@@ -5,7 +5,6 @@
       <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         <polygon points="50,0 100,0 50,100 0,100" />
       </svg>
-
       <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
         <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
           <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
@@ -27,18 +26,13 @@
           </div>
           <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
             <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Product</a>
-
             <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Features</a>
-
             <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Marketplace</a>
-
             <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Company</a>
-
-            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Log in</a>
+            <a href="<%= new_user_session_path%>" class="font-medium text-indigo-600 hover:text-indigo-500">Log in</a>
           </div>
         </nav>
       </div>
-
       <!--
         Mobile menu, show/hide based on menu open state.
 
@@ -68,11 +62,8 @@
           <div role="menu" aria-orientation="vertical" aria-labelledby="main-menu">
             <div class="px-2 pt-2 pb-3 space-y-1" role="none">
               <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" role="menuitem">Product</a>
-
               <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" role="menuitem">Features</a>
-
               <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" role="menuitem">Marketplace</a>
-
               <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" role="menuitem">Company</a>
             </div>
             <div role="none">
@@ -83,7 +74,6 @@
           </div>
         </div>
       </div>
-
       <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
         <div class="sm:text-center lg:text-left">
           <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
@@ -95,7 +85,7 @@
           </p>
           <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
             <div class="rounded-md shadow">
-              <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+              <a href="<%= new_user_session_path%>" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                 Get started
               </a>
             </div>
