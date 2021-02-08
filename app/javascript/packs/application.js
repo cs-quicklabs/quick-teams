@@ -8,9 +8,13 @@ import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import "alpine-turbo-drive-adapter"
+import "alpinejs"
+
 import "stylesheets/application"
 
 Rails.start()
 ActiveStorage.start()
 
 import "controllers"
+
