@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def set_tenant
     return unless current_user.present?
-    current_account = current_user.account_id
+    current_account = Account.find(current_user.account_id)
     set_current_tenant(current_account)
   end
 
