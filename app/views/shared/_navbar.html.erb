@@ -46,7 +46,7 @@
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href=<%= home_path %> class= "<%= current_page?(home_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Dashboard</a>
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+            <a href=<%= people_path %> class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
             <a href=<%= projects_path %> class= "<%= current_page?(projects_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Projects</a>
             <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Schedule</a>
           </div>
