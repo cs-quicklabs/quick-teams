@@ -9,4 +9,15 @@ Rails.application.routes.draw do
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+
+  scope '/settings' do
+    get '/profile', to: "settings#profile", as: "profile"
+    get '/password', to: "settings#password", as: "password"
+    get '/notifications', to: "settings#notifications", as: "notifications"
+  end
+
+  scope '/account' do
+    get '/details', to: "accounts#profile", as: "account_details"
+  end
+
 end
