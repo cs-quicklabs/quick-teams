@@ -8,14 +8,8 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <% if content_for?(:head) %>
-      <%= yield(:head) %>
-    <% end %>
   </head>
   <body>
-    <p class="notice text-sm font-medium bg-green-50 text-center"><%= notice %></p>
-    <p class="alert text-sm font-medium bg-red-50 text-center"><%= alert %></p>
-    <%= render "shared/navbar" if user_signed_in? %>
     <%= yield %>
   </body>
 </html>
