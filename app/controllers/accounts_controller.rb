@@ -27,4 +27,12 @@ class AccountsController < ApplicationController
     def skills
         
     end
+
+    def peoplestatus
+
+    end
+
+    def projectstatus
+        
+    end
 end

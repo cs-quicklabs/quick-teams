@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects do 
+    get '/participants', to: "projects/team#index", as: "team"
+    get '/notes', to: "projects/notes#index", as: "notes"
+    get '/feedback', to: "projects/feedback#index", as: "feedback"
+    get '/schedule', to: "projects/schedule#index", as: "schedule"
+  end
+
   resources :people
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -22,7 +28,9 @@ Rails.application.routes.draw do
     get '/disciplines', to: "accounts#disciplines", as: "disciplines"
     get '/clients', to: "accounts#clients", as: "clients"
     get '/peopleTags', to: "accounts#peopletags", as: "peopletags"
+    get '/peopleStatus', to: "accounts#peoplestatus", as: "peoplestatus"
     get '/projectTags', to: "accounts#projecttags", as: "projecttags"
+    get '/projectStatus', to: "accounts#projectstatus", as: "projectstatus"
     get '/skills', to: "accounts#skills", as: "skills"
     get '/jobProfile', to: "accounts#jobprofile", as: "jobprofile"
   end
