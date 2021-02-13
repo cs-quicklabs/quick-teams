@@ -18,6 +18,13 @@ Rails.application.routes.draw do
 
   scope '/account' do
     get '/details', to: "accounts#profile", as: "account_details"
+    get '/roles', to: "accounts#roles", as: "roles"
+    get '/disciplines', to: "accounts#disciplines", as: "disciplines"
+    get '/clients', to: "accounts#clients", as: "clients"
+    get '/peopleTags', to: "accounts#peopletags", as: "peopletags"
+    get '/projectTags', to: "accounts#projecttags", as: "projecttags"
+    get '/skills', to: "accounts#skills", as: "skills"
+    get '/jobProfile', to: "accounts#jobprofile", as: "jobprofile"
   end
 
 end

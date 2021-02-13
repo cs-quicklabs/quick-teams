@@ -1,0 +1,48 @@
+<main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
+  <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+    <%= render 'menu'%>
+    <main class="max-w-xl px-4 lg:col-span-8">
+      <form>
+        <div class="space-y-6">
+          <div>
+            <h1 class="text-lg leading-6 font-medium text-gray-900">
+              Skills
+            </h1>
+            <p class="mt-1 text-sm text-gray-500">
+              You can define skills which can be assigned to your team. Like RxJava, Typecript, Figma. 
+            </p>
+          </div>
+          <div>
+            <label for="project_name" class="block text-sm font-medium text-gray-700">
+              Add New Skill
+            </label>
+            <div class="mt-1 flex">
+              <input type="text" name="project_name" id="project_name" class="block w-full shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm border-gray-300 rounded-md">
+              <button type="submit" class="justify-end ml-3 inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
+                Add
+              </button>
+            </div>
+          </div>
+          <!-- This example requires Tailwind CSS v2.0+ -->
+          <ul class="divide-y divide-gray-200">
+            <li class="py-4 flex">
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">RxJava</p>
+              </div>
+            </li>
+            <li class="py-4 flex">
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">Figma</p>
+              </div>
+            </li>
+            <li class="py-4 flex">
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">Typescript</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </form>
+    </main>
+  </div>
+</main>
