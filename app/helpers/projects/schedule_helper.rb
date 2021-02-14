@@ -1,0 +1,2 @@
+module Projects::ScheduleHelper
+end
