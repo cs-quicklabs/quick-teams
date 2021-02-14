@@ -15,6 +15,7 @@
   <body>
     <p class="notice text-sm font-medium bg-green-50 text-center"><%= notice %></p>
     <p class="alert text-sm font-medium bg-red-50 text-center"><%= alert %></p>
+    <%= render "shared/navbar" if user_signed_in? %>
     <%= yield %>
   </body>
 </html>

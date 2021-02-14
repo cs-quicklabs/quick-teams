@@ -31,6 +31,8 @@ gem "devise"
 gem "rubocop", require: false
 gem "acts_as_tenant"
 gem "hotwire-rails"
+gem "draper"
+gem "interactor"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
