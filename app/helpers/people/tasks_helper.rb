@@ -1,0 +1,2 @@
+module People::TasksHelper
+end
