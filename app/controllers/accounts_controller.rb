@@ -1,4 +1,6 @@
 class AccountsController < ApplicationController
+    before_action :authenticate_user!
+    before_action :set_account
 
     def profile
 
@@ -34,5 +36,11 @@ class AccountsController < ApplicationController
 
     def projectstatus
         
+    end
+
+    private 
+
+    def set_account
+        @account = current_user.account
     end
 end
