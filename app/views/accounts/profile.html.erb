@@ -1,9 +1,8 @@
-<%= form_with(model: @account) do |form| %>
+  <%= form_with(model: @account) do |form| %>
   <main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
     <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
       <%= render 'menu'%>
       <main class="max-w-xl pb-12 px-4 lg:col-span-6">
-        <%= render "devise/shared/error_messages", resource: @account %>
         <form>
           <div class="space-y-6">
             <div>
