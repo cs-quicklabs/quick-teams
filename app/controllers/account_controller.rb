@@ -5,9 +5,9 @@ class AccountController < ApplicationController
   def update
     respond_to do |format|
       if @account.update(account_params)
-        format.html { redirect_to account_details_path, notice: "Account was successfully updated." }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "accounts/forms/profile", locals: { message: "Account was updated successfully", account: @account }) }
       else
-        format.html { redirect_to account_details_path, alert: "Failed to update account." }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "accounts/forms/profile", locals: { account: @account }) }
       end
     end
   end
