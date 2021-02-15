@@ -1,46 +1,37 @@
 class AccountsController < ApplicationController
-    before_action :authenticate_user!
-    before_action :set_account
+  before_action :authenticate_user!
+  before_action :set_account
 
-    def profile
+  def profile
+  end
 
-    end
+  def roles
+  end
 
-    def roles
+  def clients
+  end
 
-    end
+  def peopletags
+  end
 
-    def clients
+  def projecttags
+  end
 
-    end
+  def disciplines
+  end
 
-    def peopletags
+  def skills
+  end
 
-    end
+  def peoplestatus
+  end
 
-    def projecttags
+  def projectstatus
+  end
 
-    end
+  private
 
-    def disciplines
-
-    end
-
-    def skills
-        
-    end
-
-    def peoplestatus
-
-    end
-
-    def projectstatus
-        
-    end
-
-    private 
-
-    def set_account
-        @account = current_user.account
-    end
+  def set_account
+    @account = current_user.account
+  end
 end
