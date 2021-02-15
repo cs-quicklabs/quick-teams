@@ -11,6 +11,7 @@ import "channels"
 import "alpine-turbo-drive-adapter"
 import "alpinejs"
 
+//tailwind css
 import "stylesheets/application"
 
 Rails.start()
