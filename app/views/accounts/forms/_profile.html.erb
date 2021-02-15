@@ -12,16 +12,9 @@
         Please fill in your company information. This will be available for all your workforce.
       </p>
     </div>
-    <div>
-      <label for="project_name" class="block text-sm font-medium text-gray-700">
-        Company Name
-      </label>
-      <div class="mt-1">
-        <%= form.text_field :name%>
-      </div>
-    </div>
+    <%= form.text_field :name, "Company Homes" %>
     <div class="flex justify-end">
-      <%= form.submit "Save", class:"btn-indigo"%>
+      <%= form.submit "Save", class:"btn-blue"%>
     </div>
   </div>
 <% end %>
