@@ -2,14 +2,6 @@
   <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
     <%= render 'menu'%>
     <main class="max-w-xl pb-12 px-4 lg:col-span-6">
-      <div class="pb-6">
-        <h1 class="text-lg leading-6 font-medium text-gray-900">
-          Account Settings
-        </h1>
-        <p class="mt-1 text-sm text-gray-500">
-          Please fill in your company information. This will be available for all your workforce.
-        </p>
-      </div>
       <%= turbo_frame_tag "profile_form" do %>
         <%= render "accounts/forms/profile", account: @account%>
       <% end %>
