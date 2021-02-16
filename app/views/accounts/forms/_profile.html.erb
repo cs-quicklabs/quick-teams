@@ -1,17 +1,6 @@
   <%= tailwind_form_with(model: account, id: dom_id(account)) do |form| %>
   <div class="space-y-6">
-    <% if local_assigns[:message] %>
-      <%= render "devise/shared/success_message", message: local_assigns[:message] %>
-    <% end %>
-    <%= render "devise/shared/error_messages", resource: account %>
-    <div>
-      <h1 class="text-lg leading-6 font-medium text-gray-900">
-        Account Settings
-      </h1>
-      <p class="mt-1 text-sm text-gray-500">
-        Please fill in your company information. This will be available for all your workforce.
-      </p>
-    </div>
+    <%= render "shared/form_messages", resource: account, message: local_assigns[:message] %>
     <%= form.text_field :name, "Company Homes" %>
     <div class="flex justify-end">
       <%= form.submit "Save", class:"btn-blue"%>
