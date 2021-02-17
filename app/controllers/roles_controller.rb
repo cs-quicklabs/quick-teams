@@ -38,7 +38,9 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, partial: "roles/role", locals: { message: "Role was created successfully.", role: @role }) }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, partial: "roles/role", locals: { role: @role }) }
       end
     end
   end
