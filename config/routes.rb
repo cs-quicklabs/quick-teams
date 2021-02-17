@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :roles, path: "/account/roles"
   resources :projects do
     get "/participants", to: "projects/team#index", as: "team"
     get "/notes", to: "projects/notes#index", as: "notes"
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   resources :people
   resources :account, only: [:update, :edit]
   resources :user, only: [:update, :edit]
+
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "static#home"
@@ -24,9 +26,8 @@ Rails.application.routes.draw do
     get "/notifications", to: "settings#notifications", as: "notifications"
   end
 
-  scope "/admin" do
-    get "/details", to: "accounts#profile", as: "account_details"
-    get "/roles", to: "accounts#roles", as: "roles"
+  scope "/account" do
+    get "/details", to: "account#index", as: "account_details"
     get "/disciplines", to: "accounts#disciplines", as: "disciplines"
     get "/clients", to: "accounts#clients", as: "clients"
     get "/peopleTags", to: "accounts#peopletags", as: "peopletags"

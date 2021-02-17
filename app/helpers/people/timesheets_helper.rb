@@ -1,2 +1,0 @@
-module People::TimesheetsHelper
-end

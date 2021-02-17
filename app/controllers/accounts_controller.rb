@@ -6,6 +6,7 @@ class AccountsController < ApplicationController
   end
 
   def roles
+    @roles = Role.all
   end
 
   def clients
