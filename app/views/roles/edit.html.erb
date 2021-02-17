@@ -1,6 +1,6 @@
-<h1>Editing Role</h1>
-
-<%= render 'form', role: @role %>
-
-<%= link_to 'Show', @role %> |
-<%= link_to 'Back', roles_path %>
+<%= turbo_frame_tag dom_id(role) do %>
+  <li class="py-4 flex border-b border-gray-200">
+    <%= form.text_field :name, "Add New Role" %>
+    <%= form.submit "Save", class:"btn-blue"%>
+  </li>
+<% end %>

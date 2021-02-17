@@ -38,11 +38,7 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.html { redirect_to @role, notice: "Role was successfully updated." }
-        format.json { render :show, status: :ok, location: @role }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,7 +47,7 @@ class RolesController < ApplicationController
   def destroy
     @role.destroy
     respond_to do |format|
-      format.html { redirect_to roles_url, notice: "Role was successfully destroyed." }
+      format.html { head :no_content }
       format.json { head :no_content }
     end
   end
