@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   resources :roles, path: "/account/roles"
   resources :disciplines, path: "/account/disciplines"
+  resources :skills, path: "/account/skills"
+  resources :jobs, path: "/account/jobs"
+  resources :people_tags, path: "/account/people-tags"
+  resources :project_tags, path: "/account/project-tags"
+  resources :people_statuses, path: "/account/people-statuses"
+  resources :project_statuses, path: "/account/project-statuses"
   resources :account, only: [:edit, :update]
 
   resources :projects do
@@ -32,11 +38,5 @@ Rails.application.routes.draw do
   scope "/account" do
     get "/details", to: "account#index", as: "detail"
     get "/clients", to: "accounts#clients", as: "clients"
-    get "/peopleTags", to: "accounts#peopletags", as: "peopletags"
-    get "/peopleStatus", to: "accounts#peoplestatus", as: "peoplestatus"
-    get "/projectTags", to: "accounts#projecttags", as: "projecttags"
-    get "/projectStatus", to: "accounts#projectstatus", as: "projectstatus"
-    get "/skills", to: "accounts#skills", as: "skills"
-    get "/jobProfile", to: "accounts#jobprofile", as: "jobprofile"
   end
 end

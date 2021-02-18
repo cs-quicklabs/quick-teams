@@ -1,0 +1,10 @@
+  <%= tailwind_form_with(model: @job, id: dom_id(@job)) do |form| %>
+  <div class="space-y-6">
+    <%= render "shared/form_messages", resource: @job, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Job Profiles", subtitle: "You can define various Job profiles of your organization. Examples include, Android Developer, iOS Developer." %>
+    <%= form.text_field :name, "Add New Job" %>
+    <div class="flex justify-end">
+      <%= form.submit "Save", class:"btn-blue"%>
+    </div>
+  </div>
+<% end %>

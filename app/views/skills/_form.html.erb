@@ -1,0 +1,10 @@
+  <%= tailwind_form_with(model: @skill, id: dom_id(@skill)) do |form| %>
+  <div class="space-y-6">
+    <%= render "shared/form_messages", resource: @skill, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Skills", subtitle: "You can define skills which can be assigned to your team. Like RxJava, Typecript, Figma. " %>
+    <%= form.text_field :name, "Add New Skill" %>
+    <div class="flex justify-end">
+      <%= form.submit "Save", class:"btn-blue"%>
+    </div>
+  </div>
+<% end %>
