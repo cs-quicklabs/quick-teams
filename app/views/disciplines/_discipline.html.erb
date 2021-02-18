@@ -1,0 +1,11 @@
+<%= turbo_frame_tag dom_id(discipline) do %>
+  <li class="py-4 flex border-b border-gray-200">
+    <div class="ml-3 flex w-full">
+      <p class="w-full text-sm font-medium text-gray-900"><%= discipline.name.capitalize %></p>
+      <div class="flex">
+        <%= link_to "Edit", edit_discipline_path(discipline), class: "text-sm text-gray-400 hover:text-indigo-600" %>
+        <%= link_to "Delete", discipline_path(discipline), method: :delete, class: "text-sm pl-2 text-gray-400 hover:text-red-600" %>
+      </div>
+    </div>
+  </li>
+<% end %>

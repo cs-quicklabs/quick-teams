@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :roles, path: "/account/roles"
+  resources :disciplines, path: "/account/disciplines"
   resources :account, only: [:edit, :update]
 
   resources :projects do
@@ -30,7 +31,6 @@ Rails.application.routes.draw do
 
   scope "/account" do
     get "/details", to: "account#index", as: "detail"
-    get "/disciplines", to: "accounts#disciplines", as: "disciplines"
     get "/clients", to: "accounts#clients", as: "clients"
     get "/peopleTags", to: "accounts#peopletags", as: "peopletags"
     get "/peopleStatus", to: "accounts#peoplestatus", as: "peoplestatus"
