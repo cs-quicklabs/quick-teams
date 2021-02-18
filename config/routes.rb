@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :roles, path: "/account/roles"
+  resources :account, only: [:edit, :update]
+
   resources :projects do
     get "/participants", to: "projects/team#index", as: "team"
     get "/notes", to: "projects/notes#index", as: "notes"
@@ -27,7 +29,7 @@ Rails.application.routes.draw do
   end
 
   scope "/account" do
-    get "/details", to: "account#index", as: "account_details"
+    get "/details", to: "account#index", as: "detail"
     get "/disciplines", to: "accounts#disciplines", as: "disciplines"
     get "/clients", to: "accounts#clients", as: "clients"
     get "/peopleTags", to: "accounts#peopletags", as: "peopletags"
