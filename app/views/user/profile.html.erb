@@ -3,7 +3,7 @@
     <%= render 'shared/settings_menu'%>
     <main class="max-w-xl pb-12 px-4 lg:col-span-6">
       <%= turbo_frame_tag "profile_form" do %>
-        <%= render "settings/forms/profile", user: @user%>
+        <%= render "user/forms/profile", user: @user%>
       <% end %>
     </main>
   </div>
