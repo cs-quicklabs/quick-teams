@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :project_tags, path: "/account/project-tags"
   resources :people_statuses, path: "/account/people-statuses"
   resources :project_statuses, path: "/account/project-statuses"
+  resources :clients, path: "/account/clients"
   resources :account, only: [:edit, :update]
 
   resources :projects do
@@ -37,6 +38,5 @@ Rails.application.routes.draw do
 
   scope "/account" do
     get "/details", to: "account#index", as: "detail"
-    get "/clients", to: "accounts#clients", as: "clients"
   end
 end
