@@ -18,7 +18,13 @@ class ProjectDecorator < Draper::Decorator
     "#{project.created_at.to_s(:long)}"
   end
 
-  def display_additional_memebers
-    "+4"
+  def display_additional_participants
+    total_participants = project.participants.count
+    return total_participants < 4 ? "" : "+#{total_participants - 4}"
+  end
+
+  def display_participants_count
+    total_participants = project.participants.count
+    [total_participants, 4].min
   end
 end
