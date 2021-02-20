@@ -4,7 +4,7 @@ class SchedulesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(schedule_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/profile", locals: { message: "User was updated successfully", user: @user }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/profile", locals: { user: @user }) }
@@ -13,15 +13,15 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @schedule = Schedule.new(schedule_params)
+    @schedule.project_id = @project.id
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: "User was added created." }
-        format.json { render :show, status: :created, location: @user }
+      if @schedule.save
+        @schedule = Schedule.new
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { message: "Participant was added.", schedule: @schedule }) }
       else
-        format.html { redirect_to new_person_path(@user) }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { schedule: @schedule }) }
       end
     end
   end
@@ -31,4 +31,13 @@ class SchedulesController < ApplicationController
   def build_form
     @form = ChangePasswordForm.new(@user)
   end
+
+  def set_project
+    @project = Project.find(params['project_id'])
+  end
+
+  def schedule_params
+    params.require(:schedule).permit(:user_id, :starts_at, :discipline_id, :ends_at, :occupancy)
+  end
+
 end

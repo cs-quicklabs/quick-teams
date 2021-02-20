@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get "/notes", to: "projects/notes#index", as: "notes"
     get "/feedback", to: "projects/feedback#index", as: "feedback"
     get "/schedule", to: "projects/schedule#index", as: "schedule"
+    resources :schedules
   end
 
   resources :people
