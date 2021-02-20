@@ -10,15 +10,23 @@ class UserDecorator < Draper::Decorator
   #     end
   #   end
 
-  def name
-    "Aashish Dhawan"
+  def display_name
+    "#{first_name} #{last_name}"
   end
 
-  def job_title
-    "Android Development"
+  def display_job_title
+    job.nil? ? "" : "#{job.name}"
   end
 
-  def discipline_title
-    "Engineering"
+  def display_role_title
+    role.nil? ? "" : "#{role.name}"
+  end
+
+  def display_discipline_title
+    discipline.nil? ? "" : "#{discipline.name}"
+  end
+
+  def display_position
+    display_role_title + " " + display_job_title
   end
 end

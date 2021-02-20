@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
-    redirect_to project_team_path(@project)
+    redirect_to project_participants_path(@project)
   end
 
   # GET /projects/new
