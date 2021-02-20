@@ -29,6 +29,20 @@ class UserController < ApplicationController
   def password
   end
 
+  def create
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to @user, notice: "User was added created." }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { redirect_to new_person_path(@user) }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_user
@@ -36,7 +50,7 @@ class UserController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email)
+    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :manager_id, :job_id, :discipline_id)
   end
 
   def change_password_params

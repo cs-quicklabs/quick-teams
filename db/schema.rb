@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_060018) do
+ActiveRecord::Schema.define(version: 2021_02_19_150953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,9 +114,17 @@ ActiveRecord::Schema.define(version: 2021_02_19_060018) do
     t.integer "account_id"
     t.string "first_name"
     t.string "last_name"
+    t.bigint "role_id"
+    t.bigint "discipline_id"
+    t.bigint "job_id"
+    t.bigint "manager_id"
     t.index ["account_id"], name: "index_users_on_account_id"
+    t.index ["discipline_id"], name: "index_users_on_discipline_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["job_id"], name: "index_users_on_job_id"
+    t.index ["manager_id"], name: "index_users_on_manager_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "clients", "accounts"
@@ -128,4 +136,8 @@ ActiveRecord::Schema.define(version: 2021_02_19_060018) do
   add_foreign_key "project_tags", "accounts"
   add_foreign_key "roles", "accounts"
   add_foreign_key "skills", "accounts"
+  add_foreign_key "users", "disciplines"
+  add_foreign_key "users", "jobs"
+  add_foreign_key "users", "roles"
+  add_foreign_key "users", "users", column: "manager_id"
 end

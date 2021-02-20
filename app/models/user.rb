@@ -5,4 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :account
+  belongs_to :manager, class_name: "User", optional: true
+  belongs_to :discipline
+  belongs_to :role
+  belongs_to :job
+
+  has_many :subordinates, class_name: "User", foreign_key: "manager_id"
 end

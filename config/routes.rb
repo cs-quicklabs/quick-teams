@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :people
   resources :account, only: [:update, :edit]
-  resources :user, only: [:update, :edit]
+  resources :user
 
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
