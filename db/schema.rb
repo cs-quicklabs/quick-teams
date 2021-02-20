@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_150953) do
+ActiveRecord::Schema.define(version: 2021_02_20_071353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,12 @@ ActiveRecord::Schema.define(version: 2021_02_19_150953) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "account_id"
+    t.bigint "manager_id"
+    t.bigint "discipline_id"
+    t.string "description"
     t.index ["account_id"], name: "index_projects_on_account_id"
+    t.index ["discipline_id"], name: "index_projects_on_discipline_id"
+    t.index ["manager_id"], name: "index_projects_on_manager_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -93,6 +98,15 @@ ActiveRecord::Schema.define(version: 2021_02_19_150953) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_roles_on_account_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_schedules_on_project_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -134,7 +148,11 @@ ActiveRecord::Schema.define(version: 2021_02_19_150953) do
   add_foreign_key "people_tags", "accounts"
   add_foreign_key "project_statuses", "accounts"
   add_foreign_key "project_tags", "accounts"
+  add_foreign_key "projects", "disciplines"
+  add_foreign_key "projects", "users", column: "manager_id"
   add_foreign_key "roles", "accounts"
+  add_foreign_key "schedules", "projects"
+  add_foreign_key "schedules", "users"
   add_foreign_key "skills", "accounts"
   add_foreign_key "users", "disciplines"
   add_foreign_key "users", "jobs"

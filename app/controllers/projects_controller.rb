@@ -4,11 +4,12 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    @projects = ProjectDecorator.decorate_collection(Project.all)
   end
 
   # GET /projects/1 or /projects/1.json
   def show
+    redirect_to project_team_path(@project)
   end
 
   # GET /projects/new
@@ -27,10 +28,8 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: "Project was successfully created." }
-        format.json { render :show, status: :created, location: @project }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Project.new, partial: "projects/forms/form", locals: { project: @project }) }
       end
     end
   end
@@ -66,6 +65,6 @@ class ProjectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def project_params
-    params.require(:project).permit(:name)
+    params.require(:project).permit(:name, :description, :discipline_id)
   end
 end
