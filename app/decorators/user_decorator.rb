@@ -29,4 +29,21 @@ class UserDecorator < Draper::Decorator
   def display_position
     display_role_title + " " + display_job_title
   end
+
+  def display_participated_projects
+    participated_projects = []
+    schedules.each do |schedule|
+      participated_projects.push schedule.project.name
+    end
+    participated_projects.join(', ')
+  end
+
+  def display_occupancy 
+    overall_occupancy = 0 
+    schedules.each do |schedule|
+      overall_occupancy += schedule.occupancy
+    end
+    overall_occupancy.to_s + "%"
+  end  
 end
+

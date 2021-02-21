@@ -1,6 +1,11 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project
+  before_action :set_project, only: %i[ update create ]
+
+  def index
+    employees = User.includes(:schedules, :role, :discipline, :job).all
+    @employees = UserDecorator.decorate_collection(employees)
+  end
 
   def update
     respond_to do |format|
