@@ -19,5 +19,9 @@ class SettingsController < ApplicationController
     @user = current_user
   end
 
+  # def password_params
+  #   params.require(:password_form).permit(:old_pasword, :new_password, :confirm_new_password)
+  # end
+
   
 end

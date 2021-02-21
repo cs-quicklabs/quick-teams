@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :people
   resources :account, only: [:update, :edit]
   resources :user, only: [:update, :edit]
+  resources :settings, only: [:update, :edit]
+  # resources :password, only: [:create, :new]
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "static#home"
@@ -19,8 +21,12 @@ Rails.application.routes.draw do
   end
 
   scope "/settings" do
-    get "/profile", to: "settings#profile", as: "profile"
-    get "/password", to: "settings#password", as: "password"
+    # get "/profile", to: "settings#profile", as: "profile"
+    # get "/password", to: "settings#password", as: "password"
+    # post "/password", to: "settings#password"
+    get "/profile", to: "user#profile", as: "profile"
+    get "/password", to: "user#password", as: "password"
+    patch "/password", to: "user#password_update", as: "update_password"
     get "/notifications", to: "settings#notifications", as: "notifications"
   end
 
