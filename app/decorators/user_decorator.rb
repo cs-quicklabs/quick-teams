@@ -35,14 +35,14 @@ class UserDecorator < Draper::Decorator
     schedules.each do |schedule|
       participated_projects.push schedule.project.name
     end
-    participated_projects.join(', ')
+    participated_projects.join(", ")
   end
 
-  def display_occupancy 
-    overall_occupancy = 0 
+  def display_occupancy
+    overall_occupancy = 0
     schedules.each do |schedule|
       overall_occupancy += schedule.occupancy
     end
     overall_occupancy.to_s + "%"
-  end  
+  end
 end
