@@ -33,6 +33,6 @@ class PeopleController < ApplicationController
   end
 
   def employee_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :discipline_id, :job_id)
+    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :discipline_id, :job_id, :manager_id)
   end
 end
