@@ -5,9 +5,9 @@ class AccountController < ApplicationController
   def update
     respond_to do |format|
       if @account.update(account_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "accounts/forms/profile", locals: { message: "Account was updated successfully", account: @account }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "form", locals: { message: "Account was updated successfully", account: @account }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "accounts/forms/profile", locals: { account: @account }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "form", locals: { account: @account }) }
       end
     end
   end
@@ -15,7 +15,7 @@ class AccountController < ApplicationController
   private
 
   def set_account
-    @account = Account.find(params[:id])
+    @account = Account.find(current_user.account_id)
   end
 
   def account_params

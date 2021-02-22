@@ -1,0 +1,15 @@
+<%= tailwind_form_with(model: employee, id: dom_id(employee), url: person_path(employee), method: :patch) do |form| %>
+  <main class="max-w-lg mx-auto pt-10 pb-12 px-4 lg:pb-16 space-y-6">
+    <%= render "shared/form_messages", resource: employee, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Create New Project", subtitle: "Please fill in details of your new Project." %>
+    <%= form.text_field :first_name, "First Name"%>
+    <%= form.text_field :last_name, "Last Name"%>
+    <%= form.text_field :email, "Email"%>
+    <%= form.collection_select(:discipline_id, Discipline.all, :id, :name, {:prompt => 'Select Discipline'}, :selected => employee.discipline_id ) %>
+    <%= form.collection_select(:job_id, Job.all, :id, :name, {:prompt => 'Select Job'}, :selected => employee.job_id ) %>
+    <%= form.collection_select(:role_id, Role.all, :id, :name, {:prompt => 'Select Role'}, :selected => employee.role_id ) %>
+    <div class="flex justify-end">
+      <%= form.submit "Save", class:"btn-blue"%>
+    </div>
+  </main>
+<% end %>

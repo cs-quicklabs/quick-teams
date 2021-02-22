@@ -1,0 +1,13 @@
+<%= form_with(model: schedule, id: dom_id(schedule), url: project_schedules_path(@project)) do |form| %>
+  <main class="max-w-lg mx-auto pt-6 pb-12 px-4 lg:pb-16 space-y-6">
+    <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New Participant", subtitle: "Please add new project participant and fill in engagement level." %>
+    <%= form.collection_select(:user_id, User.all, :id, :first_name, {:prompt => 'Select User'}, :selected => schedule.user_id ) %>
+    <%= form.date_field :starts_at, class: 'form-control' %>
+    <%= form.date_field :ends_at, class: 'form-control' %>
+    <%= form.text_field :occupancy%>
+    <div class="flex justify-end">
+      <%= form.submit "Save", class:"btn-blue"%>
+    </div>
+  </main>
+<% end %>

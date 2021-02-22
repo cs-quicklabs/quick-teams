@@ -5,7 +5,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
   #   end
   # end
 
-  %w[text_field text_area password_field collection_select].each do |method_name|
+  %w[text_field text_area password_field].each do |method_name|
     define_method(method_name) do |name, title, *args|
       @template.content_tag :div do
         label(name, title, class: "block text-sm font-medium text-gray-700") +
