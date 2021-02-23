@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: %i[ update create ]
+  before_action :set_project, only: %i[ update create destroy ]
+  before_action :set_schedule, only: %i[ update destroy ]
 
   def index
     employees = User.includes(:schedules, :role, :discipline, :job).all
@@ -24,10 +25,18 @@ class SchedulesController < ApplicationController
     respond_to do |format|
       if @schedule.save
         @schedule = Schedule.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { message: "Participant was added.", schedule: @schedule }) }
+        format.html { redirect_to project_participants_path(@project), notice: "Participant was added successfully." }
+        #format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { message: "Participant was added.", schedule: @schedule }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { schedule: @schedule }) }
       end
+    end
+  end
+
+  def destroy
+    @schedule.destroy
+    respond_to do |format|
+      format.html { redirect_to project_participants_path(@project), notice: "Participant was removed successfully." }
     end
   end
 
@@ -38,11 +47,14 @@ class SchedulesController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params['project_id'])
+    @project = Project.find(params["project_id"])
+  end
+
+  def set_schedule
+    @schedule = Schedule.find(params["id"])
   end
 
   def schedule_params
     params.require(:schedule).permit(:user_id, :starts_at, :discipline_id, :ends_at, :occupancy)
   end
-
 end

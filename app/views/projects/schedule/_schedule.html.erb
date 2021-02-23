@@ -1,0 +1,31 @@
+<li>
+  <div class="flex items-center px-2 py-2 sm:px-6">
+    <div class="flex items-center flex-1 min-w-0">
+      <div class="flex-shrink-0">
+        <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixqx=T6AY8bD1bU&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+      </div>
+      <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4">
+        <a href="<%= person_path(schedule.user)%>" class="block hover:underline">
+          <div>
+            <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.user.display_name%></p>
+            <p class="flex items-center mt-1 text-sm text-gray-500">
+              <span class="truncate"><%= schedule.user.display_position%></span>
+            </p>
+          </div>
+        </a>
+        <div class="flex">
+          <div class="whitespace-nowrap">
+            <div class="text-sm text-gray-900"><%= schedule.user.display_occupancy + " occupied"%></div>
+            <div class="text-sm text-gray-500"><%= schedule.user.display_discipline_title%></div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="whitespace-nowrap">
+            <div class="text-sm text-gray-900"><%= link_to "Edit", home_path, class: "text-sm text-gray-400 hover:text-indigo-600" %></div>
+            <div class="text-sm text-gray-900"><%= link_to "Delete", [@project, schedule], method: :delete, class: "text-sm text-gray-400 hover:text-red-600" %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
