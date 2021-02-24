@@ -12,4 +12,11 @@ class ScheduleDecorator < Draper::Decorator
   #     end
   #   end
 
+  def display_occupancy
+    "#{occupancy}% occupied"
+  end
+
+  def display_occupied_till
+    "till #{ends_at.to_s(:long)}"
+  end
 end

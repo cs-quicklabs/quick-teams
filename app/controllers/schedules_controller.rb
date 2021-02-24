@@ -1,7 +1,7 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: %i[ update create destroy ]
-  before_action :set_schedule, only: %i[ update destroy ]
+  before_action :set_project, only: %i[ update create destroy edit ]
+  before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
     employees = User.includes(:schedules, :role, :discipline, :job).all
@@ -10,10 +10,10 @@ class SchedulesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @user.update(schedule_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/profile", locals: { message: "User was updated successfully", user: @user }) }
+      if @schedule.update(schedule_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/schedule", locals: { message: "Schedule was updated successfully", schedule: @schedule.decorate }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/profile", locals: { user: @user }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/edit", locals: { schedule: @schedule }) }
       end
     end
   end
@@ -31,6 +31,9 @@ class SchedulesController < ApplicationController
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { schedule: @schedule }) }
       end
     end
+  end
+
+  def edit
   end
 
   def destroy
