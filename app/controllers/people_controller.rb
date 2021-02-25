@@ -24,6 +24,7 @@ class PeopleController < ApplicationController
   end
 
   def show
+    @employee = @employee.decorate
   end
 
   private

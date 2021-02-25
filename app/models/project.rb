@@ -5,6 +5,7 @@ class Project < ApplicationRecord
   has_many :participants, through: :schedules, source: :user
 
   has_one :manager
+  has_many :notes, as: :notable
 
   belongs_to :discipline
 

@@ -2,12 +2,13 @@ class Projects::NotesController < ApplicationController
   before_action :set_project, only: %i[ index show edit update destroy ]
 
   def index
+    @notes = NoteDecorator.decorate_collection(@project.notes)
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_project
-    @project = Project.find(params["project_id"])
+    @project = Project.find(params["project_id"]).decorate
   end
 end

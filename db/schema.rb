@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_20_124208) do
+ActiveRecord::Schema.define(version: 2021_02_25_055419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 2021_02_20_124208) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_jobs_on_account_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.text "body"
+    t.string "notable_type"
+    t.bigint "notable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "people_statuses", force: :cascade do |t|
@@ -147,6 +158,7 @@ ActiveRecord::Schema.define(version: 2021_02_20_124208) do
   add_foreign_key "clients", "accounts"
   add_foreign_key "disciplines", "accounts"
   add_foreign_key "jobs", "accounts"
+  add_foreign_key "notes", "users"
   add_foreign_key "people_statuses", "accounts"
   add_foreign_key "people_tags", "accounts"
   add_foreign_key "project_statuses", "accounts"
