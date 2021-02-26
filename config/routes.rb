@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   resources :account, only: [:edit, :update]
 
   resources :projects do
-    resources :schedules, module: "projects"
-    resources :notes, only: [:index, :show, :destroy], module: "projects"
+    resources :schedules
+    resources :notes, only: [:index, :show, :create, :destroy], module: "projects"
     get "/participants", to: "projects/schedule#index", as: "participants"
     get "/feedback", to: "projects/feedback#index", as: "feedback"
   end
