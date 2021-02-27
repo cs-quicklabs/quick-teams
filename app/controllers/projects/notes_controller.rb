@@ -1,5 +1,4 @@
-class Projects::NotesController < ApplicationController
-  before_action :set_project, only: %i[ index show edit update destroy create ]
+class Projects::NotesController < Projects::BaseController
   before_action :set_note, only: %i[ destroy ]
 
   def index
@@ -28,11 +27,6 @@ class Projects::NotesController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_project
-    @project = Project.find(params["project_id"]).decorate
-  end
 
   def set_note
     @note = Note.find(params["id"])
