@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @employees = UserDecorator.decorate_collection(User.includes(:role, :discipline, :job).all)
+    @employees = UserDecorator.decorate_collection(User.includes(:role, :discipline, :job).order(:first_name))
   end
 
   def new
