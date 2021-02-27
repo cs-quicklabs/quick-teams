@@ -6,6 +6,7 @@ class Project < ApplicationRecord
 
   has_one :manager
   has_many :notes, as: :notable
+  has_many :feedbacks, as: :critiquable
 
   belongs_to :discipline
 

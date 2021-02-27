@@ -1,0 +1,11 @@
+<%= tailwind_form_with(model: @feedback, id: dom_id(@feedback), url: project_feedbacks_path(@project)) do |form| %>
+  <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: @feedback, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New Feedback", subtitle: "" %>
+    <%= form.text_field :title, "Title"%>
+    <%= form.rich_text_area :body, "Add New feedback"%>
+    <div class="flex justify-end">
+      <%= form.submit "Add Feedback", class:"btn-blue"%>
+    </div>
+  </main>
+<% end %>

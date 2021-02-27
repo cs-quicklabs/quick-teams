@@ -1,0 +1,19 @@
+<li>
+  <div class="flex space-x-3">
+    <div class="flex-shrink-0">
+      <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixqx=T6AY8bD1bU&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+    </div>
+    <div>
+      <div class="text-sm">
+        <a href="#" class="font-medium text-gray-900"><%= feedback.title%></a>
+      </div>
+      <div class="mt-1 text-sm text-gray-700">
+        <p><%= feedback.body%></p>
+      </div>
+      <div class="mt-2 space-x-2 text-sm">
+        <span class="font-medium text-gray-500"><%=time_ago_in_words(feedback.created_at) + ' ago'%></span>
+        <%= link_to "Delete", project_feedback_path(@project, feedback), method: :delete, class: "text-sm pl-2 text-gray-400 hover:text-red-600" %>
+      </div>
+    </div>
+  </div>
+</li>
