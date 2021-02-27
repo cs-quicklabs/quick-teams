@@ -49,4 +49,8 @@ class UserDecorator < Draper::Decorator
 
   def display_occupancy_for(project)
   end
+
+  def display_manager_name
+    manager.nil? ? "N/A" : manager.display_name
+  end
 end

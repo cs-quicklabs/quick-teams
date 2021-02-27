@@ -4,7 +4,7 @@ class SchedulesController < ApplicationController
   before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
-    employees = User.includes(:schedules, :role, :discipline, :job).order(:first_name)
+    employees = User.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
     @employees = UserDecorator.decorate_collection(employees)
   end
 

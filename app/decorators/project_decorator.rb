@@ -20,12 +20,12 @@ class ProjectDecorator < Draper::Decorator
   end
 
   def display_additional_participants
-    total_participants = project.participants.count
+    total_participants = project.participants.size
     return total_participants <= 4 ? "" : "+#{total_participants - 4}"
   end
 
   def display_participants_count
-    total_participants = project.participants.count
+    total_participants = project.participants.size
     [total_participants, 4].min
   end
 end
