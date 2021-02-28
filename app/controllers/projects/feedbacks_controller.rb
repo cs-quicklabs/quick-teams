@@ -1,6 +1,8 @@
 class Projects::FeedbacksController < Projects::BaseController
+  before_action :set_feedback, only: %i[show destroy]
+
   def index
-    @feedbacks = @project.feedbacks
+    @feedbacks = FeedbackDecorator.decorate_collection(@project.feedbacks)
     @feedback = Feedback.new
   end
 
@@ -17,7 +19,21 @@ class Projects::FeedbacksController < Projects::BaseController
     end
   end
 
+  def destroy
+    @feedback.destroy
+    respond_to do |format|
+      format.html { redirect_to project_feedbacks_path(@project), notice: "Feedback was removed successfully." }
+    end
+  end
+
+  def show
+  end
+
   private
+
+  def set_feedback
+    @feedback = Feedback.find(params["id"]).decorate
+  end
 
   def feedback_params
     params.require(:feedback).permit(:title, :body)

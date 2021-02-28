@@ -17,7 +17,10 @@ Rails.application.routes.draw do
     get "/participants", to: "projects/schedule#index", as: "participants"
   end
 
-  resources :people
+  resources :people do
+    resources :feedbacks, module: "people"
+    get "/team", to: "people/team#index"
+  end
   resources :account, only: [:update, :edit]
   resources :user
 

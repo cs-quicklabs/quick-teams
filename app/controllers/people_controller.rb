@@ -25,6 +25,7 @@ class PeopleController < ApplicationController
 
   def show
     @employee = @employee.decorate
+    redirect_to person_team_path(@employee)
   end
 
   private
