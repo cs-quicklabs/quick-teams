@@ -1,6 +1,6 @@
 class People::BaseController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_employee, only: %i[show edit index create]
+  before_action :set_employee, only: %i[show edit index create destroy]
 
   private
 

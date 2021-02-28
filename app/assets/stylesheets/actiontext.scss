@@ -43,3 +43,9 @@
 
 trix-editor ul { list-style-type: disc !important; margin-left: 1rem !important; }
 trix-editor ol { list-style-type: decimal !important; margin-left: 1rem !important; }
+trix-editor a { text-decoration: underline !important; color: blue }
+
+.trix-content ul { list-style-type: disc !important; margin-left: 1rem !important; }
+.trix-content ol { list-style-type: decimal !important; margin-left: 1rem !important; }
+.trix-content a { text-decoration: underline !important; color: blue }
+
