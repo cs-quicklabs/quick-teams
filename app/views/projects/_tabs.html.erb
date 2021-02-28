@@ -11,13 +11,13 @@
   <div class="hidden sm:block">
     <div class="border-b border-gray-200">
       <nav class="flex -mb-px space-x-8 lg:px-8" aria-label="Tabs">
-        <a href="<%= project_participants_path %>" class="<%= current_page?(project_participants_path) ? "border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"%>">
+        <a href="<%= project_participants_path %>" class="<%= current_page?(project_participants_path) ? "selected-tab" : "unselected-tab"%>">
           Team
         </a>
-        <a href="<%= project_notes_path %>" class="<%= current_page?(project_notes_path) ? "border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"%>">
+        <a href="<%= project_notes_path %>" class="<%= current_page?(project_notes_path) ? "selected-tab" : "unselected-tab"%>">
           Notes
         </a>
-        <a href="<%= project_feedbacks_path %>" class="<%= current_page?(project_feedbacks_path) ? "border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"%>">
+        <a href="<%= project_feedbacks_path %>" class="<%= current_page?(project_feedbacks_path) ? "selected-tab" : "unselected-tab"%>">
           Feedback
         </a>
       </nav>
