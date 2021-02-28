@@ -3,8 +3,8 @@
     <div class="ml-3 flex w-full">
       <p class="w-full text-sm font-medium text-gray-900"><%= role.name %></p>
       <div class="flex">
-        <%= link_to "Edit", edit_role_path(role), class: "text-sm text-gray-400 hover:text-indigo-600" %>
-        <%= link_to "Delete", role_path(role), method: :delete, class: "text-sm pl-2 text-gray-400 hover:text-red-600" %>
+        <%= link_to "Edit", edit_role_path(role), class: "btn-inline-edit" %>
+        <%= link_to "Delete", role_path(role), method: :delete, class: "btn-inline-delete pl-2" %>
       </div>
     </div>
   </li>

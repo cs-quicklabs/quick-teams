@@ -3,8 +3,8 @@
     <div class="ml-3 flex w-full">
       <p class="w-full text-sm font-medium text-gray-900"><%= skill.name.titleize %></p>
       <div class="flex">
-        <%= link_to "Edit", edit_skill_path(skill), class: "text-sm text-gray-400 hover:text-indigo-600" %>
-        <%= link_to "Delete", skill_path(skill), method: :delete, class: "text-sm pl-2 text-gray-400 hover:text-red-600" %>
+        <%= link_to "Edit", edit_skill_path(skill), class: "btn-inline-edit" %>
+        <%= link_to "Delete", skill_path(skill), method: :delete, class: "btn-inline-delete pl-2" %>
       </div>
     </div>
   </li>

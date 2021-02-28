@@ -7,8 +7,8 @@
         <p class="text-sm text-gray-500"><%= client.email %></p>
       </div>
       <div class="flex justify-end">
-        <%= link_to "Edit", edit_client_path(client), class: "text-sm text-gray-400 hover:text-indigo-600" %>
-        <%= link_to "Delete", client_path(client), method: :delete, class: "text-sm pl-2 text-gray-400 hover:text-red-600" %>
+        <%= link_to "Edit", edit_client_path(client), class: "btn-inline-edit" %>
+        <%= link_to "Delete", client_path(client), method: :delete, class: "btn-inline-delete pl-2" %>
       </div>
     </div>
   </li>

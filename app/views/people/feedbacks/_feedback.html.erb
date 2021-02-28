@@ -12,8 +12,8 @@
       </div>
       <div class="mt-2 space-x-2 text-sm">
         <span class="font-medium text-gray-500"><%=time_ago_in_words(feedback.created_at) + ' ago'%></span>
-        <%= link_to "Show", person_feedback_path(@employee, feedback), class: "text-sm pl-2 text-gray-400 hover:text-red-600" %>
-        <%= link_to "Delete", person_feedback_path(@employee, feedback), method: :delete, class: "text-sm pl-2 text-gray-400 hover:text-red-600" %>
+        <%= link_to "Show", person_feedback_path(@employee, feedback), class: "btn-inline-delete pl-2" %>
+        <%= link_to "Delete", person_feedback_path(@employee, feedback), method: :delete, class: "btn-inline-delete pl-2" %>
       </div>
     </div>
   </div>
