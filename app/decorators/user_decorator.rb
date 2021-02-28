@@ -53,4 +53,14 @@ class UserDecorator < Draper::Decorator
   def display_manager_name
     manager.nil? ? "N/A" : manager.display_name
   end
+
+  def display_additional_team_members
+    total_subordinates = subordinates.size
+    return total_subordinates <= 4 ? "" : "+#{total_subordinates - 4}"
+  end
+
+  def display_team_members_count
+    total_subordinates = subordinates.size
+    [total_subordinates, 4].min
+  end
 end
