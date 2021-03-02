@@ -6,8 +6,7 @@ class Account::DisciplinesController < Account::BaseController
     @discipline = Discipline.new
   end
 
-  def new
-    @discipline = Discipline.new
+  def edit
   end
 
   def create
@@ -15,10 +14,9 @@ class Account::DisciplinesController < Account::BaseController
 
     respond_to do |format|
       if @discipline.save
-        @discipline = Discipline.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Discipline.new, partial: "disciplines/form", locals: { message: "Discipline was created successfully." }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:disciplines, partial: "account/disciplines/discipline", locals: { message: "Discipline was created successfully.", discipline: @discipline }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Discipline.new, partial: "disciplines/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Discipline.new, partial: "account/disciplines/form", locals: {}) }
       end
     end
   end
@@ -26,9 +24,9 @@ class Account::DisciplinesController < Account::BaseController
   def update
     respond_to do |format|
       if @discipline.update(discipline_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@discipline, partial: "disciplines/discipline", locals: { message: "Discipline was created successfully.", discipline: @discipline }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@discipline, partial: "account/disciplines/discipline", locals: { message: "Discipline was created successfully.", discipline: @discipline }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@discipline, partial: "disciplines/discipline", locals: { discipline: @discipline }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@discipline, partial: "account/disciplines/discipline", locals: { discipline: @discipline }) }
       end
     end
   end
@@ -36,8 +34,7 @@ class Account::DisciplinesController < Account::BaseController
   def destroy
     @discipline.destroy
     respond_to do |format|
-      format.html { head :no_content }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@discipline) }
     end
   end
 

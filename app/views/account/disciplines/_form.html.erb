@@ -1,4 +1,4 @@
-  <%= tailwind_form_with(model: @discipline, id: dom_id(@discipline)) do |form| %>
+  <%= tailwind_form_with(model: @discipline, id: dom_id(@discipline), url: account_disciplines_path) do |form| %>
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: @discipline, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Disciplines", subtitle: "Discipline indicates the type of work a person does within the organization, also known as ‘department.’ Examples include design, research, and development." %>
