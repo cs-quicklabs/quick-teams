@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   namespace :account do
     resources :roles, except: [:new, :show]
-    resources :disciplines, path: "/account/disciplines"
-    resources :skills, path: "/account/skills"
-    resources :jobs, path: "/account/jobs"
-    resources :people_tags, path: "/account/people-tags"
-    resources :project_tags, path: "/account/project-tags"
-    resources :people_statuses, path: "/account/people-statuses"
-    resources :project_statuses, path: "/account/project-statuses"
-    resources :clients, path: "/account/clients"
+    resources :disciplines, except: [:new, :show]
+    resources :skills, except: [:new, :show]
+    resources :jobs, except: [:new, :show]
+    resources :people_tags, except: [:new, :show]
+    resources :project_tags, except: [:new, :show]
+    resources :people_statuses, except: [:new, :show]
+    resources :project_statuses, except: [:new, :show]
+    resources :clients, except: [:new, :show]
     resources :account, only: [:edit, :update]
   end
 
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "static#home"
+  root to: "static/static#home"
   get "/home", to: "home#index", as: "home"
   get "/schedule", to: "schedules#index", as: "schedules"
 
@@ -44,6 +44,6 @@ Rails.application.routes.draw do
   end
 
   scope "/account" do
-    get "/details", to: "account#index", as: "detail", module: "account"
+    get "/details", to: "account/account#index", as: "detail"
   end
 end

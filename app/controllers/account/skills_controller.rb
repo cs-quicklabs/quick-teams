@@ -7,15 +7,6 @@ class Account::SkillsController < Account::BaseController
     @skill = Skill.new
   end
 
-  # GET /skills/1 or /skills/1.json
-  def show
-  end
-
-  # GET /skills/new
-  def new
-    @skill = Skill.new
-  end
-
   # GET /skills/1/edit
   def edit
   end
@@ -26,8 +17,7 @@ class Account::SkillsController < Account::BaseController
 
     respond_to do |format|
       if @skill.save
-        @skill = Skill.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Skill.new, partial: "skills/form", locals: { message: "Skill was created successfully." }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:skills, partial: "account/skills/skill", locals: { message: "Skill was updated successfully.", skill: @skill }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Skill.new, partial: "skills/form", locals: {}) }
       end
@@ -38,9 +28,9 @@ class Account::SkillsController < Account::BaseController
   def update
     respond_to do |format|
       if @skill.update(skill_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@skill, partial: "skills/skill", locals: { message: "Skill was created successfully.", skill: @skill }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@skill, partial: "account/skills/skill", locals: { message: "Skill was created successfully.", skill: @skill }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@skill, partial: "skills/skill", locals: { skill: @skill }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@skill, partial: "account/skills/skill", locals: { skill: @skill }) }
       end
     end
   end
@@ -49,8 +39,7 @@ class Account::SkillsController < Account::BaseController
   def destroy
     @skill.destroy
     respond_to do |format|
-      format.html { head :no_content }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@skill) }
     end
   end
 
