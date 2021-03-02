@@ -1,4 +1,4 @@
-class PeopleStatusesController < ApplicationController
+class Account::PeopleStatusesController < Account::BaseController
   before_action :set_people_status, only: %i[ show edit update destroy ]
 
   # GET /people_statuses or /people_statuses.json

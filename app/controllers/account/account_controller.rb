@@ -1,4 +1,4 @@
-class AccountController < ApplicationController
+class Account::AccountController < Account::BaseController
   before_action :authenticate_user!
   before_action :set_account
 

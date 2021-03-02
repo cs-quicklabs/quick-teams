@@ -1,4 +1,4 @@
-class RolesController < ApplicationController
+class Account::RolesController < Account::BaseController
   before_action :set_role, only: %i[ show edit update destroy ]
 
   # GET /roles or /roles.json
@@ -7,16 +7,6 @@ class RolesController < ApplicationController
     @role = Role.new
   end
 
-  # GET /roles/1 or /roles/1.json
-  def show
-  end
-
-  # GET /roles/new
-  def new
-    @role = Role.new
-  end
-
-  # GET /roles/1/edit
   def edit
   end
 
@@ -26,10 +16,9 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        @role = Role.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Role.new, partial: "roles/form", locals: { message: "Role was created successfully." }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:roles, partial: "account/roles/role", locals: { message: "Role was updated successfully.", role: @role }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Role.new, partial: "roles/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Role.new, partial: "account/roles/form", locals: {}) }
       end
     end
   end
@@ -38,9 +27,9 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, partial: "roles/role", locals: { message: "Role was created successfully.", role: @role }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, partial: "account/roles/role", locals: { message: "Role was updated successfully.", role: @role }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, partial: "roles/role", locals: { role: @role }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, partial: "account/roles/role", locals: { role: @role }) }
       end
     end
   end
@@ -49,8 +38,7 @@ class RolesController < ApplicationController
   def destroy
     @role.destroy
     respond_to do |format|
-      format.html { head :no_content }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@role) }
     end
   end
 

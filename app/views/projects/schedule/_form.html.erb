@@ -2,7 +2,7 @@
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Participant", subtitle: "Please add new project participant and fill in engagement level." %>
-    <%= form.collection_select(:user_id, UserDecorator.decorate_collection(User.order(:first_name)), :id, :display_name, {:prompt => 'Select User'}, :selected => schedule.user_id ) %>
+    <%= form.collection_select(:user_id, UserDecorator.decorate_collection(User.for_current_account.order(:first_name)), :id, :display_name, {:prompt => 'Select User'}, :selected => schedule.user_id ) %>
     <%= form.date_field :starts_at, class: 'form-control' %>
     <%= form.date_field :ends_at, class: 'form-control' %>
     <%= form.text_field :occupancy%>

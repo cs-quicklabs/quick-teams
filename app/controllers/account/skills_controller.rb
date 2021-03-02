@@ -1,4 +1,4 @@
-class SkillsController < ApplicationController
+class Account::SkillsController < Account::BaseController
   before_action :set_skill, only: %i[ show edit update destroy ]
 
   # GET /skills or /skills.json

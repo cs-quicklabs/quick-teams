@@ -1,4 +1,4 @@
-class PeopleTagsController < ApplicationController
+class Account::PeopleTagsController < Account::BaseController
   before_action :set_people_tag, only: %i[ show edit update destroy ]
 
   # GET /people_tags or /people_tags.json

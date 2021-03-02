@@ -1,4 +1,4 @@
-class DisciplinesController < ApplicationController
+class Account::DisciplinesController < Account::BaseController
   before_action :set_discipline, only: %i[ show edit update destroy ]
 
   def index

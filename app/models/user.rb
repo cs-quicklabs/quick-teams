@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  scope :for_current_account, -> { where(account: Current.account) }
   belongs_to :account
   belongs_to :manager, class_name: "User", optional: true
   belongs_to :discipline

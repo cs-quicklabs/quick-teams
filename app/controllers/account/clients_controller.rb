@@ -1,4 +1,4 @@
-class ClientsController < ApplicationController
+class Account::ClientsController < Account::BaseController
   before_action :set_client, only: %i[ show edit update destroy ]
 
   # GET /clients or /clients.json

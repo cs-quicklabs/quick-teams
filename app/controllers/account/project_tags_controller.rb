@@ -1,4 +1,4 @@
-class ProjectTagsController < ApplicationController
+class Account::ProjectTagsController < Account::BaseController
   before_action :set_project_tag, only: %i[ show edit update destroy ]
 
   # GET /project_tags or /project_tags.json

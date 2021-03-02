@@ -1,4 +1,4 @@
-class ProjectStatusesController < ApplicationController
+class Account::ProjectStatusesController < Account::BaseController
   before_action :set_project_status, only: %i[ show edit update destroy ]
 
   # GET /project_statuses or /project_statuses.json

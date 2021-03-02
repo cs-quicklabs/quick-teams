@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
-  resources :roles, path: "/account/roles"
-  resources :disciplines, path: "/account/disciplines"
-  resources :skills, path: "/account/skills"
-  resources :jobs, path: "/account/jobs"
-  resources :people_tags, path: "/account/people-tags"
-  resources :project_tags, path: "/account/project-tags"
-  resources :people_statuses, path: "/account/people-statuses"
-  resources :project_statuses, path: "/account/project-statuses"
-  resources :clients, path: "/account/clients"
-  resources :account, only: [:edit, :update]
+  namespace :account do
+    resources :roles, except: [:new, :show]
+    resources :disciplines, path: "/account/disciplines"
+    resources :skills, path: "/account/skills"
+    resources :jobs, path: "/account/jobs"
+    resources :people_tags, path: "/account/people-tags"
+    resources :project_tags, path: "/account/project-tags"
+    resources :people_statuses, path: "/account/people-statuses"
+    resources :project_statuses, path: "/account/project-statuses"
+    resources :clients, path: "/account/clients"
+    resources :account, only: [:edit, :update]
+  end
 
   resources :projects do
     resources :schedules
@@ -42,6 +44,6 @@ Rails.application.routes.draw do
   end
 
   scope "/account" do
-    get "/details", to: "account#index", as: "detail"
+    get "/details", to: "account#index", as: "detail", module: "account"
   end
 end
