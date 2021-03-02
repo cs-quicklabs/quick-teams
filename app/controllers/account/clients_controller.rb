@@ -7,15 +7,6 @@ class Account::ClientsController < Account::BaseController
     @client = Client.new
   end
 
-  # GET /clients/1 or /clients/1.json
-  def show
-  end
-
-  # GET /clients/new
-  def new
-    @client = Client.new
-  end
-
   # GET /clients/1/edit
   def edit
   end
@@ -26,10 +17,9 @@ class Account::ClientsController < Account::BaseController
 
     respond_to do |format|
       if @client.save
-        @client = Client.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Client.new, partial: "clients/form", locals: { message: "Client was created successfully." }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(:clients, partial: "account/clients/client", locals: { message: "Client was created successfully.", client: @client }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Client.new, partial: "clients/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Client.new, partial: "account/clients/form", locals: {}) }
       end
     end
   end
@@ -38,9 +28,9 @@ class Account::ClientsController < Account::BaseController
   def update
     respond_to do |format|
       if @client.update(client_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@client, partial: "clients/client", locals: { message: "Client was created successfully.", client: @client }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@client, partial: "account/clients/client", locals: { message: "Client was created successfully.", client: @client }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@client, partial: "clients/client", locals: { client: @client }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@client, partial: "account/clients/client", locals: { client: @client }) }
       end
     end
   end
@@ -49,8 +39,7 @@ class Account::ClientsController < Account::BaseController
   def destroy
     @client.destroy
     respond_to do |format|
-      format.html { head :no_content }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@client) }
     end
   end
 
