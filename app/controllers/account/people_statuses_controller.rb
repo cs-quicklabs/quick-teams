@@ -7,15 +7,6 @@ class Account::PeopleStatusesController < Account::BaseController
     @people_status = PeopleStatus.new
   end
 
-  # GET /people_statuses/1 or /people_statuses/1.json
-  def show
-  end
-
-  # GET /people_statuses/new
-  def new
-    @people_status = PeopleStatus.new
-  end
-
   # GET /people_statuses/1/edit
   def edit
   end
@@ -26,10 +17,9 @@ class Account::PeopleStatusesController < Account::BaseController
 
     respond_to do |format|
       if @people_status.save
-        @people_status = PeopleStatus.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(PeopleStatus.new, partial: "people_statuses/form", locals: { message: "People Status was created successfully." }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:people_statuses, partial: "account/people_statuses/people_status", locals: { message: "People Status was created successfully.", people_status: @people_status }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(PeopleStatus.new, partial: "people_statuses/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(PeopleStatus.new, partial: "account/people_statuses/form", locals: {}) }
       end
     end
   end
@@ -38,9 +28,9 @@ class Account::PeopleStatusesController < Account::BaseController
   def update
     respond_to do |format|
       if @people_status.update(people_status_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@people_status, partial: "people_statuses/people_status", locals: { message: "People Status was created successfully.", people_status: @people_status }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@people_status, partial: "account/people_statuses/people_status", locals: { message: "People Status was created successfully.", people_status: @people_status }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@people_status, partial: "people_statuses/people_status", locals: { people_status: @people_status }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@people_status, partial: "account/people_statuses/people_status", locals: { people_status: @people_status }) }
       end
     end
   end
@@ -49,8 +39,7 @@ class Account::PeopleStatusesController < Account::BaseController
   def destroy
     @people_status.destroy
     respond_to do |format|
-      format.html { head :no_content }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@people_status) }
     end
   end
 
