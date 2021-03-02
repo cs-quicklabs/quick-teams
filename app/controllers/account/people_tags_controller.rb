@@ -7,15 +7,6 @@ class Account::PeopleTagsController < Account::BaseController
     @people_tag = PeopleTag.new
   end
 
-  # GET /people_tags/1 or /people_tags/1.json
-  def show
-  end
-
-  # GET /people_tags/new
-  def new
-    @people_tag = PeopleTag.new
-  end
-
   # GET /people_tags/1/edit
   def edit
   end
@@ -23,13 +14,11 @@ class Account::PeopleTagsController < Account::BaseController
   # POST /people_tags or /people_tags.json
   def create
     @people_tag = PeopleTag.new(people_tag_params)
-
     respond_to do |format|
       if @people_tag.save
-        @people_tag = PeopleTag.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(PeopleTag.new, partial: "people_tags/form", locals: { message: "Tag was created successfully." }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:people_tags, partial: "account/people_tags/people_tag", locals: { message: "Tag was created successfully.", people_tag: @people_tag }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(PeopleTag.new, partial: "people_tags/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(PeopleTag.new, partial: "account/people_tags/form", locals: {}) }
       end
     end
   end
@@ -38,9 +27,9 @@ class Account::PeopleTagsController < Account::BaseController
   def update
     respond_to do |format|
       if @people_tag.update(people_tag_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@people_tag, partial: "people_tags/people_tag", locals: { message: "Tag was created successfully.", people_tag: @people_tag }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@people_tag, partial: "account/people_tags/people_tag", locals: { message: "Tag was created successfully.", people_tag: @people_tag }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@people_tag, partial: "people_tags/people_tag", locals: { people_tag: @people_tag }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@people_tag, partial: "account/people_tags/people_tag", locals: { people_tag: @people_tag }) }
       end
     end
   end
@@ -49,8 +38,7 @@ class Account::PeopleTagsController < Account::BaseController
   def destroy
     @people_tag.destroy
     respond_to do |format|
-      format.html { head :no_content }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@people_tag) }
     end
   end
 
