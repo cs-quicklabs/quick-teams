@@ -10,7 +10,7 @@ class ProjectDecorator < Draper::Decorator
   end
 
   def display_created_at
-    "#{project.created_at.to_s(:long)}"
+    "#{project.created_at.to_date.to_s(:long)}"
   end
 
   def display_additional_participants
