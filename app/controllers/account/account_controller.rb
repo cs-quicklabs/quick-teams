@@ -1,12 +1,15 @@
 class Account::AccountController < Account::BaseController
   before_action :set_account
 
+  def index
+  end
+
   def update
     respond_to do |format|
       if @account.update(account_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "form", locals: { message: "Account was updated successfully", account: @account }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "account/account/form", locals: { message: "Account was updated successfully", account: @account }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "form", locals: { account: @account }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@account, partial: "account/account/form", locals: { account: @account }) }
       end
     end
   end

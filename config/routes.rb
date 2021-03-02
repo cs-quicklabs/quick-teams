@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     resources :people_statuses, except: [:new, :show]
     resources :project_statuses, except: [:new, :show]
     resources :clients, except: [:new, :show]
-    resources :account, only: [:edit, :update]
   end
 
   resources :projects do
@@ -23,7 +22,6 @@ Rails.application.routes.draw do
     resources :feedbacks, module: "people"
     get "/team", to: "people/team#index"
   end
-  resources :account, only: [:update, :edit]
   resources :user
 
   devise_for :users
@@ -43,7 +41,6 @@ Rails.application.routes.draw do
     get "/notifications", to: "settings#notifications", as: "notifications"
   end
 
-  scope "/account" do
-    get "/details", to: "account/account#index", as: "detail"
-  end
+  get "account/details", to: "account/account#index", as: "detail"
+  patch "account/:id", to: "account/account#update", as: "update_account"
 end
