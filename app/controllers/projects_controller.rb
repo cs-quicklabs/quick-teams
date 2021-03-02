@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = ProjectDecorator.decorate_collection(Project.includes(:discipline, :participants).order(:name))
+    @projects = ProjectDecorator.decorate_collection(Project.includes(:discipline, :participants, :manager).order(:name))
   end
 
   # GET /projects/1 or /projects/1.json
@@ -63,6 +63,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :discipline_id)
+    params.require(:project).permit(:name, :description, :discipline_id, :manager_id)
   end
 end

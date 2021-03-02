@@ -20,7 +20,10 @@
       <span class="flex-shrink-0 text-xs font-medium leading-5"><%= project.display_additional_participants %></span>
     </div>
   </td>
-  <td class="hidden px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+  <td class="py-3 text-sm text-left text-gray-500 md:table-cell whitespace-nowrap">
+    <%= project.display_manager_name %>
+  </td>
+  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
     <%= project.display_created_at %>
   </td>
 </tr>
