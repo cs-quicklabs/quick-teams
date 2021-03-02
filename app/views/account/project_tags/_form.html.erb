@@ -1,4 +1,4 @@
-  <%= tailwind_form_with(model: @project_tag, id: dom_id(@project_tag)) do |form| %>
+  <%= tailwind_form_with(model: @project_tag, id: dom_id(@project_tag), url: account_project_tags_path) do |form| %>
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: @project_tag, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Project Tags", subtitle: "You can define custom tags which can be applied to your projects. Examples include At Risk, In UAT." %>

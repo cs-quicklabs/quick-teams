@@ -7,15 +7,6 @@ class Account::ProjectTagsController < Account::BaseController
     @project_tag = ProjectTag.new
   end
 
-  # GET /project_tags/1 or /project_tags/1.json
-  def show
-  end
-
-  # GET /project_tags/new
-  def new
-    @project_tag = ProjectTag.new
-  end
-
   # GET /project_tags/1/edit
   def edit
   end
@@ -26,10 +17,12 @@ class Account::ProjectTagsController < Account::BaseController
 
     respond_to do |format|
       if @project_tag.save
-        @project_tag = ProjectTag.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectTag.new, partial: "project_tags/form", locals: { message: "Tag was created successfully." }) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:project_tags, partial: "account/project_tags/project_tag",
+                                                                   locals: { message: "Tag was created successfully.", project_tag: @project_tag })
+        }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectTag.new, partial: "project_tags/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectTag.new, partial: "account/project_tags/form", locals: {}) }
       end
     end
   end
@@ -38,9 +31,9 @@ class Account::ProjectTagsController < Account::BaseController
   def update
     respond_to do |format|
       if @project_tag.update(project_tag_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_tag, partial: "project_tags/project_tag", locals: { message: "Tag was created successfully.", project_tag: @project_tag }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_tag, partial: "account/project_tags/project_tag", locals: { message: "Tag was created successfully.", project_tag: @project_tag }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_tag, partial: "project_tags/project_tag", locals: { project_tag: @project_tag }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_tag, partial: "account/project_tags/project_tag", locals: { project_tag: @project_tag }) }
       end
     end
   end
@@ -49,8 +42,7 @@ class Account::ProjectTagsController < Account::BaseController
   def destroy
     @project_tag.destroy
     respond_to do |format|
-      format.html { head :no_content }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@project_tag) }
     end
   end
 

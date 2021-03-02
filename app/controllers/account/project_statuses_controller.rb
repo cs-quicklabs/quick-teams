@@ -7,15 +7,6 @@ class Account::ProjectStatusesController < Account::BaseController
     @project_status = ProjectStatus.new
   end
 
-  # GET /project_statuses/1 or /project_statuses/1.json
-  def show
-  end
-
-  # GET /project_statuses/new
-  def new
-    @project_status = ProjectStatus.new
-  end
-
   # GET /project_statuses/1/edit
   def edit
   end
@@ -26,10 +17,12 @@ class Account::ProjectStatusesController < Account::BaseController
 
     respond_to do |format|
       if @project_status.save
-        @project_status = ProjectStatus.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectStatus.new, partial: "project_statuses/form", locals: { message: "Project Status was created successfully." }) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:project_statuses, partial: "account/project_statuses/project_status",
+                                                                       locals: { message: "Project Status was created successfully.", project_status: @project_status })
+        }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectStatus.new, partial: "project_statuses/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectStatus.new, partial: "account/project_statuses/form", locals: {}) }
       end
     end
   end
@@ -38,9 +31,15 @@ class Account::ProjectStatusesController < Account::BaseController
   def update
     respond_to do |format|
       if @project_status.update(project_status_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_status, partial: "project_statuses/project_status", locals: { message: "Project Status was created successfully.", project_status: @project_status }) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(@project_status, partial: "account/project_statuses/project_status",
+                                                                     locals: { message: "Project Status was created successfully.", project_status: @project_status })
+        }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_status, partial: "project_statuses/project_status", locals: { project_status: @project_status }) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(@project_status, partial: "account/project_statuses/project_status",
+                                                                     locals: { project_status: @project_status })
+        }
       end
     end
   end
@@ -49,8 +48,7 @@ class Account::ProjectStatusesController < Account::BaseController
   def destroy
     @project_status.destroy
     respond_to do |format|
-      format.html { head :no_content }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@project_status) }
     end
   end
 
