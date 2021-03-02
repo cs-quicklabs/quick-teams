@@ -1,4 +1,4 @@
-  <%= tailwind_form_with(model: @job, id: dom_id(@job)) do |form| %>
+  <%= tailwind_form_with(model: @job, id: dom_id(@job), url: account_jobs_path) do |form| %>
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: @job, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Job Profiles", subtitle: "You can define various Job profiles of your organization. Examples include, Android Developer, iOS Developer." %>
