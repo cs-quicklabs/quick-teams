@@ -1,29 +1,31 @@
 <tr>
-  <td class="px-6 py-3 max-w-0 w-full whitespace-nowrap text-sm font-medium text-gray-900">
+  <td class="w-full px-6 py-3 text-sm font-medium text-gray-900 max-w-0 whitespace-nowrap">
     <div class="flex items-center space-x-3 lg:pl-2">
       <div class="flex-shrink-0 w-2.5 h-2.5 rounded-full bg-pink-600" aria-hidden="true"></div>
-      <a href="<%= project_participants_path(project) %>" class="truncate hover:text-gray-600">
+      <a href="<%= project_participants_path(project) %>" class="truncate hover:text-gray-600 hover:underline">
         <span>
           <%= project.name %>
-          <span class="text-gray-500 font-normal"><%= project.display_discipline %></span>
+          <span class="font-normal text-gray-500"><%= project.display_discipline %></span>
         </span>
       </a>
     </div>
   </td>
-  <td class="px-6 py-3 text-sm text-gray-500 font-medium">
+  <td class="px-6 py-3 text-sm font-medium text-gray-500">
     <div class="flex items-center space-x-2">
       <div class="flex flex-shrink-0 -space-x-1">
         <% project.display_participants_count.times do %>
-        <img class="max-w-none h-6 w-6 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixqx=T6AY8bD1bU&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+          <%= image_tag "male-placeholder-image.png", class:"w-6 h-6 rounded-full max-w-none ring-2 ring-white"%>
         <% end %>
       </div>
-      <span class="flex-shrink-0 text-xs leading-5 font-medium"><%= project.display_additional_participants %></span>
+      <span class="flex-shrink-0 text-xs font-medium leading-5"><%= project.display_additional_participants %></span>
     </div>
   </td>
-  <td>
-    
+  <td class="py-3 text-sm text-left text-gray-500 md:table-cell whitespace-nowrap">
+    <a href="<%= person_path(project.manager) if !project.manager.nil?%>" class="truncate hover:text-gray-600 hover:underline">
+      <%= project.display_manager_name %>
+    </a>
   </td>
-  <td class="hidden md:table-cell px-6 py-3 whitespace-nowrap text-sm text-gray-500 text-right">
-    <%= project.display_starts_at %>
+  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+    <%= project.display_created_at %>
   </td>
 </tr>

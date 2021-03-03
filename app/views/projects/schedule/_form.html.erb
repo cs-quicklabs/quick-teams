@@ -1,25 +1,22 @@
 <%= form_with(model: schedule, id: dom_id(schedule), url: project_schedules_path(@project)) do |form| %>
-<main class="max-w-lg mx-auto pt-6 pb-12 px-4 lg:pb-16 space-y-6">
-  <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
-  <%= render "shared/form_header", title: "Add New Participant", subtitle: "Please add new project participant and fill in engagement level." %>
-  <div>
-    <%= form.label :user_id, class: "label" %>
-    <%= form.collection_select(:user_id, User.all, :id, :full_name, {:prompt => 'Select User'}, :selected => schedule.user_id, class: "drop-down" ) %>
-  </div>
-  <div>
-    <%= form.label :occupancy, class: "label" %>
-    <%= form.number_field :occupancy, in: 1..100, class: "block w-full border-gray-300 rounded-md" %>
-  </div>
-  <div class="control-group">
-    <%= form.label :starts_date, class: "label" %>
-      <%= form.date_field :starts_at, class: "drop-down"%>
-  </div>
-  <div class="control-group">
-    <%= form.label :ends_date, class: "label" %>
-      <%= form.date_field :ends_at, class: "drop-down"%>
-  </div>
-  <div class="flex justify-end">
-    <%= form.submit "Save", class:"btn-blue"%>
-  </div>
-</main>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto lg:pb-16">
+    <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New Participant", subtitle: "Add new project participant and fill in engagement level." %>
+    <%= form.collection_select(:user_id, UserDecorator.decorate_collection(User.for_current_account.order(:first_name)), :id, :display_name, {:prompt => 'Select Participant'}, :selected => schedule.user_id, :class=>"form-text-field mt-4" )%>
+    <label for="starts" class="block mt-4 text-sm font-medium text-gray-700">
+      Starts At
+    </label>
+    <%= form.date_field :starts_at, class: 'form-text-field mt-1' %>
+    <label for="ends" class="block mt-4 text-sm font-medium text-gray-700">
+      Ends At
+    </label>
+    <%= form.date_field :ends_at, class: 'form-text-field mt-1' %>
+    <label for="occupancy" class="block mt-4 text-sm font-medium text-gray-700">
+      Occupancy (%)
+    </label>
+    <%= form.text_field :occupancy, class: 'form-text-field mt-1', placeholder: "1 to 100 percent"%>
+    <div class="flex justify-end mt-6">
+      <%= form.submit "Save", class:"btn-blue"%>
+    </div>
+  </main>
 <% end %>

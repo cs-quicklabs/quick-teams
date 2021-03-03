@@ -5,6 +5,7 @@
     "@fullhuman/postcss-purgecss": "^4.0.0",
     "@hotwired/turbo-rails": "^7.0.0-beta.5",
     "@rails/actioncable": "^6.0.0",
+    "@rails/actiontext": "^6.1.1",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
@@ -15,7 +16,8 @@
     "postcss": "^8.2.6",
     "rails-erb-loader": "^5.5.2",
     "stimulus": "^2.0.0",
-    "tailwindcss": "^2.0.3"
+    "tailwindcss": "^2.0.2",
+    "trix": "^1.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {

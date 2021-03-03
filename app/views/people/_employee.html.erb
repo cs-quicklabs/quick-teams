@@ -2,9 +2,9 @@
   <td class="px-6 py-4 whitespace-nowrap">
     <div class="flex items-center">
       <div class="flex-shrink-0 w-10 h-10">
-        <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60" alt="">
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
       </div>
-      <a href="<%= person_path(employee) %>" class="truncate hover:text-gray-600">
+      <a href="<%= person_path(employee) %>" class="truncate hover:text-gray-600 hover:underline">
         <div class="ml-4">
           <div class="text-sm font-medium text-gray-900">
             <%= employee.display_name %>
@@ -20,15 +20,19 @@
     <div class="text-sm text-gray-900"><%= employee.display_position%></div>
     <div class="text-sm text-gray-500"><%= employee.display_discipline_title%></div>
   </td>
-  <td class="px-6 py-4 whitespace-nowrap">
-    <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-      Active
-    </span>
-  </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-    <%= employee.manager.nil? ? "N/A" : employee.manager.full_name %>
+    <a href="<%= person_path(employee.manager) %>" class="truncate hover:text-gray-600 hover:underline">
+      <%= employee.display_manager_name %>
+    </a>
   </td>
-  <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-    <a href="<%= edit_person_path(employee)%>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+  <td class="px-6 py-3 text-sm font-medium text-gray-500">
+    <div class="flex items-center space-x-2">
+      <div class="flex flex-shrink-0 -space-x-1">
+        <% employee.display_team_members_count.times do %>
+          <%= image_tag "male-placeholder-image.png", class: "w-6 h-6 rounded-full max-w-none ring-2 ring-white"%>
+        <% end %>
+      </div>
+      <span class="flex-shrink-0 text-xs font-medium leading-5"><%= employee.display_additional_team_members %></span>
+    </div>
   </td>
 </tr>

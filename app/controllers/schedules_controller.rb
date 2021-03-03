@@ -1,18 +1,19 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: %i[ update create ]
+  before_action :set_project, only: %i[ update create destroy edit ]
+  before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
-    employees = User.includes(:schedules, :role, :discipline, :job).all
+    employees = User.for_current_account.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
     @employees = UserDecorator.decorate_collection(employees)
   end
 
   def update
     respond_to do |format|
-      if @user.update(schedule_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/profile", locals: { message: "User was updated successfully", user: @user }) }
+      if @schedule.update(schedule_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/schedule", locals: { message: "Schedule was updated successfully", schedule: @schedule.decorate }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/profile", locals: { user: @user }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/edit", locals: { schedule: @schedule }) }
       end
     end
   end
@@ -24,10 +25,21 @@ class SchedulesController < ApplicationController
     respond_to do |format|
       if @schedule.save
         @schedule = Schedule.new
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { message: "Participant was added.", schedule: @schedule }) }
+        format.html { redirect_to project_participants_path(@project), notice: "Participant was added successfully." }
+        #format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { message: "Participant was added.", schedule: @schedule }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { schedule: @schedule }) }
       end
+    end
+  end
+
+  def edit
+  end
+
+  def destroy
+    @schedule.destroy
+    respond_to do |format|
+      format.html { redirect_to project_participants_path(@project), notice: "Participant was removed successfully." }
     end
   end
 
@@ -38,11 +50,14 @@ class SchedulesController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params['project_id'])
+    @project = Project.find(params["project_id"])
+  end
+
+  def set_schedule
+    @schedule = Schedule.find(params["id"])
   end
 
   def schedule_params
     params.require(:schedule).permit(:user_id, :starts_at, :discipline_id, :ends_at, :occupancy)
   end
-
 end

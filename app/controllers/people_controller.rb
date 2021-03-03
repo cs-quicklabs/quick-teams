@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   before_action :authenticate_user!
 
   def index
-   @pagy, @employees = pagy_countless(UserDecorator.decorate_collection(User.includes(:role, :discipline, :job).all), items: 10)
+   @pagy, @employees = pagy_countless(UserDecorator.decorate_collection(User.for_current_account.includes(:role, :discipline, :job, :manager, :subordinates).order(:first_name)))
   end
 
   def new
@@ -24,6 +24,8 @@ class PeopleController < ApplicationController
   end
 
   def show
+    @employee = @employee.decorate
+    redirect_to person_team_path(@employee)
   end
 
   private

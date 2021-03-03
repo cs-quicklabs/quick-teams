@@ -1,6 +1,7 @@
 class UserDecorator < Draper::Decorator
   delegate_all
 
+  decorates_association :manager
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
@@ -46,7 +47,20 @@ class UserDecorator < Draper::Decorator
     overall_occupancy.to_s + "%"
   end
 
-  # def self.collection_decorator_class
-  #   PaginatingDecorator
-  # end
+  def display_occupancy_for(project)
+  end
+
+  def display_manager_name
+    manager.nil? ? "N/A" : manager.display_name
+  end
+
+  def display_additional_team_members
+    total_subordinates = subordinates.size
+    return total_subordinates <= 4 ? "" : "+#{total_subordinates - 4}"
+  end
+
+  def display_team_members_count
+    total_subordinates = subordinates.size
+    [total_subordinates, 4].min
+  end
 end

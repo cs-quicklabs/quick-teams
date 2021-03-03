@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :email, uniqueness: true
-  validates :first_name, :last_name, presence: true, :uniqueness => true
+
+  scope :for_current_account, -> { where(account: Current.account) }
   belongs_to :account
   belongs_to :manager, class_name: "User", optional: true
   belongs_to :discipline
@@ -14,8 +14,5 @@ class User < ApplicationRecord
   has_many :schedules
   has_many :projects, through: :schedules
   has_many :subordinates, class_name: "User", foreign_key: "manager_id"
-
-  def full_name
-    "#{first_name} #{last_name}"
-  end
+  has_many :feedbacks, as: :critiquable
 end

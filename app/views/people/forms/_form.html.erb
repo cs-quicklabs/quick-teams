@@ -1,14 +1,16 @@
 <%= tailwind_form_with(model: employee, id: dom_id(employee), url: person_path(employee), method: :patch) do |form| %>
-<main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
-  <%= render "shared/form_messages", resource: employee, message: local_assigns[:message] %>
-  <%= render "shared/form_header", title: "Update Employee Details", subtitle: "Please fill in details of the Employee." %>
-  <%= form.text_field :first_name, "First Name"%>
-  <%= form.text_field :last_name, "Last Name"%>
-  <%= form.text_field :email, "Email"%>
-  <div>
-    <%= form.label :discipline_id, class: "label" %>
-    <div class="mt-1">
-      <%= form.collection_select(:discipline_id, Discipline.all, :id, :name, {:prompt => 'Select Discipline'}, :selected => employee.discipline_id, class: "drop-down" ) %>
+  <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: employee, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Create New Project", subtitle: "Please fill in details of your new Project." %>
+    <%= form.text_field :first_name, "First Name"%>
+    <%= form.text_field :last_name, "Last Name"%>
+    <%= form.text_field :email, "Email"%>
+    <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, {:prompt => 'Select Discipline'}, :selected => employee.discipline_id ) %>
+    <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job'}, :selected => employee.job_id ) %>
+    <%= form.collection_select(:role_id, Role.order(:name), :id, :name, {:prompt => 'Select Role'}, :selected => employee.role_id ) %>
+    <%= form.collection_select(:manager_id, UserDecorator.decorate_collection(User.for_current_account.order(:first_name)), :id, :display_name, {:prompt => 'Select Manager'}, :selected => employee.manager_id ) %>
+    <div class="flex justify-end">
+      <%= form.submit "Save", class:"btn-blue"%>
     </div>
   </div>
   <div>

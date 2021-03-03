@@ -1,0 +1,10 @@
+  <%= tailwind_form_with(model: account, id: dom_id(account), url: update_account_path(@account)) do |form| %>
+  <div class="space-y-6">
+    <%= render "shared/form_messages", resource: account, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Account Settings", subtitle: "Please fill in your company information. This will be available for all your workforce." %>
+    <%= form.text_field :name, "Company Name" %>
+    <div class="flex justify-end">
+      <%= form.submit "Save", class:"btn-blue"%>
+    </div>
+  </div>
+<% end %>

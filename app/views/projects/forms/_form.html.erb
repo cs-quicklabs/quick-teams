@@ -1,13 +1,13 @@
 <%= tailwind_form_with(model: project, id: dom_id(project)) do |form| %>
-<main class="max-w-lg mx-auto pt-10 pb-12 px-4 lg:pb-16 space-y-6">
-  <%= render "shared/form_messages", resource: project, message: local_assigns[:message] %>
-  <%= render "shared/form_header", title: "Create New Project", subtitle: "Please fill in details of your new Project." %>
-  <%= form.text_field :name, "Project Name"%>
-  <%= form.text_area :description, "Description"%>
-  <div>
-    <%= form.label :discipline_id, class: "label" %>
-    <div class="mt-1">
-      <%= form.collection_select(:discipline_id, Discipline.all, :id, :name, {:prompt => 'Select Discipline'}, :selected => project.discipline_id, class: "drop-down" )%>
+  <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: project, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Create New Project", subtitle: "Please fill in details of your new Project." %>
+    <%= form.text_field :name, "Project Name"%>
+    <%= form.text_area :description, "Description"%>
+    <%= form.collection_select(:discipline_id, Discipline.all, :id, :name, {:prompt => 'Select Discipline'}, :selected => project.discipline_id ) %>
+    <%= form.collection_select(:manager_id, UserDecorator.decorate_collection(User.for_current_account.order(:first_name)), :id, :display_name, {:prompt => 'Select Manager'}, :selected => project.manager_id ) %>
+    <div class="flex justify-end">
+      <%= form.submit "Save", class:"btn-blue"%>
     </div>
   </div>
   <div class="control-group">

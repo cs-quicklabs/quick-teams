@@ -4,7 +4,9 @@ class Project < ApplicationRecord
   has_many :schedules
   has_many :participants, through: :schedules, source: :user
 
-  has_one :manager
+  belongs_to :manager, class_name: "User"
+  has_many :notes, as: :notable
+  has_many :feedbacks, as: :critiquable
 
   belongs_to :discipline
 

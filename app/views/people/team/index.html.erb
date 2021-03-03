@@ -1,0 +1,17 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "people/title", employee: @employee%>
+  <div class="px-4 sm:px-6">
+    <h2 class="sr-only" id="section-1-title">Project Participants</h2>
+    <div class="overflow-hidden bg-white">
+      <div class="p-4">
+        <div class="flex flex-wrap">
+          <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Team Members(" + @subordinates.size.to_s + ")"%></p>
+        </div>
+        <ul class="divide-y divide-gray-200">
+          <%= render partial: "people/team/employee", collection: @subordinates, as: :employee%>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</main>

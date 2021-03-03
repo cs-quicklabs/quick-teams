@@ -1,30 +1,32 @@
 Rails.application.routes.draw do
-  resources :roles, path: "/account/roles"
-  resources :disciplines, path: "/account/disciplines"
-  resources :skills, path: "/account/skills"
-  resources :jobs, path: "/account/jobs"
-  resources :people_tags, path: "/account/people-tags"
-  resources :project_tags, path: "/account/project-tags"
-  resources :people_statuses, path: "/account/people-statuses"
-  resources :project_statuses, path: "/account/project-statuses"
-  resources :clients, path: "/account/clients"
-  resources :account, only: [:edit, :update]
-
-  resources :projects do
-    get "/participants", to: "projects/participants#index", as: "participants"
-    get "/notes", to: "projects/notes#index", as: "notes"
-    get "/feedback", to: "projects/feedback#index", as: "feedback"
-    get "/schedule", to: "projects/schedule#index", as: "schedule"
-    resources :schedules
+  namespace :account do
+    resources :roles, except: [:new, :show]
+    resources :disciplines, except: [:new, :show]
+    resources :skills, except: [:new, :show]
+    resources :jobs, except: [:new, :show]
+    resources :people_tags, except: [:new, :show]
+    resources :project_tags, except: [:new, :show]
+    resources :people_statuses, except: [:new, :show]
+    resources :project_statuses, except: [:new, :show]
+    resources :clients, except: [:new, :show]
   end
 
-  resources :people
-  resources :account, only: [:update, :edit]
+  resources :projects do
+    resources :schedules
+    resources :notes, only: [:index, :show, :create, :destroy], module: "projects"
+    resources :feedbacks, only: [:index, :show, :create, :destroy], module: "projects"
+    get "/participants", to: "projects/schedule#index", as: "participants"
+  end
+
+  resources :people do
+    resources :feedbacks, module: "people"
+    get "/team", to: "people/team#index"
+  end
   resources :user
 
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "static#home"
+  root to: "static/static#home"
   get "/home", to: "home#index", as: "home"
   get "/schedule", to: "schedules#index", as: "schedules"
 
@@ -39,7 +41,6 @@ Rails.application.routes.draw do
     get "/notifications", to: "settings#notifications", as: "notifications"
   end
 
-  scope "/account" do
-    get "/details", to: "account#index", as: "detail"
-  end
+  get "account/details", to: "account/account#index", as: "detail"
+  patch "account/:id", to: "account/account#update", as: "update_account"
 end
