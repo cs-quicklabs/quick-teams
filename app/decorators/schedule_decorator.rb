@@ -13,4 +13,8 @@ class Schedule < Draper::Decorator
   def display_added_at
     "#{starts_at.to_s(:long)}"
   end
+
+  # def self.collection_decorator_class
+  #   PaginatingDecorator
+  # end
 end

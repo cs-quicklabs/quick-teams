@@ -45,4 +45,8 @@ class UserDecorator < Draper::Decorator
     end
     overall_occupancy.to_s + "%"
   end
+
+  # def self.collection_decorator_class
+  #   PaginatingDecorator
+  # end
 end

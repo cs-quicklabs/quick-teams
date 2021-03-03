@@ -141,7 +141,9 @@ GEM
       racc (~> 1.4)
     nokogiri (1.11.1-x86_64-linux)
       racc (~> 1.4)
+    oj (3.11.2)
     orm_adapter (0.5.0)
+    pagy (3.10.0)
     parallel (1.12.1)
     parser (3.0.0.0)
       ast (~> 2.4.1)
@@ -281,6 +283,8 @@ DEPENDENCIES
   letter_opener
   letter_opener_web
   listen (~> 3.3)
+  oj (~> 3.11, >= 3.11.1)
+  pagy (~> 3.10)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

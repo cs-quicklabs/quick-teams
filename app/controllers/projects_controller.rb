@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = ProjectDecorator.decorate_collection(Project.includes(:discipline).all)
+    @pagy, @projects = pagy_countless(ProjectDecorator.decorate_collection(Project.includes(:discipline).all))
   end
 
   # GET /projects/1 or /projects/1.json
@@ -63,6 +63,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :discipline_id)
+    params.require(:project).permit(:name, :description, :starts_at, :discipline_id)
   end
 end

@@ -1,0 +1,51 @@
+<%#
+  This template is i18n-ready: if you don't use i18n, then you can replace the pagy_t
+  calls with the actual strings ("&lsaquo; Prev", "Next &rsaquo;", "&hellip;").
+
+  The link variable is set to a proc that returns the link tag.
+  Usage: link.call( page_number [, text [, extra_attributes_string ]])
+  -%>
+  <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+  	<% link = pagy_link_proc(pagy, 'class="page-link"') -%>
+  	
+  	<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+  		<div>
+  			<p class="text-sm text-gray-700">
+  				Showing
+  				<span class="font-medium">1</span>
+  				to
+  				<span class="font-medium">5</span>
+  				of
+  				<span class="font-medium">10</span>
+  				results
+  			</p>
+  		</div>
+  		<div>
+  			<nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+  				<ul class="pagination">
+  					<% if pagy.prev-%>   
+  					<li class="relative inline-flex items-center px-2 py-1 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"><%== link.call(pagy.prev, pagy_t('pagy.nav.prev'), 'aria-label="previous"') %></li>
+  					<% else                        -%>    
+  					<li class="relative inline-flex items-center px-2 py-1 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled">
+  						<a href="#" class="page-link"><%== pagy_t('pagy.nav.prev') %></a></li>
+  						<% end-%>
+  						<% pagy.series.each do |item| # series example: [1, :gap, 7, 8, "9", 10, 11, :gap, 36] -%>
+  						<%   if    item.is_a?(Integer) -%>    
+  						<li class="relative inline-flex items-center px-4 py-1 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"><%== link.call(item) %></li>
+  						<%   elsif item.is_a?(String)  -%>   
+  						<li class="relative inline-flex items-center px-4 py-1 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 active"><%== link.call(item) %></li>
+  						<%   elsif item == :gap        -%>  
+  						<li class="relative inline-flex items-center px-4 py-1 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 disabled gap"><a href="#" class="page-link"><%== pagy_t('pagy.nav.gap') %></a></li>
+  						<% end-%>
+  						<% end-%>
+  						<% if pagy.next-%> 
+  						<li class="ml-3 relative inline-flex items-center px-2 py-1 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 next"><%== link.call(pagy.next, pagy_t('pagy.nav.next'), 'aria-label="next"') %></li>
+  						<% else-%>  
+  						<li class="ml-3 relative inline-flex items-center px-2 py-1 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 next disabled"><a href="#" class="page-link"><%== pagy_t('pagy.nav.next') %></a></li>
+  						<% end                         -%>
+  					</ul>
+  				</nav>
+  			</div>
+  		</div>
+  	</div>
+

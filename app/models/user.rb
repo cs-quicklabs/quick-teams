@@ -14,4 +14,8 @@ class User < ApplicationRecord
   has_many :schedules
   has_many :projects, through: :schedules
   has_many :subordinates, class_name: "User", foreign_key: "manager_id"
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

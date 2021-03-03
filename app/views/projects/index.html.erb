@@ -25,8 +25,11 @@
               <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Participants
               </th>
+              <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Project Lead
+              </th>
               <th class="pr-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Created At
+              Starts At
               </th>
             </tr>
           </thead>
@@ -38,3 +41,4 @@
     </div>
   <% end %>
 </main>
+<%== render partial: 'shared/bootstrap_nav', locals: {pagy: @pagy} %>
