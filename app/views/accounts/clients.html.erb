@@ -1,11 +1,11 @@
-<main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
+<main class="pb-10 mx-auto max-w-7xl lg:py-12 lg:px-8">
   <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
     <%= render 'menu'%>
-    <main class="max-w-auto px-4 lg:col-span-8">
+    <main class="px-4 max-w-auto lg:col-span-8">
       <form>
         <div class="space-y-6">
           <div>
-            <h1 class="text-lg leading-6 font-medium text-gray-900">
+            <h1 class="text-lg font-medium leading-6 text-gray-900">
               Clients
             </h1>
             <p class="mt-1 text-sm text-gray-500">
@@ -16,33 +16,33 @@
             <label for="project_name" class="block text-sm font-medium text-gray-700">
               Add New Client
             </label>
-            <div class="mt-1 flex space-x-4">
-              <input placeholder="Frist Name" type="text" name="project_name" id="first_name" class="block w-full shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm border-gray-300 rounded-md">
-              <input placeholder="Last Name" type="text" name="project_name" id="last_name" class="block w-full shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm border-gray-300 rounded-md">
-              <input placeholder="Email" type="text" name="project_name" id="email" class="block w-full shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm border-gray-300 rounded-md">
-              <button type="submit" class="justify-end ml-3 inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
+            <div class="flex mt-1 space-x-4">
+              <input placeholder="Frist Name" type="text" name="project_name" id="first_name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
+              <input placeholder="Last Name" type="text" name="project_name" id="last_name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
+              <input placeholder="Email" type="text" name="project_name" id="email" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
+              <button type="submit" class="inline-flex justify-center justify-end px-4 py-2 ml-3 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
                 Add
               </button>
             </div>
           </div>
           <!-- This example requires Tailwind CSS v2.0+ -->
           <ul class="divide-y divide-gray-200">
-            <li class="py-4 flex">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+            <li class="flex py-4">
+              <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
               <div class="ml-3">
                 <p class="text-sm font-medium text-gray-900">Calvin Hawkins</p>
                 <p class="text-sm text-gray-500">calvin.hawkins@example.com</p>
               </div>
             </li>
-            <li class="py-4 flex">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+            <li class="flex py-4">
+              <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
               <div class="ml-3">
                 <p class="text-sm font-medium text-gray-900">Kristen Ramos</p>
                 <p class="text-sm text-gray-500">kristen.ramos@example.com</p>
               </div>
             </li>
-            <li class="py-4 flex">
-              <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+            <li class="flex py-4">
+              <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
               <div class="ml-3">
                 <p class="text-sm font-medium text-gray-900">Ted Fox</p>
                 <p class="text-sm text-gray-500">ted.fox@example.com</p>
