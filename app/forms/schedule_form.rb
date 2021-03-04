@@ -1,9 +1,11 @@
 class ScheduleForm
   include ActiveModel::Model
+  include ActiveModel::Validations
 
   attr_accessor :starts_at, :ends_at, :user, :project, :occupancy
 
   validates_presence_of :user, :starts_at, :ends_at, :project, :occupancy
+  validates :starts_at, date: { before: :ends_at }
 
   def initialize(project, schedule)
     @schedule = schedule
@@ -11,8 +13,8 @@ class ScheduleForm
   end
 
   def submit(params)
-    self.starts_at = params[:starts_at]
-    self.ends_at = params[:ends_at]
+    self.starts_at = params[:starts_at].to_date
+    self.ends_at = params[:ends_at].to_date
     self.occupancy = params[:occupancy]
     self.user = params[:user_id]
 
