@@ -11,4 +11,8 @@ class Project < ApplicationRecord
   belongs_to :discipline
 
   validates_presence_of :name
+
+  def potential_participants
+    User.for_current_account.where.not(id: participants).order(:first_name)
+  end
 end
