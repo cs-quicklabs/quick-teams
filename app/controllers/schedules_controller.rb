@@ -2,6 +2,7 @@ class SchedulesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[ update create destroy edit ]
   before_action :set_schedule, only: %i[ update destroy edit ]
+  before_action :build_form, only: %i[create]
 
   def index
     employees = User.for_current_account.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
@@ -19,16 +20,11 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @schedule = Schedule.new(schedule_params)
-    @schedule.project_id = @project.id
-
     respond_to do |format|
-      if @schedule.save
-        @schedule = Schedule.new
+      if @form.submit(schedule_params)
         format.html { redirect_to project_participants_path(@project), notice: "Participant was added successfully." }
-        #format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { message: "Participant was added.", schedule: @schedule }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { schedule: @schedule }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { schedule: @schedule, errors: @form }) }
       end
     end
   end
@@ -59,5 +55,10 @@ class SchedulesController < ApplicationController
 
   def schedule_params
     params.require(:schedule).permit(:user_id, :starts_at, :discipline_id, :ends_at, :occupancy)
+  end
+
+  def build_form
+    @schedule ||= Schedule.new
+    @form = ScheduleForm.new(@project, @schedule)
   end
 end
