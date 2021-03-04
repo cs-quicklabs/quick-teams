@@ -25,9 +25,13 @@ Rails.application.routes.draw do
   resources :user
 
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
   root to: "static/static#home"
   get "/home", to: "home#index", as: "home"
+
+  get "/contact", to: "static/static#contact"
+  get "/pricing", to: "static/static#pricing"
+
   get "/schedule", to: "schedules#index", as: "schedules"
 
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
