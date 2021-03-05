@@ -12,6 +12,9 @@ class Project < ApplicationRecord
 
   validates_presence_of :name
 
+  scope :archived, -> { where(archived: true) }
+  scope :active, -> { where(archived: false) }
+
   def potential_participants
     User.for_current_account.where.not(id: participants).order(:first_name)
   end

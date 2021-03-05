@@ -45,6 +45,12 @@ Rails.application.routes.draw do
     get "/notifications", to: "settings#notifications", as: "notifications"
   end
 
+  scope "archive" do
+    get "/projects", to: "projects#archived", as: "archived_projects"
+    get "/people", to: "people#deactivated", as: "deactivated_users"
+    get "/project/:id", to: "projects#archive_project", as: "archive_project"
+  end
+
   get "account/details", to: "account/account#index", as: "detail"
   patch "account/:id", to: "account/account#update", as: "update_account"
 end

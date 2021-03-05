@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_project, only: %i[ show edit update destroy archive_project ]
   before_action :authenticate_user!
 
   # GET /projects or /projects.json
   def index
-    @projects = ProjectDecorator.decorate_collection(Project.includes(:discipline, :participants, :manager).order(:name))
+    @projects = ProjectDecorator.decorate_collection(Project.active.includes(:discipline, :participants, :manager).order(:name))
   end
 
   # GET /projects/1 or /projects/1.json
@@ -32,6 +32,15 @@ class ProjectsController < ApplicationController
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Project.new, partial: "projects/forms/form", locals: { project: @project }) }
       end
     end
+  end
+
+  def archived
+    @projects = ProjectDecorator.decorate_collection(Project.archived.includes(:discipline).order(archived_on: :desc))
+  end
+
+  def archive_project
+    ArchiveProject.call(@project)
+    redirect_to archived_projects_path
   end
 
   # PATCH/PUT /projects/1 or /projects/1.json
