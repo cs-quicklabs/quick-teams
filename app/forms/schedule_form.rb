@@ -6,6 +6,8 @@ class ScheduleForm
 
   validates_presence_of :user, :starts_at, :ends_at, :project, :occupancy
   validates :starts_at, date: { before: :ends_at }
+  validates :ends_at, date: true
+  validates :occupancy, inclusion: { in: 0..100, message: "should be less than 100%" }
 
   def initialize(project, schedule)
     @schedule = schedule
@@ -15,7 +17,7 @@ class ScheduleForm
   def submit(params)
     self.starts_at = params[:starts_at].to_date
     self.ends_at = params[:ends_at].to_date
-    self.occupancy = params[:occupancy]
+    self.occupancy = params[:occupancy].to_i
     self.user = params[:user_id]
 
     if valid?
