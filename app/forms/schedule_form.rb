@@ -5,8 +5,6 @@ class ScheduleForm
   attr_accessor :starts_at, :ends_at, :user, :project, :occupancy
 
   validates_presence_of :user, :starts_at, :ends_at, :project, :occupancy
-  validates :starts_at, date: { before: :ends_at }
-  validates :ends_at, date: true
   validates :occupancy, inclusion: { in: 0..100, message: "should be less than 100%" }
 
   def initialize(project, schedule)
