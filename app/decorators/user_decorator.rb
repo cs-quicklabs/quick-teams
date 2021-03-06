@@ -40,11 +40,15 @@ class UserDecorator < Draper::Decorator
   end
 
   def display_occupancy
+    overall_occupancy.to_s + "%"
+  end
+
+  def overall_occupancy
     overall_occupancy = 0
     schedules.each do |schedule|
       overall_occupancy += schedule.occupancy
     end
-    overall_occupancy.to_s + "%"
+    overall_occupancy
   end
 
   def display_occupancy_for(project)
@@ -66,5 +70,14 @@ class UserDecorator < Draper::Decorator
 
   def display_deactivated_on
     "#{deactivated_on.to_s(:long)}"
+  end
+
+  def display_occupied_till
+    busy_untill = 0
+    schedules.each do |schedule|
+      busy_untill = schedule.ends_at if schedule.ends_at > busy_untill
+    end
+    busy_untill.to_s
+    "Occupied untill #{busy_untill.to_s(:long)}"
   end
 end
