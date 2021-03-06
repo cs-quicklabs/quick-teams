@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     get "/projects", to: "projects#archived", as: "archived_projects"
     get "/people", to: "people#deactivated", as: "deactivated_users"
     get "/project/:id", to: "projects#archive_project", as: "archive_project"
+    get "/project/:id/restore", to: "projects#unarchive_project", as: "unarchive_project"
   end
 
   get "account/details", to: "account/account#index", as: "detail"

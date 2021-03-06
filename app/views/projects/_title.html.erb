@@ -13,6 +13,10 @@
       <div>
         <%= link_to 'Archive', archive_project_path(@project), class:" ml-4 btn-normal" %>
       </div>
+    <% else %>
+      <div>
+        <%= link_to 'Restore', unarchive_project_path(@project), class:" ml-4 btn-normal" %>
+      </div>
     <% end %>
   </div>
 </div>

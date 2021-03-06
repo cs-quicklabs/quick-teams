@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy archive_project ]
+  before_action :set_project, only: %i[ show edit update destroy archive_project unarchive_project ]
   before_action :authenticate_user!
 
   # GET /projects or /projects.json
@@ -40,7 +40,12 @@ class ProjectsController < ApplicationController
 
   def archive_project
     ArchiveProject.call(@project)
-    redirect_to archived_projects_path
+    redirect_to archived_projects_path, notice: "Project has been archived."
+  end
+
+  def unarchive_project
+    UnarchiveProject.call(@project)
+    redirect_to project_participants_path(@project), notice: "Project has been restored."
   end
 
   # PATCH/PUT /projects/1 or /projects/1.json
