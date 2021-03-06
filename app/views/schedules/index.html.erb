@@ -19,13 +19,13 @@
                 Teams
               </h3>
               <div class="mt-1 space-y-1" role="group" aria-labelledby="teams-headline">
-                <a href="#" class="flex items-center px-3 py-1 text-sm font-medium text-gray-700 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+                <a href="<%= schedules_path%>" class="<%= request.params[:job].nil? ? "selected" : "unselected"%>">
                   <span class="ml-2 truncate">
                     All
                   </span>
                 </a>
                 <% @jobs.each do |job| %>
-                  <a href="#" class="flex items-center px-3 py-1 text-sm font-medium text-gray-700 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+                  <a href="<%= schedules_path(:job => job.id)%>" class="<%= request.params[:job].to_i == job.id  ? "selected" : "unselected"%>">
                     <span class="ml-2 truncate">
                       <%= job.name %>
                     </span>
@@ -37,25 +37,27 @@
         </div>
       </div>
     </div>
-    <div class="w-full overflow-hidden border-b border-gray-200">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Name
-            </th>
-            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Projects
-            </th>
-            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Occupancy
-            </th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <%= render partial: "schedule", collection: @employees, as: :employee%>
-        </tbody>
-      </table>
-    </div>
+    <% if @employees.size > 0 %>
+      <div class="w-full overflow-hidden">
+        <table class="min-w-full pb-6 divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Name
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Projects
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Occupancy
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <%= render partial: "schedule", collection: @employees, as: :employee%>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
   </div>
 </div>

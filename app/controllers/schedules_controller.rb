@@ -6,7 +6,11 @@ class SchedulesController < ApplicationController
 
   def index
     employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
-    @employees = UserDecorator.decorate_collection(employees)
+    if params[:job]
+      @employees = UserDecorator.decorate_collection(employees.where(job: params[:job]))
+    else
+      @employees = UserDecorator.decorate_collection(employees)
+    end
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
   end
