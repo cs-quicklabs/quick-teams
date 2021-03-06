@@ -27,7 +27,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params)
-        format.html { redirect_to people_path, notice: "User was successfully updated." }
+        format.html { redirect_to person_path(@employee), notice: "User was successfully updated." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@employee, partial: "people/forms/form", locals: { employee: @employee }) }
       end
@@ -35,6 +35,16 @@ class PeopleController < ApplicationController
   end
 
   def create
+    employee = CreateUser.call(employee_params).result
+    respond_to do |format|
+      if employee.id.nil?
+        format.html { redirect_to new_person_path(@user), notice: "Failed to create user. Please try again." }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      else
+        format.html { redirect_to person_path(employee), notice: "User was successfully created." }
+        format.json { render :show, status: :created, location: @user }
+      end
+    end
   end
 
   def show

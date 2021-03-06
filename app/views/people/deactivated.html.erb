@@ -6,7 +6,7 @@
         <div class="pb-4 ml-4">
           <%= render "shared/form_header", title: "Deactivated Users", subtitle: "Following users have been deactivated." %>
         </div>
-        <ul class="divide-y divide-gray-200">
+        <ul>
           <%= render partial: "people/deactivated_user", collection: @employees, as: :employee%>
         </ul>
       </div>
