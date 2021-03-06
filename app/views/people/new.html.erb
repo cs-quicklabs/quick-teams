@@ -11,7 +11,7 @@
           <%= form.collection_select(:discipline_id, Discipline.all, :id, :name, {:prompt => 'Select Discipline'}, :selected => @employee.discipline_id ) %>
           <%= form.collection_select(:job_id, Job.all, :id, :name, {:prompt => 'Select Job'}, :selected => @employee.job_id ) %>
           <%= form.collection_select(:role_id, Role.all, :id, :name, {:prompt => 'Select Role'}, :selected => @employee.role_id ) %>
-          <%= form.collection_select(:manager_id, User.for_current_account.all, :id, :first_name, {:prompt => 'Select Manager'}, :selected => @employee.manager_id ) %>
+          <%= form.collection_select(:manager_id, User.for_current_account.active.all, :id, :first_name, {:prompt => 'Select Manager'}, :selected => @employee.manager_id ) %>
         </div>
       </div>
     </div>

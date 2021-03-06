@@ -47,9 +47,11 @@ Rails.application.routes.draw do
 
   scope "archive" do
     get "/projects", to: "projects#archived", as: "archived_projects"
-    get "/people", to: "people#deactivated", as: "deactivated_users"
     get "/project/:id", to: "projects#archive_project", as: "archive_project"
     get "/project/:id/restore", to: "projects#unarchive_project", as: "unarchive_project"
+    get "/people", to: "people#deactivated", as: "deactivated_users"
+    get "/people/:id", to: "people#deactivate_user", as: "deactivate_user"
+    get "/people/:id/restore", to: "people#activate_user", as: "activate_user"
   end
 
   get "account/details", to: "account/account#index", as: "detail"

@@ -16,6 +16,6 @@ class Project < ApplicationRecord
   scope :active, -> { where(archived: false) }
 
   def potential_participants
-    User.for_current_account.where.not(id: participants).order(:first_name)
+    User.for_current_account.active.where.not(id: participants).order(:first_name)
   end
 end

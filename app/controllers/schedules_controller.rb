@@ -5,7 +5,7 @@ class SchedulesController < ApplicationController
   before_action :build_form, only: %i[create update]
 
   def index
-    employees = User.for_current_account.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
+    employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
     @employees = UserDecorator.decorate_collection(employees)
   end
 

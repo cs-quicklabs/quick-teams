@@ -63,4 +63,8 @@ class UserDecorator < Draper::Decorator
     total_subordinates = subordinates.size
     [total_subordinates, 4].min
   end
+
+  def display_deactivated_on
+    "#{deactivated_on.to_s(:long)}"
+  end
 end

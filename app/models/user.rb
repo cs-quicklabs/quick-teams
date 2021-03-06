@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   scope :for_current_account, -> { where(account: Current.account) }
+  scope :inactive, -> { where(active: false) }
+  scope :active, -> { where(active: true) }
+
   belongs_to :account
   belongs_to :manager, class_name: "User", optional: true
   belongs_to :discipline
