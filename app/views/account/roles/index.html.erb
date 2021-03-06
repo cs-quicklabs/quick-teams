@@ -1,0 +1,16 @@
+  <main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
+  <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+    <%= render 'shared/account_menu'%>
+    <main class="max-w-xl pb-12 px-4 lg:col-span-6">
+      <%= turbo_frame_tag "role_form" do %>
+        <%=  render "form", role: @role%>
+      <% end %>
+      <%= turbo_stream_from "roles" %>
+      <%= turbo_frame_tag "roles" do %>
+        <ul>
+          <%= render @roles %>
+        </ul>
+      <% end %>
+    </main>
+  </div>
+</main>

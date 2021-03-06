@@ -1,0 +1,20 @@
+<li>
+  <div class="flex space-x-3">
+    <div class="flex-shrink-0">
+      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+    </div>
+    <div>
+      <div class="text-sm">
+        <a href="#" class="font-medium text-gray-900"><%= feedback.author.display_name%></a>
+      </div>
+      <div class="mt-1 text-sm text-gray-700">
+        <p><%= feedback.title%></p>
+      </div>
+      <div class="mt-2 space-x-2 text-sm">
+        <span class="font-medium text-gray-500"><%=time_ago_in_words(feedback.created_at) + ' ago'%></span>
+        <%= link_to "Show", project_feedback_path(@project, feedback), class: "btn-inline-edit" %>
+        <%= link_to "Delete", project_feedback_path(@project, feedback), method: :delete, class: "pl-2 btn-inline-delete" %>
+      </div>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,15 @@
+<%= turbo_frame_tag dom_id(client) do %>
+  <li class="flex py-4 border-b border-gray-200">
+    <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+    <div class="flex w-full ml-3">
+      <div class="w-full">
+        <p class="w-full text-sm font-medium text-gray-900"><%= client.name.titleize %></p>
+        <p class="text-sm text-gray-500"><%= client.email %></p>
+      </div>
+      <div class="flex justify-end">
+        <%= link_to "Edit", edit_account_client_path(client), class: "btn-inline-edit" %>
+        <%= link_to "Delete", account_client_path(client), method: :delete, class: "btn-inline-delete pl-2" %>
+      </div>
+    </div>
+  </li>
+<% end %>

@@ -1,0 +1,43 @@
+<% presenter = UserPresenter.new(@employee) %>
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "people/title", employee: @employee%>
+  <main class="pb-8">
+    <div class="px-4 sm:px-6">
+      <h1 class="sr-only">Page title</h1>
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+          <section aria-labelledby="participants_section">
+            <h2 class="sr-only" id="section-1-title">Employee Feedbacks</h2>
+            <div class="overflow-hidden bg-white">
+              <div class="p-4">
+                <div class="flex flex-wrap">
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Employee Feedbacks (" + @feedbacks.size.to_s + ")"%></p>
+                </div>
+                <ul class="space-y-6">
+                  <%= render @feedbacks%>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+        <% if presenter.show_add_feedback_form %>
+          <!-- Right column -->
+          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+            <section aria-labelledby="add-participant-section">
+              <h2 class="sr-only" id="section-2-title">Add New Feedback</h2>
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <%= render "people/feedbacks/form", feedback: @feedback%>
+                </div>
+              </div>
+            </section>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </main>
+  <div class="pt-4 pl-16 pr-16">
+  </div>
+</main>

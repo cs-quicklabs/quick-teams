@@ -1,0 +1,14 @@
+<%= turbo_frame_tag dom_id(@skill) do %>
+  <%= form_with(model: @skill, id: dom_id(@skill), url: account_skill_path(@skill)) do |form| %>
+    <li class="flex py-4 border-b border-gray-200">
+      <div class="flex w-full">
+        <%= form.text_field :name, class: "w-full block w-full shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm border-gray-300 rounded-md"%>
+        <div class="flex">
+          <%= form.submit "Save", class:"btn-blue ml-3"%>
+        </div>
+        <div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+<% end %>

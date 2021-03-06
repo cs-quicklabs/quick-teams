@@ -1,0 +1,10 @@
+<%= form_with(model: @note, id: dom_id(@note), url: project_notes_path(@project)) do |form| %>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: @note, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New Note", subtitle: "A note can be added to a project which can help you remember important things. " %>
+    <%= form.text_area :body, class: "resize-y form-text-field h-24"%>
+    <div class="flex justify-end">
+      <%= form.submit "Add Note", class:"btn-blue"%>
+    </div>
+  </main>
+<% end %>

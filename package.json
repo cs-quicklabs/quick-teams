@@ -2,11 +2,21 @@
   "name": "skia",
   "private": true,
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.0",
+    "@hotwired/turbo-rails": "^7.0.0-beta.5",
     "@rails/actioncable": "^6.0.0",
+    "@rails/actiontext": "^6.1.1",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
-    "turbolinks": "^5.2.0"
+    "@tailwindcss/forms": "^0.2.1",
+    "alpine-turbo-drive-adapter": "^1.0.1",
+    "alpinejs": "^2.8.0",
+    "autoprefixer": "^10.2.4",
+    "postcss": "^8.2.4",
+    "stimulus": "^2.0.0",
+    "tailwindcss": "^2.0.2",
+    "trix": "^1.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {

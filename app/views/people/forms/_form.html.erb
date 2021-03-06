@@ -1,0 +1,36 @@
+<%= tailwind_form_with(model: employee, id: dom_id(employee), url: person_path(employee), method: :patch) do |form| %>
+  <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: employee, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Edit Employee Details", subtitle: "Please update detail of existing employee." %>
+    <%= form.text_field :first_name, "First Name"%>
+    <%= form.text_field :last_name, "Last Name"%>
+    <%= form.text_field :email, "Email"%>
+    <div>
+      <label for="ends" class="block mt-4 text-sm font-medium text-gray-700">
+        Select Discipline
+      </label>
+      <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, {:prompt => 'Select Discipline'}, :selected => employee.discipline_id, :class=>"form-text-field mt-1" ) %>
+    </div>
+    <div>
+      <label for="ends" class="block mt-4 text-sm font-medium text-gray-700">
+        Select Job
+      </label>
+      <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job'}, :selected => employee.job_id, :class=>"form-text-field mt-1" ) %>
+    </div>
+    <div>
+      <label for="ends" class="block mt-4 text-sm font-medium text-gray-700">
+        Select Role
+      </label>
+      <%= form.collection_select(:role_id, Role.order(:name), :id, :name, {:prompt => 'Select Role'}, :selected => employee.role_id, :class=>"form-text-field mt-1" ) %>
+    </div>
+    <div>
+      <label for="ends" class="block mt-4 text-sm font-medium text-gray-700">
+        Select Manager
+      </label>
+      <%= form.collection_select(:manager_id, UserDecorator.decorate_collection(User.for_current_account.active.order(:first_name)), :id, :display_name, {:prompt => 'Select Manager'}, :selected => employee.manager_id, :class=>"form-text-field mt-1" ) %>
+    </div>
+    <div class="flex justify-end">
+      <%= form.submit "Save", class:"btn-blue"%>
+    </div>
+  </main>
+<% end %>

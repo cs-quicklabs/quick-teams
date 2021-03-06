@@ -1,0 +1,16 @@
+  <main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
+  <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+    <%= render 'shared/account_menu'%>
+    <main class="max-w-xl pb-12 px-4 lg:col-span-6">
+      <%= turbo_frame_tag "job_form" do %>
+        <%=  render "form", job: @job%>
+      <% end %>
+      <%= turbo_stream_from "jobs" %>
+      <%= turbo_frame_tag "jobs" do %>
+        <ul>
+          <%= render @jobs %>
+        </ul>
+      <% end %>
+    </main>
+  </div>
+</main>

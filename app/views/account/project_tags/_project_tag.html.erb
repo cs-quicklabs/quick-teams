@@ -1,0 +1,11 @@
+<%= turbo_frame_tag dom_id(project_tag) do %>
+  <li class="flex py-4 border-b border-gray-200">
+    <div class="flex w-full ml-3">
+      <p class="w-full text-sm font-medium text-gray-900"><%= project_tag.name.titleize %></p>
+      <div class="flex">
+        <%= link_to "Edit", edit_account_project_tag_path(project_tag), class: "btn-inline-edit" %>
+        <%= link_to "Delete", account_project_tag_path(project_tag), method: :delete, class: "pl-2 btn-inline-delete" %>
+      </div>
+    </div>
+  </li>
+<% end %>

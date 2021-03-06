@@ -1,0 +1,19 @@
+<li>
+  <div class="flex items-center px-2 py-2 sm:px-6">
+    <div class="flex items-center flex-1 min-w-0">
+      <div class="flex-shrink-0">
+        <%= image_tag "male-placeholder-image.png", class:"w-12 h-12 rounded-full" %>
+      </div>
+      <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4">
+        <a href="<%= person_path(employee)%>" class="block hover:underline" target="_top">
+          <div>
+            <p class="text-sm font-medium text-gray-900 truncate"><%= employee.display_name%></p>
+            <p class="flex items-center mt-1 text-sm text-gray-500">
+              <span class="truncate"><%= employee.display_position%></span>
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</li>
