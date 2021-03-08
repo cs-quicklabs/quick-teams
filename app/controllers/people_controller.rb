@@ -4,6 +4,7 @@ class PeopleController < ApplicationController
 
   def index
     @employees = UserDecorator.decorate_collection(User.for_current_account.active.includes(:role, :discipline, :job, :manager, :subordinates).order(:first_name))
+    fresh_when @employees
   end
 
   def new

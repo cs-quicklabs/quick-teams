@@ -27,6 +27,7 @@ class People::FeedbacksController < People::BaseController
   end
 
   def show
+    fresh_when @feedback
   end
 
   private

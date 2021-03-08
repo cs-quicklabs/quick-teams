@@ -13,6 +13,7 @@ class SchedulesController < ApplicationController
     end
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
+    fresh_when @employees
   end
 
   def update
