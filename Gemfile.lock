@@ -93,6 +93,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-pwned_password (0.1.9)
+      devise (~> 4)
+      pwned (~> 2.0.0)
     draper (4.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -139,11 +142,14 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.0.2)
     minitest (5.14.3)
-    msgpack (1.4.1)
+    msgpack (1.4.2)
     nio4r (2.5.4)
     nokogiri (1.11.1-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.11.1-x86_64-linux)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (3.11.0)
     parallel (1.12.1)
     parser (3.0.0.0)
       ast (~> 2.4.1)
@@ -152,6 +158,7 @@ GEM
     public_suffix (4.0.6)
     puma (5.2.0)
       nio4r (~> 2.0)
+    pwned (2.0.2)
     racc (1.5.2)
     rack (2.2.3)
     rack-mini-profiler (2.3.1)
@@ -270,6 +277,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-18
+  x86_64-linux
 
 DEPENDENCIES
   acts_as_tenant
@@ -277,6 +285,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  devise-pwned_password
   draper
   hotwire-rails
   image_processing (~> 1.2)
@@ -285,6 +294,7 @@ DEPENDENCIES
   letter_opener
   letter_opener_web
   listen (~> 3.3)
+  pagy (~> 3.10)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

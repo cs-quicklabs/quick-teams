@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   set_current_tenant_through_filter
   before_action :set_tenant
 
@@ -7,6 +8,8 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
+    set_flash_message! :alert, :warn_pwned if resource.respond_to?(:pwned?) && resource.pwned?
+    super
     home_path(script_name: "/#{current_user.account.id}")
   end
 
