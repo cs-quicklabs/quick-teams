@@ -16,7 +16,7 @@
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Participants(" + @project.participants.count.to_s + ")"%></p>
                 </div>
                 <ul class="divide-y divide-gray-200">
-                  <%= render partial: "projects/schedule/schedule", collection: @schedules%>
+                  <%= render partial: "projects/schedule/schedule", collection: @schedules, cached: true%>
                 </ul>
               </div>
             </div>
@@ -29,7 +29,7 @@
               <h2 class="sr-only" id="section-2-title">Add New Participant</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "projects/schedule/form", schedule: @schedule, errors: nil, cached: true%>
+                  <%= render "projects/schedule/form", schedule: @schedule, errors: nil%>
                 </div>
               </div>
             </section>
