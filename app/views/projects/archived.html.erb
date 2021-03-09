@@ -7,7 +7,7 @@
           <%= render "shared/form_header", title: "Archived Projects", subtitle: "Following projects have been archived." %>
         </div>
         <ul class="divide-y divide-gray-200">
-          <%= render partial: "projects/archived_project", collection: @projects, as: :project%>
+          <%= render partial: "projects/archived_project", collection: @projects, as: :project, cached: true%>
         </ul>
       </div>
     </main>

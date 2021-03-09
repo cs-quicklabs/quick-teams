@@ -34,7 +34,7 @@
               </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-              <%= render partial: "employee", collection: @employees%>
+              <%= render partial: "employee", collection: @employees, cached: true%>
             </tbody>
           </table>
         </div>
