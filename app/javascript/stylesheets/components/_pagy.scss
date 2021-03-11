@@ -25,7 +25,7 @@
 }
 .pagy-nav .active,
 .pagy-nav-js .active {
-  @apply text-blue-600;
+  @apply text-blue-600 bg-gray-100;
 }
 .pagy-nav .prev,
 .pagy-nav-js .prev,
