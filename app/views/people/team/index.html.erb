@@ -8,7 +8,7 @@
           <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Team Members(" + @subordinates.size.to_s + ")"%></p>
         </div>
         <ul class="divide-y divide-gray-200">
-          <%= render partial: "people/team/employee", collection: @subordinates, as: :employee%>
+          <%= render partial: "people/team/employee", collection: @subordinates, as: :employee, cached: true%>
         </ul>
       </div>
     </div>

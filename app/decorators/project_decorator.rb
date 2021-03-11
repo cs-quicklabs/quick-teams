@@ -13,6 +13,10 @@ class ProjectDecorator < Draper::Decorator
     "#{project.created_at.to_date.to_s(:long)}"
   end
 
+  def display_archived_on
+    "#{project.archived_on.to_s(:long)}"
+  end
+
   def display_additional_participants
     total_participants = project.participants.size
     return total_participants <= 4 ? "" : "+#{total_participants - 4}"

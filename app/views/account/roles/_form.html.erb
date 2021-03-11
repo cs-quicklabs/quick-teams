@@ -2,7 +2,7 @@
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: @role, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Roles", subtitle: "Role indicates the level or title of the person within the organization. Examples include junior, senior, associate, and director." %>
-    <%= form.text_field :name, "Add New Role", type: "reset" %>
+    <%= form.text_field :name, "New Role"%>
     <div class="flex justify-end">
       <%= form.submit "Save", class:"btn-blue"%>
     </div>

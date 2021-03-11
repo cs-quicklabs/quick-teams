@@ -21,7 +21,7 @@
     <div class="text-sm text-gray-500"><%= employee.display_discipline_title%></div>
   </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-    <a href="<%= person_path(employee.manager) %>" class="truncate hover:text-gray-600 hover:underline">
+    <a href="<%= person_path(employee.manager) if !employee.manager.nil? %>" class="truncate hover:text-gray-600 hover:underline">
       <%= employee.display_manager_name %>
     </a>
   </td>

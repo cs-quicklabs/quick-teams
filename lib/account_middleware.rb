@@ -8,6 +8,7 @@ class AccountMiddleware
 
     if account_id =~ /\d+/
       Current.account = Account.find_by_id(account_id)
+      ActsAsTenant.current_tenant = Current.account
 
       env["SCRIPT_NAME"] = "/#{account_id}"
       env["PATH_INFO"] = "/#{request_path}"
