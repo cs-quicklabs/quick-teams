@@ -33,6 +33,7 @@ gem "acts_as_tenant"
 gem "hotwire-rails"
 gem "draper"
 gem "rails-patterns"
+gem "pagy"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
