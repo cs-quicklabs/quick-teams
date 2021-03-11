@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get "/pricing", to: "static/static#pricing"
 
   get "/schedule", to: "schedules#index", as: "schedules"
+  get :search, controller: :search
 
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
