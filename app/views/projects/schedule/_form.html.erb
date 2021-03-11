@@ -1,6 +1,6 @@
 <%= form_with(model: schedule, id: dom_id(schedule), url: project_schedules_path(@project)) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto lg:pb-16">
-    <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
+    <%= render "shared/form_messages", resource: @par_form, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Participant", subtitle: "Add new project participant and fill in engagement level." %>
     <%= form.collection_select(:user_id, UserDecorator.decorate_collection(User.for_current_account.order(:first_name)), :id, :display_name, {:prompt => 'Select Participant'}, :selected => schedule.user_id, :class=>"form-text-field mt-4" )%>
     <label for="starts" class="block mt-4 text-sm font-medium text-gray-700">
