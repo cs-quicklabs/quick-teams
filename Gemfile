@@ -33,6 +33,9 @@ gem "acts_as_tenant"
 gem "hotwire-rails"
 gem "draper"
 gem "rails-patterns"
+gem 'pagy', '~> 3.10'
+gem 'devise-pwned_password'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -3,7 +3,8 @@ class PeopleController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @employees = UserDecorator.decorate_collection(User.for_current_account.active.includes(:role, :discipline, :job, :manager, :subordinates).order(:first_name))
+    @pagy, collection = pagy(User.for_current_account.active.includes(:role, :discipline, :job, :manager, :subordinates).order(:first_name))
+    @employees = UserDecorator.decorate_collection(collection)
     fresh_when @employees
   end
 
