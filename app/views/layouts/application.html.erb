@@ -12,6 +12,7 @@
     <% if content_for?(:head) %>
       <%= yield(:head) %>
     <% end %>
+    <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
   </head>
   <body>
     <%= render "shared/navbar" if user_signed_in? %>

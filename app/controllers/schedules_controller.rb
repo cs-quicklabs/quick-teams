@@ -2,19 +2,26 @@ class SchedulesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[ update create destroy edit ]
   before_action :set_schedule, only: %i[ update destroy edit ]
-  before_action :have_form, only: %i[ create update ]
+  before_action :build_form, only: %i[create update]
 
   def index
-    employees = User.for_current_account.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
-    @employees = UserDecorator.decorate_collection(employees)
+    employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
+    if params[:job]
+      @employees = UserDecorator.decorate_collection(employees.where(job: params[:job]))
+    else
+      @employees = UserDecorator.decorate_collection(employees)
+    end
+    @jobs = Job.all.order(:name)
+    @roles = Role.all.order(:name)
+    fresh_when @employees
   end
 
   def update
     respond_to do |format|
-      if @par_form.submit(schedule_params)
+      if @form.submit(schedule_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/schedule", locals: { message: "Schedule was updated successfully", schedule: @schedule.decorate }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/edit", locals: { schedule: @schedule }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/form", locals: { schedule: @schedule }) }
       end
     end
   end
@@ -22,11 +29,10 @@ class SchedulesController < ApplicationController
   def create
 
     respond_to do |format|
-      if @par_form.submit(schedule_params)
+      if @form.submit(schedule_params)
         format.html { redirect_to project_participants_path(@project), notice: "Participant was added successfully." }
-        #format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { message: "Participant was added.", schedule: @schedule }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { schedule: @schedule }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { schedule: @schedule, errors: @form }) }
       end
     end
   end
@@ -62,5 +68,10 @@ class SchedulesController < ApplicationController
 
   def schedule_params
     params.require(:schedule).permit(:user_id, :starts_at, :discipline_id, :ends_at, :occupancy)
+  end
+
+  def build_form
+    @schedule ||= Schedule.new
+    @form = ScheduleForm.new(@project, @schedule)
   end
 end

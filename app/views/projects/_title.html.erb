@@ -6,7 +6,18 @@
     <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= project.display_discipline%></p>
   </div>
   <div class="flex mt-4 sm:mt-0 sm:ml-4">
-    <%= link_to 'Edit', edit_project_path(project), class:"btn-normal" %>
+    <div>
+      <%= link_to 'Edit', edit_project_path(project), class:"btn-normal" %>
+    </div>
+    <% if !@project.archived %>
+      <div>
+        <%= link_to 'Archive', archive_project_path(@project), class:" ml-4 btn-normal" %>
+      </div>
+    <% else %>
+      <div>
+        <%= link_to 'Restore', unarchive_project_path(@project), class:" ml-4 btn-normal" %>
+      </div>
+    <% end %>
   </div>
 </div>
 <%= render 'projects/tabs'%>
