@@ -32,3 +32,15 @@ document.addEventListener("turbolinks:load", function () {
 
     $input.easyAutocomplete(options)
 });
+
+$(document).on('turbolinks:load', function () {
+    console.log("turbolink load")
+});
+
+$(document).on("page:change", function () {
+    console.log("page change")
+});
+
+$(document).on("page:receive", function () {
+    console.log("page receive")
+});
