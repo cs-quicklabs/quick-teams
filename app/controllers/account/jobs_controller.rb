@@ -17,7 +17,7 @@ class Account::JobsController < Account::BaseController
 
     respond_to do |format|
       if @job.save
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(:jobs, partial: "account/jobs/job", locals: { message: "Job was created successfully.", job: @job }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:jobs, partial: "account/jobs/job", locals: { message: "Job was created successfully.", job: @job }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Job.new, partial: "account/jobs/form", locals: {}) }
       end

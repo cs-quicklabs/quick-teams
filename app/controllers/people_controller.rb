@@ -1,9 +1,11 @@
 class PeopleController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_employee, only: %i[ show edit update destroy deactivate_user activate_user ]
   before_action :authenticate_user!
 
   def index
-    @pagy, collection = pagy(User.for_current_account.active.includes(:role, :discipline, :job, :manager, :subordinates).order(:first_name))
+    @pagy, collection = pagy(User.for_current_account.active.includes(:role, :discipline, :job, :manager, :subordinates).order(:first_name), items: 10)
     @employees = UserDecorator.decorate_collection(collection)
     fresh_when @employees
   end
