@@ -6,7 +6,7 @@ class ScheduleForm
 
   validates_presence_of :user, :starts_at, :ends_at, :project, :occupancy
   validates :occupancy, inclusion: { in: 0..100, message: "should be less than 100%" }
-  validate :start_date_cannot_be_in_the_past, :end_date_cannot_be_before_start_date
+  validate :start_date_cannot_be_in_the_past, :end_date_cannot_be_in_the_past
 
   def initialize(project, schedule)
     @schedule = schedule
@@ -35,7 +35,7 @@ class ScheduleForm
     end
   end
 
-  def end_date_cannot_be_before_start_date
+  def end_date_cannot_be_in_the_past
     return if ends_at.blank? || starts_at.blank?
 
     if ends_at < starts_at
