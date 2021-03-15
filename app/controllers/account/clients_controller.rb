@@ -17,7 +17,7 @@ class Account::ClientsController < Account::BaseController
 
     respond_to do |format|
       if @client.save
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(:clients, partial: "account/clients/client", locals: { message: "Client was created successfully.", client: @client }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:clients, partial: "account/clients/client", locals: { message: "Client was created successfully.", client: @client }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Client.new, partial: "account/clients/form", locals: {}) }
       end
