@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
   scope "/settings" do
     get "/profile", to: "user#profile", as: "profile"
-    get "/password", to: "user#password", as: "password"
+    get "/password", to: "user#password", as: "setting_password"
     patch "/password", to: "user#update_password", as: "edit_password"
     get "/notifications", to: "settings#notifications", as: "notifications"
   end
