@@ -33,7 +33,6 @@ gem "acts_as_tenant"
 gem "hotwire-rails"
 gem "draper"
 gem "rails-patterns"
-gem 'devise-pwned_password'
 gem 'pwned'
 gem "pagy"
 group :development, :test do
