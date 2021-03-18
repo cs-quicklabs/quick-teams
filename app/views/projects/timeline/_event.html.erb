@@ -15,7 +15,7 @@
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">
-          <%=time_ago_in_words(event.created_at) + ' ago'%>
+          <%=    event.created_at.to_date.to_s(:long) %>
         </div>
       </div>
     </div>

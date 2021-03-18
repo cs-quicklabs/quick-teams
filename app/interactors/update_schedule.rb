@@ -23,6 +23,7 @@ class UpdateSchedule < Patterns::Service
 
   def add_event
     project.events.create(user: actor, action: "updated schedule.", action_for_context: "updated schedule")
+    employee.events.create(user: actor, action: "updated schedule.", action_for_context: "updated schedule")
   end
 
   attr_reader :project, :actor, :schedule, :employee, :params
