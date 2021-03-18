@@ -19,7 +19,7 @@ class AddEmployeeFeedback < Patterns::Service
   end
 
   def add_event
-    employee.events.create(user: actor, action: "added new feedback.", action_for_context: "added feedback for")
+    employee.events.create(user: actor, action: "feedback", action_for_context: "added feedback for", trackable: feedback)
   end
 
   attr_reader :employee, :feedback, :actor

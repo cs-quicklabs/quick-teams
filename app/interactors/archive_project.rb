@@ -24,7 +24,7 @@ class ArchiveProject < Patterns::Service
   end
 
   def add_event
-    project.events.create(user: actor, action: "archived project.", action_for_context: "archived")
+    project.events.create(user: actor, action: "archived", action_for_context: "archived", trackable: project)
   end
 
   attr_reader :project, :actor

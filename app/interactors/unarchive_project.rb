@@ -19,7 +19,7 @@ class UnarchiveProject < Patterns::Service
   end
 
   def add_event
-    project.events.create(user: actor, action: "unarchived project.", action_for_context: "unarchived project")
+    project.events.create(user: actor, action: "unarchived", action_for_context: "unarchived project", trackable: project)
   end
 
   attr_reader :project, :actor

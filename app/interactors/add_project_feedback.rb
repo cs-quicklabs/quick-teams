@@ -19,7 +19,7 @@ class AddProjectFeedback < Patterns::Service
   end
 
   def add_event
-    project.events.create(user: actor, action: "added new feedback.", action_for_context: "added new feedback in project")
+    project.events.create(user: actor, action: "reviewed", action_for_context: "added new feedback in project", trackable: feedback)
   end
 
   attr_reader :project, :feedback, :actor

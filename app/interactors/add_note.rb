@@ -19,7 +19,7 @@ class AddNote < Patterns::Service
   end
 
   def add_event
-    project.events.create(user: actor, action: "added new note.", action_for_context: "added a note for project")
+    project.events.create(user: actor, action: "noted", action_for_context: "added a note for project", trackable: note)
   end
 
   attr_reader :project, :note, :actor

@@ -15,7 +15,9 @@
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Timeline"%></p>
                 </div>
                 <ul>
-                  <%= render partial: "projects/timeline/event", collection: @events, as: :event, cached: true%>
+                  <% @events.each do |event| %>
+                    <%= render partial: event.action, locals: {event: event}%>
+                  <% end %>
                 </ul>
               </div>
             </div>
