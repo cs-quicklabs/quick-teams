@@ -7,10 +7,9 @@ class People::FeedbacksController < People::BaseController
   end
 
   def create
-    @feedback = @employee.feedbacks.new feedback_params
-    @feedback.user_id = current_user.id
+    @feedback = AddEmployeeFeedback.call(@employee, feedback_params, current_user)
     respond_to do |format|
-      if @feedback.save
+      if @feedback
         @feedback = Feedback.new
         format.html { redirect_to person_feedbacks_path(@employee), notice: "Feedback was added successfully." }
       else

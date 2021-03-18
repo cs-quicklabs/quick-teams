@@ -14,10 +14,9 @@ class Projects::NotesController < Projects::BaseController
   end
 
   def create
-    @note = @project.notes.new note_params
-    @note.user_id = current_user.id
+    @note = AddNote.call(@project, note_params, current_user)
     respond_to do |format|
-      if @note.save
+      if @note
         @note = Note.new
         format.html { redirect_to project_notes_path(@project), notice: "Note was added successfully." }
       else

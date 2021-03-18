@@ -1,16 +1,26 @@
 class UnarchiveProject < Patterns::Service
-  def initialize(project)
+  def initialize(project, actor)
     @project = project
+    @actor = actor
   end
 
   def call
-    project.archived = false
-    project.archived_on = nil
-    project.save
+    unarchive
+    add_event
     project
   end
 
   private
 
-  attr_reader :project
+  def unarchive
+    project.archived = false
+    project.archived_on = nil
+    project.save
+  end
+
+  def add_event
+    project.events.create(user: actor, action: "unarchived project.", action_for_context: "unarchived project")
+  end
+
+  attr_reader :project, :actor
 end

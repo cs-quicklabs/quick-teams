@@ -7,10 +7,9 @@ class Projects::FeedbacksController < Projects::BaseController
   end
 
   def create
-    @feedback = @project.feedbacks.new feedback_params
-    @feedback.user_id = current_user.id
+    @feedback = AddProjectFeedback.call(@project, feedback_params, current_user)
     respond_to do |format|
-      if @feedback.save
+      if @feedback
         @feedback = Feedback.new
         format.html { redirect_to project_feedbacks_path(@project), notice: "Feedback was added successfully." }
       else
