@@ -11,8 +11,13 @@
         <div>
           <p class="text-sm text-gray-500">
             <a href="<%= person_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name%></a>
-            added a new feedback titled
-            <a href="<%= person_feedback_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.title%></a>
+            added a new feedback 
+            <% if event.trackable.nil?%>
+              which does not exists anymore 
+            <% else %>
+              titled
+              <a href="<%= person_feedback_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.title%></a>
+            <% end %>
             for
             <a href="<%= person_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.first_name + " " + event.eventable.last_name%></a>
           </p>

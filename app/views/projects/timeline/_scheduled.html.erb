@@ -11,10 +11,15 @@
         <div>
           <p class="text-sm text-gray-500">
             <a href="<%= person_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name%></a>
-            updated schedule for
-            <a href="<%= person_path(event.trackable.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.user.first_name + " " + event.trackable.user.last_name %>
-            </a>
-            <%= event.action_for_context %>
+            updated schedule 
+            <% if event.trackable.nil? %>
+              which does not exist anymore
+            <% else %>
+              for
+              <a href="<%= person_path(event.trackable.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.user.first_name + " " + event.trackable.user.last_name %>
+              </a>
+              <%= event.action_for_context %>
+            <% end %>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

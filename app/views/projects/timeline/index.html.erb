@@ -16,7 +16,9 @@
                 </div>
                 <ul>
                   <% @events.each do |event| %>
-                    <%= render partial: event.action, locals: {event: event}%>
+                    <% if lookup_context.template_exists?(event.action, "projects/timeline", true) %>
+                      <%= render partial: event.action, locals: {event: event}%>
+                    <% end %>
                   <% end %>
                 </ul>
               </div>

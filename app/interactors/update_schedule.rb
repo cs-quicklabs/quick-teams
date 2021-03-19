@@ -23,7 +23,6 @@ class UpdateSchedule < Patterns::Service
 
   def add_event
     project.events.create(user: actor, action: "scheduled", action_for_context: "with #{schedule.occupancy}% occupancy till #{schedule.ends_at.to_date.to_s(:long)}", trackable: schedule)
-    employee.events.create(user: actor, action: "scheduled", action_for_context: "updated schedule", trackable: schedule)
   end
 
   attr_reader :project, :actor, :schedule, :employee, :params
