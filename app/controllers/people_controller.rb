@@ -15,12 +15,12 @@ class PeopleController < ApplicationController
   end
 
   def deactivate_user
-    DeactivateUser.call(@employee)
+    DeactivateUser.call(@employee, current_user)
     redirect_to deactivated_users_path, notice: "User has been deactivated."
   end
 
   def activate_user
-    ActivateUser.call(@employee)
+    ActivateUser.call(@employee, current_user)
     redirect_to person_path(@employee), notice: "User has been activated."
   end
 
@@ -39,7 +39,7 @@ class PeopleController < ApplicationController
   end
 
   def create
-    employee = CreateUser.call(employee_params).result
+    employee = CreateUser.call(employee_params, current_user).result
     respond_to do |format|
       if employee.id.nil?
         format.html { redirect_to new_person_path(@user), notice: "Failed to create user. Please try again." }

@@ -5,12 +5,15 @@ class ScheduleForm
   attr_accessor :starts_at, :ends_at, :user, :project, :occupancy
 
   validates_presence_of :user, :starts_at, :ends_at, :project, :occupancy
-  validates :occupancy, inclusion: { in: 0..100, message: "should be less than 100%" }
-  validate :start_date_cannot_be_in_the_past, :end_date_cannot_be_in_the_past
+  validates_numericality_of :occupancy
 
-  def initialize(project, schedule)
+  validates :occupancy, inclusion: { in: 0..100, message: "should be less than 100%" }
+  validate :end_date_cannot_be_in_the_past
+  
+  def initialize(project, schedule, actor)
     @schedule = schedule
     @project = project
+    @actor = actor
   end
 
   def submit(params)
@@ -20,18 +23,10 @@ class ScheduleForm
     self.user = params[:user_id]
 
     if valid?
-      @schedule.update(params)
-      @schedule.project = @project
-      @schedule.save!
+      UpdateSchedule.call(@schedule, @project, User.find(self.user), params, @actor)
       true
     else
       false
-    end
-  end
-
-  def start_date_cannot_be_in_the_past
-    if starts_at.present? && starts_at < Date.today
-      errors.add(:starts_at, "can't be in the past")
     end
   end
 
@@ -39,8 +34,8 @@ class ScheduleForm
     return if ends_at.blank? || starts_at.blank?
 
     if ends_at < starts_at
-      errors.add(:end_date, "cannot be before the start date") 
-    end 
+      errors.add(:ends_at, "cannot be before the start date")
+    end
   end
 
   def persisted?

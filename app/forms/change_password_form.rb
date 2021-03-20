@@ -6,6 +6,7 @@ class ChangePasswordForm
   validates_confirmation_of :new_password
   validates :new_password, not_pwned: true
   validate :verify_old_password
+  validates :new_password, not_pwned: true
   validates_length_of :new_password, minimum: 6
 
   attr_accessor :original_password, :new_password, :new_password_confirmation

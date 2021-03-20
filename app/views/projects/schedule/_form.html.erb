@@ -19,7 +19,7 @@
       <label for="occupancy" class="block text-sm font-medium text-gray-700">
         Occupancy (%)
       </label>
-      <%= form.text_field :occupancy, class: 'form-text-field mt-1', placeholder: "1 to 100 percent"%>
+      <%= form.text_field :occupancy, class: 'form-text-field mt-1', placeholder: "1 to 100 percent", autocomplete: "off"%>
     </div>
     <div class="flex justify-end mt-6">
       <%= form.submit "Save", class:"btn-blue"%>

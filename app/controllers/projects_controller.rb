@@ -41,12 +41,12 @@ class ProjectsController < ApplicationController
   end
 
   def archive_project
-    ArchiveProject.call(@project)
+    ArchiveProject.call(@project, current_user)
     redirect_to archived_projects_path, notice: "Project has been archived."
   end
 
   def unarchive_project
-    UnarchiveProject.call(@project)
+    UnarchiveProject.call(@project, current_user)
     redirect_to project_participants_path(@project), notice: "Project has been restored."
   end
 
