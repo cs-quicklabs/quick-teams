@@ -1,6 +1,7 @@
 class DeactivateUser < Patterns::Service
-  def initialize(user)
+  def initialize(user, actor)
     @user = user
+    @actor = actor
   end
 
   def call
@@ -8,6 +9,7 @@ class DeactivateUser < Patterns::Service
     remove_reporting_manager
     clear_schedules
     deactivate
+    add_event
   end
 
   private
@@ -30,5 +32,9 @@ class DeactivateUser < Patterns::Service
     user.save
   end
 
-  attr_reader :user
+  def add_event
+    user.events.create(user: actor, action: "deactivated project.", action_for_context: "deactivated project")
+  end
+
+  attr_reader :user, :actor
 end

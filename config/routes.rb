@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :notes, only: [:index, :show, :create, :destroy], module: "projects"
     resources :feedbacks, only: [:index, :show, :create, :destroy], module: "projects"
     get "/participants", to: "projects/schedule#index", as: "participants"
+    get "/timeline", to: "projects/timeline#index", as: "timeline"
   end
 
   resources :people do
@@ -41,7 +42,7 @@ Rails.application.routes.draw do
 
   scope "/settings" do
     get "/profile", to: "user#profile", as: "profile"
-    get "/password", to: "user#password", as: "password"
+    get "/password", to: "user#password", as: "setting_password"
     patch "/password", to: "user#update_password", as: "edit_password"
     get "/notifications", to: "settings#notifications", as: "notifications"
   end

@@ -7,6 +7,7 @@ class Project < ApplicationRecord
   belongs_to :manager, class_name: "User"
   has_many :notes, as: :notable
   has_many :feedbacks, as: :critiquable
+  has_many :events, as: :eventable
 
   belongs_to :discipline
 

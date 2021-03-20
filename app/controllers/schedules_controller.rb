@@ -66,6 +66,6 @@ class SchedulesController < ApplicationController
 
   def build_form
     @schedule ||= Schedule.new
-    @form = ScheduleForm.new(@project, @schedule)
+    @form = ScheduleForm.new(@project, @schedule, current_user)
   end
 end
