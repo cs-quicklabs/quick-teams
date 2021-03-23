@@ -1,0 +1,40 @@
+regular:
+  first_name: Aashish
+  last_name: Dhawan
+  active: true
+  email: aashishdhawan@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+
+actor:
+  first_name: Rachita
+  last_name: Agnihotri
+  active: true
+  email: rachita@crownstack.com
+  account: crownstack
+
+inactive:
+  first_name: Inactive
+  last_name: User
+  active: false
+  email: inactive@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  deactivated_on: 2021-03-06
+
+active:
+  first_name: Active
+  last_name: User
+  active: false
+  email: active@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  deactivated_on: 2021-03-06
+  manager: regular

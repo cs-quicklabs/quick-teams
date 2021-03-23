@@ -10,6 +10,7 @@ class DeactivateUser < Patterns::Service
     clear_schedules
     deactivate
     add_event
+    true
   end
 
   private
@@ -29,11 +30,11 @@ class DeactivateUser < Patterns::Service
   def deactivate
     user.active = false
     user.deactivated_on = Time.now
-    user.save
+    user.save!
   end
 
   def add_event
-    user.events.create(user: actor, action: "deactivated project.", action_for_context: "deactivated project")
+    user.events.create(user: actor, action: "deactivated project.", action_for_context: "deactivated project", trackable: user)
   end
 
   attr_reader :user, :actor
