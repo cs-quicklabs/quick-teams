@@ -10,7 +10,7 @@ class DeactivateUser < Patterns::Service
     clear_schedules
     deactivate
     add_event
-    true
+    user
   end
 
   private

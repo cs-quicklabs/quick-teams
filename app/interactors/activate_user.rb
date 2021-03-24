@@ -7,7 +7,7 @@ class ActivateUser < Patterns::Service
   def call
     activate
     add_event
-    true
+    user
   end
 
   private

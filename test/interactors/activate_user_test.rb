@@ -8,9 +8,10 @@ class ActivateUserTest < ActiveSupport::TestCase
   end
 
   test "can activate user" do
-    assert ActivateUser.call(@user, @actor)
-    assert @user.active
-    assert_nil @user.deactivated_on
+    user = ActivateUser.call(@user, @actor).result
+    assert user
+    assert user.active
+    assert_nil user.deactivated_on
   end
 
   test "can add event activated" do

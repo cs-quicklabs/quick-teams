@@ -8,9 +8,10 @@ class DeactivateUserTest < ActiveSupport::TestCase
   end
 
   test "can deactivate user" do
-    assert DeactivateUser.call(@user, @actor)
-    assert_not @user.active
-    assert_not_nil @user.deactivated_on
+    user = DeactivateUser.call(@user, @actor).result
+    assert user
+    assert_not user.active
+    assert_not_nil user.deactivated_on
   end
 
   test "can add event" do
@@ -21,17 +22,17 @@ class DeactivateUserTest < ActiveSupport::TestCase
   end
 
   test "can clear schedules" do
-    DeactivateUser.call(@user, @actor)
-    assert Schedule.where(user: @user).count == 0
+    user = DeactivateUser.call(@user, @actor).result
+    assert Schedule.where(user: user).count == 0
   end
 
   test "can remove as manager" do
-    DeactivateUser.call(@user, @actor)
-    assert @user.subordinates.count == 0
+    user = DeactivateUser.call(@user, @actor).result
+    assert user.subordinates.count == 0
   end
 
   test "can remove reporting manager" do
-    DeactivateUser.call(@user, @actor)
-    assert_nil @user.manager
+    user = DeactivateUser.call(@user, @actor).result
+    assert_nil user.manager
   end
 end
