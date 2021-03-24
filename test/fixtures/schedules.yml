@@ -1,3 +1,7 @@
 one:
   user: regular
   project: one
+
+two:
+  user: regular
+  project: unarchived

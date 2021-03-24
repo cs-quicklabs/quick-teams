@@ -1,2 +1,17 @@
 one:
   name: Gotasker
+  archived: false
+
+unarchived:
+  name: Gotasker
+  archived: false
+  account: crownstack
+  manager: regular
+  discipline: engineering
+
+archived:
+  name: Gotasker
+  archived: true
+  account: crownstack
+  manager: regular
+  discipline: engineering
