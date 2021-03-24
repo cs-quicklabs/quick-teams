@@ -39,7 +39,7 @@ class PeopleController < ApplicationController
   end
 
   def create
-    employee = CreateUser.call(employee_params, current_user).result
+    employee = CreateUser.call(employee_params, current_user, Current.account).result
     respond_to do |format|
       if employee.id.nil?
         format.html { redirect_to new_person_path(@user), notice: "Failed to create user. Please try again." }

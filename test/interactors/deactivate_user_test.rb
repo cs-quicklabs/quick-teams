@@ -17,6 +17,7 @@ class DeactivateUserTest < ActiveSupport::TestCase
     assert_difference("@user.events.count") do
       DeactivateUser.call(@user, @actor)
     end
+    assert_equal Event.last.action, "deactivated"
   end
 
   test "can clear schedules" do

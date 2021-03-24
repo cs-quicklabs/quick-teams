@@ -34,7 +34,7 @@ class DeactivateUser < Patterns::Service
   end
 
   def add_event
-    user.events.create(user: actor, action: "deactivated project.", action_for_context: "deactivated project", trackable: user)
+    user.events.create(user: actor, action: "deactivated", action_for_context: "deactivated", trackable: user)
   end
 
   attr_reader :user, :actor
