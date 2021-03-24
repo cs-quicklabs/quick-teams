@@ -11,7 +11,7 @@
         <div>
           <p class="text-sm text-gray-500">
             <a href="<%= person_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name%></a>
-            created new employee
+            added new employee
             <a href="<%= person_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.first_name + " " + event.eventable.last_name%></a>
           </p>
         </div>
