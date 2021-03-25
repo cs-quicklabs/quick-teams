@@ -15,7 +15,7 @@ class AddProjectFeedback < Patterns::Service
 
   def add_feedback
     feedback.user_id = actor.id
-    feedback.save
+    feedback.save!
   end
 
   def add_event
