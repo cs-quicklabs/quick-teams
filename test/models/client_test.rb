@@ -37,7 +37,7 @@ class ClientTest < ActiveSupport::TestCase
     ActsAsTenant.current_tenant = accounts(:infosys)
 
     client3 = Client.new(name: "Steve", email: "rogers@gmail.com")
-    assert client3.save
+    assert client3.save!
 
     assert_raises ActiveRecord::RecordInvalid do
       client4 = Client.new(name: "Steve", email: "rogers@gmail.com")
