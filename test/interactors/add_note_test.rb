@@ -11,6 +11,7 @@ class AddNoteTest < ActiveSupport::TestCase
   test "can add note" do
     note = AddNote.call(@project, @params, @actor).result
     assert note
+    assert_equal note.user_id, @actor.id
   end
 
   test "can add event noted" do

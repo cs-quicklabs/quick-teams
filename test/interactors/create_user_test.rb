@@ -10,7 +10,7 @@ class CreateUserTest < ActiveSupport::TestCase
   test "can create user" do
     user = CreateUser.call(@params, @actor, @account).result
     assert user.save
-    assert user.account, accounts(:crownstack)
+    assert_equal user.account, accounts(:crownstack)
   end
 
   test "can add event created" do
