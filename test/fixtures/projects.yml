@@ -1,6 +1,7 @@
 one:
   name: Gotasker
   archived: false
+  manager: regular
 
 unarchived:
   name: Gotasker

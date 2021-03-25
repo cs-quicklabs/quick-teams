@@ -5,7 +5,8 @@ class DeactivateUser < Patterns::Service
   end
 
   def call
-    remove_as_manager
+    remove_as_people_manager
+    remove_as_project_manager
     remove_reporting_manager
     clear_schedules
     deactivate
@@ -15,8 +16,12 @@ class DeactivateUser < Patterns::Service
 
   private
 
-  def remove_as_manager
+  def remove_as_people_manager
     user.subordinates.update_all(manager_id: nil)
+  end
+
+  def remove_as_project_manager
+    Project.where(manager_id: user.id).update_all(manager_id: nil)
   end
 
   def remove_reporting_manager

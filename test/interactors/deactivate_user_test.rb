@@ -26,7 +26,7 @@ class DeactivateUserTest < ActiveSupport::TestCase
     assert Schedule.where(user: user).count == 0
   end
 
-  test "can remove as manager" do
+  test "can remove as people manager" do
     user = DeactivateUser.call(@user, @actor).result
     assert user.subordinates.count == 0
   end
@@ -34,5 +34,10 @@ class DeactivateUserTest < ActiveSupport::TestCase
   test "can remove reporting manager" do
     user = DeactivateUser.call(@user, @actor).result
     assert_nil user.manager
+  end
+
+  test "can remove as project manager" do
+    user = DeactivateUser.call(@user, @actor).result
+    assert Project.where(manager_id: user.id).count == 0
   end
 end
