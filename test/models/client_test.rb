@@ -15,13 +15,13 @@ class ClientTest < ActiveSupport::TestCase
 
   test "should have name" do
     client = Client.new
-    client.save
+    client.valid?
     assert_not client.errors[:name].empty?
   end
 
   test "should have email" do
     client = Client.new
-    client.save
+    client.valid?
     assert_not client.errors[:email].empty?
   end
 

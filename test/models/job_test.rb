@@ -15,7 +15,7 @@ class JobTest < ActiveSupport::TestCase
 
   test "should have name" do
     job = Job.new
-    job.save
+    job.valid?
     assert_not job.errors[:name].empty?
   end
 

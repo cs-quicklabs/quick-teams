@@ -15,7 +15,7 @@ class ProjectTagTest < ActiveSupport::TestCase
 
   test "should have name" do
     project_tag = ProjectTag.new
-    project_tag.save
+    project_tag.valid?
     assert_not project_tag.errors[:name].empty?
   end
 

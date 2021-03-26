@@ -15,7 +15,7 @@ class RoleTest < ActiveSupport::TestCase
 
   test "should have name" do
     role = Role.new
-    role.save
+    role.valid?
     assert_not role.errors[:name].empty?
   end
 

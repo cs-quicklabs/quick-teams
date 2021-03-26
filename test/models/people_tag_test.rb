@@ -15,7 +15,7 @@ class PeopleTagTest < ActiveSupport::TestCase
 
   test "should have name" do
     people_tag = PeopleTag.new
-    people_tag.save
+    people_tag.valid?
     assert_not people_tag.errors[:name].empty?
   end
 

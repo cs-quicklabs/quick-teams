@@ -15,7 +15,7 @@ class ProjectStatusTest < ActiveSupport::TestCase
 
   test "should have name" do
     project_status = ProjectStatus.new
-    project_status.save
+    project_status.valid?
     assert_not project_status.errors[:name].empty?
   end
 

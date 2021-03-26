@@ -15,7 +15,7 @@ class PeopleStatusTest < ActiveSupport::TestCase
 
   test "should have name" do
     people_status = PeopleStatus.new
-    people_status.save
+    people_status.valid?
     assert_not people_status.errors[:name].empty?
   end
 

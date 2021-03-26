@@ -15,7 +15,7 @@ class DisciplineTest < ActiveSupport::TestCase
 
   test "should have name" do
     discipline = Discipline.new
-    discipline.save
+    discipline.valid?
     assert_not discipline.errors[:name].empty?
   end
 
