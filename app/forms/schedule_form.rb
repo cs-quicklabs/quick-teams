@@ -17,11 +17,14 @@ class ScheduleForm
     self.user = params[:user_id]
 
     if valid?
-      UpdateSchedule.call(@schedule, @project, User.find(self.user), params, @actor)
-      true
+      update_schedule
     else
       false
     end
+  end
+
+  def update_schedule
+    UpdateSchedule.call(@schedule, @project, User.find(self.user), params, @actor)
   end
 
   def persisted?
