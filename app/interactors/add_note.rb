@@ -15,7 +15,7 @@ class AddNote < Patterns::Service
 
   def add_note
     note.user_id = actor.id
-    note.save
+    note.save!
   end
 
   def add_event
