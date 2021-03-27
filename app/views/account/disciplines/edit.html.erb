@@ -1,10 +1,9 @@
 <%= turbo_frame_tag dom_id(@discipline) do %>
   <%= form_with(model: @discipline, id: dom_id(@discipline), url: account_discipline_path(@discipline)) do |form| %>
-    <% if defined?(message) && !message.nil?%>
-      <p class="mt-2 text-sm text-red-600" id="email-error">Your password must be less than 4 characters.</p>
-    <% end %>
     <li class="flex w-full py-4 border-b border-gray-200">
-      <%= form.text_field :name, class: "form-text-field w-full"%>
+      <div class="w-full">
+        <%= form.text_field :name, class: "form-text-field", autocomplete: "off"%>
+      </div>
       <div class="flex">
         <%= form.submit "Save", class:"btn-blue ml-3"%>
       </div>

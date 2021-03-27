@@ -15,8 +15,8 @@ class Account::DisciplinesController < Account::BaseController
     respond_to do |format|
       if @discipline.save
         format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend("disciplines", partial: "account/disciplines/discipline", locals: { discipline: @discipline }) +
-                               turbo_stream.replace("new_discipline", partial: "account/disciplines/form", locals: { discipline: Discipline.new, message: "Discipline was created successfully." })
+          render turbo_stream: turbo_stream.prepend(:disciplines, partial: "account/disciplines/discipline", locals: { discipline: @discipline }) +
+                               turbo_stream.replace(Discipline.new, partial: "account/disciplines/form", locals: { discipline: Discipline.new, message: "Discipline was created successfully." })
         }
       else
         format.turbo_stream {
