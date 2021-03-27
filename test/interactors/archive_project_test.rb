@@ -12,6 +12,7 @@ class ArchiveProjectTest < ActiveSupport::TestCase
     assert project
     assert project.archived
     assert_not_nil project.archived_on
+    assert_nil project.manager
   end
 
   test "can add event archived" do

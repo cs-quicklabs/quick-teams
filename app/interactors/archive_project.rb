@@ -20,6 +20,7 @@ class ArchiveProject < Patterns::Service
   def archive
     project.archived = true
     project.archived_on = Time.now
+    project.manager = nil
     project.save!
   end
 

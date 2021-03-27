@@ -5,3 +5,15 @@ one:
 two:
   user: regular
   project: unarchived
+
+three:
+  user: regular
+  project: archived
+
+four:
+  user: regular
+  project: one
+
+five:
+  user: inactive
+  project: one
