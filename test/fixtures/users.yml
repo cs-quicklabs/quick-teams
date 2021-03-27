@@ -15,6 +15,9 @@ actor:
   active: true
   email: rachita@crownstack.com
   account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
 
 inactive:
   first_name: Inactive
