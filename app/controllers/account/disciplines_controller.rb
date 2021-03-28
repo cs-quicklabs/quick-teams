@@ -20,7 +20,7 @@ class Account::DisciplinesController < Account::BaseController
         }
       else
         format.turbo_stream {
-          render turbo_stream: turbo_stream.replace("new_discipline", partial: "account/disciplines/form", locals: { discipline: @discipline })
+          render turbo_stream: turbo_stream.replace(Discipline.new, partial: "account/disciplines/form", locals: { discipline: @discipline })
         }
       end
     end
