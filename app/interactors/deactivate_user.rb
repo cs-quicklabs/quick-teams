@@ -5,17 +5,23 @@ class DeactivateUser < Patterns::Service
   end
 
   def call
-    remove_as_manager
+    remove_as_people_manager
+    remove_as_project_manager
     remove_reporting_manager
     clear_schedules
     deactivate
     add_event
+    user
   end
 
   private
 
-  def remove_as_manager
+  def remove_as_people_manager
     user.subordinates.update_all(manager_id: nil)
+  end
+
+  def remove_as_project_manager
+    Project.where(manager_id: user.id).update_all(manager_id: nil)
   end
 
   def remove_reporting_manager
@@ -29,11 +35,11 @@ class DeactivateUser < Patterns::Service
   def deactivate
     user.active = false
     user.deactivated_on = Time.now
-    user.save
+    user.save!
   end
 
   def add_event
-    user.events.create(user: actor, action: "deactivated project.", action_for_context: "deactivated project")
+    user.events.create(user: actor, action: "deactivated", action_for_context: "deactivated", trackable: user)
   end
 
   attr_reader :user, :actor

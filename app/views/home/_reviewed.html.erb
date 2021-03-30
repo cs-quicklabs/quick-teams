@@ -19,7 +19,7 @@
               <a href="<%= project_feedback_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.title%></a>
             <% end %>
             in 
-            <a href="<%= project_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
+            <a href="<%= project_feedbacks_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

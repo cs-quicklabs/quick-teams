@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_151113) do
+ActiveRecord::Schema.define(version: 2021_03_27_092509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_151113) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_clients_on_account_id"
-    t.index ["email"], name: "index_clients_on_email", unique: true
+    t.index ["email"], name: "index_clients_on_email"
   end
 
   create_table "disciplines", force: :cascade do |t|
@@ -87,6 +87,8 @@ ActiveRecord::Schema.define(version: 2021_03_18_151113) do
     t.string "action_for_context"
     t.integer "trackable_id"
     t.string "trackable_type"
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_events_on_account_id"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -202,12 +204,12 @@ ActiveRecord::Schema.define(version: 2021_03_18_151113) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "account_id"
-    t.string "first_name"
-    t.string "last_name"
-    t.bigint "role_id"
-    t.bigint "discipline_id"
-    t.bigint "job_id"
+    t.integer "account_id", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.integer "role_id", null: false
+    t.integer "discipline_id", null: false
+    t.integer "job_id", null: false
     t.bigint "manager_id"
     t.boolean "active", default: true, null: false
     t.date "deactivated_on"
@@ -224,6 +226,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_151113) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clients", "accounts"
   add_foreign_key "disciplines", "accounts"
+  add_foreign_key "events", "accounts"
   add_foreign_key "feedbacks", "users"
   add_foreign_key "jobs", "accounts"
   add_foreign_key "notes", "users"

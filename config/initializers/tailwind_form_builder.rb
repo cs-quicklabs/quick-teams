@@ -11,7 +11,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def text_field(method, title, opts = {})
-    default_opts = { class: "form-text-field #{"border-2 border-red-00" if @object.errors.any?}" }
+    default_opts = { class: "form-text-field #{"border-red-400" if @object.errors.any?}" }
     merged_opts = default_opts.merge(opts)
     @template.content_tag :div do
       label(method, title, class: "block text-sm font-medium text-gray-700") +
@@ -22,7 +22,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def password_field(method, title, opts = {})
-    default_opts = { class: "form-text-field #{"border-2 border-red-00" if @object.errors.any?}" }
+    default_opts = { class: "form-text-field #{"border-red-400" if @object.errors.any?}" }
     merged_opts = default_opts.merge(opts)
     @template.content_tag :div do
       label(method, title, class: "block text-sm font-medium text-gray-700") +

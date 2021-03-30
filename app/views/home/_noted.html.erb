@@ -12,7 +12,7 @@
           <p class="text-sm text-gray-500">
             <a href="<%= person_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name%></a>
             added a new note in 
-            <a href="<%= project_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
+            <a href="<%= project_notes_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

@@ -10,7 +10,7 @@ class UpdateSchedule < Patterns::Service
   def call
     update_schedule
     add_event
-    project
+    schedule
   end
 
   private

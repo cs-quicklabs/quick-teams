@@ -3,6 +3,7 @@ class PeopleController < ApplicationController
 
   before_action :set_employee, only: %i[ show edit update destroy deactivate_user activate_user ]
   before_action :authenticate_user!
+  before_action :build_form, only: %i[create]
 
   def index
     @pagy, collection = pagy(User.for_current_account.active.includes(:role, :discipline, :job, :manager, :subordinates).order(:first_name), items: 10)
@@ -39,11 +40,11 @@ class PeopleController < ApplicationController
   end
 
   def create
-    employee = CreateUser.call(employee_params, current_user).result
+    employee = @form.submit(employee_params)
     respond_to do |format|
-      if employee.id.nil?
-        format.html { redirect_to new_person_path(@user), notice: "Failed to create user. Please try again." }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+      if !employee
+        format.html { redirect_to new_person_path(@user), alert: "Failed to create user. Please try again." }
+        format.json { render json: @form.errors, status: :unprocessable_entity }
       else
         format.html { redirect_to person_path(employee), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
@@ -64,5 +65,9 @@ class PeopleController < ApplicationController
 
   def employee_params
     params.require(:user).permit(:first_name, :last_name, :email, :role_id, :discipline_id, :job_id, :manager_id)
+  end
+
+  def build_form
+    @form ||= CreateUserForm.new(Current.account, current_user)
   end
 end

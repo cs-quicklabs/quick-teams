@@ -20,8 +20,10 @@
               </a>
               <%= event.action_for_context %>
             <% end %>
-            in
-            <a href="<%= project_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
+            <% if !event.eventable.nil?%>
+              in
+              <a href="<%= project_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
+            <% end %>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

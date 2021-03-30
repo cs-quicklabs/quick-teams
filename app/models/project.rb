@@ -4,14 +4,14 @@ class Project < ApplicationRecord
   has_many :schedules
   has_many :participants, through: :schedules, source: :user
 
-  belongs_to :manager, class_name: "User"
+  belongs_to :manager, class_name: "User", optional: true
   has_many :notes, as: :notable
   has_many :feedbacks, as: :critiquable
   has_many :events, as: :eventable
 
   belongs_to :discipline
 
-  validates_presence_of :name
+  validates_presence_of :name, :discipline
 
   scope :archived, -> { where(archived: true) }
   scope :active, -> { where(archived: false) }

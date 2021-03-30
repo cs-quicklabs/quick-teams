@@ -7,8 +7,12 @@ class AccountMiddleware
     _, account_id, request_path = env["REQUEST_PATH"].split("/", 3)
 
     if account_id =~ /\d+/
-      Current.account = Account.find_by_id(account_id)
-      ActsAsTenant.current_tenant = Current.account
+      if account = Account.find_by(id: account_id)
+        Current.account = account
+        ActsAsTenant.current_tenant = account
+      else
+        return [302, { "Location" => "/" }, []]
+      end
 
       env["SCRIPT_NAME"] = "/#{account_id}"
       env["PATH_INFO"] = "/#{request_path}"

@@ -1,9 +1,19 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  user: one
+  user: regular
   project: one
 
 two:
-  user: two
-  project: two
+  user: regular
+  project: unarchived
+
+three:
+  user: regular
+  project: archived
+
+four:
+  user: regular
+  project: one
+
+five:
+  user: inactive
+  project: one

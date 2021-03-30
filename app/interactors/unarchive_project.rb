@@ -15,7 +15,7 @@ class UnarchiveProject < Patterns::Service
   def unarchive
     project.archived = false
     project.archived_on = nil
-    project.save
+    project.save!
   end
 
   def add_event
