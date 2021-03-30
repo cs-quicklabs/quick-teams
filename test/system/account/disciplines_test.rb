@@ -7,35 +7,40 @@ class DisciplinesTest < ApplicationSystemTestCase
     sign_in @user
   end
 
+  def page_url
+    account_disciplines_url(script_name: "/#{@account.id}")
+  end
+
   test "can visit the index if logged in" do
-    visit account_disciplines_url(script_name: "/#{@account.id}")
+    visit page_url
     take_screenshot
     assert_selector "h1", text: "Disciplines"
   end
 
   test "redirect to login if not logged in" do
     sign_out @user
-    visit account_disciplines_url(script_name: "/#{@account.id}")
+    visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
 
   test "can add a new discipline" do
-    visit account_disciplines_url(script_name: "/#{@account.id}")
+    visit page_url
     fill_in "Add New Discipline", with: "New Discipline"
     click_on "Save"
     take_screenshot
     assert_text "Discipline was created successfully."
+    assert_selector "#discipline_name", text: ""
   end
 
   test "can not add an empty discipline" do
-    visit account_disciplines_url(script_name: "/#{@account.id}")
+    visit page_url
     click_on "Save"
     take_screenshot
     assert_text "Name can't be blank"
   end
 
   test "can not add a duplicate discipline" do
-    visit account_disciplines_url(script_name: "/#{@account.id}")
+    visit page_url
     fill_in "Add New Discipline", with: disciplines(:engineering).name
     click_on "Save"
     take_screenshot
@@ -48,20 +53,43 @@ class DisciplinesTest < ApplicationSystemTestCase
   end
 
   test "can delete a discipline" do
-  end
+    visit page_url
+    discipline = disciplines(:hr)
 
-  test "can not delete a discipline which is being used" do
+    assert_selector "li", text: discipline.name
+    find("li", text: discipline.name).click_on("Delete")
+    assert_no_selector "li", text: discipline.name
   end
 
   test "can edit discipline" do
+    visit page_url
+    discipline = disciplines(:hr)
+
+    assert_selector "li", text: discipline.name
+    find("li", text: discipline.name).click_on("Edit")
+    within "turbo-frame#discipline_#{discipline.id}" do
+      fill_in "discipline_name", with: "Edited Name"
+      click_on "Save"
+    end
+    assert_selector "li", text: "Edited Name"
+  end
+
+  test "should have nav bar" do
+    visit page_url
+    assert_selector "#menubar", count: 1
+  end
+
+  test "should have left menu with Disciplines selected" do
+    visit page_url
+    within "#menu" do
+      assert_selector "a", count: 10
+      assert_selector ".selected", text: "Disciplines"
+    end
   end
 
   test "can not edit discipline with exiting name" do
   end
 
-  test "should have nav bar" do
-  end
-
-  test "should have left menu" do
+  test "can not delete a discipline which is being used" do
   end
 end
