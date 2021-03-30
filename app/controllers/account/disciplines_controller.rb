@@ -30,11 +30,11 @@ class Account::DisciplinesController < Account::BaseController
     respond_to do |format|
       if @discipline.update(discipline_params)
         format.turbo_stream {
-          render turbo_stream: turbo_stream.replace(@discipline, partial: "account/disciplines/discipline", locals: { discipline: @discipline })
+          render turbo_stream: turbo_stream.replace(@discipline, partial: "account/disciplines/discipline", locals: { discipline: @discipline, messages: nil })
         }
       else
         format.turbo_stream {
-          render turbo_stream: turbo_stream.replace(@discipline, partial: "account/disciplines/discipline", locals: { discipline: @discipline })
+          render turbo_stream: turbo_stream.replace(@discipline, template: "account/disciplines/edit", locals: { discipline: @discipline, messages: @discipline.errors.full_messages })
         }
       end
     end

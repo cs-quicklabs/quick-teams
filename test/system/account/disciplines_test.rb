@@ -88,6 +88,18 @@ class DisciplinesTest < ApplicationSystemTestCase
   end
 
   test "can not edit discipline with exiting name" do
+    visit page_url
+    discipline = disciplines(:hr)
+    engineering = disciplines(:engineering)
+
+    assert_selector "li", text: discipline.name
+    find("li", text: discipline.name).click_on("Edit")
+    within "turbo-frame#discipline_#{discipline.id}" do
+      fill_in "discipline_name", with: engineering.name
+      click_on "Save"
+      take_screenshot
+      assert_text "Name has already been taken"
+    end
   end
 
   test "can not delete a discipline which is being used" do
