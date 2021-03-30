@@ -19,7 +19,7 @@ class Account::SkillsController < Account::BaseController
       if @skill.save
         format.turbo_stream { render turbo_stream: turbo_stream.prepend(:skills, partial: "account/skills/skill", locals: { message: "Skill was updated successfully.", skill: @skill }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Skill.new, partial: "skills/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Skill.new, partial: "account/skills/form", locals: {}) }
       end
     end
   end

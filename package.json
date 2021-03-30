@@ -13,15 +13,16 @@
     "@tailwindcss/postcss7-compat": "^2.0.3",
     "alpine-turbo-drive-adapter": "^1.0.1",
     "alpinejs": "^2.8.0",
-    "autoprefixer": "^9",
     "node-sass": "^4.14.1",
-    "postcss": "^7",
     "stimulus": "^2.0.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
+    "tailwind-toast": "^1.0.5",
     "trix": "^1.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.8",
+    "tailwindcss": "^2.0.4",
     "webpack-dev-server": "^3.11.2"
   },
   "engines": {
