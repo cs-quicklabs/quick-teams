@@ -110,5 +110,8 @@ class DisciplinesTest < ApplicationSystemTestCase
     find("li", text: discipline.name).click_on("Delete")
     take_screenshot
     assert_text "Unable to Delete Record"
+    click_on "Cancel"
+    assert_no_text "Unable to Delete Record"
+    assert_selector "li", text: discipline.name
   end
 end
