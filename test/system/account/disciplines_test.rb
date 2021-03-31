@@ -103,5 +103,12 @@ class DisciplinesTest < ApplicationSystemTestCase
   end
 
   test "can not delete a discipline which is being used" do
+    visit page_url
+    discipline = disciplines(:engineering)
+
+    assert_selector "li", text: discipline.name
+    find("li", text: discipline.name).click_on("Delete")
+    take_screenshot
+    assert_text "Unable to Delete Record"
   end
 end
