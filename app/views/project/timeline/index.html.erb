@@ -1,6 +1,6 @@
 <% presenter = ProjectPresenter.new(@project) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "projects/title", project: @project%>
+  <%= render "project/title", project: @project%>
   <main class="pb-8">
     <div class="px-4 sm:px-6">
       <!-- Main 3 column grid -->
@@ -16,7 +16,7 @@
                 </div>
                 <ul>
                   <% @events.each do |event| %>
-                    <% if lookup_context.template_exists?(event.action, "projects/timeline", true) %>
+                    <% if lookup_context.template_exists?(event.action, "project/timeline", true) %>
                       <%= render partial: event.action, locals: {event: event}%>
                     <% end %>
                   <% end %>

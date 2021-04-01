@@ -1,4 +1,4 @@
-class Projects::NotesController < Projects::BaseController
+class Project::NotesController < Project::BaseController
   before_action :set_note, only: %i[ destroy ]
 
   def index

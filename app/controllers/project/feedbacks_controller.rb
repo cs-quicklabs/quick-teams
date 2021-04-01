@@ -1,4 +1,4 @@
-class Projects::FeedbacksController < Projects::BaseController
+class Project::FeedbacksController < Project::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
