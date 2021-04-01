@@ -10,13 +10,13 @@
       <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
         <div>
           <p class="text-sm text-gray-500">
-            <a href="<%= person_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name%></a>
+            <a href="<%= employee_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name%></a>
             updated schedule 
             <% if event.trackable.nil?%>
               which does not exist anymore
             <% else %>
               for
-              <a href="<%= person_path(event.trackable.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.user.first_name + " " + event.trackable.user.last_name %>
+              <a href="<%= employee_path(event.trackable.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.user.first_name + " " + event.trackable.user.last_name %>
               </a>
               <%= event.action_for_context %>
             <% end %>

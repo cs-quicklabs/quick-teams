@@ -7,7 +7,7 @@
           <%= render "shared/form_header", title: "Deactivated Users", subtitle: "Following users have been deactivated." %>
         </div>
         <ul>
-          <%= render partial: "people/deactivated_user", collection: @employees, as: :employee, cached: true%>
+          <%= render partial: "employees/deactivated_user", collection: @employees, as: :employee, cached: true%>
         </ul>
       </div>
     </main>

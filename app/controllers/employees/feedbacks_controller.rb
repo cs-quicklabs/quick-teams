@@ -1,4 +1,4 @@
-class People::FeedbacksController < People::BaseController
+class Employees::FeedbacksController < Employees::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
@@ -11,9 +11,9 @@ class People::FeedbacksController < People::BaseController
     respond_to do |format|
       if @feedback
         @feedback = Feedback.new
-        format.html { redirect_to person_feedbacks_path(@employee), notice: "Feedback was added successfully." }
+        format.html { redirect_to employee_feedbacks_path(@employee), notice: "Feedback was added successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Feedback.new, partial: "people/feedbacks/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Feedback.new, partial: "employees/feedbacks/form", locals: {}) }
       end
     end
   end
@@ -21,7 +21,7 @@ class People::FeedbacksController < People::BaseController
   def destroy
     @feedback.destroy
     respond_to do |format|
-      format.html { redirect_to person_feedbacks_path(@employee), notice: "Feedback was removed successfully." }
+      format.html { redirect_to employee_feedbacks_path(@employee), notice: "Feedback was removed successfully." }
     end
   end
 

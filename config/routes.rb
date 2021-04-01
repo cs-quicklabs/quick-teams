@@ -19,9 +19,9 @@ Rails.application.routes.draw do
     get "/timeline", to: "projects/timeline#index", as: "timeline"
   end
 
-  resources :people do
-    resources :feedbacks, module: "people"
-    get "/team", to: "people/team#index"
+  resources :employees do
+    resources :feedbacks, module: "employees"
+    get "/team", to: "employees/team#index"
   end
   resources :user
 
@@ -51,9 +51,9 @@ Rails.application.routes.draw do
     get "/projects", to: "projects#archived", as: "archived_projects"
     get "/project/:id", to: "projects#archive_project", as: "archive_project"
     get "/project/:id/restore", to: "projects#unarchive_project", as: "unarchive_project"
-    get "/people", to: "people#deactivated", as: "deactivated_users"
-    get "/people/:id", to: "people#deactivate_user", as: "deactivate_user"
-    get "/people/:id/restore", to: "people#activate_user", as: "activate_user"
+    get "/employees", to: "employees#deactivated", as: "deactivated_users"
+    get "/employees/:id", to: "employees#deactivate_user", as: "deactivate_user"
+    get "/employees/:id/restore", to: "employees#activate_user", as: "activate_user"
   end
 
   get "account/details", to: "account/account#index", as: "detail"

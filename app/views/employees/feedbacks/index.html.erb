@@ -1,6 +1,6 @@
 <% presenter = UserPresenter.new(@employee) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "people/title", employee: @employee%>
+  <%= render "employees/title", employee: @employee%>
   <main class="pb-8">
     <div class="px-4 sm:px-6">
       <h1 class="sr-only">Page title</h1>
@@ -29,7 +29,7 @@
               <h2 class="sr-only" id="section-2-title">Add New Feedback</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "people/feedbacks/form", feedback: @feedback%>
+                  <%= render "employees/feedbacks/form", feedback: @feedback%>
                 </div>
               </div>
             </section>

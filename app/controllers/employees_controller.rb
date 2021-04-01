@@ -1,4 +1,4 @@
-class PeopleController < ApplicationController
+class EmployeesController < ApplicationController
   include Pagy::Backend
 
   before_action :set_employee, only: %i[ show edit update destroy deactivate_user activate_user ]
@@ -22,7 +22,7 @@ class PeopleController < ApplicationController
 
   def activate_user
     ActivateUser.call(@employee, current_user)
-    redirect_to person_path(@employee), notice: "User has been activated."
+    redirect_to employee_path(@employee), notice: "User has been activated."
   end
 
   def deactivated
@@ -32,9 +32,9 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params)
-        format.html { redirect_to person_path(@employee), notice: "User was successfully updated." }
+        format.html { redirect_to employee_path(@employee), notice: "User was successfully updated." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@employee, partial: "people/forms/form", locals: { employee: @employee }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@employee, partial: "employees/forms/form", locals: { employee: @employee }) }
       end
     end
   end
@@ -43,10 +43,10 @@ class PeopleController < ApplicationController
     employee = @form.submit(employee_params)
     respond_to do |format|
       if !employee
-        format.html { redirect_to new_person_path(@user), alert: "Failed to create user. Please try again." }
+        format.html { redirect_to new_employee_path(@user), alert: "Failed to create user. Please try again." }
         format.json { render json: @form.errors, status: :unprocessable_entity }
       else
-        format.html { redirect_to person_path(employee), notice: "User was successfully created." }
+        format.html { redirect_to employee_path(employee), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       end
     end
@@ -54,7 +54,7 @@ class PeopleController < ApplicationController
 
   def show
     @employee = @employee.decorate
-    redirect_to person_team_path(@employee)
+    redirect_to employee_team_path(@employee)
   end
 
   private

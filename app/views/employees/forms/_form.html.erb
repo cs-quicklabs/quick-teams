@@ -1,4 +1,4 @@
-<%= tailwind_form_with(model: employee, id: dom_id(employee), url: person_path(employee), method: :patch) do |form| %>
+<%= tailwind_form_with(model: employee, id: dom_id(employee), url: employee_path(employee), method: :patch) do |form| %>
   <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: employee, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Edit Employee Details", subtitle: "Please update detail of existing employee." %>

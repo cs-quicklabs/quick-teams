@@ -7,7 +7,7 @@
   </div>
   <div class="flex mt-4 sm:mt-0 sm:ml-4">
     <div>
-      <%= link_to 'Edit', edit_person_path(employee), class:"btn-normal" %>
+      <%= link_to 'Edit', edit_employee_path(employee), class:"btn-normal" %>
     </div>
     <% if employee.active %>
       <div>
@@ -20,5 +20,5 @@
     <% end %>
   </div>
 </div>
-<%= render 'people/tabs'%>
+<%= render 'employees/tabs'%>
 </div>
