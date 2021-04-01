@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   end
 
   resources :employees do
-    resources :feedbacks, module: "employees"
-    get "/team", to: "employees/team#index"
+    resources :feedbacks, module: "employee"
+    get "/team", to: "employee/team#index"
   end
   resources :user
 

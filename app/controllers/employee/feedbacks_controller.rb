@@ -1,4 +1,4 @@
-class Employees::FeedbacksController < Employees::BaseController
+class Employee::FeedbacksController < Employee::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
