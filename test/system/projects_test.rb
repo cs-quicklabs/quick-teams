@@ -4,6 +4,8 @@ class ProjectTest < ApplicationSystemTestCase
   setup do
     @user = users(:regular)
     @account = @user.account
+    ActsAsTenant.current_tenant = @account
+    @project = projects(:one)
     sign_in @user
   end
 
@@ -26,11 +28,31 @@ class ProjectTest < ApplicationSystemTestCase
 
   test "can show project detail page" do
     visit page_url
-    click_on "Gotasker in Engineering"
+    click_on "#{@project.name} in #{@project.discipline.name}"
     assert_text "Add New Participant"
+    take_screenshot
   end
 
   test "can create a new project" do
+    visit page_url
+    click_on "New Project"
+    fill_in "Project Name", with: "Awesome"
+    fill_in "Description", with: "This is a sample Project Description"
+    select disciplines(:engineering).name, from: "project_discipline_id"
+    click_on "Save"
+    take_screenshot
+    assert_text "Project was successfully created."
+  end
+
+  test "can not create with empty Name Discipline manager" do
+    visit page_url
+    click_on "New Project"
+    assert_text "Create New Project"
+    click_on "Save"
+    take_screenshot
+    assert_text "Create New Project"
+    assert_text "Discipline must exist"
+    assert_text "Name can't be blank"
   end
 
   test "can edit a project" do

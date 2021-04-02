@@ -1,19 +1,27 @@
 one:
   user: regular
   project: one
+  starts_at: 2021-02-01
+  ends_at: 2021-03-31
+  occupancy: 10
 
 two:
   user: regular
   project: unarchived
+  starts_at: 2021-03-31
+  ends_at: 2021-06-31
+  occupancy: 11
 
 three:
   user: regular
   project: archived
+  starts_at: 2021-03-31
+  ends_at: 2021-06-31
+  occupancy: 14
 
 four:
-  user: regular
+  user: actor
   project: one
-
-five:
-  user: inactive
-  project: one
+  starts_at: 2021-02-01
+  ends_at: 2021-03-31
+  occupancy: 90

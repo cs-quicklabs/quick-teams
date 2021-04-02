@@ -2,16 +2,18 @@ one:
   name: Gotasker
   archived: false
   manager: regular
+  discipline: engineering
+  account: crownstack
 
 unarchived:
-  name: Gotasker
+  name: Thaut
   archived: false
   account: crownstack
   manager: regular
   discipline: engineering
 
 archived:
-  name: Gotasker
+  name: Indokargo
   archived: true
   account: crownstack
   manager: regular
