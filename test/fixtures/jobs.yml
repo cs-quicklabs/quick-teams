@@ -1,3 +1,7 @@
 ios:
-  name: iOS Engineer
+  name: ios_engineer
+  account: crownstack
+
+developer:
+  name: Developer
   account: crownstack
