@@ -3,7 +3,7 @@ class Account::PeopleStatusesController < Account::BaseController
 
   # GET /people_statuses or /people_statuses.json
   def index
-    @people_statuses = PeopleStatus.all
+    @people_statuses = PeopleStatus.all.order(created_at: :desc)
     @people_status = PeopleStatus.new
   end
 

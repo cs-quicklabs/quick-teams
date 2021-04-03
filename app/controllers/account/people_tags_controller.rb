@@ -3,7 +3,7 @@ class Account::PeopleTagsController < Account::BaseController
 
   # GET /people_tags or /people_tags.json
   def index
-    @people_tags = PeopleTag.all
+    @people_tags = PeopleTag.all.order(created_at: :desc)
     @people_tag = PeopleTag.new
   end
 

@@ -3,7 +3,7 @@ class Account::ClientsController < Account::BaseController
 
   # GET /clients or /clients.json
   def index
-    @clients = Client.all
+    @clients = Client.all.order(created_at: :desc)
     @client = Client.new
   end
 
