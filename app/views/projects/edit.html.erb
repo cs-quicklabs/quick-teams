@@ -1,3 +1,3 @@
 <%= turbo_frame_tag "project_form", target: "_top" do %>
-  <%= render "projects/forms/form", project: @project%>
+  <%= render partial: "projects/forms/form", locals: { project: @project, title: "Edit Project", subtitle: "Please update details of existing project" }%>
 <% end %>

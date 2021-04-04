@@ -3,7 +3,7 @@ class Account::ProjectStatusesController < Account::BaseController
 
   # GET /project_statuses or /project_statuses.json
   def index
-    @project_statuses = ProjectStatus.all
+    @project_statuses = ProjectStatus.all.order(created_at: :desc)
     @project_status = ProjectStatus.new
   end
 

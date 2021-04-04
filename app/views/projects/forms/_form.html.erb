@@ -1,21 +1,15 @@
 <%= tailwind_form_with(model: project, id: dom_id(project)) do |form| %>
   <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: project, message: local_assigns[:message] %>
-    <% if current_page?(new_project_path)%>
-      <%= render "shared/form_header", title: "Create New Project", subtitle: "Please fill in details of your new Project." %>
-    <%else%>
-      <%= render "shared/form_header", title: "Edit Project", subtitle: "Update details of existing project." %>
-    <%end%>
+    <%= render "shared/form_header", title: local_assigns[:title], subtitle: local_assigns[:subtitle] %>
     <%= form.text_field :name, "Project Name"%>
     <%= form.text_area :description, "Description"%>
     <div>
-      <label for="ends" class="block mt-4 text-sm font-medium text-gray-700">
-        Select Discipline
-      </label>
+      <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">Select Discipline</label>
       <%= form.collection_select(:discipline_id, Discipline.all, :id, :name, {:prompt => 'Select Discipline'}, :selected => project.discipline_id, :class=>"form-text-field mt-1"  ) %>
     </div>
     <div>
-      <label for="ends" class="block mt-4 text-sm font-medium text-gray-700">
+      <label for="manager" class="block mt-4 text-sm font-medium text-gray-700">
         Select Manager
       </label>
       <%= form.collection_select(:manager_id, UserDecorator.decorate_collection(User.for_current_account.active.order(:first_name)), :id, :display_name, {:prompt => 'Select Manager'}, :selected => project.manager_id, :class=>"form-text-field mt-1"  ) %>

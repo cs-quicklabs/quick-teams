@@ -3,7 +3,7 @@ class Account::SkillsController < Account::BaseController
 
   # GET /skills or /skills.json
   def index
-    @skills = Skill.all
+    @skills = Skill.all.order(created_at: :desc)
     @skill = Skill.new
   end
 

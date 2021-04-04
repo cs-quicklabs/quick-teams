@@ -3,7 +3,7 @@ class Account::JobsController < Account::BaseController
 
   # GET /jobs or /jobs.json
   def index
-    @jobs = Job.all
+    @jobs = Job.all.order(created_at: :desc)
     @job = Job.new
   end
 
@@ -17,9 +17,12 @@ class Account::JobsController < Account::BaseController
 
     respond_to do |format|
       if @job.save
-        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:jobs, partial: "account/jobs/job", locals: { message: "Job was created successfully.", job: @job }) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:jobs, partial: "account/jobs/job", locals: { job: @job }) +
+                               turbo_stream.replace(Job.new, partial: "account/jobs/form", locals: { job: Job.new, message: "Job was created successfully." })
+        }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Job.new, partial: "account/jobs/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Job.new, partial: "account/jobs/form", locals: { job: @job }) }
       end
     end
   end
@@ -28,9 +31,9 @@ class Account::JobsController < Account::BaseController
   def update
     respond_to do |format|
       if @job.update(job_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@job, partial: "account/jobs/job", locals: { message: "Job was created successfully.", job: @job }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@job, partial: "account/jobs/job", locals: { job: @job, messages: nil }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@job, partial: "account/jobs/job", locals: { job: @job }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@job, template: "account/jobs/edit", locals: { job: @job, messages: @job.errors.full_messages }) }
       end
     end
   end

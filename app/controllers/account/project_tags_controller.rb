@@ -3,7 +3,7 @@ class Account::ProjectTagsController < Account::BaseController
 
   # GET /project_tags or /project_tags.json
   def index
-    @project_tags = ProjectTag.all
+    @project_tags = ProjectTag.all.order(created_at: :desc)
     @project_tag = ProjectTag.new
   end
 

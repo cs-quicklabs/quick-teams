@@ -10,8 +10,7 @@ class Project < ApplicationRecord
   has_many :events, as: :eventable
 
   belongs_to :discipline
-
-  validates_presence_of :name, :discipline
+  validates_presence_of :name
 
   scope :archived, -> { where(archived: true) }
   scope :active, -> { where(archived: false) }

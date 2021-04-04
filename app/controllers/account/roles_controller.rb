@@ -3,7 +3,7 @@ class Account::RolesController < Account::BaseController
 
   # GET /roles or /roles.json
   def index
-    @roles = Role.all
+    @roles = Role.all.order(created_at: :desc)
     @role = Role.new
   end
 
