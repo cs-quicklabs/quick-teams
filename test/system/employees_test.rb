@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class EmployeesTest < ApplicationSystemTestCase
   setup do
-    @employee = users(:regular)
+    @employee = users(:abram)
     @account = @employee.account
     ActsAsTenant.current_tenant = @account
     sign_in @employee
@@ -78,7 +78,7 @@ class EmployeesTest < ApplicationSystemTestCase
     assert_selector "p.notice", text: "User was successfully updated."
   end
 
-  test "can not edit an employee with empty name" do
+  test "can not edit an employee with empty name email" do
     visit page_url
     click_on "#{@employee.first_name} #{@employee.last_name}"
     within "#employee-header" do
@@ -87,20 +87,30 @@ class EmployeesTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Edit Employee Details"
     fill_in "First Name", with: ""
     fill_in "Last Name", with: ""
-    fill_in "Email", with: "john.doe@crownstack.com"
-    select disciplines(:engineering).name, from: "user_discipline_id"
-    select jobs(:ios).name, from: "user_job_id"
-    select roles(:senior).name, from: "user_role_id"
-    select "#{users(:actor).first_name} #{users(:actor).last_name}", from: "user_manager_id"
+    fill_in "Email", with: ""
     click_on "Save"
     take_screenshot
     assert_text "First name can't be blank"
     assert_text "Last name can't be blank"
+    assert_text "Email can't be blank"
+  end
+
+  test "can not edit an employee with duplicate email" do
+    visit page_url
+    click_on "#{@employee.first_name} #{@employee.last_name}"
+    within "#employee-header" do
+      click_on "Edit"
+    end
+    assert_selector "h1", text: "Edit Employee Details"
+    fill_in "Email", with: users(:actor).email
+    click_on "Save"
+    take_screenshot
+    assert_text "Email has already been taken"
   end
 
   test "can deactivate an employee" do
     visit page_url
-    click_on "#{users(:actor).first_name} #{users(:actor).last_name}"
+    click_on "#{@employee.first_name} #{@employee.last_name}"
     within "#employee-header" do
       click_on "Deactivate"
     end
@@ -124,5 +134,14 @@ class EmployeesTest < ApplicationSystemTestCase
     visit deactivated_users_url(script_name: "/#{@account.id}")
     page.first(:link, "Activate").click
     assert_selector "p.notice", text: "User has been activated."
+  end
+
+  test "pagination" do
+    visit page_url
+    within "nav.pagination" do
+      find("span", text: "2").click
+      take_screenshot
+      assert_current_path("/#{@account.id}/employees?page=2")
+    end
   end
 end

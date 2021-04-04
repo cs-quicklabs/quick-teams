@@ -19,6 +19,17 @@ actor:
   role: senior
   discipline: engineering
 
+abram:
+  first_name: Abram
+  last_name: Lodhi
+  active: true
+  email: abram@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+
 inactive:
   first_name: Inactive
   last_name: User
@@ -40,4 +51,114 @@ active:
   role: senior
   discipline: engineering
   deactivated_on: 2021-03-06
+  manager: regular
+
+one:
+  first_name: Active
+  last_name: User
+  active: true
+  email: one@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: regular
+
+two:
+  first_name: Active
+  last_name: User
+  active: true
+  email: two@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: regular
+
+three:
+  first_name: Active
+  last_name: User
+  active: true
+  email: three@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: regular
+
+four:
+  first_name: Active
+  last_name: User
+  active: true
+  email: four@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: regular
+
+five:
+  first_name: Active
+  last_name: User
+  active: true
+  email: five@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: regular
+
+six:
+  first_name: Active
+  last_name: User
+  active: true
+  email: six@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: regular
+
+seven:
+  first_name: Active
+  last_name: User
+  active: true
+  email: seven@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: regular
+
+eight:
+  first_name: Active
+  last_name: User
+  active: true
+  email: eight@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: regular
+
+nine:
+  first_name: Active
+  last_name: User
+  active: true
+  email: nine@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: regular
+
+ten:
+  first_name: Active
+  last_name: User
+  active: true
+  email: ten@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
   manager: regular
