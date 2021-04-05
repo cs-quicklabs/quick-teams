@@ -17,9 +17,12 @@ class Account::SkillsController < Account::BaseController
 
     respond_to do |format|
       if @skill.save
-        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:skills, partial: "account/skills/skill", locals: { message: "Skill was updated successfully.", skill: @skill }) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:skills, partial: "account/skills/skill", locals: { skill: @skill }) +
+          turbo_stream.replace(Skill.new, partial: "account/skills/form", locals: { skill: Skill.new, message: "Skill was created successfully." })
+        }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Skill.new, partial: "skills/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Skill.new, partial: "account/skills/form", locals: { skill: @skill }) }
       end
     end
   end
@@ -28,9 +31,9 @@ class Account::SkillsController < Account::BaseController
   def update
     respond_to do |format|
       if @skill.update(skill_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@skill, partial: "account/skills/skill", locals: { message: "Skill was created successfully.", skill: @skill }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@skill, partial: "account/skills/skill", locals: {skill: @skill, message: nil }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@skill, partial: "account/skills/skill", locals: { skill: @skill }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@skill, template: "account/skills/edit", locals: { skill: @skill, messages: @skill.errors.full_messages }) }
       end
     end
   end
