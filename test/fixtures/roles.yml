@@ -1,3 +1,7 @@
 senior:
   name: Senior
   account: crownstack
+
+junior:
+  name: Junior
+  account: crownstack
