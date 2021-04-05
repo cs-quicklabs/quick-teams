@@ -136,7 +136,7 @@ class EmployeesTest < ApplicationSystemTestCase
     assert_selector "p.notice", text: "User has been activated."
   end
 
-  test "pagination" do
+  test "can paginate" do
     visit page_url
     within "nav.pagination" do
       find("span", text: "2").click
