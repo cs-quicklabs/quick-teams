@@ -16,9 +16,12 @@ class Account::RolesController < Account::BaseController
 
     respond_to do |format|
       if @role.save
-        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:roles, partial: "account/roles/role", locals: { message: "Role was updated successfully.", role: @role }) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:roles, partial: "account/roles/role", locals: { role: @role }) +
+                               turbo_stream.replace(Role.new, partial: "account/roles/form", locals: { role: Role.new, message: "Role was created successfully." })
+        }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Role.new, partial: "account/roles/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Role.new, partial: "account/roles/form", locals: { role: @role }) }
       end
     end
   end
@@ -27,9 +30,9 @@ class Account::RolesController < Account::BaseController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, partial: "account/roles/role", locals: { message: "Role was updated successfully.", role: @role }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, partial: "account/roles/role", locals: { role: @role, message: nil }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, partial: "account/roles/role", locals: { role: @role }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@role, template: "account/roles/edit", locals: { role: @role, messages: @role.errors.full_messages }) }
       end
     end
   end
