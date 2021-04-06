@@ -5,8 +5,13 @@ class ActivateUser < Patterns::Service
   end
 
   def call
-    activate
-    add_event
+    begin
+      activate
+      add_event
+    rescue
+      user
+    end
+
     user
   end
 

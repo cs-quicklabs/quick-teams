@@ -8,8 +8,13 @@ class UpdateSchedule < Patterns::Service
   end
 
   def call
-    update_schedule
-    add_event
+    begin
+      update_schedule
+      add_event
+    rescue
+      schedule
+    end
+
     schedule
   end
 

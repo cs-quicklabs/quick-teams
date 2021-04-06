@@ -8,8 +8,13 @@ class CreateUser < Patterns::Service
   end
 
   def call
-    create_user
-    add_event
+    begin
+      create_user
+      add_event
+    rescue
+      user
+    end
+
     user
   end
 

@@ -5,9 +5,14 @@ class ArchiveProject < Patterns::Service
   end
 
   def call
-    clear_schedule
-    archive
-    add_event
+    begin
+      clear_schedule
+      archive
+      add_event
+    rescue
+      project
+    end
+
     project
   end
 

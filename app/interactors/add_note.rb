@@ -6,8 +6,13 @@ class AddNote < Patterns::Service
   end
 
   def call
-    add_note
-    add_event
+    begin
+      add_note
+      add_event
+    rescue
+      note
+    end
+
     note
   end
 

@@ -5,8 +5,12 @@ class UnarchiveProject < Patterns::Service
   end
 
   def call
-    unarchive
-    add_event
+    begin
+      unarchive
+      add_event
+    rescue
+      project
+    end
     project
   end
 

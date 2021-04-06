@@ -6,8 +6,13 @@ class AddProjectFeedback < Patterns::Service
   end
 
   def call
-    add_feedback
-    add_event
+    begin
+      add_feedback
+      add_event
+    rescue
+      feedback
+    end
+
     feedback
   end
 

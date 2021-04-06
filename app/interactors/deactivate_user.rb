@@ -5,12 +5,17 @@ class DeactivateUser < Patterns::Service
   end
 
   def call
-    remove_as_people_manager
-    remove_as_project_manager
-    remove_reporting_manager
-    clear_schedules
-    deactivate
-    add_event
+    begin
+      remove_as_people_manager
+      remove_as_project_manager
+      remove_reporting_manager
+      clear_schedules
+      deactivate
+      add_event
+    rescue
+      user
+    end
+
     user
   end
 
