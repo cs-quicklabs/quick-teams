@@ -1,6 +1,7 @@
 class Project::ScheduleController < Project::BaseController
   def index
-    @schedules = ScheduleDecorator.decorate_collection(Schedule.where(project: @project).includes({ user: [:role, :job] }))
+    collection = Schedule.where(project: @project).includes({ user: [:role, :job] })
+    @schedules = ScheduleDecorator.decorate_collection(collection)
     @schedule = Schedule.new
   end
 end

@@ -48,10 +48,6 @@ class SchedulesController < ApplicationController
 
   private
 
-  def build_form
-    @form = ChangePasswordForm.new(@user)
-  end
-
   def set_project
     @project = Project.find(params["project_id"])
   end
