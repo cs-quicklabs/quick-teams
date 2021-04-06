@@ -48,7 +48,7 @@ class SkillsTest < ApplicationSystemTestCase
   end
 
   test "can visit edit page" do
-    visit edit_account_skill_url(jobs(:ruby), script_name: "/#{@account.id}")
+    visit edit_account_skill_url(skills(:ruby), script_name: "/#{@account.id}")
     page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
   end
 
@@ -82,7 +82,7 @@ class SkillsTest < ApplicationSystemTestCase
     assert_selector "li", text: skill.name
     find("li", text: skill.name).click_on("Edit")
     within "turbo-frame#skill_#{skill.id}" do
-      fill_in "skill_name", with: ios_engineer.name
+      fill_in "skill_name", with: python.name
       click_on "Save"
       take_screenshot
       assert_text "Name has already been taken"
@@ -94,7 +94,7 @@ class SkillsTest < ApplicationSystemTestCase
     assert_selector "#menubar", count: 1
   end
 
-  test "should have left menu with Job Profiles selected" do
+  test "should have left menu with Skills selected" do
     visit page_url
     within "#menu" do
       assert_selector "a", count: 10

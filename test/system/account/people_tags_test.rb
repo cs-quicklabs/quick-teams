@@ -94,7 +94,7 @@ class PeopleTagsTest < ApplicationSystemTestCase
     assert_selector "#menubar", count: 1
   end
 
-  test "should have left menu with Job Profiles selected" do
+  test "should have left menu with People Tags selected" do
     visit page_url
     within "#menu" do
       assert_selector "a", count: 10
@@ -104,7 +104,7 @@ class PeopleTagsTest < ApplicationSystemTestCase
 
   test "can not delete a people tag which is being used" do
     visit page_url
-    people_tag = people_tags(:gold)
+    people_tag = people_tags(:star)
 
     assert_selector "li", text: people_tag.name
     find("li", text: people_tag.name).click_on("Delete")

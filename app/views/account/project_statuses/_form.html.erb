@@ -1,6 +1,6 @@
-  <%= tailwind_form_with(model: @project_status, id: dom_id(@project_status), url: account_project_statuses_path) do |form| %>
+  <%= tailwind_form_with(model: project_status, id: dom_id(project_status), url: account_project_statuses_path) do |form| %>
   <div class="space-y-6">
-    <%= render "shared/form_messages", resource: @project_status, message: local_assigns[:message] %>
+    <%= render "shared/form_messages", resource: project_status, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Project Status", subtitle: "You can define custom status which can be applied to your projects. Examples include tentative, in progess." %>
     <%= form.text_field :name, "Add New Status" %>
     <div class="flex justify-end">

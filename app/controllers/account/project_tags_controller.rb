@@ -18,11 +18,11 @@ class Account::ProjectTagsController < Account::BaseController
     respond_to do |format|
       if @project_tag.save
         format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend(:project_tags, partial: "account/project_tags/project_tag",
-                                                                   locals: { message: "Tag was created successfully.", project_tag: @project_tag })
+          render turbo_stream: turbo_stream.prepend(:project_tags, partial: "account/project_tags/project_tag", locals: { project_tag: @project_tag }) +
+          turbo_stream.replace(ProjectTag.new, partial: "account/project_tags/form", locals: { project_tag: ProjectTag.new, message: "Tag was created successfully." })
         }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectTag.new, partial: "account/project_tags/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectTag.new, partial: "account/project_tags/form", locals: { project_tag: @project_tag }) }
       end
     end
   end
@@ -31,9 +31,9 @@ class Account::ProjectTagsController < Account::BaseController
   def update
     respond_to do |format|
       if @project_tag.update(project_tag_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_tag, partial: "account/project_tags/project_tag", locals: { message: "Tag was created successfully.", project_tag: @project_tag }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_tag, partial: "account/project_tags/project_tag", locals: { project_tag: @project_tag, message: nil }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_tag, partial: "account/project_tags/project_tag", locals: { project_tag: @project_tag }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project_tag, template: "account/project_tags/edit", locals: { project_tag: @project_tag, messages: @project_tag.errors.full_messages  }) }
       end
     end
   end

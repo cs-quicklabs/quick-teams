@@ -1,16 +1,13 @@
-  <main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
+<main class="pb-10 mx-auto max-w-7xl lg:py-12 lg:px-8">
   <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
     <%= render 'shared/account_menu'%>
-    <main class="max-w-xl pb-12 px-4 lg:col-span-6">
-      <%= turbo_frame_tag "project_status_form" do %>
+    <main class="max-w-xl px-4 pb-12 lg:col-span-6">
+      <div id="project_statuses_form">
         <%=  render "form", project_status: @project_status%>
-      <% end %>
-      <%= turbo_stream_from "project_statuses" %>
-      <%= turbo_frame_tag "project_statuses" do %>
-        <ul>
-          <%= render @project_statuses %>
-        </ul>
-      <% end %>
+      </div>
+      <div id="project_statuses">
+        <%= render @project_statuses %>
+      </div>
     </main>
   </div>
 </main>
