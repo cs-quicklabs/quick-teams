@@ -2,18 +2,19 @@ class Employee::FeedbacksController < Employee::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
-    @feedbacks = FeedbackDecorator.decorate_collection(@employee.feedbacks)
+    @feedbacks = FeedbackDecorator.decorate_collection(@employee.feedbacks.order(created_at: :desc))
     @feedback = Feedback.new
   end
 
   def create
-    @feedback = AddEmployeeFeedback.call(@employee, feedback_params, current_user)
+    @feedback = AddEmployeeFeedback.call(@employee, feedback_params, current_user).result
+
     respond_to do |format|
-      if @feedback
+      if @feedback.persisted?
         @feedback = Feedback.new
         format.html { redirect_to employee_feedbacks_path(@employee), notice: "Feedback was added successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Feedback.new, partial: "employees/feedbacks/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Feedback.new, partial: "employee/feedbacks/form", locals: { feedback: @feedback }) }
       end
     end
   end
