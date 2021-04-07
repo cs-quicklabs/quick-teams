@@ -14,7 +14,7 @@
             <a href="#" class="font-medium text-gray-900"><%= @feedback.author.display_name%></a>
           </div>
           <div class="mt-1 space-x-2 text-sm">
-            <span class="font-medium text-gray-500"><%= @feedback.created_at.to_date.to_s(:long)%></span>
+            <span class="font-medium text-gray-500"><%= display_created_at(@feedback) %></span>
           </div>
         </div>
       </div>

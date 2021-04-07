@@ -9,10 +9,6 @@ class ProjectDecorator < Draper::Decorator
     project.manager.nil? ? "N/A" : project.manager.decorate.display_name
   end
 
-  def display_created_at
-    "#{project.created_at.to_date.to_s(:long)}"
-  end
-
   def display_archived_on
     "#{project.archived_on.to_s(:long)}"
   end
