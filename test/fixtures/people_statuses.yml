@@ -1,7 +1,7 @@
-tentative:
-  name: Tentative
+deployed:
+  name: Deployed
   account: crownstack
 
-progess:
-  name: In Progess
+bench:
+  name: On Bench
   account: crownstack

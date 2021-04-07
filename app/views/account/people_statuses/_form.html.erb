@@ -1,6 +1,6 @@
-  <%= tailwind_form_with(model: @people_status, id: dom_id(@people_status), url: account_people_statuses_path) do |form| %>
+  <%= tailwind_form_with(model: people_status, id: dom_id(people_status), url: account_people_statuses_path) do |form| %>
   <div class="space-y-6">
-    <%= render "shared/form_messages", resource: @people_status, message: local_assigns[:message] %>
+    <%= render "shared/form_messages", resource: people_status, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "People Status", subtitle: "You can define custom status which can be applied to your team. Examples include On Bench, Deployed" %>
     <%= form.text_field :name, "Add New Status" %>
     <div class="flex justify-end">
