@@ -17,9 +17,11 @@ class Account::ClientsController < Account::BaseController
 
     respond_to do |format|
       if @client.save
-        format.turbo_stream { render turbo_stream: turbo_stream.prepend(:clients, partial: "account/clients/client", locals: { message: "Client was created successfully.", client: @client }) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:clients, partial: "account/clients/client", locals: { client: @client }) +
+          turbo_stream.replace(Client.new, partial: "account/clients/form", locals: { client: Client.new, message: "Client was created successfully." })}
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Client.new, partial: "account/clients/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Client.new, partial: "account/clients/form", locals: { client: @client }) }
       end
     end
   end
@@ -28,9 +30,9 @@ class Account::ClientsController < Account::BaseController
   def update
     respond_to do |format|
       if @client.update(client_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@client, partial: "account/clients/client", locals: { message: "Client was created successfully.", client: @client }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@client, partial: "account/clients/client", locals: { client: @client, message: nil }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@client, partial: "account/clients/client", locals: { client: @client }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@client, template: "account/clients/edit", locals: { client: @client, messages: @client.errors.full_messages }) }
       end
     end
   end
