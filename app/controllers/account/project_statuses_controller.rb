@@ -18,11 +18,11 @@ class Account::ProjectStatusesController < Account::BaseController
     respond_to do |format|
       if @project_status.save
         format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend(:project_statuses, partial: "account/project_statuses/project_status",
-                                                                       locals: { message: "Project Status was created successfully.", project_status: @project_status })
+          render turbo_stream: turbo_stream.prepend(:project_statuses, partial: "account/project_statuses/project_status", locals: { project_status: @project_status }) +
+                               turbo_stream.replace(ProjectStatus.new, partial: "account/project_statuses/form", locals: { project_status: ProjectStatus.new, message: "Project Status was created successfully." })
         }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectStatus.new, partial: "account/project_statuses/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(ProjectStatus.new, partial: "account/project_statuses/form", locals: { project_status: @project_status }) }
       end
     end
   end
@@ -33,12 +33,12 @@ class Account::ProjectStatusesController < Account::BaseController
       if @project_status.update(project_status_params)
         format.turbo_stream {
           render turbo_stream: turbo_stream.replace(@project_status, partial: "account/project_statuses/project_status",
-                                                                     locals: { message: "Project Status was created successfully.", project_status: @project_status })
+                                                                     locals: { project_status: @project_status, message: nil })
         }
       else
         format.turbo_stream {
-          render turbo_stream: turbo_stream.replace(@project_status, partial: "account/project_statuses/project_status",
-                                                                     locals: { project_status: @project_status })
+          render turbo_stream: turbo_stream.replace(@project_status, template: "account/project_statuses/edit",
+                                                                     locals: { project_status: @project_status, messages: @project_status.errors.full_messages })
         }
       end
     end
