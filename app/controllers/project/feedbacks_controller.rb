@@ -2,7 +2,7 @@ class Project::FeedbacksController < Project::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
-    @feedbacks = FeedbackDecorator.decorate_collection(@project.feedbacks)
+    @feedbacks = FeedbackDecorator.decorate_collection(@project.feedbacks.order(created_at: :desc))
     @feedback = Feedback.new
   end
 

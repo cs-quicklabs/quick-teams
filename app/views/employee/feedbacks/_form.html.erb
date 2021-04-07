@@ -2,7 +2,7 @@
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: @feedback, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Feedback", subtitle: "A feedback can be added for employee which might be useful in performace review later." %>
-    <%= form.text_field :title, "Title"%>
+    <%= form.text_field :title, "Title", autocomplete: "off"%>
     <%= form.rich_text_area :body, "Feedback"%>
     <div class="flex justify-end">
       <%= form.submit "Add Feedback", class:"btn-blue"%>
