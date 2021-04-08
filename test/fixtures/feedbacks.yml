@@ -3,3 +3,9 @@ one:
   user: regular
   critiquable_type: User
   critiquable: regular
+
+two:
+  title: Some Random Feedback
+  user: regular
+  critiquable_type: Project
+  critiquable: one
