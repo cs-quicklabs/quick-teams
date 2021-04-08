@@ -7,13 +7,13 @@ class Project::FeedbacksController < Project::BaseController
   end
 
   def create
-    @feedback = AddProjectFeedback.call(@project, feedback_params, current_user)
+    @feedback = AddProjectFeedback.call(@project, feedback_params, current_user).result
     respond_to do |format|
-      if @feedback
+      if @feedback.persisted?
         @feedback = Feedback.new
         format.html { redirect_to project_feedbacks_path(@project), notice: "Feedback was added successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Feedback.new, partial: "projects/feedbacks/form", locals: {}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Feedback.new, partial: "project/feedbacks/form", locals: { feedback: @feedback }) }
       end
     end
   end

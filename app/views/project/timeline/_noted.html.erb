@@ -11,7 +11,12 @@
         <div>
           <p class="text-sm text-gray-500">
             <a href="<%= employee_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name%></a>
-            added a new note.            
+            added a new note
+            <% if event.trackable.nil?%>
+              which does not exist anymore.
+            <% else %>
+              .
+            <% end %>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">
