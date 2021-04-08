@@ -1,0 +1,79 @@
+one:
+  user: regular
+  action: archived
+  eventable_type: Project
+  eventable: one
+  trackable_type: Project
+  trackable: one
+  action_for_context: archived
+  account: crownstack
+
+two:
+  user: regular
+  action: unarchived
+  eventable_type: Project
+  eventable: one
+  trackable_type: Project
+  trackable: one
+  action_for_context: unarchived project
+  account: crownstack
+
+three:
+  user: regular
+  action: reviewed
+  eventable_type: Project
+  eventable: one
+  trackable_type: Feedback
+  trackable: one
+  action_for_context: added new feedback in project
+  account: crownstack
+
+four:
+  user: regular
+  action: noted
+  eventable_type: Project
+  eventable: one
+  trackable_type: Note
+  trackable: one
+  action_for_context: added a note for project
+  account: crownstack
+
+five:
+  user: regular
+  action: scheduled
+  eventable_type: Project
+  eventable: one
+  trackable_type: Schedule
+  trackable: one
+  action_for_context: with 100% occupancy till Mar 31, 2021
+  account: crownstack
+
+six:
+  user: regular
+  action: reviewed
+  eventable_type: Project
+  eventable: one
+  trackable_type: Feedback
+  trackable: none
+  action_for_context: added new feedback in project
+  account: crownstack
+
+seven:
+  user: regular
+  action: noted
+  eventable_type: Project
+  eventable: one
+  trackable_type: Note
+  trackable: none
+  action_for_context: added a note for project
+  account: crownstack
+
+eight:
+  user: regular
+  action: scheduled
+  eventable_type: Project
+  eventable: one
+  trackable_type: Schedule
+  trackable: none
+  action_for_context: with 100% occupancy till Mar 31, 2021
+  account: crownstack
