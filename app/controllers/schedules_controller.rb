@@ -2,7 +2,6 @@ class SchedulesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[ update create destroy edit ]
   before_action :set_schedule, only: %i[ update destroy edit ]
-  before_action :build_form, only: %i[create update]
 
   def index
     employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
@@ -17,9 +16,11 @@ class SchedulesController < ApplicationController
   end
 
   def update
+    schedule = UpdateSchedule.call(@schedule, @project, current_user, schedule_params, @actor).result
+
     respond_to do |format|
-      if @form.submit(schedule_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/schedule", locals: { message: "Schedule was updated successfully", schedule: @schedule.decorate }) }
+      if schedule.errors.empty?
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "project/schedule/schedule", locals: { schedule: @schedule.decorate }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/form", locals: { schedule: @schedule }) }
       end
@@ -27,11 +28,13 @@ class SchedulesController < ApplicationController
   end
 
   def create
+    schedule = UpdateSchedule.call(Schedule.new, @project, current_user, schedule_params, @actor).result
+
     respond_to do |format|
-      if @form.submit(schedule_params)
+      if schedule.persisted?
         format.html { redirect_to project_participants_path(@project), notice: "Participant was added successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "projects/schedule/form", locals: { schedule: @schedule, errors: @form }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Schedule.new, partial: "project/schedule/form", locals: { schedule: schedule }) }
       end
     end
   end
@@ -58,10 +61,5 @@ class SchedulesController < ApplicationController
 
   def schedule_params
     params.require(:schedule).permit(:user_id, :starts_at, :discipline_id, :ends_at, :occupancy)
-  end
-
-  def build_form
-    @schedule ||= Schedule.new
-    @form = ScheduleForm.new(@project, @schedule, current_user)
   end
 end

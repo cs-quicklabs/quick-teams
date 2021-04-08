@@ -1,9 +1,9 @@
-<%= turbo_frame_tag dom_id(@schedule) do %>
-  <%= form_with(model: @schedule, id: dom_id(@schedule), url: project_schedule_path(@project, @schedule)) do |form| %>
-    <%= render "shared/form_messages", resource: @form, message: local_assigns[:message] %>
+<%= turbo_frame_tag dom_id(schedule) do %>
+  <%= form_with(model: schedule, id: dom_id(schedule), url: project_schedule_path(@project, schedule)) do |form| %>
+    <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
     <li>
       <label for="name" class="block mt-3 ml-3 text-sm font-bold text-gray-700">
-        <%= "Edit " + @schedule.user.first_name + "'s schedule"%>
+        <%= "Edit " + schedule.user.first_name + "'s schedule"%>
       </label>
       <div class="flex pt-2 pb-4 border-b border-gray-200">
         <div class="flex w-full ml-3">
@@ -11,7 +11,7 @@
             <label for="starts" class="block text-sm font-medium text-gray-700">
               Starts At
             </label>
-            <%= form.hidden_field :user_id, value: @schedule.user_id%>
+            <%= form.hidden_field :user_id, value: schedule.user_id%>
             <%= form.date_field :starts_at, class: "form-text-field mt-1"%>
           </div>
           <div class="w-full ml-4">
@@ -24,7 +24,7 @@
             <label for="ends" class="block text-sm font-medium text-gray-700">
               Occupancy(%)
             </label>
-            <%= form.text_field :occupancy, class: "form-text-field mt-1"%>
+            <%= form.text_field :occupancy, class: "form-text-field mt-1", autocomplete: "off"%>
           </div>
           <div class="content-end">
             <%= form.submit "Save", class:"btn-blue ml-3 mt-6"%>
