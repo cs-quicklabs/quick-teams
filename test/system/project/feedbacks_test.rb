@@ -42,7 +42,6 @@ class FeedbacksTest < ApplicationSystemTestCase
     click_on "Add Feedback"
     take_screenshot
     assert_text "Title can't be blank"
-    assert_text "Body can't be blank"
   end
 
   test "can see feedback detail page" do
