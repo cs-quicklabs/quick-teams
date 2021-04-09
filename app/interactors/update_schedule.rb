@@ -27,6 +27,7 @@ class UpdateSchedule < Patterns::Service
   end
 
   def add_event
+    binding.irb
     project.events.create(user: actor, action: "scheduled", action_for_context: "with #{schedule.occupancy}% occupancy till #{schedule.ends_at.to_date.to_s(:long)}", trackable: schedule)
   end
 

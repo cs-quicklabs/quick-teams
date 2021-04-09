@@ -16,7 +16,7 @@ class SchedulesController < ApplicationController
   end
 
   def update
-    schedule = UpdateSchedule.call(@schedule, @project, current_user, schedule_params, @actor).result
+    schedule = UpdateSchedule.call(@schedule, @project, current_user, schedule_params, current_user).result
 
     respond_to do |format|
       if schedule.errors.empty?
@@ -28,7 +28,7 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    schedule = UpdateSchedule.call(Schedule.new, @project, current_user, schedule_params, @actor).result
+    schedule = UpdateSchedule.call(Schedule.new, @project, current_user, schedule_params, current_user).result
 
     respond_to do |format|
       if schedule.persisted?

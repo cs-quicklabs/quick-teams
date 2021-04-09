@@ -2,7 +2,7 @@ class Project::NotesController < Project::BaseController
   before_action :set_note, only: %i[ destroy ]
 
   def index
-    @notes = NoteDecorator.decorate_collection(@project.notes)
+    @notes = NoteDecorator.decorate_collection(@project.notes.order(created_at: :desc))
     @note = Note.new
   end
 
