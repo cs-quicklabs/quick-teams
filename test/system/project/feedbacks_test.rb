@@ -61,4 +61,10 @@ class FeedbacksTest < ApplicationSystemTestCase
     assert_selector "p.notice", text: "Feedback was removed successfully."
     assert_no_text feedbacks(:one).title
   end
+
+  test "can not show add feedback when project is archived" do
+    archived_project = projects(:archived)
+    visit project_feedbacks_url(script_name: "/#{@account.id}", project_id: archived_project.id)
+    assert_no_text "Add New Feedback"
+  end
 end

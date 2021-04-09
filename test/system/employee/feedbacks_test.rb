@@ -60,4 +60,10 @@ class FeedbacksTest < ApplicationSystemTestCase
     assert_selector "p.notice", text: "Feedback was removed successfully."
     assert_no_text feedbacks(:one).title
   end
+
+  test "can not show add feedback when user is deactivated" do
+    inactive_employee = users(:inactive)
+    visit employee_feedbacks_url(script_name: "/#{@account.id}", employee_id: inactive_employee.id)
+    assert_no_text "Add New Feedback"
+  end
 end
