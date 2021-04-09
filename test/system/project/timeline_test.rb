@@ -18,4 +18,10 @@ class TimelineTest < ApplicationSystemTestCase
     take_screenshot
     assert_selector "p", text: "Project Timeline"
   end
+
+  test "can not visit index if not logged in" do
+    sign_out @employee
+    visit page_url
+    assert_selector "h1", text: "Sign in to your account"
+  end
 end

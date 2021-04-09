@@ -35,6 +35,7 @@ gem "draper"
 gem "rails-patterns"
 gem "pagy"
 gem "devise-pwned_password"
+gem "aws-sdk-s3", "~> 1.87"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
