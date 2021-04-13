@@ -1,0 +1,30 @@
+<%= turbo_frame_tag dom_id(schedule) do %>
+  <li class="border-b border-gray-200">
+    <div class="flex items-center px-2 py-2 sm:px-6">
+      <div class="flex items-center flex-1 min-w-0">
+        <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4">
+          <a href="<%= project_path(schedule.project)%>" class="block hover:underline" target="_top">
+            <div>
+              <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.project.display_name%></p>
+              <p class="flex items-center mt-1 text-sm text-gray-500">
+                <span class="truncate"><%= schedule.project.display_position%></span>
+              </p>
+            </div>
+          </a>
+          <div class="flex">
+            <div class="whitespace-nowrap">
+              <div class="text-sm text-gray-900"><%= schedule.display_occupancy %></div>
+              <div class="text-sm text-gray-500"><%= schedule.display_occupied_till %></div>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="whitespace-nowrap">
+              <div class="text-sm text-gray-900"><%= link_to "Edit", edit_employee_schedule_path(@employee, schedule), class: "btn-inline-edit" %></div>
+              <div class="text-sm text-gray-900"><%= link_to "Delete", [@employee, schedule], method: :delete, class: "btn-inline-delete" %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+<% end %>
