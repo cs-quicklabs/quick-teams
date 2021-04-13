@@ -1,0 +1,27 @@
+<%= form_with(model: timesheet, id: dom_id(timesheet), url: employee_timesheets_path(@employee)) do |form| %>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: timesheet, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New Timesheet", subtitle: "Please fill in the details of you new timsheet." %>
+    <%= form.collection_select(:project_id, @employee.projects.order(:name), :id, :name, {:prompt => 'Select Project'}, :selected => timesheet.project_id, :class=>"form-text-field mt-4" )%>
+    <div>
+      <label for="date" class="block text-sm font-medium text-gray-700">
+        Date
+      </label>
+      <%= form.date_field :date, class: 'form-text-field mt-1' %>
+    </div>
+    <div>
+      <label for="hours" class="block text-sm font-medium text-gray-700">
+        Task Description
+      </label>
+      <%= form.text_area :description, class: "resize-y form-text-field h-24"%>
+    </div>
+    <div>
+      <label for="hours" class="block text-sm font-medium text-gray-700">
+        Hours
+      </label>
+      <%= form.text_field :value, class: 'form-text-field mt-1', placeholder: "Time spent in hours", autocomplete: "off"%>
+    </div>
+    <div class="flex justify-end mt-6">
+      <%= form.submit "Add Timesheet", class:"btn-blue"%>
+    </div>
+  </main><% end %>

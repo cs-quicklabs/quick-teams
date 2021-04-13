@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account: one
+  project: one
+  user: one
+  value: 1
+  date: 2021-04-13
+  description: MyString
+  billed: false
+  billable: false
+
+two:
+  account: two
+  project: two
+  user: two
+  value: 1
+  date: 2021-04-13
+  description: MyString
+  billed: false
+  billable: false

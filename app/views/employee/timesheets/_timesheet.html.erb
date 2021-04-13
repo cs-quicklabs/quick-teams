@@ -1,0 +1,19 @@
+<li>
+  <div class="flex space-x-3">
+    <div class="flex-shrink-0">
+      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+    </div>
+    <div>
+      <div class="text-sm">
+        <a href="#" class="font-medium text-gray-900"><%= timesheet.description%></a>
+      </div>
+      <div class="mt-1 text-sm text-gray-700">
+        <p><%= timesheet.description%></p>
+      </div>
+      <div class="mt-2 space-x-2 text-sm">
+        <span class="font-medium text-gray-500"><%= display_created_at(timesheet) %></span>
+        <%= link_to "Delete", employee_timesheet_path(@employee, timesheet), method: :delete, class: "btn-inline-delete pl-2" %>
+      </div>
+    </div>
+  </div>
+</li>

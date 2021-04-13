@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :employees do
     resources :feedbacks, module: "employee"
+    resources :timesheets, module: "employee"
     get "/team", to: "employee/team#index"
   end
   resources :user

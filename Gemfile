@@ -39,6 +39,8 @@ gem "devise-pwned_password"
 gem "aws-sdk-s3", "~> 1.87"
 gem "view_component", require: "view_component/engine"
 gem "view_component_reflex"
+gem "tailwindcss-rails", "~> 0.3.3"
+gem "stimulus_reflex", "~> 3.4"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -69,7 +71,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem "tailwindcss-rails", "~> 0.3.3"
-
-gem "stimulus_reflex", "~> 3.4"
