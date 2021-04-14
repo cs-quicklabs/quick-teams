@@ -1,5 +1,5 @@
 <div class="flex flex-wrap p-4">
-  <p class="text-sm font-medium text-gray-900 truncate"><%= "Last Week's Performance"%></p>
+  <p class="text-sm font-medium text-gray-900 truncate"><%= title %></p>
 </div>
 <div>
   <dl class="grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -29,22 +29,17 @@
     </div>
   </dl>
 </div>
-<div class="flex flex-wrap p-4 mt-2">
+<div class="flex flex-wrap px-4 mt-6">
   <p class="text-sm font-medium text-gray-900 truncate"><%= "Top Contributors"%></p>
 </div>
-<!-- This example requires Tailwind CSS v2.0+ -->
 <ul class="divide-y divide-gray-200">
   <% stats.contributors.each do |contributor|%>
-    <li class="flex px-4 py-2">
-      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
-      <div class="ml-3">
-        <p class="text-sm font-medium text-gray-900">Calvin Hawkins</p>
-        <p class="text-sm text-gray-500">calvin.hawkins@example.com</p>
+    <li class="flex px-2 py-2">
+      <div class="w-full ml-3">
+        <p class="text-sm font-medium text-gray-900"><%= contributor.display_name %></p>
       </div>
-      <div class="flex text-right">
-        <dd class="self-center mt-1 text-xl font-semibold text-right text-gray-900 ">
-          90 hrs
-        </dd>
+      <div class="w-full ml-3">
+        <p class="text-sm font-medium text-right text-gray-900"><%= contributor.contribution %></p>
       </div>
     </li>
   <% end %>

@@ -27,10 +27,6 @@
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         Hours
                       </th>
-                      <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Edit</span>
-                        <span class="sr-only">Delete</span>
-                      </th>
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
@@ -47,20 +43,22 @@
             <h2 class="sr-only" id="section-2-title">Add New Timesheet</h2>
             <div class="overflow-hidden bg-white">
               <div class="px-4">
-                <div class="flex justify-center mt-4">
+                <div class="flex justify-center mt-4" data-project-id="<%= @project.id %>">
                   <span class="relative z-0 inline-flex rounded-md shadow-sm">
-                    <button type="button" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                    <button type="button" data-reflex="click->ProjectTimesheetsStats#last_week" data-reflex-dataset="combined" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                       Last Week
                     </button>
-                    <button type="button" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                    <button type="button" data-reflex="click->ProjectTimesheetsStats#last_month" data-reflex-dataset="combined" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                       Last month
                     </button>
-                    <button type="button" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                      Since Beginning
+                    <button type="button" data-reflex="click->ProjectTimesheetsStats#since_beginning" data-reflex-dataset="combined" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                      Since Start
                     </button>
                   </span>
                 </div>
-                <%= render partial: "project/timesheets/stats", locals: {stats: @stats }%>
+                <div id="stats">
+                  <%= render partial: "project/timesheets/stats", locals: {stats: @stats, title: @title }%>
+                </div>
               </div>
             </div>
           </section>

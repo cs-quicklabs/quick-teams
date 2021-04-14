@@ -298,12 +298,6 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
-    view_component (2.30.0)
-      activesupport (>= 5.0.0, < 7.0)
-    view_component_reflex (3.1.11)
-      rails (>= 5.2, < 7.0)
-      stimulus_reflex (>= 3.4.1)
-      view_component (>= 2.28.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -367,8 +361,6 @@ DEPENDENCIES
   tailwindcss-rails (~> 0.3.3)
   turbolinks (~> 5)
   tzinfo-data
-  view_component
-  view_component_reflex
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
