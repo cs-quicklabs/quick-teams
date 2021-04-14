@@ -6,6 +6,10 @@ module ApplicationHelper
   end
 
   def display_created_at(resource)
-    resource.created_at.to_date.to_s(:long)
+    display_date(resource.created_at)
+  end
+
+  def display_date(date)
+    date.to_s(:long)
   end
 end

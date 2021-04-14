@@ -1,6 +1,6 @@
 class Employee::TimesheetsController < Employee::BaseController
   def index
-    @timesheets = Timesheet.all
+    @timesheets = @employee.timesheets.order(date: :desc)
     @timesheet = Timesheet.new
   end
 
@@ -10,8 +10,10 @@ class Employee::TimesheetsController < Employee::BaseController
     @timesheet.save
     respond_to do |format|
       if @timesheet.persisted?
-        @timesheet = Timesheet.new
-        format.html { redirect_to employee_timesheets_path(@employee), notice: "Timesheet was added successfully." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(Timesheet.new, partial: "employee/timesheets/form", locals: { timesheet: Timesheet.new, message: "Timesheet was added successfully." }) +
+                               turbo_stream.prepend(:timesheets, partial: "employee/timesheets/timesheet", locals: { timesheet: @timesheet })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Timesheet.new, partial: "employee/timesheets/form", locals: { timesheet: @timesheet }) }
       end

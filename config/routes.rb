@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :schedules
     resources :notes, only: [:index, :show, :create, :destroy], module: "project"
     resources :feedbacks, only: [:index, :show, :create, :destroy], module: "project"
+    resources :timesheets, module: "project"
     get "/participants", to: "project/schedule#index", as: "participants"
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end

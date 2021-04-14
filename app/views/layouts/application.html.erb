@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <% if user_signed_in? %>
-      <meta name="current-account", content="<%= current_user.account.id %>">
+      <meta name="current-account", content="<%= Current.account.id %>">
     <% end %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>

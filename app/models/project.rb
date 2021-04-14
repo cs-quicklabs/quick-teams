@@ -8,6 +8,7 @@ class Project < ApplicationRecord
   has_many :notes, as: :notable
   has_many :feedbacks, as: :critiquable
   has_many :events, as: :eventable
+  has_many :timesheets
 
   belongs_to :discipline
   validates_presence_of :name

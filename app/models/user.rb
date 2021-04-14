@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :feedbacks, as: :critiquable
   has_many :events, as: :eventable
   has_many :notes
+  has_many :timesheets
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 end

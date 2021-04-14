@@ -1,6 +1,6 @@
-<% presenter = UserPresenter.new(@employee) %>
+<% presenter = ProjectPresenter.new(@project) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "employee/title", employee: @employee%>
+  <%= render "project/title", project: @project%>
   <main class="pb-8">
     <div class="">
       <h1 class="sr-only">Page title</h1>
@@ -9,7 +9,7 @@
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
           <section aria-labelledby="participants_section">
-            <h2 class="sr-only" id="section-1-title">Employee Timesheets</h2>
+            <h2 class="sr-only" id="section-1-title">Project Timesheets</h2>
             <div class="overflow-hidden bg-white">
               <div>
                 <table class="min-w-full divide-y divide-gray-200">
@@ -41,19 +41,17 @@
             </div>
           </section>
         </div>
-        <% if presenter.show_add_feedback_form %>
-          <!-- Right column -->
-          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
-            <section aria-labelledby="add-participant-section">
-              <h2 class="sr-only" id="section-2-title">Add New Timesheet</h2>
-              <div class="overflow-hidden bg-white">
-                <div class="px-4">
-                  <%= render "employee/timesheets/form", timesheet: @timesheet%>
-                </div>
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <section aria-labelledby="add-participant-section">
+            <h2 class="sr-only" id="section-2-title">Add New Timesheet</h2>
+            <div class="overflow-hidden bg-white">
+              <div class="px-4">
+                <%= render "project/timesheets/stats", project: @project%>
               </div>
-            </section>
-          </div>
-        <% end %>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   </main>

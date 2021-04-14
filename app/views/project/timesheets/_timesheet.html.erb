@@ -1,6 +1,6 @@
 <tr>
   <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-    <%= timesheet.project.name %>
+    <%= timesheet.user.first_name %>
   </td>
   <td class="px-6 py-4 overflow-hidden text-sm text-gray-500 truncate whitespace-nowrap">
     <%= timesheet.description%>
@@ -12,7 +12,7 @@
     <%= timesheet.value%>
   </td>
   <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-    <%= link_to "Edit", employee_timesheet_path(@employee, timesheet), class: "btn-inline-edit pl-2" %>
-    <%= link_to "Delete", employee_timesheet_path(@employee, timesheet), method: :delete, class: "btn-inline-delete pl-2" %>
+    <%= link_to "Edit", project_timesheet_path(@project, timesheet), class: "btn-inline-edit pl-2" %>
+    <%= link_to "Delete", project_timesheet_path(@project, timesheet), method: :delete, class: "btn-inline-delete pl-2" %>
   </td>
 </tr>
