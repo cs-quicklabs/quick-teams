@@ -1,63 +1,51 @@
+<div class="flex flex-wrap p-4">
+  <p class="text-sm font-medium text-gray-900 truncate"><%= "Last Week's Performance"%></p>
+</div>
+<div>
+  <dl class="grid grid-cols-1 gap-5 sm:grid-cols-3">
+    <div class="px-4 overflow-hidden">
+      <dt class="text-sm font-medium text-gray-500 truncate">
+        Total Hours
+      </dt>
+      <dd class="mt-1 text-xl font-semibold text-gray-900">
+        <%= stats.total_hours %>
+      </dd>
+    </div>
+    <div class="px-4 overflow-hidden">
+      <dt class="text-sm font-medium text-gray-500 truncate">
+        Billable Hours
+      </dt>
+      <dd class="mt-1 text-xl font-semibold text-gray-900">
+        <%= stats.billable_hours %>
+      </dd>
+    </div>
+    <div class="px-4 overflow-hidden">
+      <dt class="text-sm font-medium text-gray-500 truncate">
+        Billed Hours
+      </dt>
+      <dd class="mt-1 text-xl font-semibold text-gray-900">
+        <%= stats.billed_hours %>
+      </dd>
+    </div>
+  </dl>
+</div>
+<div class="flex flex-wrap p-4 mt-2">
+  <p class="text-sm font-medium text-gray-900 truncate"><%= "Top Contributors"%></p>
+</div>
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div>
-  <h3 class="text-lg font-medium leading-6 text-gray-900">
-    Last 30 days
-  </h3>
-  <dl class="grid grid-cols-1 gap-5 mt-5 sm:grid-cols-3">
-    <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-      <dt class="text-sm font-medium text-gray-500 truncate">
-        Total Subscribers
-      </dt>
-      <dd class="mt-1 text-3xl font-semibold text-gray-900">
-        71,897
-      </dd>
-    </div>
-    <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-      <dt class="text-sm font-medium text-gray-500 truncate">
-        Avg. Open Rate
-      </dt>
-      <dd class="mt-1 text-3xl font-semibold text-gray-900">
-        58.16%
-      </dd>
-    </div>
-    <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-      <dt class="text-sm font-medium text-gray-500 truncate">
-        Avg. Click Rate
-      </dt>
-      <dd class="mt-1 text-3xl font-semibold text-gray-900">
-        24.57%
-      </dd>
-    </div>
-  </dl>
-</div>
-<div>
-  <h3 class="text-lg font-medium leading-6 text-gray-900">
-    Since Beginning
-  </h3>
-  <dl class="grid grid-cols-1 gap-5 mt-5 sm:grid-cols-3">
-    <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-      <dt class="text-sm font-medium text-gray-500 truncate">
-        Total Subscribers
-      </dt>
-      <dd class="mt-1 text-3xl font-semibold text-gray-900">
-        71,897
-      </dd>
-    </div>
-    <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-      <dt class="text-sm font-medium text-gray-500 truncate">
-        Avg. Open Rate
-      </dt>
-      <dd class="mt-1 text-3xl font-semibold text-gray-900">
-        58.16%
-      </dd>
-    </div>
-    <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-      <dt class="text-sm font-medium text-gray-500 truncate">
-        Avg. Click Rate
-      </dt>
-      <dd class="mt-1 text-3xl font-semibold text-gray-900">
-        24.57%
-      </dd>
-    </div>
-  </dl>
-</div>
+<ul class="divide-y divide-gray-200">
+  <% stats.contributors.each do |contributor|%>
+    <li class="flex px-4 py-2">
+      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+      <div class="ml-3">
+        <p class="text-sm font-medium text-gray-900">Calvin Hawkins</p>
+        <p class="text-sm text-gray-500">calvin.hawkins@example.com</p>
+      </div>
+      <div class="flex text-right">
+        <dd class="self-center mt-1 text-xl font-semibold text-right text-gray-900 ">
+          90 hrs
+        </dd>
+      </div>
+    </li>
+  <% end %>
+</ul>
