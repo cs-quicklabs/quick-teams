@@ -3,19 +3,21 @@ class EmployeeTimesheetsStats
 
   def initialize(employee, time_span)
     @employee = employee
-    @entries = employee.timesheets.where(date: date_range(time_span))
+    @time_span = time_span
+
+    @entries = employee.timesheets.where(date: date_range)
   end
 
   def total_hours
-    @entries.sum(:value)
+    @entries.sum(:hours)
   end
 
   def billable_hours
-    @entries.where(billable: true).sum(:value)
+    @entries.where(billable: true).sum(:hours)
   end
 
   def billed_hours
-    @entries.where(billed: true).sum(:value)
+    @entries.where(billed: true).sum(:hours)
   end
 
   def contributions
@@ -24,24 +26,37 @@ class EmployeeTimesheetsStats
 
     contributions = []
     projects.each do |project|
-      contribution = Contribution.new(project.name, @entries.where(project: project).sum(:value))
+      contribution = Contribution.new(project.name, @entries.where(project: project).sum(:hours))
       contribution.push(contribution)
     end
 
     contributions
   end
 
+  def title
+    title_message = ""
+    start_date = date_range.first
+    end_date = date_range.last
+    if @time_span === "week"
+      title_message = "Last Week's Performance (#{start_date.to_s(:long)} to #{end_date.to_s(:long)})"
+    elsif @time_span === "month"
+      title_message = "Last Months's Performance (#{start_date.to_s(:long)} to #{end_date.to_s(:long)})"
+    elsif @time_span === "beginning"
+      title_message = "Performance since Beginning"
+    end
+  end
+
   private
 
-  def date_range(time_span)
+  def date_range
     range, start_date, end_date = nil
-    if time_span === "week"
-      start_date = 7.days.ago.to_date
+    if @time_span === "week"
+      start_date = 6.days.ago.to_date
       end_date = Date.current
-    elsif time_span === "month"
+    elsif @time_span === "month"
       start_date = 30.days.ago.to_date
       end_date = Date.current
-    elsif time_span === "beginning"
+    elsif @time_span === "beginning"
       start_date = 1000.days.ago.to_date
       end_date = Date.current
     end

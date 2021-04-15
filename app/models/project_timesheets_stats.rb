@@ -7,15 +7,15 @@ class ProjectTimesheetsStats
   end
 
   def total_hours
-    @entries.sum(:value)
+    @entries.sum(:hours)
   end
 
   def billable_hours
-    @entries.where(billable: true).sum(:value)
+    @entries.where(billable: true).sum(:hours)
   end
 
   def billed_hours
-    @entries.where(billed: true).sum(:value)
+    @entries.where(billed: true).sum(:hours)
   end
 
   def contributors
@@ -24,11 +24,24 @@ class ProjectTimesheetsStats
 
     contributors = []
     users.each do |user|
-      contributor = Contributor.new(user, @entries.where(user: user).sum(:value))
+      contributor = Contributor.new(user, @entries.where(user: user).sum(:hours))
       contributors.push(contributor)
     end
 
     contributors
+  end
+
+  def title
+    title_message = ""
+    start_date = date_range.first
+    end_date = date_range.last
+    if @time_span === "week"
+      title_message = "Last Week's Performance (#{start_date.to_s(:long)} to #{end_date.to_s(:long)})"
+    elsif @time_span === "month"
+      title_message = "Last Months's Performance (#{start_date.to_s(:long)} to #{end_date.to_s(:long)})"
+    elsif @time_span === "beginning"
+      title_message = "Performance since Beginning"
+    end
   end
 
   private

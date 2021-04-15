@@ -35,7 +35,7 @@
                       </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200" id="timesheets">
-                      <%= render partial: "employee/timesheets/timesheet", collection: @timesheets, cached: true%>
+                      <%= render partial: "employee/timesheets/timesheet", collection: @timesheets, cached: true %>
                     </tbody>
                   </table>
                 </div>
@@ -79,7 +79,7 @@
                     </div>
                   <% end %>
                   <div id="stats">
-                    <%= render partial: "employee/timesheets/stats", locals: {stats: @stats, title: @title }%>
+                    <%= render partial: "employee/timesheets/stats", locals: {stats: @stats }%>
                   </div>
                 </div>
               </div>

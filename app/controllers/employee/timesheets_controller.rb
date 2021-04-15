@@ -1,9 +1,10 @@
 class Employee::TimesheetsController < Employee::BaseController
+  before_action :set_timesheet, only: %i[destroy]
+
   def index
     @timesheets = @employee.timesheets.order(date: :desc)
     @timesheet = Timesheet.new
 
-    @title = @employee.active ? "Last Week's Performance" : "Performance since beginning"
     time_span = @employee.active ? "week" : "beginning"
     @stats = EmployeeTimesheetsStats.new(@employee, time_span)
   end
@@ -24,9 +25,20 @@ class Employee::TimesheetsController < Employee::BaseController
     end
   end
 
+  def destroy
+    @timesheet.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@timesheet) }
+    end
+  end
+
   private
 
+  def set_timesheet
+    @timesheet = Timesheet.find(params["id"])
+  end
+
   def timesheet_params
-    params.require(:timesheet).permit(:project_id, :description, :value, :date, :employee_id)
+    params.require(:timesheet).permit(:project_id, :description, :hours, :date, :employee_id)
   end
 end

@@ -1,4 +1,5 @@
-<tr>
+  
+<tr id="<%= dom_id timesheet %>">
   <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
     <a href="<%= project_timesheets_path(timesheet.project)%>" class="block hover:underline">
       <%= timesheet.project.name %>
@@ -11,7 +12,7 @@
     <%= display_date(timesheet.date) %>
   </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-    <%= timesheet.value%>
+    <%= timesheet.hours%>
   </td>
   <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
     <%= link_to "Edit", employee_timesheet_path(@employee, timesheet), class: "btn-inline-edit pl-2" %>

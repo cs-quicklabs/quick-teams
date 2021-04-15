@@ -8,7 +8,7 @@ class UserPresenter
   end
 
   def show_add_timesheet_form(current_user)
-    user.active && user.id == current_user.id
+    user.active && user.id == current_user.id && user.projects.size > 0
   end
 
   def show_timesheet_stats(current_user)
