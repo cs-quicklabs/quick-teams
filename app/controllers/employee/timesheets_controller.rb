@@ -2,6 +2,10 @@ class Employee::TimesheetsController < Employee::BaseController
   def index
     @timesheets = @employee.timesheets.order(date: :desc)
     @timesheet = Timesheet.new
+
+    @title = @employee.active ? "Last Week's Performance" : "Performance since beginning"
+    time_span = @employee.active ? "week" : "beginning"
+    @stats = EmployeeTimesheetsStats.new(@employee, time_span)
   end
 
   def create

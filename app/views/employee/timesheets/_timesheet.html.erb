@@ -1,6 +1,8 @@
 <tr>
   <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-    <%= timesheet.project.name %>
+    <a href="<%= project_timesheets_path(timesheet.project)%>" class="block hover:underline">
+      <%= timesheet.project.name %>
+    </a>
   </td>
   <td class="px-6 py-4 overflow-hidden text-sm text-gray-500 truncate whitespace-nowrap">
     <%= timesheet.description%>

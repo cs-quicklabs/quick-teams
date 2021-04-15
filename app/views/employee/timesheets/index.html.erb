@@ -8,40 +8,42 @@
       <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-          <section aria-labelledby="participants_section">
-            <h2 class="sr-only" id="section-1-title">Employee Timesheets</h2>
-            <div class="overflow-hidden bg-white">
-              <div>
-                <table class="min-w-full divide-y divide-gray-200">
-                  <thead class="bg-gray-50">
-                    <tr>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Project
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Task
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Date
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Hours
-                      </th>
-                      <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Edit</span>
-                        <span class="sr-only">Delete</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
-                    <%= render @timesheets%>
-                  </tbody>
-                </table>
+          <% if @timesheets.size > 0 %>
+            <section aria-labelledby="participants_section">
+              <h2 class="sr-only" id="section-1-title">Employee Timesheets</h2>
+              <div class="overflow-hidden bg-white">
+                <div>
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                          Project
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                          Task
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                          Date
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                          Hours
+                        </th>
+                        <th scope="col" class="relative px-6 py-3">
+                          <span class="sr-only">Edit</span>
+                          <span class="sr-only">Delete</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="timesheets">
+                      <%= render partial: "employee/timesheets/timesheet", collection: @timesheets, cached: true%>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
+            <%end %>
           </section>
         </div>
-        <% if presenter.show_add_feedback_form %>
+        <% if presenter.show_add_timesheet_form(current_user) %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
@@ -49,6 +51,36 @@
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
                   <%= render "employee/timesheets/form", timesheet: @timesheet%>
+                </div>
+              </div>
+            </section>
+          </div>
+        <% end %>
+        <% if presenter.show_timesheet_stats(current_user) %>
+          <!-- Right column -->
+          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+            <section aria-labelledby="add-participant-section">
+              <h2 class="sr-only" id="section-2-title">Add New Timesheet</h2>
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <% if presenter.show_timesheet_stats_menu(current_user) %>
+                    <div class="flex justify-center mt-4" data-employee-id="<%= @employee.id %>">
+                      <span class="relative z-0 inline-flex rounded-md shadow-sm">
+                        <button type="button" data-reflex="click->EmployeeTimesheetsStats#last_week" data-reflex-dataset="combined" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                          Last Week
+                        </button>
+                        <button type="button" data-reflex="click->EmployeeTimesheetsStats#last_month" data-reflex-dataset="combined" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                          Last month
+                        </button>
+                        <button type="button" data-reflex="click->EmployeeTimesheetsStats#since_beginning" data-reflex-dataset="combined" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                          Since Start
+                        </button>
+                      </span>
+                    </div>
+                  <% end %>
+                  <div id="stats">
+                    <%= render partial: "employee/timesheets/stats", locals: {stats: @stats, title: @title }%>
+                  </div>
                 </div>
               </div>
             </section>

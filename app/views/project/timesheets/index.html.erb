@@ -8,33 +8,35 @@
       <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-          <section aria-labelledby="participants_section">
-            <h2 class="sr-only" id="section-1-title">Project Timesheets</h2>
-            <div class="overflow-hidden bg-white">
-              <div>
-                <table class="min-w-full divide-y divide-gray-200">
-                  <thead class="bg-gray-50">
-                    <tr>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Project
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Task
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Date
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Hours
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
-                    <%= render @timesheets%>
-                  </tbody>
-                </table>
+          <% if @timesheets.size > 0 %>
+            <section aria-labelledby="participants_section">
+              <h2 class="sr-only" id="section-1-title">Project Timesheets</h2>
+              <div class="overflow-hidden bg-white">
+                <div>
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                          Project
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                          Task
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                          Date
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                          Hours
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                      <%= render @timesheets%>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
+            <% end %>
           </section>
         </div>
         <!-- Right column -->
