@@ -26,8 +26,8 @@ class EmployeeTimesheetsStats
 
     contributions = []
     projects.each do |project|
-      contribution = Contribution.new(project.name, @entries.where(project: project).sum(:hours))
-      contribution.push(contribution)
+      contribution = Contribution.new(project, @entries.where(project: project).sum(:hours))
+      contributions.push(contribution)
     end
 
     contributions
@@ -66,13 +66,14 @@ class EmployeeTimesheetsStats
 end
 
 class Contribution
-  def initialize(project_name, hrs)
-    @project_name = project_name
+  def initialize(project, hrs)
+    @project = project
+    @id = project.id
     @hrs = hrs
   end
 
-  def name
-    @project_name
+  def project
+    @project
   end
 
   def contribution

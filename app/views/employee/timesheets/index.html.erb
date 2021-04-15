@@ -8,39 +8,36 @@
       <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-          <% if @timesheets.size > 0 %>
-            <section aria-labelledby="participants_section">
-              <h2 class="sr-only" id="section-1-title">Employee Timesheets</h2>
-              <div class="overflow-hidden bg-white">
-                <div>
-                  <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                      <tr>
-                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                          Project
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                          Task
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                          Date
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                          Hours
-                        </th>
-                        <th scope="col" class="relative px-6 py-3">
-                          <span class="sr-only">Edit</span>
-                          <span class="sr-only">Delete</span>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200" id="timesheets">
-                      <%= render partial: "employee/timesheets/timesheet", collection: @timesheets, cached: true %>
-                    </tbody>
-                  </table>
-                </div>
+          <section aria-labelledby="participants_section">
+            <h2 class="sr-only" id="section-1-title">Employee Timesheets</h2>
+            <div class="overflow-hidden bg-white">
+              <div>
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Project
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Task
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Date
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Hours
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200" id="timesheets">
+                    <%= render partial: "employee/timesheets/timesheet", collection: @timesheets, cached: true %>
+                  </tbody>
+                </table>
               </div>
-            <%end %>
+            </div>
           </section>
         </div>
         <% if presenter.show_add_timesheet_form(current_user) %>

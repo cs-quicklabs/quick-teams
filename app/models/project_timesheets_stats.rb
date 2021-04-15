@@ -69,6 +69,10 @@ class Contributor
     @hrs = hrs
   end
 
+  def employee
+    @user
+  end
+
   def display_name
     @user.first_name + " " + @user.last_name
   end
