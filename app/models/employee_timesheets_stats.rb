@@ -44,6 +44,7 @@ class EmployeeTimesheetsStats
     elsif @time_span === "beginning"
       title_message = "Performance since Beginning"
     end
+    title_message
   end
 
   private

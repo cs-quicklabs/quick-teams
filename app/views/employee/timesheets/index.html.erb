@@ -76,7 +76,7 @@
                     </div>
                   <% end %>
                   <div id="stats">
-                    <%= render partial: "employee/timesheets/stats", locals: {stats: @stats }%>
+                    <%= render partial: "employee/timesheets/stats", locals: {stats: @stats }, cached: true%>
                   </div>
                 </div>
               </div>

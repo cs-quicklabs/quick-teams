@@ -3,7 +3,9 @@ class ProjectTimesheetsStats
 
   def initialize(project, time_span)
     @project = project
-    @entries = project.timesheets.where(date: date_range(time_span))
+    @time_span = time_span
+
+    @entries = project.timesheets.where(date: date_range)
   end
 
   def total_hours
@@ -42,19 +44,20 @@ class ProjectTimesheetsStats
     elsif @time_span === "beginning"
       title_message = "Performance since Beginning"
     end
+    title_message
   end
 
   private
 
-  def date_range(time_span)
+  def date_range
     range, start_date, end_date = nil
-    if time_span === "week"
+    if @time_span === "week"
       start_date = 7.days.ago.to_date
       end_date = Date.current
-    elsif time_span === "month"
+    elsif @time_span === "month"
       start_date = 30.days.ago.to_date
       end_date = Date.current
-    elsif time_span === "beginning"
+    elsif @time_span === "beginning"
       start_date = 1000.days.ago.to_date
       end_date = Date.current
     end
