@@ -1,4 +1,4 @@
-<%= form_with(model: schedule, id: dom_id(schedule), url: employee_schedule_path(@employee)) do |form| %>
+<%= form_with(model: schedule, id: dom_id(schedule), url: employee_employee_schedules_path(@employee)) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Participant Project", subtitle: "Add new Employee project and fill in engagement level." %>

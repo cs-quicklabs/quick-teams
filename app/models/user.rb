@@ -22,4 +22,8 @@ class User < ApplicationRecord
   has_many :notes
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
+
+  def potential_project
+    Project.active.where.not(id: discipline).order(:name)
+  end
 end

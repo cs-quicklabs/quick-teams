@@ -16,7 +16,7 @@
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Employee Project(" + @employee.projects.count.to_s + ")"%></p>
                 </div>
                 <ul class="divide-y divide-gray-200">
-                  <%= render partial: "employee/schedule/schedule", cached: true%>
+                  <%= render partial: "employee/schedule/schedule", collection: @employee_schedules, cached: true%>
                 </ul>
               </div>
             </div>
