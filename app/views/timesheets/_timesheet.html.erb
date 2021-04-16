@@ -1,0 +1,27 @@
+<tr>
+  <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+    <a href="<%= project_timesheets_path(timesheet.project)%>" class="block hover:underline">
+      <%= timesheet.project.name %>
+    </a>
+  </td>
+  <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+    <a href="<%= employee_timesheets_path(timesheet.user)%>" class="block hover:underline">
+      <%= timesheet.user.display_name %>
+    </a>
+  </td>
+  <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-500 truncate whitespace-nowrap max-w-0">
+    <%= timesheet.description%>
+  </td>
+  <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+    <%= display_date(timesheet.date) %>
+  </td>
+  <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+    <%= timesheet.hours%>
+  </td>
+  <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+    <%= timesheet.billable%>
+  </td>
+  <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+    <%= timesheet.billed%>
+  </td>
+</tr>

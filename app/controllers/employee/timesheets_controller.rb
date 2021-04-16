@@ -2,7 +2,7 @@ class Employee::TimesheetsController < Employee::BaseController
   before_action :set_timesheet, only: %i[destroy]
 
   def index
-    @timesheets = @employee.timesheets.order(date: :desc)
+    @timesheets = @employee.timesheets.last_30_days.order(date: :desc)
     @timesheet = Timesheet.new
 
     time_span = @employee.active ? "week" : "beginning"
