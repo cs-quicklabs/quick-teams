@@ -20,8 +20,11 @@ Rails.application.routes.draw do
   end
 
   resources :employees do
+    resources :employee_schedules
     resources :feedbacks, module: "employee"
+    get "/participants", to: "employee/schedule#index", as: "participants"
     get "/team", to: "employee/team#index"
+    get "/timeline", to: "employee/timeline#index", as: "feed"
   end
   resources :user
 

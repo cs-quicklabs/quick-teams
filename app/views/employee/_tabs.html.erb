@@ -3,14 +3,22 @@
     <label for="tabs" class="sr-only">Select a tab</label>
     <select id="tabs" name="tabs" class="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
       <option>Team</option>
+      <option>Schedule</option>
       <option>Feedback</option>
+      <option>Timeline</option>
     </select>
   </div>
   <div class="hidden sm:block">
     <div class="border-b border-gray-200">
       <nav class="flex -mb-px space-x-8 lg:px-8" aria-label="Tabs">
+        <a href="<%= employee_feed_path %>" class="<%= current_page?(employee_feed_path) ? "selected-tab" : "unselected-tab"%>">
+          Timeline
+        </a> 
         <a href="<%= employee_team_path %>" class="<%= current_page?(employee_team_path) ? "selected-tab" : "unselected-tab"%>">
           Team
+        </a>
+        <a href="<%= employee_participants_path %>" class="<%= current_page?(employee_participants_path) ? "selected-tab" : "unselected-tab"%>">
+          Schedule
         </a>
         <a href="<%= employee_feedbacks_path %>" class="<%= current_page?(employee_feedbacks_path) ? "selected-tab" : "unselected-tab"%>">
           Feedback
