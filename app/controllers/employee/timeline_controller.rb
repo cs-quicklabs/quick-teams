@@ -1,8 +1,7 @@
 class Employee::TimelineController < Employee::BaseController
-  before_action :authenticate_user!
-
   def index
-    @events = EventDecorator.decorate_collection(@employee.events.includes(:user, :eventable, :trackable).order(created_at: :desc))
+    collection = Event.where(user: @employee).or(Event.where(eventable: @employee)).order(created_at: :desc)
+    @events = EventDecorator.decorate_collection(collection)
     fresh_when @events
   end
 end

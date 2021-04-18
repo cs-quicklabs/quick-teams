@@ -23,7 +23,8 @@ class User < ApplicationRecord
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 
-  def potential_project
-    Project.active.where.not(id: discipline).order(:name)
+  def potential_projects
+    participated_project_ids = schedules.pluck(:project_id)
+    Project.active.where.not(id: participated_project_ids)
   end
 end

@@ -1,6 +1,6 @@
-<% presenter = UserPresenter.new(@employee) %>
+<% presenter = ProjectPresenter.new(@project) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "employee/title", employee: @employee%>
+  <%= render "project/title", project: @project%>
   <main class="pb-8">
     <div class="px-4 sm:px-6">
       <h1 class="sr-only">Page title</h1>
@@ -9,14 +9,14 @@
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
           <section aria-labelledby="participants_section">
-            <h2 class="sr-only" id="section-1-title">Employee Project</h2>
+            <h2 class="sr-only" id="section-1-title">Project Participants</h2>
             <div class="overflow-hidden bg-white">
-              <div class="p-4", id="employee-participants">
+              <div class="p-4", id="project-participants">
                 <div class="flex flex-wrap">
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Employee Project(" + @employee.projects.count.to_s + ")"%></p>
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Participants(" + @project.participants.count.to_s + ")"%></p>
                 </div>
                 <ul class="divide-y divide-gray-200">
-                  <%= render partial: "employee/schedule/schedule", collection: @employee_schedules, cached: true%>
+                  <%= render partial: "project/schedules/schedule", collection: @schedules, cached: true%>
                 </ul>
               </div>
             </div>
@@ -26,10 +26,10 @@
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
-              <h2 class="sr-only" id="section-2-title">Add New Participant Project</h2>
+              <h2 class="sr-only" id="section-2-title">Add New Participant</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "employee/schedule/form", schedule: @schedule, errors: nil%>
+                  <%= render "project/schedules/form", schedule: @schedule, errors: nil%>
                 </div>
               </div>
             </section>

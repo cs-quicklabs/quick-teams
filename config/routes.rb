@@ -12,19 +12,17 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
-    resources :schedules
+    resources :schedules, module: "project"
     resources :notes, only: [:index, :show, :create, :destroy], module: "project"
     resources :feedbacks, only: [:index, :show, :create, :destroy], module: "project"
-    get "/participants", to: "project/schedule#index", as: "participants"
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
 
   resources :employees do
-    resources :employee_schedules
+    resources :schedules, module: "employee"
     resources :feedbacks, module: "employee"
-    get "/participants", to: "employee/schedule#index", as: "participants"
     get "/team", to: "employee/team#index"
-    get "/timeline", to: "employee/timeline#index", as: "feed"
+    get "/timeline", to: "employee/timeline#index", as: "timeline"
   end
   resources :user
 
