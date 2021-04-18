@@ -8,7 +8,7 @@ class Employee::SchedulesController < Employee::BaseController
   end
 
   def update
-    schedule = UpdateSchedule.call(@schedule, Project.find_by(id: schedule_params["project_id"]), @employee, schedule_params, current_user).result
+    schedule = UpdateSchedule.call(@schedule, @employee, Project.find_by(id: schedule_params["project_id"]), schedule_params, current_user).result
 
     respond_to do |format|
       if schedule.errors.empty?
