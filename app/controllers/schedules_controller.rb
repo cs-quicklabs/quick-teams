@@ -32,7 +32,7 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       if schedule.persisted?
-        format.html { redirect_to project_participants_path(@project), notice: "Participant was added successfully." }
+        format.html { redirect_to project_schedules_path(@project), notice: "Participant was added successfully." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Schedule.new, partial: "project/schedule/form", locals: { schedule: schedule }) }
       end
@@ -45,7 +45,7 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule.destroy
     respond_to do |format|
-      format.html { redirect_to project_participants_path(@project), notice: "Participant was removed successfully." }
+      format.html { redirect_to project_schedules_path(@project), notice: "Participant was removed successfully." }
     end
   end
 

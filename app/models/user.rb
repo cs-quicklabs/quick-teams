@@ -22,4 +22,9 @@ class User < ApplicationRecord
   has_many :notes
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
+
+  def potential_projects
+    participated_project_ids = schedules.pluck(:project_id)
+    Project.active.where.not(id: participated_project_ids)
+  end
 end

@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
-    redirect_to project_participants_path(@project)
+    redirect_to project_schedules_path(@project)
   end
 
   # GET /projects/new
@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
 
   def unarchive_project
     UnarchiveProject.call(@project, current_user)
-    redirect_to project_participants_path(@project), notice: "Project has been restored."
+    redirect_to project_schedules_path(@project), notice: "Project has been restored."
   end
 
   # PATCH/PUT /projects/1 or /projects/1.json
