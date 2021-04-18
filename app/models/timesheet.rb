@@ -10,4 +10,8 @@ class Timesheet < ApplicationRecord
   belongs_to :user
 
   scope :last_30_days, -> { where(date: (Date.today - 30.days)..Date.today) }
+
+  def self.query(params, includes = nil)
+    TimesheetQuery.new(self.includes(includes), params).filter
+  end
 end

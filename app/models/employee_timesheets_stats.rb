@@ -1,23 +1,12 @@
 class EmployeeTimesheetsStats
-  attr_accessor :total_hours, :billable_hours, :billed_hours, :title, :contributions
+  attr_accessor :stats, :title, :contributions
 
   def initialize(employee, time_span)
     @employee = employee
     @time_span = time_span
 
     @entries = employee.timesheets.where(date: date_range)
-  end
-
-  def total_hours
-    @entries.sum(:hours)
-  end
-
-  def billable_hours
-    @entries.where(billable: true).sum(:hours)
-  end
-
-  def billed_hours
-    @entries.where(billed: true).sum(:hours)
+    @stats = TimesheetsStats.new(@entries)
   end
 
   def contributions

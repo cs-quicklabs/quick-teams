@@ -1,0 +1,36 @@
+<div class="border-b border-gray-200">
+  <dl class="grid grid-cols-1 overflow-hidden bg-white divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">
+    <div class="px-4 py-2 sm:p-2">
+      <dt class="text-base font-normal text-center text-gray-900">
+        Logged Hours
+      </dt>
+      <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
+        <%= @stats.total_hours %>
+      </div>
+    </div>
+    <div class="px-4 py-2 sm:p-2">
+      <dt class="text-base font-normal text-center text-gray-900">
+        Billable Hours
+      </dt>
+      <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
+        <%= @stats.billable_hours %>
+      </div>
+    </div>
+    <div class="px-4 py-2 sm:p-2">
+      <dt class="text-base font-normal text-center text-gray-900">
+        Billed Hours
+      </dt>
+      <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
+        <%= @stats.billed_hours %>
+      </div>
+    </div>
+    <div class="px-4 py-2 sm:p-2">
+      <dt class="text-base font-normal text-center text-gray-900">
+        Utilization
+      </dt>
+      <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
+        <%= @stats.utilization %>
+      </div>
+    </div>
+  </dl>
+</div>

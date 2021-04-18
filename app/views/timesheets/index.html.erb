@@ -10,124 +10,70 @@
 </div>
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
-    <div class="flex flex-col pt-5 pb-4 border-r border-gray-200">
-      <div class="flex flex-col flex-1 w-64 h-0 overflow-y-auto">
-        <div class="relative inline-block px-3 text-left">
-          <nav class="px-3">
-            <div>
-              <h3 class="text-xs font-semibold tracking-wider text-gray-500 uppercase" id="teams-headline">
-                Filter Timesheets
-              </h3>
-              <%= form_with url: timesheets_path, method: :get do |form| %>
-                <main class="max-w-lg pt-6 pb-12 mx-auto space-y-4 lg:pb-16">
-                  <div>
-                    <label for="date" class="block text-sm font-medium text-gray-700">
-                      Select Project
-                    </label>
-                    <%= form.collection_select(:project_id, Project.active.order(:name), :id, :name, {:prompt => "Select Project"}, :class=>"form-text-field mt-1" )%>
-                  </div>
-                  <div>
-                    <label for="date" class="block text-sm font-medium text-gray-700">
-                      Select Employee
-                    </label>
-                    <%= form.collection_select(:user_id, User.active.order(:first_name).decorate, :id, :display_name, {:prompt => "Select Employee"}, :class=>"form-text-field mt-1" )%>
-                  </div>
-                  <div>
-                    <label for="date" class="block text-sm font-medium text-gray-700">
-                      From Date
-                    </label>
-                    <%= form.date_field :from_date, class: 'form-text-field mt-1' %>
-                  </div>
-                  <div>
-                    <label for="date" class="block text-sm font-medium text-gray-700">
-                      To Date
-                    </label>
-                    <%= form.date_field :to_date, class: 'form-text-field mt-1', value: Date.today.to_s(:db) %>
-                  </div>
-                  <div>
-                    <label for="billed" class="block text-sm font-medium text-gray-700">
-                      Billed
-                    </label>
-                    <%= form.select(:billed, [["Show Only Billed", 1], ["Show Only Unbilled", 0], ["Billed or not", ""]], {},  :class=>"form-text-field mt-1") %>
-                  </div>
-                  <div class="flex justify-end mt-6">
-                    <%= form.submit "Search", class:"btn-blue"%>
-                  </div>
-                </main><% end %>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
+    <%= render partial: "form"%>
     <% if @timesheets.size > 0 %>
-      <div class="w-full overflow-hidden">
-        <!-- This example requires Tailwind CSS v2.0+ -->
-        <div class="border-b border-gray-200">
-          <dl class="grid grid-cols-1 overflow-hidden bg-white divide-y divide-gray-200 md:grid-cols-4 md:divide-y-0 md:divide-x">
-            <div class="px-4 py-2 sm:p-2">
-              <dt class="text-base font-normal text-center text-gray-900">
-                Logged Hours
-              </dt>
-              <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
-                58.16%
-              </div>
+      <% if @timesheets.size > 100 %>
+        <div class="w-full text-center sm:rounded-lg">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg font-medium leading-6 text-center text-gray-900">
+              Too many results
+            </h3>
+            <div class="mt-2 text-sm text-center text-gray-500">
+              <p>Current search query returned too many results. Please download CSV file to see all records.</p>
             </div>
-            <div class="px-4 py-2 sm:p-2">
-              <dt class="text-base font-normal text-center text-gray-900">
-                Billable Hours
-              </dt>
-              <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
-                58.16%
-              </div>
+            <div class="mt-5">
+              <button type="button" class="btn-blue">
+                Download CSV
+              </button>
             </div>
-            <div class="px-4 py-2 sm:p-2">
-              <dt class="text-base font-normal text-center text-gray-900">
-                Billed Hours
-              </dt>
-              <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
-                58.16%
-              </div>
-            </div>
-            <div class="px-4 py-2 sm:p-2">
-              <dt class="text-base font-normal text-center text-gray-900">
-                Utilization
-              </dt>
-              <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
-                58.16%
-              </div>
-            </div>
-          </dl>
+          </div>
         </div>
-        <table class="min-w-full pb-6 divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                Project
-              </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                Employee
-              </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                Descritption
-              </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                Date
-              </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                Hours
-              </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                Billable
-              </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                Billed
-              </th>
-            </tr>
-          </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            <%= render partial: "timesheet", collection: @timesheets, as: :timesheet, cached: true%>
-          </tbody>
-        </table>
+      <%else%>
+        <div class="w-full overflow-hidden">
+          <!-- This example requires Tailwind CSS v2.0+ -->
+          <%= render partial: "stats"%>
+          <table class="min-w-full pb-6 divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Project
+                </th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Employee
+                </th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Descritption
+                </th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Date
+                </th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Hours
+                </th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Billable
+                </th>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                  Billed
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <%= render partial: "timesheet", collection: @timesheets, as: :timesheet, cached: true%>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="w-full text-center sm:rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-lg font-medium leading-6 text-center text-gray-900">
+            No result found
+          </h3>
+          <div class="mt-2 text-sm text-center text-gray-500">
+            <p>We have not found any result for current search query. Please modify filter criteria and search again.</p>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>

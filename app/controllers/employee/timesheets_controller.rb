@@ -6,7 +6,7 @@ class Employee::TimesheetsController < Employee::BaseController
     @timesheet = Timesheet.new
 
     time_span = @employee.active ? "week" : "beginning"
-    @stats = EmployeeTimesheetsStats.new(@employee, time_span)
+    @employee_timesheets_stats = EmployeeTimesheetsStats.new(@employee, time_span)
   end
 
   def create

@@ -1,5 +1,5 @@
 <div class="flex flex-wrap p-4">
-  <p class="text-sm font-medium text-gray-900 truncate"><%= stats.title %></p>
+  <p class="text-sm font-medium text-gray-900 truncate"><%= project_stats.title %></p>
 </div>
 <div>
   <dl class="grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -8,7 +8,7 @@
         Total Hours
       </dt>
       <dd class="mt-1 text-xl font-semibold text-gray-900">
-        <%= stats.total_hours %>
+        <%= project_stats.stats.total_hours %>
       </dd>
     </div>
     <div class="px-4 overflow-hidden">
@@ -16,7 +16,7 @@
         Billable Hours
       </dt>
       <dd class="mt-1 text-xl font-semibold text-gray-900">
-        <%= stats.billable_hours %>
+        <%= project_stats.stats.billable_hours %>
       </dd>
     </div>
     <div class="px-4 overflow-hidden">
@@ -24,7 +24,7 @@
         Billed Hours
       </dt>
       <dd class="mt-1 text-xl font-semibold text-gray-900">
-        <%= stats.billed_hours %>
+        <%= project_stats.stats.billed_hours %>
       </dd>
     </div>
   </dl>
@@ -33,7 +33,7 @@
   <p class="text-sm font-medium text-gray-900 truncate"><%= "Top Contributors"%></p>
 </div>
 <ul class="divide-y divide-gray-200">
-  <% stats.contributors.each do |contributor|%>
+  <% project_stats.contributors.each do |contributor|%>
     <li class="flex px-2 py-2">
       <div class="w-full ml-3">
         <a class= "block hover:underline" href="<%= employee_timesheets_path(contributor.employee)%>">

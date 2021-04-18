@@ -60,7 +60,7 @@
                   </span>
                 </div>
                 <div id="stats">
-                  <%= render partial: "project/timesheets/stats", locals: {stats: @stats, title: @title }, cached: true%>
+                  <%= render partial: "project/timesheets/stats", locals: {project_stats: @project_timesheets_stats, title: @project_timesheets_stats.title }, cached: true%>
                 </div>
               </div>
             </div>

@@ -4,7 +4,7 @@ class ProjectTimesheetsStatsReflex < ApplicationReflex
 
     title = "Last Week's Performance"
     stats = ProjectTimesheetsStats.new(project, "week")
-    morph "#stats", render(partial: "project/timesheets/stats", locals: { stats: stats, title: title })
+    morph "#stats", render(partial: "project/timesheets/stats", locals: { project_stats: stats, title: title })
   end
 
   def last_month
@@ -12,7 +12,7 @@ class ProjectTimesheetsStatsReflex < ApplicationReflex
 
     title = "Last Month's Performance"
     stats = ProjectTimesheetsStats.new(project, "month")
-    morph "#stats", render(partial: "project/timesheets/stats", locals: { stats: stats, title: title })
+    morph "#stats", render(partial: "project/timesheets/stats", locals: { project_stats: stats, title: title })
   end
 
   def since_beginning
@@ -20,6 +20,6 @@ class ProjectTimesheetsStatsReflex < ApplicationReflex
 
     title = "Performance since start"
     stats = ProjectTimesheetsStats.new(project, "beginning")
-    morph "#stats", render(partial: "project/timesheets/stats", locals: { stats: stats, title: title })
+    morph "#stats", render(partial: "project/timesheets/stats", locals: { project_stats: stats, title: title })
   end
 end
