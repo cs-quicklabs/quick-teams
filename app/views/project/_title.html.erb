@@ -1,13 +1,13 @@
 <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="project-header">
   <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
     <h1 class="text-3xl font-bold leading-tight text-gray-900">
-      <%= project.name %>
+      <%= @project.name %>
     </h1>
-    <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= project.display_discipline%></p>
+    <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= @project.display_discipline%></p>
   </div>
   <div class="flex mt-4 sm:mt-0 sm:ml-4">
     <div>
-      <%= link_to 'Edit', edit_project_path(project), class:"btn-normal" %>
+      <%= link_to 'Edit', edit_project_path(@project), class:"btn-normal" %>
     </div>
     <% if !@project.archived %>
       <div>

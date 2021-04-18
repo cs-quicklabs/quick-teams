@@ -23,6 +23,7 @@ class UpdateSchedule < Patterns::Service
   def update_schedule
     schedule.update(params)
     schedule.project = @project
+    schedule.user = @employee
     schedule.save!
   end
 

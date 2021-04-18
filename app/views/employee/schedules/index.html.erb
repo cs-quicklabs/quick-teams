@@ -1,6 +1,6 @@
-<% presenter = ProjectPresenter.new(@project) %>
+<% presenter = UserPresenter.new(@employee) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "project/title", project: @project%>
+  <%= render "employee/title", employee: @employee%>
   <main class="pb-8">
     <div class="px-4 sm:px-6">
       <h1 class="sr-only">Page title</h1>
@@ -13,10 +13,10 @@
             <div class="overflow-hidden bg-white">
               <div class="p-4", id="project-participants">
                 <div class="flex flex-wrap">
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Participants(" + @project.participants.count.to_s + ")"%></p>
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Participants(" + "0" + ")"%></p>
                 </div>
                 <ul class="divide-y divide-gray-200">
-                  <%= render partial: "project/schedule/schedule", collection: @schedules, cached: true%>
+                  <%= render partial: "employee/schedules/schedule", collection: @schedules, cached: true%>
                 </ul>
               </div>
             </div>
@@ -29,7 +29,7 @@
               <h2 class="sr-only" id="section-2-title">Add New Participant</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "project/schedule/form", schedule: @schedule, errors: nil%>
+                  <%= render "employee/schedules/form", schedule: @schedule, errors: nil%>
                 </div>
               </div>
             </section>
