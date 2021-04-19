@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :events, as: :eventable
   has_many :notes
   has_many :timesheets
+  belongs_to :status, class_name: "PeopleStatus", optional: true
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_035741) do
+ActiveRecord::Schema.define(version: 2021_04_19_145403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -231,6 +231,7 @@ ActiveRecord::Schema.define(version: 2021_04_19_035741) do
     t.bigint "manager_id"
     t.boolean "active", default: true, null: false
     t.date "deactivated_on"
+    t.bigint "status_id"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["discipline_id"], name: "index_users_on_discipline_id"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -238,6 +239,7 @@ ActiveRecord::Schema.define(version: 2021_04_19_035741) do
     t.index ["manager_id"], name: "index_users_on_manager_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"
+    t.index ["status_id"], name: "index_users_on_status_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -283,6 +285,7 @@ ActiveRecord::Schema.define(version: 2021_04_19_035741) do
   add_foreign_key "users", "disciplines", name: "users_discipline_id_fkey"
   add_foreign_key "users", "jobs"
   add_foreign_key "users", "jobs", name: "users_job_id_fkey"
+  add_foreign_key "users", "people_statuses", column: "status_id"
   add_foreign_key "users", "roles"
   add_foreign_key "users", "roles", name: "users_role_id_fkey"
   add_foreign_key "users", "users", column: "manager_id"
