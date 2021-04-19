@@ -1,6 +1,6 @@
 class Employee::BaseController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_employee, only: %i[show edit index create destroy index]
+  before_action :set_employee, only: %i[show edit update create destroy index]
 
   private
 

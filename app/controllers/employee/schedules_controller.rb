@@ -14,7 +14,7 @@ class Employee::SchedulesController < Employee::BaseController
       if schedule.errors.empty?
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "employee/schedules/schedule", locals: { schedule: @schedule.decorate }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/form", locals: { schedule: @schedule }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "employee/schedules/form", locals: { schedule: @schedule }) }
       end
     end
   end
