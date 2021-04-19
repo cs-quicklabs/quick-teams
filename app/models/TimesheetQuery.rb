@@ -11,7 +11,7 @@ class TimesheetQuery
     filter_params.each do |filter, value|
       result = result.public_send(filter, value) if present?(value)
     end
-    result
+    result.order(date: :desc)
   end
 
   private
