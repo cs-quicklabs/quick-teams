@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_15_025310) do
+ActiveRecord::Schema.define(version: 2021_04_19_035741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,9 +163,11 @@ ActiveRecord::Schema.define(version: 2021_04_15_025310) do
     t.string "description"
     t.boolean "archived", default: false
     t.date "archived_on"
+    t.bigint "status_id"
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["discipline_id"], name: "index_projects_on_discipline_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id"
+    t.index ["status_id"], name: "index_projects_on_status_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -263,6 +265,7 @@ ActiveRecord::Schema.define(version: 2021_04_15_025310) do
   add_foreign_key "project_tags", "accounts", name: "project_tags_account_id_fkey"
   add_foreign_key "projects", "disciplines"
   add_foreign_key "projects", "disciplines", name: "projects_discipline_id_fkey"
+  add_foreign_key "projects", "project_statuses", column: "status_id"
   add_foreign_key "projects", "users", column: "manager_id"
   add_foreign_key "projects", "users", column: "manager_id", name: "projects_manager_id_fkey"
   add_foreign_key "roles", "accounts"

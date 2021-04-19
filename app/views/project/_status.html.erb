@@ -1,0 +1,8 @@
+<span class="inline-flex items-center px-3 py-0.5 mr-4  rounded-full text-sm font-medium bg-blue-100 text-blue-800" data-reflex="click->ProjectStatus#remove" data-project-id=<%= project.id%>>
+  <%= project.status.name unless project.status.nil?%>
+  <button type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
+    <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+      <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
+    </svg>
+  </button>
+</span>

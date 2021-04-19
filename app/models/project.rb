@@ -11,6 +11,7 @@ class Project < ApplicationRecord
   has_many :timesheets
 
   belongs_to :discipline
+  belongs_to :status, class_name: "ProjectStatus", optional: true
   validates_presence_of :name
 
   scope :archived, -> { where(archived: true) }
