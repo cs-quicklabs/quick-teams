@@ -23,10 +23,12 @@ Rails.application.routes.draw do
     resources :schedules, module: "employee"
     resources :feedbacks, module: "employee"
     resources :timesheets, module: "employee"
+    resources :goals, module: "employee"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
   end
   resources :user
+  resources :comments
 
   devise_for :users
 

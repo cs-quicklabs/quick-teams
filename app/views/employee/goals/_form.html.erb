@@ -1,0 +1,11 @@
+<%= tailwind_form_with(model: @goal, id: dom_id(@goal), url: employee_goals_path(@employee)) do |form| %>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: @goal, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New goal", subtitle: "Expectation from employees can be set in form of a Goal. A goal can be weekly, monthly and quarterly. These can also be used to set career paths for employee." %>
+    <%= form.text_field :title, "Title", autocomplete: "off"%>
+    <%= form.rich_text_area :body, "goal"%>
+    <div class="flex justify-end">
+      <%= form.submit "Add goal", class:"btn-blue"%>
+    </div>
+  </main>
+<% end %>

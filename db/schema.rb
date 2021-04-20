@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_145403) do
+ActiveRecord::Schema.define(version: 2021_04_20_054043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 2021_04_19_145403) do
     t.index ["email"], name: "index_clients_on_email"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.bigint "goal_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0, null: false
+    t.index ["goal_id"], name: "index_comments_on_goal_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "disciplines", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
@@ -100,6 +111,19 @@ ActiveRecord::Schema.define(version: 2021_04_19_145403) do
     t.bigint "critiquable_id", null: false
     t.index ["critiquable_type", "critiquable_id"], name: "index_feedbacks_on_critiquable"
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.string "goalable_type", null: false
+    t.bigint "goalable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.date "deadline"
+    t.integer "status", default: 0, null: false
+    t.index ["goalable_type", "goalable_id"], name: "index_goals_on_goalable"
+    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -248,11 +272,14 @@ ActiveRecord::Schema.define(version: 2021_04_19_145403) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", name: "active_storage_variant_records_blob_id_fkey"
   add_foreign_key "clients", "accounts"
   add_foreign_key "clients", "accounts", name: "clients_account_id_fkey"
+  add_foreign_key "comments", "goals"
+  add_foreign_key "comments", "users"
   add_foreign_key "disciplines", "accounts"
   add_foreign_key "disciplines", "accounts", name: "disciplines_account_id_fkey"
   add_foreign_key "events", "accounts"
   add_foreign_key "feedbacks", "users"
   add_foreign_key "feedbacks", "users", name: "feedbacks_user_id_fkey"
+  add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
   add_foreign_key "jobs", "accounts", name: "jobs_account_id_fkey"
   add_foreign_key "notes", "users"
