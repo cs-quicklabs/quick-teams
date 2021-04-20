@@ -10,6 +10,6 @@ module ApplicationHelper
   end
 
   def display_date(date)
-    date.to_s(:long)
+    date.to_date.to_s(:long)
   end
 end
