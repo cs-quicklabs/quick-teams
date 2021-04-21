@@ -38,6 +38,6 @@ class Employee::GoalsController < Employee::BaseController
   end
 
   def goal_params
-    params.require(:goal).permit(:title, :body)
+    params.require(:goal).permit(:title, :body, :deadline)
   end
 end

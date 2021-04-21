@@ -13,7 +13,7 @@
             <div class="overflow-hidden bg-white">
               <div class="p-4">
                 <div class="flex flex-wrap">
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "project goals (" + @milestones.size.to_s + ")"%></p>
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Milestones (" + @milestones.size.to_s + ")"%></p>
                 </div>
                 <ul class="space-y-6">
                   <%= render partial: "project/milestones/milestone", collection: @milestones%>

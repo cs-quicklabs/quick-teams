@@ -17,7 +17,7 @@
             </span>
           </div>
           <div class="mt-1 space-x-2 text-sm">
-            <span class="font-medium text-gray-500">Created By <%= @goal.author.display_name%> on <%= display_created_at(@goal) %></span>
+            <span class="font-medium text-gray-500">Created By <%= @goal.author.display_name%> on <%= display_created_at(@goal) %> with deadline on  <%= display_date(@goal.deadline) %></span>
           </div>
         </div>
       </div>

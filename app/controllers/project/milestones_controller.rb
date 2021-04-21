@@ -12,7 +12,7 @@ class Project::MilestonesController < Project::BaseController
     respond_to do |format|
       if @milestone.persisted?
         @milestone = Goal.new
-        format.html { redirect_to employee_goals_path(@employee), notice: "Milestone was added successfully." }
+        format.html { redirect_to project_milestones_path(@project), notice: "Milestone was added successfully." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Goal.new, partial: "project/milestones/form", locals: { milestone: @milestone }) }
       end
@@ -38,6 +38,6 @@ class Project::MilestonesController < Project::BaseController
   end
 
   def milestone_params
-    params.require(:goal).permit(:title, :body)
+    params.require(:goal).permit(:title, :body, :deadline)
   end
 end
