@@ -15,7 +15,7 @@ class EmployeeScheduleTest < ApplicationSystemTestCase
   test "can visit index page if logged in" do
     visit page_url
     take_screenshot
-    assert_selector "h1", text: "#{@employee.display_name}"
+    assert_selector "h1", text: "#{@employee.first_name} #{@employee.last_name}"
     assert_text "Project Participants"
     assert_text "Schedule for new project"
   end
@@ -29,8 +29,8 @@ class EmployeeScheduleTest < ApplicationSystemTestCase
   test "can redirect to employee detail page on project click" do
     visit page_url
     project = @employee.projects.first
-    click_on "#{@project.name}"
-    assert_selector "h1", text: "#{@project.name}"
+    click_on "#{project.name}"
+    assert_selector "h1", text: "#{project.name}"
   end
 
   test "can add new schedule" do
@@ -102,7 +102,7 @@ class EmployeeScheduleTest < ApplicationSystemTestCase
 
   test "can not show add schedule when employee is inactive" do
     inactive_employee = users(:inactive)
-    visit project_feedbacks_url(script_name: "/#{@account.id}", user_id: inactive_employee.id)
+    visit employee_feedbacks_url(script_name: "/#{@account.id}", employee_id: inactive_employee.id)
     assert_no_text "Schedule for new project"
   end
 end
