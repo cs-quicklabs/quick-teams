@@ -15,26 +15,31 @@ Rails.application.routes.draw do
     resources :schedules, module: "project"
     resources :notes, only: [:index, :show, :create, :destroy], module: "project"
     resources :feedbacks, only: [:index, :show, :create, :destroy], module: "project"
+    resources :timesheets, module: "project"
+    resources :milestones, module: "project"
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
 
   resources :employees do
     resources :schedules, module: "employee"
     resources :feedbacks, module: "employee"
+    resources :timesheets, module: "employee"
+    resources :goals, module: "employee"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
   end
   resources :user
+  resources :comments
 
   devise_for :users
 
   root to: "static/static#home"
   get "/home", to: "home#index", as: "home"
-
   get "/contact", to: "static/static#contact"
   get "/pricing", to: "static/static#pricing"
 
   get "/schedule", to: "schedules#index", as: "schedules"
+  get "timesheets", to: "timesheets#index", as: "timesheets"
   get :search, controller: :search
 
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)

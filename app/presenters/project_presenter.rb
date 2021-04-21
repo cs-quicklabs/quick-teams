@@ -7,6 +7,10 @@ class ProjectPresenter
     !project.archived
   end
 
+  def show_add_milestone_form
+    !project.archived
+  end
+
   private
 
   attr_accessor :project

@@ -1,0 +1,51 @@
+<div class="flex flex-col pt-5 pb-4 border-r border-gray-200">
+  <div class="flex flex-col flex-1 w-64 h-0 overflow-y-auto">
+    <div class="relative inline-block px-3 text-left">
+      <nav class="px-3">
+        <div>
+          <h3 class="text-xs font-semibold tracking-wider text-gray-500 uppercase" id="teams-headline">
+            Filter Timesheets
+          </h3>
+          <%= form_with url: timesheets_path, method: :get do |form| %>
+            <main class="max-w-lg pt-6 pb-12 mx-auto space-y-4 lg:pb-16">
+              <div>
+                <label for="date" class="block text-sm font-medium text-gray-700">
+                  Select Project
+                </label>
+                <%= form.collection_select(:project_id, Project.active.order(:name), :id, :name, {:prompt => "Select Project", :selected => (params["project_id"] if !params["project_id"].blank?)}, :class=>"form-text-field mt-1" )%>
+              </div>
+              <div>
+                <label for="date" class="block text-sm font-medium text-gray-700">
+                  Select Employee
+                </label>
+                <%= form.collection_select(:user_id, User.active.order(:first_name).decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class=>"form-text-field mt-1" )%>
+              </div>
+              <div>
+                <label for="date" class="block text-sm font-medium text-gray-700">
+                  From Date
+                </label>
+                <%= form.date_field :from_date, class: 'form-text-field mt-1', value:  params["from_date"].blank? ? (Date.today - 6.days).to_s(:db) : params["from_date"] %>
+              </div>
+              <div>
+                <label for="date" class="block text-sm font-medium text-gray-700">
+                  To Date
+                </label>
+                <%= form.date_field :to_date, class: 'form-text-field mt-1', value:  params["to_date"].blank? ? Date.today.to_s(:db) : params["to_date"] %>
+              </div>
+              <div>
+                <label for="billed" class="block text-sm font-medium text-gray-700">
+                  Billed
+                </label>
+                <%= form.select(:billed, [["Billed or not", ""], ["Show Only Billed", 1], ["Show Only Unbilled", 0]], {selected: params["billed"]},  :class=>"form-text-field mt-1") %>
+              </div>
+              <div class="flex justify-end mt-6">
+                <%= link_to 'Reset', timesheets_path, class: "btn-normal" %>
+                <%= form.submit "Search", class:"btn-blue"%>
+              </div>
+            </main>
+          <% end %>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

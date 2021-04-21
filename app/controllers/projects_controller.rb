@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = ProjectDecorator.decorate_collection(Project.active.includes(:discipline, :participants, :manager).order(:name))
+    @projects = ProjectDecorator.decorate_collection(Project.active.includes(:discipline, :participants, :manager, :status).order(:name))
     fresh_when @projects
   end
 

@@ -18,10 +18,16 @@
           Team
         </a>
         <a href="<%= employee_schedules_path %>" class="<%= current_page?(employee_schedules_path) ? "selected-tab" : "unselected-tab"%>">
-          Schedule
+          Schedules
         </a>
         <a href="<%= employee_feedbacks_path %>" class="<%= current_page?(employee_feedbacks_path) ? "selected-tab" : "unselected-tab"%>">
-          Feedback
+          Feedbacks
+        </a>
+        <a href="<%= employee_goals_path %>" class="<%= current_page?(employee_goals_path) ? "selected-tab" : "unselected-tab"%>">
+          Goals
+        </a>
+        <a href="<%= employee_timesheets_path %>" class="<%= current_page?(employee_timesheets_path) ? "selected-tab" : "unselected-tab"%>">
+          Timesheets
         </a>
       </nav>
     </div>

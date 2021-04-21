@@ -1,6 +1,6 @@
 <% presenter = ProjectPresenter.new(@project) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "project/title", project: @project%>
+  <%= render partial: "project/title", locals: {project: @project}%>
   <main class="pb-8">
     <div class="px-4 sm:px-6">
       <h1 class="sr-only">Page title</h1>

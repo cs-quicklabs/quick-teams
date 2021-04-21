@@ -8,8 +8,12 @@ class Project < ApplicationRecord
   has_many :notes, as: :notable
   has_many :feedbacks, as: :critiquable
   has_many :events, as: :eventable
+  has_many :milestones, as: :goalable, class_name: "Goal"
+  has_many :timesheets
+  has_and_belongs_to_many :project_tags
 
   belongs_to :discipline
+  belongs_to :status, class_name: "ProjectStatus", optional: true
   validates_presence_of :name
 
   scope :archived, -> { where(archived: true) }

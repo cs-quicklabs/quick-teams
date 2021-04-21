@@ -18,8 +18,11 @@ class User < ApplicationRecord
   has_many :projects, through: :schedules
   has_many :subordinates, class_name: "User", foreign_key: "manager_id"
   has_many :feedbacks, as: :critiquable
+  has_many :goals, as: :goalable
   has_many :events, as: :eventable
   has_many :notes
+  has_many :timesheets
+  belongs_to :status, class_name: "PeopleStatus", optional: true
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 
