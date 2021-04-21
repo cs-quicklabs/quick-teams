@@ -1,0 +1,22 @@
+<li>
+  <div class="flex space-x-3">
+    <div class="flex-shrink-0">
+      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+    </div>
+    <div>
+      <div class="text-sm">
+        <a href="#" class="font-medium text-gray-900"><%= milestone.author.display_name%></a>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium <%= goal_status_color(milestone) %>">
+          <%= milestone.status.to_s %>
+        </span>
+      </div>
+      <div class="mt-1 text-sm text-gray-700">
+        <p><%= milestone.title%></p>
+      </div>
+      <div class="mt-2 space-x-2 text-sm">
+        <span class="font-medium text-gray-500"><%= display_created_at(milestone) %></span>
+        <%= link_to "Show", project_milestone_path(@project, milestone), class: "btn-inline-edit pl-2" %>
+      </div>
+    </div>
+  </div>
+</li>
