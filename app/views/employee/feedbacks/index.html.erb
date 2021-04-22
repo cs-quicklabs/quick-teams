@@ -22,7 +22,7 @@
             </div>
           </section>
         </div>
-        <% if presenter.show_add_feedback_form %>
+        <% if policy([:employee, @feedback]).create? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">

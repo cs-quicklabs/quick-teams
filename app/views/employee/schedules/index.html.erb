@@ -13,7 +13,7 @@
             <div class="overflow-hidden bg-white">
               <div class="p-4", id="project-participants">
                 <div class="flex flex-wrap">
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Participants(" + "0" + ")"%></p>
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Projects (" + @schedules.size.to_s + ")"%></p>
                 </div>
                 <ul class="divide-y divide-gray-200">
                   <%= render partial: "employee/schedules/schedule", collection: @schedules, cached: true%>
@@ -22,11 +22,10 @@
             </div>
           </section>
         </div>
-        <% if presenter.show_add_feedback_form %>
+        <% if policy([:employee, @schedule]).create? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
-              <h2 class="sr-only" id="section-2-title">Add New Participant</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
                   <%= render "employee/schedules/form", schedule: @schedule, errors: nil%>
