@@ -1,14 +1,15 @@
 class Employee::TimesheetsController < Employee::BaseController
   before_action :set_timesheet, only: %i[destroy]
+  before_action :set_projects, only: %i[create index]
 
   def index
-    authorize [:employee, Timesheet]
+    authorize @employee
 
-    @timesheets = @employee.timesheets.last_30_days.order(date: :desc)
     @timesheet = Timesheet.new
-
-    time_span = @employee.active ? "week" : "beginning"
+    @timesheets = @employee.timesheets.includes(:project).last_30_days.order(date: :desc)
     @employee_timesheets_stats = EmployeeTimesheetsStats.new(@employee, time_span)
+
+    fresh_when @timesheets
   end
 
   def create
@@ -20,11 +21,11 @@ class Employee::TimesheetsController < Employee::BaseController
     respond_to do |format|
       if @timesheet.persisted?
         format.turbo_stream {
-          render turbo_stream: turbo_stream.replace(Timesheet.new, partial: "employee/timesheets/form", locals: { timesheet: Timesheet.new, message: "Timesheet was added successfully." }) +
+          render turbo_stream: turbo_stream.replace(Timesheet.new, partial: "employee/timesheets/form", locals: { timesheet: Timesheet.new, projects: @projects, message: "Timesheet was added successfully." }) +
                                turbo_stream.prepend(:timesheets, partial: "employee/timesheets/timesheet", locals: { timesheet: @timesheet })
         }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Timesheet.new, partial: "employee/timesheets/form", locals: { timesheet: @timesheet }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Timesheet.new, partial: "employee/timesheets/form", locals: { timesheet: @timesheet, projects: @projects }) }
       end
     end
   end
@@ -39,6 +40,14 @@ class Employee::TimesheetsController < Employee::BaseController
   end
 
   private
+
+  def set_projects
+    @projects ||= @employee.projects.order(:name)
+  end
+
+  def time_span
+    @employee.active ? "month" : "beginning"
+  end
 
   def set_timesheet
     @timesheet = Timesheet.find(params["id"])

@@ -4,7 +4,7 @@ class Employee::TimesheetPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    true
   end
 
   def index?
@@ -12,6 +12,6 @@ class Employee::TimesheetPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? or record.user = user
+    user.admin? or record.user == user
   end
 end

@@ -1,4 +1,4 @@
-class Employee::SchedulePolicy < ApplicationPolicy
+class UserPolicy < ApplicationPolicy
   def update?
     user.admin?
   end
@@ -10,6 +10,10 @@ class Employee::SchedulePolicy < ApplicationPolicy
   def index?
     return true if user.admin?
 
-    record.all { |schedule| schedule.user_id == user.id }
+    user.id == record.id
+  end
+
+  def show?
+    user.admin? or record.id == user
   end
 end

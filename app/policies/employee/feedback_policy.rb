@@ -10,4 +10,8 @@ class Employee::FeedbackPolicy < ApplicationPolicy
   def index?
     true
   end
+
+  def show?
+    user.admin? or record.user == user or record.critiquable_id == user.id
+  end
 end

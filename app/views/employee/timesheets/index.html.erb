@@ -9,7 +9,6 @@
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
           <section aria-labelledby="participants_section">
-            <h2 class="sr-only" id="section-1-title">Employee Timesheets</h2>
             <div class="overflow-hidden bg-white">
               <div>
                 <table class="min-w-full divide-y divide-gray-200">
@@ -48,7 +47,7 @@
               <h2 class="sr-only" id="section-2-title">Add New Timesheet</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "employee/timesheets/form", timesheet: @timesheet%>
+                  <%= render partial: "employee/timesheets/form", locals: {timesheet: @timesheet, projects: @projects}%>
                 </div>
               </div>
             </section>

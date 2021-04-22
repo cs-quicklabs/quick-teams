@@ -11,13 +11,13 @@
         </div>
         <div>
           <div class="text-sm">
-            <a href="#" class="font-medium text-gray-900"><%= @goal.user.decorate.display_name%></a>
+            <a href="#" class="font-medium text-gray-900"><%= @goal.goalable.decorate.display_name%></a>
             <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium <%= goal_status_color(@goal) %>">
               <%= @goal.status.to_s %>
             </span>
           </div>
           <div class="mt-1 space-x-2 text-sm">
-            <span class="font-medium text-gray-500">Created By <%= @goal.author.display_name%> on <%= display_created_at(@goal) %> with deadline on  <%= display_date(@goal.deadline) %></span>
+            <span class="font-medium text-gray-500">Created By <%= @goal.user.decorate.display_name%> on <%= display_created_at(@goal) %> with deadline on  <%= display_date(@goal.deadline) %></span>
           </div>
         </div>
       </div>
@@ -26,22 +26,25 @@
       <%= link_to 'Back',:back, class:"btn-normal" %>
     </div>
   </div>
-  <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
+  <div class="text-sm text-gray-700 sm:px-6 lg:px-8">
+    <p class="font-medium text-gray-900">Description: </p>
     <p><%= @goal.body%></p>
   </div>
   <!-- Comments-->
   <section aria-labelledby="notes-title">
     <div class="pb-24 bg-white sm:rounded-lg overflow">
-      <div class="divide-y divide-gray-200">
-        <div class="px-4 py-5 sm:px-6">
-          <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments</h2>
+      <% if @goal.comments.size > 0 %>
+        <div class="divide-y divide-gray-200">
+          <div class="px-4 py-5 sm:px-6">
+            <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments</h2>
+          </div>
+          <div class="px-4 py-6 sm:px-6">
+            <ul class="space-y-4" id="comments">
+              <%= render partial: "employee/goals/comments/comment", collection: @goal.comments, as: :comment, cached: true%>
+            </ul>
+          </div>
         </div>
-        <div class="px-4 py-6 sm:px-6">
-          <ul class="space-y-4" id="comments">
-            <%= render partial: "employee/goals/comments/comment", collection: @goal.comments, as: :comment, cached: true%>
-          </ul>
-        </div>
-      </div>
+      <% end %>
       <% if policy(:comments).create? %>
         <div id="add">
           <%= render partial: "employee/goals/comments/add", locals: {goal: @goal, comment: @comment }%>

@@ -2,13 +2,17 @@ class Employee::GoalsController < Employee::BaseController
   before_action :set_goal, only: %i[show destroy]
 
   def index
-    authorize [:employee, Goal]
+    authorize @employee
 
-    @goals = GoalDecorator.decorate_collection(@employee.goals.includes({ comments: :user }).order(created_at: :desc))
+    @goals = GoalDecorator.decorate_collection(@employee.goals.includes(:user).order(created_at: :desc))
     @goal = Goal.new
+
+    fresh_when @goals
   end
 
   def create
+    authorize [:employee, Goal]
+
     @goal = AddEmployeeGoal.call(@employee, goal_params, current_user).result
 
     respond_to do |format|
@@ -22,6 +26,8 @@ class Employee::GoalsController < Employee::BaseController
   end
 
   def destroy
+    authorize [:employee, @goal]
+
     @goal.destroy
     respond_to do |format|
       format.html { redirect_to employee_goals_path(@employee), notice: "Goal was removed successfully." }

@@ -2,13 +2,17 @@ class Employee::FeedbacksController < Employee::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
-    authorize [:employee, Feedback]
+    authorize @employee
 
-    @feedbacks = FeedbackDecorator.decorate_collection(@employee.feedbacks.order(created_at: :desc))
+    @feedbacks = FeedbackDecorator.decorate_collection(@employee.feedbacks.includes(:user).order(created_at: :desc))
     @feedback = Feedback.new
+
+    fresh_when @feedbacks
   end
 
   def create
+    authorize [:employee, Feedback]
+
     @feedback = AddEmployeeFeedback.call(@employee, feedback_params, current_user).result
 
     respond_to do |format|
@@ -22,6 +26,8 @@ class Employee::FeedbacksController < Employee::BaseController
   end
 
   def destroy
+    authorize [:employee, @feedback]
+
     @feedback.destroy
     respond_to do |format|
       format.html { redirect_to employee_feedbacks_path(@employee), notice: "Feedback was removed successfully." }
@@ -29,6 +35,8 @@ class Employee::FeedbacksController < Employee::BaseController
   end
 
   def show
+    authorize [:employee, @feedback]
+
     fresh_when @feedback
   end
 
