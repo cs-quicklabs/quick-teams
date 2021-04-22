@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  enum permission: [:member, :lead, :admin]
+
   scope :for_current_account, -> { where(account: Current.account) }
   scope :inactive, -> { where(active: false) }
   scope :active, -> { where(active: true) }

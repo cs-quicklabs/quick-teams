@@ -39,6 +39,7 @@ gem "devise-pwned_password"
 gem "aws-sdk-s3", "~> 1.87"
 gem "tailwindcss-rails", "~> 0.3.3"
 gem "stimulus_reflex", "~> 3.4"
+gem "pundit"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
