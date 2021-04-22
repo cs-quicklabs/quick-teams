@@ -4,7 +4,8 @@ class Employee::GoalPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    return true if user.admin?
+    false
   end
 
   def index?

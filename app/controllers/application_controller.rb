@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
   end
 
   def landing_path
-    employee_schedules_path(current_user, script_name: "/#{current_user.account.id}")
+    if current_user.member?
+      employee_schedules_path(current_user, script_name: "/#{current_user.account.id}")
+    else
+      employee_team_path(current_user, script_name: "/#{current_user.account.id}")
+    end
   end
 end

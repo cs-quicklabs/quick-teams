@@ -11,7 +11,7 @@ class Employee::FeedbacksController < Employee::BaseController
   end
 
   def create
-    authorize [:employee, Feedback]
+    authorize @employee, :create_feedback?
 
     @feedback = AddEmployeeFeedback.call(@employee, feedback_params, current_user).result
 

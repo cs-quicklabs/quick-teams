@@ -22,7 +22,7 @@
             </div>
           </section>
         </div>
-        <% if policy([:employee, @goal]).create? %>
+        <% if policy(@employee).create_goal? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">

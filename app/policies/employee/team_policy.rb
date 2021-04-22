@@ -1,4 +1,4 @@
-class Employee::TeamPolicy < Struct.new(:user, :team)
+class Employee::TeamPolicy < Struct.new(:user, :home)
   def index?
     user.admin? or user.lead?
   end

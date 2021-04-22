@@ -57,10 +57,14 @@
             <% if policy(:team).index? %>
               <a href=<%= schedules_path %> class= "<%= current_page?(schedules_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Schedules</a>
             <% end %>
-            <% if policy(:team).index? %>
+            <% if policy(:timesheets).index? %>
               <a href=<%= timesheets_path %> class= "<%= current_page?(timesheets_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Timesheets</a>
             <% end %>
-            <a href=<%= employee_schedules_path(current_user) %> class= "<%= current_page?(employee_schedules_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"><%= current_user.first_name%></a>
+            <% if current_user.member? %>
+              <a href=<%= employee_schedules_path(current_user) %> class= "<%= current_page?(employee_schedules_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"><%= current_user.first_name%></a>
+            <% elsif current_user.lead? %>
+              <a href=<%= employee_team_path(current_user) %> class= "<%= current_page?(employee_team_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"><%= current_user.first_name%></a>
+            <% end %>
           </div>
         </div>
       </div>

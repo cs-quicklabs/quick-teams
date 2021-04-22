@@ -11,7 +11,7 @@ class Employee::GoalsController < Employee::BaseController
   end
 
   def create
-    authorize [:employee, Goal]
+    authorize @employee, :create_goal?
 
     @goal = AddEmployeeGoal.call(@employee, goal_params, current_user).result
 

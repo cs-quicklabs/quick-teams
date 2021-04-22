@@ -21,7 +21,7 @@
             </div>
           </section>
         </div>
-        <% if policy([:employee, @feedback]).create? %>
+        <% if policy(@employee).create_feedback? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">

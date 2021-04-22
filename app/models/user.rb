@@ -32,4 +32,16 @@ class User < ApplicationRecord
     participated_project_ids = schedules.pluck(:project_id)
     Project.active.where.not(id: participated_project_ids)
   end
+
+  def subordinate?(employee)
+    #checks for 3 levels of leadership
+    all_subordinates_id = self.subordinates.pluck(:id)
+
+    self.subordinates.each do |sub|
+      all_subordinates_id << sub.subordinates.pluck(:id)
+    end
+
+    all_subordinates_id = all_subordinates_id.flatten.uniq
+    all_subordinates_id.include?(employee.id)
+  end
 end
