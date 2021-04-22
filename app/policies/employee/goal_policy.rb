@@ -6,4 +6,12 @@ class Employee::GoalPolicy < ApplicationPolicy
   def create?
     user.admin?
   end
+
+  def index?
+    true
+  end
+
+  def show?
+    user.admin? or record.user == user or record.goalable_id == user.id
+  end
 end

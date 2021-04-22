@@ -2,6 +2,7 @@ class Employee::SchedulesController < Employee::BaseController
   before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
+    authorize [:employee, Schedule]
     collection = Schedule.where(user: @employee).includes(:project, :user).order(created_at: :desc)
     @schedules = ScheduleDecorator.decorate_collection(collection)
     @schedule = Schedule.new

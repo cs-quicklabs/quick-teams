@@ -2,6 +2,8 @@ class Employee::TimesheetsController < Employee::BaseController
   before_action :set_timesheet, only: %i[destroy]
 
   def index
+    authorize [:employee, Timesheet]
+
     @timesheets = @employee.timesheets.last_30_days.order(date: :desc)
     @timesheet = Timesheet.new
 
@@ -10,6 +12,8 @@ class Employee::TimesheetsController < Employee::BaseController
   end
 
   def create
+    authorize [:employee, Timesheet]
+
     @timesheet = Timesheet.new(timesheet_params)
     @timesheet.user = current_user
     @timesheet.save
@@ -26,6 +30,8 @@ class Employee::TimesheetsController < Employee::BaseController
   end
 
   def destroy
+    authorize [:employee, @timesheet]
+
     @timesheet.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@timesheet) }

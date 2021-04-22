@@ -2,6 +2,8 @@ class Employee::FeedbacksController < Employee::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
+    authorize [:employee, Feedback]
+
     @feedbacks = FeedbackDecorator.decorate_collection(@employee.feedbacks.order(created_at: :desc))
     @feedback = Feedback.new
   end
