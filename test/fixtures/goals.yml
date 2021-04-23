@@ -1,0 +1,13 @@
+one:
+  title: Some Random Goal
+  user: regular
+  goalable_type: User
+  goalable: regular
+  deadline: 2021-04-01
+
+two:
+  title: Some Random Goal
+  user: regular
+  goalable_type: User
+  goalable: regular
+  deadline: 2021-06-31
