@@ -3,7 +3,6 @@ class Account::JobsController < Account::BaseController
 
   def index
     authorize :account
-
     @jobs = Job.all.order(created_at: :desc)
     @job = Job.new
   end
@@ -54,8 +53,6 @@ class Account::JobsController < Account::BaseController
   def set_job
     @job = Job.find(params[:id])
   end
-
-  authorize :account
 
   def job_params
     params.require(:job).permit(:name, :account_id)

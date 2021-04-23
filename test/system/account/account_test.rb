@@ -27,6 +27,7 @@ class AccountTest < ApplicationSystemTestCase
     visit page_url
     fill_in "Company Name", with: "Awesome Company"
     click_on "Save"
+    take_screenshot
     assert_text "Account was updated successfully"
   end
 
@@ -34,6 +35,7 @@ class AccountTest < ApplicationSystemTestCase
     visit page_url
     fill_in "Company Name", with: ""
     click_on "Save"
+    take_screenshot
     assert_text "Name can't be blank"
   end
 end
