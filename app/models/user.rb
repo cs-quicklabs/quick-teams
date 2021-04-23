@@ -25,6 +25,7 @@ class User < ApplicationRecord
   has_many :notes
   has_many :timesheets
   belongs_to :status, class_name: "PeopleStatus", optional: true
+  has_and_belongs_to_many :people_tags
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 

@@ -161,6 +161,11 @@ ActiveRecord::Schema.define(version: 2021_04_22_022133) do
     t.index ["account_id"], name: "index_people_tags_on_account_id"
   end
 
+  create_table "people_tags_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "people_tag_id", null: false
+  end
+
   create_table "project_statuses", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
