@@ -1,18 +1,20 @@
 class Account::ClientsController < Account::BaseController
   before_action :set_client, only: %i[ show edit update destroy ]
 
-  # GET /clients or /clients.json
   def index
+    authorize :account
+
     @clients = Client.all.order(created_at: :desc)
     @client = Client.new
   end
 
-  # GET /clients/1/edit
   def edit
+    authorize :account
   end
 
-  # POST /clients or /clients.json
   def create
+    authorize :account
+
     @client = Client.new(client_params)
 
     respond_to do |format|
@@ -27,8 +29,9 @@ class Account::ClientsController < Account::BaseController
     end
   end
 
-  # PATCH/PUT /clients/1 or /clients/1.json
   def update
+    authorize :account
+
     respond_to do |format|
       if @client.update(client_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@client, partial: "account/clients/client", locals: { client: @client, message: nil }) }
@@ -38,8 +41,9 @@ class Account::ClientsController < Account::BaseController
     end
   end
 
-  # DELETE /clients/1 or /clients/1.json
   def destroy
+    authorize :account
+
     @client.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@client) }
@@ -48,12 +52,10 @@ class Account::ClientsController < Account::BaseController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_client
     @client = Client.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def client_params
     params.require(:client).permit(:name, :email, :account_id)
   end
