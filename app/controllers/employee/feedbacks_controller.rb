@@ -17,8 +17,10 @@ class Employee::FeedbacksController < Employee::BaseController
 
     respond_to do |format|
       if @feedback.persisted?
-        @feedback = Feedback.new
-        format.html { redirect_to employee_feedbacks_path(@employee), notice: "Feedback was added successfully." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:feedbacks, partial: "employee/feedbacks/feedback", locals: { feedback: @feedback.decorate }) +
+                               turbo_stream.replace(Feedback.new, partial: "employee/feedbacks/form", locals: { feedback: Feedback.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Feedback.new, partial: "employee/feedbacks/form", locals: { feedback: @feedback }) }
       end
@@ -30,7 +32,7 @@ class Employee::FeedbacksController < Employee::BaseController
 
     @feedback.destroy
     respond_to do |format|
-      format.html { redirect_to employee_feedbacks_path(@employee), notice: "Feedback was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@feedback) }
     end
   end
 

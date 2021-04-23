@@ -2,7 +2,7 @@
   <div class="px-4 py-6 bg-gray-50 sm:px-6">
     <div class="flex space-x-3">
       <div class="flex-shrink-0">
-        <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="">
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
       </div>
       <div class="flex-1 min-w-0">
         <%= form_with model: comment, url: comments_path, method: :post do |form| %>

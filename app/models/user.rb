@@ -34,14 +34,12 @@ class User < ApplicationRecord
   end
 
   def subordinate?(employee)
-    #checks for 3 levels of leadership
-    all_subordinates_id = self.subordinates.pluck(:id)
+    # level 1 subordinates
+    all_subordinates_ids = self.subordinates.ids
 
-    self.subordinates.each do |sub|
-      all_subordinates_id << sub.subordinates.pluck(:id)
-    end
-
-    all_subordinates_id = all_subordinates_id.flatten.uniq
-    all_subordinates_id.include?(employee.id)
+    # level 2 subordinates
+    all_subordinates_ids << User.where("manager_id in (?)", all_subordinates_ids).ids
+    all_subordinates_ids = all_subordinates_ids.flatten.uniq
+    all_subordinates_ids.include?(employee.id)
   end
 end

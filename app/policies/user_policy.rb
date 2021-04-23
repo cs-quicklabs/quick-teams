@@ -28,4 +28,10 @@ class UserPolicy < ApplicationPolicy
     return true if user.lead? and user.subordinate?(record)
     false
   end
+
+  def create_comment?
+    return true if user.admin?
+    return true if user.lead? and user.subordinate?(record)
+    false
+  end
 end
