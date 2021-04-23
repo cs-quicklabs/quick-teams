@@ -5,28 +5,30 @@
       <p class="text-sm font-medium text-gray-600"><%= project.description %></p>
     </h1>
     <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= project.display_discipline%></p>
-    <div class="flex">
-      <div id="project-tags" class="flex ml-4">
-        <%= render partial: 'project/tags', locals: {project: project, tags: project.project_tags }%>
-      </div>
-      <div class="relative inline-block mr-4 text-left" x-data="{opentags: false}" @keydown.window.escape="opentags = false" >
-        <button @click="opentags = !opentags" type="button" class="inline-flex items-center p-1 ml-2 text-white bg-indigo-600 border border-transparent rounded-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          <!-- Heroicon name: solid/plus -->
-          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-          </svg>
-        </button>
-        <div  x-show="opentags"
+    <% if current_user.admin? %>
+      <div class="flex">
+        <div id="project-tags" class="flex ml-4">
+          <%= render partial: 'project/tags', locals: {project: project, tags: project.project_tags }%>
+        </div>
+        <div class="relative inline-block mr-4 text-left" x-data="{opentags: false}" @keydown.window.escape="opentags = false" >
+          <button @click="opentags = !opentags" type="button" class="inline-flex items-center p-1 ml-2 text-white bg-indigo-600 border border-transparent rounded-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <!-- Heroicon name: solid/plus -->
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div  x-show="opentags"
         @click.away="opentags = false" class="absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg hide ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-          <div class="py-1" role="none">
-            <% @tags.each do |tag|%>
-              <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-              <a @click="opentags = false" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-reflex="click->ProjectTags#change" data-project-id=<%= project.id%> data-tag-id=<%= tag.id%> ><%= tag.name %></a>
-            <% end %>
+            <div class="py-1" role="none">
+              <% @tags.each do |tag|%>
+                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                <a @click="opentags = false" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-reflex="click->ProjectTags#change" data-project-id=<%= project.id%> data-tag-id=<%= tag.id%> ><%= tag.name %></a>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
   <div class="flex sm:mt-0 sm:ml-4">
     <div id="project-status" class="flex">
