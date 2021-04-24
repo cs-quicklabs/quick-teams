@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def after_sign_in_path_for(resource)
     if current_user.admin?
@@ -17,6 +18,10 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     redirect_to(request.referrer || landing_path)
+  end
+
+  def record_not_found
+    user_not_authorized
   end
 
   def landing_path
