@@ -2,14 +2,14 @@ class Project::NotesController < Project::BaseController
   before_action :set_note, only: %i[ destroy ]
 
   def index
-    @notes = NoteDecorator.decorate_collection(@project.notes.order(created_at: :desc))
+    @notes = @project.notes.order(created_at: :desc)
     @note = Note.new
   end
 
   def destroy
     @note.destroy
     respond_to do |format|
-      format.html { redirect_to project_notes_path(@project), notice: "Note was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@note) }
     end
   end
 

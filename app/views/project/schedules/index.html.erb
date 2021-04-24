@@ -15,7 +15,7 @@
                 <div class="flex flex-wrap">
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Participants(" + @project.participants.count.to_s + ")"%></p>
                 </div>
-                <ul class="divide-y divide-gray-200">
+                <ul class="divide-y divide-gray-200" id="schedules">
                   <%= render partial: "project/schedules/schedule", collection: @schedules, cached: true%>
                 </ul>
               </div>

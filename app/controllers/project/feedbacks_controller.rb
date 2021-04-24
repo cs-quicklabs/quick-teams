@@ -2,7 +2,7 @@ class Project::FeedbacksController < Project::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
-    @feedbacks = FeedbackDecorator.decorate_collection(@project.feedbacks.order(created_at: :desc))
+    @feedbacks = @project.feedbacks.order(created_at: :desc)
     @feedback = Feedback.new
   end
 
@@ -21,7 +21,7 @@ class Project::FeedbacksController < Project::BaseController
   def destroy
     @feedback.destroy
     respond_to do |format|
-      format.html { redirect_to project_feedbacks_path(@project), notice: "Feedback was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@feedback) }
     end
   end
 
@@ -31,7 +31,7 @@ class Project::FeedbacksController < Project::BaseController
   private
 
   def set_feedback
-    @feedback = Feedback.find(params["id"]).decorate
+    @feedback = Feedback.find(params["id"])
   end
 
   def feedback_params

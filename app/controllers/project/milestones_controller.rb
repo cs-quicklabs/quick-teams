@@ -2,7 +2,7 @@ class Project::MilestonesController < Project::BaseController
   before_action :set_milestone, only: %i[show destroy]
 
   def index
-    @milestones = MilestoneDecorator.decorate_collection(@project.milestones.includes({ comments: :user }).order(created_at: :desc))
+    @milestones = @project.milestones.includes({ comments: :user }).order(created_at: :desc)
     @milestone = Goal.new
   end
 
@@ -22,7 +22,7 @@ class Project::MilestonesController < Project::BaseController
   def destroy
     @milestone.destroy
     respond_to do |format|
-      format.html { redirect_to project_milestones_path(@project), notice: "Milestone was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@milestone) }
     end
   end
 
@@ -34,7 +34,7 @@ class Project::MilestonesController < Project::BaseController
   private
 
   def set_milestone
-    @milestone = Goal.find(params["id"]).decorate
+    @milestone = Goal.find(params["id"])
   end
 
   def milestone_params

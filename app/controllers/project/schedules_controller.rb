@@ -2,8 +2,7 @@ class Project::SchedulesController < Project::BaseController
   before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
-    collection = Schedule.where(project: @project).includes({ user: [:role, :job] })
-    @schedules = ScheduleDecorator.decorate_collection(collection)
+    @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] })
     @schedule = Schedule.new
   end
 
@@ -37,7 +36,7 @@ class Project::SchedulesController < Project::BaseController
   def destroy
     @schedule.destroy
     respond_to do |format|
-      format.html { redirect_to project_schedules_path(@project), notice: "Participant was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@schedule) }
     end
   end
 
