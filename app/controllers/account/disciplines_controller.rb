@@ -2,14 +2,19 @@ class Account::DisciplinesController < Account::BaseController
   before_action :set_discipline, only: %i[ show edit update destroy ]
 
   def index
+    authorize :account
+
     @disciplines = Discipline.all.order(created_at: :desc)
     @discipline = Discipline.new
   end
 
   def edit
+    authorize :account
   end
 
   def create
+    authorize :account
+
     @discipline = Discipline.new(discipline_params)
 
     respond_to do |format|
@@ -27,6 +32,8 @@ class Account::DisciplinesController < Account::BaseController
   end
 
   def update
+    authorize :account
+
     respond_to do |format|
       if @discipline.update(discipline_params)
         format.turbo_stream {
@@ -41,6 +48,8 @@ class Account::DisciplinesController < Account::BaseController
   end
 
   def destroy
+    authorize :account
+
     @discipline.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@discipline) }

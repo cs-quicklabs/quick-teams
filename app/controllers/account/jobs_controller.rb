@@ -1,20 +1,20 @@
 class Account::JobsController < Account::BaseController
   before_action :set_job, only: %i[ show edit update destroy ]
 
-  # GET /jobs or /jobs.json
   def index
+    authorize :account
     @jobs = Job.all.order(created_at: :desc)
     @job = Job.new
   end
 
-  # GET /jobs/1/edit
   def edit
+    authorize :account
   end
 
-  # POST /jobs or /jobs.json
   def create
-    @job = Job.new(job_params)
+    authorize :account
 
+    @job = Job.new(job_params)
     respond_to do |format|
       if @job.save
         format.turbo_stream {
@@ -27,8 +27,9 @@ class Account::JobsController < Account::BaseController
     end
   end
 
-  # PATCH/PUT /jobs/1 or /jobs/1.json
   def update
+    authorize :account
+
     respond_to do |format|
       if @job.update(job_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@job, partial: "account/jobs/job", locals: { job: @job, messages: nil }) }
@@ -38,8 +39,9 @@ class Account::JobsController < Account::BaseController
     end
   end
 
-  # DELETE /jobs/1 or /jobs/1.json
   def destroy
+    authorize :account
+
     @job.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@job) }
@@ -48,12 +50,10 @@ class Account::JobsController < Account::BaseController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_job
     @job = Job.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def job_params
     params.require(:job).permit(:name, :account_id)
   end

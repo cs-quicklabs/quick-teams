@@ -45,41 +45,51 @@
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href=<%= home_path %> class= "<%= current_page?(home_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Dashboard</a>
-            <a href=<%= employees_path %> class= "<%= current_page?(employees_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Team</a>
-            <a href=<%= projects_path %> class= "<%= current_page?(projects_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Projects</a>
-            <a href=<%= schedules_path %> class= "<%= current_page?(schedules_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Schedules</a>
-            <a href=<%= timesheets_path %> class= "<%= current_page?(timesheets_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Timesheets</a>
+            <% if policy(:home).index? %>
+              <a href=<%= home_path %> class= "<%= current_page?(home_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Dashboard</a>
+            <% end %>
+            <% if policy(:team).index? %>
+              <a href=<%= employees_path %> class= "<%= current_page?(employees_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Team</a>
+            <% end %>
+            <% if policy(:projects).index? %>
+              <a href=<%= projects_path %> class= "<%= current_page?(projects_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Projects</a>
+            <% end %>
+            <% if policy(:team).index? %>
+              <a href=<%= schedules_path %> class= "<%= current_page?(schedules_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Schedules</a>
+            <% end %>
+            <% if policy(:timesheets).index? %>
+              <a href=<%= timesheets_path %> class= "<%= current_page?(timesheets_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Timesheets</a>
+            <% end %>
+            <% if current_user.member? %>
+              <a href=<%= employee_schedules_path(current_user) %> class= "<%= current_page?(employee_schedules_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"><%= current_user.first_name%></a>
+            <% elsif current_user.lead? %>
+              <a href=<%= employee_team_path(current_user) %> class= "<%= current_page?(employee_team_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"><%= current_user.first_name%></a>
+            <% end %>
           </div>
         </div>
       </div>
-      <div class="flex justify-center flex-1 px-2 lg:ml-6 lg:justify-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search">
-        <div class="w-full max-w-lg lg:max-w-xs">
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none" >
-              <!-- Heroicon name: solid/search -->
-              <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-              </svg>
+      <% if current_user.admin? %>
+        <div class="flex justify-center px-2 lg:ml-6 lg:justify-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search">
+          <div class="w-full max-w-lg lg:max-w-xs">
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none" >
+                <!-- Heroicon name: solid/search -->
+                <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input id="search" name="search" class="block w-full py-1 pl-10 pr-3 leading-5 text-gray-300 placeholder-gray-400 bg-gray-700 border border-transparent rounded-md focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm" placeholder="Search People" type="search" data-nav-search-target="input">
             </div>
-            <input id="search" name="search" class="block w-full py-1 pl-10 pr-3 leading-5 text-gray-300 placeholder-gray-400 bg-gray-700 border border-transparent rounded-md focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm" placeholder="Search People" type="search" data-nav-search-target="input">
-          </div>
-          <div class="relative">
-            <div class="absolute left-0 z-10 block w-56 w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-              <ul data-nav-search-target="results">
-              </ul>
+            <div class="relative">
+              <div class="absolute left-0 z-10 block w-56 w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                <ul data-nav-search-target="results">
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <button class="p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-          <span class="sr-only">View notifications</span>
-          <!-- Heroicon name: outline/bell -->
-          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
-        </button>
         <!-- Profile dropdown -->
         <div @click.away="open = false" class="relative z-10 ml-3" x-data="{ open: false }">
           <div>
@@ -96,9 +106,11 @@
               </div>
               <div class="border-t border-gray-100">
                 <div>
-                  <a><%= link_to "Account", detail_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem"%></a>
+                  <% if current_user.admin? %>
+                    <a><%= link_to "Account", detail_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem"%></a>
+                    <a><%= link_to "Archive", archived_projects_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem"%></a>
+                  <% end %>
                   <a><%= link_to "Settings", profile_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem"%></a>
-                  <a><%= link_to "Archive", archived_projects_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem"%></a>
                   <a><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem"%></a>
                 </div>
               </div>
@@ -117,4 +129,5 @@
       </div>
     </div>
   </div>
+</nav>
 </nav>

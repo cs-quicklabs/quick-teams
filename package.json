@@ -1,35 +1,35 @@
 {
-  "name": "skia",
-  "private": true,
-  "dependencies": {
-    "@fullhuman/postcss-purgecss": "3.0",
-    "@hotwired/turbo-rails": "^7.0.0-beta.5",
-    "@rails/actioncable": "^6.0.0",
-    "@rails/actiontext": "^6.1.1",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.2.1",
-    "@tailwindcss/forms": "^0.2.1",
-    "@tailwindcss/postcss7-compat": "^2.0.3",
-    "alpine-turbo-drive-adapter": "^1.0.1",
-    "alpinejs": "^2.8.0",
-    "autoprefixer": "^9",
-    "node-sass": "^4.14.1",
-    "postcss": "^7",
-    "stimulus": "^2.0.0",
-    "stimulus_reflex": "3.4.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
-    "trix": "^1.2.0"
-  },
-  "version": "0.1.0",
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.2"
-  },
-  "engines": {
-    "node": "12.16.2"
-  },
-  "main": "index.js",
-  "repository": "git@github.com:aashishdhawan/skia.git",
-  "author": "Aashish Dhawan <aashishdhawan@gmail.com>",
-  "license": "MIT"
+    "name": "skia",
+    "private": true,
+    "dependencies": {
+        "@fullhuman/postcss-purgecss": "3.0",
+        "@hotwired/turbo-rails": "^7.0.0-beta.5",
+        "@rails/actioncable": "^6.0.0",
+        "@rails/actiontext": "^6.1.1",
+        "@rails/activestorage": "^6.0.0",
+        "@rails/ujs": "^6.0.0",
+        "@rails/webpacker": "5.2.1",
+        "@tailwindcss/forms": "^0.2.1",
+        "@tailwindcss/postcss7-compat": "^2.0.3",
+        "alpine-turbo-drive-adapter": "^1.0.1",
+        "alpinejs": "^2.8.0",
+        "autoprefixer": "^9",
+        "node-sass": "^4.12.1",
+        "postcss": "^7",
+        "stimulus": "^2.0.0",
+        "stimulus_reflex": "^3.4.1",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
+        "trix": "^1.2.0"
+    },
+    "version": "0.1.0",
+    "devDependencies": {
+        "webpack-dev-server": "^3.11.2"
+    },
+    "engines": {
+        "node": "12.16.2"
+    },
+    "main": "index.js",
+    "repository": "git@github.com:aashishdhawan/skia.git",
+    "author": "Aashish Dhawan <aashishdhawan@gmail.com>",
+    "license": "MIT"
 }

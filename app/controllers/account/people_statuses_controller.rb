@@ -1,18 +1,20 @@
 class Account::PeopleStatusesController < Account::BaseController
   before_action :set_people_status, only: %i[ show edit update destroy ]
 
-  # GET /people_statuses or /people_statuses.json
   def index
+    authorize :account
+
     @people_statuses = PeopleStatus.all.order(created_at: :desc)
     @people_status = PeopleStatus.new
   end
 
-  # GET /people_statuses/1/edit
   def edit
+    authorize :account
   end
 
-  # POST /people_statuses or /people_statuses.json
   def create
+    authorize :account
+
     @people_status = PeopleStatus.new(people_status_params)
 
     respond_to do |format|
@@ -27,8 +29,9 @@ class Account::PeopleStatusesController < Account::BaseController
     end
   end
 
-  # PATCH/PUT /people_statuses/1 or /people_statuses/1.json
   def update
+    authorize :account
+
     respond_to do |format|
       if @people_status.update(people_status_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@people_status, partial: "account/people_statuses/people_status", locals: { people_status: @people_status, message: nil }) }
@@ -38,8 +41,9 @@ class Account::PeopleStatusesController < Account::BaseController
     end
   end
 
-  # DELETE /people_statuses/1 or /people_statuses/1.json
   def destroy
+    authorize :account
+
     @people_status.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@people_status) }
@@ -48,12 +52,10 @@ class Account::PeopleStatusesController < Account::BaseController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_people_status
     @people_status = PeopleStatus.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def people_status_params
     params.require(:people_status).permit(:name, :account_id)
   end

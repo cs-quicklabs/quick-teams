@@ -2,17 +2,25 @@ class Employee::FeedbacksController < Employee::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
-    @feedbacks = FeedbackDecorator.decorate_collection(@employee.feedbacks.order(created_at: :desc))
+    authorize @employee
+
+    @feedbacks = FeedbackDecorator.decorate_collection(@employee.feedbacks.includes(:user).order(created_at: :desc))
     @feedback = Feedback.new
+
+    fresh_when @feedbacks
   end
 
   def create
+    authorize @employee, :create_feedback?
+
     @feedback = AddEmployeeFeedback.call(@employee, feedback_params, current_user).result
 
     respond_to do |format|
       if @feedback.persisted?
-        @feedback = Feedback.new
-        format.html { redirect_to employee_feedbacks_path(@employee), notice: "Feedback was added successfully." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:feedbacks, partial: "employee/feedbacks/feedback", locals: { feedback: @feedback.decorate }) +
+                               turbo_stream.replace(Feedback.new, partial: "employee/feedbacks/form", locals: { feedback: Feedback.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Feedback.new, partial: "employee/feedbacks/form", locals: { feedback: @feedback }) }
       end
@@ -20,13 +28,17 @@ class Employee::FeedbacksController < Employee::BaseController
   end
 
   def destroy
+    authorize [:employee, @feedback]
+
     @feedback.destroy
     respond_to do |format|
-      format.html { redirect_to employee_feedbacks_path(@employee), notice: "Feedback was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@feedback) }
     end
   end
 
   def show
+    authorize [:employee, @feedback]
+
     fresh_when @feedback
   end
 

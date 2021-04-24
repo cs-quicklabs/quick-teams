@@ -1,5 +1,7 @@
 class Account::BaseController < ApplicationController
   before_action :authenticate_user!
+  after_action :verify_authorized
+
   rescue_from ActiveRecord::InvalidForeignKey, with: :show_referenced_alert
 
   def show_referenced_alert(exception)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_145403) do
+ActiveRecord::Schema.define(version: 2021_04_22_022133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 2021_04_19_145403) do
     t.index ["email"], name: "index_clients_on_email"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.bigint "goal_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0, null: false
+    t.index ["goal_id"], name: "index_comments_on_goal_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "disciplines", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
@@ -100,6 +111,19 @@ ActiveRecord::Schema.define(version: 2021_04_19_145403) do
     t.bigint "critiquable_id", null: false
     t.index ["critiquable_type", "critiquable_id"], name: "index_feedbacks_on_critiquable"
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.string "goalable_type", null: false
+    t.bigint "goalable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.date "deadline"
+    t.integer "status", default: 0, null: false
+    t.index ["goalable_type", "goalable_id"], name: "index_goals_on_goalable"
+    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -137,6 +161,11 @@ ActiveRecord::Schema.define(version: 2021_04_19_145403) do
     t.index ["account_id"], name: "index_people_tags_on_account_id"
   end
 
+  create_table "people_tags_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "people_tag_id", null: false
+  end
+
   create_table "project_statuses", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
@@ -151,6 +180,11 @@ ActiveRecord::Schema.define(version: 2021_04_19_145403) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_project_tags_on_account_id"
+  end
+
+  create_table "project_tags_projects", id: false, force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "project_tag_id", null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -232,6 +266,7 @@ ActiveRecord::Schema.define(version: 2021_04_19_145403) do
     t.boolean "active", default: true, null: false
     t.date "deactivated_on"
     t.bigint "status_id"
+    t.integer "permission", default: 0, null: false
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["discipline_id"], name: "index_users_on_discipline_id"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -245,9 +280,14 @@ ActiveRecord::Schema.define(version: 2021_04_19_145403) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clients", "accounts"
+  add_foreign_key "clients", "accounts", name: "clients_account_id_fkey"
+  add_foreign_key "comments", "goals"
+  add_foreign_key "comments", "users"
   add_foreign_key "disciplines", "accounts"
   add_foreign_key "events", "accounts"
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "feedbacks", "users", name: "feedbacks_user_id_fkey"
+  add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
   add_foreign_key "notes", "users"
   add_foreign_key "people_statuses", "accounts"

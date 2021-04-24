@@ -1,0 +1,53 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<main class="max-w-2xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex-1 min-w-0">
+      <h3 class="text-2xl font-bold leading-tight text-gray-900">
+        Goal: <%= @goal.title.titleize %>
+      </h3>
+      <div class="flex mt-4 space-x-3">
+        <div class="flex-shrink-0">
+          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+        </div>
+        <div>
+          <div class="text-sm">
+            <a href="#" class="font-medium text-gray-900"><%= @goal.goalable.decorate.display_name%></a>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium <%= goal_status_color(@goal) %>">
+              <%= @goal.status.to_s %>
+            </span>
+          </div>
+          <div class="mt-1 space-x-2 text-sm">
+            <span class="font-medium text-gray-500">Created By <%= @goal.user.decorate.display_name%> on <%= display_created_at(@goal) %> with deadline on  <%= display_date(@goal.deadline) %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex mt-4 sm:mt-0 sm:ml-4">
+      <%= link_to 'Back',:back, class:"btn-normal" %>
+    </div>
+  </div>
+  <div class="text-sm text-gray-700 sm:px-6 lg:px-8">
+    <p class="font-medium text-gray-900">Description: </p>
+    <p><%= @goal.body%></p>
+  </div>
+  <!-- Comments-->
+  <section aria-labelledby="notes-title">
+    <div class="pb-24 bg-white sm:rounded-lg overflow">
+      <div class="divide-y divide-gray-200">
+        <div class="px-4 py-5 sm:px-6">
+          <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments</h2>
+        </div>
+        <div class="px-4 py-6 sm:px-6">
+          <ul class="space-y-4" id="comments">
+            <%= render partial: "employee/goals/comments/comment", collection: @goal.comments, as: :comment, cached: true%>
+          </ul>
+        </div>
+      </div>
+      <% if policy([:employee, @goal]).comment? %>
+        <div id="add">
+          <%= render partial: "employee/goals/comments/add", locals: {goal: @goal, comment: @comment }%>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</main>

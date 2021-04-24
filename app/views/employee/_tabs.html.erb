@@ -11,17 +11,24 @@
   <div class="hidden sm:block">
     <div class="border-b border-gray-200">
       <nav class="flex -mb-px space-x-8 lg:px-8" aria-label="Tabs">
-        <a href="<%= employee_timeline_path %>" class="<%= current_page?(employee_timeline_path) ? "selected-tab" : "unselected-tab"%>">
-          Timeline
-        </a>
-        <a href="<%= employee_team_path %>" class="<%= current_page?(employee_team_path) ? "selected-tab" : "unselected-tab"%>">
-          Team
-        </a>
+        <% if policy([:employee, :timeline]).index? %>
+          <a href="<%= employee_timeline_path %>" class="<%= current_page?(employee_timeline_path) ? "selected-tab" : "unselected-tab"%>">
+            Timeline
+          </a>
+        <% end %>
+        <% if policy([:employee, :team]).index? %>
+          <a href="<%= employee_team_path %>" class="<%= current_page?(employee_team_path) ? "selected-tab" : "unselected-tab"%>">
+            Team
+          </a>
+        <% end %>
         <a href="<%= employee_schedules_path %>" class="<%= current_page?(employee_schedules_path) ? "selected-tab" : "unselected-tab"%>">
-          Schedule
+          Schedules
         </a>
         <a href="<%= employee_feedbacks_path %>" class="<%= current_page?(employee_feedbacks_path) ? "selected-tab" : "unselected-tab"%>">
-          Feedback
+          Feedbacks
+        </a>
+        <a href="<%= employee_goals_path %>" class="<%= current_page?(employee_goals_path) ? "selected-tab" : "unselected-tab"%>">
+          Goals
         </a>
         <a href="<%= employee_timesheets_path %>" class="<%= current_page?(employee_timesheets_path) ? "selected-tab" : "unselected-tab"%>">
           Timesheets
