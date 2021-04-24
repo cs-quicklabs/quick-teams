@@ -19,6 +19,10 @@ class UserPresenter
     show_timesheet_stats(current_user) && user.active
   end
 
+  def show_add_goal_form
+    user.active
+  end
+
   private
 
   attr_accessor :user

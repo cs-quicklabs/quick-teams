@@ -8,6 +8,7 @@ regular:
   role: senior
   discipline: engineering
   manager: actor
+  permission: admin
 
 actor:
   first_name: Rachita

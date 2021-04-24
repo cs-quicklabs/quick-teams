@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class TimelineTest < ApplicationSystemTestCase
+class EmployeeTimelineTest < ApplicationSystemTestCase
   setup do
     @employee = users(:regular)
     @account = @employee.account
@@ -9,7 +9,7 @@ class TimelineTest < ApplicationSystemTestCase
   end
 
   def page_url
-    employee_timeline_url(script_name: "/#{@account.id}", user_is: @employee.id)
+    employee_timeline_url(script_name: "/#{@account.id}", employee_id: @employee.id)
   end
 
   test "can visit index page if logged in" do

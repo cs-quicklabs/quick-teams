@@ -2,12 +2,18 @@ class Employee::SchedulesController < Employee::BaseController
   before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
+    authorize @employee
+
     collection = Schedule.where(user: @employee).includes(:project, :user).order(created_at: :desc)
     @schedules = ScheduleDecorator.decorate_collection(collection)
     @schedule = Schedule.new
+
+    fresh_when @schedules
   end
 
   def update
+    authorize [:employee, @schedule]
+
     schedule = UpdateSchedule.call(@schedule, Project.find_by(id: schedule_params["project_id"]), @employee, schedule_params, current_user).result
 
     respond_to do |format|
@@ -20,6 +26,8 @@ class Employee::SchedulesController < Employee::BaseController
   end
 
   def create
+    authorize [:employee, Schedule]
+
     schedule = UpdateSchedule.call(Schedule.new, Project.find_by(id: schedule_params["project_id"]), @employee, schedule_params, current_user).result
 
     respond_to do |format|
@@ -32,9 +40,12 @@ class Employee::SchedulesController < Employee::BaseController
   end
 
   def edit
+    authorize [:employee, @schedule]
   end
 
   def destroy
+    authorize [:employee, @schedule]
+
     @schedule.destroy
     respond_to do |format|
       format.html { redirect_to employee_schedules_path(@employee), notice: "Schedule was removed successfully." }

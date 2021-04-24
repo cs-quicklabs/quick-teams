@@ -6,7 +6,7 @@
       <label for="date" class="block text-sm font-medium text-gray-700">
         Select Project
       </label>
-      <%= form.collection_select(:project_id, @employee.projects.order(:name), :id, :name, {:selected => @employee.projects.first}, :class=>"form-text-field mt-1" )%>
+      <%= form.collection_select(:project_id, @projects, :id, :name, {:selected => @projects.first}, :class=>"form-text-field mt-1" )%>
     </div>
     <div>
       <label for="date" class="block text-sm font-medium text-gray-700">
@@ -27,6 +27,6 @@
       <%= form.text_field :hours, class: 'form-text-field mt-1', placeholder: "Time spent in hours", autocomplete: "off"%>
     </div>
     <div class="flex justify-end mt-6">
-      <%= form.submit "Add Timesheet", class:"btn-blue"%>
+      <%= form.submit "Add Timesheet", class:"btn-blue cursor-pointer"%>
     </div>
   </main><% end %>

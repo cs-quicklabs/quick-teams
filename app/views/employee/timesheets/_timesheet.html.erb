@@ -1,8 +1,12 @@
 <tr id="<%= dom_id timesheet %>">
   <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-    <a href="<%= project_timesheets_path(timesheet.project)%>" class="block hover:underline">
+    <% if current_user.admin? %>
+      <a href="<%= project_timesheets_path(timesheet.project)%>" class="block hover:underline">
+        <%= timesheet.project.name %>
+      </a>
+    <% else %>
       <%= timesheet.project.name %>
-    </a>
+    <% end %>
   </td>
   <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-500 truncate whitespace-nowrap max-w-0">
     <%= timesheet.description%>
