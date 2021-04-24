@@ -2,27 +2,22 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy archive_project unarchive_project ]
   before_action :authenticate_user!
 
-  # GET /projects or /projects.json
   def index
-    @projects = ProjectDecorator.decorate_collection(Project.active.includes(:discipline, :participants, :manager, :status).order(:name))
+    @projects = Project.active.includes(:discipline, :participants, :manager, :status).order(:name)
     fresh_when @projects
   end
 
-  # GET /projects/1 or /projects/1.json
   def show
     redirect_to project_schedules_path(@project)
   end
 
-  # GET /projects/new
   def new
     @project = Project.new
   end
 
-  # GET /projects/1/edit
   def edit
   end
 
-  # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
 
@@ -49,7 +44,6 @@ class ProjectsController < ApplicationController
     redirect_to project_schedules_path(@project), notice: "Project has been restored."
   end
 
-  # PATCH/PUT /projects/1 or /projects/1.json
   def update
     respond_to do |format|
       if @project.update(project_params)
@@ -60,7 +54,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1 or /projects/1.json
   def destroy
     @project.destroy
     respond_to do |format|
@@ -72,7 +65,7 @@ class ProjectsController < ApplicationController
   private
 
   def set_project
-    @project = Project.find(params[:id])
+    @project ||= Project.find(params[:id])
   end
 
   def project_params

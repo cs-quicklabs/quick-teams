@@ -50,7 +50,7 @@ class Employee::TimesheetsController < Employee::BaseController
   end
 
   def set_timesheet
-    @timesheet = Timesheet.find(params["id"])
+    @timesheet ||= Timesheet.find(params["id"])
   end
 
   def timesheet_params

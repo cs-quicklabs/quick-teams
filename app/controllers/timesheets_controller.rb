@@ -2,6 +2,8 @@ class TimesheetsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    authorize :employee
+
     @filters = TimesheetFilter.new(timesheet_filter_params)
     @timesheet_entries = entries(Timesheet.query(timesheet_filter_params))
     @timesheets = TimesheetDecorator.decorate_collection(@timesheet_entries)

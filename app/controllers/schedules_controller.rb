@@ -6,9 +6,9 @@ class SchedulesController < ApplicationController
   def index
     employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
     if params[:job]
-      @employees = UserDecorator.decorate_collection(employees.where(job: params[:job]))
+      @employees = employees.where(job: params[:job])
     else
-      @employees = UserDecorator.decorate_collection(employees)
+      @employees = employees
     end
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
@@ -52,11 +52,11 @@ class SchedulesController < ApplicationController
   private
 
   def set_project
-    @project = Project.find(params["project_id"])
+    @project ||= Project.find(params["project_id"])
   end
 
   def set_schedule
-    @schedule = Schedule.find(params["id"])
+    @schedule ||= Schedule.find(params["id"])
   end
 
   def schedule_params

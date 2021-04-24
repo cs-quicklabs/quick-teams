@@ -3,16 +3,17 @@ class Project::BaseController < ApplicationController
   before_action :set_project, only: %i[ index show edit update destroy create ]
   before_action :set_statuses, only: %i[index]
   before_action :set_tags, only: %i[index]
+  after_action :verify_authorized
 
   def set_project
-    @project = Project.find(params["project_id"]).decorate
+    @project ||= Project.find(params["project_id"]).decorate
   end
 
   def set_statuses
-    @statuses = ProjectStatus.all.order(:name)
+    @statuses ||= ProjectStatus.all.order(:name)
   end
 
   def set_tags
-    @tags = ProjectTag.all.order(:name)
+    @tags ||= ProjectTag.all.order(:name)
   end
 end

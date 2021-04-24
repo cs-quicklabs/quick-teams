@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   def index
     authorize :home
-    @events = EventDecorator.decorate_collection(Event.includes(:user, :eventable, :trackable).order(created_at: :desc).limit(10))
+    @events = Event.includes(:user, :eventable, :trackable).order(created_at: :desc).limit(10)
     fresh_when @events
   end
 end

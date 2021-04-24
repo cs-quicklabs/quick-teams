@@ -31,7 +31,7 @@ class Project::FeedbacksController < Project::BaseController
   private
 
   def set_feedback
-    @feedback = Feedback.find(params["id"])
+    @feedback ||= Feedback.find(params["id"])
   end
 
   def feedback_params

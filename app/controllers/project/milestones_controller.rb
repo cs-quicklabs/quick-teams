@@ -34,7 +34,7 @@ class Project::MilestonesController < Project::BaseController
   private
 
   def set_milestone
-    @milestone = Goal.find(params["id"])
+    @milestone ||= Goal.find(params["id"])
   end
 
   def milestone_params

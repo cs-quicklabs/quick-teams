@@ -4,7 +4,7 @@ class Employee::FeedbacksController < Employee::BaseController
   def index
     authorize @employee
 
-    @feedbacks = FeedbackDecorator.decorate_collection(@employee.feedbacks.includes(:user).order(created_at: :desc))
+    @feedbacks = @employee.feedbacks.includes(:user).order(created_at: :desc)
     @feedback = Feedback.new
 
     fresh_when @feedbacks
@@ -45,7 +45,7 @@ class Employee::FeedbacksController < Employee::BaseController
   private
 
   def set_feedback
-    @feedback = Feedback.find(params["id"]).decorate
+    @feedback ||= Feedback.find(params["id"])
   end
 
   def feedback_params

@@ -4,8 +4,7 @@ class Employee::SchedulesController < Employee::BaseController
   def index
     authorize @employee
 
-    collection = Schedule.where(user: @employee).includes(:project, :user).order(created_at: :desc)
-    @schedules = ScheduleDecorator.decorate_collection(collection)
+    @schedules = Schedule.where(user: @employee).includes(:project, :user).order(created_at: :desc)
     @schedule = Schedule.new
 
     fresh_when @schedules
@@ -48,14 +47,14 @@ class Employee::SchedulesController < Employee::BaseController
 
     @schedule.destroy
     respond_to do |format|
-      format.html { redirect_to employee_schedules_path(@employee), notice: "Schedule was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@schedule) }
     end
   end
 
   private
 
   def set_schedule
-    @schedule = Schedule.find(params["id"])
+    @schedule ||= Schedule.find(params["id"])
   end
 
   def schedule_params

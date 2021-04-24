@@ -32,7 +32,7 @@ class UserController < ApplicationController
   private
 
   def set_user
-    @user = current_user
+    @user ||= current_user
   end
 
   def user_params
@@ -44,6 +44,6 @@ class UserController < ApplicationController
   end
 
   def build_form
-    @form = ChangePasswordForm.new(@user)
+    @form ||= ChangePasswordForm.new(@user)
   end
 end

@@ -59,7 +59,7 @@ class Account::ProjectStatusesController < Account::BaseController
   private
 
   def set_project_status
-    @project_status = ProjectStatus.find(params[:id])
+    @project_status ||= ProjectStatus.find(params[:id])
   end
 
   def project_status_params
