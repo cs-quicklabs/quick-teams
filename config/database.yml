@@ -79,3 +79,9 @@ production:
   database: skia_production
   username: skia
   password: <%= ENV['SKIA_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: skia_staging
+  username: skia
+  password: <%= ENV['SKIA_DATABASE_PASSWORD'] %>
