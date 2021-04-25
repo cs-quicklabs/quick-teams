@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/mimemagicrb/mimemagic.git
+  revision: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
+  ref: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
+  specs:
+    mimemagic (0.3.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -167,7 +174,6 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
-    mimemagic (0.3.5)
     mini_magick (4.11.0)
     mini_mime (1.0.2)
     minitest (5.14.4)
@@ -349,6 +355,7 @@ DEPENDENCIES
   letter_opener
   letter_opener_web
   listen (~> 3.3)
+  mimemagic!
   pagy
   pg (~> 1.1)
   puma (~> 5.0)
