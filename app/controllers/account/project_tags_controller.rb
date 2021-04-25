@@ -57,6 +57,6 @@ class Account::ProjectTagsController < Account::BaseController
   end
 
   def project_tag_params
-    params.require(:project_tag).permit(:name, :account_id)
+    params.require(:project_tag).permit(:name, :account_id, :color)
   end
 end

@@ -3,6 +3,39 @@
     <%= render "shared/form_messages", resource: project_tag, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Project Tags", subtitle: "You can define custom tags which can be applied to your projects. Examples include At Risk, In UAT." %>
     <%= form.text_field :name, "Add New Tag" %>
+    <div class="flex">
+      <label for="project_tag_color" class="text-sm">Appearance</label>
+      <div class="flex items-center ml-2 text-sm ">
+        <input checked type="radio" name="project_tag[color]" value="gray" class="w-4 h-4 text-gray-600 border-gray-300 cursor-pointer focus:ring-gray-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+        <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+          Gray
+        </span>
+      </div>
+      <div class="flex items-center ml-4 text-sm">
+        <input type="radio" name="project_tag[color]" value="red" class="w-4 h-4 text-red-600 border-gray-300 cursor-pointer focus:ring-red-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+        <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
+          Red
+        </span>
+      </div>
+      <div class="flex items-center ml-4 text-sm">
+        <input type="radio" name="project_tag[color]" value="yellow" class="w-4 h-4 text-yellow-600 border-gray-300 cursor-pointer focus:ring-yellow-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+        <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+          Yellow
+        </span>
+      </div>
+      <div class="flex items-center ml-4 text-sm">
+        <input type="radio" name="project_tag[color]" value="green" class="w-4 h-4 text-green-600 border-gray-300 cursor-pointer focus:ring-green-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+        <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+          Green
+        </span>
+      </div>
+      <div class="flex items-center ml-4 text-sm">
+        <input type="radio" name="project_tag[color]" value="blue" class="w-4 h-4 text-blue-600 border-gray-300 cursor-pointer focus:ring-blue-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+        <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+          Blue
+        </span>
+      </div>
+    </div>
     <div class="flex justify-end">
       <%= form.submit "Save", class:"btn-blue cursor-pointer"%>
     </div>
