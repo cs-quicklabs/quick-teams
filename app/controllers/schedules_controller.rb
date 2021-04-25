@@ -1,9 +1,11 @@
-class SchedulesController < ApplicationController
+class SchedulesController < BaseController
   before_action :authenticate_user!
   before_action :set_project, only: %i[ update create destroy edit ]
   before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
+    authorize :schedules
+
     employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
     if params[:job]
       @employees = employees.where(job: params[:job])
@@ -16,6 +18,8 @@ class SchedulesController < ApplicationController
   end
 
   def update
+    authorize :schedules
+
     schedule = UpdateSchedule.call(@schedule, @project, current_user, schedule_params, current_user).result
 
     respond_to do |format|
@@ -28,6 +32,8 @@ class SchedulesController < ApplicationController
   end
 
   def create
+    authorize :schedules
+
     schedule = UpdateSchedule.call(Schedule.new, @project, current_user, schedule_params, current_user).result
 
     respond_to do |format|
@@ -40,9 +46,12 @@ class SchedulesController < ApplicationController
   end
 
   def edit
+    authorize :schedules
   end
 
   def destroy
+    authorize :schedules
+
     @schedule.destroy
     respond_to do |format|
       format.html { redirect_to project_schedules_path(@project), notice: "Participant was removed successfully." }

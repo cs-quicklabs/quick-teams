@@ -1,24 +1,33 @@
-class ProjectsController < ApplicationController
+class ProjectsController < BaseController
   before_action :set_project, only: %i[ show edit update destroy archive_project unarchive_project ]
   before_action :authenticate_user!
 
   def index
+    authorize :projects
+
     @projects = Project.active.includes(:discipline, :participants, :manager, :status).order(:name)
     fresh_when @projects
   end
 
   def show
+    authorize :projects
+
     redirect_to project_schedules_path(@project)
   end
 
   def new
+    authorize :projects
+
     @project = Project.new
   end
 
   def edit
+    authorize :projects
   end
 
   def create
+    authorize :projects
+
     @project = Project.new(project_params)
 
     respond_to do |format|
@@ -30,21 +39,9 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def archived
-    @projects = ProjectDecorator.decorate_collection(Project.archived.includes(:discipline).order(archived_on: :desc))
-  end
-
-  def archive_project
-    ArchiveProject.call(@project, current_user)
-    redirect_to archived_projects_path, notice: "Project has been archived."
-  end
-
-  def unarchive_project
-    UnarchiveProject.call(@project, current_user)
-    redirect_to project_schedules_path(@project), notice: "Project has been restored."
-  end
-
   def update
+    authorize :projects
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated." }
@@ -55,11 +52,27 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    authorize :projects
+
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def archived
+    @projects = Project.archived.includes(:discipline).order(archived_on: :desc)
+  end
+
+  def archive_project
+    ArchiveProject.call(@project, current_user)
+    redirect_to archived_projects_path, notice: "Project has been archived."
+  end
+
+  def unarchive_project
+    UnarchiveProject.call(@project, current_user)
+    redirect_to project_schedules_path(@project), notice: "Project has been restored."
   end
 
   private

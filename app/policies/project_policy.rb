@@ -8,12 +8,10 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def index?
-    return true if user.admin?
-    return true if user.lead? and user.subordinate?(record)
-    user.id == record.id
+    user.admin?
   end
 
   def show?
-    user.admin? or record.id == user
+    user.admin?
   end
 end

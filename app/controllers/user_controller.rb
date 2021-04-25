@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UserController < BaseController
   before_action :authenticate_user!
   before_action :set_user
   before_action :build_form, only: [:update_password, :password]
