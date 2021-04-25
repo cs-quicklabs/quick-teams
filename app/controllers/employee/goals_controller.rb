@@ -17,8 +17,10 @@ class Employee::GoalsController < Employee::BaseController
 
     respond_to do |format|
       if @goal.persisted?
-        @goal = Goal.new
-        format.html { redirect_to employee_goals_path(@employee), notice: "Goal was added successfully." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:goals, partial: "employee/goals/goal", locals: { goal: @goal }) +
+                               turbo_stream.replace(Goal.new, partial: "employee/goals/form", locals: { goal: Goal.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Goal.new, partial: "employee/goals/form", locals: { goal: @goal }) }
       end

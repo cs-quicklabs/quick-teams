@@ -17,7 +17,7 @@ class Employee::SchedulesController < Employee::BaseController
 
     respond_to do |format|
       if schedule.errors.empty?
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "employee/schedules/schedule", locals: { schedule: @schedule.decorate }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "employee/schedules/schedule", locals: { schedule: @schedule }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "employee/schedules/form", locals: { schedule: @schedule }) }
       end
@@ -27,11 +27,14 @@ class Employee::SchedulesController < Employee::BaseController
   def create
     authorize [:employee, Schedule]
 
-    schedule = UpdateSchedule.call(Schedule.new, Project.find_by(id: schedule_params["project_id"]), @employee, schedule_params, current_user).result
+    @schedule = UpdateSchedule.call(Schedule.new, Project.find_by(id: schedule_params["project_id"]), @employee, schedule_params, current_user).result
 
     respond_to do |format|
-      if schedule.persisted?
-        format.html { redirect_to employee_schedules_path(@employee), notice: "Schedule was added successfully." }
+      if @schedule.persisted?
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:schedules, partial: "employee/schedules/schedule", locals: { schedule: @schedule }) +
+                               turbo_stream.replace(Schedule.new, partial: "employee/schedules/form", locals: { schedule: Schedule.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Schedule.new, partial: "employee/schedules/form", locals: { schedule: schedule }) }
       end
