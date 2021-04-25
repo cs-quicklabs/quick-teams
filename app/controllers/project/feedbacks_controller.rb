@@ -14,8 +14,10 @@ class Project::FeedbacksController < Project::BaseController
     @feedback = AddProjectFeedback.call(@project, feedback_params, current_user).result
     respond_to do |format|
       if @feedback.persisted?
-        @feedback = Feedback.new
-        format.html { redirect_to project_feedbacks_path(@project), notice: "Feedback was added successfully." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:feedbacks, partial: "project/feedbacks/feedback", locals: { feedback: @feedback }) +
+                               turbo_stream.replace(Feedback.new, partial: "project/feedbacks/form", locals: { feedback: Feedback.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Feedback.new, partial: "project/feedbacks/form", locals: { feedback: @feedback }) }
       end

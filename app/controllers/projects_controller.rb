@@ -5,7 +5,7 @@ class ProjectsController < BaseController
   def index
     authorize :projects
 
-    @projects = Project.active.includes(:discipline, :participants, :manager, :status).order(:name)
+    @projects = Project.active.includes(:discipline, :participants, :manager, :status, :project_tags).order(:name)
     fresh_when @projects
   end
 

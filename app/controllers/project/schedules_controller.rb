@@ -8,13 +8,13 @@ class Project::SchedulesController < Project::BaseController
   end
 
   def update
-    authorize @schedule
+    authorize [:project, @schedule]
 
-    schedule = UpdateSchedule.call(@schedule, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
+    @schedule = UpdateSchedule.call(@schedule, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
 
     respond_to do |format|
-      if schedule.errors.empty?
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "project/schedules/schedule", locals: { schedule: @schedule.decorate }) }
+      if @schedule.errors.empty?
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "project/schedules/schedule", locals: { schedule: @schedule }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/form", locals: { schedule: @schedule }) }
       end
@@ -24,11 +24,14 @@ class Project::SchedulesController < Project::BaseController
   def create
     authorize [:project, Schedule]
 
-    schedule = UpdateSchedule.call(Schedule.new, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
+    @schedule = UpdateSchedule.call(Schedule.new, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
 
     respond_to do |format|
-      if schedule.persisted?
-        format.html { redirect_to project_schedules_path(@project), notice: "Participant was added successfully." }
+      if @schedule.persisted?
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:milestones, partial: "project/schedules/schedule", locals: { schedule: @schedule }) +
+                               turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: Schedule.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: schedule }) }
       end
@@ -36,11 +39,11 @@ class Project::SchedulesController < Project::BaseController
   end
 
   def edit
-    authorize @schedule
+    authorize [:project, @schedule]
   end
 
   def destroy
-    authorize @schedule
+    authorize [:project, @schedule]
 
     @schedule.destroy
     respond_to do |format|

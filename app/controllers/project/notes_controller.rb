@@ -22,8 +22,10 @@ class Project::NotesController < Project::BaseController
     @note = AddNote.call(@project, note_params, current_user).result
     respond_to do |format|
       if @note.persisted?
-        @note = Note.new
-        format.html { redirect_to project_notes_path(@project), notice: "Note was added successfully." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:notes, partial: "project/notes/note", locals: { note: @note }) +
+                               turbo_stream.replace(Note.new, partial: "project/notes/form", locals: { note: Note.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Note.new, partial: "project/notes/form", locals: { note: @note }) }
       end

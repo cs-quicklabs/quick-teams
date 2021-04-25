@@ -14,8 +14,10 @@ class Project::MilestonesController < Project::BaseController
     @milestone = AddProjectMilestone.call(@project, milestone_params, current_user).result
     respond_to do |format|
       if @milestone.persisted?
-        @milestone = Goal.new
-        format.html { redirect_to project_milestones_path(@project), notice: "Milestone was added successfully." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:milestones, partial: "project/milestones/milestone", locals: { milestone: @milestone }) +
+                               turbo_stream.replace(Goal.new, partial: "project/milestones/form", locals: { milestone: Goal.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Goal.new, partial: "project/milestones/form", locals: { milestone: @milestone }) }
       end
@@ -23,7 +25,7 @@ class Project::MilestonesController < Project::BaseController
   end
 
   def destroy
-    authorize [:project, @goal]
+    authorize [:project, @milestone]
     @milestone.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@milestone) }
@@ -31,7 +33,7 @@ class Project::MilestonesController < Project::BaseController
   end
 
   def show
-    authorize [:project, @goal]
+    authorize [:project, @milestone]
 
     @comment = Comment.new
     fresh_when @milestone
