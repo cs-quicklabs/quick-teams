@@ -2,13 +2,16 @@ class Project::MilestonesController < Project::BaseController
   before_action :set_milestone, only: %i[show destroy]
 
   def index
+    authorize [:project, Goal]
+
     @milestones = @project.milestones.includes({ comments: :user }).order(created_at: :desc)
     @milestone = Goal.new
   end
 
   def create
-    @milestone = AddProjectMilestone.call(@project, milestone_params, current_user).result
+    authorize [:project, Goal]
 
+    @milestone = AddProjectMilestone.call(@project, milestone_params, current_user).result
     respond_to do |format|
       if @milestone.persisted?
         @milestone = Goal.new
@@ -20,6 +23,7 @@ class Project::MilestonesController < Project::BaseController
   end
 
   def destroy
+    authorize [:project, @goal]
     @milestone.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@milestone) }
@@ -27,6 +31,8 @@ class Project::MilestonesController < Project::BaseController
   end
 
   def show
+    authorize [:project, @goal]
+
     @comment = Comment.new
     fresh_when @milestone
   end

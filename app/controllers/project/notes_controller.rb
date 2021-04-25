@@ -2,11 +2,14 @@ class Project::NotesController < Project::BaseController
   before_action :set_note, only: %i[ destroy ]
 
   def index
+    authorize [:project, Note]
     @notes = @project.notes.order(created_at: :desc)
     @note = Note.new
   end
 
   def destroy
+    authorize [:project, @note]
+
     @note.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@note) }
@@ -14,6 +17,8 @@ class Project::NotesController < Project::BaseController
   end
 
   def create
+    authorize [:project, Note]
+
     @note = AddNote.call(@project, note_params, current_user).result
     respond_to do |format|
       if @note.persisted?

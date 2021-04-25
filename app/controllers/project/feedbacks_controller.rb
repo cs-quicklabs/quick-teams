@@ -2,11 +2,15 @@ class Project::FeedbacksController < Project::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
+    authorize [:project, Feedback]
+
     @feedbacks = @project.feedbacks.order(created_at: :desc)
     @feedback = Feedback.new
   end
 
   def create
+    authorize [:project, Feedback]
+
     @feedback = AddProjectFeedback.call(@project, feedback_params, current_user).result
     respond_to do |format|
       if @feedback.persisted?
@@ -19,6 +23,8 @@ class Project::FeedbacksController < Project::BaseController
   end
 
   def destroy
+    authorize [:project, @feedback]
+
     @feedback.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@feedback) }
@@ -26,6 +32,7 @@ class Project::FeedbacksController < Project::BaseController
   end
 
   def show
+    authorize [:project, @feedback]
   end
 
   private

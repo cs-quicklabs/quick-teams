@@ -2,11 +2,14 @@ class Project::SchedulesController < Project::BaseController
   before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
+    authorize [:project, Schedule]
     @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] })
     @schedule = Schedule.new
   end
 
   def update
+    authorize @schedule
+
     schedule = UpdateSchedule.call(@schedule, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
 
     respond_to do |format|
@@ -19,6 +22,8 @@ class Project::SchedulesController < Project::BaseController
   end
 
   def create
+    authorize [:project, Schedule]
+
     schedule = UpdateSchedule.call(Schedule.new, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
 
     respond_to do |format|
@@ -31,9 +36,12 @@ class Project::SchedulesController < Project::BaseController
   end
 
   def edit
+    authorize @schedule
   end
 
   def destroy
+    authorize @schedule
+
     @schedule.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@schedule) }
