@@ -1,7 +1,8 @@
 <%= turbo_frame_tag dom_id(people_tag) do %>
   <li class="flex py-4 border-b border-gray-200">
-    <div class="flex w-full ml-3">
-      <p class="w-full text-sm font-medium text-gray-900"><%= people_tag.name.titleize %></p>
+    <div class="flex items-center w-full ml-3">
+      <div class="flex-shrink-0 w-2.5 h-2.5 rounded-full bg-<%= people_tag.color %>-400" aria-hidden="true"></div>
+      <p class="w-full ml-2 text-sm font-medium text-gray-900"><%= people_tag.name.titleize %></p>
       <div class="flex">
         <%= link_to "Edit", edit_account_people_tag_path(people_tag), class: "btn-inline-edit" %>
         <%= link_to "Delete", account_people_tag_path(people_tag), method: :delete, class: "btn-inline-delete pl-2" %>
