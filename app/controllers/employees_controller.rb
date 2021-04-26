@@ -52,16 +52,22 @@ class EmployeesController < BaseController
   end
 
   def deactivate_user
+    authorize @employee, :update?
+
     DeactivateUser.call(@employee, current_user)
     redirect_to deactivated_users_path, notice: "User has been deactivated."
   end
 
   def activate_user
+    authorize @employee, :update?
+
     ActivateUser.call(@employee, current_user)
     redirect_to employee_path(@employee), notice: "User has been activated."
   end
 
   def deactivated
+    authorize :team, :index?
+
     @employees = User.for_current_account.inactive.includes(:role, :discipline, :job).order(deactivated_on: :desc)
   end
 

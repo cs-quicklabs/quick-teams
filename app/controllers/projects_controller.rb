@@ -62,15 +62,21 @@ class ProjectsController < BaseController
   end
 
   def archived
+    authorize :projects, :index?
+
     @projects = Project.archived.includes(:discipline).order(archived_on: :desc)
   end
 
   def archive_project
+    authorize :projects, :update?
+
     ArchiveProject.call(@project, current_user)
     redirect_to archived_projects_path, notice: "Project has been archived."
   end
 
   def unarchive_project
+    authorize :projects, :update?
+
     UnarchiveProject.call(@project, current_user)
     redirect_to project_schedules_path(@project), notice: "Project has been restored."
   end
