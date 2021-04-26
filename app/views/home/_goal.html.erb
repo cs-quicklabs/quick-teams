@@ -19,7 +19,7 @@
               <a href="<%= employee_goal_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.title%></a>
             <% end %>
             for
-            <a href="<%= employee_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.first_name + " " + event.eventable.last_name%></a>
+            <a href="<%= employee_goals_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

@@ -12,7 +12,7 @@
           <p class="text-sm text-gray-500">
             <a href="<%= employee_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name%></a>
             activated employee
-            <a href="<%= employee_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.first_name + " " + event.eventable.last_name%></a>
+            <a href="<%= employee_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name%></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

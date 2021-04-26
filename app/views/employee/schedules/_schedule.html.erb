@@ -5,7 +5,7 @@
       <div class="flex items-center flex-1 min-w-0">
         <div class="flex-1 min-w-0 md:grid md:grid-cols-3 md:gap-4">
           <% if current_user.admin? %>
-            <a href="<%= project_path(schedule.project)%>" class="block hover:underline" target="_top">
+            <a href="<%= project_schedules_path(schedule.project)%>" class="block hover:underline" target="_top">
               <div>
                 <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.project.name%></p>
               </div>

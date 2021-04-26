@@ -16,13 +16,13 @@
               which does not exist anymore
             <% else %>
               for
-              <a href="<%= employee_path(event.trackable.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.user.first_name + " " + event.trackable.user.last_name %>
+              <a href="<%= employee_schedules_path(event.trackable.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.user.decorate.display_name %>
               </a>
               <%= event.action_for_context %>
             <% end %>
             <% if !event.eventable.nil?%>
               in
-              <a href="<%= project_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
+              <a href="<%= project_schedules_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
             <% end %>
           </p>
         </div>
