@@ -20,11 +20,12 @@ class SchedulesController < BaseController
   def update
     authorize :schedules
 
-    schedule = UpdateSchedule.call(@schedule, @project, current_user, schedule_params, current_user).result
+    @schedule = UpdateSchedule.call(@schedule, @project, current_user, schedule_params, current_user).result
 
     respond_to do |format|
-      if schedule.errors.empty?
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "project/schedule/schedule", locals: { schedule: @schedule.decorate }) }
+      if @schedule.errors.empty?
+        render turbo_stream: turbo_stream.prepend("schedules", partial: "project/schedules/schedule", locals: { schedule: @schedule }) +
+                             turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: Schedule.new })
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/form", locals: { schedule: @schedule }) }
       end
