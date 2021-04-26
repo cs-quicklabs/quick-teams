@@ -4,7 +4,7 @@ class Employee::GoalsController < Employee::BaseController
   def index
     authorize @employee
 
-    @goals = GoalDecorator.decorate_collection(@employee.goals.includes(:user).order(created_at: :desc))
+    @goals = @employee.goals.includes(:user).order(created_at: :desc)
     @goal = Goal.new
 
     fresh_when @goals
@@ -17,8 +17,10 @@ class Employee::GoalsController < Employee::BaseController
 
     respond_to do |format|
       if @goal.persisted?
-        @goal = Goal.new
-        format.html { redirect_to employee_goals_path(@employee), notice: "Goal was added successfully." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:goals, partial: "employee/goals/goal", locals: { goal: @goal }) +
+                               turbo_stream.replace(Goal.new, partial: "employee/goals/form", locals: { goal: Goal.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Goal.new, partial: "employee/goals/form", locals: { goal: @goal }) }
       end
@@ -30,7 +32,7 @@ class Employee::GoalsController < Employee::BaseController
 
     @goal.destroy
     respond_to do |format|
-      format.html { redirect_to employee_goals_path(@employee), notice: "Goal was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@goal) }
     end
   end
 
@@ -44,7 +46,7 @@ class Employee::GoalsController < Employee::BaseController
   private
 
   def set_goal
-    @goal = Goal.find(params["id"]).decorate
+    @goal ||= Goal.find(params["id"])
   end
 
   def goal_params

@@ -53,7 +53,7 @@ class Account::PeopleStatusesController < Account::BaseController
   private
 
   def set_people_status
-    @people_status = PeopleStatus.find(params[:id])
+    @people_status ||= PeopleStatus.find(params[:id])
   end
 
   def people_status_params

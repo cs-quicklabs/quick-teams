@@ -2,7 +2,6 @@
   <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
     <h1 class="text-3xl font-bold leading-tight text-gray-900">
       <%= project.name %>
-      <p class="text-sm font-medium text-gray-600"><%= project.description %></p>
     </h1>
     <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= project.display_discipline%></p>
     <% if current_user.admin? %>
@@ -69,5 +68,6 @@
     <% end %>
   </div>
 </div>
+<p class="px-6 -mt-2 text-sm font-medium text-gray-500 truncate"><%= project.description %></p>
 <%= render 'project/tabs'%>
 </div>

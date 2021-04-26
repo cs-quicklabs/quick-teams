@@ -1,14 +1,16 @@
-class SchedulesController < ApplicationController
+class SchedulesController < BaseController
   before_action :authenticate_user!
   before_action :set_project, only: %i[ update create destroy edit ]
   before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
+    authorize :schedules
+
     employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
     if params[:job]
-      @employees = UserDecorator.decorate_collection(employees.where(job: params[:job]))
+      @employees = employees.where(job: params[:job])
     else
-      @employees = UserDecorator.decorate_collection(employees)
+      @employees = employees
     end
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
@@ -16,11 +18,14 @@ class SchedulesController < ApplicationController
   end
 
   def update
-    schedule = UpdateSchedule.call(@schedule, @project, current_user, schedule_params, current_user).result
+    authorize :schedules
+
+    @schedule = UpdateSchedule.call(@schedule, @project, current_user, schedule_params, current_user).result
 
     respond_to do |format|
-      if schedule.errors.empty?
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "project/schedule/schedule", locals: { schedule: @schedule.decorate }) }
+      if @schedule.errors.empty?
+        render turbo_stream: turbo_stream.prepend("schedules", partial: "project/schedules/schedule", locals: { schedule: @schedule }) +
+                             turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: Schedule.new })
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/form", locals: { schedule: @schedule }) }
       end
@@ -28,6 +33,8 @@ class SchedulesController < ApplicationController
   end
 
   def create
+    authorize :schedules
+
     schedule = UpdateSchedule.call(Schedule.new, @project, current_user, schedule_params, current_user).result
 
     respond_to do |format|
@@ -40,9 +47,12 @@ class SchedulesController < ApplicationController
   end
 
   def edit
+    authorize :schedules
   end
 
   def destroy
+    authorize :schedules
+
     @schedule.destroy
     respond_to do |format|
       format.html { redirect_to project_schedules_path(@project), notice: "Participant was removed successfully." }
@@ -52,11 +62,11 @@ class SchedulesController < ApplicationController
   private
 
   def set_project
-    @project = Project.find(params["project_id"])
+    @project ||= Project.find(params["project_id"])
   end
 
   def set_schedule
-    @schedule = Schedule.find(params["id"])
+    @schedule ||= Schedule.find(params["id"])
   end
 
   def schedule_params

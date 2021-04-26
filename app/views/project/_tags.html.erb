@@ -1,8 +1,8 @@
 <% if project.project_tags.size > 0 %>
   <% project.project_tags.each do |tag| %>
-    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 ml-2">
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-<%= tag.color %>-100 text-<%= tag.color %>-800 ml-2">
       <%= tag.name %>
-      <button data-reflex="click->ProjectTags#remove" data-tag-id=<%= tag.id%> data-project-id=<%= project.id%> type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white">
+      <button data-reflex="click->ProjectTags#remove" data-tag-id=<%= tag.id%> data-project-id=<%= project.id%> type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-<%= tag.color %>-400 hover:bg-<%= tag.color %>-200 hover:text-<%= tag.color %>-500 focus:outline-none focus:bg-<%= tag.color %>-500 focus:text-white">
         <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
           <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
         </svg>

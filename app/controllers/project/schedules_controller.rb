@@ -2,17 +2,20 @@ class Project::SchedulesController < Project::BaseController
   before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
-    collection = Schedule.where(project: @project).includes({ user: [:role, :job] })
-    @schedules = ScheduleDecorator.decorate_collection(collection)
+    authorize [:project, Schedule]
+    @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] })
     @schedule = Schedule.new
   end
 
   def update
-    schedule = UpdateSchedule.call(@schedule, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
+    authorize [:project, @schedule]
+
+    @schedule = UpdateSchedule.call(@schedule, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
 
     respond_to do |format|
-      if schedule.errors.empty?
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "project/schedules/schedule", locals: { schedule: @schedule.decorate }) }
+      if @schedule.errors.empty?
+        render turbo_stream: turbo_stream.prepend("schedules", partial: "project/schedules/schedule", locals: { schedule: @schedule }) +
+                             turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: Schedule.new })
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/form", locals: { schedule: @schedule }) }
       end
@@ -20,11 +23,16 @@ class Project::SchedulesController < Project::BaseController
   end
 
   def create
-    schedule = UpdateSchedule.call(Schedule.new, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
+    authorize [:project, Schedule]
+
+    @schedule = UpdateSchedule.call(Schedule.new, @project, User.find_by(id: schedule_params["user_id"]), schedule_params, current_user).result
 
     respond_to do |format|
-      if schedule.persisted?
-        format.html { redirect_to project_schedules_path(@project), notice: "Participant was added successfully." }
+      if @schedule.persisted?
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:milestones, partial: "project/schedules/schedule", locals: { schedule: @schedule }) +
+                               turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: Schedule.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: schedule }) }
       end
@@ -32,19 +40,22 @@ class Project::SchedulesController < Project::BaseController
   end
 
   def edit
+    authorize [:project, @schedule]
   end
 
   def destroy
+    authorize [:project, @schedule]
+
     @schedule.destroy
     respond_to do |format|
-      format.html { redirect_to project_schedules_path(@project), notice: "Participant was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@schedule) }
     end
   end
 
   private
 
   def set_schedule
-    @schedule = Schedule.find(params["id"])
+    @schedule ||= Schedule.find(params["id"])
   end
 
   def schedule_params

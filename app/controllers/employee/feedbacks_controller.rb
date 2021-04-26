@@ -4,7 +4,7 @@ class Employee::FeedbacksController < Employee::BaseController
   def index
     authorize @employee
 
-    @feedbacks = FeedbackDecorator.decorate_collection(@employee.feedbacks.includes(:user).order(created_at: :desc))
+    @feedbacks = @employee.feedbacks.includes(:user).order(created_at: :desc)
     @feedback = Feedback.new
 
     fresh_when @feedbacks
@@ -18,7 +18,7 @@ class Employee::FeedbacksController < Employee::BaseController
     respond_to do |format|
       if @feedback.persisted?
         format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend(:feedbacks, partial: "employee/feedbacks/feedback", locals: { feedback: @feedback.decorate }) +
+          render turbo_stream: turbo_stream.prepend(:feedbacks, partial: "employee/feedbacks/feedback", locals: { feedback: @feedback }) +
                                turbo_stream.replace(Feedback.new, partial: "employee/feedbacks/form", locals: { feedback: Feedback.new })
         }
       else
@@ -45,7 +45,7 @@ class Employee::FeedbacksController < Employee::BaseController
   private
 
   def set_feedback
-    @feedback = Feedback.find(params["id"]).decorate
+    @feedback ||= Feedback.find(params["id"])
   end
 
   def feedback_params

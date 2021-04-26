@@ -1,10 +1,12 @@
 class ProjectTimesheetsStats
+  include Statable
+
   attr_accessor :stats, :title, :contributors
 
   def initialize(project, time_span)
     @project = project
     @time_span = time_span
-    @entries = project.timesheets.where(date: date_range)
+    @entries = project.timesheets.where(date: date_range(time_span))
     @stats = TimesheetsStats.new(@entries)
   end
 
@@ -22,35 +24,7 @@ class ProjectTimesheetsStats
   end
 
   def title
-    title_message = ""
-    start_date = date_range.first
-    end_date = date_range.last
-    if @time_span === "week"
-      title_message = "Last Week's Performance (#{start_date.to_s(:long)} to #{end_date.to_s(:long)})"
-    elsif @time_span === "month"
-      title_message = "Last Months's Performance (#{start_date.to_s(:long)} to #{end_date.to_s(:long)})"
-    elsif @time_span === "beginning"
-      title_message = "Performance since Beginning"
-    end
-    title_message
-  end
-
-  private
-
-  def date_range
-    range, start_date, end_date = nil
-    if @time_span === "week"
-      start_date = 7.days.ago.to_date
-      end_date = Date.current
-    elsif @time_span === "month"
-      start_date = 30.days.ago.to_date
-      end_date = Date.current
-    elsif @time_span === "beginning"
-      start_date = 1000.days.ago.to_date
-      end_date = Date.current
-    end
-
-    (start_date..end_date)
+    stats_title(@time_span)
   end
 end
 

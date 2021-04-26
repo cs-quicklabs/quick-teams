@@ -34,4 +34,16 @@ class UserPolicy < ApplicationPolicy
     return true if user.lead? and user.subordinate?(record)
     false
   end
+
+  def profile?
+    true
+  end
+
+  def password?
+    true
+  end
+
+  def update_password?
+    true
+  end
 end

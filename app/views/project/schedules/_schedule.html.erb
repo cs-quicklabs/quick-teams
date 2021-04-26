@@ -1,4 +1,5 @@
 <%= turbo_frame_tag dom_id(schedule) do %>
+  <% schedule = schedule.decorate %>
   <li class="border-b border-gray-200">
     <div class="flex items-center px-2 py-2 sm:px-6">
       <div class="flex items-center flex-1 min-w-0">
@@ -8,7 +9,7 @@
         <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4">
           <a href="<%= employee_path(schedule.user)%>" class="block hover:underline" target="_top">
             <div>
-              <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.user.display_name%></p>
+              <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.user.decorate.display_name%></p>
               <p class="flex items-center mt-1 text-sm text-gray-500">
                 <span class="truncate"><%= schedule.user.display_position%></span>
               </p>

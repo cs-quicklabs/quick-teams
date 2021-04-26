@@ -1,29 +1,33 @@
-class ProjectsController < ApplicationController
+class ProjectsController < BaseController
   before_action :set_project, only: %i[ show edit update destroy archive_project unarchive_project ]
   before_action :authenticate_user!
 
-  # GET /projects or /projects.json
   def index
-    @projects = ProjectDecorator.decorate_collection(Project.active.includes(:discipline, :participants, :manager, :status).order(:name))
+    authorize :projects
+
+    @projects = Project.active.includes(:discipline, :participants, :manager, :status, :project_tags).order(:name)
     fresh_when @projects
   end
 
-  # GET /projects/1 or /projects/1.json
   def show
+    authorize :projects
+
     redirect_to project_schedules_path(@project)
   end
 
-  # GET /projects/new
   def new
+    authorize :projects
+
     @project = Project.new
   end
 
-  # GET /projects/1/edit
   def edit
+    authorize :projects
   end
 
-  # POST /projects or /projects.json
   def create
+    authorize :projects
+
     @project = Project.new(project_params)
 
     respond_to do |format|
@@ -35,8 +39,30 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def update
+    authorize :projects
+
+    respond_to do |format|
+      if @project.update(project_params)
+        format.html { redirect_to @project, notice: "Project was successfully updated." }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project, partial: "projects/forms/form", locals: { project: @project, title: "Edit Project", subtitle: "Please update details of existing project" }) }
+      end
+    end
+  end
+
+  def destroy
+    authorize :projects
+
+    @project.destroy
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
   def archived
-    @projects = ProjectDecorator.decorate_collection(Project.archived.includes(:discipline).order(archived_on: :desc))
+    @projects = Project.archived.includes(:discipline).order(archived_on: :desc)
   end
 
   def archive_project
@@ -49,30 +75,10 @@ class ProjectsController < ApplicationController
     redirect_to project_schedules_path(@project), notice: "Project has been restored."
   end
 
-  # PATCH/PUT /projects/1 or /projects/1.json
-  def update
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: "Project was successfully updated." }
-      else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@project, partial: "projects/forms/form", locals: { project: @project, title: "Edit Project", subtitle: "Please update details of existing project" }) }
-      end
-    end
-  end
-
-  # DELETE /projects/1 or /projects/1.json
-  def destroy
-    @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   private
 
   def set_project
-    @project = Project.find(params[:id])
+    @project ||= Project.find(params[:id])
   end
 
   def project_params
