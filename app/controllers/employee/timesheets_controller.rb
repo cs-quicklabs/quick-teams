@@ -3,7 +3,7 @@ class Employee::TimesheetsController < Employee::BaseController
   before_action :set_projects, only: %i[create index]
 
   def index
-    authorize @employee
+    authorize @employee, :show_timesheets?
 
     @timesheet = Timesheet.new
     @timesheets = @employee.timesheets.includes(:project).last_30_days.order(date: :desc)

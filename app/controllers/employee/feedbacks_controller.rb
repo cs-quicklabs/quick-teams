@@ -2,7 +2,7 @@ class Employee::FeedbacksController < Employee::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
-    authorize @employee
+    authorize @employee, :show_feedbacks?
 
     @feedbacks = @employee.feedbacks.includes(:user).order(created_at: :desc)
     @feedback = Feedback.new

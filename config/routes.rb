@@ -38,8 +38,8 @@ Rails.application.routes.draw do
   get "/contact", to: "static/static#contact"
   get "/pricing", to: "static/static#pricing"
 
-  get "/schedules", to: "schedules#index", as: "schedules"
-  get "timesheets", to: "timesheets#index", as: "timesheets"
+  get "/schedule", to: "schedules#index", as: "schedules"
+  get "/timesheet", to: "timesheets#index", as: "timesheets"
   get :search, controller: :search
 
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)

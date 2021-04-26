@@ -46,7 +46,7 @@ class EmployeesController < BaseController
   end
 
   def show
-    authorize :team
+    authorize @employee
 
     redirect_to employee_team_path(@employee)
   end

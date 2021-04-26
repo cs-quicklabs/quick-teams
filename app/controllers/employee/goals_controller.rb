@@ -2,7 +2,7 @@ class Employee::GoalsController < Employee::BaseController
   before_action :set_goal, only: %i[show destroy]
 
   def index
-    authorize @employee
+    authorize @employee, :show_goals?
 
     @goals = @employee.goals.includes(:user).order(created_at: :desc)
     @goal = Goal.new
