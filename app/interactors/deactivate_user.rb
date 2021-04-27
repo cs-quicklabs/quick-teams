@@ -22,11 +22,11 @@ class DeactivateUser < Patterns::Service
   private
 
   def remove_as_people_manager
-    user.subordinates.update_all(manager_id: nil)
+    user.subordinates.update_all(manager_id: nil, updated_at: DateTime.now)
   end
 
   def remove_as_project_manager
-    Project.where(manager_id: user.id).update_all(manager_id: nil)
+    Project.where(manager_id: user.id).update_all(manager_id: nil, updated_at: DateTime.now)
   end
 
   def remove_reporting_manager
