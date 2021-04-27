@@ -63,6 +63,6 @@ class Account::ProjectStatusesController < Account::BaseController
   end
 
   def project_status_params
-    params.require(:project_status).permit(:name, :account_id)
+    params.require(:project_status).permit(:name, :account_id, :color)
   end
 end

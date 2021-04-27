@@ -57,6 +57,6 @@ class Account::PeopleStatusesController < Account::BaseController
   end
 
   def people_status_params
-    params.require(:people_status).permit(:name, :account_id)
+    params.require(:people_status).permit(:name, :account_id, :color)
   end
 end
