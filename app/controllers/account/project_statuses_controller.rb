@@ -59,10 +59,10 @@ class Account::ProjectStatusesController < Account::BaseController
   private
 
   def set_project_status
-    @project_status = ProjectStatus.find(params[:id])
+    @project_status ||= ProjectStatus.find(params[:id])
   end
 
   def project_status_params
-    params.require(:project_status).permit(:name, :account_id)
+    params.require(:project_status).permit(:name, :account_id, :color)
   end
 end

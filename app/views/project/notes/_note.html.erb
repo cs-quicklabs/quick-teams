@@ -1,11 +1,11 @@
-<li>
+<li id=<%= dom_id(note) %>>
   <div class="flex space-x-3">
     <div class="flex-shrink-0">
       <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
     </div>
     <div>
       <div class="text-sm">
-        <a href="#" class="font-medium text-gray-900"><%= note.author.display_name%></a>
+        <a href="#" class="font-medium text-gray-900"><%= note.user.decorate.display_name%></a>
       </div>
       <div class="mt-1 text-sm text-gray-700">
         <p class="whitespace-pre-wrap"><%= note.body%></p>

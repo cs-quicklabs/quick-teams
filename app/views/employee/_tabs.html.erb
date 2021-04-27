@@ -11,28 +11,36 @@
   <div class="hidden sm:block">
     <div class="border-b border-gray-200">
       <nav class="flex -mb-px space-x-8 lg:px-8" aria-label="Tabs">
-        <% if policy([:employee, :timeline]).index? %>
+        <% if policy(employee).show_timeline? %>
           <a href="<%= employee_timeline_path %>" class="<%= current_page?(employee_timeline_path) ? "selected-tab" : "unselected-tab"%>">
             Timeline
           </a>
         <% end %>
-        <% if policy([:employee, :team]).index? %>
+        <% if policy(employee).show_team? %>
           <a href="<%= employee_team_path %>" class="<%= current_page?(employee_team_path) ? "selected-tab" : "unselected-tab"%>">
             Team
           </a>
         <% end %>
-        <a href="<%= employee_schedules_path %>" class="<%= current_page?(employee_schedules_path) ? "selected-tab" : "unselected-tab"%>">
-          Schedules
-        </a>
-        <a href="<%= employee_feedbacks_path %>" class="<%= current_page?(employee_feedbacks_path) ? "selected-tab" : "unselected-tab"%>">
-          Feedbacks
-        </a>
-        <a href="<%= employee_goals_path %>" class="<%= current_page?(employee_goals_path) ? "selected-tab" : "unselected-tab"%>">
-          Goals
-        </a>
-        <a href="<%= employee_timesheets_path %>" class="<%= current_page?(employee_timesheets_path) ? "selected-tab" : "unselected-tab"%>">
-          Timesheets
-        </a>
+        <% if policy(employee).show_schedules? %>
+          <a href="<%= employee_schedules_path %>" class="<%= current_page?(employee_schedules_path) ? "selected-tab" : "unselected-tab"%>">
+            Schedules
+          </a>
+        <% end %>
+        <% if policy(employee).show_feedbacks? %>
+          <a href="<%= employee_feedbacks_path %>" class="<%= current_page?(employee_feedbacks_path) ? "selected-tab" : "unselected-tab"%>">
+            Feedbacks
+          </a>
+        <% end %>
+        <% if policy(employee).show_goals? %>
+          <a href="<%= employee_goals_path %>" class="<%= current_page?(employee_goals_path) ? "selected-tab" : "unselected-tab"%>">
+            Goals
+          </a>
+        <% end %>
+        <% if policy(employee).show_timesheets? %>
+          <a href="<%= employee_timesheets_path %>" class="<%= current_page?(employee_timesheets_path) ? "selected-tab" : "unselected-tab"%>">
+            Timesheets
+          </a>
+        <% end %>
       </nav>
     </div>
   </div>

@@ -12,4 +12,12 @@ class Employee::SchedulePolicy < ApplicationPolicy
 
     record.all { |schedule| schedule.user_id == user.id }
   end
+
+  def destroy?
+    user.admin?
+  end
+
+  def edit?
+    user.admin?
+  end
 end

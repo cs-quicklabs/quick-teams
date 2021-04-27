@@ -3,7 +3,7 @@ class Employee::TimesheetsController < Employee::BaseController
   before_action :set_projects, only: %i[create index]
 
   def index
-    authorize @employee
+    authorize @employee, :show_timesheets?
 
     @timesheet = Timesheet.new
     @timesheets = @employee.timesheets.includes(:project).last_30_days.order(date: :desc)
@@ -50,7 +50,7 @@ class Employee::TimesheetsController < Employee::BaseController
   end
 
   def set_timesheet
-    @timesheet = Timesheet.find(params["id"])
+    @timesheet ||= Timesheet.find(params["id"])
   end
 
   def timesheet_params

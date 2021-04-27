@@ -53,10 +53,10 @@ class Account::ProjectTagsController < Account::BaseController
   private
 
   def set_project_tag
-    @project_tag = ProjectTag.find(params[:id])
+    @project_tag ||= ProjectTag.find(params[:id])
   end
 
   def project_tag_params
-    params.require(:project_tag).permit(:name, :account_id)
+    params.require(:project_tag).permit(:name, :account_id, :color)
   end
 end

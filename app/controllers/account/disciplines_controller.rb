@@ -59,7 +59,7 @@ class Account::DisciplinesController < Account::BaseController
   private
 
   def set_discipline
-    @discipline = Discipline.find(params[:id])
+    @discipline ||= Discipline.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

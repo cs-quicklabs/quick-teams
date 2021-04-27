@@ -52,10 +52,10 @@ class Account::PeopleTagsController < Account::BaseController
   private
 
   def set_people_tag
-    @people_tag = PeopleTag.find(params[:id])
+    @people_tag ||= PeopleTag.find(params[:id])
   end
 
   def people_tag_params
-    params.require(:people_tag).permit(:name, :account_id)
+    params.require(:people_tag).permit(:name, :account_id, :color)
   end
 end

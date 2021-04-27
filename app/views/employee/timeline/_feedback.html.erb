@@ -10,7 +10,7 @@
       <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
         <div>
           <p class="text-sm text-gray-500">
-            <a href="<%= employee_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name%></a>
+            <a href="<%= employee_timeline_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name%></a>
             added a new feedback 
             <% if event.trackable.nil?%>
               which does not exist anymore.
@@ -18,6 +18,8 @@
               titled
               <a href="<%= employee_feedback_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.title%></a>
             <% end %>
+            for
+            <a href="<%= employee_feedbacks_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.first_name + " " + event.eventable.last_name%></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

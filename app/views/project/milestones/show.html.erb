@@ -17,7 +17,7 @@
             </span>
           </div>
           <div class="mt-1 space-x-2 text-sm">
-            <span class="font-medium text-gray-500">Created By <%= @milestone.author.display_name%> on <%= display_created_at(@milestone) %></span>
+            <span class="font-medium text-gray-500">Created By <%= @milestone.user.decorate.display_name%> on <%= display_created_at(@milestone) %></span>
           </div>
         </div>
       </div>

@@ -2,17 +2,22 @@ class Project::MilestonesController < Project::BaseController
   before_action :set_milestone, only: %i[show destroy]
 
   def index
-    @milestones = MilestoneDecorator.decorate_collection(@project.milestones.includes({ comments: :user }).order(created_at: :desc))
+    authorize [:project, Goal]
+
+    @milestones = @project.milestones.includes({ comments: :user }).order(created_at: :desc)
     @milestone = Goal.new
   end
 
   def create
-    @milestone = AddProjectMilestone.call(@project, milestone_params, current_user).result
+    authorize [:project, Goal]
 
+    @milestone = AddProjectMilestone.call(@project, milestone_params, current_user).result
     respond_to do |format|
       if @milestone.persisted?
-        @milestone = Goal.new
-        format.html { redirect_to project_milestones_path(@project), notice: "Milestone was added successfully." }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:milestones, partial: "project/milestones/milestone", locals: { milestone: @milestone }) +
+                               turbo_stream.replace(Goal.new, partial: "project/milestones/form", locals: { milestone: Goal.new })
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Goal.new, partial: "project/milestones/form", locals: { milestone: @milestone }) }
       end
@@ -20,13 +25,16 @@ class Project::MilestonesController < Project::BaseController
   end
 
   def destroy
+    authorize [:project, @milestone]
     @milestone.destroy
     respond_to do |format|
-      format.html { redirect_to project_milestones_path(@project), notice: "Milestone was removed successfully." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@milestone) }
     end
   end
 
   def show
+    authorize [:project, @milestone]
+
     @comment = Comment.new
     fresh_when @milestone
   end
@@ -34,7 +42,7 @@ class Project::MilestonesController < Project::BaseController
   private
 
   def set_milestone
-    @milestone = Goal.find(params["id"]).decorate
+    @milestone ||= Goal.find(params["id"])
   end
 
   def milestone_params

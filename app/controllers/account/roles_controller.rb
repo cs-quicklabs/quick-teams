@@ -53,7 +53,7 @@ class Account::RolesController < Account::BaseController
   private
 
   def set_role
-    @role = Role.find(params[:id])
+    @role ||= Role.find(params[:id])
   end
 
   def role_params

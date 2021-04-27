@@ -1,7 +1,7 @@
-class CommentsController < ApplicationController
-  before_action :authenticate_user!
-
+class CommentsController < BaseController
   def create
+    authorize :comments
+
     @comment = Comment.new(comment_params)
     respond_to do |format|
       if @comment.save

@@ -18,4 +18,8 @@ class Employee::GoalPolicy < ApplicationPolicy
   def comment?
     user.admin? or record.user == user
   end
+
+  def destroy?
+    user.admin?
+  end
 end

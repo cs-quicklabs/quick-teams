@@ -51,7 +51,7 @@ class Account::JobsController < Account::BaseController
   private
 
   def set_job
-    @job = Job.find(params[:id])
+    @job ||= Job.find(params[:id])
   end
 
   def job_params

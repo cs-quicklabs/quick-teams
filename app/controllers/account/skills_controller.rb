@@ -53,7 +53,7 @@ class Account::SkillsController < Account::BaseController
   private
 
   def set_skill
-    @skill = Skill.find(params[:id])
+    @skill ||= Skill.find(params[:id])
   end
 
   def skill_params
