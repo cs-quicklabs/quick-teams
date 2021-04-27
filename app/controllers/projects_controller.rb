@@ -28,10 +28,10 @@ class ProjectsController < BaseController
   def create
     authorize :projects
 
-    @project = Project.new(project_params)
+    @project = CreateProject.call(project_params, current_user).result
 
     respond_to do |format|
-      if @project.save
+      if @project.errors.empty?
         format.html { redirect_to @project, notice: "Project was successfully created." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Project.new, partial: "projects/forms/form", locals: { project: @project, title: "Create New Project", subtitle: "Please fill in the details of you new Project." }) }
