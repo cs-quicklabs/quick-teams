@@ -37,15 +37,8 @@
     </div>
   </td>
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
-  <% employee.people_tags.each do |tag| %>
-    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-<%= tag.color %>-100 text-<%= tag.color %>-800 ml-2">
-      <%= tag.name %>
-      </span>
-    <%end %>
-  </td>
-  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
     <% unless employee.status.nil? %>
-      <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-<%= employee.status.color %>-100 text-<%= employee.status.color %>-800">
+      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= tag.color %>-800 bg-<%= employee.status.color %>-100 rounded-full">
         <%= employee.status.name  %>
       </span>
     <%end %>
