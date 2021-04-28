@@ -48,7 +48,7 @@ class Employee::SchedulesController < Employee::BaseController
   def destroy
     authorize [:employee, @schedule]
 
-    @schedule.destroy
+    @schedule = RemoveSchedule.call(@schedule, current_user).result
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@schedule) }
     end

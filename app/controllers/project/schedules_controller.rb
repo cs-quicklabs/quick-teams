@@ -46,7 +46,7 @@ class Project::SchedulesController < Project::BaseController
   def destroy
     authorize [:project, @schedule]
 
-    @schedule.destroy
+    @schedule = RemoveSchedule.call(@schedule, current_user).result
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@schedule) }
     end

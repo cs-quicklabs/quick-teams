@@ -2,7 +2,11 @@ class Employee::TimelineController < Employee::BaseController
   def index
     authorize @employee, :show_timeline?
 
-    collection = Event.where(user: @employee).or(Event.where(eventable: @employee)).order(created_at: :desc)
+    collection = []
+    if @employee.id == current_user.id
+      collection = Event.where(eventable: @employee).or(Event.where(trackable: @employee)).order(created_at: :desc)
+    elsif collection = Event.where(user: @employee).or(Event.where(eventable: @employee)).or(Event.where(trackable: @employee)).order(created_at: :desc)
+    end
     @events = collection.includes(:eventable, :trackable, :user).decorate
     fresh_when @events
   end

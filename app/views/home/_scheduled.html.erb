@@ -12,18 +12,12 @@
           <p class="text-sm text-gray-500">
             <a href="<%= employee_timeline_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name%></a>
             updated schedule 
-            <% if event.trackable.nil?%>
-              which does not exist anymore
-            <% else %>
-              for
-              <a href="<%= employee_schedules_path(event.trackable.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.user.decorate.display_name %>
-              </a>
-              <%= event.action_for_context %>
-            <% end %>
-            <% if !event.eventable.nil?%>
-              in
-              <a href="<%= project_schedules_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
-            <% end %>
+            for
+            <a href="<%= employee_schedules_path(event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.decorate.display_name%>
+            </a>
+            <%= event.action_for_context %>
+            in
+            <a href="<%= project_schedules_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">
