@@ -6,17 +6,21 @@
     <div>
       <div class="text-sm">
         <a href="#" class="font-medium text-gray-900"><%= feedback.user.decorate.display_name%></a>
-      </div>
-      <div class="mt-1 text-sm text-gray-700">
-        <p><%= feedback.title%></p>
-      </div>
-      <div class="mt-2 space-x-2 text-sm">
-        <span class="font-medium text-gray-500"><%= display_created_at(feedback) %></span>
-        <%= link_to "Show", employee_feedback_path(@employee, feedback), class: "btn-inline-edit pl-2" %>
-        <% if policy([:employee, feedback]).update? %>
-          <%= link_to "Delete", employee_feedback_path(@employee, feedback), method: :delete, class: "btn-inline-delete pl-2" %>
-        <% end %>
+        <% if feedback.published? %>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+            Published
+          </span>
+        <%end%>
+        <div class="mt-1 text-sm text-gray-700">
+          <p><%= feedback.title%></p>
+        </div>
+        <div class="mt-2 space-x-2 text-sm">
+          <span class="font-medium text-gray-500"><%= display_created_at(feedback) %></span>
+          <%= link_to "Show", employee_feedback_path(@employee, feedback), class: "btn-inline-edit pl-2" %>
+          <% if policy([:employee, feedback]).update? %>
+            <%= link_to "Delete", employee_feedback_path(@employee, feedback), method: :delete, class: "btn-inline-delete pl-2" %>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
-</li>
+  </li>
