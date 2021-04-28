@@ -20,6 +20,7 @@ class AddEmployeeFeedback < Patterns::Service
 
   def add_feedback
     feedback.user_id = actor.id
+    feedback.published = false
     feedback.save!
   end
 
