@@ -18,13 +18,6 @@
       </span>
     <%end %>
   </td>
-  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
-    <% unless project.status.nil? %>
-      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">
-        <%= project.status.name.titleize %>
-      </span>
-    <%end %>
-  </td>
   <td class="px-6 py-3 text-sm font-medium text-gray-500">
     <div class="flex items-center space-x-2">
       <div class="flex flex-shrink-0 -space-x-1">
@@ -42,5 +35,12 @@
   </td>
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
     <%= display_created_at(project) %>
+  </td>
+  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+    <% unless project.status.nil? %>
+      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">
+        <%= project.status.name.titleize %>
+      </span>
+    <%end %>
   </td>
 </tr>

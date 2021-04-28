@@ -19,6 +19,7 @@ class ProjectsController < BaseController
     authorize :projects
 
     @project = Project.new
+    @project.billable = true
   end
 
   def edit
@@ -88,6 +89,6 @@ class ProjectsController < BaseController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :discipline_id, :manager_id)
+    params.require(:project).permit(:name, :description, :discipline_id, :manager_id, :billable)
   end
 end

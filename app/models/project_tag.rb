@@ -1,7 +1,9 @@
 class ProjectTag < ApplicationRecord
   acts_as_tenant :account
-  has_and_belongs_to_many :projects
+  has_and_belongs_to_many :projects, touch: true
 
   validates_presence_of :name
   validates_uniqueness_to_tenant :name
+
+  before_destroy { |tag| tag.projects.each { |project| project.touch } }
 end

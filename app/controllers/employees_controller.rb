@@ -18,6 +18,10 @@ class EmployeesController < BaseController
     @employee = User.new
   end
 
+  def edit
+    authorize :team
+  end
+
   def update
     authorize :team
 

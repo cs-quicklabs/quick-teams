@@ -10,6 +10,7 @@
     <%= form.collection_select(:role_id, Role.order(:name), :id, :name, {:prompt => 'Select Role'}, :selected => @employee.role_id, :class=>"form-text-field mt-1" ) %>
     <%= form.collection_select(:manager_id, UserDecorator.decorate_collection(User.for_current_account.active.order(:first_name)), :id, :display_name, {:prompt => 'Select Manager'}, :selected => @employee.manager_id, :class=>"form-text-field mt-1" ) %>
     <div class="flex justify-end">
+      <%= link_to 'Back', :back, class:"btn-normal" %>
       <%= form.submit "Save", class:"btn-blue cursor-pointer"%>
     </div>
   </main>
