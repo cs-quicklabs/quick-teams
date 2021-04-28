@@ -13,10 +13,10 @@ class Employee::SchedulesController < Employee::BaseController
   def update
     authorize [:employee, @schedule]
 
-    schedule = UpdateSchedule.call(@schedule, Project.find_by(id: schedule_params["project_id"]), @employee, schedule_params, current_user).result
+    @schedule = UpdateSchedule.call(@schedule, Project.find_by(id: schedule_params["project_id"]), @employee, schedule_params, current_user).result
 
     respond_to do |format|
-      if schedule.errors.empty?
+      if @schedule.errors.empty?
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "employee/schedules/schedule", locals: { schedule: @schedule }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "employee/schedules/form", locals: { schedule: @schedule }) }
