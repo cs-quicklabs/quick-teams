@@ -22,6 +22,41 @@
             </div>
           </section>
         </div>
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <section aria-labelledby="add-participant-section">
+            <div class="overflow-hidden bg-white">
+              <div class="p-4">
+                <div class="flex flex-wrap">
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "90 days' goals/milestones window"%></p>
+                </div>
+                <ul>
+                  <% @goals.each do |goal| %>
+                    <li class="relative px-4 py-4 bg-white border-b border-gray-200">
+                      <div class="flex justify-between space-x-3">
+                        <div class="flex-1 min-w-0">
+                          <a href="<%= goal.goalable_type == "User" ? employee_goals_path(goal.goalable) : project_milestones_path(goal.goalable) %>" class="block hover:underline focus:outline-none">
+                            <span class="absolute inset-0" aria-hidden="true"></span>
+                            <p class="text-sm font-medium text-gray-900 truncate"><%= goal.decorate.display_owner %>, <%= display_date(goal.deadline)%></p>
+                          </a>
+                        </div>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= goal.decorate.color %>-100 text-<%= goal.decorate.color %>-800">
+                          <%= goal.status.to_s%>
+                        </span>
+                      </div>
+                      <div class="mt-1">
+                        <p class="text-sm text-gray-600 line-clamp-2">
+                          <%= goal.title %>
+                        </p>
+                      </div>
+                    </li>
+                  <%end %>
+                </ul>
+                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing 10 recently updated records only.</p>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   </main>

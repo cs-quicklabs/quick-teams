@@ -6,4 +6,7 @@ class Goal < ApplicationRecord
   has_rich_text :body
   has_many :comments, dependent: :destroy
   validates_presence_of :title
+
+  scope :next_90_days, -> { where(deadline: Date.today..90.days.from_now) }
+  scope :window_90_days, -> { where(deadline: 45.days.ago..45.days.from_now) }
 end
