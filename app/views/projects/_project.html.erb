@@ -18,6 +18,11 @@
       </span>
     <%end %>
   </td>
+  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+    <% if !project.billable_resources.nil? %>
+      <%= project.billable_resources.to_s %>
+    <%end %>
+  </td>
   <td class="px-6 py-3 text-sm font-medium text-gray-500">
     <div class="flex items-center space-x-2">
       <div class="flex flex-shrink-0 -space-x-1">

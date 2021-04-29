@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_28_072956) do
+ActiveRecord::Schema.define(version: 2021_04_29_121333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_072956) do
     t.date "archived_on"
     t.bigint "status_id"
     t.boolean "billable", default: true
+    t.decimal "billable_resources", precision: 4, scale: 2
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["discipline_id"], name: "index_projects_on_discipline_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id"

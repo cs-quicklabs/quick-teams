@@ -89,6 +89,6 @@ class ProjectsController < BaseController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :discipline_id, :manager_id, :billable)
+    params.require(:project).permit(:name, :description, :discipline_id, :manager_id, :billable, :billable_resources)
   end
 end
