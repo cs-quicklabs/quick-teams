@@ -3,7 +3,7 @@ class Project::SchedulesController < Project::BaseController
 
   def index
     authorize [:project, Schedule]
-    @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] })
+    @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] }).order(created_at: :desc)
     @schedule = Schedule.new
   end
 
