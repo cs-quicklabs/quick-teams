@@ -6,5 +6,7 @@ class HomeController < BaseController
 
     @events = Event.includes(:user, :eventable, :trackable).order(created_at: :desc).limit(10).decorate
     @goals = Goal.window_90_days.order(updated_at: :desc).limit(10)
+
+    fresh_when @events + @goals
   end
 end
