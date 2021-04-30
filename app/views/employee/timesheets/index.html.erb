@@ -40,7 +40,7 @@
             </div>
           </section>
         </div>
-        <% if presenter.show_add_timesheet_form(current_user) %>
+        <% if presenter.show_add_timesheet_form(@employee) %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
@@ -53,7 +53,7 @@
             </section>
           </div>
         <% end %>
-        <% if presenter.show_timesheet_stats(current_user) %>
+        <% if presenter.show_timesheet_stats(@employee) %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
