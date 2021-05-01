@@ -1,5 +1,5 @@
 class Project::MilestonesController < Project::BaseController
-  before_action :set_milestone, only: %i[show destroy]
+  before_action :set_milestone, only: %i[show destroy edit update]
 
   def index
     authorize [:project, Goal]
@@ -37,6 +37,22 @@ class Project::MilestonesController < Project::BaseController
 
     @comment = Comment.new
     fresh_when @milestone
+  end
+
+  def edit
+    authorize [:project, @milestone]
+  end
+
+  def update
+    authorize [:project, @milestone]
+
+    respond_to do |format|
+      if @milestone.update(milestone_params)
+        format.html { redirect_to project_milestones_path(@milestone.goalable), notice: "Milestone was successfully updated." }
+      else
+        format.html { redirect_to edit_project_milestones_path(@milestone), alert: "Failed to update. Please try again." }
+      end
+    end
   end
 
   private

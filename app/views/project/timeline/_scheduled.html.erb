@@ -16,8 +16,6 @@
             <a href="<%= employee_schedules_path(event.trackable.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.user.decorate.display_name%>
             </a>
             <%= event.action_for_context %>
-            in
-            <a href="<%= project_schedules_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name%></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

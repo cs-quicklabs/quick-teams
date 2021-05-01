@@ -2,7 +2,7 @@
 <tr>
   <td class="w-full px-6 py-3 text-sm font-medium text-gray-900 max-w-0 whitespace-nowrap">
     <div class="flex items-center space-x-3 lg:pl-2">
-      <span class="w-2.5 h-2.5  font-semibold leading-5 bg-<%=project.status.nil? ? "white" : project.status.color %>-400 rounded-full">
+      <span class="w-2.5 h-2.5  font-semibold leading-5 bg-<%=project.status.nil? ? "white" : project.status.color %>-100 rounded-full">
       </span>
       <a href="<%= project_schedules_path(project) %>" class="truncate hover:text-gray-600 hover:underline">
         <span>
