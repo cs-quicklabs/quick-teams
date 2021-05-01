@@ -4,16 +4,11 @@
     <%= render "shared/form_header", title: "Project Tags", subtitle: "You can define custom tags which can be applied to your projects. Examples include At Risk, In UAT." %>
     <%= form.text_field :name, "Add New Tag" %>
     <!-- this is a hack to complile colors -->
-    <div class="bg-gray-400"></div>
-    <div class="bg-red-400"></div>
-    <div class="bg-yellow-400"></div>
-    <div class="bg-green-400"></div>
-    <div class="bg-blue-400"></div>
-    <div class="bg-gray-200"></div>
-    <div class="bg-red-200"></div>
-    <div class="bg-yellow-200"></div>
-    <div class="bg-green-200"></div>
-    <div class="bg-blue-200"></div>
+    <div class="bg-gray-400 hover:bg-gray-200"></div>
+    <div class="bg-red-400 hover:bg-red-200"></div>
+    <div class="bg-yellow-400 hover:bg-yellow-200"></div>
+    <div class="bg-green-400 hover:bg-green-200"></div>
+    <div class="bg-blue-400 hover:bg-blue-200"></div>
     <!-- Hack ends here -->
     <div class="flex">
       <label for="project_tag_color" class="text-sm">Appearance</label>
