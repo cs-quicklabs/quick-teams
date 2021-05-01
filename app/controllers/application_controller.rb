@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
+  fragment_cache_key do
+    current_user.permission
+  end
+
   def after_sign_in_path_for(resource)
     landing_path
   end
