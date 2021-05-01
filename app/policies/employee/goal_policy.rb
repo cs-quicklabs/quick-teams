@@ -12,14 +12,34 @@ class Employee::GoalPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? or record.user == user or record.goalable_id == user.id
+    return true if user.admin?
+    return self_or_subordinate? if user.lead?
+    self?
   end
 
   def comment?
-    user.admin? or record.user == user
+    return true if user.admin?
+    return subordinate? if user.lead?
+    false
   end
 
   def destroy?
-    user.admin?
+    return true if user.admin?
+    return subordinate? if user.lead?
+    false
+  end
+
+  private
+
+  def self?
+    record.goalable == user
+  end
+
+  def subordinate?
+    user.subordinate?(record.goalable)
+  end
+
+  def self_or_subordinate?
+    self? or subordinate?
   end
 end

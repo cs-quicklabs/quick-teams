@@ -23,6 +23,18 @@ class UserPolicy < ApplicationPolicy
     false
   end
 
+  def show_goals?
+    return true if user.admin?
+    return self_or_subordinate? if user.lead?
+    self?
+  end
+
+  def edit_goals?
+    return true if user.admin?
+    return user.subordinate?(record) if user.lead?
+    false
+  end
+
   def create_feedback?
     return true if user.admin?
     return true if user.lead? and user.subordinate?(record)
@@ -63,21 +75,25 @@ class UserPolicy < ApplicationPolicy
     user.id == record.id
   end
 
-  def show_goals?
-    return true if user.admin?
-    return true if user.lead? and user.subordinate?(record)
-    user.id == record.id
-  end
-
   def show_team?
     return true if user.admin?
-    return true if user.lead? or record.lead?
+    return (user.id == record.id or user.subordinate?(record)) if user.lead?
     false
   end
 
   def show_schedules?
     return true if user.admin?
     return true if user.lead? and user.subordinate?(record)
+    user.id == record.id
+  end
+
+  private
+
+  def self_or_subordinate?
+    (user.id == record.id or user.subordinate?(record))
+  end
+
+  def self?
     user.id == record.id
   end
 end

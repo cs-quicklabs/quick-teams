@@ -46,7 +46,7 @@ class Employee::GoalsController < Employee::BaseController
   private
 
   def set_goal
-    @goal ||= Goal.find(params["id"])
+    @goal ||= Goal.find_by(id: params["id"], goalable_type: "User")
   end
 
   def goal_params
