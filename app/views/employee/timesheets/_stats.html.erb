@@ -38,9 +38,7 @@
   <% employee_stats.contributions.each do |contribution|%>
     <li class="flex px-2 py-2">
       <div class="w-full ml-3">
-        <a class= "block hover:underline" href="<%= project_timesheets_path(contribution.project)%>">
-          <p class="text-sm font-medium text-gray-500"><%= contribution.project.name %></p>
-        </a>
+        <p class="text-sm font-medium text-gray-500"><%= contribution.project.name %></p>
       </div>
       <div class="w-full ml-3">
         <p class="text-sm font-medium text-right text-gray-500"><%= contribution.contribution %></p>

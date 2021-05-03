@@ -1,6 +1,6 @@
 class Employee::GoalPolicy < ApplicationPolicy
   def update?
-    user.admin?
+    edit?
   end
 
   def create?
@@ -12,14 +12,40 @@ class Employee::GoalPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? or record.user == user or record.goalable_id == user.id
+    return true if user.admin?
+    return self_or_subordinate? if user.lead?
+    self?
   end
 
   def comment?
-    user.admin? or record.user == user
+    editable?
   end
 
   def destroy?
-    user.admin?
+    editable?
+  end
+
+  def edit?
+    editable?
+  end
+
+  private
+
+  def self?
+    record.goalable == user
+  end
+
+  def subordinate?
+    user.subordinate?(record.goalable)
+  end
+
+  def self_or_subordinate?
+    self? or subordinate?
+  end
+
+  def editable?
+    return true if user.admin?
+    return subordinate? if user.lead?
+    false
   end
 end

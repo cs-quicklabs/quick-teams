@@ -34,6 +34,12 @@
               </div>
               <div>
                 <label for="billed" class="block text-sm font-medium text-gray-700">
+                  Billable
+                </label>
+                <%= form.select(:billable, [["Billable or not", ""], ["Show Only Billable", 1], ["Show Only Unbillable", 0]], {selected: params["billable"]},  :class=>"form-text-field mt-1") %>
+              </div>
+              <div>
+                <label for="billed" class="block text-sm font-medium text-gray-700">
                   Billed
                 </label>
                 <%= form.select(:billed, [["Billed or not", ""], ["Show Only Billed", 1], ["Show Only Unbilled", 0]], {selected: params["billed"]},  :class=>"form-text-field mt-1") %>

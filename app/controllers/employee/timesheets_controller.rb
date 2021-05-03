@@ -15,9 +15,8 @@ class Employee::TimesheetsController < Employee::BaseController
   def create
     authorize [:employee, Timesheet]
 
-    @timesheet = Timesheet.new(timesheet_params)
-    @timesheet.user = current_user
-    @timesheet.save
+    @timesheet = AddTimesheet.call(timesheet_params, current_user).result
+
     respond_to do |format|
       if @timesheet.persisted?
         format.turbo_stream {

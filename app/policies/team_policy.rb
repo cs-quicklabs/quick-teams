@@ -18,4 +18,8 @@ class TeamPolicy < Struct.new(:user, :team)
   def show?
     user.admin?
   end
+
+  def edit?
+    user.admin?
+  end
 end

@@ -14,7 +14,17 @@
       </label>
       <%= form.collection_select(:manager_id, UserDecorator.decorate_collection(User.for_current_account.active.order(:first_name)), :id, :display_name, {:prompt => 'Select Manager'}, :selected => project.manager_id, :class=>"form-text-field mt-1"  ) %>
     </div>
+    <%= form.text_field :billable_resources, "Number of Resources which are being billed (optional)"%>
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <%= form.check_box :billable, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
+        <label for="remember_me" class="block ml-2 text-sm text-gray-900">
+          This Project is billable. Uncheck to mark internal or unbillable. 
+        </label>
+      </div>
+    </div>
     <div class="flex justify-end">
+      <%= link_to 'Back', :back, class:"btn-normal" %>
       <%= form.submit "Save", class:"btn-blue cursor-pointer"%>
     </div>
   </main>
