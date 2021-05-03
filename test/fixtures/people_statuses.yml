@@ -1,7 +1,9 @@
 deployed:
   name: Deployed
+  color: Red
   account: crownstack
 
 bench:
   name: On Bench
+  color: Blue
   account: crownstack
