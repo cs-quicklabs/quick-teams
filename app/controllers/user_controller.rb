@@ -4,6 +4,8 @@ class UserController < BaseController
   before_action :build_form, only: [:update_password, :password]
 
   def update
+    authorize @user
+
     respond_to do |format|
       if @user.update(user_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/profile", locals: { message: "User was updated successfully", user: @user }) }
