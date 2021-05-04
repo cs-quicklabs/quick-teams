@@ -52,7 +52,7 @@ class Employee::GoalsController < Employee::BaseController
 
     respond_to do |format|
       if @goal.update(goal_params)
-        format.html { redirect_to employee_goals_path(@goal.goalable), notice: "Goal was successfully updated." }
+        format.html { redirect_to employee_goal_path(@goal.goalable, @goal), notice: "Goal was successfully updated." }
       else
         format.html { redirect_to edit_employee_goal_path(@goal), alert: "Failed to update. Please try again." }
       end

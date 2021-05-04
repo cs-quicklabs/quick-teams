@@ -48,7 +48,7 @@ class Project::MilestonesController < Project::BaseController
 
     respond_to do |format|
       if @milestone.update(milestone_params)
-        format.html { redirect_to project_milestones_path(@milestone.goalable), notice: "Milestone was successfully updated." }
+        format.html { redirect_to project_milestone_path(@milestone.goalable, @milestone), notice: "Milestone was successfully updated." }
       else
         format.html { redirect_to edit_project_milestones_path(@milestone), alert: "Failed to update. Please try again." }
       end
