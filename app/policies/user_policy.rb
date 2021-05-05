@@ -35,6 +35,10 @@ class UserPolicy < ApplicationPolicy
     false
   end
 
+  def edit_goal?(goal)
+    edit_goals? && goal.progress?
+  end
+
   def create_feedback?
     return true if user.admin?
     return true if user.lead? and user.subordinate?(record)
