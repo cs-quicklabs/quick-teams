@@ -14,11 +14,13 @@
                 <ul>
                   <% @events.each do |event| %>
                     <% if lookup_context.template_exists?(event.action, "home", true) %>
-                      <%= render partial: event.action, locals: {event: event}%>
+                      <% cache event do %>
+                        <%= render partial: event.action, locals: {event: event}%>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </ul>
-                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing 50 recently created events only.</p>
+                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= @limit.to_s %> recently created events only.</p>
               </div>
             </div>
           </section>
@@ -33,27 +35,12 @@
                 </div>
                 <ul>
                   <% @goals.each do |goal| %>
-                    <li class="relative px-4 py-4 bg-white border-b border-gray-200">
-                      <div class="flex justify-between space-x-3">
-                        <div class="flex-1 min-w-0">
-                          <a href="<%= goal.goalable_type == "User" ? employee_goal_path(goal.goalable, goal) : project_milestone_path(goal.goalable, goal) %>" class="block hover:underline focus:outline-none">
-                            <span class="absolute inset-0" aria-hidden="true"></span>
-                            <p class="text-sm font-medium text-gray-900 truncate"><%= goal.decorate.display_owner %>, <%= display_date(goal.deadline)%></p>
-                          </a>
-                        </div>
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= goal.decorate.color %>-100 text-<%= goal.decorate.color %>-800">
-                          <%= goal.status.to_s%>
-                        </span>
-                      </div>
-                      <div class="mt-1">
-                        <p class="text-sm text-gray-600 line-clamp-2">
-                          <%= goal.title %>
-                        </p>
-                      </div>
-                    </li>
-                  <%end %>
+                    <% cache goal do %>
+                      <%= render partial: "upcoming_goal", locals: {goal: goal}%>
+                    <% end %>
+                  <% end %>
                 </ul>
-                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing 50 recently updated records only.</p>
+                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= @limit.to_s %> recently updated records only.</p>
               </div>
             </div>
           </section>
