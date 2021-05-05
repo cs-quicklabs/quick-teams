@@ -10,7 +10,7 @@
       <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
         <div>
           <p class="text-sm text-gray-500">
-            <a href="<%= employee_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name%></a>
+            <a href="<%= employee_timeline_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name%></a>
             added a new milestone 
             <% if event.trackable.nil?%>
               which does not exist anymore

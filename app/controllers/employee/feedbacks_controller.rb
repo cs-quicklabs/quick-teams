@@ -4,7 +4,12 @@ class Employee::FeedbacksController < Employee::BaseController
   def index
     authorize @employee, :show_feedbacks?
 
-    @feedbacks = @employee.feedbacks.includes(:user).order(created_at: :desc)
+    @feedbacks = []
+    if current_user.admin?
+      @feedbacks = @employee.feedbacks.includes(:user).order(created_at: :desc)
+    else
+      @feedbacks = @employee.feedbacks.published.includes(:user).order(created_at: :desc)
+    end
     @feedback = Feedback.new
 
     fresh_when @feedbacks

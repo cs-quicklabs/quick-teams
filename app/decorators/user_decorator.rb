@@ -38,12 +38,9 @@ class UserDecorator < Draper::Decorator
   def overall_occupancy
     overall_occupancy = 0
     schedules.each do |schedule|
-      overall_occupancy += schedule.occupancy
+      overall_occupancy += schedule.occupancy unless schedule.ends_at.to_date.past?
     end
     overall_occupancy
-  end
-
-  def display_occupancy_for(project)
   end
 
   def display_manager_name
@@ -65,11 +62,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def display_occupied_till
-    busy_untill = 0
-    schedules.each do |schedule|
-      busy_untill = schedule.ends_at if schedule.ends_at > busy_untill
-    end
-    busy_untill.to_s
+    busy_untill = schedules.map(&:ends_at).max
     "Occupied untill #{busy_untill.to_s(:long)}"
   end
 end

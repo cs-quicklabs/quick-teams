@@ -25,16 +25,19 @@
                 Tags
               </th>
               <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                Status
+                Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+)%>
               </th>
               <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                 Participants
               </th>
               <th class="py-3 pr-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                Project Lead
+                Lead
               </th>
               <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                 Created At
+              </th>
+              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                Status
               </th>
             </tr>
           </thead>

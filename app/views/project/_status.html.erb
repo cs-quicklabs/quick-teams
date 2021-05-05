@@ -1,7 +1,7 @@
 <% if !project.status.nil?%>
   <span class="inline-flex items-center px-3 py-0.5 mr-4  rounded-full text-sm font-medium bg-<%= project.status.color %>-100 text-<%= project.status.color %>-800" >
     <%= project.status.name%>
-    <button data-reflex="click->ProjectStatus#remove" data-project-id=<%= project.id%> type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-<%= project.status.color %>-400 hover:bg-<%= project.status.color %>-200 hover:text-<%= project.status.color %>-500 focus:outline-none focus:bg-<%= project.status.color %>-500 focus:text-white">
+    <button data-reflex="click->ProjectStatus#remove" data-project-id=<%= project.id%> type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-<%= project.status.color %>-400 hover:bg-<%= project.status.color %>-200 hover:text-<%= project.status.color %>-400 focus:outline-none focus:bg-<%= project.status.color %>-400 focus:text-white">
       <svg class="w-2 h-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
         <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
       </svg>

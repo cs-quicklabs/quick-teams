@@ -8,9 +8,7 @@ class Project::SchedulePolicy < ApplicationPolicy
   end
 
   def index?
-    return true if user.admin?
-
-    record.all { |schedule| schedule.user_id == user.id }
+    user.admin?
   end
 
   def destroy?

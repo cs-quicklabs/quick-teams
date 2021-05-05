@@ -12,10 +12,26 @@ class Employee::FeedbackPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? or record.user == user or record.critiquable_id == user.id
+    return true if user.admin?
+    return self_or_subordinate? if user.lead?
+    self?
   end
 
   def destroy?
     update?
+  end
+
+  private
+
+  def self?
+    record.critiquable == user
+  end
+
+  def subordinate?
+    user.subordinate?(record.critiquable)
+  end
+
+  def self_or_subordinate?
+    self? or subordinate?
   end
 end

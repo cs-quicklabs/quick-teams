@@ -3,7 +3,7 @@ class Project::SchedulesController < Project::BaseController
 
   def index
     authorize [:project, Schedule]
-    @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] })
+    @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] }).order(created_at: :desc)
     @schedule = Schedule.new
   end
 
@@ -14,8 +14,7 @@ class Project::SchedulesController < Project::BaseController
 
     respond_to do |format|
       if @schedule.errors.empty?
-        render turbo_stream: turbo_stream.prepend("schedules", partial: "project/schedules/schedule", locals: { schedule: @schedule }) +
-                             turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: Schedule.new })
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "project/schedules/schedule", locals: { schedule: @schedule }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "schedules/form", locals: { schedule: @schedule }) }
       end
@@ -30,7 +29,7 @@ class Project::SchedulesController < Project::BaseController
     respond_to do |format|
       if @schedule.persisted?
         format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend(:milestones, partial: "project/schedules/schedule", locals: { schedule: @schedule }) +
+          render turbo_stream: turbo_stream.prepend(:schedules, partial: "project/schedules/schedule", locals: { schedule: @schedule }) +
                                turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: Schedule.new })
         }
       else
@@ -46,7 +45,7 @@ class Project::SchedulesController < Project::BaseController
   def destroy
     authorize [:project, @schedule]
 
-    @schedule.destroy
+    @schedule = RemoveSchedule.call(@schedule, current_user).result
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@schedule) }
     end

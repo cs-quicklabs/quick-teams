@@ -42,6 +42,7 @@ gem "stimulus_reflex", "~> 3.4"
 gem "pundit"
 gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
 gem "rack-mini-profiler", "~> 2.0"
+gem "newrelic_rpm"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -65,7 +66,6 @@ group :development, :staging do
 
   # For call-stack profiling flamegraphs
   gem "stackprof"
-  gem "newrelic_rpm"
 end
 
 group :test do

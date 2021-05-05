@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_140554) do
+ActiveRecord::Schema.define(version: 2021_04_29_121333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2021_04_26_140554) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "critiquable_type", null: false
     t.bigint "critiquable_id", null: false
+    t.boolean "published", default: false
     t.index ["critiquable_type", "critiquable_id"], name: "index_feedbacks_on_critiquable"
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
@@ -202,6 +203,8 @@ ActiveRecord::Schema.define(version: 2021_04_26_140554) do
     t.boolean "archived", default: false
     t.date "archived_on"
     t.bigint "status_id"
+    t.boolean "billable", default: true
+    t.decimal "billable_resources", precision: 4, scale: 2
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["discipline_id"], name: "index_projects_on_discipline_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id"

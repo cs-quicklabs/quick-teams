@@ -1,7 +1,8 @@
 class Project::TimelineController < Project::BaseController
   def index
     authorize [:project, :timeline]
-    @events = @project.events.includes(:user, :eventable, :trackable).order(created_at: :desc).decorate
+    collection = Event.where(trackable: @project).or(Event.where(eventable: @project)).order(created_at: :desc)
+    @events = collection.includes(:eventable, :trackable, :user).decorate
     fresh_when @events
   end
 end

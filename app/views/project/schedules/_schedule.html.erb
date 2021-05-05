@@ -7,9 +7,16 @@
           <%= image_tag "male-placeholder-image.png", class: "w-12 h-12 rounded-full"%>
         </div>
         <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4">
-          <a href="<%= employee_path(schedule.user)%>" class="block hover:underline" target="_top">
+          <a href="<%= employee_schedules_path(schedule.user)%>" class="block hover:underline" target="_top">
             <div>
-              <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.user.decorate.display_name%></p>
+              <p class="text-sm font-medium text-gray-900 truncate">
+                <span class="truncate"><%= schedule.user.display_name%></span>
+                <% unless schedule.user.status.nil? %>
+                  <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= schedule.user.status.color %>-800 bg-<%= schedule.user.status.color %>-100 rounded-full">
+                    <%= schedule.user.status.name.titleize %>
+                  </span>
+                <% end %>
+              </p>
               <p class="flex items-center mt-1 text-sm text-gray-500">
                 <span class="truncate"><%= schedule.user.display_position%></span>
               </p>

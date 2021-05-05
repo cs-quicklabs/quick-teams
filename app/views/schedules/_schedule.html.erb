@@ -9,6 +9,11 @@
         <a href="<%= employee_schedules_path(employee) %>" class="truncate hover:text-gray-600 hover:underline">
           <div class="text-sm font-medium text-gray-900">
             <%= employee.display_name %>
+            <% unless employee.status.nil? %>
+              <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= employee.status.color %>-800 bg-<%= employee.status.color %>-100 rounded-full">
+                <%= employee.status.name.titleize %>
+              </span>
+            <% end %>
           </div>
           <div class="text-sm text-gray-500">
             <%= employee.display_position%>
