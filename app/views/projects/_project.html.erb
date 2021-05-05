@@ -2,7 +2,8 @@
 <tr>
   <td class="w-full px-6 py-3 text-sm font-medium text-gray-900 max-w-0 whitespace-nowrap">
     <div class="flex items-center space-x-3 lg:pl-2">
-      <div class="flex-shrink-0 w-2.5 h-2.5 rounded-full bg-pink-600" aria-hidden="true"></div>
+      <span class="w-2.5 h-2.5  font-semibold leading-5 bg-<%=project.status.nil? ? "white" : project.status.color %>-400 rounded-full">
+      </span>
       <a href="<%= project_schedules_path(project) %>" class="truncate hover:text-gray-600 hover:underline">
         <span>
           <%= project.name %>
@@ -12,17 +13,15 @@
     </div>
   </td>
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
-    <% project.project_tags.each do |tag| %>
+    <% project.project_tags.uniq.each do |tag| %>
       <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= tag.color %>-800 bg-<%= tag.color %>-100 rounded-full">
         <%= tag.name  %>
       </span>
     <%end %>
   </td>
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
-    <% unless project.status.nil? %>
-      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">
-        <%= project.status.name.titleize %>
-      </span>
+    <% if !project.billable_resources.nil? %>
+      <%= project.billable_resources.to_s %>
     <%end %>
   </td>
   <td class="px-6 py-3 text-sm font-medium text-gray-500">
@@ -42,5 +41,12 @@
   </td>
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
     <%= display_created_at(project) %>
+  </td>
+  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+    <% unless project.status.nil? %>
+      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">
+        <%= project.status.name.titleize %>
+      </span>
+    <%end %>
   </td>
 </tr>
