@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
-  #rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  #rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   fragment_cache_key do
     current_user.permission
