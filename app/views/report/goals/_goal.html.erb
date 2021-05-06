@@ -1,13 +1,13 @@
 <tr>
   <% if goal.goalable_type == "User"%>
     <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-900 truncate whitespace-nowrap max-w-0">
-      <a href="<%= employee_goal_path(goal.user, goal)%>" class="block hover:text-gray-900 hover:underline">
+      <a href="<%= employee_goal_path(goal.goalable, goal)%>" class="block hover:text-gray-900 hover:underline">
         <%= goal.title %>
       </a>
     </td>
   <% else %>
     <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-900 truncate whitespace-nowrap max-w-0">
-      <a href="<%= project_milestone_path(goal.user, goal)%>" class="block hover:text-gray-900 hover:underline">
+      <a href="<%= project_milestone_path(goal.goalable, goal)%>" class="block hover:text-gray-900 hover:underline">
         <%= goal.title %>
       </a>
     </td>
