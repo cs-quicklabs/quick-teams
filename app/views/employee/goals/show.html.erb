@@ -24,7 +24,7 @@
     </div>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to 'Back',:back, class:"btn-normal" %>
-      <% if policy(@employee).edit_goal(@goal)? %>
+      <% if policy(@employee).edit_goal?(@goal) %>
         <%= link_to 'Edit', edit_employee_goal_path(@goal.goalable, @goal), class:"btn-blue ml-3" %>
       <% end %>
     </div>

@@ -4,7 +4,7 @@ class HomeController < BaseController
   def index
     authorize :home
 
-    @limit = 50
+    @limit = 30
     @events = Event.includes(:user, :eventable, :trackable).order(created_at: :desc).limit(@limit).decorate
     @goals = Goal.window_90_days.order(updated_at: :desc).limit(@limit)
 
