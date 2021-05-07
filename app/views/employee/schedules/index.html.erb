@@ -26,7 +26,7 @@
             <section aria-labelledby="add-participant-section">
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "employee/schedules/form", schedule: @schedule, errors: nil%>
+                  <%= render partial: "employee/schedules/form", locals: { schedule: @schedule, errors: nil } %>
                 </div>
               </div>
             </section>

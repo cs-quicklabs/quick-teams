@@ -29,7 +29,7 @@
               <h2 class="sr-only" id="section-2-title">Add New goal</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "employee/goals/form", goal: @goal%>
+                  <%= render partial: "employee/goals/form", locals: { goal: @goal } %>
                 </div>
               </div>
             </section>

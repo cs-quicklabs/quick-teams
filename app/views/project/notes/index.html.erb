@@ -7,7 +7,7 @@
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
         <!-- Left column -->
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2" id="project_notes">
           <section aria-labelledby="participants_section">
             <h2 class="sr-only" id="section-1-title">Project Notes</h2>
             <div class="overflow-hidden bg-white">
@@ -29,7 +29,7 @@
               <h2 class="sr-only" id="section-2-title">Add New Note</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "project/notes/form", note: @note%>
+                  <%= render partial: "project/notes/form", locals:{ note:  @note }%>
                 </div>
               </div>
             </section>

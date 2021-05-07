@@ -29,7 +29,7 @@
               <h2 class="sr-only" id="section-2-title">Add New Feedback</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "project/feedbacks/form", feedback: @feedback%>
+                  <%= render partial: "project/feedbacks/form", locals: { feedback: @feedback } %>
                 </div>
               </div>
             </section>
