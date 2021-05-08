@@ -3,8 +3,10 @@ class Project::NotesController < Project::BaseController
 
   def index
     authorize [:project, Note]
-    @notes = @project.notes.order(created_at: :desc)
+    @notes = @project.notes.includes(:user).order(created_at: :desc).limit(100)
     @note = Note.new
+
+    fresh_when @notes
   end
 
   def destroy

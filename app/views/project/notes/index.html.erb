@@ -13,10 +13,10 @@
             <div class="overflow-hidden bg-white">
               <div class="p-4">
                 <div class="flex flex-wrap">
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Notes(" + @project.notes.count.to_s + ")"%></p>
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Notes(" + @notes.load.size.to_s + ")"%></p>
                 </div>
                 <ul class="space-y-6" id="notes">
-                  <%= render @notes%>
+                  <%= render partial: "note", collection: @notes, as: :note, cached: true%>
                 </ul>
               </div>
             </div>
