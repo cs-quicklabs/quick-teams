@@ -29,9 +29,11 @@
       <% end  %>
     </div>
   </div>
-  <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
-    <p><%= @milestone.body%></p>
-  </div>
+  <% cache @milestone do %>
+    <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
+      <p><%= @milestone.body%></p>
+    </div>
+  <% end %>
   <!-- Comments-->
   <section aria-labelledby="notes-title">
     <div class="pb-24 bg-white sm:rounded-lg overflow">
@@ -41,7 +43,7 @@
         </div>
         <div class="px-4 py-6 sm:px-6">
           <ul class="space-y-4" id="comments">
-            <%= render partial: "employee/goals/comments/comment", collection: @milestone.comments, as: :comment, cached: true%>
+            <%= render partial: "employee/goals/comments/comment", collection: @milestone.comments.includes(:user), as: :comment, cached: true%>
           </ul>
         </div>
       </div>

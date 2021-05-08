@@ -4,8 +4,10 @@ class Project::MilestonesController < Project::BaseController
   def index
     authorize [:project, Goal]
 
-    @milestones = @project.milestones.includes({ comments: :user }).order(created_at: :desc)
+    @milestones = @project.milestones.includes(:user).order(created_at: :desc).limit(100)
     @milestone = Goal.new
+
+    fresh_when @milestones
   end
 
   def create
