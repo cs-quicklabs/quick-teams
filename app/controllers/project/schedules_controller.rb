@@ -5,6 +5,8 @@ class Project::SchedulesController < Project::BaseController
     authorize [:project, Schedule]
     @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] }).order(created_at: :desc)
     @schedule = Schedule.new
+
+    fresh_when @schedules
   end
 
   def update
