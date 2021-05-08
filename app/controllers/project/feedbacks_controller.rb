@@ -4,8 +4,10 @@ class Project::FeedbacksController < Project::BaseController
   def index
     authorize [:project, Feedback]
 
-    @feedbacks = @project.feedbacks.order(created_at: :desc)
+    @feedbacks = @project.feedbacks.includes(:user).order(created_at: :desc).limit(100)
     @feedback = Feedback.new
+
+    fresh_when @feedbacks
   end
 
   def create
@@ -35,6 +37,8 @@ class Project::FeedbacksController < Project::BaseController
 
   def show
     authorize [:project, @feedback]
+
+    fresh_when @feedbacks
   end
 
   private
