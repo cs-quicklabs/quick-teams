@@ -23,9 +23,11 @@
       <%= link_to 'Back',:back, class:"btn-normal" %>
     </div>
   </div>
-  <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
-    <p><%= @feedback.body%></p>
-  </div>
+  <% cache @feedback do %>
+    <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
+      <p><%= @feedback.body%></p>
+    </div>
+  <% end %>
   <%if current_user.admin? %>
     <% if @feedback.published? %>
       <div class="p-4 rounded-md bg-green-50">
