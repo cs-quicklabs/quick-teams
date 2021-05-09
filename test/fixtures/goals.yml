@@ -10,4 +10,11 @@ two:
   user: regular
   goalable_type: User
   goalable: regular
-  deadline: 2021-06-31
+  deadline: 2021-06-30
+
+three:
+  title: Some Random Goal
+  user: regular
+  goalable_type: Project
+  goalable: one
+  deadline: 2021-06-30
