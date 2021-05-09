@@ -43,11 +43,11 @@
         </div>
         <div class="px-4 py-6 sm:px-6">
           <ul class="space-y-4" id="comments">
-            <%= render partial: "employee/goals/comments/comment", collection: @milestone.comments.includes(:user), as: :comment, cached: true%>
+            <%= render partial: "shared/comments/comment", collection: @milestone.comments.includes(:user), as: :comment, cached: true%>
           </ul>
         </div>
       </div>
-      <%= render partial: "employee/goals/comments/add", locals: {goal: @milestone, comment: @comment }%>
+      <%= render partial: "shared/comments/add", locals: {goal: @milestone, comment: @comment }%>
     </div>
   </section>
 </main>

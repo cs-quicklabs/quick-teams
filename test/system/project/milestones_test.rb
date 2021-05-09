@@ -66,20 +66,78 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     archived_project = projects(:archived)
     visit project_milestones_url(script_name: "/#{@account.id}", project_id: archived_project.id)
     assert_no_text "Add New milestone"
+    take_screenshot
   end
 
   test "can edit milestone" do
+    visit page_url
+    milestone = @project.milestones.first
+    find("li", id: dom_id(milestone)).click_link("Edit")
+    title = "Some Random Milestone Title Edited"
+    fill_in "Title", with: title
+    fill_in "goal_deadline", with: Time.now
+    fill_in_rich_text_area dom_id(milestone), with: "This is some milestone Edited"
+    take_screenshot
+    click_on "Edit Milestone"
+    assert_selector "p.notice", text: "Milestone was successfully updated."
+    assert_selector "h3", text: title
+    assert_selector "div.trix-content", text: "This is some milestone Edited"
+    take_screenshot
+  end
+
+  test "can not edit milestone with invalid params" do
+    visit page_url
+    milestone = @project.milestones.first
+    find("li", id: dom_id(milestone)).click_link("Edit")
+    fill_in "Title", with: nil
+    click_on "Edit Milestone"
+    assert_selector "p.alert", text: "Failed to update. Please try again."
+    take_screenshot
   end
 
   test "can comment on milestone" do
+    visit page_url
+    milestone = @project.milestones.first
+    find("li", id: dom_id(milestone)).click_link("Show")
+    fill_in "comment", with: "This is a comment"
+    click_on "Comment"
+    assert_selector "ul#comments", text: "This is a comment"
+    take_screenshot
   end
 
   test "can complete milestone" do
+    visit page_url
+    milestone = @project.milestones.first
+    find("li", id: dom_id(milestone)).click_link("Show")
+    fill_in "comment", with: "This is completed"
+    click_on "option-menu-button"
+    click_on "and mark Completed"
+    assert_selector "ul#comments", text: "This is completed"
+    assert_selector "p", text: "This goal was marked as complete."
+    take_screenshot
   end
 
   test "can miss milestone" do
+    visit page_url
+    milestone = @project.milestones.first
+    find("li", id: dom_id(milestone)).click_link("Show")
+    fill_in "comment", with: "This is missed"
+    click_on "option-menu-button"
+    click_on "and mark Missed"
+    assert_selector "ul#comments", text: "This is missed"
+    assert_selector "p", text: "Unfortunately, this goal was missed and was not completed."
+    take_screenshot
   end
 
   test "can discard milestone" do
+    visit page_url
+    milestone = @project.milestones.first
+    find("li", id: dom_id(milestone)).click_link("Show")
+    fill_in "comment", with: "This is discarded"
+    click_on "option-menu-button"
+    click_on "and mark Discarded"
+    assert_selector "ul#comments", text: "This is discarded"
+    assert_selector "p", text: "This goal was discarded."
+    take_screenshot
   end
 end
