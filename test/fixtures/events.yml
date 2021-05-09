@@ -74,7 +74,7 @@ eight:
   eventable_type: Project
   eventable: one
   trackable_type: Schedule
-  trackable: none
+  trackable: one
   action_for_context: with 100% occupancy till Mar 31, 2021
   account: crownstack
 
@@ -106,4 +106,24 @@ eleven:
   trackable_type: User
   trackable: abram
   action_for_context: deactivated
+  account: crownstack
+
+twelve:
+  user: regular
+  action: freed
+  eventable_type: User
+  eventable: regular
+  trackable_type: Project
+  trackable: one
+  action_for_context: freed employee
+  account: crownstack
+
+thirteen:
+  user: regular
+  action: project_created
+  eventable_type: Project
+  eventable: one
+  trackable_type: User
+  trackable: abram
+  action_for_context: created project
   account: crownstack
