@@ -29,6 +29,7 @@ class Project::MilestonesController < Project::BaseController
   def destroy
     authorize [:project, @milestone]
     @milestone.destroy
+    Event.where(eventable: @project, trackable: @milestone).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@milestone) }
     end

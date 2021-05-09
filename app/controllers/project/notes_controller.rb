@@ -13,6 +13,7 @@ class Project::NotesController < Project::BaseController
     authorize [:project, @note]
 
     @note.destroy
+    Event.where(eventable: @project, trackable: @note).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@note) }
     end
