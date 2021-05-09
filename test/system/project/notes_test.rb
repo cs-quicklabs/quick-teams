@@ -40,7 +40,7 @@ class NotesTest < ApplicationSystemTestCase
   test "can not add an empty note" do
     visit page_url
     click_on "Add Note"
-    assert_text "Body can't be blank"
+    assert_selector "div#error_explanation", text: "Body can't be blank"
     take_screenshot
   end
 
