@@ -46,9 +46,10 @@ class NotesTest < ApplicationSystemTestCase
 
   test "can delete a note" do
     visit page_url
-    assert_text notes(:one).body
-    find(:xpath, "/html/body/main/div[2]/main/div/div/div[1]/section/div/div/ul/li/div/div[2]/div[3]/a").click
-    assert_no_text notes(:one).body
+    note = @project.notes.first
+    assert_text note.body
+    find("li", id: dom_id(note)).click_link("Delete")
+    assert_no_text note.body
     take_screenshot
   end
 
