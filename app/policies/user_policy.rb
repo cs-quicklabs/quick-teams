@@ -40,6 +40,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create_feedback?
+    return false unless record.active?
     return true if user.admin?
     return true if user.lead? and user.subordinate?(record)
     false
