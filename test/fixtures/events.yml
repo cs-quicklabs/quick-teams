@@ -127,3 +127,63 @@ thirteen:
   trackable: abram
   action_for_context: created project
   account: crownstack
+
+fourteen:
+  user: regular
+  action: scheduled
+  eventable_type: Project
+  eventable: one
+  trackable_type: Schedule
+  trackable: one
+  action_for_context: with 100% occupancy till Mar 31, 2021
+  account: crownstack
+
+fifteen:
+  user: regular
+  action: scheduled
+  eventable_type: Project
+  eventable: one
+  trackable_type: Schedule
+  trackable: none
+  action_for_context: with 100% occupancy till Mar 31, 2021
+  account: crownstack
+
+sixteen:
+  user: regular
+  action: goal
+  eventable_type: User
+  eventable: regular
+  trackable_type: Goal
+  trackable: one
+  action_for_context: goal
+  account: crownstack
+
+seventeen:
+  user: regular
+  action: goal
+  eventable_type: User
+  eventable: regular
+  trackable_type: Goal
+  trackable: none
+  action_for_context: goal
+  account: crownstack
+
+eighteen:
+  user: regular
+  action: feedback
+  eventable_type: User
+  eventable: regular
+  trackable_type: Feedback
+  trackable: one
+  action_for_context: feedback
+  account: crownstack
+
+nineteen:
+  user: regular
+  action: feedback
+  eventable_type: User
+  eventable: regular
+  trackable_type: Feedback
+  trackable: none
+  action_for_context: feedback
+  account: crownstack
