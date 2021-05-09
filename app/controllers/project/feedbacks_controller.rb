@@ -30,7 +30,7 @@ class Project::FeedbacksController < Project::BaseController
     authorize [:project, @feedback]
 
     @feedback.destroy
-    Event.where(eventable: @project, trackable: @feedbacks).touch_all #fixes cache issues in activity
+    Event.where(eventable: @project, trackable: @feedback).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@feedback) }
     end

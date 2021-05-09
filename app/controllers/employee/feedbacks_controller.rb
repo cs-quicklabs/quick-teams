@@ -31,6 +31,7 @@ class Employee::FeedbacksController < Employee::BaseController
     authorize [:employee, @feedback]
 
     @feedback.destroy
+    Event.where(eventable: @employee, trackable: @feedback).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@feedback) }
     end
