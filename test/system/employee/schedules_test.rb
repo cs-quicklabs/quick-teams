@@ -16,8 +16,8 @@ class EmployeeScheduleTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: "#{@employee.first_name} #{@employee.last_name}"
-    assert_text "Project Participants"
-    assert_text "Schedule for new project"
+    assert_text "Employee Schedules"
+    assert_text "Schedule For New Project"
   end
 
   test "can not visit index page if not logged in" do
@@ -35,60 +35,65 @@ class EmployeeScheduleTest < ApplicationSystemTestCase
 
   test "can add new schedule" do
     visit page_url
-    select "#{projects(:one).name}", from: "schedule_project_id"
+    name = "#{projects(:two).name}"
+    select name, from: "schedule_project_id"
     fill_in "schedule_starts_at", with: Time.now
     fill_in "schedule_ends_at", with: Time.now.next_month
     fill_in "schedule_occupancy", with: 100
     click_on "Add Schedule"
+    assert_selector "div#project-participants", text: name
     take_screenshot
-    assert_selector "p.notice", text: "Schedule was added successfully."
   end
 
   test "can not add schedule with empty params" do
     visit page_url
     click_on "Add Schedule"
     take_screenshot
-    assert_text "Project must exist"
-    assert_text "Project can't be blank"
-    assert_text "Starts at can't be blank"
-    assert_text "Ends at can't be blank"
-    assert_text "Occupancy can't be blank"
-    assert_text "Occupancy is not a number"
-    assert_text "Occupancy should be less than equal to 100%"
+    assert_selector "div#error_explanation", text: "Project must exist"
+    assert_selector "div#error_explanation", text: "Project can't be blank"
+    assert_selector "div#error_explanation", text: "Starts at can't be blank"
+    assert_selector "div#error_explanation", text: "Ends at can't be blank"
+    assert_selector "div#error_explanation", text: "Occupancy can't be blank"
+    assert_selector "div#error_explanation", text: "Occupancy is not a number"
+    assert_selector "div#error_explanation", text: "Occupancy should be less than equal to 100%"
   end
 
   test "can delete a schedule" do
     visit page_url
-    text = "#{@employee.projects.first.name}"
-    assert_text text
-    find(:xpath, "/html/body/main/main/div/div/div[1]/section/div/div/ul/turbo-frame/li/div/div/div[2]/div[2]/div/div[2]/a").click
+    schedule = @employee.schedules.first
+    display_name = schedule.project.name
+    assert_text display_name
+    find("turbo-frame", id: dom_id(schedule)).click_link("Delete")
     within "#project-participants" do
-      assert_no_text text
+      assert_no_text display_name
     end
-    assert_selector "p.notice", text: "Schedule was removed successfully."
   end
 
   test "can edit a schedule" do
     visit page_url
-    assert_text "#{@employee.projects.first.name}"
-    find(:xpath, "/html/body/main/main/div/div/div[1]/section/div/div/ul/turbo-frame/li/div/div/div[2]/div[2]/div/div[1]/a").click
+    schedule = @employee.schedules.first
+    display_name = schedule.project.name
+    assert_text display_name
+    find("turbo-frame", id: dom_id(schedule)).click_link("Edit")
     take_screenshot
     within "#project-participants" do
       fill_in "schedule_occupancy", with: ""
       fill_in "schedule_occupancy", with: 79
       click_on "Save"
       take_screenshot
-      assert_text "#{@employee.projects.first.name}"
+      assert_text display_name
       assert_text "79% occupied"
       assert_no_text "Save"
     end
+    take_screenshot
   end
 
   test "can not edit schedule with invalid params" do
     visit page_url
-    assert_text "#{@employee.projects.first.name}"
-    find(:xpath, "/html/body/main/main/div/div/div[1]/section/div/div/ul/turbo-frame/li/div/div/div[2]/div[2]/div/div[1]/a").click
-    take_screenshot
+    schedule = @employee.schedules.first
+    display_name = schedule.project.name
+    assert_text display_name
+    find("turbo-frame", id: dom_id(schedule)).click_link("Edit")
     within "#project-participants" do
       fill_in "schedule_occupancy", with: 790
       fill_in "schedule_starts_at", with: Time.now.next_month

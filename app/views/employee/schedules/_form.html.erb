@@ -1,7 +1,7 @@
 <%= form_with(model: schedule, id: dom_id(schedule), url: employee_schedules_path(@employee)) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
-    <%= render "shared/form_header", title: "Schedule for new project", subtitle: "Select project and occupancy details" %>
+    <%= render "shared/form_header", title: "Schedule For New Project", subtitle: "Select project and occupancy details" %>
     <%= form.collection_select(:project_id, ProjectDecorator.decorate_collection(@employee.potential_projects.order(:name)), :id, :name, {:prompt => 'Select Project'}, :selected => schedule.project_id, :class=>"form-text-field mt-4" )%>
     <div>
       <label for="starts" class="block text-sm font-medium text-gray-700">

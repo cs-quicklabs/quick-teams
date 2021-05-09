@@ -4,7 +4,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    user.admin? && record.active
   end
 
   def index?
