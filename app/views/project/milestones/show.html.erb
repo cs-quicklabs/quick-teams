@@ -3,7 +3,7 @@
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
     <div class="flex-1 min-w-0">
       <h3 class="text-2xl font-bold leading-tight text-gray-900">
-        Milestone: <%= @milestone.title.titleize %>
+        <%= @milestone.title.titleize %>
       </h3>
       <div class="flex mt-4 space-x-3">
         <div class="flex-shrink-0">
@@ -17,7 +17,7 @@
             </span>
           </div>
           <div class="mt-1 space-x-2 text-sm">
-            <span class="font-medium text-gray-500">Created By <%= @milestone.user.decorate.display_name%> on <%= display_created_at(@milestone) %></span>
+            <span class="font-medium text-gray-500">Created By <%= @milestone.user.decorate.display_name%> on <%= display_created_at(@milestone) %> with deadline on  <%= display_date(@milestone.deadline) %></span>
           </div>
         </div>
       </div>
@@ -29,9 +29,11 @@
       <% end  %>
     </div>
   </div>
-  <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
-    <p><%= @milestone.body%></p>
-  </div>
+  <% cache @milestone do %>
+    <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
+      <p><%= @milestone.body%></p>
+    </div>
+  <% end %>
   <!-- Comments-->
   <section aria-labelledby="notes-title">
     <div class="pb-24 bg-white sm:rounded-lg overflow">
@@ -41,11 +43,11 @@
         </div>
         <div class="px-4 py-6 sm:px-6">
           <ul class="space-y-4" id="comments">
-            <%= render partial: "employee/goals/comments/comment", collection: @milestone.comments, as: :comment, cached: true%>
+            <%= render partial: "shared/comments/comment", collection: @milestone.comments.includes(:user), as: :comment, cached: true%>
           </ul>
         </div>
       </div>
-      <%= render partial: "employee/goals/comments/add", locals: {goal: @milestone, comment: @comment }%>
+      <%= render partial: "shared/comments/add", locals: {goal: @milestone, comment: @comment }%>
     </div>
   </section>
 </main>

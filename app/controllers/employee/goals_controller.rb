@@ -31,6 +31,7 @@ class Employee::GoalsController < Employee::BaseController
     authorize [:employee, @goal]
 
     @goal.destroy
+    Event.where(eventable: @employee, trackable: @goal).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@goal) }
     end

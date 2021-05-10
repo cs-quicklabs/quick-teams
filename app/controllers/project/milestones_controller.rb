@@ -4,8 +4,10 @@ class Project::MilestonesController < Project::BaseController
   def index
     authorize [:project, Goal]
 
-    @milestones = @project.milestones.includes({ comments: :user }).order(created_at: :desc)
+    @milestones = @project.milestones.includes(:user).order(created_at: :desc).limit(100)
     @milestone = Goal.new
+
+    fresh_when @milestones
   end
 
   def create
@@ -27,6 +29,7 @@ class Project::MilestonesController < Project::BaseController
   def destroy
     authorize [:project, @milestone]
     @milestone.destroy
+    Event.where(eventable: @project, trackable: @milestone).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@milestone) }
     end
@@ -50,7 +53,7 @@ class Project::MilestonesController < Project::BaseController
       if @milestone.update(milestone_params)
         format.html { redirect_to project_milestone_path(@milestone.goalable, @milestone), notice: "Milestone was successfully updated." }
       else
-        format.html { redirect_to edit_project_milestones_path(@milestone), alert: "Failed to update. Please try again." }
+        format.html { redirect_to edit_project_milestone_path(@milestone.goalable, @milestone), alert: "Failed to update. Please try again." }
       end
     end
   end

@@ -4,12 +4,7 @@ class Employee::FeedbacksController < Employee::BaseController
   def index
     authorize @employee, :show_feedbacks?
 
-    @feedbacks = []
-    if current_user.admin?
-      @feedbacks = @employee.feedbacks.includes(:user).order(created_at: :desc)
-    else
-      @feedbacks = @employee.feedbacks.published.includes(:user).order(created_at: :desc)
-    end
+    @feedbacks = employee_feedbacks
     @feedback = Feedback.new
 
     fresh_when @feedbacks
@@ -36,6 +31,7 @@ class Employee::FeedbacksController < Employee::BaseController
     authorize [:employee, @feedback]
 
     @feedback.destroy
+    Event.where(eventable: @employee, trackable: @feedback).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@feedback) }
     end
@@ -55,5 +51,29 @@ class Employee::FeedbacksController < Employee::BaseController
 
   def feedback_params
     params.require(:feedback).permit(:title, :body)
+  end
+
+  def employee_feedbacks
+    feedbacks = []
+    if current_user.admin?
+      feedbacks = all_feedbacks
+    elsif current_user.lead?
+      feedbacks = self? ? published_feedbacks : all_feedbacks
+    else
+      feedbacks = published_feedbacks
+    end
+    feedbacks
+  end
+
+  def all_feedbacks
+    @employee.feedbacks.includes(:user).order(created_at: :desc)
+  end
+
+  def published_feedbacks
+    @employee.feedbacks.published.includes(:user).order(created_at: :desc)
+  end
+
+  def self?
+    current_user == @employee
   end
 end

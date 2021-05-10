@@ -1,4 +1,4 @@
-<% if project.project_tags.size > 0 %>
+<% if project.project_tags.load.size > 0 %>
   <% project.project_tags.each do |tag| %>
     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-<%= tag.color %>-100 text-<%= tag.color %>-800 ml-2">
       <%= tag.name %>

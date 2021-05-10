@@ -13,7 +13,7 @@
             <a href="<%= employee_timeline_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name%></a>
             added a new feedback 
             <% if event.trackable.nil?%>
-              which does not exist anymore.
+              which does not exist anymore
             <% else %>
               titled
               <a href="<%= employee_feedback_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.title%></a>

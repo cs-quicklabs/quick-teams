@@ -39,7 +39,6 @@ Rails.application.routes.draw do
   get "/pricing", to: "static/static#pricing"
 
   get "/schedule", to: "schedules#index", as: "schedules"
-  get "/timesheet", to: "timesheets#index", as: "timesheets"
   get :search, controller: :search
 
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
@@ -52,6 +51,13 @@ Rails.application.routes.draw do
     patch "/password", to: "user#update_password", as: "edit_password"
     get "/notifications", to: "settings#notifications", as: "notifications"
   end
+
+  scope "report" do
+    get "/timesheets", to: "report/timesheets#index", as: "timesheets_reports"
+    get "/employees", to: "report/employees#index", as: "employees_reports"
+    get "/goals", to: "report/goals#index", as: "goals_reports"
+  end
+  get "/reports", to: "reports#index", as: "reports"
 
   scope "archive" do
     get "/projects", to: "projects#archived", as: "archived_projects"

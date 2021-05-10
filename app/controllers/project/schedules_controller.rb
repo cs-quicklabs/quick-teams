@@ -5,6 +5,8 @@ class Project::SchedulesController < Project::BaseController
     authorize [:project, Schedule]
     @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] }).order(created_at: :desc)
     @schedule = Schedule.new
+
+    fresh_when @schedules
   end
 
   def update
@@ -33,7 +35,7 @@ class Project::SchedulesController < Project::BaseController
                                turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: Schedule.new })
         }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: schedule }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Schedule.new, partial: "project/schedules/form", locals: { schedule: @schedule }) }
       end
     end
   end

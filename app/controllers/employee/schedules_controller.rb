@@ -36,7 +36,7 @@ class Employee::SchedulesController < Employee::BaseController
                                turbo_stream.replace(Schedule.new, partial: "employee/schedules/form", locals: { schedule: Schedule.new })
         }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Schedule.new, partial: "employee/schedules/form", locals: { schedule: schedule }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Schedule.new, partial: "employee/schedules/form", locals: { schedule: @schedule }) }
       end
     end
   end

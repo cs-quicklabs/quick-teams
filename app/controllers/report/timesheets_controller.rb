@@ -1,6 +1,4 @@
-class TimesheetsController < BaseController
-  before_action :authenticate_user!
-
+class Report::TimesheetsController < Report::BaseController
   def index
     authorize :timesheets
 

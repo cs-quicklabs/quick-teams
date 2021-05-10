@@ -38,6 +38,9 @@ class User < ApplicationRecord
     # level 1 subordinates
     all_subordinates_ids = self.subordinates.ids
 
+    # early return on level one
+    return true if all_subordinates_ids.include?(employee.id)
+
     # level 2 subordinates
     all_subordinates_ids << User.where("manager_id in (?)", all_subordinates_ids).ids
     all_subordinates_ids = all_subordinates_ids.flatten.uniq
