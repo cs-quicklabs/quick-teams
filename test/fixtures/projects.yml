@@ -5,6 +5,13 @@ one:
   discipline: engineering
   account: crownstack
 
+two:
+  name: Buildboard
+  archived: false
+  manager: regular
+  discipline: engineering
+  account: crownstack
+
 unarchived:
   name: Thaut
   archived: false

@@ -31,24 +31,26 @@ class NotesTest < ApplicationSystemTestCase
     visit page_url
     fill_in "note_body", with: "Added some note"
     click_on "Add Note"
+    within "#project_notes" do
+      assert_text "Added some note"
+    end
     take_screenshot
-    assert_selector "p.notice", text: "Note was added successfully."
   end
 
   test "can not add an empty note" do
     visit page_url
     click_on "Add Note"
+    assert_selector "div#error_explanation", text: "Body can't be blank"
     take_screenshot
-    assert_text "Body can't be blank"
   end
 
   test "can delete a note" do
     visit page_url
-    assert_text notes(:one).body
-    find(:xpath, "/html/body/main/main/div/div/div[1]/section/div/div/ul/li/div/div[2]/div[3]/a").click
+    note = @project.notes.first
+    assert_text note.body
+    find("li", id: dom_id(note)).click_link("Delete")
+    assert_no_text note.body
     take_screenshot
-    assert_selector "p.notice", text: "Note was removed successfully."
-    assert_no_text notes(:one).body
   end
 
   test "can not show add notes when project is archived" do

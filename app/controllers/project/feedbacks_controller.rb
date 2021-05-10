@@ -4,8 +4,10 @@ class Project::FeedbacksController < Project::BaseController
   def index
     authorize [:project, Feedback]
 
-    @feedbacks = @project.feedbacks.order(created_at: :desc)
+    @feedbacks = @project.feedbacks.includes(:user).order(created_at: :desc).limit(100)
     @feedback = Feedback.new
+
+    fresh_when @feedbacks
   end
 
   def create
@@ -28,6 +30,7 @@ class Project::FeedbacksController < Project::BaseController
     authorize [:project, @feedback]
 
     @feedback.destroy
+    Event.where(eventable: @project, trackable: @feedback).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@feedback) }
     end
@@ -35,6 +38,8 @@ class Project::FeedbacksController < Project::BaseController
 
   def show
     authorize [:project, @feedback]
+
+    fresh_when @feedbacks
   end
 
   private

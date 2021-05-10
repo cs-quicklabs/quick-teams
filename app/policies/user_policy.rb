@@ -4,7 +4,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    user.admin? && record.active
   end
 
   def index?
@@ -18,6 +18,8 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create_goal?
+    return false unless record.active?
+
     return true if user.admin?
     return true if user.lead? and user.subordinate?(record)
     false
@@ -35,7 +37,12 @@ class UserPolicy < ApplicationPolicy
     false
   end
 
+  def edit_goal?(goal)
+    edit_goals? && goal.progress?
+  end
+
   def create_feedback?
+    return false unless record.active?
     return true if user.admin?
     return true if user.lead? and user.subordinate?(record)
     false

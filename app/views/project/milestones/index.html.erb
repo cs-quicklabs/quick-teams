@@ -13,10 +13,10 @@
             <div class="overflow-hidden bg-white">
               <div class="p-4">
                 <div class="flex flex-wrap">
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Milestones (" + @milestones.size.to_s + ")"%></p>
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Milestones (" + @milestones.load.size.to_s + ")"%></p>
                 </div>
                 <ul class="space-y-6" id="milestones">
-                  <%= render partial: "project/milestones/milestone", collection: @milestones %>
+                  <%= render partial: "project/milestones/milestone", collection: @milestones, as: :milestone, cached: true %>
                 </ul>
               </div>
             </div>
@@ -29,7 +29,7 @@
               <h2 class="sr-only" id="section-2-title">Add New Milestone</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render "project/milestones/form", goal: @milestone%>
+                  <%= render partial: "project/milestones/form", locals: { milestone: @milestone }%>
                 </div>
               </div>
             </section>

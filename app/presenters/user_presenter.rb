@@ -3,10 +3,6 @@ class UserPresenter
     @user = user
   end
 
-  def show_add_feedback_form
-    user.active
-  end
-
   def show_add_timesheet_form(visiter)
     user.active && (user.id == visiter.id) && user.projects.size > 0
   end
