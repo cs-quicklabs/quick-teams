@@ -41,6 +41,8 @@ class ProjectGoalsTest < ApplicationSystemTestCase
     visit page_url
     click_on "Add Goal"
     assert_selector "div#error_explanation", text: "Title can't be blank"
+    assert_selector "div#error_explanation", text: "Deadline can't be blank"
+    assert_selector "div#error_explanation", text: "Body can't be blank"
     take_screenshot
   end
 
