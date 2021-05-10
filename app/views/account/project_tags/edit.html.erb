@@ -8,8 +8,7 @@
     <li class="flex w-full py-4 border-b border-gray-200">
       <div class="w-full">
         <%= form.text_field :name, class: "form-text-field", autocomplete: "off"%><br>
-<!--       <div class="flex-shrink-0 w-2.5 h-2.5 -mt-6 rounded-full bg-<%= @project_tag.color %>-400" aria-hidden="true"></div><br>
- -->      <div class="flex">
+      <div class="flex">
       <div class="flex items-center ml-2 text-sm ">
         <input <%= @project_tag.color == 'gray' ? 'checked' : 'NA' %> type="radio" id="project_tag_gray" name="project_tag[color]" value="gray" class="w-4 h-4 text-gray-600 border-gray-300 cursor-pointer focus:ring-gray-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
         <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
