@@ -36,8 +36,8 @@ class PeopleTagsTest < ApplicationSystemTestCase
   test "can not add an empty people tag" do
     visit page_url
     click_on "Save"
+    assert_selector "div#error_explanation", text: "Name can't be blank"
     take_screenshot
-    assert_text "Name can't be blank"
   end
 
   test "can not add a duplicate people tag" do

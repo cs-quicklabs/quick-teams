@@ -36,8 +36,8 @@ class ProjectStatusesTest < ApplicationSystemTestCase
   test "can not add an empty project status" do
     visit page_url
     click_on "Save"
+    assert_selector "div#error_explanation", text: "Name can't be blank"
     take_screenshot
-    assert_text "Name can't be blank"
   end
 
   test "can not add a duplicate project status" do
