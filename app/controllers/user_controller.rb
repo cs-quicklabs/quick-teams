@@ -16,7 +16,7 @@ class UserController < BaseController
   end
 
   def update_password
-    authorizr @user
+    authorize @user
     respond_to do |format|
       if @form.submit(change_password_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/password", locals: { message: "Password was updated successfully", user: @user }) }
