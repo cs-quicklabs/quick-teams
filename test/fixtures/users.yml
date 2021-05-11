@@ -9,6 +9,8 @@ regular:
   discipline: engineering
   manager: actor
   permission: admin
+  status: deployed
+  people_tags: star
 
 actor:
   first_name: Rachita
