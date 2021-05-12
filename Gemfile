@@ -41,6 +41,7 @@ gem "tailwindcss-rails", "~> 0.3.3"
 gem "stimulus_reflex", "~> 3.4"
 gem "pundit"
 gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
+gem "rack-mini-profiler", "~> 2.0"
 gem "newrelic_rpm"
 
 group :development, :test do
@@ -56,7 +57,7 @@ group :development, :staging do
   gem "web-console", ">= 4.1.0"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem "rack-mini-profiler", "~> 2.0"
+  # gem "rack-mini-profiler", "~> 2.0"
   gem "listen", "~> 3.3"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"

@@ -1,19 +1,53 @@
 <%= turbo_frame_tag dom_id(@people_status) do %>
-  <%= form_with(model: @people_status, id: dom_id(@people_status), url: account_people_status_path(@people_status)) do |form| %>
-    <% if local_assigns[:messages] && defined?(messages) && !messages.nil?%>
-      <% messages.each do |message| %>
-        <p class="mt-2 text-sm text-red-600"><%= message %></p>
-      <% end %>
-    <% end %>
-    <li class="flex w-full py-4 border-b border-gray-200">
-      <div class="w-full">
-        <%= form.text_field :name, class: "form-text-field", autocomplete: "off"%>
-      </div>
-      <div class="flex">
-        <%= form.submit "Save", class:"btn-blue ml-3 cursor-pointer"%>
-      </div>
-      <div>
-      </div>
-    </li>
-  <% end %>
+<%= form_with(model: @people_status, id: dom_id(@people_status), url: account_people_status_path(@people_status)) do |form| %>
+<% if local_assigns[:messages] && defined?(messages) && !messages.nil?%>
+<% messages.each do |message| %>
+<p class="mt-2 text-sm text-red-600"><%= message %></p>
+<% end %>
+<% end %>
+<li class="flex w-full py-4 border-b border-gray-200">
+	<div class="w-full">
+		<%= form.text_field :name, class: "form-text-field", autocomplete: "off"%><br>
+<!-- 	<div class="flex-shrink-0 w-2.5 h-2.5 -mt-6 rounded-full bg-<%= @people_status.color %>-400" aria-hidden="true"></div>
+ -->
+		<div class="flex">
+			<div class="flex items-center ml-2 text-sm ">
+				<input <%= @people_status.color == 'gray' ? 'checked' : 'NA' %> type="radio" id="project_tag_gray" name="people_status[color]" value="gray" class="w-4 h-4 text-gray-600 border-gray-300 cursor-pointer focus:ring-gray-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+				<span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+					Gray
+				</span>
+			</div>
+			<div class="flex items-center ml-4 text-sm">
+				<input <%= @people_status.color == 'red' ? 'checked' : 'NA' %> type="radio" id="project_tag_red" name="people_status[color]" value="red" class="w-4 h-4 text-red-600 border-gray-300 cursor-pointer focus:ring-red-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+				<span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
+					Red
+				</span>
+			</div>
+			<div class="flex items-center ml-4 text-sm">
+				<input <%= @people_status.color == 'yellow' ? 'checked' : 'NA' %> type="radio" id="project_tag_yellow" name="people_status[color]" value="yellow" class="w-4 h-4 text-yellow-600 border-gray-300 cursor-pointer focus:ring-yellow-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+				<span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+					Yellow
+				</span>
+			</div>
+			<div class="flex items-center ml-4 text-sm">
+				<input <%= @people_status.color == 'green' ? 'checked' : 'NA' %> type="radio" id="project_tag_green" name="people_status[color]" value="green" class="w-4 h-4 text-green-600 border-gray-300 cursor-pointer focus:ring-green-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+				<span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+					Green
+				</span>
+			</div>
+			<div class="flex items-center ml-4 text-sm">
+				<input <%= @people_status.color == 'blue' ? 'checked' : 'NA' %> type="radio" id="project_tag_blue" name="people_status[color]" value="blue" class="w-4 h-4 text-blue-600 border-gray-300 cursor-pointer focus:ring-blue-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+				<span class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+					Blue
+				</span>
+			</div>
+		</div>
+	</div>
+	<div>
+		<%= form.submit "Save", class:"btn-blue ml-3 cursor-pointer"%>
+	</div>
+	<div>
+	</div>
+</li>
+<% end %>
 <% end %>

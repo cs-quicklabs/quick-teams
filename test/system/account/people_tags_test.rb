@@ -26,6 +26,7 @@ class PeopleTagsTest < ApplicationSystemTestCase
   test "can add a new people tag" do
     visit page_url
     fill_in "Add New Tag", with: "New Tag"
+    choose(option: 'blue')
     click_on "Save"
     take_screenshot
     assert_text "Tag was created successfully."
@@ -35,8 +36,8 @@ class PeopleTagsTest < ApplicationSystemTestCase
   test "can not add an empty people tag" do
     visit page_url
     click_on "Save"
+    assert_selector "div#error_explanation", text: "Name can't be blank"
     take_screenshot
-    assert_text "Name can't be blank"
   end
 
   test "can not add a duplicate people tag" do
@@ -69,6 +70,7 @@ class PeopleTagsTest < ApplicationSystemTestCase
     find("li", text: people_tag.name).click_on("Edit")
     within "turbo-frame#people_tag_#{people_tag.id}" do
       fill_in "people_tag_name", with: "Edited Name"
+      choose(option: 'blue')
       click_on "Save"
     end
     assert_selector "li", text: "Edited Name"
@@ -83,6 +85,7 @@ class PeopleTagsTest < ApplicationSystemTestCase
     find("li", text: people_tag.name).click_on("Edit")
     within "turbo-frame#people_tag_#{people_tag.id}" do
       fill_in "people_tag_name", with: gold.name
+      choose(option: 'blue')
       click_on "Save"
       take_screenshot
       assert_text "Name has already been taken"

@@ -19,7 +19,7 @@
           <div  x-show="opentags"
         @click.away="opentags = false" class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg hide ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             <div class="py-1" role="none">
-              <% @tags.each do |tag|%>
+              <% @tags.uniq.each do |tag|%>
                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                 <a @click="opentags = false" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-reflex="click->ProjectTags#change" data-project-id=<%= project.id%> data-tag-id=<%= tag.id%> ><%= tag.name %></a>
               <% end %>

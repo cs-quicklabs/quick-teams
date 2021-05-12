@@ -1,5 +1,5 @@
 <% if project.project_tags.load.size > 0 %>
-  <% project.project_tags.each do |tag| %>
+  <% project.project_tags.uniq.each do |tag| %>
     <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-<%= tag.color %>-100 text-<%= tag.color %>-800 ml-2">
       <%= tag.name %>
       <button id="remove" data-reflex="click->ProjectTags#remove" data-tag-id=<%= tag.id%> data-project-id=<%= project.id%> type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-<%= tag.color %>-400 hover:bg-<%= tag.color %>-200 hover:text-<%= tag.color %>-400 focus:outline-none focus:bg-<%= tag.color %>-400 focus:text-white">

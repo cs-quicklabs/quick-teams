@@ -1,7 +1,9 @@
 risk:
   name: At Risk
+  color: Red
   account: crownstack
 
 uat:
   name: In UAT
+  color: Yellow
   account: crownstack
