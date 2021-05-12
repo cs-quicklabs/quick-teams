@@ -22,4 +22,13 @@ class Project < ApplicationRecord
   def potential_participants
     User.for_current_account.active.where.not(id: participants).order(:first_name)
   end
+
+  before_update :update_schedules, :if => :billable_changed?
+
+  def update_schedules
+    # bust cache and recalculate occupancy
+    # this is a hack because scheduled are cached with employees.
+    # need to find a better way for this
+    participants.touch_all
+  end
 end
