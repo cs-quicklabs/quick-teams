@@ -24,6 +24,7 @@ class User < ApplicationRecord
   has_many :events, as: :eventable
   has_many :notes
   has_many :timesheets
+  has_many :todos, as: :todoable
   belongs_to :status, class_name: "PeopleStatus", optional: true
   has_and_belongs_to_many :people_tags
 
