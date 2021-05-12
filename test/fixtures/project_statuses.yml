@@ -1,9 +1,9 @@
 tentative:
   name: Tentative
-  color: Blue
+  color: blue
   account: crownstack
 
 progess:
   name: In Progess
-  color: Green
+  color: green
   account: crownstack

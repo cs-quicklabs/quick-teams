@@ -1,9 +1,9 @@
 star:
   name: Star
-  color: Yellow
+  color: yellow
   account: crownstack
 
 gold:
   name: Gold
-  color: Grey
+  color: gray
   account: crownstack
