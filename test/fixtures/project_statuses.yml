@@ -7,3 +7,8 @@ progess:
   name: In Progess
   color: green
   account: crownstack
+
+unused:
+  name: Unused
+  color: green
+  account: crownstack
