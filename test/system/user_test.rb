@@ -44,6 +44,7 @@ class UserTest < ApplicationSystemTestCase
 
   test "can not edit user with duplicate email" do
     visit page_url
+    fill_in "Email", with: ""
     fill_in "Email", with: users(:actor).email
     click_on "Save"
     take_screenshot
