@@ -26,7 +26,7 @@ class ProjectTagsTest < ApplicationSystemTestCase
   test "can add a new project tag" do
     visit page_url
     fill_in "Add New Tag", with: "New Tag"
-    choose(option: 'red')
+    choose(option: "red")
     click_on "Save"
     take_screenshot
     assert_text "Tag was created successfully."
@@ -70,7 +70,7 @@ class ProjectTagsTest < ApplicationSystemTestCase
     find("li", text: project_tag.name).click_on("Edit")
     within "turbo-frame#project_tag_#{project_tag.id}" do
       fill_in "project_tag_name", with: "Edited Name"
-      choose(option: 'red')
+      choose(option: "red")
       click_on "Save"
     end
     assert_selector "li", text: "Edited Name"
@@ -86,7 +86,7 @@ class ProjectTagsTest < ApplicationSystemTestCase
     find("li", text: project_tag.name).click_on("Edit")
     within "turbo-frame#project_tag_#{project_tag.id}" do
       fill_in "project_tag_name", with: uat.name
-      choose(option: 'red')
+      choose(option: "red")
       click_on "Save"
       take_screenshot
       assert_text "Name has already been taken"
@@ -104,18 +104,5 @@ class ProjectTagsTest < ApplicationSystemTestCase
       assert_selector "a", count: 10
       assert_selector ".selected", text: "Project Tags"
     end
-  end
-
-  test "can not delete a project tag which is being used" do
-    visit page_url
-    project_tag = project_tags(:risk)
-
-    assert_selector "li", text: project_tag.name
-    find("li", text: project_tag.name).click_on("Delete")
-    take_screenshot
-    assert_text "Unable to Delete Record"
-    click_on "Cancel"
-    assert_no_text "Unable to Delete Record"
-    assert_selector "li", text: project_tag.name
   end
 end

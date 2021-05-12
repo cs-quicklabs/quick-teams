@@ -26,7 +26,7 @@ class PeopleTagsTest < ApplicationSystemTestCase
   test "can add a new people tag" do
     visit page_url
     fill_in "Add New Tag", with: "New Tag"
-    choose(option: 'blue')
+    choose(option: "blue")
     click_on "Save"
     take_screenshot
     assert_text "Tag was created successfully."
@@ -70,7 +70,7 @@ class PeopleTagsTest < ApplicationSystemTestCase
     find("li", text: people_tag.name).click_on("Edit")
     within "turbo-frame#people_tag_#{people_tag.id}" do
       fill_in "people_tag_name", with: "Edited Name"
-      choose(option: 'blue')
+      choose(option: "blue")
       click_on "Save"
     end
     assert_selector "li", text: "Edited Name"
@@ -85,7 +85,7 @@ class PeopleTagsTest < ApplicationSystemTestCase
     find("li", text: people_tag.name).click_on("Edit")
     within "turbo-frame#people_tag_#{people_tag.id}" do
       fill_in "people_tag_name", with: gold.name
-      choose(option: 'blue')
+      choose(option: "blue")
       click_on "Save"
       take_screenshot
       assert_text "Name has already been taken"
@@ -103,18 +103,5 @@ class PeopleTagsTest < ApplicationSystemTestCase
       assert_selector "a", count: 10
       assert_selector ".selected", text: "People Tags"
     end
-  end
-
-  test "can not delete a people tag which is being used" do
-    visit page_url
-    people_tag = people_tags(:gold)
-
-    assert_selector "li", text: people_tag.name
-    find("li", text: people_tag.name).click_on("Delete")
-    take_screenshot
-    assert_text "Unable to Delete Record"
-    click_on "Cancel"
-    assert_no_text "Unable to Delete Record"
-    assert_selector "li", text: people_tag.name
   end
 end

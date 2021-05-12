@@ -26,7 +26,7 @@ class ProjectStatusesTest < ApplicationSystemTestCase
   test "can add a new project status" do
     visit page_url
     fill_in "Add New Status", with: "New Status"
-    choose(option: 'yellow')
+    choose(option: "yellow")
     click_on "Save"
     take_screenshot
     assert_text "Project Status was created successfully."
@@ -55,7 +55,7 @@ class ProjectStatusesTest < ApplicationSystemTestCase
 
   test "can delete a project status" do
     visit page_url
-    project_status = project_statuses(:tentative)
+    project_status = project_statuses(:unused)
 
     assert_selector "li", text: project_status.name
     find("li", text: project_status.name).click_on("Delete")
@@ -70,7 +70,7 @@ class ProjectStatusesTest < ApplicationSystemTestCase
     find("li", text: project_status.name).click_on("Edit")
     within "turbo-frame#project_status_#{project_status.id}" do
       fill_in "project_status_name", with: "Edited Name"
-      choose(option: 'yellow')
+      choose(option: "yellow")
       click_on "Save"
     end
     assert_selector "li", text: "Edited Name"
@@ -86,7 +86,7 @@ class ProjectStatusesTest < ApplicationSystemTestCase
     find("li", text: project_status.name).click_on("Edit")
     within "turbo-frame#project_status_#{project_status.id}" do
       fill_in "project_status_name", with: progess.name
-      choose(option: 'yellow')
+      choose(option: "yellow")
       click_on "Save"
       take_screenshot
       assert_text "Name has already been taken"

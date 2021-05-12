@@ -4,6 +4,8 @@ one:
   manager: regular
   discipline: engineering
   account: crownstack
+  project_tags: risk
+  status: tentative
 
 two:
   name: Buildboard
