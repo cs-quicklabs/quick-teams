@@ -26,13 +26,14 @@ class SchedulesTest < ApplicationSystemTestCase
 
   test "can navigate with jobs menu" do
     visit page_url
-    find(:xpath, "/html/body/div[3]/div/div[1]/div/div/nav/div/div/a[2]").click
+    find(:xpath, "/html/body/div[4]/div/div[1]/div/div/nav/div/div/a[2]").click
     assert_current_path("/#{@account.id}/schedule?job=#{jobs(:developer).id}")
   end
 
   test "can navigate to employee page" do
     visit page_url
-    find(:xpath, "/html/body/div[3]/div/div[2]/table/tbody/tr[1]/td[1]/div/div[2]/a/div[1]").click
+    user = User.where(account: @account).active.order(:first_name).first
+    find("tr", id: dom_id(user)).click_link(user.decorate.display_name)
     within "#employee-header" do
       assert_selector "a", text: "Deactivate"
     end

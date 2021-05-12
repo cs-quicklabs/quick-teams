@@ -1,9 +1,14 @@
 deployed:
   name: Deployed
-  color: Red
+  color: red
   account: crownstack
 
 bench:
   name: On Bench
-  color: Blue
+  color: blue
+  account: crownstack
+
+unused:
+  name: Unused
+  color: blue
   account: crownstack

@@ -26,7 +26,7 @@ class PeopleStatusesTest < ApplicationSystemTestCase
   test "can add a new people status" do
     visit page_url
     fill_in "Add New Status", with: "New Status"
-    choose(option: 'green')
+    choose(option: "green")
     click_on "Save"
     take_screenshot
     assert_text "People Status was created successfully."
@@ -55,7 +55,7 @@ class PeopleStatusesTest < ApplicationSystemTestCase
 
   test "can delete a people status" do
     visit page_url
-    people_status = people_statuses(:deployed)
+    people_status = people_statuses(:unused)
 
     assert_selector "li", text: people_status.name
     find("li", text: people_status.name).click_on("Delete")
@@ -70,7 +70,7 @@ class PeopleStatusesTest < ApplicationSystemTestCase
     find("li", text: people_status.name).click_on("Edit")
     within "turbo-frame#people_status_#{people_status.id}" do
       fill_in "people_status_name", with: "Edited Name"
-      choose(option: 'green')
+      choose(option: "green")
       click_on "Save"
       take_screenshot
     end
@@ -86,7 +86,7 @@ class PeopleStatusesTest < ApplicationSystemTestCase
     find("li", text: people_status.name).click_on("Edit")
     within "turbo-frame#people_status_#{people_status.id}" do
       fill_in "people_status_name", with: bench.name
-      choose(option: 'green')
+      choose(option: "green")
       click_on "Save"
       take_screenshot
       assert_text "Name has already been taken"

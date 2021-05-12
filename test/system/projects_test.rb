@@ -13,6 +13,10 @@ class ProjectsTest < ApplicationSystemTestCase
     projects_url(script_name: "/#{@account.id}")
   end
 
+  def project_page_url
+    project_milestones_url(script_name: "/#{@account.id}", project_id: @project.id)
+  end
+
   test "can show index if logged in" do
     visit page_url
     take_screenshot
@@ -110,5 +114,46 @@ class ProjectsTest < ApplicationSystemTestCase
     visit archived_projects_url(script_name: "/#{@account.id}")
     page.first(:link, "Restore").click
     assert_selector "p.notice", text: "Project has been restored."
+  end
+
+  test "can add status" do
+    visit project_page_url
+    assert_selector "h1", text: @project.name
+
+    take_screenshot
+    click_on "Status"
+    click_on ProjectStatus.first.name
+    assert_selector "span", text: ProjectStatus.first.name
+    take_screenshot
+  end
+
+  test "can remove status" do
+    visit project_page_url
+    assert_selector "h1", text: @project.name
+
+    take_screenshot
+    find("div", id: "project-status").click_button("remove")
+    assert_no_selector "span", text: @project.status.name
+    take_screenshot
+  end
+
+  test "can add tag" do
+    visit project_page_url
+    assert_selector "h1", text: @project.name
+    take_screenshot
+    click_on "add"
+    click_on ProjectTag.first.name
+    assert_selector "span", text: ProjectTag.first.name
+    take_screenshot
+  end
+
+  test "can remove tags" do
+    visit project_page_url
+    assert_selector "h1", text: @project.name
+
+    take_screenshot
+    find("div", id: "project-tags").click_button("remove")
+    assert_no_selector "span", text: @project.project_tags.first.name
+    take_screenshot
   end
 end
