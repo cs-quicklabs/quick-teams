@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_29_121333) do
+ActiveRecord::Schema.define(version: 2021_05_12_112436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,6 +255,18 @@ ActiveRecord::Schema.define(version: 2021_04_29_121333) do
     t.index ["user_id"], name: "index_timesheets_on_user_id"
   end
 
+  create_table "todos", force: :cascade do |t|
+    t.string "title"
+    t.date "deadline"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "todoable_type", null: false
+    t.bigint "todoable_id", null: false
+    t.index ["todoable_type", "todoable_id"], name: "index_todos_on_todoable"
+    t.index ["user_id"], name: "index_todos_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -285,54 +297,34 @@ ActiveRecord::Schema.define(version: 2021_04_29_121333) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", name: "active_storage_attachments_blob_id_fkey"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", name: "active_storage_variant_records_blob_id_fkey"
   add_foreign_key "clients", "accounts"
-  add_foreign_key "clients", "accounts", name: "clients_account_id_fkey"
   add_foreign_key "comments", "goals"
   add_foreign_key "comments", "users"
   add_foreign_key "disciplines", "accounts"
-  add_foreign_key "disciplines", "accounts", name: "disciplines_account_id_fkey"
   add_foreign_key "events", "accounts"
   add_foreign_key "feedbacks", "users"
-  add_foreign_key "feedbacks", "users", name: "feedbacks_user_id_fkey"
   add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
-  add_foreign_key "jobs", "accounts", name: "jobs_account_id_fkey"
   add_foreign_key "notes", "users"
-  add_foreign_key "notes", "users", name: "notes_user_id_fkey"
   add_foreign_key "people_statuses", "accounts"
-  add_foreign_key "people_statuses", "accounts", name: "people_statuses_account_id_fkey"
   add_foreign_key "people_tags", "accounts"
-  add_foreign_key "people_tags", "accounts", name: "people_tags_account_id_fkey"
   add_foreign_key "project_statuses", "accounts"
-  add_foreign_key "project_statuses", "accounts", name: "project_statuses_account_id_fkey"
   add_foreign_key "project_tags", "accounts"
-  add_foreign_key "project_tags", "accounts", name: "project_tags_account_id_fkey"
   add_foreign_key "projects", "disciplines"
-  add_foreign_key "projects", "disciplines", name: "projects_discipline_id_fkey"
   add_foreign_key "projects", "project_statuses", column: "status_id"
   add_foreign_key "projects", "users", column: "manager_id"
-  add_foreign_key "projects", "users", column: "manager_id", name: "projects_manager_id_fkey"
   add_foreign_key "roles", "accounts"
-  add_foreign_key "roles", "accounts", name: "roles_account_id_fkey"
   add_foreign_key "schedules", "projects"
-  add_foreign_key "schedules", "projects", name: "schedules_project_id_fkey"
   add_foreign_key "schedules", "users"
-  add_foreign_key "schedules", "users", name: "schedules_user_id_fkey"
   add_foreign_key "skills", "accounts"
-  add_foreign_key "skills", "accounts", name: "skills_account_id_fkey"
   add_foreign_key "timesheets", "accounts"
   add_foreign_key "timesheets", "projects"
   add_foreign_key "timesheets", "users"
+  add_foreign_key "todos", "users"
   add_foreign_key "users", "disciplines"
-  add_foreign_key "users", "disciplines", name: "users_discipline_id_fkey"
   add_foreign_key "users", "jobs"
-  add_foreign_key "users", "jobs", name: "users_job_id_fkey"
   add_foreign_key "users", "people_statuses", column: "status_id"
   add_foreign_key "users", "roles"
-  add_foreign_key "users", "roles", name: "users_role_id_fkey"
   add_foreign_key "users", "users", column: "manager_id"
-  add_foreign_key "users", "users", column: "manager_id", name: "users_manager_id_fkey"
 end

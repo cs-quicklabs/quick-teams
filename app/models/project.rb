@@ -10,6 +10,7 @@ class Project < ApplicationRecord
   has_many :events, as: :eventable
   has_many :milestones, as: :goalable, class_name: "Goal"
   has_many :timesheets
+  has_many :todos, as: :todoable, class_name: "Todo"
   has_and_belongs_to_many :project_tags
 
   belongs_to :discipline
