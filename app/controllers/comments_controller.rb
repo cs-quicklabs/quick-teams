@@ -10,7 +10,8 @@ class CommentsController < BaseController
         update_goal
         format.turbo_stream {
           render turbo_stream: turbo_stream.append(:comments, partial: "shared/comments/comment", locals: { comment: @comment }) +
-                               turbo_stream.replace("add", partial: "shared/comments/add", locals: { goal: @goal, comment: Comment.new })
+                               turbo_stream.replace("add", partial: "shared/comments/add", locals: { goal: @goal, comment: Comment.new }) +
+                               turbo_stream.replace("title", partial: "shared/goals/title", locals: { goal: @goal })
         }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(:add, partial: "shared/comments/add", locals: { goal: @goal, comment: @comment }) }

@@ -1,27 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
-    <div class="flex-1 min-w-0">
-      <h3 class="text-2xl font-bold leading-tight text-gray-900">
-        <%= @milestone.title %>
-      </h3>
-      <div class="flex mt-4 space-x-3">
-        <div class="flex-shrink-0">
-          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
-        </div>
-        <div>
-          <div class="text-sm">
-            <a href="<%= project_milestones_path(@milestone.goalable)%>" class="font-medium text-gray-900 hover:underline"><%= @milestone.goalable.decorate.name %></a>
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium <%= goal_status_color(@milestone) %>">
-              <%= @milestone.status.to_s %>
-            </span>
-          </div>
-          <div class="mt-1 space-x-2 text-sm">
-            <span class="font-medium text-gray-500">Created By <%= @milestone.user.decorate.display_name%> on <%= display_created_at(@milestone) %> with deadline on  <%= display_date(@milestone.deadline) %></span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render partial: "shared/goals/title", locals: {goal: @milestone}%>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to 'Back',:back, class:"btn-normal" %>
       <% if current_user.admin? %>
