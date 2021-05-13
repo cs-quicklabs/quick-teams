@@ -24,11 +24,11 @@ class CommentsController < BaseController
   def update_goal
     if params[:commit] == "Comment"
     elsif params[:commit] == "and mark Missed"
-      @goal.update(status: "missed")
+      @goal.update_attribute("status", "missed")
     elsif params[:commit] == "and mark Completed"
-      @goal.update(status: "completed")
+      @goal.update_attribute("status", "completed")
     elsif params[:commit] == "and mark Discarded"
-      @goal.update(status: "discarded")
+      @goal.update_attribute("status", "discarded")
     end
   end
 
