@@ -25,6 +25,12 @@ class UserPolicy < ApplicationPolicy
     false
   end
 
+  def create_schedule?
+    return false unless record.active?
+    return true if user.admin?
+    false
+  end
+
   def show_goals?
     return true if user.admin?
     return self_or_subordinate? if user.lead?
