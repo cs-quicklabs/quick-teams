@@ -8,7 +8,7 @@ class AddProjectTodo < Patterns::Service
   def call
     begin
       add_todo
-      add_event
+      # add_event
     rescue
       todo
     end
@@ -24,7 +24,7 @@ class AddProjectTodo < Patterns::Service
   end
 
   def add_event
-    project.events.create(user: actor, action: "todo", action_for_context: "added todo for", trackable: todo)
+    # project.events.create(user: actor, action: "todo", action_for_context: "added todo for", trackable: todo)
   end
 
   attr_reader :project, :todo, :actor

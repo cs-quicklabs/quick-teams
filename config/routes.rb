@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :feedbacks, module: "employee"
     resources :timesheets, module: "employee"
     resources :goals, module: "employee"
+    resources :todos, module: "employee"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
   end
