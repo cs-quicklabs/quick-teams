@@ -7,6 +7,10 @@ class UserDecorator < Draper::Decorator
     "#{first_name} #{last_name}"
   end
 
+  def name
+    display_name
+  end
+
   def display_job_title
     job.nil? ? "" : "#{job.name}"
   end

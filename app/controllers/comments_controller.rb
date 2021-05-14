@@ -10,7 +10,8 @@ class CommentsController < BaseController
         update_goal
         format.turbo_stream {
           render turbo_stream: turbo_stream.append(:comments, partial: "shared/comments/comment", locals: { comment: @comment }) +
-                               turbo_stream.replace("add", partial: "shared/comments/add", locals: { goal: @goal, comment: Comment.new })
+                               turbo_stream.replace("add", partial: "shared/comments/add", locals: { goal: @goal, comment: Comment.new }) +
+                               turbo_stream.replace("title", partial: "shared/goals/title", locals: { goal: @goal })
         }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(:add, partial: "shared/comments/add", locals: { goal: @goal, comment: @comment }) }
@@ -23,11 +24,11 @@ class CommentsController < BaseController
   def update_goal
     if params[:commit] == "Comment"
     elsif params[:commit] == "and mark Missed"
-      @goal.update(status: "missed")
+      @goal.update_attribute("status", "missed")
     elsif params[:commit] == "and mark Completed"
-      @goal.update(status: "completed")
+      @goal.update_attribute("status", "completed")
     elsif params[:commit] == "and mark Discarded"
-      @goal.update(status: "discarded")
+      @goal.update_attribute("status", "discarded")
     end
   end
 
