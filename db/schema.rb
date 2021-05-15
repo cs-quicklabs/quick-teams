@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_112436) do
+ActiveRecord::Schema.define(version: 2021_05_15_091156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -286,9 +286,25 @@ ActiveRecord::Schema.define(version: 2021_05_12_112436) do
     t.date "deactivated_on"
     t.bigint "status_id"
     t.integer "permission", default: 0, null: false
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count", default: 0
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["discipline_id"], name: "index_users_on_discipline_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["job_id"], name: "index_users_on_job_id"
     t.index ["manager_id"], name: "index_users_on_manager_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -331,8 +347,6 @@ ActiveRecord::Schema.define(version: 2021_05_12_112436) do
   add_foreign_key "roles", "accounts", name: "roles_account_id_fkey"
   add_foreign_key "schedules", "projects"
   add_foreign_key "schedules", "projects", name: "schedules_project_id_fkey"
-  add_foreign_key "schedules", "users"
-  add_foreign_key "schedules", "users", name: "schedules_user_id_fkey"
   add_foreign_key "skills", "accounts"
   add_foreign_key "skills", "accounts", name: "skills_account_id_fkey"
   add_foreign_key "timesheets", "accounts"

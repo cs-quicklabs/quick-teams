@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referrer || landing_path)
   end
 
+  def signed_in_root_path(resource)
+    landing_path
+  end
+
   def record_not_found
     user_not_authorized
   end
