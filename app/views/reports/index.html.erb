@@ -3,9 +3,14 @@
     Timesheets
   </h3>
   <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-    <a href="<%= timesheets_reports_path %>" class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+    <a href="<%= timesheets_reports_path(from_date: Date.today - 7.days, to_date: Date.today) %>" class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
       <span class="truncate">
-        Timesheet Report
+        Last Week's Timesheet Report
+      </span>
+    </a>
+    <a href="<%= timesheets_reports_path(from_date: Date.today - 30.days, to_date: Date.today) %>" class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+      <span class="truncate">
+        Last Month's Timesheet Report
       </span>
     </a>
   </div>
@@ -13,9 +18,19 @@
     Goals
   </h3>
   <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
+    <a href="<%= goals_reports_path(from_date: Date.today - 7.days, to_date: Date.today) %>" class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+      <span class="truncate">
+        Last Week's Goals Status Report
+      </span>
+    </a>
     <a href="<%= goals_reports_path(from_date: Date.today - 30.days, to_date: Date.today) %>" class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
       <span class="truncate">
-        Goals Status Report
+        Last Month's Goals Status Report
+      </span>
+    </a>
+    <a href="<%= goals_reports_path(from_date: Date.today - 90.days, to_date: Date.today) %>" class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+      <span class="truncate">
+        Last Quarter's Goals Status Report
       </span>
     </a>
     <a href="<%= goals_reports_path(status: 0, to_date: Date.today) %>" class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">

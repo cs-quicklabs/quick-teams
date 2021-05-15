@@ -45,7 +45,7 @@
                 <%= form.select(:status, [["Any", ""], ["Progress", 0], ["Completed", 1], ["Missed", 2], ["Discarded", 3]], {selected: params["status"]},  :class=>"form-text-field mt-1") %>
               </div>
               <div class="flex justify-end mt-6">
-                <%= link_to 'Reset', goals_reports_path, class: "btn-normal" %>
+                <%= link_to 'Reset', goals_reports_path(from_date: Date.today - 30.days, to_date: Date.today), class: "btn-normal" %>
                 <%= form.submit "Search", class:"btn-blue cursor-pointer"%>
               </div>
             </main>

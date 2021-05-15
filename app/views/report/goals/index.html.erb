@@ -13,6 +13,7 @@
     <%= render partial: "form"%>
     <% if @goals.size > 0 %>
       <div class="w-full overflow-hidden">
+        <%= render partial: "stats", locals: {stats: @stats}%>
         <!-- This example requires Tailwind CSS v2.0+ -->
         <table class="min-w-full pb-6 divide-y divide-gray-200">
           <thead class="bg-gray-50">
