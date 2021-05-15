@@ -39,6 +39,7 @@
 <ul class="divide-y divide-gray-200">
   <% employee_stats.contributions.each do |contribution|%>
     <li class="flex px-2 py-2">
+      <!-- Somehow normal rails path are not working in stimulus reflex render so putting this hack -->
       <a class="w-full hover:underline" href="<%= "/" + Current.account.id.to_s + "/report/timesheets?" + "user_id=" + employee_stats.employee.id.to_s + "&project_id=" + contribution.project.id.to_s + "&from_date=" + employee_stats.from_date.to_s + "&to_date=" + employee_stats.to_date.to_s %>">
         <div class="w-full ml-3">
           <p class="text-sm font-medium text-gray-500"><%= contribution.project.name %></p>

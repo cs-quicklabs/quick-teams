@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     get "/notifications", to: "settings#notifications", as: "notifications"
   end
 
+  # if you change something in reports path please check stats path are not broken in project/employee timsheets, as they are hardcoded.
   scope "report" do
     get "/timesheets", to: "report/timesheets#index", as: "timesheets_reports"
     get "/employees", to: "report/employees#index", as: "employees_reports"
