@@ -18,4 +18,7 @@ class OnboardingTest < ApplicationSystemTestCase
 
   test "user can reset password from settings" do
   end
+
+  test "session should expire in 1 day" do
+  end
 end
