@@ -18,7 +18,7 @@ class AddTimesheet < Patterns::Service
   private
 
   def create_timesheet
-    timesheet.billable = project.billable
+    timesheet.billable = project.billable && actor.billable
     timesheet.user = actor
     timesheet.save!
   end

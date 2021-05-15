@@ -1,0 +1,40 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Available By Next Month
+      </h1>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @employees.count.to_s + " employees)"%></p>
+    </div>
+    <div class="flex mt-4 sm:mt-0 sm:ml-4">
+      <%= link_to 'Back', reports_path, class:"btn-normal cursor-pointer" %>
+    </div>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <% if @employees.size > 0 %>
+      <div class="w-full overflow-hidden">
+        <table class="min-w-full pb-6 divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Name
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Projects
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Occupancy
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <%= render partial: "schedule", collection: @employees, as: :employee, cached: true%>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</div>

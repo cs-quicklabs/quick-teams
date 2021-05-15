@@ -58,7 +58,12 @@ Rails.application.routes.draw do
     get "/timesheets", to: "report/timesheets#index", as: "timesheets_reports"
     get "/employees", to: "report/employees#index", as: "employees_reports"
     get "/goals", to: "report/goals#index", as: "goals_reports"
+    get "/schedules/available", to: "report/schedules#available", as: "available_schedules_reports"
+    get "/schedules/overburdened", to: "report/schedules#overburdened", as: "overburdened_schedules_reports"
+    get "/schedules/shared", to: "report/schedules#shared", as: "shared_schedules_reports"
+    get "/schedules/next", to: "report/schedules#available_next_month", as: "available_next_month_schedules_reports"
   end
+
   get "/reports", to: "reports#index", as: "reports"
 
   scope "archive" do
