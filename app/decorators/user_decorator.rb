@@ -4,7 +4,7 @@ class UserDecorator < Draper::Decorator
   decorates_association :manager
 
   def display_name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".titleize
   end
 
   def name

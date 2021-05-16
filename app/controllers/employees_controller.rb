@@ -37,7 +37,7 @@ class EmployeesController < BaseController
   def create
     authorize :team
 
-    employee = @form.submit(employee_params)
+    employee = @form.submit(employee_params, params[:invite])
     respond_to do |format|
       if !employee
         format.html { redirect_to new_employee_path(@user), alert: "Failed to create user. Please try again." }
