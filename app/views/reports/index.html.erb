@@ -8,11 +8,6 @@
         Last Week's Timesheet Report
       </span>
     </a>
-    <a href="<%= timesheets_reports_path(from_date: Date.today - 30.days, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-      <span class="truncate">
-        Last Month's Timesheet Report
-      </span>
-    </a>
   </div>
   <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
     Goals
@@ -61,11 +56,6 @@
     <a href="<%= shared_schedules_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
       <span class="truncate">
         Resources shared in multiple projects
-      </span>
-    </a>
-    <a href="<%= available_next_month_schedules_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-      <span class="truncate">
-        Occupied Resources getting freed by next month
       </span>
     </a>
   </div>

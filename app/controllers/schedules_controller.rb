@@ -6,7 +6,7 @@ class SchedulesController < BaseController
   def index
     authorize :schedules
 
-    employees = User.for_current_account.active.billable.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
+    employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
     if params[:job]
       @employees = employees.where(job: params[:job])
     else
