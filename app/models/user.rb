@@ -50,6 +50,7 @@ class User < ApplicationRecord
   end
 
   def self.query(params, includes = nil)
+    return [] if params.empty?
     EmployeeQuery.new(self.includes(:job, :role, :manager, :discipline), params).filter
   end
 end

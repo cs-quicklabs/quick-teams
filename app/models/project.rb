@@ -34,6 +34,7 @@ class Project < ApplicationRecord
   end
 
   def self.query(params, includes = nil)
+    return [] if params.empty?
     ProjectQuery.new(self.includes(:manager), params).filter
   end
 end
