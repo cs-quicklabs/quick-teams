@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   scope "report" do
     get "/timesheets", to: "report/timesheets#index", as: "timesheets_reports"
     get "/employees", to: "report/employees#index", as: "employees_reports"
+    get "/projects", to: "report/projects#index", as: "projects_reports"
+
     get "/goals", to: "report/goals#index", as: "goals_reports"
     get "/schedules/available", to: "report/schedules#available", as: "available_schedules_reports"
     get "/schedules/overburdened", to: "report/schedules#overburdened", as: "overburdened_schedules_reports"

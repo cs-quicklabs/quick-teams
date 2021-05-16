@@ -32,4 +32,8 @@ class Project < ApplicationRecord
     # need to find a better way for this
     participants.touch_all
   end
+
+  def self.query(params, includes = nil)
+    ProjectQuery.new(self.includes(:manager), params).filter
+  end
 end

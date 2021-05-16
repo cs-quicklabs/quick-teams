@@ -48,4 +48,8 @@ class User < ApplicationRecord
     all_subordinates_ids = all_subordinates_ids.flatten.uniq
     all_subordinates_ids.include?(employee.id)
   end
+
+  def self.query(params, includes = nil)
+    EmployeeQuery.new(self.includes(:job, :role, :manager, :discipline), params).filter
+  end
 end

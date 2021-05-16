@@ -1,0 +1,55 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Projects
+      </h1>
+    </div>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <%= render partial: "form"%>
+    <% if @projects.size > 0 %>
+      <div class="w-full overflow-hidden">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <table class="min-w-full pb-6 divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr class="border-gray-200">
+              <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                <span class="lg:pl-2">Project</span>
+              </th>
+              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+)%>
+              </th>
+              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                Lead
+              </th>
+              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                Created At
+              </th>
+              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <%= render partial: "project", collection: @projects, as: :project, cached: true%>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="w-full text-center sm:rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-lg font-medium leading-6 text-center text-gray-900">
+            No result found
+          </h3>
+          <div class="mt-2 text-sm text-center text-gray-500">
+            <p>We have not found any result for current search query. Please modify filter criteria and search again.</p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
