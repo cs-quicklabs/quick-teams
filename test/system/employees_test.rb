@@ -192,4 +192,18 @@ class EmployeesTest < ApplicationSystemTestCase
     assert_no_selector "span", text: @employees.first.people_tags.first.name
     take_screenshot
   end
+
+  test "admin can invite emmployee" do
+    assert_emails 1 do
+      click_on "Invite"
+      sleep(0.5)
+    end
+    doc = Nokogiri::HTML::Document.parse(ActionMailer::Base.deliveries.last.body.to_s)
+    link = doc.css("a").first.values.first
+    visit link
+    fill_in "user_password", with: "password"
+    fill_in "user_password_confirmation", with: "password"
+    click_on "Change my password"
+    assert_selector "div#error_explanation", text: "Reset password token is invalid" #this is fine because token has been changed.
+  end
 end
