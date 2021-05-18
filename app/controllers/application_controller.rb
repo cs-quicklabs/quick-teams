@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_token
 
   fragment_cache_key do
     current_user.permission
@@ -26,6 +27,11 @@ class ApplicationController < ActionController::Base
 
   def record_not_found
     user_not_authorized
+  end
+
+  def invalid_token
+    sign_out(current_user) if current_user
+    redirect_to new_user_session_path, alert: "Your session has expired. Please login again."
   end
 
   def landing_path
