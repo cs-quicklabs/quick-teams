@@ -1,0 +1,39 @@
+<div class="flex flex-col pt-5 pb-4 border-r border-gray-200">
+  <div class="flex flex-col flex-1 w-64 h-0 overflow-y-auto">
+    <div class="relative inline-block px-3 text-left">
+      <nav class="px-3">
+        <div>
+          <h3 class="text-xs font-semibold tracking-wider text-gray-500 uppercase" id="teams-headline">
+            Filter Employees
+          </h3>
+          <%= form_with url: employees_reports_path, method: :get do |form| %>
+            <main class="max-w-lg pt-6 pb-12 mx-auto space-y-4 lg:pb-16">
+              <div>
+                <label for="date" class="block text-sm font-medium text-gray-700">
+                  Manager
+                </label>
+                <%= form.collection_select(:manager_id, User.for_current_account.active.order(:first_name).decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["manager_id"] if !params["manager_id"].blank?) }, :class=>"form-text-field mt-1" )%>
+              </div>
+              <div>
+                <label for="billed" class="block text-sm font-medium text-gray-700">
+                  Status
+                </label>
+                <%= form.collection_select(:status, PeopleStatus.all.order(:name), :id, :name, {:prompt => "Select Status", :selected => (params["status"] if !params["status"].blank?) }, :class=>"form-text-field mt-1" )%>
+              </div>
+              <div>
+                <label for="billed" class="block text-sm font-medium text-gray-700">
+                  Permission
+                </label>
+                <%= form.select(:permission, [["Any", ""], ["Member", 0], ["Lead", 1], ["Admin", 2]], {selected: params["permission"]},  :class=>"form-text-field mt-1") %>
+              </div>
+              <div class="flex justify-end mt-6">
+                <%= link_to 'Reset', employees_reports_path, class: "btn-normal" %>
+                <%= form.submit "Search", class:"btn-blue cursor-pointer"%>
+              </div>
+            </main>
+          <% end %>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

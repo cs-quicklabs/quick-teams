@@ -8,14 +8,14 @@ class CreateUserTest < ActiveSupport::TestCase
   end
 
   test "can create user" do
-    user = CreateUser.call(@params, @actor, @account).result
+    user = CreateUser.call(@params, @actor, @account, false).result
     assert user.save
     assert_equal user.account, accounts(:crownstack)
   end
 
   test "can add event created" do
     assert_difference("Event.count") do
-      CreateUser.call(@params, @actor, @account)
+      CreateUser.call(@params, @actor, @account, false)
     end
     assert_equal Event.last.action, "created"
   end

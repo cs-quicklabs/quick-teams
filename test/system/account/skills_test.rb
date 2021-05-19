@@ -101,17 +101,4 @@ class SkillsTest < ApplicationSystemTestCase
       assert_selector ".selected", text: "Skills"
     end
   end
-
-  test "can not delete a skill which is being used" do
-    visit page_url
-    skill = skills(:python)
-
-    assert_selector "li", text: skill.name
-    find("li", text: skill.name).click_on("Delete")
-    take_screenshot
-    assert_text "Unable to Delete Record"
-    click_on "Cancel"
-    assert_no_text "Unable to Delete Record"
-    assert_selector "li", text: skill.name
-  end
 end

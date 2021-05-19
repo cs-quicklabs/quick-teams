@@ -43,8 +43,8 @@ five:
   action: scheduled
   eventable_type: Project
   eventable: one
-  trackable_type: Schedule
-  trackable: one
+  trackable_type: User
+  trackable: admin
   action_for_context: with 100% occupancy till Mar 31, 2021
   account: crownstack
 
@@ -73,8 +73,8 @@ eight:
   action: scheduled
   eventable_type: Project
   eventable: one
-  trackable_type: Schedule
-  trackable: one
+  trackable_type: User
+  trackable: admin
   action_for_context: with 100% occupancy till Mar 31, 2021
   account: crownstack
 
@@ -133,8 +133,8 @@ fourteen:
   action: scheduled
   eventable_type: Project
   eventable: one
-  trackable_type: Schedule
-  trackable: one
+  trackable_type: User
+  trackable: admin
   action_for_context: with 100% occupancy till Mar 31, 2021
   account: crownstack
 
@@ -143,8 +143,8 @@ fifteen:
   action: scheduled
   eventable_type: Project
   eventable: one
-  trackable_type: Schedule
-  trackable: none
+  trackable_type: User
+  trackable: admin
   action_for_context: with 100% occupancy till Mar 31, 2021
   account: crownstack
 

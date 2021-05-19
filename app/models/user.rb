@@ -1,14 +1,15 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  # :confirmable, :lockable, :timeoutable, and :omniauthable
+  devise :invitable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :trackable, :timeoutable, timeout_in: 1.day, invite_for: 2.weeks
 
   enum permission: [:member, :lead, :admin]
 
   scope :for_current_account, -> { where(account: Current.account) }
   scope :inactive, -> { where(active: false) }
   scope :active, -> { where(active: true) }
+  scope :billable, -> { where(billable: true) }
 
   belongs_to :account
   belongs_to :manager, class_name: "User", optional: true
@@ -51,5 +52,10 @@ class User < ApplicationRecord
     all_subordinates_ids << User.where("manager_id in (?)", all_subordinates_ids).ids
     all_subordinates_ids = all_subordinates_ids.flatten.uniq
     all_subordinates_ids.include?(employee.id)
+  end
+
+  def self.query(params, includes = nil)
+    return [] if params.empty?
+    EmployeeQuery.new(self.includes(:job, :role, :manager, :discipline), params).filter
   end
 end

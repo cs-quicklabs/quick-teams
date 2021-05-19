@@ -11,7 +11,7 @@ class CreateUserForm
     @actor = actor
   end
 
-  def submit(params)
+  def submit(params, invite)
     self.first_name = params[:first_name]
     self.last_name = params[:last_name]
     self.email = params[:email]
@@ -21,7 +21,7 @@ class CreateUserForm
     self.manager = params[:manager_id]
 
     if valid?
-      CreateUser.call(params, actor, account).result
+      CreateUser.call(params, actor, account, invite).result
     else
       false
     end

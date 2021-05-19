@@ -1,7 +1,7 @@
 class ProjectTimesheetsStats
   include Statable
 
-  attr_accessor :stats, :title, :contributors
+  attr_accessor :stats, :title, :contributors, :project, :from_date, :to_date
 
   def initialize(project, time_span)
     @project = project
@@ -25,6 +25,14 @@ class ProjectTimesheetsStats
 
   def title
     stats_title(@time_span)
+  end
+
+  def from_date
+    date_range(@time_span).first
+  end
+
+  def to_date
+    date_range(@time_span).last
   end
 end
 

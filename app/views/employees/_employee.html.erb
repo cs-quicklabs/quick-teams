@@ -38,9 +38,32 @@
   </td>
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
     <% unless employee.status.nil? %>
-      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= employee.status.color %>-800 bg-<%= employee.status.color %>-100 rounded-full">
-        <%= employee.status.name  %>
-      </span>
+      <a href="<%= employees_reports_path(status: employee.status.id)%>" class="hover:underline">
+        <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= employee.status.color %>-800 bg-<%= employee.status.color %>-100 rounded-full">
+          <%= employee.status.name  %>
+        </span>
+      </a>
     <%end %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap">
+    <div class="text-sm text-gray-500"><%= employee.permission.titleize %></div>
+    <% if employee.sign_in_count > 0 %>
+      <p class="flex items-center text-sm text-gray-500">
+        Joined      
+        <!-- Heroicon name: solid/check-circle -->
+        <svg class="flex-shrink-0 mr-1.5 h-4 w-4 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+      </p>
+    <% elsif employee.invitation_created_at.nil? %>
+      <div data-reflex="click->InviteEmployee#invite" data-employee-id=<%= employee.id%> class="text-blue-600 cursor-pointer hover:underline btn-inline-edit">Invite</div>
+    <% else  %>
+      <p class="flex items-center text-sm text-gray-500 ">
+        Invited
+        <!-- Heroicon name: solid/check-circle -->
+        <svg class="flex-shrink-0 mr-1.5 h-4 w-4 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+        </svg>      </p>
+    <% end %>
   </td>
 </tr>

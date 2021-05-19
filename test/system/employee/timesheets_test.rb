@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class TimesheetsTest < ApplicationSystemTestCase
+class EmployeeTimesheetsTest < ApplicationSystemTestCase
   setup do
     @employee = users(:regular)
     @account = @employee.account
@@ -55,11 +55,12 @@ class TimesheetsTest < ApplicationSystemTestCase
   end
 
   test "can delete timesheet" do
-    visit page_url
-    timesheet = @employee.timesheets.last_30_days.order(date: :desc).first
-    assert_text timesheet.description
-    save_and_open_page
-    find("tr", id: dom_id(timesheet)).click_link("Delete")
-    assert_no_selector "tbody#timesheets", text: timesheet.description
+    travel_to "2021-04-05".to_date do
+      visit page_url
+      timesheet = @employee.timesheets.last_30_days.order(date: :desc).first
+      assert_text timesheet.description
+      find("tr", id: dom_id(timesheet)).click_link("Delete")
+      assert_no_selector "tbody#timesheets", text: timesheet.description
+    end
   end
 end

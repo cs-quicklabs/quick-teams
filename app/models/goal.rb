@@ -11,6 +11,7 @@ class Goal < ApplicationRecord
   scope :window_90_days, -> { where(deadline: 45.days.ago..45.days.from_now) }
 
   def self.query(params, includes = nil)
+    return [] if params.empty?
     GoalQuery.new(self.includes(includes), params).filter
   end
 end

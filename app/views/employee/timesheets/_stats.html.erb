@@ -1,5 +1,11 @@
 <div class="flex flex-wrap p-4">
-  <p class="text-sm font-medium text-gray-900 truncate"><%= employee_stats.title %></p>
+  <% if current_user.admin? %>
+    <a class="w-full hover:underline" href="<%= "/" + Current.account.id.to_s + "/report/timesheets?" + "user_id=" + employee_stats.employee.id.to_s + "&from_date=" + employee_stats.from_date.to_s + "&to_date=" + employee_stats.to_date.to_s %>">
+      <p class="text-sm font-medium text-gray-900 truncate"><%= employee_stats.title %></p>
+    </a>
+  <% else %>
+    <p class="text-sm font-medium text-gray-900 truncate"><%= employee_stats.title %></p>
+  <% end %>
 </div>
 <div>
   <dl class="grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -37,9 +43,18 @@
 <ul class="divide-y divide-gray-200">
   <% employee_stats.contributions.each do |contribution|%>
     <li class="flex px-2 py-2">
-      <div class="w-full ml-3">
-        <p class="text-sm font-medium text-gray-500"><%= contribution.project.name %></p>
-      </div>
+      <% if current_user.admin? %>
+        <!-- Somehow normal rails path are not working in stimulus reflex render so putting this hack -->
+        <a class="w-full hover:underline" href="<%= "/" + Current.account.id.to_s + "/report/timesheets?" + "user_id=" + employee_stats.employee.id.to_s + "&project_id=" + contribution.project.id.to_s + "&from_date=" + employee_stats.from_date.to_s + "&to_date=" + employee_stats.to_date.to_s %>">
+          <div class="w-full ml-3">
+            <p class="text-sm font-medium text-gray-500"><%= contribution.project.name %></p>
+          </div>
+        </a>
+      <% else %>
+        <div class="w-full ml-3">
+          <p class="text-sm font-medium text-gray-500"><%= contribution.project.name %></p>
+        </div>
+      <% end %>
       <div class="w-full ml-3">
         <p class="text-sm font-medium text-right text-gray-500"><%= contribution.contribution %></p>
       </div>

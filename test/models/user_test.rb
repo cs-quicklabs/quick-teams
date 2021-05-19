@@ -14,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should have active users in active scope" do
-    users = User.active
+    users = User.for_current_account.active
     users.each do |user|
       assert user.active
     end

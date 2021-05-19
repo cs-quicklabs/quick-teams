@@ -3,3 +3,7 @@ crownstack:
 
 infosys:
   name: Infosys technologies
+
+fixed:
+  name: fixed
+  id: 1

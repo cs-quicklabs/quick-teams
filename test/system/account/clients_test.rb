@@ -104,20 +104,4 @@ class ClientsTest < ApplicationSystemTestCase
       assert_selector ".selected", text: "Clients"
     end
   end
-
-  test "can not delete a client which is being used" do
-    visit page_url
-    client = clients(:prachi)
-
-    assert_selector "li", text: client.name
-    assert_selector "li", text: client.email
-    find("li", text: client.name).click_on("Delete")
-    find("li", text: client.email).click_on("Delete")
-    take_screenshot
-    assert_text "Unable to Delete Record"
-    click_on "Cancel"
-    assert_no_text "Unable to Delete Record"
-    assert_selector "li", text: client.name
-    assert_selector "li", text: client.email
-  end
 end

@@ -44,9 +44,11 @@
   </td>
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
     <% unless project.status.nil? %>
-      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">
-        <%= project.status.name.titleize %>
-      </span>
+      <a href="<%= projects_reports_path(status: project.status.id)%>" class="hover:underline">
+        <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">
+          <%= project.status.name.titleize %>
+        </span>
+      </a>
     <%end %>
   </td>
 </tr>
