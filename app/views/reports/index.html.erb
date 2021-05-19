@@ -8,6 +8,11 @@
         Timesheets Report
       </span>
     </a>
+    <a href="<%= timesheets_reports_path(from_date: Date.yesterday, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+      <span class="truncate">
+        What happened yesterday?
+      </span>
+    </a>
   </div>
   <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
     Goals
