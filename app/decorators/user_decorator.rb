@@ -4,7 +4,11 @@ class UserDecorator < Draper::Decorator
   decorates_association :manager
 
   def display_name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".titleize
+  end
+
+  def name
+    display_name
   end
 
   def display_job_title
@@ -38,7 +42,7 @@ class UserDecorator < Draper::Decorator
   def overall_occupancy
     overall_occupancy = 0
     schedules.each do |schedule|
-      overall_occupancy += schedule.occupancy unless schedule.ends_at.to_date.past?
+      overall_occupancy += schedule.occupancy if schedule.ends_at.to_date.future? and schedule.project.billable
     end
     overall_occupancy
   end

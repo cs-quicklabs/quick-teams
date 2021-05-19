@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :schedules, module: "project"
     resources :notes, only: [:index, :show, :create, :destroy], module: "project"
     resources :feedbacks, only: [:index, :show, :create, :destroy], module: "project"
+    resources :todos, module: "project"
     resources :timesheets, module: "project"
     resources :milestones, module: "project"
     get "/timeline", to: "project/timeline#index", as: "timeline"
@@ -52,11 +53,19 @@ Rails.application.routes.draw do
     get "/notifications", to: "settings#notifications", as: "notifications"
   end
 
+  # if you change something in reports path please check stats path are not broken in project/employee timsheets, as they are hardcoded.
   scope "report" do
     get "/timesheets", to: "report/timesheets#index", as: "timesheets_reports"
     get "/employees", to: "report/employees#index", as: "employees_reports"
+    get "/projects", to: "report/projects#index", as: "projects_reports"
+
     get "/goals", to: "report/goals#index", as: "goals_reports"
+    get "/schedules/available", to: "report/schedules#available", as: "available_schedules_reports"
+    get "/schedules/overburdened", to: "report/schedules#overburdened", as: "overburdened_schedules_reports"
+    get "/schedules/shared", to: "report/schedules#shared", as: "shared_schedules_reports"
+    get "/schedules/next", to: "report/schedules#available_next_month", as: "available_next_month_schedules_reports"
   end
+
   get "/reports", to: "reports#index", as: "reports"
 
   scope "archive" do

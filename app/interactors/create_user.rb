@@ -1,15 +1,17 @@
 class CreateUser < Patterns::Service
   CHARS = ("0".."9").to_a + ("A".."Z").to_a + ("a".."z").to_a
 
-  def initialize(params, actor, account)
+  def initialize(params, actor, account, invite)
     @user = User.new(params)
     @actor = actor
     @account = account
+    @invite = invite
   end
 
   def call
     begin
       create_user
+      invite_user
       add_event
     rescue
       user
@@ -25,6 +27,10 @@ class CreateUser < Patterns::Service
     user.account = account
     user.password = password
     user.save!
+  end
+
+  def invite_user
+    user.invite! if @invite == "1"
   end
 
   def random_password(length = 10)

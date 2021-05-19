@@ -31,7 +31,7 @@
       <%else%>
         <div class="w-full overflow-hidden">
           <!-- This example requires Tailwind CSS v2.0+ -->
-          <%= render partial: "stats"%>
+          <%= render partial: "stats", locals: {stats: @stats}%>
           <table class="min-w-full pb-6 divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>

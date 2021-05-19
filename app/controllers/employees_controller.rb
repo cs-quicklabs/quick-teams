@@ -37,7 +37,7 @@ class EmployeesController < BaseController
   def create
     authorize :team
 
-    employee = @form.submit(employee_params)
+    employee = @form.submit(employee_params, params[:invite])
     respond_to do |format|
       if !employee
         format.html { redirect_to new_employee_path(@user), alert: "Failed to create user. Please try again." }
@@ -82,7 +82,7 @@ class EmployeesController < BaseController
   end
 
   def employee_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :discipline_id, :job_id, :manager_id)
+    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :discipline_id, :job_id, :manager_id, :billable)
   end
 
   def build_form

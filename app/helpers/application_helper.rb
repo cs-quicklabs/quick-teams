@@ -12,4 +12,12 @@ module ApplicationHelper
   def display_date(date)
     date.to_date.to_s(:long)
   end
+
+  def goal_path(goal)
+    if goal.goalable == "Project"
+      project_milestones_path(goal.goalable, goal)
+    else
+      employee_goals_path(goal.goalable, goal)
+    end
+  end
 end

@@ -9,6 +9,8 @@ regular:
   discipline: engineering
   manager: actor
   permission: admin
+  status: deployed
+  people_tags: star
 
 actor:
   first_name: Rachita
@@ -163,3 +165,48 @@ ten:
   role: senior
   discipline: engineering
   manager: regular
+
+admin:
+  first_name: Aashish
+  last_name: Dhawan (Admin)
+  active: true
+  email: admin@crownstack.com
+  account_id: 1
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+  permission: admin
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+lead:
+  first_name: Aashish
+  last_name: Dhawan (Lead)
+  active: true
+  email: lead@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+  permission: lead
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+member:
+  first_name: Aashish
+  last_name: Dhawan (Member)
+  active: true
+  email: member@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+  permission: member
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

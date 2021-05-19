@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_29_121333) do
+ActiveRecord::Schema.define(version: 2021_05_16_121815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,7 +243,7 @@ ActiveRecord::Schema.define(version: 2021_04_29_121333) do
     t.bigint "account_id", null: false
     t.bigint "project_id", null: false
     t.bigint "user_id", null: false
-    t.integer "hours", default: 0, null: false
+    t.decimal "hours", precision: 4, scale: 2, default: "0.0", null: false
     t.date "date", null: false
     t.string "description", null: false
     t.boolean "billed", default: false, null: false
@@ -253,6 +253,18 @@ ActiveRecord::Schema.define(version: 2021_04_29_121333) do
     t.index ["account_id"], name: "index_timesheets_on_account_id"
     t.index ["project_id"], name: "index_timesheets_on_project_id"
     t.index ["user_id"], name: "index_timesheets_on_user_id"
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.string "title"
+    t.date "deadline"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "todoable_type", null: false
+    t.bigint "todoable_id", null: false
+    t.index ["todoable_type", "todoable_id"], name: "index_todos_on_todoable"
+    t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -274,9 +286,26 @@ ActiveRecord::Schema.define(version: 2021_04_29_121333) do
     t.date "deactivated_on"
     t.bigint "status_id"
     t.integer "permission", default: 0, null: false
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count", default: 0
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.boolean "billable", default: true, null: false
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["discipline_id"], name: "index_users_on_discipline_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["job_id"], name: "index_users_on_job_id"
     t.index ["manager_id"], name: "index_users_on_manager_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -319,13 +348,12 @@ ActiveRecord::Schema.define(version: 2021_04_29_121333) do
   add_foreign_key "roles", "accounts", name: "roles_account_id_fkey"
   add_foreign_key "schedules", "projects"
   add_foreign_key "schedules", "projects", name: "schedules_project_id_fkey"
-  add_foreign_key "schedules", "users"
-  add_foreign_key "schedules", "users", name: "schedules_user_id_fkey"
   add_foreign_key "skills", "accounts"
   add_foreign_key "skills", "accounts", name: "skills_account_id_fkey"
   add_foreign_key "timesheets", "accounts"
   add_foreign_key "timesheets", "projects"
   add_foreign_key "timesheets", "users"
+  add_foreign_key "todos", "users"
   add_foreign_key "users", "disciplines"
   add_foreign_key "users", "disciplines", name: "users_discipline_id_fkey"
   add_foreign_key "users", "jobs"

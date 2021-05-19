@@ -21,6 +21,9 @@ common:
   distributed_tracing:
     enabled: true
 
+  browser_monitoring:
+    auto_instrument: true
+
   # To disable the agent regardless of other settings, uncomment the following:
   # agent_enabled: false
 

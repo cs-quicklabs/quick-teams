@@ -1,7 +1,7 @@
 class EmployeeTimesheetsStats
   include Statable
 
-  attr_accessor :stats, :title, :contributions
+  attr_accessor :stats, :title, :contributions, :employee, :from_date, :to_date
 
   def initialize(employee, time_span)
     @employee = employee
@@ -26,6 +26,14 @@ class EmployeeTimesheetsStats
 
   def title
     stats_title(@time_span)
+  end
+
+  def from_date
+    date_range(@time_span).first
+  end
+
+  def to_date
+    date_range(@time_span).last
   end
 end
 

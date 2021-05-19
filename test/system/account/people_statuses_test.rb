@@ -26,6 +26,7 @@ class PeopleStatusesTest < ApplicationSystemTestCase
   test "can add a new people status" do
     visit page_url
     fill_in "Add New Status", with: "New Status"
+    choose(option: "green")
     click_on "Save"
     take_screenshot
     assert_text "People Status was created successfully."
@@ -35,8 +36,8 @@ class PeopleStatusesTest < ApplicationSystemTestCase
   test "can not add an empty people status" do
     visit page_url
     click_on "Save"
+    assert_selector "div#error_explanation", text: "Name can't be blank"
     take_screenshot
-    assert_text "Name can't be blank"
   end
 
   test "can not add a duplicate people status" do
@@ -54,7 +55,7 @@ class PeopleStatusesTest < ApplicationSystemTestCase
 
   test "can delete a people status" do
     visit page_url
-    people_status = people_statuses(:deployed)
+    people_status = people_statuses(:unused)
 
     assert_selector "li", text: people_status.name
     find("li", text: people_status.name).click_on("Delete")
@@ -69,7 +70,9 @@ class PeopleStatusesTest < ApplicationSystemTestCase
     find("li", text: people_status.name).click_on("Edit")
     within "turbo-frame#people_status_#{people_status.id}" do
       fill_in "people_status_name", with: "Edited Name"
+      choose(option: "green")
       click_on "Save"
+      take_screenshot
     end
     assert_selector "li", text: "Edited Name"
   end
@@ -83,6 +86,7 @@ class PeopleStatusesTest < ApplicationSystemTestCase
     find("li", text: people_status.name).click_on("Edit")
     within "turbo-frame#people_status_#{people_status.id}" do
       fill_in "people_status_name", with: bench.name
+      choose(option: "green")
       click_on "Save"
       take_screenshot
       assert_text "Name has already been taken"
@@ -94,7 +98,7 @@ class PeopleStatusesTest < ApplicationSystemTestCase
     assert_selector "#menubar", count: 1
   end
 
-  test "should have left menu with Job Profiles selected" do
+  test "should have left menu with People Status selected" do
     visit page_url
     within "#menu" do
       assert_selector "a", count: 10
@@ -113,5 +117,6 @@ class PeopleStatusesTest < ApplicationSystemTestCase
     click_on "Cancel"
     assert_no_text "Unable to Delete Record"
     assert_selector "li", text: people_status.name
+    take_screenshot
   end
 end

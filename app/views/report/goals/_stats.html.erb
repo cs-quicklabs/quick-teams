@@ -1,0 +1,44 @@
+<div class="border-b border-gray-200">
+  <dl class="grid grid-cols-1 overflow-hidden bg-white divide-y divide-gray-200 md:grid-cols-5 md:divide-y-0 md:divide-x">
+    <div class="px-4 py-2 sm:p-2">
+      <dt class="text-base font-normal text-center text-gray-900">
+        Total Goals
+      </dt>
+      <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
+        <%= stats.total %>
+      </div>
+    </div>
+    <div class="px-4 py-2 sm:p-2">
+      <dt class="text-base font-normal text-center text-gray-900">
+        In Progress
+      </dt>
+      <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
+        <%= stats.progress %>
+      </div>
+    </div>
+    <div class="px-4 py-2 sm:p-2">
+      <dt class="text-base font-normal text-center text-gray-900">
+        Completed
+      </dt>
+      <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
+        <%= stats.completed %>
+      </div>
+    </div>
+    <div class="px-4 py-2 sm:p-2">
+      <dt class="text-base font-normal text-center text-gray-900">
+        Missed
+      </dt>
+      <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
+        <%= stats.missed %>
+      </div>
+    </div>
+    <div class="px-4 py-2 sm:p-2">
+      <dt class="text-base font-normal text-center text-gray-900">
+        Discarded
+      </dt>
+      <div class="flex items-baseline justify-center text-xl font-semibold text-gray-600">
+        <%= stats.discarded %>
+      </div>
+    </div>
+  </dl>
+</div>

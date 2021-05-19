@@ -2,9 +2,12 @@ require "application_system_test_case"
 
 class EmployeesTest < ApplicationSystemTestCase
   setup do
-    @employee = users(:abram)
+    @employee = users(:regular)
+    @actor = users(:actor)
     @account = @employee.account
     ActsAsTenant.current_tenant = @account
+    @employees = User.where(account: @account).active.order(:first_name)
+
     sign_in @employee
   end
 
@@ -27,7 +30,7 @@ class EmployeesTest < ApplicationSystemTestCase
 
   test "can show employee detail page" do
     visit page_url
-    click_on "#{@employee.first_name} #{@employee.last_name}"
+    find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
     within "#employee-header" do
       assert_text "Deactivate"
     end
@@ -44,7 +47,7 @@ class EmployeesTest < ApplicationSystemTestCase
     select disciplines(:engineering).name, from: "user_discipline_id"
     select jobs(:ios).name, from: "user_job_id"
     select roles(:senior).name, from: "user_role_id"
-    select "#{users(:actor).first_name} #{users(:actor).last_name}", from: "user_manager_id"
+    select @actor.decorate.display_name, from: "user_manager_id"
     click_on "Save"
     take_screenshot
     assert_selector "p.notice", text: "User was successfully created."
@@ -61,7 +64,7 @@ class EmployeesTest < ApplicationSystemTestCase
 
   test "can edit an employee" do
     visit page_url
-    click_on "#{@employee.first_name} #{@employee.last_name}"
+    find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
     within "#employee-header" do
       click_on "Edit"
     end
@@ -72,7 +75,7 @@ class EmployeesTest < ApplicationSystemTestCase
     select disciplines(:engineering).name, from: "user_discipline_id"
     select jobs(:ios).name, from: "user_job_id"
     select roles(:senior).name, from: "user_role_id"
-    select "#{users(:actor).first_name} #{users(:actor).last_name}", from: "user_manager_id"
+    select @actor.decorate.display_name, from: "user_manager_id"
     click_on "Save"
     take_screenshot
     assert_selector "p.notice", text: "User was successfully updated."
@@ -80,7 +83,7 @@ class EmployeesTest < ApplicationSystemTestCase
 
   test "can not edit an employee with empty name email" do
     visit page_url
-    click_on "#{@employee.first_name} #{@employee.last_name}"
+    find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
     within "#employee-header" do
       click_on "Edit"
     end
@@ -90,14 +93,14 @@ class EmployeesTest < ApplicationSystemTestCase
     fill_in "Email", with: ""
     click_on "Save"
     take_screenshot
-    assert_text "First name can't be blank"
-    assert_text "Last name can't be blank"
-    assert_text "Email can't be blank"
+    assert_selector "div#error_explanation", text: "First name can't be blank"
+    assert_selector "div#error_explanation", text: "Last name can't be blank"
+    assert_selector "div#error_explanation", text: "Email can't be blank"
   end
 
   test "can not edit an employee with duplicate email" do
     visit page_url
-    click_on "#{@employee.first_name} #{@employee.last_name}"
+    find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
     within "#employee-header" do
       click_on "Edit"
     end
@@ -105,12 +108,12 @@ class EmployeesTest < ApplicationSystemTestCase
     fill_in "Email", with: users(:actor).email
     click_on "Save"
     take_screenshot
-    assert_text "Email has already been taken"
+    assert_selector "div#error_explanation", text: "Email has already been taken"
   end
 
   test "can deactivate an employee" do
     visit page_url
-    click_on "#{@employee.first_name} #{@employee.last_name}"
+    find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
     within "#employee-header" do
       click_on "Deactivate"
     end
@@ -143,5 +146,50 @@ class EmployeesTest < ApplicationSystemTestCase
       take_screenshot
       assert_current_path("/#{@account.id}/employees?page=2")
     end
+  end
+
+  test "can add status" do
+    visit page_url
+    find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
+    assert_selector "h1", text: @employees.first.decorate.display_name
+
+    take_screenshot
+    click_on "Status"
+    click_on PeopleStatus.first.name
+    assert_selector "span", text: PeopleStatus.first.name
+    take_screenshot
+  end
+
+  test "can remove status" do
+    visit page_url
+    find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
+    assert_selector "h1", text: @employees.first.decorate.display_name
+
+    take_screenshot
+    find("div", id: "employee-status").click_button("remove")
+    assert_no_selector "span", text: @employees.first.status.name
+    take_screenshot
+  end
+
+  test "can add tag" do
+    visit page_url
+    find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
+    assert_selector "h1", text: @employees.first.decorate.display_name
+    take_screenshot
+    click_on "add"
+    click_on PeopleTag.first.name
+    assert_selector "span", text: PeopleTag.first.name
+    take_screenshot
+  end
+
+  test "can remove tags" do
+    visit page_url
+    find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
+    assert_selector "h1", text: @employees.first.decorate.display_name
+
+    take_screenshot
+    find("div", id: "employee-tags").click_button("remove")
+    assert_no_selector "span", text: @employees.first.people_tags.first.name
+    take_screenshot
   end
 end

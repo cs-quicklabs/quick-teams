@@ -16,7 +16,6 @@ class HomeTest < ApplicationSystemTestCase
   test "can visit index page if logged in" do
     visit page_url
     take_screenshot
-    save_and_open_page
     assert_selector "p", text: "Recent Activities"
   end
 
