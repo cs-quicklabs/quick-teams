@@ -15,7 +15,13 @@
                   <thead class="bg-gray-50">
                     <tr>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Done
+                        <label>
+                          <%#= check_box_tag nil, nil, false, data: { target: "todos-bulk.checkboxAll" } %>
+                          Done
+                        </label>
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Assigned To
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         Title
@@ -32,6 +38,7 @@
                   <%= render partial: "project/todos/todo", collection: @todos, as: :todo, cached: true %>
                   </tbody>
                 </table>
+                <%#= link_to "Delete", "#", data: { action: "click->todos-bulk#destroy" } %>
               </div>
             </div>
           </section>
@@ -43,7 +50,7 @@
               <h2 class="sr-only" id="section-2-title">Add New Todo</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render partial: "project/todos/form", locals: { todo: @todo }%>
+                  <%= render partial: "project/todos/form", locals: { todo: @todo, errors: nil }%>
                 </div>
               </div>
             </section>

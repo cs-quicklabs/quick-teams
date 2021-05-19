@@ -4,7 +4,7 @@ class Employee::TodosController < Employee::BaseController
   def index
     authorize @employee, :show_todo?
 
-    @todo = @employee.todos.includes(:user).order(created_at: :desc)
+    @todo = Todo.where(user: @employee).includes(:project, :user).order(created_at: :desc)
     @todo = Todo.new
 
     fresh_when @todos
@@ -13,7 +13,7 @@ class Employee::TodosController < Employee::BaseController
   def create
     authorize @employee, :create_todo?
 
-    @todo = AddEmployeeTodo.call(@employee, todo_params, current_user).result
+    @todo = AddTodo.call(Todo.new, Project.find_by(id: todo_params["project_id"]), @employee, todo_params, current_user).result
 
     respond_to do |format|
       if @todo.persisted?
@@ -30,8 +30,7 @@ class Employee::TodosController < Employee::BaseController
   def destroy
     authorize [:employee, @todo]
 
-    @todo.destroy
-    Event.where(eventable: @employee, trackable: @todo).touch_all #fixes cache issues in activity
+    @todo = RemoveTodo.call(@todo, current_user).result
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@todo) }
     end
@@ -66,6 +65,6 @@ class Employee::TodosController < Employee::BaseController
   end
 
   def todo_params
-    params.require(:todo).permit(:title, :deadline)
+    params.require(:todo).permit(:project_id, :discipline_id, :title, :deadline, :completed)
   end
 end

@@ -1,11 +1,23 @@
 <tr id="<%= dom_id todo %>">
+  <% todo = todo.decorate %>
   <td class="px-6 py-4 overflow-hidden text-sm text-gray-500 truncate whitespace-nowrap max-w-0">
-    <%#= timesheet.description%>
+  <%= check_box_tag nil, nil, todo.completed, data: { reflex: "click->ProjectTodoReflex#change", id: todo.id }, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
+  </td>
+  <td class="px-6 py-4 overflow-hidden text-sm text-gray-500 truncate whitespace-nowrap max-w-0">
+    <a href="<%= employee_todos_path(todo.user)%>" class="block hover:underline" target="_top">
+
+      <div>
+        <p class="text-sm font-medium text-gray-900 truncate">
+          <span class="truncate"><%= todo.user.decorate.display_name%></span>
+        </p>
+        <p class="flex items-center mt-1 text-sm text-gray-500">
+          <span class="truncate"><%= todo.user.decorate.display_position%></span>
+        </p>
+      </div>
+    </a>
   </td>
   <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-      <a href="#" class="block hover:underline">
-        <%= todo.title %>
-      </a>
+      <%= todo.title %>
   </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
     <%= display_created_at(todo) %>

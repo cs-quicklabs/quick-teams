@@ -10,7 +10,9 @@ class Project < ApplicationRecord
   has_many :events, as: :eventable
   has_many :milestones, as: :goalable, class_name: "Goal"
   has_many :timesheets
-  has_many :todos, as: :todoable, class_name: "Todo"
+  has_many :todos
+  has_many :lists, through: :todos, source: :user
+  # has_many :todos, as: :todoable, class_name: "Todo"
   has_and_belongs_to_many :project_tags
 
   belongs_to :discipline
@@ -22,6 +24,9 @@ class Project < ApplicationRecord
 
   def potential_participants
     User.for_current_account.active.where.not(id: participants).order(:first_name)
+  end
+  def potential_todos
+    User.for_current_account.active.where.not(id: lists).order(:first_name)
   end
 
   before_update :update_schedules, :if => :billable_changed?

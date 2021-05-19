@@ -18,14 +18,14 @@
                         Done
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Assigned To
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         Todo
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         Date
                       </th>
-<!--                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Hours
-                      </th> -->
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
                         Action
                       </th>
@@ -46,7 +46,7 @@
               <h2 class="sr-only" id="section-2-title">Add New Todo</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render partial: "employee/todos/form", locals: {todo: @todo, projects: @projects}%>
+                  <%= render partial: "employee/todos/form", locals: {todo: @todo, errors: nil }%>
                 </div>
               </div>
             </section>
