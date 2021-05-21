@@ -14,10 +14,10 @@ module ApplicationHelper
   end
 
   def goal_path(goal)
-    if goal.goalable == "Project"
-      project_milestones_path(goal.goalable, goal)
+    if goal.goalable_type == "Project"
+      project_milestones_path(goal.goalable)
     else
-      employee_goals_path(goal.goalable, goal)
+      employee_goals_path(goal.goalable)
     end
   end
 end

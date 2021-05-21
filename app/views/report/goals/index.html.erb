@@ -12,7 +12,7 @@
   <div class="flex w-full">
     <%= render partial: "form"%>
     <% if @goals.size > 0 %>
-      <div class="w-full overflow-hidden">
+      <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <%= render partial: "stats", locals: {stats: @stats}%>
         <!-- This example requires Tailwind CSS v2.0+ -->
         <table class="min-w-full pb-6 divide-y divide-gray-200">
@@ -38,10 +38,13 @@
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
             <%= render partial: "goal", collection: @goals, as: :goal, cached: true%>
           </tbody>
         </table>
+        <div class="flex justify-end mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+        </div>
       </div>
     <% else %>
       <div class="w-full text-center sm:rounded-lg">

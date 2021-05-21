@@ -29,7 +29,7 @@
           </div>
         </div>
       <%else%>
-        <div class="w-full overflow-hidden">
+        <div class="w-full overflow-hidden" data-controller="infinite-scroll">
           <!-- This example requires Tailwind CSS v2.0+ -->
           <%= render partial: "stats", locals: {stats: @stats}%>
           <table class="min-w-full pb-6 divide-y divide-gray-200">
@@ -58,10 +58,13 @@
                 </th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
               <%= render partial: "timesheet", collection: @timesheets, as: :timesheet, cached: true%>
             </tbody>
           </table>
+          <div class="flex justify-end mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+            <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+          </div>
         </div>
       <% end %>
     <% else %>
