@@ -4,7 +4,7 @@ class Employee::TodosController < Employee::BaseController
   def index
     authorize @employee, :show_todo?
 
-    @todo = Todo.where(user: @employee).includes(:project, :user).order(created_at: :desc)
+    @todos = @employee.todos.includes(:project, :user).order(deadline: :asc)
     @todo = Todo.new
 
     fresh_when @todos

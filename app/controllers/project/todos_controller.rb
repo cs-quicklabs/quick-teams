@@ -4,7 +4,7 @@ class Project::TodosController < Project::BaseController
   def index
     authorize [:project, Todo]
 
-    @todos = Todo.where(project: @project).includes({ user: [:role, :job] }).order(created_at: :desc).limit(100)
+    @todos = @project.todos.includes({ user: [:role, :job] }).order(created_at: :desc).limit(100)
     @todo = Todo.new
 
     fresh_when @todos

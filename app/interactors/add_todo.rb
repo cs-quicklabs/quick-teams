@@ -10,7 +10,6 @@ class AddTodo < Patterns::Service
   def call
     begin
       add_project_todo
-      # add_event
     rescue
       todo
     end
@@ -25,10 +24,6 @@ class AddTodo < Patterns::Service
     todo.project = @project
     todo.user = @employee
     todo.save!
-  end
-
-  def add_event
-    # project.events.create(user: actor, action: "todo", action_for_context: "added todo for", trackable: todo)
   end
 
   attr_reader :project, :todo, :actor, :employee, :params

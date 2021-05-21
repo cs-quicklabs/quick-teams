@@ -1,8 +1,13 @@
 class ProjectTodoReflex < ApplicationReflex
-  def change
+  def toggle_project_todo
     todo = Todo.find(element.dataset[:id])
-    todo.update(completed: (todo.completed ? false : true))
-    todo.touch
-    morph "#todos", render(partial: "project/todos/todo", collection: { todo: @todos })
+    todo.update(completed: !todo.completed)
+    morph "#todo_#{todo.id}", render(partial: "project/todos/todo", locals: { todo: todo })
+  end
+
+  def toggle_employee_todo
+    todo = Todo.find(element.dataset[:id])
+    todo.update(completed: !todo.completed)
+    morph "#todo_#{todo.id}", render(partial: "employee/todos/todo", locals: { todo: todo })
   end
 end

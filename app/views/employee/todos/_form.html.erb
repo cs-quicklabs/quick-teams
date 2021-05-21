@@ -1,20 +1,14 @@
 <%= tailwind_form_with(model: todo, id: dom_id(todo), url: employee_todos_path(@employee)) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: todo, message: local_assigns[:message] %>
-    
-    <%= render "shared/form_header", title: "Add New Todo", subtitle: "Expectation from employees can be set in form of a Todo. A todo can be weekly, monthly and quarterly. These can also be used to set career paths for employee." %>
-    
-    <%= form.collection_select(:project_id, ProjectDecorator.decorate_collection(@employee.potential_todos.order(:name)), :id, :name, {:prompt => 'Select Project'}, :selected => todo.project_id, :class=>"form-text-field mt-4" )%>
-    
+    <%= render "shared/form_header", title: "Add New Todo", subtitle: "Todo are short term goals" %>
     <%= form.text_area :title, "Todo", autocomplete: "off"%>
-    
     <div>
       <label for="date" class="block text-sm font-medium text-gray-700">
         Due Date
       </label>
-      <%= form.date_field :deadline, class: 'form-text-field mt-1'%>
+      <%= form.date_field :deadline, class: 'form-text-field mt-1', value: Date.today.to_s(:db)%>
     </div>
-    
     <div class="flex justify-end">
       <%= form.submit "Add Todo", class:"btn-blue cursor-pointer"%>
     </div>
