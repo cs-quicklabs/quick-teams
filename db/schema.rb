@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_121815) do
+ActiveRecord::Schema.define(version: 2021_05_19_111842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -333,7 +333,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_121815) do
   add_foreign_key "projects", "users", column: "manager_id"
   add_foreign_key "roles", "accounts"
   add_foreign_key "schedules", "projects"
-  add_foreign_key "schedules", "projects", name: "schedules_project_id_fkey"
+  add_foreign_key "schedules", "users"
   add_foreign_key "skills", "accounts"
   add_foreign_key "timesheets", "accounts"
   add_foreign_key "timesheets", "projects"
