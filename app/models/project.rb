@@ -25,6 +25,7 @@ class Project < ApplicationRecord
   def potential_participants
     User.for_current_account.active.where.not(id: participants).order(:first_name)
   end
+
   def potential_todos
     User.for_current_account.active.where.not(id: lists).order(:first_name)
   end

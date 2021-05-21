@@ -36,28 +36,6 @@ class Employee::TodosController < Employee::BaseController
     end
   end
 
-  # def show
-  #   authorize [:employee, @todo]
-
-  #   fresh_when @todo
-  # end
-
-  # def edit
-  #   authorize [:employee, @todo]
-  # end
-
-  # def update
-  #   authorize [:employee, @todo]
-
-  #   respond_to do |format|
-  #     if @todo.update(todo_params)
-  #       format.html { redirect_to employee_todo_path(@todo.todoable, @todo), notice: "Todo was successfully updated." }
-  #     else
-  #       format.html { redirect_to edit_employee_todo_path(@todo), alert: "Failed to update. Please try again." }
-  #     end
-  #   end
-  # end
-
   private
 
   def set_todo
