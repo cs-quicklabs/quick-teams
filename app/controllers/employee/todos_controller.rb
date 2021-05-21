@@ -4,7 +4,7 @@ class Employee::TodosController < Employee::BaseController
   def index
     authorize @employee, :show_todo?
 
-    @todo = Todo.where(user: @employee).includes(:project, :user).order(created_at: :desc)
+    @todos = @employee.todos.includes(:project, :user).order(deadline: :asc)
     @todo = Todo.new
 
     fresh_when @todos
@@ -35,28 +35,6 @@ class Employee::TodosController < Employee::BaseController
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@todo) }
     end
   end
-
-  # def show
-  #   authorize [:employee, @todo]
-
-  #   fresh_when @todo
-  # end
-
-  # def edit
-  #   authorize [:employee, @todo]
-  # end
-
-  # def update
-  #   authorize [:employee, @todo]
-
-  #   respond_to do |format|
-  #     if @todo.update(todo_params)
-  #       format.html { redirect_to employee_todo_path(@todo.todoable, @todo), notice: "Todo was successfully updated." }
-  #     else
-  #       format.html { redirect_to edit_employee_todo_path(@todo), alert: "Failed to update. Please try again." }
-  #     end
-  #   end
-  # end
 
   private
 

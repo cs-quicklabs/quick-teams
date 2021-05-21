@@ -1,24 +1,22 @@
 <tr id="<%= dom_id todo %>">
   <% todo = todo.decorate %>
   <td class="px-6 py-4 overflow-hidden text-sm text-gray-500 truncate whitespace-nowrap max-w-0">
-  <%= check_box_tag nil, nil, todo.completed, data: { reflex: "click->ProjectTodoReflex#change", id: todo.id }, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
+    <%= check_box_tag nil, nil, todo.completed, data: { reflex: "click->ProjectTodoReflex#toggle_employee_todo", id: todo.id }, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
   </td>
-  <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-    <% if current_user.admin? %>
+  <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-500 max-w-0">
+    <p><%= todo.title.capitalize %></p>
+  </td>
+  <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
+    <% if current_user.admin? && !todo.project.nil? %>
       <a href="<%= project_todos_path(todo.project)%>" class="block hover:underline">
         <%= todo.project.name %>
       </a>
-    <% else %>
-      <%= todo.project.name %>
     <% end %>
-  </td>
-  <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-    <p><%= todo.title%></p>
   </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
     <%= display_created_at(todo) %>
   </td>
   <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-    <%= link_to "Delete", employee_todo_path(@employee, todo), method: :delete, class: "btn-inline-delete pl-2" %>
+    <%= link_to "Delete", employee_todo_path(todo.user, todo), method: :delete, class: "btn-inline-delete pl-2" %>
   </td>
 </tr>
