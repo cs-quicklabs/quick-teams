@@ -3,10 +3,16 @@ class Report::TimesheetsController < Report::BaseController
     authorize :timesheets
     @filters = TimesheetFilter.new(timesheet_filter_params)
     @timesheet_entries = entries(Timesheet.query(timesheet_filter_params))
-    @timesheets = TimesheetDecorator.decorate_collection(@timesheet_entries)
     @stats = TimesheetsStats.new(@timesheet_entries)
+    @pagy, @timesheets = pagy_nil_safe(@timesheet_entries, items: LIMIT)
 
-    fresh_when @timesheet_entries
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: { entries: render_to_string(partial: "report/timesheets/timesheet", formats: [:html], collection: @timesheets, cached: true),
+                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
+      }
+    end
   end
 
   private
