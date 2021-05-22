@@ -15,7 +15,7 @@
         "alpinejs": "^2.8.0",
         "autoprefixer": "^9",
         "node-sass": "^4.12.1",
-        "postcss": "^7",
+        "postcss": "^8",
         "stimulus": "^2.0.0",
         "stimulus-checkbox-select-all": "^4.0.0",
         "stimulus_reflex": "^3.4.1",
