@@ -2,7 +2,7 @@ class Report::BaseController < ApplicationController
   before_action :authenticate_user!
   include Pagy::Backend
 
-  LIMIT = 50
+  LIMIT = 30
 
   def pagy_nil_safe(collection, vars = {})
     pagy = Pagy.new(count: collection.count(:all), page: params[:page], **vars)
