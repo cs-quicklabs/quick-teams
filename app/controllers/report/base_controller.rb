@@ -1,5 +1,4 @@
-class Report::BaseController < ApplicationController
-  before_action :authenticate_user!
+class Report::BaseController < BaseController
   include Pagy::Backend
 
   LIMIT = 30

@@ -1,5 +1,4 @@
 class SchedulesController < BaseController
-  before_action :authenticate_user!
   before_action :set_project, only: %i[ update create destroy edit ]
   before_action :set_schedule, only: %i[ update destroy edit ]
 

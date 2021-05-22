@@ -2,7 +2,6 @@ class EmployeesController < BaseController
   include Pagy::Backend
 
   before_action :set_employee, only: %i[ show edit update destroy deactivate_user activate_user ]
-  before_action :authenticate_user!
   before_action :build_form, only: %i[create]
 
   def index
