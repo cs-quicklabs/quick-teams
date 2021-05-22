@@ -6,8 +6,14 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_token
   rescue_from ActsAsTenant::Errors::NoTenantSet, with: :user_not_authorized
 
+  etag { heroku_version }
+
   fragment_cache_key do
     current_user.permission
+  end
+
+  def heroku_version
+    ENV["HEROKU_RELEASE_VERSION"] if Rails.env == "production" or Rails.env == "staging"
   end
 
   def after_sign_in_path_for(resource)
