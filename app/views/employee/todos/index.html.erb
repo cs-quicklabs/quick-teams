@@ -1,6 +1,6 @@
-<% presenter = ProjectPresenter.new(@project) %>
+<% presenter = UserPresenter.new(@employee) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "project/title", project: @project%>
+  <%= render "employee/title", employee: @employee%>
   <main class="pb-8">
     <div class="">
       <h1 class="sr-only">Page title</h1>
@@ -18,10 +18,10 @@
                         Done
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Assigned To
+                        Todo
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Title
+                        Project
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         Date
@@ -32,22 +32,21 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200" id="todos">
-                    <%= render partial: "project/todos/todo", collection: @todos, as: :todo, cached: true %>
+                    <%= render partial: "employee/todos/todo", collection: @todos, cached: true %>
                   </tbody>
                 </table>
-                <%#= link_to "Delete", "#", data: { action: "click->todos-bulk#destroy" } %>
               </div>
             </div>
           </section>
         </div>
-        <% if presenter.show_add_feedback_form %>
+        <% if policy(@employee).create_todo? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
               <h2 class="sr-only" id="section-2-title">Add New Todo</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render partial: "project/todos/form", locals: { todo: @todo, errors: nil }%>
+                  <%= render partial: "employee/todos/form", locals: {todo: @todo, errors: nil }%>
                 </div>
               </div>
             </section>
