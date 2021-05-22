@@ -92,6 +92,20 @@ class UserPolicy < ApplicationPolicy
     return true if user.admin?
     return (user.id == record.id or user.subordinate?(record)) if user.lead?
     false
+  end 
+
+  def show_todo?
+    return true if user.admin?
+    return true if user.lead? and user.subordinate?(record)
+    user.id == record.id
+  end
+
+  def create_todo?
+    return false unless record.active?
+
+    return true if user.admin?
+    return true if user.lead? and user.subordinate?(record)
+    false
   end
 
   def show_schedules?

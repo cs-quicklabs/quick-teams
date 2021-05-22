@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_121815) do
+ActiveRecord::Schema.define(version: 2021_05_19_111842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -261,9 +261,9 @@ ActiveRecord::Schema.define(version: 2021_05_16_121815) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "todoable_type", null: false
-    t.bigint "todoable_id", null: false
-    t.index ["todoable_type", "todoable_id"], name: "index_todos_on_todoable"
+    t.boolean "completed", default: false
+    t.bigint "project_id"
+    t.index ["project_id"], name: "index_todos_on_project_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
@@ -353,6 +353,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_121815) do
   add_foreign_key "timesheets", "accounts"
   add_foreign_key "timesheets", "projects"
   add_foreign_key "timesheets", "users"
+  add_foreign_key "todos", "projects"
   add_foreign_key "todos", "users"
   add_foreign_key "users", "disciplines"
   add_foreign_key "users", "disciplines", name: "users_discipline_id_fkey"

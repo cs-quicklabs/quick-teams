@@ -36,6 +36,11 @@
             Goals
           </a>
         <% end %>
+        <% if policy(employee).show_todo? %>
+          <a href="<%= employee_todos_path %>" class="<%= current_page?(employee_todos_path) ? "selected-tab" : "unselected-tab"%>">
+            Todos
+          </a>
+        <% end %>
         <% if policy(employee).show_timesheets? %>
           <a href="<%= employee_timesheets_path %>" class="<%= current_page?(employee_timesheets_path) ? "selected-tab" : "unselected-tab"%>">
             Timesheets

@@ -25,7 +25,8 @@ class User < ApplicationRecord
   has_many :events, as: :eventable
   has_many :notes
   has_many :timesheets
-  has_many :todos, as: :todoable
+  has_many :todos
+  # has_many :todos, as: :todoable
   belongs_to :status, class_name: "PeopleStatus", optional: true
   has_and_belongs_to_many :people_tags
 
@@ -34,6 +35,10 @@ class User < ApplicationRecord
   def potential_projects
     participated_project_ids = schedules.pluck(:project_id)
     Project.active.where.not(id: participated_project_ids)
+  end 
+  def potential_todos
+    participated_todo_ids = todos.pluck(:project_id)
+    Project.active.where.not(id: participated_todo_ids)
   end
 
   def subordinate?(employee)

@@ -1,0 +1,27 @@
+one:
+  user: regular
+  project: one
+  title: Some Random Todo
+  deadline: 2021-03-31
+  completed: true
+
+two:
+  user: regular
+  project: unarchived
+  title: Some Random Second Todo
+  deadline: 2021-03-31
+  completed: true
+
+three:
+  user: regular
+  project: archived
+  title: Some Random Third Todo
+  deadline: 2021-03-31
+  completed: true
+
+four:
+  user: actor
+  project: one
+  title: Some Random Fourth Todo
+  deadline: 2021-03-31
+  completed: true
