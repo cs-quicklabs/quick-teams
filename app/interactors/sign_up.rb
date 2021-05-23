@@ -5,12 +5,8 @@ class SignUp < Patterns::Service
   end
 
   def call
-    begin
-      register
-    rescue
-      false
-    end
-    true
+    register
+    user.persisted? && account.persisted?
   end
 
   private
@@ -28,6 +24,7 @@ class SignUp < Patterns::Service
   end
 
   def seed_database
+    now = Time.now
     ActsAsTenant.with_tenant(account) do
       Discipline.create!([{ name: "Management" }, { name: "Design" }, { name: "HR" }, { name: "Development" }])
       Job.create!([{ name: "Admin" }, { name: "UI/UX Designer" }, { name: "Android Developer" }, { name: "Web Developer" }, { name: "HR Executive" }])
@@ -41,6 +38,7 @@ class SignUp < Patterns::Service
       user.role = Role.first
       user.discipline = Discipline.first
       user.job = Job.first
+      user.permission = 2 #admin
       user.save!
     end
   end

@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
     registered = @form.submit(registration_params)
     respond_to do |format|
       if registered
-        format.html { redirect_to new_user_session_path }
+        format.html { redirect_to new_user_session_path, notice: "Registration successful. Please login to continue." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace("sign_up_form", partial: "devise/registrations/form", locals: { resource: @form }) }
       end

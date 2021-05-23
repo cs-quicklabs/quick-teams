@@ -1,6 +1,6 @@
 class Report::ProjectsController < Report::BaseController
   def index
-    authorize :projects
+    authorize :report
 
     @projects = Project.query(projects_filter_params)
     fresh_when @projects

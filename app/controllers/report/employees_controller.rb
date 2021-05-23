@@ -1,6 +1,6 @@
 class Report::EmployeesController < Report::BaseController
   def index
-    authorize :team
+    authorize :report
 
     @pagy, @employees = pagy_nil_safe(User.for_current_account.active.query(employees_filter_params), items: LIMIT)
     respond_to do |format|
