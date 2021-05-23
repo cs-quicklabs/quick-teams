@@ -1,12 +1,12 @@
 class SignUp < Patterns::Service
-  def initialize(account_parmas, user_params)
-    @account = Account.new(account_parmas)
-    @user = User.new(user_parmas)
+  def initialize(account, user)
+    @account = account
+    @user = user
   end
 
   def call
     begin
-      create_account_and_user
+      register
     rescue
       false
     end
@@ -15,10 +15,32 @@ class SignUp < Patterns::Service
 
   private
 
-  def create_account_and_user
+  def register
     ActiveRecord::Base.transaction do
-      account = account.save!
+      create_account
+      seed_database
+      create_user
+    end
+  end
+
+  def create_account
+    account.save!
+  end
+
+  def seed_database
+    ActsAsTenant.with_tenant(account) do
+      Discipline.create!([{ name: "Management" }, { name: "Design" }, { name: "HR" }, { name: "Development" }])
+      Job.create!([{ name: "Admin" }, { name: "UI/UX Designer" }, { name: "Android Developer" }, { name: "Web Developer" }, { name: "HR Executive" }])
+      Role.create!([{ name: "Super" }, { name: "Senior" }, { name: "Junior" }])
+    end
+  end
+
+  def create_user
+    ActsAsTenant.with_tenant(account) do
       user.account = account
+      user.role = Role.first
+      user.discipline = Discipline.first
+      user.job = Job.first
       user.save!
     end
   end

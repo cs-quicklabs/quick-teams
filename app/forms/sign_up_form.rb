@@ -5,8 +5,6 @@ class SignUpForm
   attr_accessor :first_name, :last_name, :email, :company, :new_password, :new_password_confirmation, :account, :user
 
   validates_presence_of :first_name, :last_name, :email, :company, :new_password, :new_password_confirmation
-  validates_presence_of :new_password, :new_password_confirmation
-  validates_confirmation_of :new_password
   validates :new_password, not_pwned: true
   validates_length_of :new_password, minimum: 6
 
@@ -14,15 +12,30 @@ class SignUpForm
     super
   end
 
-  def submit(account_parmas, user_params)
-    @user = User.new(user_params)
-    @account = Account.new(account_parmas)
+  def submit(registration_params)
+    build_children(registration_params)
 
+    result = false
     if valid?
-      SignUp.call(account_parmas, user_params).result
-    else
-      false
+      result = SignUp.call(account, user).result
     end
+    result
+  end
+
+  def build_children(registration_params)
+    self.first_name = registration_params[:first_name]
+    self.last_name = registration_params[:last_name]
+    self.email = registration_params[:email]
+    self.new_password = registration_params[:new_password]
+    self.new_password_confirmation = registration_params[:new_password_confirmation]
+    self.company = registration_params[:company]
+
+    @user = User.new(first_name: first_name,
+                     last_name: last_name,
+                     email: email,
+                     password: new_password,
+                     password_confirmation: new_password_confirmation)
+    @account = Account.new(name: company)
   end
 
   def validate_children
@@ -32,9 +45,8 @@ class SignUpForm
   end
 
   def promote_errors(child)
-    binding.irb
     child.errors.each do |error|
-      errors.add(error)
+      errors.errors.append(error)
     end
   end
 
