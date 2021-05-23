@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :comments
 
   devise_for :users
+  post "/register", to: "registrations#create"
 
   root to: "static/static#home"
   get "/home", to: "home#index", as: "home"
