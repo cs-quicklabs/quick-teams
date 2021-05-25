@@ -29,13 +29,11 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     visit page_url
     project = @employee.projects.first
     click_on "#{project.name}"
-    assert_selector "h1", text: "#{project.name}"
+    assert_selector "a", text: "#{project.name}"
   end
 
   test "can add new todo" do
     visit page_url
-    name = "#{projects(:two).name}"
-    select name, from: "todo_project_id"
     fill_in "todo_title", with: "Some Random Todo Title"
     fill_in "todo_deadline", with: Time.now
     click_on "Add Todo"
@@ -53,10 +51,8 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     visit page_url
     click_on "Add Todo"
     take_screenshot
-    assert_selector "div#error_explanation", text: "Project must exist"
     assert_selector "div#error_explanation", text: "Title can't be blank"
     assert_selector "div#error_explanation", text: "Deadline can't be blank"
-    assert_selector "div#error_explanation", text: "Project can't be blank"
   end
 
   test "can delete a todo" do
