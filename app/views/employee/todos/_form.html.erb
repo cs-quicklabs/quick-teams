@@ -1,8 +1,7 @@
-<%= tailwind_form_with(model: todo, id: dom_id(todo), url: project_todos_path(@project)) do |form| %>
+<%= tailwind_form_with(model: todo, id: dom_id(todo), url: employee_todos_path(@employee)) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: todo, message: local_assigns[:message] %>
-    <%= render "shared/form_header", title: "Add New Todo", subtitle: "Add details of todo for project" %>
-    <%= form.collection_select(:user_id, UserDecorator.decorate_collection(@project.participants), :id, :display_name, {:prompt => 'Select Participant'}, :selected => todo.user_id, :class=>"form-text-field mt-4" )%>
+    <%= render "shared/form_header", title: "Add New Todo", subtitle: "Todo are short term goals" %>
     <%= form.text_area :title, "Todo", autocomplete: "off"%>
     <div>
       <label for="date" class="block text-sm font-medium text-gray-700">

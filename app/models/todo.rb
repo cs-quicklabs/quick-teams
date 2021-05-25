@@ -1,5 +1,6 @@
 class Todo < ApplicationRecord
   belongs_to :user
-  belongs_to :todoable, polymorphic: true
-  validates_presence_of :title, :deadline
+  belongs_to :project, optional: true
+
+  validates_presence_of :user, :title, :deadline
 end

@@ -9,7 +9,6 @@ class EmployeesController < BaseController
     authorize :team
 
     @pagy, @employees = pagy(User.for_current_account.active.includes(:role, :discipline, :job, :manager, :subordinates).order(:first_name), items: 10)
-    fresh_when @employees
   end
 
   def new
