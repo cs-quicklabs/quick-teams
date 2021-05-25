@@ -7,19 +7,22 @@
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
         <!-- Left column -->
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2" id="project_notes">
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2" id="project_notes"data-controller="infinite-scroll">
           <section aria-labelledby="participants_section">
             <h2 class="sr-only" id="section-1-title">Project Notes</h2>
-            <div class="overflow-hidden bg-white">
+            <div class="overflow-hidden bg-white" >
               <div class="p-4">
                 <div class="flex flex-wrap">
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Notes(" + @notes.load.size.to_s + ")"%></p>
                 </div>
-                <ul class="space-y-6" id="notes">
+                <ul class="space-y-6" id="notes" data-infinite-scroll-target="entries">
                   <%= render partial: "note", collection: @notes, as: :note, cached: true%>
                 </ul>
               </div>
             </div>
+            <div class="flex justify-end mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+        </div>
           </section>
         </div>
         <!-- Right column -->
