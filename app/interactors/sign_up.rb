@@ -5,8 +5,12 @@ class SignUp < Patterns::Service
   end
 
   def call
-    register
-    user.persisted? && account.persisted?
+    begin
+      register
+    rescue
+      user
+    end
+    user
   end
 
   private

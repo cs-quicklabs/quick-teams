@@ -6,13 +6,18 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    registered = @form.submit(registration_params)
+    resource = @form.submit(registration_params)
+    if resource.nil? or !resource.persisted?
+      show_errors
+    else
+      set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+      redirect_to new_user_session_path
+    end
+  end
+
+  def show_errors
     respond_to do |format|
-      if registered
-        format.html { redirect_to new_user_session_path, notice: "Registration successful. Please login to continue." }
-      else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("sign_up_form", partial: "devise/registrations/form", locals: { resource: @form }) }
-      end
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("sign_up_form", partial: "devise/registrations/form", locals: { resource: @form }) }
     end
   end
 

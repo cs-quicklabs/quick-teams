@@ -7,6 +7,7 @@ class SignUpForm
   validates_presence_of :first_name, :last_name, :email, :company, :new_password, :new_password_confirmation
   validates :new_password, not_pwned: true
   validates_length_of :new_password, minimum: 6
+  validate :validate_children
 
   def initialize(*)
     super
@@ -15,7 +16,7 @@ class SignUpForm
   def submit(registration_params)
     build_children(registration_params)
 
-    result = false
+    result = nil
     if valid?
       result = SignUp.call(account, user).result
     end
@@ -46,7 +47,7 @@ class SignUpForm
 
   def promote_errors(child)
     child.errors.each do |error|
-      errors.errors.append(error)
+      errors.errors.append(error) if error.attribute == :email
     end
   end
 

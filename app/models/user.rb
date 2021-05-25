@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
+  #  :lockable, :timeoutable, and :omniauthable
+  devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :trackable, :timeoutable, timeout_in: 1.day, invite_for: 2.weeks
 
   enum permission: [:member, :lead, :admin]
@@ -35,7 +35,8 @@ class User < ApplicationRecord
   def potential_projects
     participated_project_ids = schedules.pluck(:project_id)
     Project.active.where.not(id: participated_project_ids)
-  end 
+  end
+
   def potential_todos
     participated_todo_ids = todos.pluck(:project_id)
     Project.active.where.not(id: participated_todo_ids)
