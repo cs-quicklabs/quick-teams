@@ -28,7 +28,7 @@ class ProjectTodosTest < ApplicationSystemTestCase
 
   test "can redirect to employee detail page on todo click" do
     visit page_url
-    list = @project.lists.first
+    list = @project.participants.first
     click_on "#{list.first_name} #{list.last_name}"
     assert_selector "h1", text: "#{list.first_name} #{list.last_name}"
     take_screenshot
@@ -42,7 +42,6 @@ class ProjectTodosTest < ApplicationSystemTestCase
     fill_in "todo_deadline", with: Time.now
     click_on "Add Todo"
     assert_selector "tbody#todos", text: "Worked on some random todo"
-    take_screenshot
   end
 
   test "can check a todo" do
