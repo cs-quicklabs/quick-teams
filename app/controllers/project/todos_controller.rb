@@ -9,7 +9,7 @@ class Project::TodosController < Project::BaseController
       format.html
       format.json {
         render json: { entries: render_to_string(partial: "project/todos/todo", formats: [:html], collection: @todos, cached: true),
-                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
+        pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
       }
     end
     @todo = Todo.new

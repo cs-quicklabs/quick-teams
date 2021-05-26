@@ -4,10 +4,15 @@ class Employee::TodosController < Employee::BaseController
   def index
     authorize @employee, :show_todo?
 
-    @todos = @employee.todos.includes(:project, :user).order(deadline: :asc)
+    @pagy, @todos = pagy_nil_safe(@employee.todos.includes(:project, :user).order(deadline: :asc), items: LIMIT)
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: { entries: render_to_string(partial: "employee/todos/todo", formats: [:html], collection: @todos, cached: true),
+                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
+      }
+    end
     @todo = Todo.new
-
-    fresh_when @todos
   end
 
   def create
