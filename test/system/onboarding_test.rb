@@ -35,7 +35,7 @@ class OnboardingTest < ApplicationSystemTestCase
   end
 
   test "user can send forgotten password email" do
-    admin = users(:admin)
+    admin = users(:lead)
     visit new_user_session_path
     click_on "Forgot your password?"
     fill_in "user_email", with: admin.email
@@ -51,7 +51,7 @@ class OnboardingTest < ApplicationSystemTestCase
     fill_in "user_password", with: "password"
     fill_in "user_password_confirmation", with: "password"
     click_on "Change my password"
-    assert_selector "div#error_explanation", text: "Reset password token is invalid" #this is fine because token has been changed.
+    assert_selector "p.notice", text: "Your password has been changed successfully."
   end
 
   test "user can signup" do

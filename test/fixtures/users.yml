@@ -172,9 +172,9 @@ admin:
   active: true
   email: admin@crownstack.com
   account_id: 1
-  job: ios
-  role: senior
-  discipline: engineering
+  job_id: 1
+  role_id: 1
+  discipline_id: 1
   manager: actor
   permission: admin
   status: deployed
