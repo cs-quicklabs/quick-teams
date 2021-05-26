@@ -53,4 +53,22 @@ class OnboardingTest < ApplicationSystemTestCase
     click_on "Change my password"
     assert_selector "div#error_explanation", text: "Reset password token is invalid" #this is fine because token has been changed.
   end
+
+  test "user can signup" do
+  end
+
+  test "user can not signup with invalid params" do
+  end
+
+  test "user can not signup with duplicate email" do
+  end
+
+  test "user can get confirmation email" do
+  end
+
+  test "admin can invite user from employee list" do
+  end
+
+  test "email notification is sent when adding a new user" do
+  end
 end
