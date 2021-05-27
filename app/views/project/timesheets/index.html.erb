@@ -12,7 +12,7 @@
             <section aria-labelledby="participants_section">
               <h2 class="sr-only" id="section-1-title">Project Timesheets</h2>
               <div class="overflow-hidden bg-white">
-                <div>
+                <div class="w-full overflow-hidden" data-controller="infinite-scroll">
                   <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                       <tr>
@@ -30,11 +30,14 @@
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
                       <%= render partial: "project/timesheets/timesheet", collection: @timesheets, cached: true%>
                     </tbody>
                   </table>
                   <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing last 30 days' timesheets only.</p>
+                  <div class="flex justify-end mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                    <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                  </div>
                 </div>
               </div>
             <% end %>

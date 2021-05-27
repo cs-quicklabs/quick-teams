@@ -2,19 +2,19 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <%= render partial: "project/title", locals: {project: @project}%>
   <main class="pb-8">
-    <div class="px-4 sm:px-6">
+    <div class="px-4 sm:px-6" >
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
           <section aria-labelledby="participants_section">
             <h2 class="sr-only" id="section-1-title">Project Feedbacks</h2>
-            <div class="overflow-hidden bg-white">
+            <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
               <div class="p-4">
                 <div class="flex flex-wrap">
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Timeline"%></p>
                 </div>
-                <ul>
+                <ul data-infinite-scroll-target="entries">
                   <% @events.each do |event| %>
                     <% if lookup_context.template_exists?(event.action, "project/timeline", true) %>
                       <% cache event do %>
@@ -24,6 +24,9 @@
                   <% end %>
                 </ul>
               </div>
+            </div>
+            <div class="flex justify-end mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+              <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
             </div>
           </section>
         </div>

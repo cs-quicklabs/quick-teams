@@ -6,10 +6,15 @@ class Employee::TimesheetsController < Employee::BaseController
     authorize @employee, :show_timesheets?
 
     @timesheet = Timesheet.new
-    @timesheets = @employee.timesheets.includes(:project).last_30_days.order(date: :desc)
     @employee_timesheets_stats = EmployeeTimesheetsStats.new(@employee, time_span)
-
-    fresh_when @timesheets
+    @pagy, @timesheets =  pagy_nil_safe(@employee.timesheets.includes(:project).last_30_days.order(date: :desc), items: LIMIT)
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: { entries: render_to_string(partial: "project/timesheets/timesheet", formats: [:html], collection: @timesheets, cached: true),
+        pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
+      }
+    end
   end
 
   def create
