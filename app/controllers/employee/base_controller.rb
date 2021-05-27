@@ -6,7 +6,7 @@ class Employee::BaseController < ApplicationController
   after_action :verify_authorized
   include Pagy::Backend
 
-  LIMIT = 5
+  LIMIT = 20
 
   def pagy_nil_safe(collection, vars = {})
     pagy = Pagy.new(count: collection.count(:all), page: params[:page], **vars)
