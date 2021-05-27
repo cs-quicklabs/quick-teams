@@ -35,7 +35,7 @@
                     </tbody>
                   </table>
                   <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing last 30 days' timesheets only.</p>
-                  <div class="flex justify-end mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                  <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
                     <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
                   </div>
                 </div>
