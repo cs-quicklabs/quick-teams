@@ -4,10 +4,15 @@ class Employee::FeedbacksController < Employee::BaseController
   def index
     authorize @employee, :show_feedbacks?
 
-    @feedbacks = employee_feedbacks
+    @pagy, @feedbacks = pagy_nil_safe(employee_feedbacks, items: LIMIT)
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: { entries: render_to_string(partial: "employee/feedbacks/feedback", formats: [:html], collection: @feedbacks, cached: true),
+                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
+      }
+    end
     @feedback = Feedback.new
-
-    fresh_when @feedbacks
   end
 
   def create
