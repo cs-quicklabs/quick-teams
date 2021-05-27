@@ -181,6 +181,21 @@ admin:
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
+owner:
+  first_name: Aashish
+  last_name: Dhawan (Admin)
+  active: true
+  email: owner@crownstack.com
+  account: crownstack
+  job: ios
+  role: junior
+  discipline: engineering
+  manager: actor
+  permission: admin
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
 lead:
   first_name: Aashish
   last_name: Dhawan (Lead)
