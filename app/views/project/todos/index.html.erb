@@ -18,13 +18,13 @@
                         Done
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Assigned To
+                        Assigned
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         Title
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Date
+                        Due Date
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
                         Action
@@ -35,9 +35,9 @@
                     <%= render partial: "project/todos/todo", collection: @todos, as: :todo, cached: true %>
                   </tbody>
                 </table>
-                <div class="flex justify-end mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
                   <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
-                </div>              
+                </div>
               </div>
             </div>
           </section>
