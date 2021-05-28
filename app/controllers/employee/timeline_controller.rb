@@ -10,6 +10,6 @@ class Employee::TimelineController < Employee::BaseController
     end
     @pagy, events_collection = pagy_nil_safe(collection.includes(:eventable, :trackable, :user), items: LIMIT)
     @events = events_collection.decorate
-    render_partial("employee/timeline/activity", collection: @events) if stale?(@events)
+    render_timeline("employee/timeline/activity", collection: @events) if stale?(@events)
   end
 end

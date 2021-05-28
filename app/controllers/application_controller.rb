@@ -65,4 +65,14 @@ class ApplicationController < ActionController::Base
       }
     end
   end
+
+  def render_timeline(partial, collection:)
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: { entries: render_to_string(partial: partial, formats: [:html], collection: collection, as: :event, cached: true),
+                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
+      }
+    end
+  end
 end
