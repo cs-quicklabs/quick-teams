@@ -4,15 +4,9 @@ class Project::MilestonesController < Project::BaseController
   def index
     authorize [:project, Goal]
 
-    @pagy, @milestones = pagy_nil_safe(@project.milestones.includes(:user).order(created_at: :desc), items: LIMIT)
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: { entries: render_to_string(partial: "project/milestones/milestone", formats: [:html], collection: @milestones, cached: true),
-                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
-      }
-    end
     @milestone = Goal.new
+    @pagy, @milestones = pagy_nil_safe(@project.milestones.includes(:user).order(created_at: :desc), items: LIMIT)
+    render_partial("project/milestones/milestone", collection: @milestones) if stale?(@milestones)
   end
 
   def create

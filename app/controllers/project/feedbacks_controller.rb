@@ -4,15 +4,9 @@ class Project::FeedbacksController < Project::BaseController
   def index
     authorize [:project, Feedback]
 
-   @pagy, @feedbacks = pagy_nil_safe(@project.feedbacks.includes(:user).order(created_at: :desc), items: LIMIT)
-   respond_to do |format|
-      format.html
-      format.json {
-        render json: { entries: render_to_string(partial: "project/feedbacks/feedback", formats: [:html], collection: @feedbacks, cached: true),
-                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
-      }
-    end
-   @feedback = Feedback.new
+    @feedback = Feedback.new
+    @pagy, @feedbacks = pagy_nil_safe(@project.feedbacks.includes(:user).order(created_at: :desc), items: LIMIT)
+    render_partial("project/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks)
   end
 
   def create
