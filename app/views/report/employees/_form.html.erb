@@ -26,6 +26,12 @@
                 </label>
                 <%= form.select(:permission, [["Any", ""], ["Member", 0], ["Lead", 1], ["Admin", 2]], {selected: params["permission"]},  :class=>"form-text-field mt-1") %>
               </div>
+              <div>
+                <label for="billed" class="block text-sm font-medium text-gray-700">
+                  Billable
+                </label>
+                <%= form.select(:billable, [["Billable or not", ""], ["Show Only Billable", 1], ["Show Only Unbillable", 0]], {selected: params["billable"]},  :class=>"form-text-field mt-1") %>
+              </div>
               <div class="flex justify-end mt-6">
                 <%= link_to 'Reset', employees_reports_path, class: "btn-normal" %>
                 <%= form.submit "Search", class:"btn-blue cursor-pointer"%>

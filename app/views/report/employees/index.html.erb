@@ -14,6 +14,7 @@
     <% if @employees.size > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <!-- This example requires Tailwind CSS v2.0+ -->
+        <%= render partial: "stats", locals: {stats: @stats}%>
         <table class="min-w-full pb-6 divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -38,7 +39,7 @@
             <%= render partial: "employee", collection: @employees, as: :employee, cached: true%>
           </tbody>
         </table>
-        <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
           <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
         </div>
       </div>

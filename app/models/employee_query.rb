@@ -38,5 +38,9 @@ class EmployeeQuery
     def permission(param)
       where(permission: param)
     end
+
+    def billable(param)
+      where(billable: param)
+    end
   end
 end

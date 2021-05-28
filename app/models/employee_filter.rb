@@ -7,6 +7,7 @@ class EmployeeFilter
     manager_id
     status
     permission
+    billable
   ].freeze
 
   attr_accessor(*KEYS)

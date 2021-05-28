@@ -2,7 +2,10 @@ class Report::EmployeesController < Report::BaseController
   def index
     authorize :report
 
-    @pagy, @employees = pagy_nil_safe(User.for_current_account.active.query(employees_filter_params), items: LIMIT)
+    entries = User.for_current_account.active.query(employees_filter_params)
+    @stats = EmployeesStats.new(entries)
+
+    @pagy, @employees = pagy_nil_safe(entries, items: LIMIT)
     respond_to do |format|
       format.html
       format.json {
