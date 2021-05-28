@@ -3,16 +3,10 @@ class Project::NotesController < Project::BaseController
 
   def index
     authorize [:project, Note]
-    @pagy, @notes = pagy_nil_safe( @project.notes.includes(:user).order(created_at: :desc), items: LIMIT)
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: { entries: render_to_string(partial: "project/notes/note", formats: [:html], collection: @notes, cached: true),
-                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
-      }
-    end
     @note = Note.new
-  end    
+    @pagy, @notes = pagy_nil_safe(@project.notes.includes(:user).order(created_at: :desc), items: LIMIT)
+    render_partial("project/notes/note", collection: @notes) if stale?(@notes)
+  end
 
   def destroy
     authorize [:project, @note]
