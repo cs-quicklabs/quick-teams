@@ -4,8 +4,8 @@ class Employee::SchedulesController < Employee::BaseController
   def index
     authorize @employee, :show_schedules?
 
-    @schedules = Schedule.where(user: @employee).includes(:project, :user).order(created_at: :desc)
     @schedule = Schedule.new
+    @schedules = Schedule.where(user: @employee).includes(:project, :user).order(created_at: :desc)
 
     fresh_when @schedules
   end

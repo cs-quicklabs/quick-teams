@@ -6,10 +6,10 @@ class Employee::TimesheetsController < Employee::BaseController
     authorize @employee, :show_timesheets?
 
     @timesheet = Timesheet.new
-    @timesheets = @employee.timesheets.includes(:project).last_30_days.order(date: :desc)
     @employee_timesheets_stats = EmployeeTimesheetsStats.new(@employee, time_span)
+    @pagy, @timesheets =  pagy_nil_safe(@employee.timesheets.includes(:project).last_30_days.order(date: :desc), items: LIMIT)
+    render_partial("employee/timesheets/timesheet", collection: @timesheets) if stale?(@timesheets)
 
-    fresh_when @timesheets
   end
 
   def create

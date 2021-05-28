@@ -4,10 +4,9 @@ class Project::FeedbacksController < Project::BaseController
   def index
     authorize [:project, Feedback]
 
-    @feedbacks = @project.feedbacks.includes(:user).order(created_at: :desc).limit(100)
     @feedback = Feedback.new
-
-    fresh_when @feedbacks
+    @pagy, @feedbacks = pagy_nil_safe(@project.feedbacks.includes(:user).order(created_at: :desc), items: LIMIT)
+    render_partial("project/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks)
   end
 
   def create

@@ -4,10 +4,10 @@ class Employee::FeedbacksController < Employee::BaseController
   def index
     authorize @employee, :show_feedbacks?
 
-    @feedbacks = employee_feedbacks
     @feedback = Feedback.new
+    @pagy, @feedbacks = pagy_nil_safe(employee_feedbacks, items: LIMIT)
+    render_partial("employee/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks)
 
-    fresh_when @feedbacks
   end
 
   def create

@@ -4,10 +4,10 @@ class Employee::TodosController < Employee::BaseController
   def index
     authorize @employee, :show_todo?
 
-    @todos = @employee.todos.includes(:project, :user).order(deadline: :asc)
     @todo = Todo.new
+    @pagy, @todos = pagy_nil_safe(@employee.todos.includes(:project, :user).order(deadline: :asc), items: LIMIT)
+    render_partial("employee/todos/todo", collection: @todos) if stale?(@todos)
 
-    fresh_when @todos
   end
 
   def create

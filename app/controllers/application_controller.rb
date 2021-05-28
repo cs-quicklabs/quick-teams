@@ -55,4 +55,24 @@ class ApplicationController < ActionController::Base
   def script_name
     "/#{current_user.account.id}"
   end
+
+  def render_partial(partial, collection:)
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: { entries: render_to_string(partial: partial, formats: [:html], collection: collection, cached: true),
+                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
+      }
+    end
+  end
+
+  def render_timeline(partial, collection:)
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: { entries: render_to_string(partial: partial, formats: [:html], collection: collection, as: :event, cached: true),
+                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
+      }
+    end
+  end
 end

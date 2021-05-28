@@ -4,10 +4,9 @@ class Project::MilestonesController < Project::BaseController
   def index
     authorize [:project, Goal]
 
-    @milestones = @project.milestones.includes(:user).order(created_at: :desc).limit(100)
     @milestone = Goal.new
-
-    fresh_when @milestones
+    @pagy, @milestones = pagy_nil_safe(@project.milestones.includes(:user).order(created_at: :desc), items: LIMIT)
+    render_partial("project/milestones/milestone", collection: @milestones) if stale?(@milestones)
   end
 
   def create

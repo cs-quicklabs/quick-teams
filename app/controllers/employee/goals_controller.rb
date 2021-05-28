@@ -4,10 +4,10 @@ class Employee::GoalsController < Employee::BaseController
   def index
     authorize @employee, :show_goals?
 
-    @goals = @employee.goals.includes(:user).order(created_at: :desc)
     @goal = Goal.new
+    @pagy, @goals = pagy_nil_safe(@employee.goals.includes(:user).order(created_at: :desc), items: LIMIT)
+    render_partial("employee/goals/goal", collection: @goals) if stale?(@goals)
 
-    fresh_when @goals
   end
 
   def create

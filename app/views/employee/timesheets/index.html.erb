@@ -9,7 +9,7 @@
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
           <section aria-labelledby="participants_section">
-            <div class="overflow-hidden bg-white">
+            <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
               <div>
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
@@ -31,11 +31,14 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200" id="timesheets">
+                  <tbody class="bg-white divide-y divide-gray-200" id="timesheets" data-infinite-scroll-target="entries">
                     <%= render partial: "employee/timesheets/timesheet", collection: @timesheets, cached: true %>
                   </tbody>
                 </table>
                 <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing last 30 days' timesheets only.</p>
+                <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+                    <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                </div>
               </div>
             </div>
           </section>

@@ -3,10 +3,10 @@ class Project::NotesController < Project::BaseController
 
   def index
     authorize [:project, Note]
-    @notes = @project.notes.includes(:user).order(created_at: :desc).limit(100)
-    @note = Note.new
 
-    fresh_when @notes
+    @note = Note.new
+    @pagy, @notes = pagy_nil_safe(@project.notes.includes(:user).order(created_at: :desc), items: LIMIT)
+    render_partial("project/notes/note", collection: @notes) if stale?(@notes)
   end
 
   def destroy

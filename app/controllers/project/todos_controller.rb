@@ -4,10 +4,9 @@ class Project::TodosController < Project::BaseController
   def index
     authorize [:project, Todo]
 
-    @todos = @project.todos.includes({ user: [:role, :job] }).order(created_at: :desc).limit(100)
     @todo = Todo.new
-
-    fresh_when @todos
+    @pagy, @todos = pagy_nil_safe(@project.todos.includes({ user: [:role, :job] }).order(created_at: :desc), items: LIMIT)
+    render_partial("project/todos/todo", collection: @todos) if stale?(@todos)
   end
 
   def create
