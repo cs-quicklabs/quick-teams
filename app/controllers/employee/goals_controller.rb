@@ -4,15 +4,10 @@ class Employee::GoalsController < Employee::BaseController
   def index
     authorize @employee, :show_goals?
 
-    @pagy, @goals = pagy_nil_safe(@employee.goals.includes(:user).order(created_at: :desc), items: LIMIT)
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: { entries: render_to_string(partial: "employee/goals/goal", formats: [:html], collection: @goals, cached: true),
-                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
-      }
-    end
     @goal = Goal.new
+    @pagy, @goals = pagy_nil_safe(@employee.goals.includes(:user).order(created_at: :desc), items: LIMIT)
+    render_partial("employee/goals/goal", collection: @goals) if stale?(@goals)
+
   end
 
   def create
