@@ -5,9 +5,8 @@ class Employee::TodosController < Employee::BaseController
     authorize @employee, :show_todo?
 
     @todo = Todo.new
-    @pagy, @todos = pagy_nil_safe(@employee.todos.includes(:project, :user).order(deadline: :asc), items: LIMIT)
+    @pagy, @todos = pagy_nil_safe(@employee.todos.includes(:project, :user, :owner).order(deadline: :asc), items: LIMIT)
     render_partial("employee/todos/todo", collection: @todos) if stale?(@todos)
-
   end
 
   def create

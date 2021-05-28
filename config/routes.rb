@@ -66,6 +66,8 @@ Rails.application.routes.draw do
     get "/schedules/overburdened", to: "report/schedules#overburdened", as: "overburdened_schedules_reports"
     get "/schedules/shared", to: "report/schedules#shared", as: "shared_schedules_reports"
     get "/schedules/next", to: "report/schedules#available_next_month", as: "available_next_month_schedules_reports"
+    get "/todos/my-pending-todos", to: "report/todos#my_pending_todos", as: "my_pending_todos"
+    get "/todos/pending-todos", to: "report/todos#pending_todos", as: "pending_todos"
   end
 
   get "/reports", to: "reports#index", as: "reports"

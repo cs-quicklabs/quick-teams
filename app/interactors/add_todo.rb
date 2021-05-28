@@ -21,8 +21,9 @@ class AddTodo < Patterns::Service
 
   def add_project_todo
     todo.update(params)
-    todo.project = @project
-    todo.user = @employee
+    todo.project = project
+    todo.user = actor
+    todo.owner = employee
     todo.save!
   end
 

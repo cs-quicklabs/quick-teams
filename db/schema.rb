@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_045622) do
+ActiveRecord::Schema.define(version: 2021_05_28_152833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -265,6 +265,8 @@ ActiveRecord::Schema.define(version: 2021_05_25_045622) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "completed", default: false
     t.bigint "project_id"
+    t.bigint "owner_id", null: false
+    t.index ["owner_id"], name: "index_todos_on_owner_id"
     t.index ["project_id"], name: "index_todos_on_project_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
@@ -364,6 +366,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_045622) do
   add_foreign_key "timesheets", "users"
   add_foreign_key "todos", "projects"
   add_foreign_key "todos", "users"
+  add_foreign_key "todos", "users", column: "owner_id"
   add_foreign_key "users", "disciplines"
   add_foreign_key "users", "disciplines", name: "users_discipline_id_fkey"
   add_foreign_key "users", "jobs"

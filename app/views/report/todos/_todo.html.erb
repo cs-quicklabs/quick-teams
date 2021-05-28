@@ -1,7 +1,7 @@
 <tr id="<%= dom_id todo %>">
   <% todo = todo.decorate %>
-  <td class="px-6 py-4 overflow-hidden text-sm text-gray-500 truncate whitespace-nowrap max-w-0">
-    <%= check_box_tag nil, nil, todo.completed, data: { reflex: "click->ProjectTodoReflex#toggle_employee_todo", id: todo.id }, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
+  <td class="px-6 py-4 overflow-hidden text-sm text-gray-700 truncate whitespace-nowrap max-w-0">
+    <%= check_box_tag nil, nil, todo.completed, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
   </td>
   <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-700 max-w-0">
     <p><%= todo.title.capitalize %></p>
@@ -13,10 +13,14 @@
       </a>
     <% end %>
   </td>
+  <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
+    <% if current_user.admin?%>
+      <a href="<%= employee_todos_path(todo.owner)%>" class="block hover:underline">
+        <%= todo.owner.display_name %>
+      </a>
+    <% end %>
+  </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
     <%= display_created_at(todo) %>
-  </td>
-  <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-    <%= link_to "Delete", employee_todo_path(todo.user, todo), method: :delete, class: "btn-inline-delete pl-2" %>
   </td>
 </tr>
