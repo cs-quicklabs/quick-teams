@@ -4,14 +4,7 @@ class Report::GoalsController < Report::BaseController
     @stats = GoalsStats.new(entries)
 
     @pagy, @goals = pagy_nil_safe(entries, items: LIMIT)
-
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: { entries: render_to_string(partial: "report/goals/goal", formats: [:html], collection: @goals, cached: true),
-                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
-      }
-    end
+    render_partial("report/goals/goal", collection: @goals) if stale?(@goals)
   end
 
   private

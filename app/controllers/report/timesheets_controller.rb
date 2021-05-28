@@ -5,14 +5,7 @@ class Report::TimesheetsController < Report::BaseController
     @timesheet_entries = entries(Timesheet.query(timesheet_filter_params))
     @stats = TimesheetsStats.new(@timesheet_entries)
     @pagy, @timesheets = pagy_nil_safe(@timesheet_entries, items: LIMIT)
-
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: { entries: render_to_string(partial: "report/timesheets/timesheet", formats: [:html], collection: @timesheets, cached: true),
-                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
-      }
-    end
+    render_partial("report/timesheets/timesheet", collection: @timesheets) if stale?(@timesheets)
   end
 
   private
