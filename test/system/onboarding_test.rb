@@ -35,7 +35,7 @@ class OnboardingTest < ApplicationSystemTestCase
   end
 
   test "user can send forgotten password email" do
-    admin = users(:admin)
+    admin = users(:lead)
     visit new_user_session_path
     click_on "Forgot your password?"
     fill_in "user_email", with: admin.email
@@ -51,6 +51,70 @@ class OnboardingTest < ApplicationSystemTestCase
     fill_in "user_password", with: "password"
     fill_in "user_password_confirmation", with: "password"
     click_on "Change my password"
-    assert_selector "div#error_explanation", text: "Reset password token is invalid" #this is fine because token has been changed.
+    assert_selector "p.notice", text: "Your password has been changed successfully."
+    take_screenshot
+  end
+
+  test "user can signup" do
+  end
+
+  test "user can not signup with invalid params" do
+  end
+
+  test "user can not signup with duplicate email" do
+  end
+
+  test "admin can invite user from employee list" do
+    admin = users(:owner)
+    visit new_user_session_path
+    fill_in "user_email", with: admin.email
+    fill_in "user_password", with: "password"
+    click_on "Log In"
+    click_on "Team"
+    user = User.where(account: admin.account).active.order(:first_name).first
+    assert_emails 1 do
+      find("tr", id: dom_id(user)).find("a", text: "Invite").click
+      sleep(0.5)
+    end
+    sign_out admin
+    doc = Nokogiri::HTML::Document.parse(ActionMailer::Base.deliveries.last.to_s)
+    link = doc.css("a").first.values.first
+    visit link
+    fill_in "user_password", with: "password"
+    fill_in "user_password_confirmation", with: "password"
+    click_on "Set password and login"
+    assert_selector "p.notice", text: "Your password was set successfully. You are now signed in."
+  end
+
+  test "email notification is sent when adding a new user" do
+    admin = users(:owner)
+    visit new_user_session_path
+    fill_in "user_email", with: admin.email
+    fill_in "user_password", with: "password"
+    click_on "Log In"
+    click_on "Team"
+    click_on "Add Member"
+    assert_selector "h1", text: "Add New Employee"
+    fill_in "First Name", with: "John"
+    fill_in "Last Name", with: "Doe"
+    fill_in "Email", with: "john.doe@crownstack.com"
+    select disciplines(:engineering).name, from: "user_discipline_id"
+    select jobs(:ios).name, from: "user_job_id"
+    select roles(:senior).name, from: "user_role_id"
+    select users(:actor).decorate.display_name, from: "user_manager_id"
+    check("user_invite")
+    assert_emails 1 do
+      click_on "Save"
+      sleep(0.5)
+    end
+    assert_selector "p.notice", text: "User was successfully created."
+    sign_out admin
+    doc = Nokogiri::HTML::Document.parse(ActionMailer::Base.deliveries.last.to_s)
+    link = doc.css("a").first.values.first
+    visit link
+    fill_in "user_password", with: "password"
+    fill_in "user_password_confirmation", with: "password"
+    click_on "Set password and login"
+    assert_selector "p.notice", text: "Your password was set successfully. You are now signed in."
   end
 end

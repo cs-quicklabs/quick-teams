@@ -1,6 +1,5 @@
 class ProjectsController < BaseController
   before_action :set_project, only: %i[ show edit update destroy archive_project unarchive_project ]
-  before_action :authenticate_user!
 
   def index
     authorize :projects

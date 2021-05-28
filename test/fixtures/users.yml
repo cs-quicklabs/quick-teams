@@ -172,8 +172,23 @@ admin:
   active: true
   email: admin@crownstack.com
   account_id: 1
+  job_id: 1
+  role_id: 1
+  discipline_id: 1
+  manager: actor
+  permission: admin
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+owner:
+  first_name: Aashish
+  last_name: Dhawan (Admin)
+  active: true
+  email: owner@crownstack.com
+  account: crownstack
   job: ios
-  role: senior
+  role: junior
   discipline: engineering
   manager: actor
   permission: admin

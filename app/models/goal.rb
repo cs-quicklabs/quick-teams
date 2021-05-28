@@ -1,5 +1,6 @@
 class Goal < ApplicationRecord
   enum status: [:progress, :completed, :missed, :discarded]
+  acts_as_tenant :account
 
   belongs_to :user
   belongs_to :goalable, polymorphic: true

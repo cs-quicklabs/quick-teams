@@ -1,5 +1,7 @@
 class Report::GoalsController < Report::BaseController
   def index
+    authorize :report
+
     entries = Goal.query(goal_filter_params)
     @stats = GoalsStats.new(entries)
 

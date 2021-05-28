@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_token
+  rescue_from ActsAsTenant::Errors::NoTenantSet, with: :user_not_authorized
+  rescue_from Pundit::NotDefinedError, with: :record_not_found
 
   etag { heroku_version }
 

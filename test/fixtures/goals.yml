@@ -4,6 +4,7 @@ one:
   goalable_type: User
   goalable: regular
   deadline: 2021-04-01
+  account: crownstack
 
 two:
   title: Some Random Goal second
@@ -11,6 +12,7 @@ two:
   goalable_type: User
   goalable: regular
   deadline: 2021-06-30
+  account: crownstack
 
 three:
   title: Some Random Goal third
@@ -18,3 +20,4 @@ three:
   goalable_type: Project
   goalable: one
   deadline: 2021-06-30
+  account: crownstack

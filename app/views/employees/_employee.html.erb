@@ -56,7 +56,7 @@
         </svg>
       </p>
     <% elsif employee.invitation_created_at.nil? %>
-      <div data-reflex="click->InviteEmployee#invite" data-employee-id=<%= employee.id%> class="text-blue-600 cursor-pointer hover:underline btn-inline-edit">Invite</div>
+      <a data-reflex="click->InviteEmployee#invite" data-employee-id=<%= employee.id%> class="text-blue-600 cursor-pointer hover:underline btn-inline-edit">Invite</a>
     <% else  %>
       <p class="flex items-center text-sm text-gray-500 ">
         Invited

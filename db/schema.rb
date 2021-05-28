@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_111842) do
+ActiveRecord::Schema.define(version: 2021_05_25_045622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_111842) do
     t.datetime "updated_at", precision: 6, null: false
     t.date "deadline"
     t.integer "status", default: 0, null: false
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_goals_on_account_id"
     t.index ["goalable_type", "goalable_id"], name: "index_goals_on_goalable"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
@@ -300,6 +302,10 @@ ActiveRecord::Schema.define(version: 2021_05_19_111842) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.boolean "billable", default: true, null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["discipline_id"], name: "index_users_on_discipline_id"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -326,6 +332,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_111842) do
   add_foreign_key "events", "accounts"
   add_foreign_key "feedbacks", "users"
   add_foreign_key "feedbacks", "users", name: "feedbacks_user_id_fkey"
+  add_foreign_key "goals", "accounts"
   add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
   add_foreign_key "jobs", "accounts", name: "jobs_account_id_fkey"
@@ -348,6 +355,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_111842) do
   add_foreign_key "roles", "accounts", name: "roles_account_id_fkey"
   add_foreign_key "schedules", "projects"
   add_foreign_key "schedules", "projects", name: "schedules_project_id_fkey"
+  add_foreign_key "schedules", "users"
+  add_foreign_key "schedules", "users", name: "schedules_user_id_fkey"
   add_foreign_key "skills", "accounts"
   add_foreign_key "skills", "accounts", name: "skills_account_id_fkey"
   add_foreign_key "timesheets", "accounts"

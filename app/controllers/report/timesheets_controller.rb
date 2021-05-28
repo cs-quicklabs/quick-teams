@@ -1,6 +1,7 @@
 class Report::TimesheetsController < Report::BaseController
   def index
-    authorize :timesheets
+    authorize :report
+
     @filters = TimesheetFilter.new(timesheet_filter_params)
     @timesheet_entries = entries(Timesheet.query(timesheet_filter_params))
     @stats = TimesheetsStats.new(@timesheet_entries)
