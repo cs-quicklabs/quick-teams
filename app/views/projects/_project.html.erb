@@ -35,7 +35,7 @@
     </div>
   </td>
   <td class="py-3 text-sm text-left text-gray-500 md:table-cell whitespace-nowrap">
-    <a href="<%= employee_path(project.manager) if !project.manager.nil?%>" class="truncate hover:text-gray-600 hover:underline">
+    <a href="<%= employee_team_path(project.manager) if !project.manager.nil?%>" class="truncate hover:text-gray-600 hover:underline">
       <%= project.display_manager_name %>
     </a>
   </td>

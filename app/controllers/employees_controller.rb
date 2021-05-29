@@ -25,7 +25,7 @@ class EmployeesController < BaseController
 
     respond_to do |format|
       if @employee.update(employee_params)
-        format.html { redirect_to employee_path(@employee), notice: "User was successfully updated." }
+        format.html { redirect_to employee_team_path(@employee), notice: "User was successfully updated." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@employee, partial: "employees/forms/form", locals: { employee: @employee }) }
       end
@@ -41,7 +41,7 @@ class EmployeesController < BaseController
         format.html { redirect_to new_employee_path(@user), alert: "Failed to create user. Please try again." }
         format.json { render json: @form.errors, status: :unprocessable_entity }
       else
-        format.html { redirect_to employee_path(employee), notice: "User was successfully created." }
+        format.html { redirect_to employee_team_path(employee), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       end
     end
@@ -64,7 +64,7 @@ class EmployeesController < BaseController
     authorize @employee, :update?
 
     ActivateUser.call(@employee, current_user)
-    redirect_to employee_path(@employee), notice: "User has been activated."
+    redirect_to employee_team_path(@employee), notice: "User has been activated."
   end
 
   def deactivated
