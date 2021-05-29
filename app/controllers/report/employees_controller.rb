@@ -6,13 +6,7 @@ class Report::EmployeesController < Report::BaseController
     @stats = EmployeesStats.new(entries)
 
     @pagy, @employees = pagy_nil_safe(entries, items: LIMIT)
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: { entries: render_to_string(partial: "report/employees/employee", formats: [:html], collection: @employees, cached: true),
-                       pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
-      }
-    end
+    render_partial("report/employees/employee", collection: @employees) if stale?(@employees)
   end
 
   private
