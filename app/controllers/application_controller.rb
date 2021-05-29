@@ -58,21 +58,21 @@ class ApplicationController < ActionController::Base
     "/#{current_user.account.id}"
   end
 
-  def render_partial(partial, collection:)
+  def render_partial(partial, collection:, cached: true)
     respond_to do |format|
       format.html
       format.json {
-        render json: { entries: render_to_string(partial: partial, formats: [:html], collection: collection, cached: true),
+        render json: { entries: render_to_string(partial: partial, formats: [:html], collection: collection, cached: cached),
                        pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
       }
     end
   end
 
-  def render_timeline(partial, collection:)
+  def render_timeline(partial, collection:, cached: true)
     respond_to do |format|
       format.html
       format.json {
-        render json: { entries: render_to_string(partial: partial, formats: [:html], collection: collection, as: :event, cached: true),
+        render json: { entries: render_to_string(partial: partial, formats: [:html], collection: collection, as: :event, cached: cached),
                        pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
       }
     end
