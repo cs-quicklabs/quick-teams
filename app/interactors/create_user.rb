@@ -26,6 +26,7 @@ class CreateUser < Patterns::Service
     password = random_password
     user.account = account
     user.password = password
+    user.skip_confirmation!
     user.save!
   end
 

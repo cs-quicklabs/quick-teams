@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   #  :lockable, :timeoutable, and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable, :timeoutable, timeout_in: 1.day, invite_for: 2.weeks
+  devise :invitable, :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :validatable, :trackable, :timeoutable, timeout_in: 2.days, invite_for: 2.weeks
 
   enum permission: [:member, :lead, :admin]
 

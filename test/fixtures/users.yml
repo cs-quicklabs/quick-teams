@@ -180,6 +180,7 @@ admin:
   status: deployed
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: 2021-03-18
 
 owner:
   first_name: Aashish
@@ -195,6 +196,8 @@ owner:
   status: deployed
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: 2021-03-18
+
 
 lead:
   first_name: Aashish
@@ -210,6 +213,7 @@ lead:
   status: deployed
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: 2021-03-18
 
 member:
   first_name: Aashish
@@ -225,3 +229,4 @@ member:
   status: deployed
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: 2021-03-18
