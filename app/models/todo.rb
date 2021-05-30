@@ -5,5 +5,5 @@ class Todo < ApplicationRecord
 
   validates_presence_of :user, :title, :deadline
 
-  scope :pending, -> { where(completed: false) }
+  scope :pending, -> { where(completed: false).order(deadline: :asc) }
 end
