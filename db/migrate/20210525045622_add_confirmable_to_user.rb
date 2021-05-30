@@ -6,10 +6,11 @@ class AddConfirmableToUser < ActiveRecord::Migration[6.1]
       t.datetime :confirmation_sent_at
       t.string :unconfirmed_email
     end
-
-    User.all.each do |user|
-      user.confirmed_at = Time.now.utc
-      user.save!
+    ActsAsTenant.without_tenant do
+      User.all.each do |user|
+        user.confirmed_at = Time.now.utc
+        user.save!
+      end
     end
   end
 end
