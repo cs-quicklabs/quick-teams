@@ -1,0 +1,27 @@
+class AddProjectTodo < Patterns::Service
+  def initialize(project, params, actor)
+    @todo = project.todos.new params
+    @project = project
+    @actor = actor
+    @params = params
+  end
+
+  def call
+    begin
+      add_todo
+    rescue
+      todo
+    end
+    todo
+  end
+
+  private
+
+  def add_todo
+    todo.project = project
+    todo.user_id = actor.id
+    todo.save!
+  end
+
+  attr_reader :project, :todo, :actor, :params
+end

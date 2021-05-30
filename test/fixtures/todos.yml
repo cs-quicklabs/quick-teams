@@ -11,7 +11,7 @@ two:
   project: unarchived
   title: Some Random Second Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: regular
 
 three:

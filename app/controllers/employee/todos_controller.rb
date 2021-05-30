@@ -12,7 +12,7 @@ class Employee::TodosController < Employee::BaseController
   def create
     authorize @employee, :create_todo?
 
-    @todo = AddTodo.call(Todo.new, Project.find_by(id: todo_params["project_id"]), @employee, todo_params, current_user).result
+    @todo = AddEmployeeTodo.call(@employee, todo_params, current_user).result
 
     respond_to do |format|
       if @todo.persisted?

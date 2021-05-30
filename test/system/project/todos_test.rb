@@ -32,20 +32,22 @@ class ProjectTodosTest < ApplicationSystemTestCase
     click_on "#{list.first_name} #{list.last_name}"
     assert_selector "h1", text: "#{list.first_name} #{list.last_name}"
     take_screenshot
-  end  
+  end
 
   test "can add new todo" do
     visit page_url
-    name = "#{users(:abram).first_name + " " + users(:abram).last_name}"
-    select name, from: "todo_user_id"
+    name = @project.participants.first.decorate.display_name
+    select name, from: "todo_owner_id"
     fill_in "todo_title", with: "Some Random Todo Title"
     fill_in "todo_deadline", with: Time.now
     click_on "Add Todo"
-    assert_selector "tbody#todos", text: "Worked on some random todo"
+    assert_selector "tbody#todos", text: "Some Random Todo Title"
   end
 
   test "can check a todo" do
     visit page_url
+    todo = @project.todos.first
+
     find("tr", id: dom_id(todo)).check "completed"
     take_screenshot
   end
@@ -53,10 +55,8 @@ class ProjectTodosTest < ApplicationSystemTestCase
   test "can not add todo with empty params" do
     visit page_url
     click_on "Add Todo"
-    assert_selector "div#error_explanation", text: "User must exist"
-    assert_selector "div#error_explanation", text: "User can't be blank"
+    assert_selector "div#error_explanation", text: "Owner must exist"
     assert_selector "div#error_explanation", text: "Title can't be blank"
-    assert_selector "div#error_explanation", text: "Deadline can't be blank"
     take_screenshot
   end
 

@@ -5,6 +5,7 @@ class CreateUserTest < ActiveSupport::TestCase
     @params = { first_name: "Aashish", last_name: "Dhawan", email: "aashish@crownstack.com", role: roles(:senior), job: jobs(:ios), discipline: disciplines(:engineering) }
     @actor = users(:actor)
     @account = accounts(:crownstack)
+    ActsAsTenant.current_tenant = @account
   end
 
   test "can create user" do

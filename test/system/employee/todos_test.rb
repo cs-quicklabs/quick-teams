@@ -37,12 +37,14 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     fill_in "todo_title", with: "Some Random Todo Title"
     fill_in "todo_deadline", with: Time.now
     click_on "Add Todo"
-    assert_selector "tbody#todos", text: "Worked on some random project"
+    assert_selector "tbody#todos", text: "Some Random Todo Title"
     take_screenshot
   end
 
   test "can check a todo" do
     visit page_url
+    todo = @employee.todos.first
+
     find("tr", id: dom_id(todo)).check "completed"
     take_screenshot
   end
@@ -52,7 +54,6 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     click_on "Add Todo"
     take_screenshot
     assert_selector "div#error_explanation", text: "Title can't be blank"
-    assert_selector "div#error_explanation", text: "Deadline can't be blank"
   end
 
   test "can delete a todo" do
@@ -62,7 +63,6 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     assert_text display_name
     find("tr", id: dom_id(todo)).click_link("Delete")
     assert_no_selector "tbody#todos", text: todo.title
-
   end
 
   test "can not show add todo when employee is inactive" do

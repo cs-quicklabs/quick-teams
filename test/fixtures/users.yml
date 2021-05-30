@@ -11,6 +11,7 @@ regular:
   permission: admin
   status: deployed
   people_tags: star
+  confirmed_at: 2021-03-18
 
 actor:
   first_name: Rachita
@@ -21,6 +22,7 @@ actor:
   job: ios
   role: senior
   discipline: engineering
+  confirmed_at: 2021-03-18
 
 abram:
   first_name: Abram
@@ -32,6 +34,7 @@ abram:
   role: senior
   discipline: engineering
   manager: actor
+  confirmed_at: 2021-03-18
 
 inactive:
   first_name: Inactive
@@ -43,6 +46,7 @@ inactive:
   role: senior
   discipline: engineering
   deactivated_on: 2021-03-06
+  confirmed_at: 2021-03-18
 
 active:
   first_name: Active
@@ -55,6 +59,7 @@ active:
   discipline: engineering
   deactivated_on: 2021-03-06
   manager: regular
+  confirmed_at: 2021-03-18
 
 one:
   first_name: One Active
@@ -66,6 +71,7 @@ one:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
 
 two:
   first_name: Two Active
@@ -77,6 +83,7 @@ two:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
 
 three:
   first_name: Three Active
@@ -88,6 +95,7 @@ three:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
 
 four:
   first_name: Four Active
@@ -99,6 +107,7 @@ four:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
 
 five:
   first_name: Five Active
@@ -110,6 +119,7 @@ five:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
 
 six:
   first_name: Six Active
@@ -121,6 +131,7 @@ six:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
 
 seven:
   first_name: Seven Active
@@ -132,6 +143,7 @@ seven:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
 
 eight:
   first_name: Eight Active
@@ -143,6 +155,7 @@ eight:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
 
 nine:
   first_name: Nine Active
@@ -154,6 +167,7 @@ nine:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
 
 ten:
   first_name: Ten Active
@@ -165,6 +179,8 @@ ten:
   role: senior
   discipline: engineering
   manager: regular
+  confirmed_at: 2021-03-18
+
 
 admin:
   first_name: Aashish
@@ -230,3 +246,18 @@ member:
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   confirmed_at: 2021-03-18
+
+unconfirmed:
+  first_name: Aashish
+  last_name: Dhawan (Member)
+  active: true
+  email: unconfirmed@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+  permission: member
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

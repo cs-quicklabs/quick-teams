@@ -101,7 +101,7 @@ class OnboardingTest < ApplicationSystemTestCase
   test "user can confirm email" do
     visit new_user_session_path
     click_on "Didn't receive email confirmation instructions?"
-    fill_in "user_email", with: users(:ten).email
+    fill_in "user_email", with: users(:unconfirmed).email
     assert_emails 1 do
       click_on "Resend confirmation instructions"
       sleep(0.5)
