@@ -95,7 +95,7 @@ class ProjectsTest < ApplicationSystemTestCase
       click_on "Archive"
     end
     take_screenshot
-    assert_text "Project has been archived."
+    assert_selector "p.notice", text: "Project has been archived."
     assert_selector "h1", text: "Archived Projects"
   end
 

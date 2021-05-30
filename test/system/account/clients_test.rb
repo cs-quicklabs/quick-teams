@@ -85,6 +85,7 @@ class ClientsTest < ApplicationSystemTestCase
     assert_selector "li", text: client.email
     find("li", text: client.email).click_on("Edit")
     within "turbo-frame#client_#{client.id}" do
+      fill_in "client_email", with: ""
       fill_in "client_email", with: prachi.email
       click_on "Save"
       take_screenshot

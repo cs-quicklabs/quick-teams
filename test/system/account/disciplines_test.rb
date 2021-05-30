@@ -95,6 +95,7 @@ class DisciplinesTest < ApplicationSystemTestCase
     assert_selector "li", text: discipline.name
     find("li", text: discipline.name).click_on("Edit")
     within "turbo-frame#discipline_#{discipline.id}" do
+      fill_in "discipline_name", with: ""
       fill_in "discipline_name", with: engineering.name
       click_on "Save"
       take_screenshot
