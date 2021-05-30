@@ -39,11 +39,6 @@
                 Last Quarter's Goals Status Report
               </span>
             </a>
-            <a href="<%= goals_reports_path(status: 0, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Pending goals which should have been completed by now
-              </span>
-            </a>
             <a href="<%= goals_reports_path(status: 0, to_date: Date.today, created_by: current_user.id) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
               <span class="truncate">
                 Pending goals created by me
@@ -52,6 +47,16 @@
             <a href="<%= goals_reports_path(status: 1, from_date: Date.today - 30.days, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
               <span class="truncate">
                 Recently completed goals
+              </span>
+            </a>
+            <a href="<%= goals_reports_path(status: 0, to_date: Date.today, type: "User") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+              <span class="truncate">
+                Pending employee goals which should have been completed by now
+              </span>
+            </a>
+            <a href="<%= goals_reports_path(status: 0, to_date: Date.today, type: "Project") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+              <span class="truncate">
+                Pending project milestones which should have been completed by now
               </span>
             </a>
           </div>
