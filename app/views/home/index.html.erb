@@ -11,16 +11,10 @@
                 <div class="flex flex-wrap">
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Recent Activities"%></p>
                 </div>
-                <ul>
-                  <% @events.each do |event| %>
-                    <% if lookup_context.template_exists?(event.action, "home", true) %>
-                      <% cache event do %>
-                        <%= render partial: event.action, locals: {event: event}%>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-                </ul>
-                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= @limit.to_s %> recently created events only.</p>
+                <%= turbo_frame_tag "events", src: events_path, target: "_top", loading: :lazy do %>
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate">Hold on a sec while I fetch events...</p>
+                <% end %>
+                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= 50.to_s %> recently created events only.</p>
               </div>
             </div>
           </section>
@@ -33,14 +27,10 @@
                 <div class="flex flex-wrap">
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "90 days' goals/milestones window"%></p>
                 </div>
-                <ul>
-                  <% @goals.each do |goal| %>
-                    <% cache goal do %>
-                      <%= render partial: "upcoming_goal", locals: {goal: goal}%>
-                    <% end %>
-                  <% end %>
-                </ul>
-                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= @limit.to_s %> records only.</p>
+                <%= turbo_frame_tag "goals", src: goals_path, target: "_top", loading: :lazy  do %>
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate">Hold on a sec while I fetch goals...</p>
+                <% end %>
+                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= 40.to_s %> records only.</p>
               </div>
             </div>
           </section>
