@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_152833) do
+ActiveRecord::Schema.define(version: 2021_05_31_041757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -266,6 +266,8 @@ ActiveRecord::Schema.define(version: 2021_05_28_152833) do
     t.boolean "completed", default: false
     t.bigint "project_id"
     t.bigint "owner_id", null: false
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_todos_on_account_id"
     t.index ["owner_id"], name: "index_todos_on_owner_id"
     t.index ["project_id"], name: "index_todos_on_project_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
@@ -364,16 +366,11 @@ ActiveRecord::Schema.define(version: 2021_05_28_152833) do
   add_foreign_key "timesheets", "accounts"
   add_foreign_key "timesheets", "projects"
   add_foreign_key "timesheets", "users"
+  add_foreign_key "todos", "accounts"
   add_foreign_key "todos", "projects"
   add_foreign_key "todos", "users"
   add_foreign_key "todos", "users", column: "owner_id"
-  add_foreign_key "users", "disciplines"
-  add_foreign_key "users", "disciplines", name: "users_discipline_id_fkey"
-  add_foreign_key "users", "jobs"
-  add_foreign_key "users", "jobs", name: "users_job_id_fkey"
   add_foreign_key "users", "people_statuses", column: "status_id"
-  add_foreign_key "users", "roles"
-  add_foreign_key "users", "roles", name: "users_role_id_fkey"
   add_foreign_key "users", "users", column: "manager_id"
   add_foreign_key "users", "users", column: "manager_id", name: "users_manager_id_fkey"
 end
