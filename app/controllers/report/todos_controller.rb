@@ -10,7 +10,7 @@ class Report::TodosController < Report::BaseController
   def pending_todos
     authorize :report, :index?
 
-    entries = Todo.includes(:project, :owner).pending
+    entries = Todo.where("deadline <= ?", Date.today).includes(:project, :owner).pending
     @pagy, @todos = pagy_nil_safe(entries, items: LIMIT)
     render_partial("report/todos/todo", collection: @todos, cached: false) if stale?(@todos)
   end
