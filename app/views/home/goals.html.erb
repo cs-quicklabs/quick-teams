@@ -23,4 +23,9 @@
       <% end %>
     <% end %>
   </ul>
+  <% if @goals.size > 0 %>
+    <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= 40.to_s %> records only.</p>
+  <% else %>
+    <p class="pr-4 mt-2 text-sm text-right text-gray-500">No record found.</p>
+  <% end %>
 </turbo-frame>

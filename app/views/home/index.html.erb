@@ -12,9 +12,8 @@
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Recent Activities"%></p>
                 </div>
                 <%= turbo_frame_tag "events", src: events_path, target: "_top", loading: :lazy do %>
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate">Hold on a sec while I fetch events...</p>
+                  <p class="pb-2 mt-1 text-sm text-gray-500 truncate">Hold on a sec while I fetch events...</p>
                 <% end %>
-                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= 50.to_s %> recently created events only.</p>
               </div>
             </div>
           </section>
@@ -28,9 +27,8 @@
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "90 days' goals/milestones window"%></p>
                 </div>
                 <%= turbo_frame_tag "goals", src: goals_path, target: "_top", loading: :lazy  do %>
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate">Hold on a sec while I fetch goals...</p>
+                  <p class="pb-2 mt-1 text-sm text-gray-500 truncate">Hold on a sec while I fetch goals...</p>
                 <% end %>
-                <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= 40.to_s %> records only.</p>
               </div>
             </div>
           </section>
