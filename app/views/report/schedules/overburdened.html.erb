@@ -32,6 +32,8 @@
           </tbody>
         </table>
       </div>
+    <% else %>
+      <%= render partial: "shared/no_result_found", cached: true%>
     <% end %>
   </div>
 </div>
