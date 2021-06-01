@@ -6,6 +6,7 @@ class ProjectFilter
   KEYS = %i[
     manager_id
     status
+    tag
   ].freeze
 
   attr_accessor(*KEYS)

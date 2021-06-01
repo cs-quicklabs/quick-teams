@@ -35,6 +35,10 @@ class EmployeeQuery
       where(status: param)
     end
 
+    def tag(param)
+      joins(:people_tags).where("people_tags.id = ?", param)
+    end
+
     def permission(param)
       where(permission: param)
     end

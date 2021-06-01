@@ -34,5 +34,9 @@ class ProjectQuery
     def status(param)
       where(status: param)
     end
+
+    def tag(param)
+      joins(:project_tags).where("project_tags.id = ?", param)
+    end
   end
 end

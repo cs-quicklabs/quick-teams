@@ -13,6 +13,15 @@
     </div>
   </td>
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+    <% project.project_tags.uniq.each do |tag| %>
+      <a href="<%= projects_reports_path(tag: tag.id)%>" class="hover:underline">
+        <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= tag.color %>-800 bg-<%= tag.color %>-100 rounded-full">
+          <%= tag.name  %>
+        </span>
+      </a>
+    <%end %>
+  </td>
+  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
     <% if !project.billable_resources.nil? %>
       <%= project.billable_resources.to_s %>
     <%end %>
@@ -27,9 +36,11 @@
   </td>
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
     <% unless project.status.nil? %>
-      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">
-        <%= project.status.name.titleize %>
-      </span>
+      <a href="<%= projects_reports_path(status: project.status.id)%>" class="hover:underline">
+        <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">
+          <%= project.status.name.titleize %>
+        </span>
+      </a>
     <%end %>
   </td>
 </tr>

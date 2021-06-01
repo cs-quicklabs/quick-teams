@@ -370,7 +370,13 @@ ActiveRecord::Schema.define(version: 2021_05_31_041757) do
   add_foreign_key "todos", "projects"
   add_foreign_key "todos", "users"
   add_foreign_key "todos", "users", column: "owner_id"
+  add_foreign_key "users", "disciplines"
+  add_foreign_key "users", "disciplines", name: "users_discipline_id_fkey"
+  add_foreign_key "users", "jobs"
+  add_foreign_key "users", "jobs", name: "users_job_id_fkey"
   add_foreign_key "users", "people_statuses", column: "status_id"
+  add_foreign_key "users", "roles"
+  add_foreign_key "users", "roles", name: "users_role_id_fkey"
   add_foreign_key "users", "users", column: "manager_id"
   add_foreign_key "users", "users", column: "manager_id", name: "users_manager_id_fkey"
 end

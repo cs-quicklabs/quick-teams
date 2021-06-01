@@ -6,6 +6,7 @@ class EmployeeFilter
   KEYS = %i[
     manager_id
     status
+    tag
     permission
     billable
   ].freeze
