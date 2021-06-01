@@ -11,10 +11,10 @@ class UpdateSchedule < Patterns::Service
     begin
       update_schedule
       add_event
+      send_email
     rescue
       schedule
     end
-
     schedule
   end
 
@@ -28,7 +28,16 @@ class UpdateSchedule < Patterns::Service
   end
 
   def add_event
-    project.events.create(user: actor, action: "scheduled", action_for_context: "with #{schedule.occupancy}% occupancy till #{schedule.ends_at.to_date.to_s(:long)}", trackable: employee)
+    project.events.create(user: actor, action: "scheduled", action_for_context: context, trackable: employee)
+  end
+
+  def send_email
+    message = context + " in project #{project.name}"
+    SchedulesMailer.with(employee: employee, message: message).updated_email.deliver_later
+  end
+
+  def context
+    "with #{schedule.occupancy}% occupancy till #{schedule.ends_at.to_date.to_s(:long)}"
   end
 
   attr_reader :project, :actor, :schedule, :employee, :params

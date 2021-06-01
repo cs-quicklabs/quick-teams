@@ -1,6 +1,9 @@
 require "application_system_test_case"
+require "nokogiri"
 
 class EmployeeScheduleTest < ApplicationSystemTestCase
+  include ActionMailer::TestHelper
+
   setup do
     @employee = users(:regular)
     @account = @employee.account
@@ -40,9 +43,16 @@ class EmployeeScheduleTest < ApplicationSystemTestCase
     fill_in "schedule_starts_at", with: Time.now
     fill_in "schedule_ends_at", with: Time.now.next_month
     fill_in "schedule_occupancy", with: 100
-    click_on "Add Schedule"
+    assert_emails 1 do
+      click_on "Add Schedule"
+      sleep(0.5)
+    end
     assert_selector "div#project-participants", text: name
     take_screenshot
+    doc = Nokogiri::HTML::Document.parse(ActionMailer::Base.deliveries.last.body.to_s)
+    link = doc.css("a").first.values.first
+    visit link
+    assert_text "Employee Schedules"
   end
 
   test "can not add schedule with empty params" do

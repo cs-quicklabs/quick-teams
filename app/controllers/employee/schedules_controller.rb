@@ -1,5 +1,6 @@
 class Employee::SchedulesController < Employee::BaseController
   before_action :set_schedule, only: %i[ update destroy edit ]
+  before_action :set_project, only: %i[ update create ]
 
   def index
     authorize @employee, :show_schedules?
@@ -13,7 +14,7 @@ class Employee::SchedulesController < Employee::BaseController
   def update
     authorize [:employee, @schedule]
 
-    @schedule = UpdateSchedule.call(@schedule, Project.find_by(id: schedule_params["project_id"]), @employee, schedule_params, current_user).result
+    @schedule = UpdateSchedule.call(@schedule, @project, @employee, schedule_params, current_user).result
 
     respond_to do |format|
       if @schedule.errors.empty?
@@ -27,7 +28,7 @@ class Employee::SchedulesController < Employee::BaseController
   def create
     authorize [:employee, Schedule]
 
-    @schedule = UpdateSchedule.call(Schedule.new, Project.find_by(id: schedule_params["project_id"]), @employee, schedule_params, current_user).result
+    @schedule = UpdateSchedule.call(Schedule.new, @project, @employee, schedule_params, current_user).result
 
     respond_to do |format|
       if @schedule.persisted?
@@ -58,6 +59,10 @@ class Employee::SchedulesController < Employee::BaseController
 
   def set_schedule
     @schedule ||= Schedule.find(params["id"])
+  end
+
+  def set_project
+    @project ||= Project.find_by(id: schedule_params["project_id"])
   end
 
   def schedule_params
