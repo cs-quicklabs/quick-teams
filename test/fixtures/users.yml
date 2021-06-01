@@ -23,6 +23,7 @@ actor:
   role: senior
   discipline: engineering
   confirmed_at: 2021-03-18
+  permission: admin
 
 abram:
   first_name: Abram

@@ -9,6 +9,7 @@ class AddEmployeeGoal < Patterns::Service
     begin
       add_goal
       add_event
+      send_email
     rescue
       goal
     end
@@ -25,6 +26,10 @@ class AddEmployeeGoal < Patterns::Service
 
   def add_event
     employee.events.create(user: actor, action: "goal", action_for_context: "added goal for", trackable: goal)
+  end
+
+  def send_email
+    GoalsMailer.with(actor: actor, employee: employee, goal: goal).created_email.deliver_later unless actor == employee
   end
 
   attr_reader :employee, :goal, :actor

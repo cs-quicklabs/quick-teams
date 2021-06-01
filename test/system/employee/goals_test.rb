@@ -1,12 +1,15 @@
 require "application_system_test_case"
+require "nokogiri"
 
 class EmployeeGoalsTest < ApplicationSystemTestCase
+  include ActionMailer::TestHelper
+
   setup do
-    @employee = users(:regular)
-    @account = @employee.account
+    @actor = users(:actor)
+    @account = @actor.account
     ActsAsTenant.current_tenant = @account
     @employee = users(:regular)
-    sign_in @employee
+    sign_in @actor
   end
 
   def page_url
@@ -29,12 +32,20 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
 
   test "can add new goal" do
     visit page_url
-    fill_in "Title", with: "Some Random Goal Title"
+    title = "Some Random Goal Title"
+    fill_in "Title", with: title
     fill_in "goal_deadline", with: Time.now
     fill_in_rich_text_area "new_goal", with: "This is some goal"
-    click_on "Add Goal"
-    assert_selector "ul#goals", text: "Some Random Goal Title"
+    assert_emails 1 do
+      click_on "Add Goal"
+      sleep(0.5)
+    end
+    assert_selector "ul#goals", text: title
     take_screenshot
+    doc = Nokogiri::HTML::Document.parse(ActionMailer::Base.deliveries.last.body.to_s)
+    link = doc.css("a").first.values.first
+    visit link
+    assert_selector "h3", text: title
   end
 
   test "can not add goal with empty details" do
@@ -52,8 +63,6 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     find("li", id: dom_id(goal)).click_link("Show")
     assert_selector "h3", text: goal.title
     take_screenshot
-    click_on "Back"
-    assert_text "Add New Goal"
   end
 
   test "can delete a goal" do
