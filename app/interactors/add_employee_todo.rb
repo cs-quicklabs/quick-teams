@@ -18,8 +18,8 @@ class AddEmployeeTodo < Patterns::Service
   private
 
   def add_todo
-    todo.user_id = employee.id
-    todo.owner_id = actor.id
+    todo.user_id = actor.id
+    todo.owner_id = employee.id
     todo.save!
   end
 
