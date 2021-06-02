@@ -1,6 +1,8 @@
 require "test_helper"
 
 class UpdateScheduleTest < ActiveSupport::TestCase
+  include ActionMailer::TestHelper
+
   setup do
     ActsAsTenant.current_tenant = accounts(:crownstack)
     @schedule = Schedule.new
@@ -21,5 +23,11 @@ class UpdateScheduleTest < ActiveSupport::TestCase
       UpdateSchedule.call(@schedule, @project, @employee, @params, @actor)
     end
     assert_equal Event.last.action, "scheduled"
+  end
+
+  test "can send email" do
+    assert_emails 1 do
+      UpdateSchedule.call(@schedule, @project, @employee, @params, @actor)
+    end
   end
 end

@@ -9,6 +9,7 @@ class RemoveSchedule < Patterns::Service
     begin
       remove_schedule
       add_event
+      send_email
     rescue
       schedule
     end
@@ -24,6 +25,10 @@ class RemoveSchedule < Patterns::Service
 
   def add_event
     employee.events.create(user: actor, action: "freed", action_for_context: "freed", trackable: schedule.project)
+  end
+
+  def send_email
+    SchedulesMailer.with(employee: employee, project: schedule.project).relieved_email.deliver_later
   end
 
   attr_reader :actor, :schedule, :employee

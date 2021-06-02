@@ -16,4 +16,16 @@ class SchedulesMailerTest < ActionMailer::TestCase
     assert_equal email.subject, "Schedule Updated"
     assert_match "Show Schedule", email.body.encoded
   end
+
+  test "relieved" do
+    email = SchedulesMailer.with(employee: @employee, project: projects(:one)).relieved_email
+    assert_emails 1 do
+      email.deliver_later
+    end
+
+    assert_equal email.to, [@employee.email]
+    assert_equal email.from, ["admin@skia.com"]
+    assert_equal email.subject, "Relieved From Project"
+    assert_match "Show Schedule", email.body.encoded
+  end
 end
