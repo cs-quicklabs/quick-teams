@@ -66,4 +66,6 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     visit employee_feedbacks_url(script_name: "/#{@account.id}", employee_id: inactive_employee.id)
     assert_no_text "Add New Feedback"
   end
+
+  test ""
 end
