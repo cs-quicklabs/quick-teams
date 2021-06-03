@@ -183,8 +183,6 @@ GEM
     mini_mime (1.0.2)
     minitest (5.14.4)
     msgpack (1.4.2)
-    mustermann (1.1.1)
-      ruby2_keywords (~> 0.0.1)
     newrelic_rpm (7.0.0)
     nio4r (2.5.7)
     nokogiri (1.11.4-x86_64-darwin)
@@ -207,8 +205,6 @@ GEM
     rack (2.2.3)
     rack-mini-profiler (2.3.1)
       rack (>= 1.2.0)
-    rack-protection (2.1.0)
-      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -291,11 +287,6 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sinatra (2.1.0)
-      mustermann (~> 1.0)
-      rack (~> 2.2)
-      rack-protection (= 2.1.0)
-      tilt (~> 2.0)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -393,7 +384,6 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   sidekiq
-  sinatra (>= 1.3.0)
   spring
   stackprof
   stimulus_reflex (~> 3.4)
