@@ -4,7 +4,7 @@ class Report::TodosController < Report::BaseController
 
     entries = current_user.created_todos.includes(:project, :owner).pending
     @pagy, @todos = pagy_nil_safe(entries, items: LIMIT)
-    render_partial("report/todos/todo", collection: @todos, cached: false)
+    render_partial("report/todos/todo", collection: @todos, cached: false) if stale?(@todos)
   end
 
   def pending_todos
@@ -12,6 +12,6 @@ class Report::TodosController < Report::BaseController
 
     entries = Todo.where("deadline <= ?", Date.today).includes(:project, :owner).pending
     @pagy, @todos = pagy_nil_safe(entries, items: LIMIT)
-    render_partial("report/todos/todo", collection: @todos, cached: false)
+    render_partial("report/todos/todo", collection: @todos, cached: false) if stale?(@todos)
   end
 end
