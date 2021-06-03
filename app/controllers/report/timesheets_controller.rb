@@ -6,7 +6,7 @@ class Report::TimesheetsController < Report::BaseController
     @timesheet_entries = entries(Timesheet.includes(:user, :project).query(timesheet_filter_params))
     @stats = TimesheetsStats.new(@timesheet_entries)
     @pagy, @timesheets = pagy_nil_safe(@timesheet_entries, items: LIMIT)
-    render_partial("report/timesheets/timesheet", collection: @timesheets, cached: false) if stale?(@timesheets)
+    render_partial("report/timesheets/timesheet", collection: @timesheets, cached: false)
   end
 
   private

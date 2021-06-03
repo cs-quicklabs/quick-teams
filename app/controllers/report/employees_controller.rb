@@ -6,7 +6,7 @@ class Report::EmployeesController < Report::BaseController
     @stats = EmployeesStats.new(entries)
 
     @pagy, @employees = pagy_nil_safe(entries, items: LIMIT)
-    render_partial("report/employees/employee", collection: @employees, cached: false) if stale?(@employees)
+    render_partial("report/employees/employee", collection: @employees, cached: false)
   end
 
   private

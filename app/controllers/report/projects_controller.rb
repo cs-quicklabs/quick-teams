@@ -3,7 +3,7 @@ class Report::ProjectsController < Report::BaseController
     authorize :report
 
     @pagy, @projects = pagy_nil_safe(Project.includes(:status).query(projects_filter_params), items: LIMIT)
-    render_partial("report/projects/project", collection: @projects, cached: false) if stale?(@projects)
+    render_partial("report/projects/project", collection: @projects, cached: false)
   end
 
   private

@@ -4,24 +4,18 @@ class Report::SchedulesController < Report::BaseController
 
     @employees = User.for_current_account.active.billable.includes({ schedules: :project }, :role, :discipline, :job).order(:job_id).decorate
     @employees = @employees.select { |e| e.overall_occupancy < 100 }
-
-    fresh_when @employees
   end
 
   def overburdened
     authorize :report, :index?
     @employees = User.for_current_account.active.billable.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name).decorate
     @employees = @employees.select { |e| e.overall_occupancy > 100 }
-
-    fresh_when @employees
   end
 
   def shared
     authorize :report, :index?
     @employees = User.for_current_account.active.billable.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name).decorate
     @employees = @employees.select { |e| e.schedules.size > 1 }
-
-    fresh_when @employees
   end
 
   def available_next_month
