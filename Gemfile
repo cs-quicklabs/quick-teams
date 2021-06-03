@@ -44,7 +44,7 @@ gem "pundit"
 gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
 gem "rack-mini-profiler", "~> 2.0"
 gem "newrelic_rpm"
-gem 'sidekiq', '~> 6.1.3'
+gem 'sidekiq'
 
 
 group :development, :test do
