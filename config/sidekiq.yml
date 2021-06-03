@@ -12,7 +12,7 @@
 # http://www.mikeperham.com/2013/11/13/advanced-sidekiq-host-specific-queues/
 :queues:
   - critical
-  - default
-  - <%= `hostname`.strip %>
-  - low
+  - skia_staging_default
+  - skia_production_default
+  - mailers
 
