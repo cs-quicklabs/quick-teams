@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  require "sidekiq/web"
+  mount Sidekiq::Web => "/sidekiq"
+
   namespace :account do
     resources :roles, except: [:new, :show]
     resources :disciplines, except: [:new, :show]
