@@ -10,6 +10,7 @@ class GoalFilter
     to_date
     status
     type
+    tag
   ].freeze
 
   attr_accessor(*KEYS)

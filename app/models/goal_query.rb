@@ -50,5 +50,9 @@ class GoalQuery
     def type(param)
       where(goalable_type: param)
     end
+
+    def tag(param)
+      joins(:taggings).where(taggings: { tag_id: Tag.find(param), taggable_type: "Goal" })
+    end
   end
 end
