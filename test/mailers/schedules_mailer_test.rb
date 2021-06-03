@@ -12,7 +12,7 @@ class SchedulesMailerTest < ActionMailer::TestCase
     end
 
     assert_equal email.to, [@employee.email]
-    assert_equal email.from, ["admin@skia.com"]
+    assert_equal email.from, ["admin@skia.me"]
     assert_equal email.subject, "Schedule Updated"
     assert_match "Show Schedule", email.body.encoded
   end
@@ -24,7 +24,7 @@ class SchedulesMailerTest < ActionMailer::TestCase
     end
 
     assert_equal email.to, [@employee.email]
-    assert_equal email.from, ["admin@skia.com"]
+    assert_equal email.from, ["admin@skia.me"]
     assert_equal email.subject, "Relieved From Project"
     assert_match "Show Schedule", email.body.encoded
   end
