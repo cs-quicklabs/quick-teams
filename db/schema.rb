@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_041757) do
+ActiveRecord::Schema.define(version: 2021_06_03_063855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -241,6 +241,24 @@ ActiveRecord::Schema.define(version: 2021_05_31_041757) do
     t.index ["account_id"], name: "index_skills_on_account_id"
   end
 
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "tag_id", null: false
+    t.string "taggable_type", null: false
+    t.bigint "taggable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_tags_on_account_id"
+  end
+
   create_table "timesheets", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.bigint "project_id", null: false
@@ -363,6 +381,8 @@ ActiveRecord::Schema.define(version: 2021_05_31_041757) do
   add_foreign_key "schedules", "users", name: "schedules_user_id_fkey"
   add_foreign_key "skills", "accounts"
   add_foreign_key "skills", "accounts", name: "skills_account_id_fkey"
+  add_foreign_key "taggings", "tags"
+  add_foreign_key "tags", "accounts"
   add_foreign_key "timesheets", "accounts"
   add_foreign_key "timesheets", "projects"
   add_foreign_key "timesheets", "users"
