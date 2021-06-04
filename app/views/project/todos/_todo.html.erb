@@ -7,7 +7,7 @@
     <a href="<%= employee_todos_path(todo.user)%>" class="block hover:underline" target="_top">
       <div>
         <p class="font-medium text-gray-900 max-w-0">
-          <span class="truncate"><%= todo.user.decorate.display_name%></span>
+          <span class="truncate"><%= todo.owner.decorate.display_name%></span>
         </p>
       </div>
     </a>
