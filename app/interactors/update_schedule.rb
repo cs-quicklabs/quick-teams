@@ -33,7 +33,11 @@ class UpdateSchedule < Patterns::Service
 
   def send_email
     message = context + " in project #{project.name}"
-    SchedulesMailer.with(employee: employee, message: message).updated_email.deliver_later
+    SchedulesMailer.with(employee: employee, message: message).updated_email.deliver_later if deliver_email?
+  end
+
+  def deliver_email?
+    employee.email_enabled and employee.account.email_enabled
   end
 
   def context

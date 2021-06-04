@@ -25,7 +25,11 @@ class AddProjectTodo < Patterns::Service
   end
 
   def send_email
-    TodosMailer.with(actor: actor, employee: todo.owner).added_email.deliver_later unless actor == todo.owner
+    TodosMailer.with(actor: actor, employee: todo.owner).added_email.deliver_later if deliver_email?
+  end
+
+  def deliver_email?
+    actor != todo.owner and todo.owner.email_enabled and todo.owner.account.email_enabled
   end
 
   attr_reader :project, :todo, :actor, :params

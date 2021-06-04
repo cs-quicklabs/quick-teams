@@ -68,6 +68,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def preferences?
+    true
+  end
+
   def update_password?
     true
   end

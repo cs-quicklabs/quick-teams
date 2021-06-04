@@ -25,6 +25,10 @@ class UserController < BaseController
     end
   end
 
+  def preferences
+    authorize @user
+  end
+
   def profile
     authorize @user
   end

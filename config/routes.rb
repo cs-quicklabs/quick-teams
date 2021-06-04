@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :project_statuses, except: [:new, :show]
     resources :clients, except: [:new, :show]
     resources :tags, only: [:destroy, :index]
+    resources :preferences, only: [:index]
   end
 
   resources :projects do
@@ -55,7 +56,7 @@ Rails.application.routes.draw do
     get "/profile", to: "user#profile", as: "profile"
     get "/password", to: "user#password", as: "setting_password"
     patch "/password", to: "user#update_password", as: "edit_password"
-    get "/notifications", to: "settings#notifications", as: "notifications"
+    get "/preferences", to: "user#preferences", as: "user_preferences"
   end
 
   # if you change something in reports path please check stats path are not broken in project/employee timsheets, as they are hardcoded.
