@@ -10,6 +10,7 @@ class TimesheetFilter
     billable
     from_date
     to_date
+    status
   ].freeze
 
   attr_accessor(*KEYS)

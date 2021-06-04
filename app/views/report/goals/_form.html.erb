@@ -46,7 +46,7 @@
               </div>
               <div>
                 <label for="billed" class="block text-sm font-medium text-gray-700">
-                  Tag
+                  HashTag
                 </label>
                 <%= form.collection_select(:tag, Tag.order(:name), :id, :name, {:prompt => "Select Tag", :selected => (params["tag"] if !params["tag"].blank?) }, :class=>"form-text-field mt-1" )%>
               </div>

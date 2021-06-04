@@ -11,7 +11,7 @@ class TimesheetQuery
     filter_params.each do |filter, value|
       result = result.public_send(filter, value) if present?(value)
     end
-    result.order(date: :desc)
+    result.order(date: :desc).order(project_id: :desc)
   end
 
   private
@@ -57,6 +57,10 @@ class TimesheetQuery
 
     def billed(param)
       where("billed = ?", param)
+    end
+
+    def status(param)
+      joins(:user).where(users: { status: param })
     end
   end
 end
