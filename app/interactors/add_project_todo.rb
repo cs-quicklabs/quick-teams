@@ -9,6 +9,7 @@ class AddProjectTodo < Patterns::Service
   def call
     begin
       add_todo
+      send_email
     rescue
       todo
     end
@@ -21,6 +22,10 @@ class AddProjectTodo < Patterns::Service
     todo.project = project
     todo.user_id = actor.id
     todo.save!
+  end
+
+  def send_email
+    TodosMailer.with(actor: actor, employee: todo.owner).added_email.deliver_later unless actor == todo.owner
   end
 
   attr_reader :project, :todo, :actor, :params
