@@ -1,0 +1,11 @@
+<main class="pb-10 mx-auto max-w-7xl lg:py-12 lg:px-8">
+  <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+    <%= render 'shared/account_menu'%>
+    <main class="max-w-xl px-4 pb-12 lg:col-span-6">
+      <%= render "shared/form_header", title: "HashTags", subtitle: "HashTags are automatically created when you add text with '#' in goal's title. You can then search goals based on hashtags in reports. This is a good way to group your records." %>
+      <div id="tags">
+        <%= render @tags %>
+      </div>
+    </main>
+  </div>
+</main>

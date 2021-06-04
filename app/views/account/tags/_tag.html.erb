@@ -1,0 +1,10 @@
+<%= turbo_frame_tag dom_id(tag) do %>
+  <li class="flex py-4 border-b border-gray-200">
+    <div class="flex w-full ml-3">
+      <p class="w-full text-sm font-medium text-gray-900"><%= tag.name %></p>
+      <div class="flex">
+        <%= link_to "Delete", account_tag_path(tag), method: :delete, class: "btn-inline-delete pl-2" %>
+      </div>
+    </div>
+  </li>
+<% end %>

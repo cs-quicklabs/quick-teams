@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :people_statuses, except: [:new, :show]
     resources :project_statuses, except: [:new, :show]
     resources :clients, except: [:new, :show]
+    resources :tags, only: [:destroy, :index]
   end
 
   resources :projects do
