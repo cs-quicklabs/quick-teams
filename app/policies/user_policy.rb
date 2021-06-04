@@ -54,6 +54,10 @@ class UserPolicy < ApplicationPolicy
     false
   end
 
+  def edit_feedback?(feedback)
+    user.admin? and !feedback.published?
+  end
+
   def create_comment?
     return true if user.admin?
     return true if user.lead? and user.subordinate?(record)

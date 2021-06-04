@@ -1,6 +1,6 @@
 class Employee::FeedbackPolicy < ApplicationPolicy
   def update?
-    user.admin? or record.user == user
+    edit?
   end
 
   def create?
@@ -19,6 +19,10 @@ class Employee::FeedbackPolicy < ApplicationPolicy
 
   def destroy?
     update?
+  end
+
+  def edit?
+    user.admin? and !record.published?
   end
 
   private

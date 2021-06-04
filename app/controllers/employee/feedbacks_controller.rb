@@ -1,5 +1,5 @@
 class Employee::FeedbacksController < Employee::BaseController
-  before_action :set_feedback, only: %i[show destroy]
+  before_action :set_feedback, only: %i[show destroy edit update]
 
   def index
     authorize @employee, :show_feedbacks?
@@ -7,7 +7,6 @@ class Employee::FeedbacksController < Employee::BaseController
     @feedback = Feedback.new
     @pagy, @feedbacks = pagy_nil_safe(employee_feedbacks, items: LIMIT)
     render_partial("employee/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks)
-
   end
 
   def create
@@ -41,6 +40,22 @@ class Employee::FeedbacksController < Employee::BaseController
     authorize [:employee, @feedback]
 
     fresh_when @feedback
+  end
+
+  def edit
+    authorize [:employee, @feedback]
+  end
+
+  def update
+    authorize [:employee, @feedback]
+
+    respond_to do |format|
+      if @feedback.update(feedback_params)
+        format.html { redirect_to employee_feedback_path(@feedback.critiquable, @feedback), notice: "Feedback was successfully updated." }
+      else
+        format.html { redirect_to edit_employee_feedback_path(@feedback), alert: "Failed to update. Please try again." }
+      end
+    end
   end
 
   private

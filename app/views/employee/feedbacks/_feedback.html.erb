@@ -17,6 +17,9 @@
         <div class="mt-2 space-x-2 text-sm">
           <span class="font-medium text-gray-500"><%= display_created_at(feedback) %></span>
           <%= link_to "Show", employee_feedback_path(@employee, feedback), class: "btn-inline-edit pl-2" %>
+          <% if policy([:employee, feedback]).edit? %>
+            <%= link_to "Edit", edit_employee_feedback_path(@employee, feedback), class: "btn-inline-delete pl-2" %>
+          <% end %>
           <% if policy([:employee, feedback]).update? %>
             <%= link_to "Delete", employee_feedback_path(@employee, feedback), method: :delete, class: "btn-inline-delete pl-2" %>
           <% end %>

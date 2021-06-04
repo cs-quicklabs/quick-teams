@@ -49,8 +49,6 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     find("li", id: dom_id(feedback)).click_link("Show")
     assert_selector "h3", text: feedback.title
     take_screenshot
-    click_on "Back"
-    assert_text "Add New Feedback"
   end
 
   test "can delete a feedback" do
@@ -67,5 +65,29 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     assert_no_text "Add New Feedback"
   end
 
-  test ""
+  test "can edit feedback" do
+    visit page_url
+    feedback = @employee.feedbacks.first
+    find("li", id: dom_id(feedback)).click_link("Edit")
+    title = "Some Random Goal Title Edited"
+    fill_in "Title", with: ""
+    fill_in "Title", with: title
+    fill_in_rich_text_area dom_id(feedback), with: title
+    take_screenshot
+    click_on "Edit Feedback"
+    assert_selector "p.notice", text: "Feedback was successfully updated."
+    assert_selector "h3", text: title
+    assert_selector "div.trix-content", text: title
+    take_screenshot
+  end
+
+  test "can not edit feedback with invalid params" do
+    visit page_url
+    feedback = @employee.feedbacks.first
+    find("li", id: dom_id(feedback)).click_link("Edit")
+    fill_in "Title", with: nil
+    click_on "Edit Feedback"
+    assert_selector "p.alert", text: "Failed to update. Please try again."
+    take_screenshot
+  end
 end
