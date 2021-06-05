@@ -1,5 +1,5 @@
 class Account::TagsController < Account::BaseController
-  before_action :set_skill, only: %i[ destroy ]
+  before_action :set_tag, only: %i[ destroy ]
 
   def index
     authorize :account
@@ -18,7 +18,7 @@ class Account::TagsController < Account::BaseController
 
   private
 
-  def set_skill
+  def set_tag
     @tag ||= Tag.find(params[:id])
   end
 end
