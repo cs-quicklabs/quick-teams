@@ -18,11 +18,14 @@ class Employee::FeedbackPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
+    return false if record.published?
+    return true if user.admin?
+    return record.user == user if (user.lead? and subordinate?)
+    false
   end
 
   def edit?
-    user.admin? and !record.published?
+    (user.admin? or subordinate?) and !record.published?
   end
 
   private
