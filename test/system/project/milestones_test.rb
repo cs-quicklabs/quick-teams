@@ -53,8 +53,6 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     find("li", id: dom_id(milestone)).click_link("Show")
     assert_selector "h3", text: milestone.title
     take_screenshot
-    click_on "Back"
-    assert_text "Add New Milestone"
   end
 
   test "can delete a milestone" do

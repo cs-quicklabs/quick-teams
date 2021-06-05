@@ -29,11 +29,11 @@ class AddEmployeeGoal < Patterns::Service
   end
 
   def send_email
-    GoalsMailer.with(actor: actor, employee: employee, goal: goal).created_email if deliver_email?
+    GoalsMailer.with(actor: actor, employee: employee, goal: goal).created_email.deliver_later if deliver_email?
   end
 
   def deliver_email?
-    actor != employee and employee.email_enabled and employee.account.email_enabled
+    (actor != employee) and employee.email_enabled and employee.account.email_enabled
   end
 
   attr_reader :employee, :goal, :actor

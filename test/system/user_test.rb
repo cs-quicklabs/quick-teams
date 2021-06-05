@@ -57,6 +57,7 @@ class UserTest < ApplicationSystemTestCase
     fill_in "New Password", with: "Home@123"
     fill_in "Confirm New Password", with: "Home@123"
     click_on "Save"
+    sleep(1)
     take_screenshot
     assert_text "New password has previously appeared in a data breach and should not be used"
   end

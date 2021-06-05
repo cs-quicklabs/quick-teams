@@ -50,8 +50,6 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     find("li", id: dom_id(feedback)).click_link("Show")
     assert_selector "h3", text: feedback.title
     take_screenshot
-    click_on "Back"
-    assert_text "Add New Feedback"
   end
 
   test "can delete a feedback" do

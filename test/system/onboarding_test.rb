@@ -65,7 +65,7 @@ class OnboardingTest < ApplicationSystemTestCase
     fill_in "user_new_password_confirmation", with: "Awesome@2021!"
     assert_emails 1 do
       click_on "Sign up"
-      sleep(0.5)
+      sleep(1.0)
     end
 
     take_screenshot

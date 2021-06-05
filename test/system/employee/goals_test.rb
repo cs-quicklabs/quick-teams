@@ -38,7 +38,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     fill_in_rich_text_area "new_goal", with: "This is some goal"
     assert_emails 1 do
       click_on "Add Goal"
-      sleep(0.5)
+      sleep(1)
     end
     assert_selector "ul#goals", text: title
     take_screenshot
