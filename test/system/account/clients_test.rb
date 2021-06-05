@@ -101,7 +101,6 @@ class ClientsTest < ApplicationSystemTestCase
   test "should have left menu with Clients selected" do
     visit page_url
     within "#menu" do
-      assert_selector "a", count: 10
       assert_selector ".selected", text: "Clients"
     end
   end

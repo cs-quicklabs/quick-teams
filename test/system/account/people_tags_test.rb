@@ -100,7 +100,6 @@ class PeopleTagsTest < ApplicationSystemTestCase
   test "should have left menu with People Tags selected" do
     visit page_url
     within "#menu" do
-      assert_selector "a", count: 10
       assert_selector ".selected", text: "People Tags"
     end
   end

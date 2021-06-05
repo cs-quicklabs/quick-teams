@@ -97,7 +97,6 @@ class RolesTest < ApplicationSystemTestCase
   test "should have left menu with Roles selected" do
     visit page_url
     within "#menu" do
-      assert_selector "a", count: 10
       assert_selector ".selected", text: "Roles"
     end
   end
