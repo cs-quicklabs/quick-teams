@@ -1,7 +1,7 @@
 <tr id="<%= dom_id todo %>">
   <% todo = todo.decorate %>
   <td class="px-6 py-4 text-sm text-gray-700 truncate whitespace-nowrap">
-    <%= check_box_tag "completed", nil, todo.completed, data: { reflex: "click->ProjectTodoReflex#toggle_project_todo", id: todo.id }, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
+    <%= check_box_tag "completed", nil, todo.completed, data: { reflex: "click->TodoReflex#toggle_project_todo", id: todo.id }, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
   </td>
   <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
     <a href="<%= employee_todos_path(todo.user)%>" class="block hover:underline" target="_top">
