@@ -18,7 +18,7 @@ class Employee::FeedbackPolicy < ApplicationPolicy
   end
 
   def destroy?
-    update?
+    user.admin?
   end
 
   def edit?

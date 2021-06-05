@@ -20,7 +20,7 @@
           <% if policy([:employee, feedback]).edit? %>
             <%= link_to "Edit", edit_employee_feedback_path(@employee, feedback), class: "btn-inline-delete pl-2" %>
           <% end %>
-          <% if policy([:employee, feedback]).update? %>
+          <% if policy([:employee, feedback]).destroy? %>
             <%= link_to "Delete", employee_feedback_path(@employee, feedback), method: :delete, class: "btn-inline-delete pl-2" %>
           <% end %>
         </div>
