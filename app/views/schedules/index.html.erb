@@ -38,7 +38,7 @@
       </div>
     </div>
     <% if @employees.size > 0 %>
-      <div class="w-full overflow-hidden">
+      <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <table class="min-w-full pb-6 divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -53,10 +53,13 @@
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
             <%= render partial: "schedule", collection: @employees, as: :employee, cached: true%>
           </tbody>
         </table>
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+        </div>
       </div>
     <% end %>
   </div>

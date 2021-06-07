@@ -1,4 +1,6 @@
 class SchedulesController < BaseController
+  include Pagy::Backend
+
   before_action :set_project, only: %i[ update create destroy edit ]
   before_action :set_schedule, only: %i[ update destroy edit ]
 
@@ -13,7 +15,9 @@ class SchedulesController < BaseController
     end
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
-    fresh_when @employees
+
+    @pagy, @employees = pagy(@employees, items: 10)
+    render_partial("schedules/schedule", collection: @employees, cached: true) if stale?(@employees)
   end
 
   def update
