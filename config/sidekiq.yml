@@ -16,3 +16,8 @@
   - skia_production_default
   - mailers
 
+
+:schedule:
+  hello_world:
+    every: 1m   # Runs once per minute
+    class: HelloWorld

@@ -45,6 +45,7 @@ gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dab
 gem "rack-mini-profiler", "~> 2.0"
 gem "newrelic_rpm"
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 
 
 group :development, :test do
