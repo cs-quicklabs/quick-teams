@@ -111,7 +111,11 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     goal = @employee.goals.first
     find("li", id: dom_id(goal)).click_link("Show")
     fill_in "comment", with: "This is a comment"
-    click_on "Comment"
+    assert_emails 1 do
+      click_on "Comment"
+      sleep(0.5)
+    end
+
     assert_selector "ul#comments", text: "This is a comment"
     take_screenshot
   end

@@ -4,10 +4,9 @@ class CommentsController < BaseController
   def create
     authorize @goal, :comment?
 
-    @comment = Comment.new(comment_params)
+    @comment = AddComment.call(comment_params, @goal, params[:commit], current_user).result
     respond_to do |format|
-      if @comment.save
-        update_goal
+      if @comment.persisted?
         format.turbo_stream {
           render turbo_stream: turbo_stream.append(:comments, partial: "shared/comments/comment", locals: { comment: @comment }) +
                                turbo_stream.replace("add", partial: "shared/comments/add", locals: { goal: @goal, comment: Comment.new }) +
@@ -20,17 +19,6 @@ class CommentsController < BaseController
   end
 
   private
-
-  def update_goal
-    if params[:commit] == "Comment"
-    elsif params[:commit] == "and mark Missed"
-      @goal.update_attribute("status", "missed")
-    elsif params[:commit] == "and mark Completed"
-      @goal.update_attribute("status", "completed")
-    elsif params[:commit] == "and mark Discarded"
-      @goal.update_attribute("status", "discarded")
-    end
-  end
 
   def comment_params
     params.require(:comment).permit(:title, :user_id, :goal_id, :status)
