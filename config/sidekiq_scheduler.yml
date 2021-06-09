@@ -1,5 +1,5 @@
-clear_leaderboards_contributors:
+send_weekly_activity_report:
   cron: '0 10 * * MON'
   class: WeeklyActivityMailerJob
-  queue: mailers
+  queue: default
   description: 'This job sends weekly report to employees every Monday 10:00 AM'
