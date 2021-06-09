@@ -6,7 +6,7 @@ class WeeklyActivityMailerJob < ApplicationJob
       users = User.active.where(email_enabled: true, account: account)
       users.each do |user|
         stats = Reports::EmployeeWeeklyStats.new(user)
-        WeeklyActivityMailer.with(employee: user, stats: stats).weekly_summary_email.deliver_now if user.email == "aashishdhawan@crownstack.com"
+        WeeklyActivityMailer.with(employee: user, stats: stats).weekly_summary_email.deliver_now
       end
     end
   end
