@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.0"
 
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.1.1"
 # Use postgresql as the database for Active Record
@@ -46,6 +47,7 @@ gem "rack-mini-profiler", "~> 2.0"
 gem "newrelic_rpm"
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
+gem 'sinatra', '>= 1.3.0', :require => nil
 
 
 group :development, :test do
