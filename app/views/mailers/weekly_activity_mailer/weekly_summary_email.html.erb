@@ -1,3 +1,13 @@
 <p>Dear <%= @employee.decorate.display_name %>!</p>
 <p> Here is the summary of last week:</p>
-<p> Timesheets hours logged: <%= @stats.hours %></p>
+<p> Timesheets hours logged: <%= @stats.hours.to_s %></p>
+<% if @stats.goals.size > 0 %>
+  <p> You have <%= @stats.goals.size.to_s %> pending goal.</p>
+<% else %>
+  <p> You have no pending goal.</p>
+<% end %>
+<% if @stats.todos.size > 0 %>
+  <p> You have <%= @stats.todos.size.to_s %> pending TODOs.</p>
+<% else %>
+  <p> You have no pending TODOs.</p>
+<% end %>

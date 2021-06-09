@@ -4,6 +4,8 @@ class Reports::EmployeeWeeklyStats
   def initialize(employee)
     @employee = employee
     @hours = employee.timesheets.where(date: time_span).sum(:hours)
+    @goals = employee.goals.where(deadline: time_span)
+    @todos = employee.todos.where(deadline: time_span)
   end
 
   private
