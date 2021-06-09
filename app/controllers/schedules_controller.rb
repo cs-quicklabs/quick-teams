@@ -9,15 +9,29 @@ class SchedulesController < BaseController
 
     employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name)
     if params[:job]
-      @employees = employees.where(job: params[:job])
+      employees = employees.where(job: params[:job])
     else
-      @employees = employees
+      employees = employees
     end
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
 
-    @pagy, @employees = pagy(@employees, items: 10)
-    render_partial("schedules/schedule", collection: @employees, cached: true) if stale?(@employees)
+    @pagy, @employees = pagy_nil_safe(employees, items: 10)
+    if stale?(@employees)
+      respond_to do |format|
+        format.html
+        format.json {
+          render json: { entries: render_to_string(partial: "schedules/schedule", formats: [:html], collection: @employees, as: :employee, cached: true),
+                         pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
+        }
+      end
+    end
+  end
+
+  def pagy_nil_safe(collection, vars = {})
+    pagy = Pagy.new(count: collection.count(:all), page: params[:page], **vars)
+    return pagy, collection.offset(pagy.offset).limit(pagy.items) if collection.respond_to?(:offset)
+    return pagy, collection
   end
 
   def update

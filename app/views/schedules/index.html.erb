@@ -54,7 +54,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
-            <%= render partial: "schedule", collection: @employees, as: :employee, cached: true%>
+            <%= render partial: "schedules/schedule", collection: @employees, as: :employee, cached: true%>
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
