@@ -16,7 +16,7 @@ class SchedulesController < BaseController
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
 
-    @pagy, @employees = pagy_nil_safe(employees, items: 10)
+    @pagy, @employees = pagy_nil_safe(employees, items: 20)
     if stale?(@employees)
       respond_to do |format|
         format.html
