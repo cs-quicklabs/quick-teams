@@ -9,7 +9,7 @@
     <div>
       <div class="text-sm">
         <a href="<%= goal_path(goal)%>" class="font-medium text-gray-900 hover:underline"><%= goal.goalable.decorate.name%></a>
-        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium <%= goal_status_color(goal) %>">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium <%= goal_status_color(goal) %>">
           <%= goal.status.to_s %>
         </span>
       </div>

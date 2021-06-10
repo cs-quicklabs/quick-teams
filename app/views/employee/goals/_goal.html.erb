@@ -6,7 +6,7 @@
     <div>
       <div class="text-sm">
         <a href="#" class="font-medium text-gray-900"><%= goal.user.decorate.display_name%></a>
-        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium <%= goal_status_color(goal) %>">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium <%= goal_status_color(goal) %>">
           <%= goal.status.to_s %>
         </span>
       </div>
