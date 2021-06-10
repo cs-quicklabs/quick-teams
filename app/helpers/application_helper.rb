@@ -1,5 +1,6 @@
 module ApplicationHelper
   include Pagy::Frontend
+  include Extractor::HashTag
 
   def tailwind_form_with(**options, &block)
     form_with(**options.merge(builder: TailwindFormBuilder), &block)
@@ -19,5 +20,10 @@ module ApplicationHelper
     else
       employee_goals_path(goal.goalable)
     end
+  end
+
+  def highlight_hashtag(title)
+    hashtags = extract_hashtags(title)
+    highlight(title, hashtags.map { |tag| "#" + tag })
   end
 end

@@ -16,7 +16,7 @@
               which does not exists anymore 
             <% else %>
               titled
-              <a href="<%= employee_goal_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.title%></a>
+              <a href="<%= employee_goal_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title)%></a>
             <% end %>
             for
             <a href="<%= employee_goals_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.first_name + " " + event.eventable.last_name%></a>
