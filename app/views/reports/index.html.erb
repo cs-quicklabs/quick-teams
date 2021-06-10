@@ -59,6 +59,11 @@
                 Pending project milestones which should have been completed by now
               </span>
             </a>
+            <a href="<%= goals_reports_path(status: 0) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+              <span class="truncate">
+                All Pending goals
+              </span>
+            </a>
           </div>
           <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
             Schedules
@@ -90,16 +95,6 @@
               </span>
             </a>
           </div>
-          <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
-            Projects
-          </h3>
-          <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= projects_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Projects Report
-              </span>
-            </a>
-          </div>
         </div>
       </div>
       <!-- Left column -->
@@ -117,6 +112,21 @@
             <a href="<%= pending_todos_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
               <span class="truncate">
                 Pending Todos which should have been completed by now
+              </span>
+            </a>
+            <a href="<%= all_pending_todos_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+              <span class="truncate">
+                All Pending Todos
+              </span>
+            </a>
+          </div>
+          <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
+            Projects
+          </h3>
+          <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
+            <a href="<%= projects_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+              <span class="truncate">
+                Projects Report
               </span>
             </a>
           </div>

@@ -77,6 +77,7 @@ Rails.application.routes.draw do
     get "/schedules/next", to: "report/schedules#available_next_month", as: "available_next_month_schedules_reports"
     get "/todos/my-pending-todos", to: "report/todos#my_pending_todos", as: "my_pending_todos"
     get "/todos/pending-todos", to: "report/todos#pending_todos", as: "pending_todos"
+    get "/todos/pending-todos-all", to: "report/todos#all_pending_todos", as: "all_pending_todos"
   end
 
   get "/reports", to: "reports#index", as: "reports"

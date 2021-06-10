@@ -14,4 +14,12 @@ class Report::TodosController < Report::BaseController
     @pagy, @todos = pagy_nil_safe(entries, items: LIMIT)
     render_partial("report/todos/todo", collection: @todos, cached: false) if stale?(@todos)
   end
+
+  def all_pending_todos
+    authorize :report, :index?
+
+    entries = Todo.includes(:project, :owner).pending
+    @pagy, @todos = pagy_nil_safe(entries, items: LIMIT)
+    render_partial("report/todos/todo", collection: @todos, cached: false) if stale?(@todos)
+  end
 end
