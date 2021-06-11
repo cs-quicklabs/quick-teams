@@ -4,7 +4,7 @@
     <%= check_box_tag "completed", nil, todo.completed, data: { reflex: "click->TodoReflex#toggle_project_todo", id: todo.id }, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
   </td>
   <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
-    <a href="<%= employee_todos_path(todo.user)%>" class="block hover:underline" target="_top">
+    <a href="<%= employee_todos_path(todo.owner)%>" class="block hover:underline" target="_top">
       <div>
         <p class="font-medium text-gray-900 max-w-0">
           <span class="truncate"><%= todo.owner.decorate.display_name%></span>
@@ -13,7 +13,7 @@
     </a>
   </td>
   <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-700 max-w-0">
-    <%= highlight_hashtag(todo.title.capitalize) %>
+    <%= highlight_hashtag(auto_link_urls_in_text(todo.title.capitalize)) %>
   </td>
   <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
     <%= display_created_at(todo) %>
