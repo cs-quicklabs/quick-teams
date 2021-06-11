@@ -44,9 +44,19 @@
                 Pending goals created by me
               </span>
             </a>
-            <a href="<%= goals_reports_path(status: 1, from_date: Date.today - 30.days, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+            <a href="<%= goals_reports_path(status: 1, from_date: Date.today - 30.days, to_date: Date.today, order_by: "updated_at", order: "desc") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
               <span class="truncate">
                 Recently completed goals
+              </span>
+            </a>
+            <a href="<%= goals_reports_path(status: 0, order: "desc", order_by: "created_at") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+              <span class="truncate">
+                Recently Added pending goals
+              </span>
+            </a>
+            <a href="<%= goals_reports_path(status: 0, order: "desc", order_by: "updated_at") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+              <span class="truncate">
+                Recently Updated pending goals
               </span>
             </a>
             <a href="<%= goals_reports_path(status: 0, to_date: Date.today, type: "User") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
@@ -85,16 +95,6 @@
               </span>
             </a>
           </div>
-          <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
-            Employees
-          </h3>
-          <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= employees_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Employees Report
-              </span>
-            </a>
-          </div>
         </div>
       </div>
       <!-- Left column -->
@@ -127,6 +127,16 @@
             <a href="<%= projects_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
               <span class="truncate">
                 Projects Report
+              </span>
+            </a>
+          </div>
+          <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
+            Employees
+          </h3>
+          <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
+            <a href="<%= employees_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+              <span class="truncate">
+                Employees Report
               </span>
             </a>
           </div>

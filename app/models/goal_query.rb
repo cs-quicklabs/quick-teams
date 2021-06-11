@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class GoalQuery
-  def initialize(entries, params)
+  def initialize(entries, params, order_by, order)
     @entries = entries.extending(Scopes)
     @params = params
+    @order_by = order_by
+    @order = order
   end
 
   def filter
@@ -11,12 +13,16 @@ class GoalQuery
     filter_params.each do |filter, value|
       result = result.public_send(filter, value) if present?(value)
     end
-    result.order(deadline: :desc)
+    if order_by.nil? or order.nil?
+      result.order(deadline: :desc)
+    else
+      result.order(order_by.parameterize => order.parameterize)
+    end
   end
 
   private
 
-  attr_reader :entries, :params
+  attr_reader :entries, :params, :order, :order_by
 
   def filter_params
     params&.reject { |_, v| v.nil? } || {}

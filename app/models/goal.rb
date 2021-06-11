@@ -18,9 +18,9 @@ class Goal < ApplicationRecord
 
   after_save :set_tags_from_title
 
-  def self.query(params, includes = nil)
+  def self.query(params, includes = nil, order_by, order)
     return [] if params.empty?
-    GoalQuery.new(self.includes(includes), params).filter
+    GoalQuery.new(self.includes(includes), params, order_by, order).filter
   end
 
   private

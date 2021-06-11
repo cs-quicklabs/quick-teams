@@ -11,6 +11,8 @@ class GoalFilter
     status
     type
     tag
+    order_by
+    order
   ].freeze
 
   attr_accessor(*KEYS)
