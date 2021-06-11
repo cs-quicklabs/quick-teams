@@ -1,6 +1,6 @@
 class Project::NotePolicy < ApplicationPolicy
   def update?
-    user.admin? or record.user == user
+    user.admin?
   end
 
   def create?
@@ -16,6 +16,10 @@ class Project::NotePolicy < ApplicationPolicy
   end
 
   def destroy?
+    user.admin?
+  end
+
+  def edit?
     user.admin?
   end
 end

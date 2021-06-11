@@ -1,19 +1,22 @@
-<li id=<%= dom_id(note) %>>
-  <div class="flex space-x-3">
-    <div class="flex-shrink-0">
-      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+<%= turbo_frame_tag dom_id(note) do %>
+  <li >
+    <div class="flex mt-6 space-x-3">
+      <div class="flex-shrink-0">
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+      </div>
+      <div>
+        <div class="text-sm">
+          <a href="#" class="font-medium text-gray-900"><%= note.user.decorate.display_name%></a>
+        </div>
+        <div class="mt-1 text-sm text-gray-700">
+          <p class="whitespace-pre-wrap"><%= note.body%></p>
+        </div>
+        <div class="mt-2 space-x-2 text-sm">
+          <span class="font-medium text-gray-500"><%= display_created_at(note)%></span>
+          <%= link_to "Edit", edit_project_note_path(@project, note), class: "pl-2 btn-inline-edit" %>
+          <%= link_to "Delete", project_note_path(@project, note), method: :delete, class: "pl-2 btn-inline-delete" %>
+        </div>
+      </div>
     </div>
-    <div>
-      <div class="text-sm">
-        <a href="#" class="font-medium text-gray-900"><%= note.user.decorate.display_name%></a>
-      </div>
-      <div class="mt-1 text-sm text-gray-700">
-        <p class="whitespace-pre-wrap"><%= note.body%></p>
-      </div>
-      <div class="mt-2 space-x-2 text-sm">
-        <span class="font-medium text-gray-500"><%= display_created_at(note)%></span>
-        <%= link_to "Delete", project_note_path(@project, note), method: :delete, class: "pl-2 btn-inline-delete" %>
-      </div>
-    </div>
-  </div>
-</li>
+  </li>
+<% end %>

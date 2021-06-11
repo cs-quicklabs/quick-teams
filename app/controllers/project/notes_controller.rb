@@ -1,5 +1,5 @@
 class Project::NotesController < Project::BaseController
-  before_action :set_note, only: %i[ destroy ]
+  before_action :set_note, only: %i[ destroy edit update ]
 
   def index
     authorize [:project, Note]
@@ -16,6 +16,22 @@ class Project::NotesController < Project::BaseController
     Event.where(eventable: @project, trackable: @note).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@note) }
+    end
+  end
+
+  def edit
+    authorize [:project, @note]
+  end
+
+  def update
+    authorize [:project, @note]
+
+    respond_to do |format|
+      if @note.update(note_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@note, partial: "project/notes/note", locals: { note: @note }) }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@note, template: "project/notes/edit", locals: { note: @note }) }
+      end
     end
   end
 

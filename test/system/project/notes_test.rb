@@ -58,4 +58,31 @@ class ProjectNotesTest < ApplicationSystemTestCase
     visit project_feedbacks_url(script_name: "/#{@account.id}", project_id: archived_project.id)
     assert_no_text "Add New Note"
   end
+
+  test "can edit a note" do
+    visit page_url
+    note = @project.notes.first
+    assert_text note.body
+    find("turbo-frame", id: dom_id(note)).click_link("Edit")
+    take_screenshot
+    within "#project_notes" do
+      fill_in "note_body", with: "Noted Edited"
+      click_on "Edit Note"
+      take_screenshot
+      assert_no_text "Edit Note"
+    end
+  end
+
+  test "can not edit note with invalid params" do
+    visit page_url
+    note = @project.notes.first
+    assert_text note.body
+    find("turbo-frame", id: dom_id(note)).click_link("Edit")
+    within "#project_notes" do
+      fill_in "note_body", with: ""
+      click_on "Edit Note"
+      take_screenshot
+      assert_selector "div#error_explanation", text: "Body can't be blank"
+    end
+  end
 end
