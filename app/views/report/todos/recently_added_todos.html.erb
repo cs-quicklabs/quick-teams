@@ -1,0 +1,45 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Recently Added Todos
+      </h1>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @todos.count.to_s + " todos)"%></p>
+    </div>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <% if @todos.size > 0 %>
+      <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+        <table class="min-w-full pb-6 divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Todo
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Project
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Owner
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Due Date
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
+            <%= render partial: "todo", collection: @todos, as: :todo, cached: true%>
+          </tbody>
+        </table>
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+        </div>
+      </div>
+    <% else %>
+      <%= render partial: "shared/no_result_found", cached: true%>
+    <% end  %>
+  </div>
+</div>

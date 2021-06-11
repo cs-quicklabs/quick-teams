@@ -7,5 +7,9 @@ class Todo < ApplicationRecord
 
   validates_presence_of :user, :title, :deadline
 
-  scope :pending, -> { where(completed: false).order(deadline: :asc) }
+  scope :pending, -> { where(completed: false) }
+  scope :finished, -> { where(completed: true) }
+  scope :order_by_deadline, -> { order(deadline: :desc) }
+  scope :order_by_created, -> { order(created_at: :desc) }
+  scope :order_by_updated, -> { order(updated_at: :desc) }
 end
