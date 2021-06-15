@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_133004) do
+ActiveRecord::Schema.define(version: 2021_06_15_131728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "abouts", force: :cascade do |t|
+    t.string "email"
+    t.string "description"
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_abouts_on_project_id"
+    t.index ["user_id"], name: "index_abouts_on_user_id"
+  end
 
   create_table "accounts", force: :cascade do |t|
     t.string "name"
@@ -79,6 +90,16 @@ ActiveRecord::Schema.define(version: 2021_06_04_133004) do
     t.integer "status", default: 0, null: false
     t.index ["goal_id"], name: "index_comments_on_goal_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "crono_jobs", force: :cascade do |t|
+    t.string "job_id", null: false
+    t.text "log"
+    t.datetime "last_performed_at"
+    t.boolean "healthy"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_id"], name: "index_crono_jobs_on_job_id", unique: true
   end
 
   create_table "disciplines", force: :cascade do |t|
@@ -204,7 +225,7 @@ ActiveRecord::Schema.define(version: 2021_06_04_133004) do
     t.bigint "discipline_id"
     t.string "description"
     t.boolean "archived", default: false
-    t.date "archived_on"
+    t.datetime "archived_on"
     t.bigint "status_id"
     t.boolean "billable", default: true
     t.decimal "billable_resources", precision: 4, scale: 2
@@ -308,7 +329,7 @@ ActiveRecord::Schema.define(version: 2021_06_04_133004) do
     t.integer "job_id", null: false
     t.bigint "manager_id"
     t.boolean "active", default: true, null: false
-    t.date "deactivated_on"
+    t.datetime "deactivated_on"
     t.bigint "status_id"
     t.integer "permission", default: 0, null: false
     t.string "invitation_token"
@@ -343,6 +364,8 @@ ActiveRecord::Schema.define(version: 2021_06_04_133004) do
     t.index ["status_id"], name: "index_users_on_status_id"
   end
 
+  add_foreign_key "abouts", "projects"
+  add_foreign_key "abouts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", name: "active_storage_attachments_blob_id_fkey"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"

@@ -6,7 +6,7 @@ class Project::NotesController < Project::BaseController
 
     @note = Note.new
     @pagy, @notes = pagy_nil_safe(@project.notes.includes(:user).order(created_at: :desc), items: LIMIT)
-    render_partial("project/notes/note", collection: @notes) if stale?(@notes)
+    render_partial("project/notes/note", collection: @notes) if stale?(@notes + [@project]) 
   end
 
   def destroy

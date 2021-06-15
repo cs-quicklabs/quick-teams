@@ -8,7 +8,7 @@ class Employee::SchedulesController < Employee::BaseController
     @schedule = Schedule.new
     @schedules = Schedule.where(user: @employee).includes(:project, :user).order(created_at: :desc)
 
-    fresh_when @schedules
+    fresh_when @schedules + [@employee]
   end
 
   def update

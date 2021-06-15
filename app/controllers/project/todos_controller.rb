@@ -6,7 +6,7 @@ class Project::TodosController < Project::BaseController
 
     @todo = Todo.new
     @pagy, @todos = pagy_nil_safe(@project.todos.includes({ user: [:role, :job] }).order(created_at: :desc), items: LIMIT)
-    render_partial("project/todos/todo", collection: @todos) if stale?(@todos) and stale?(@project)
+    render_partial("project/todos/todo", collection: @todos) if stale?(@todos + [@project])
   end
 
   def create

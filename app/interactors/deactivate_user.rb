@@ -10,6 +10,8 @@ class DeactivateUser < Patterns::Service
       remove_as_project_manager
       remove_reporting_manager
       clear_schedules
+      discard_goals
+      clear_todos
       deactivate
       add_event
     rescue
@@ -39,8 +41,20 @@ class DeactivateUser < Patterns::Service
 
   def deactivate
     user.active = false
-    user.deactivated_on = Time.now
+    user.deactivated_on = DateTime.now
     user.save!
+  end
+
+  def discard_goals
+    user.goals.pending.each do |goal|
+      params = { user_id: actor.id, goal_id: goal.id, title: "Discarding as employee has been deactivated.", status: "stale" }
+      goal.comments <<  Comment.new(params)
+      goal.update_attribute("status", "discarded")
+    end
+  end
+
+  def clear_todos
+    user.todos.pending.delete_all
   end
 
   def add_event

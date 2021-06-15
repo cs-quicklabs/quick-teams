@@ -21,3 +21,12 @@ three:
   goalable: one
   deadline: 2021-06-30
   account: crownstack
+
+four:
+  title: Some Random Goal third
+  user: regular
+  goalable_type: Project
+  goalable: unarchived
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress

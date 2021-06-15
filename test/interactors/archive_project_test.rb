@@ -23,7 +23,21 @@ class ArchiveProjectTest < ActiveSupport::TestCase
   end
 
   test "can clear schedules" do
+    assert @project.schedules.count != 0
     project = ArchiveProject.call(@project, @actor).result
     assert project.schedules.count == 0
   end
+
+  test "can clear pending todos" do 
+    assert @project.todos.pending.count != 0
+    project = ArchiveProject.call(@project, @actor).result
+    assert project.todos.pending.count == 0
+  end
+
+  test "can discard pending milestones" do 
+    assert @project.milestones.where(status: :progress).count != 0
+    project = ArchiveProject.call(@project, @actor).result
+    assert project.milestones.where(status: :progress).count == 0
+  end
+
 end

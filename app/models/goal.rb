@@ -15,6 +15,7 @@ class Goal < ApplicationRecord
 
   scope :next_90_days, -> { where(deadline: Date.today..90.days.from_now) }
   scope :window_90_days, -> { where(deadline: 45.days.ago..45.days.from_now) }
+  scope :pending, -> { where(status: :progress) }
 
   after_save :set_tags_from_title
 

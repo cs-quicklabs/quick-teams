@@ -6,7 +6,7 @@ class Project::FeedbacksController < Project::BaseController
 
     @feedback = Feedback.new
     @pagy, @feedbacks = pagy_nil_safe(@project.feedbacks.includes(:user).order(created_at: :desc), items: LIMIT)
-    render_partial("project/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks)
+    render_partial("project/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks + [@project])
   end
 
   def create

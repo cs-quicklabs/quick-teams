@@ -6,7 +6,7 @@ class Employee::FeedbacksController < Employee::BaseController
 
     @feedback = Feedback.new
     @pagy, @feedbacks = pagy_nil_safe(employee_feedbacks, items: LIMIT)
-    render_partial("employee/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks)
+    render_partial("employee/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks + [@employee])
   end
 
   def create

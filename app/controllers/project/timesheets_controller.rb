@@ -6,6 +6,6 @@ class Project::TimesheetsController < Project::BaseController
     @pagy, collection = pagy_nil_safe(@project.timesheets.last_30_days.includes(:user).order(date: :desc), items: LIMIT)
     @timesheets = collection.decorate
 
-    render_partial("project/timesheets/timesheet", collection: @timesheets) if stale?(@timesheets)
+    render_partial("project/timesheets/timesheet", collection: @timesheets) if stale?(@timesheets + [@project])
   end
 end

@@ -6,7 +6,7 @@ class Employee::GoalsController < Employee::BaseController
 
     @goal = Goal.new
     @pagy, @goals = pagy_nil_safe(@employee.goals.includes(:user).order(created_at: :desc), items: LIMIT)
-    render_partial("employee/goals/goal", collection: @goals) if stale?(@goals)
+    render_partial("employee/goals/goal", collection: @goals) if stale?(@goals  + [@employee])
   end
 
   def create
