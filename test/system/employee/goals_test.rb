@@ -68,7 +68,9 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can delete a goal" do
     visit page_url
     goal = @employee.goals.first
-    find("li", id: dom_id(goal)).click_link("Delete")
+    page.accept_confirm do
+      find("li", id: dom_id(goal)).click_link("Delete")
+    end
     assert_no_text goal.title
     take_screenshot
   end
@@ -85,6 +87,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     goal = @employee.goals.first
     find("li", id: dom_id(goal)).click_link("Edit")
     title = "Some Random Goal Title Edited"
+    fill_in "", with: title
     fill_in "Title", with: title
     fill_in "goal_deadline", with: Time.now
     fill_in_rich_text_area dom_id(goal), with: "This is some goal Edited"

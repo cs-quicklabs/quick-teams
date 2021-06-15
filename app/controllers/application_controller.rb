@@ -6,6 +6,28 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_token
   rescue_from ActsAsTenant::Errors::NoTenantSet, with: :user_not_authorized
   rescue_from Pundit::NotDefinedError, with: :record_not_found
+  rescue_from ActiveRecord::InvalidForeignKey, with: :show_referenced_alert
+
+  def show_referenced_alert(exception)
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("modal", partial: "shared/modal", locals: { title: "Unable to Delete Record", message: "This record has been associated with other records in system therefore deleting this might result in unexpected behavior. If you want to delete this please make sure all assosications have been removed first.", main_button_visible: false })
+      }
+    end
+  end
+
+  def show_delete_confirmation_alert
+    show_confirmation_alert("Delete Record", "Are you sure you want to delete this record?")
+  end
+
+  def show_confirmation_alert(title, message)
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("modal", partial: "shared/modal", locals: { title: title, message: message, main_button_visible: true  })
+      }
+    end
+
+  end
 
   etag { heroku_version }
 

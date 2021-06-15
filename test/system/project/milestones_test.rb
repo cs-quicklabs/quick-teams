@@ -58,7 +58,9 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can delete a milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("li", id: dom_id(milestone)).click_link("Delete")
+    page.accept_confirm do
+      find("li", id: dom_id(milestone)).click_link("Delete")
+    end
     assert_no_text milestone.title
     take_screenshot
   end

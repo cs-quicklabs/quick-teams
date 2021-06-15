@@ -18,6 +18,6 @@
     <%= timesheet.hours%>
   </td>
   <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-    <%= link_to "Delete", employee_timesheet_path(@employee, timesheet), method: :delete, class: "btn-inline-delete pl-2" %>
+    <%= link_to "Delete", employee_timesheet_path(@employee, timesheet), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
   </td>
 </tr>

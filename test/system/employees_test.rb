@@ -115,7 +115,9 @@ class EmployeesTest < ApplicationSystemTestCase
     visit page_url
     find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
     within "#employee-header" do
-      click_on "Deactivate"
+      page.accept_confirm do
+        click_on "Deactivate"
+      end
     end
     take_screenshot
     assert_selector "p.notice", text: "User has been deactivated."
@@ -127,7 +129,9 @@ class EmployeesTest < ApplicationSystemTestCase
     user = users(:inactive)
     click_on "#{user.first_name} #{user.last_name} #{user.job.name}"
     within "#employee-header" do
-      click_on "Activate"
+      page.accept_confirm do
+        click_on "Activate"
+      end
     end
     take_screenshot
     assert_selector "p.notice", text: "User has been activated."

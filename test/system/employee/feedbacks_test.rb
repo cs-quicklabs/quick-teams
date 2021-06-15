@@ -54,7 +54,9 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
   test "can delete a feedback" do
     visit page_url
     feedback = @employee.feedbacks.first
-    find("li", id: dom_id(feedback)).click_link("Delete")
+    page.accept_confirm do
+      find("li", id: dom_id(feedback)).click_link("Delete")
+    end
     assert_no_text feedback.title
     take_screenshot
   end

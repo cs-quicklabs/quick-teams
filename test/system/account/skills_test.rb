@@ -82,6 +82,7 @@ class SkillsTest < ApplicationSystemTestCase
     assert_selector "li", text: skill.name
     find("li", text: skill.name).click_on("Edit")
     within "turbo-frame#skill_#{skill.id}" do
+      fill_in "skill_name", with: ""
       fill_in "skill_name", with: python.name
       click_on "Save"
       take_screenshot

@@ -61,7 +61,9 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     todo = @employee.todos.first
     display_name = todo.project.name
     assert_text display_name
-    find("tr", id: dom_id(todo)).click_link("Delete")
+    page.accept_confirm do
+      find("tr", id: dom_id(todo)).click_link("Delete")
+    end
     assert_no_selector "tbody#todos", text: todo.title
   end
 

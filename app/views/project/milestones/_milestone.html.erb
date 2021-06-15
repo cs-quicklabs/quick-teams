@@ -17,7 +17,7 @@
         <span class="font-medium text-gray-500"><%= display_created_at(milestone) %></span>
         <%= link_to "Show", project_milestone_path(@project, milestone), class: "btn-inline-edit pl-2" %>
         <%= link_to "Edit", edit_project_milestone_path(@project, milestone), class: "btn-inline-delete pl-2" %>
-        <%= link_to "Delete", project_milestone_path(@project, milestone), method: :delete, class: "btn-inline-delete pl-2" %>
+        <%= link_to "Delete", project_milestone_path(@project, milestone), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
       </div>
     </div>
   </div>

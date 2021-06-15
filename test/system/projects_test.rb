@@ -92,7 +92,9 @@ class ProjectsTest < ApplicationSystemTestCase
     visit page_url
     click_on "#{@project.name} in #{@project.discipline.name}"
     within "#project-header" do
-      click_on "Archive"
+      page.accept_confirm do
+        click_on "Archive"
+      end
     end
     take_screenshot
     assert_selector "p.notice", text: "Project has been archived."
@@ -104,7 +106,9 @@ class ProjectsTest < ApplicationSystemTestCase
     project = projects(:archived)
     click_on "#{project.name} in #{project.discipline.name}"
     within "#project-header" do
-      click_on "Restore"
+      page.accept_confirm do
+        click_on "Restore"
+      end
     end
     take_screenshot
     assert_selector "p.notice", text: "Project has been restored."

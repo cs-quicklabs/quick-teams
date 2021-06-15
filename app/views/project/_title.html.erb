@@ -59,11 +59,11 @@
     </div>
     <% if !project.archived %>
       <div>
-        <%= link_to 'Archive', archive_project_path(project), class:" ml-4 btn-normal" %>
+        <%= link_to 'Archive', archive_project_path(project), class:" ml-4 btn-normal", data: { confirm: "Are you sure?" } %>
       </div>
     <% else %>
       <div>
-        <%= link_to 'Restore', unarchive_project_path(project), class:" ml-4 btn-normal" %>
+        <%= link_to 'Restore', unarchive_project_path(project), class:" ml-4 btn-normal", data: { confirm: "Are you sure?" } %>
       </div>
     <% end %>
   </div>

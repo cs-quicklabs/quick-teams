@@ -59,7 +59,9 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
       visit page_url
       timesheet = @employee.timesheets.last_30_days.order(date: :desc).first
       assert_text timesheet.description
-      find("tr", id: dom_id(timesheet)).click_link("Delete")
+      page.accept_confirm do
+        find("tr", id: dom_id(timesheet)).click_link("Delete")
+      end
       assert_no_selector "tbody#timesheets", text: timesheet.description
     end
   end
