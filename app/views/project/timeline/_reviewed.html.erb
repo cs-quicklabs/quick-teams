@@ -16,7 +16,7 @@
               which does not exist anymore.
             <% else %>
               titled
-              <a href="<%= project_feedback_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.title%></a>
+              <a href="<%= project_feedback_path(event.eventable, event.trackable)%>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title)%></a>
             <% end %>
           </p>
         </div>
