@@ -33,7 +33,7 @@ class AddEmployeeGoal < Patterns::Service
   end
 
   def deliver_email?
-    (actor != employee) and employee.email_enabled and employee.account.email_enabled
+    (actor != employee) and employee.email_enabled and employee.account.email_enabled and employee.sign_in_count > 0
   end
 
   attr_reader :employee, :goal, :actor

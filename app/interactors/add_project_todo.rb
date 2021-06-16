@@ -29,7 +29,7 @@ class AddProjectTodo < Patterns::Service
   end
 
   def deliver_email?
-    actor != todo.owner and todo.owner.email_enabled and todo.owner.account.email_enabled
+    actor != todo.owner and todo.owner.email_enabled and todo.owner.account.email_enabled and todo.owner.sign_in_count > 0
   end
 
   attr_reader :project, :todo, :actor, :params

@@ -15,6 +15,6 @@ class TodoReflex < ApplicationReflex
   end
 
   def deliver_email?(todo)
-    todo.completed and todo.user.email_enabled and todo.user.account.email_enabled
+    todo.completed and todo.user.email_enabled and todo.user.account.email_enabled and todo.user.sign_in_count > 0
   end
 end

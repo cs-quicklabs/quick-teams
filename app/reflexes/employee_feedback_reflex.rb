@@ -13,6 +13,6 @@ class EmployeeFeedbackReflex < ApplicationReflex
   end
 
   def deliver_email?(employee)
-    employee.email_enabled and employee.account.email_enabled
+    employee.email_enabled and employee.account.email_enabled and employee.sign_in_count > 0
   end
 end
