@@ -61,4 +61,8 @@ class User < ApplicationRecord
     return [] if params.empty?
     EmployeeQuery.new(self.includes(:job, :role, :manager, :discipline), params).filter
   end
+
+  def active_for_authentication?
+    super and active
+  end
 end
