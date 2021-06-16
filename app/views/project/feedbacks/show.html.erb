@@ -12,10 +12,10 @@
           </div>
           <div>
             <div class="text-sm">
-              <a href="#" class="font-medium text-gray-900"><%= @feedback.user.decorate.display_name%></a>
+              <a href="<%= project_feedbacks_path(@project) %>" class="font-medium text-gray-900 hover:underline"><%= @feedback.critiquable.name%></a>
             </div>
             <div class="mt-1 space-x-2 text-sm">
-              <span class="font-medium text-gray-500"><%= display_created_at(@feedback) %></span>
+              <span class="font-medium text-gray-500">Created By <%= @feedback.user.decorate.display_name%> on <%= display_created_at(@feedback) %></span>
             </div>
           </div>
         </div>
