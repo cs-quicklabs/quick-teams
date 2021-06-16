@@ -31,4 +31,8 @@ module ApplicationHelper
   def auto_link_urls_in_text(text)
     auto_link(text, html: { class: "text-indigo-700 hover:underline", target: "_blank" })
   end
+
+  def login_options
+    @redirect_path ? {redirect_to: @redirect_path} : {}
+  end
 end

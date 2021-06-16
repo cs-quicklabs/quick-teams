@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotDefinedError, with: :record_not_found
   rescue_from ActiveRecord::InvalidForeignKey, with: :show_referenced_alert
 
+  before_action :set_redirect_path, unless: :user_signed_in?
+
+  def set_redirect_path
+    @redirect_path = request.path
+  end
+
   def show_referenced_alert(exception)
     respond_to do |format|
       format.turbo_stream {
@@ -40,7 +46,13 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    landing_path
+    if params[:redirect_to].present?
+      store_location_for(resource, params[:redirect_to])
+    elsif request.referer == new_user_session_url
+      super
+    else
+      landing_path
+    end
   end
 
   def after_sign_out_path_for(resource)
