@@ -3,7 +3,7 @@
     <%= tailwind_form_with(model: @goal, id: dom_id(@goal), url: employee_goal_path(@employee, @goal), method: :patch) do |form| %>
       <main class="w-full px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
         <%= render "shared/form_messages", resource: @goal, message: local_assigns[:message] %>
-        <%= render "shared/form_header", title: "Edit Goal", subtitle: "A goal is created with mutual understanding with employee. Please make sure you are not changing goal without invloving your team mate." %>
+        <%= render "shared/form_header", title: "Edit Goal for #{ @employee.decorate.display_name}", subtitle: "A goal is created with mutual understanding with employee. Please make sure you are not changing goal without invloving your team mate." %>
         <%= form.text_field :title, "Title", autocomplete: "off"%>
         <div>
           <label for="date" class="block text-sm font-medium text-gray-700">

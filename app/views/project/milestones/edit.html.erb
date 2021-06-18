@@ -3,7 +3,7 @@
     <%= tailwind_form_with(model: @milestone, id: dom_id(@milestone), url: project_milestone_path(@project, @milestone), method: :patch) do |form| %>
       <main class="w-full px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
         <%= render "shared/form_messages", resource: @milestone, message: local_assigns[:message] %>
-        <%= render "shared/form_header", title: "Edit Milestone", subtitle: "Edit details of Milestone" %>
+        <%= render "shared/form_header", title: "Edit Milestone for #{ @project.name }", subtitle: "Edit details of Milestone" %>
         <%= form.text_field :title, "Title", autocomplete: "off"%>
         <div>
           <label for="date" class="block text-sm font-medium text-gray-700">
