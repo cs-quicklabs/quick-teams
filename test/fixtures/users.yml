@@ -12,6 +12,7 @@ regular:
   status: deployed
   people_tags: star
   confirmed_at: 2021-03-18
+  sign_in_count: 1
 
 actor:
   first_name: Rachita
@@ -24,6 +25,7 @@ actor:
   discipline: engineering
   confirmed_at: 2021-03-18
   permission: admin
+  sign_in_count: 1
 
 abram:
   first_name: Abram
@@ -63,7 +65,7 @@ active:
   confirmed_at: 2021-03-18
 
 one:
-  first_name: One Active
+  first_name: AAAOne Active
   last_name: User
   active: true
   email: one@crownstack.com
@@ -182,7 +184,6 @@ ten:
   manager: regular
   confirmed_at: 2021-03-18
 
-
 admin:
   first_name: Aashish
   last_name: Dhawan (Admin)
@@ -200,7 +201,7 @@ admin:
   confirmed_at: 2021-03-18
 
 owner:
-  first_name: Aashish
+  first_name: OAashish
   last_name: Dhawan (Admin)
   active: true
   email: owner@crownstack.com
@@ -214,7 +215,6 @@ owner:
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   confirmed_at: 2021-03-18
-
 
 lead:
   first_name: Aashish

@@ -38,7 +38,7 @@ class ClientsTest < ApplicationSystemTestCase
     visit page_url
     click_on "Save"
     take_screenshot
-    assert_text "Name can't be blank"
+    assert_selector "div#error_explanation", text: "Name can't be blank"
   end
 
   test "can not add a duplicate client email" do

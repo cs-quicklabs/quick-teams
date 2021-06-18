@@ -49,7 +49,7 @@ class ProjectNotesTest < ApplicationSystemTestCase
     note = @project.notes.first
     assert_text note.body
     page.accept_confirm do
-      find("li", id: dom_id(note)).click_link("Delete")
+      find("turbo-frame", id: dom_id(note)).click_link("Delete")
     end
     assert_no_text note.body
     take_screenshot
