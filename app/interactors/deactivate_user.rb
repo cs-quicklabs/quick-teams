@@ -24,11 +24,11 @@ class DeactivateUser < Patterns::Service
   private
 
   def remove_as_people_manager
-    user.subordinates.update_all(manager_id: nil, updated_at: DateTime.now)
+    user.subordinates.update_all(manager_id: nil, updated_at: DateTime.now.utc)
   end
 
   def remove_as_project_manager
-    Project.where(manager_id: user.id).update_all(manager_id: nil, updated_at: DateTime.now)
+    Project.where(manager_id: user.id).update_all(manager_id: nil, updated_at: DateTime.now.utc)
   end
 
   def remove_reporting_manager
@@ -41,14 +41,14 @@ class DeactivateUser < Patterns::Service
 
   def deactivate
     user.active = false
-    user.deactivated_on = DateTime.now
+    user.deactivated_on = DateTime.now.utc
     user.save!
   end
 
   def discard_goals
     user.goals.pending.each do |goal|
       params = { user_id: actor.id, goal_id: goal.id, title: "Discarding as employee has been deactivated.", status: "stale" }
-      goal.comments <<  Comment.new(params)
+      goal.comments << Comment.new(params)
       goal.update_attribute("status", "discarded")
     end
   end
