@@ -4,12 +4,18 @@
     <h2 class="sr-only" id="section-1-title">Project Participants</h2>
     <div class="overflow-hidden bg-white">
       <div class="p-4">
-        <div class="flex flex-wrap">
-          <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Team Members(" + @subordinates.load.size.to_s + ")"%></p>
-        </div>
-        <ul class="divide-y divide-gray-200">
-          <%= render partial: "employee/team/employee", collection: @subordinates, as: :employee, cached: true%>
-        </ul>
+          <% if @subordinates.empty? %>
+              <div class="flex items-center content-center justify-center my-8 text-base italic text-gray-900">
+                  No result found.
+                </div>
+          <% else %>
+           <div class="flex flex-wrap">
+            <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Team Members(" + @subordinates.load.size.to_s + ")"%></p>
+          </div>
+          <ul class="divide-y divide-gray-200">
+            <%= render partial: "employee/team/employee", collection: @subordinates, as: :employee, cached: true%>
+          </ul>
+         <% end %>
       </div>
     </div>
   </div>

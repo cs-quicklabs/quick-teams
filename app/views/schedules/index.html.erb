@@ -37,8 +37,8 @@
         </div>
       </div>
     </div>
-    <% if @employees.size > 0 %>
-      <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+    <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+      <% if @employees.size > 0 %>
         <table class="min-w-full pb-6 divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -60,7 +60,11 @@
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
           <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
         </div>
+      <% else %>
+      <div class="flex items-center content-center justify-center my-8 text-base italic text-gray-900">
+            No result found.
       </div>
     <% end %>
+    </div>
   </div>
 </div>

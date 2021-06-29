@@ -10,12 +10,18 @@
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
               <div class="p-4", id="project-participants">
+              <% if @schedules.empty? %>
+                <div class="flex items-center content-center justify-center my-8 text-base italic text-gray-900">
+                  No result found.
+                </div>
+              <% else %>
                 <div class="flex flex-wrap">
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Employee Schedules (" + @schedules.load.size.to_s + ")"%></p>
                 </div>
                 <ul class="divide-y divide-gray-200" id="schedules">
                   <%= render partial: "employee/schedules/schedule", collection: @schedules, cached: true%>
                 </ul>
+                <% end %>
               </div>
             </div>
           </section>
