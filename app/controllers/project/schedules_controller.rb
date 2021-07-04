@@ -61,6 +61,6 @@ class Project::SchedulesController < Project::BaseController
   end
 
   def schedule_params
-    params.require(:schedule).permit(:user_id, :starts_at, :discipline_id, :ends_at, :occupancy)
+    params.require(:schedule).permit(:user_id, :starts_at, :discipline_id, :ends_at, :occupancy, :billable)
   end
 end
