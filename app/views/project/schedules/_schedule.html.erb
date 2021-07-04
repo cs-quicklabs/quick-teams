@@ -6,7 +6,7 @@
         <div class="flex-shrink-0">
           <%= image_tag "male-placeholder-image.png", class: "w-12 h-12 rounded-full"%>
         </div>
-        <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4">
+        <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-4 md:gap-4">
           <a href="<%= employee_schedules_path(schedule.user)%>" class="block hover:underline" target="_top">
             <div>
               <p class="text-sm font-medium text-gray-900 truncate">
@@ -22,6 +22,19 @@
               </p>
             </div>
           </a>
+           <div>
+              <p class="text-sm font-medium text-gray-900 truncate">
+                <% if schedule.billable? %>
+                  <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full">
+                    Billable 
+                  </span>
+                <% else %>
+                <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full">
+                     Non-Billable 
+                  </span>
+                  <% end %>
+              </p>
+            </div>
           <div class="flex">
             <div class="whitespace-nowrap">
               <div class="text-sm text-gray-700"><%= schedule.display_occupancy %></div>
