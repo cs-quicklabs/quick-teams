@@ -48,7 +48,7 @@
           <div class="flex">
             <div class="whitespace-nowrap">
               <div class="text-sm text-gray-900"><%= link_to "Edit", edit_project_schedule_path(@project, schedule), class: "btn-inline-edit" %></div>
-              <div class="text-sm text-gray-900"><%= link_to "Delete", [@project, schedule], method: :delete, class: "btn-inline-delete" %></div>
+              <div class="text-sm text-gray-900"><%= link_to "Delete", [@project, schedule], method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?"} %></div>
             </div>
           </div>
         </div>
