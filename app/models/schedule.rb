@@ -7,6 +7,12 @@ class Schedule < ApplicationRecord
 
   validates :occupancy, inclusion: { in: 0..100, message: "should be less than equal to 100%" }
   validate :end_date_cannot_be_in_the_past
+  validates :billable, inclusion: { in: [true, false]}
+
+  SCHEDULE_OPTIONS = [
+    ['Billable', 'true'], 
+    ['Non-Billable','false']
+  ]
 
   def end_date_cannot_be_in_the_past
     return if ends_at.blank? || starts_at.blank?
@@ -15,9 +21,4 @@ class Schedule < ApplicationRecord
       errors.add(:ends_at, "cannot be before the start date")
     end
   end
-  validates :billable, inclusion: { in: [true, false]}
-  SCHEDULE_OPTIONS = [
-    ['Billable', 'true'], 
-    ['Non-billable','false']
-  ]
 end

@@ -92,16 +92,6 @@ ActiveRecord::Schema.define(version: 2021_06_30_140455) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "crono_jobs", force: :cascade do |t|
-    t.string "job_id", null: false
-    t.text "log"
-    t.datetime "last_performed_at"
-    t.boolean "healthy"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["job_id"], name: "index_crono_jobs_on_job_id", unique: true
-  end
-
   create_table "disciplines", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
@@ -251,7 +241,7 @@ ActiveRecord::Schema.define(version: 2021_06_30_140455) do
     t.date "starts_at"
     t.date "ends_at"
     t.integer "occupancy"
-    t.boolean "billable"
+    t.boolean "billable", default: true
     t.index ["project_id"], name: "index_schedules_on_project_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end

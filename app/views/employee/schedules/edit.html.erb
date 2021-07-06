@@ -8,12 +8,6 @@
       <div class="flex pt-2 pb-4 border-b border-gray-200">
         <div class="flex w-full ml-3">
           <div class="w-full">
-              <label for="billable" class="block text-sm font-medium text-gray-700">
-                  Billable
-                </label>
-                <%= form.select :billable, Schedule::SCHEDULE_OPTIONS ,{}, class:'form-text-field mt-1' %>
-          </div>
-          <div class="w-full ml-4">
             <label for="starts" class="block text-sm font-medium text-gray-700">
               Starts At
             </label>
@@ -31,6 +25,12 @@
               Occupancy(%)
             </label>
             <%= form.text_field :occupancy, class: "form-text-field mt-1", autocomplete: "off"%>
+          </div>
+          <div class="w-full ml-4">
+            <label for="billable" class="block text-sm font-medium text-gray-700">
+              Billable
+            </label>
+            <%= form.select :billable, Schedule::SCHEDULE_OPTIONS ,{}, class:'form-text-field mt-1' %>
           </div>
           <div class="content-end">
             <%= form.submit "Save", class:"btn-blue ml-3 cursor-pointer mt-6"%>
