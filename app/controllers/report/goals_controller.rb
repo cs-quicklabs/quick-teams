@@ -6,7 +6,7 @@ class Report::GoalsController < Report::BaseController
     @stats = GoalsStats.new(entries)
 
     @pagy, @goals = pagy_nil_safe(entries, items: LIMIT)
-    render_partial("report/goals/goal", collection: @goals.includes(:goalable).decorate, cached: false)
+    render_partial("report/goals/goal", collection: @goals.empty? ? @goals : @goals.includes(:goalable).decorate, cached: false)
   end
 
   private
