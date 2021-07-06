@@ -10,6 +10,7 @@ class UpdateSchedule < Patterns::Service
   def call
     begin
       update_schedule
+      update_billable_resources
       add_event
       send_email
     rescue
@@ -25,6 +26,18 @@ class UpdateSchedule < Patterns::Service
     schedule.project = @project
     schedule.user = @employee
     schedule.save!
+  end
+
+  def update_billable_resources
+    project.billable_resources = billable_resources
+    project.save!
+  end
+
+  def billable_resources
+    project.schedules.reduce(0.0) do |sum, schedule|
+      sum += schedule.billable ? (schedule.occupancy/100.0) : 0
+      sum
+    end
   end
 
   def add_event
