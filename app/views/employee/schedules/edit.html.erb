@@ -26,12 +26,23 @@
             </label>
             <%= form.text_field :occupancy, class: "form-text-field mt-1", autocomplete: "off"%>
           </div>
-          <div class="w-full ml-4">
-            <label for="billable" class="block text-sm font-medium text-gray-700">
-              Billable
-            </label>
-            <%= form.select :billable, Schedule::SCHEDULE_OPTIONS ,{}, class:'form-text-field mt-1' %>
-          </div>
+          <% if @schedule.project.billable %>
+            <div class="w-full ml-4">
+              <label for="billable" class="block text-sm font-medium text-gray-700">
+                Billable
+              </label>
+              <%= form.select :billable, Schedule::SCHEDULE_OPTIONS ,{}, class:'form-text-field mt-1' %>
+            </div>
+          <% else  %>
+            <div class="w-full ml-4">
+              <label for="billable" class="block text-sm font-medium text-gray-700">
+                Billable
+              </label>
+              <label for="billable" class="block text-xs font-medium text-gray-500">
+                Project is non billable hence this schedule is non-billable as well.
+              </label>
+            </div>
+          <% end  %>
           <div class="content-end">
             <%= form.submit "Save", class:"btn-blue ml-3 cursor-pointer mt-6"%>
           </div>

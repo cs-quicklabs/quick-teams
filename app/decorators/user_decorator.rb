@@ -42,7 +42,7 @@ class UserDecorator < Draper::Decorator
   def overall_occupancy
     overall_occupancy = 0
     schedules.each do |schedule|
-      overall_occupancy += schedule.occupancy if schedule.ends_at.to_date.future? and schedule.project.billable
+      overall_occupancy += schedule.occupancy if schedule.billable and schedule.project.billable and schedule.ends_at.to_date.future?
     end
     overall_occupancy
   end
