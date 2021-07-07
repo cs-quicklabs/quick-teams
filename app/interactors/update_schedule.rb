@@ -39,7 +39,7 @@ class UpdateSchedule < Patterns::Service
 
   def billable_resources
     project.schedules.reduce(0.0) do |sum, schedule|
-      sum += schedule.billable ? (schedule.occupancy / 100.0) : 0
+      sum += schedule.billable ? (schedule.occupancy / 100.0) : 0.0
       sum
     end
   end
