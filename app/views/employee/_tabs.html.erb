@@ -46,6 +46,11 @@
             Timesheets
           </a>
         <% end %>
+        <% if policy(employee).show_skills? %>
+          <a href="<%= employee_skills_path %>" class="<%= current_page?(employee_skills_path) ? "selected-tab" : "unselected-tab"%>">
+            Skills
+          </a>
+        <% end %>
       </nav>
     </div>
   </div>

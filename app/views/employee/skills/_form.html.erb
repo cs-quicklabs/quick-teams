@@ -1,0 +1,7 @@
+<%= tailwind_form_with(model: skill, id: dom_id(skill), url: employee_skills_path(@employee)) do |form| %>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: skill, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New Skill", subtitle: "" %>
+    <%= form.text_field :skill, "Search Skills to add", autocomplete: "off"%>
+  </main>
+<% end %>

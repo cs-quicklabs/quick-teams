@@ -64,6 +64,14 @@ class UserPolicy < ApplicationPolicy
     false
   end
 
+  def create_skill?
+    true
+  end
+
+  def show_skills?
+    true
+  end
+
   def profile?
     true
   end
