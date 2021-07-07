@@ -73,7 +73,9 @@ class EmployeeScheduleTest < ApplicationSystemTestCase
     schedule = @employee.schedules.first
     display_name = schedule.project.name
     assert_text display_name
-    find("turbo-frame", id: dom_id(schedule)).click_link("Delete")
+    page.accept_confirm do
+      find("turbo-frame", id: dom_id(schedule)).click_link("Delete")
+    end
     within "#project-participants" do
       assert_no_text display_name
     end
