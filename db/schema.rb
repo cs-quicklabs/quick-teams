@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_131728) do
+ActiveRecord::Schema.define(version: 2021_06_30_140455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,16 +90,6 @@ ActiveRecord::Schema.define(version: 2021_06_15_131728) do
     t.integer "status", default: 0, null: false
     t.index ["goal_id"], name: "index_comments_on_goal_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "crono_jobs", force: :cascade do |t|
-    t.string "job_id", null: false
-    t.text "log"
-    t.datetime "last_performed_at"
-    t.boolean "healthy"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["job_id"], name: "index_crono_jobs_on_job_id", unique: true
   end
 
   create_table "disciplines", force: :cascade do |t|
@@ -251,6 +241,7 @@ ActiveRecord::Schema.define(version: 2021_06_15_131728) do
     t.date "starts_at"
     t.date "ends_at"
     t.integer "occupancy"
+    t.boolean "billable", default: true
     t.index ["project_id"], name: "index_schedules_on_project_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end

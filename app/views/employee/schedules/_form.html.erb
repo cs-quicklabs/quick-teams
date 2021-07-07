@@ -2,27 +2,33 @@
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Schedule For New Project", subtitle: "Select project and occupancy details" %>
-    <%= form.collection_select(:project_id, ProjectDecorator.decorate_collection(@employee.potential_projects.order(:name)), :id, :name, {:prompt => 'Select Project'}, :selected => schedule.project_id, :class=>"form-text-field mt-4" )%>
+    <%= form.collection_select(:project_id, ProjectDecorator.decorate_collection(@employee.potential_projects.order(:name)), :id, :name, { :prompt => "Select Project" }, :selected => schedule.project_id, :class => "form-text-field mt-4") %>
     <div>
       <label for="starts" class="block text-sm font-medium text-gray-700">
         Starts At
       </label>
-      <%= form.date_field :starts_at, class: 'form-text-field mt-1' %>
+      <%= form.date_field :starts_at, class: "form-text-field mt-1" %>
     </div>
     <div>
       <label for="ends" class="block text-sm font-medium text-gray-700">
         Ends At
       </label>
-      <%= form.date_field :ends_at, class: 'form-text-field mt-1' %>
+      <%= form.date_field :ends_at, class: "form-text-field mt-1" %>
     </div>
     <div>
       <label for="occupancy" class="block text-sm font-medium text-gray-700">
         Occupancy (%)
       </label>
-      <%= form.text_field :occupancy, class: 'form-text-field mt-1', placeholder: "1 to 100 percent", autocomplete: "off"%>
+      <%= form.text_field :occupancy, class: "form-text-field mt-1", placeholder: "1 to 100 percent", autocomplete: "off" %>
+    </div>
+    <div>
+      <label for="billable" class="block text-sm font-medium text-gray-700">
+        Billable
+      </label>
+      <%= form.select :billable, Schedule::SCHEDULE_OPTIONS, {}, class: "form-text-field mt-1" %>
     </div>
     <div class="flex justify-end mt-6">
-      <%= form.submit "Add Schedule", class:"btn-blue cursor-pointer"%>
+      <%= form.submit "Add Schedule", class: "btn-blue cursor-pointer" %>
     </div>
   </main>
 <% end %>
