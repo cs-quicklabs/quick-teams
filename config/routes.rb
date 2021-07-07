@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :timesheets, module: "project"
     resources :milestones, module: "project"
     resources :todos, module: "project"
+    resources :skills, module: "project"
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
 
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
     resources :timesheets, module: "employee"
     resources :goals, module: "employee"
     resources :todos, module: "employee"
+    resources :skills, module: "employee"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
   end
