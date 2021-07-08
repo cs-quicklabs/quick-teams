@@ -1,263 +1,264 @@
-import { Controller } from "stimulus"
+import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ["input", "hidden", "results"]
-  static values = {
-    submitOnEnter: Boolean,
-    url: String,
-    minLength: Number
-  }
-
-  connect() {
-    this.resultsTarget.hidden = true
-
-    this.inputTarget.setAttribute("autocomplete", "off")
-    this.inputTarget.setAttribute("spellcheck", "false")
-
-    this.mouseDown = false
-
-    this.onInputChange = this.onInputChange.bind(this)
-    this.onResultsClick = this.onResultsClick.bind(this)
-    this.onResultsMouseDown = this.onResultsMouseDown.bind(this)
-    this.onInputBlur = this.onInputBlur.bind(this)
-    this.onKeydown = this.onKeydown.bind(this)
-
-    this.inputTarget.addEventListener("keydown", this.onKeydown)
-    this.inputTarget.addEventListener("blur", this.onInputBlur)
-    this.inputTarget.addEventListener("input", this.onInputChange)
-    this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown)
-    this.resultsTarget.addEventListener("click", this.onResultsClick)
-
-    if (typeof this.inputTarget.getAttribute("autofocus") === "string") {
-      this.inputTarget.focus()
+    static targets = ['input', 'hidden', 'results']
+    static values = {
+        submitOnEnter: Boolean,
+        url: String,
+        minLength: Number
     }
 
-    let element = document.querySelector("meta[name='current-account']")
-    if (element == null) return
-    this.current_account = element.getAttribute("content")
+    connect() {
+        this.resultsTarget.hidden = true
 
-  }
+        this.inputTarget.setAttribute('autocomplete', 'off')
+        this.inputTarget.setAttribute('spellcheck', 'false')
 
-  disconnect() {
-    if (this.hasInputTarget) {
-      this.inputTarget.removeEventListener("keydown", this.onKeydown)
-      this.inputTarget.removeEventListener("focus", this.onInputFocus)
-      this.inputTarget.removeEventListener("blur", this.onInputBlur)
-      this.inputTarget.removeEventListener("input", this.onInputChange)
-    }
-    if (this.hasResultsTarget) {
-      this.resultsTarget.removeEventListener(
-        "mousedown",
-        this.onResultsMouseDown
-      )
-      this.resultsTarget.removeEventListener("click", this.onResultsClick)
-    }
-  }
+        this.mouseDown = false
 
-  sibling(next) {
-    const options = Array.from(
-      this.resultsTarget.querySelectorAll(
-        '[role="option"]:not([aria-disabled])'
-      )
-    )
-    const selected = this.resultsTarget.querySelector('[aria-selected="true"]')
-    const index = options.indexOf(selected)
-    const sibling = next ? options[index + 1] : options[index - 1]
-    const def = next ? options[0] : options[options.length - 1]
-    return sibling || def
-  }
+        this.onInputChange = this.onInputChange.bind(this)
+        this.onResultsClick = this.onResultsClick.bind(this)
+        this.onResultsMouseDown = this.onResultsMouseDown.bind(this)
+        this.onInputBlur = this.onInputBlur.bind(this)
+        this.onKeydown = this.onKeydown.bind(this)
 
-  select(target) {
-    for (const el of this.resultsTarget.querySelectorAll(
-      '[aria-selected="true"]'
-    )) {
-      el.removeAttribute("aria-selected")
-      el.classList.remove("active")
-    }
-    target.setAttribute("aria-selected", "true")
-    target.classList.add("active")
-    this.inputTarget.setAttribute("aria-activedescendant", target.id)
-    target.scrollIntoView(false)
-  }
+        this.inputTarget.addEventListener('keydown', this.onKeydown)
+        this.inputTarget.addEventListener('blur', this.onInputBlur)
+        this.inputTarget.addEventListener('input', this.onInputChange)
+        this.resultsTarget.addEventListener('mousedown', this.onResultsMouseDown)
+        this.resultsTarget.addEventListener('click', this.onResultsClick)
 
-  onKeydown(event) {
-    switch (event.key) {
-      case "Escape":
-        if (!this.resultsTarget.hidden) {
-          this.hideAndRemoveOptions()
-          event.stopPropagation()
-          event.preventDefault()
+        if (typeof this.inputTarget.getAttribute('autofocus') === 'string') {
+            this.inputTarget.focus()
         }
-        break
-      case "ArrowDown":
-        {
-          const item = this.sibling(true)
-          if (item) this.select(item)
-          event.preventDefault()
+
+        let element = document.querySelector("meta[name='current-account']")
+        if (element == null) return
+        this.current_account = element.getAttribute('content')
+    }
+
+    disconnect() {
+        if (this.hasInputTarget) {
+            this.inputTarget.removeEventListener('keydown', this.onKeydown)
+            this.inputTarget.removeEventListener('focus', this.onInputFocus)
+            this.inputTarget.removeEventListener('blur', this.onInputBlur)
+            this.inputTarget.removeEventListener('input', this.onInputChange)
         }
-        break
-      case "ArrowUp":
-        {
-          const item = this.sibling(false)
-          if (item) this.select(item)
-          event.preventDefault()
+        if (this.hasResultsTarget) {
+            this.resultsTarget.removeEventListener(
+                'mousedown',
+                this.onResultsMouseDown
+            )
+            this.resultsTarget.removeEventListener('click', this.onResultsClick)
         }
-        break
-      case "Tab":
-        {
-          const selected = this.resultsTarget.querySelector(
-            '[aria-selected="true"]'
-          )
-          if (selected) {
-            this.commit(selected)
-          }
+    }
+
+    sibling(next) {
+        const options = Array.from(
+            this.resultsTarget.querySelectorAll(
+                '[role="option"]:not([aria-disabled])'
+            )
+        )
+        const selected = this.resultsTarget.querySelector('[aria-selected="true"]')
+        const index = options.indexOf(selected)
+        const sibling = next ? options[index + 1] : options[index - 1]
+        const def = next ? options[0] : options[options.length - 1]
+        return sibling || def
+    }
+
+    select(target) {
+        for (const el of this.resultsTarget.querySelectorAll(
+                '[aria-selected="true"]'
+            )) {
+            el.removeAttribute('aria-selected')
+            el.classList.remove('active')
         }
-        break
-      case "Enter":
-        {
-          const selected = this.resultsTarget.querySelector(
-            '[aria-selected="true"]'
-          )
-          if (selected && !this.resultsTarget.hidden) {
-            this.commit(selected)
-            if (!this.hasSubmitOnEnterValue) {
-              event.preventDefault()
-            }
-          }
+        target.setAttribute('aria-selected', 'true')
+        target.classList.add('active')
+        this.inputTarget.setAttribute('aria-activedescendant', target.id)
+        target.scrollIntoView(false)
+    }
+
+    onKeydown(event) {
+        switch (event.key) {
+            case 'Escape':
+                if (!this.resultsTarget.hidden) {
+                    this.hideAndRemoveOptions()
+                    event.stopPropagation()
+                    event.preventDefault()
+                }
+                break
+            case 'ArrowDown':
+                {
+                    const item = this.sibling(true)
+                    if (item) this.select(item)
+                    event.preventDefault()
+                }
+                break
+            case 'ArrowUp':
+                {
+                    const item = this.sibling(false)
+                    if (item) this.select(item)
+                    event.preventDefault()
+                }
+                break
+            case 'Tab':
+                {
+                    const selected = this.resultsTarget.querySelector(
+                        '[aria-selected="true"]'
+                    )
+                    if (selected) {
+                        this.commit(selected)
+                    }
+                }
+                break
+            case 'Enter':
+                {
+                    const selected = this.resultsTarget.querySelector(
+                        '[aria-selected="true"]'
+                    )
+                    if (selected && !this.resultsTarget.hidden) {
+                        this.commit(selected)
+                        if (!this.hasSubmitOnEnterValue) {
+                            event.preventDefault()
+                        }
+                    }
+                }
+                break
         }
-        break
-    }
-  }
-
-  onInputBlur() {
-    if (this.mouseDown) return
-    this.resultsTarget.hidden = true
-  }
-
-  commit(selected) {
-    if (selected.getAttribute("aria-disabled") === "true") return
-
-    if (selected instanceof HTMLAnchorElement) {
-      selected.click()
-      this.resultsTarget.hidden = true
-      return
     }
 
-    const textValue = this.extractTextValue(selected)
-    const value = selected.getAttribute("data-autocomplete-value") || textValue
-    this.inputTarget.value = textValue
-
-    if (this.hasHiddenTarget) {
-      this.hiddenTarget.value = value
-      this.hiddenTarget.dispatchEvent(new Event("input"))
-      this.hiddenTarget.dispatchEvent(new Event("change"))
-    } else {
-      this.inputTarget.value = value
+    onInputBlur() {
+        if (this.mouseDown) return
+        this.resultsTarget.hidden = true
     }
 
-    this.inputTarget.focus()
-    this.hideAndRemoveOptions()
+    commit(selected) {
+        if (selected.getAttribute('aria-disabled') === 'true') return
 
-    this.element.dispatchEvent(
-      new CustomEvent("autocomplete.change", {
-        bubbles: true,
-        detail: { value: value, textValue: textValue }
-      })
-    )
-  }
+        if (selected instanceof HTMLAnchorElement) {
+            selected.click()
+            this.resultsTarget.hidden = true
+            return
+        }
 
-  onResultsClick(event) {
-    if (!(event.target instanceof Element)) return
-    const selected = event.target.closest('[role="option"]')
-    if (selected) this.commit(selected)
-  }
+        const textValue = this.extractTextValue(selected)
+        const value = selected.getAttribute('data-autocomplete-value') || textValue
+        this.inputTarget.value = textValue
 
-  onResultsMouseDown() {
-    this.mouseDown = true
-    this.resultsTarget.addEventListener(
-      "mouseup",
-      () => (this.mouseDown = false),
-      { once: true }
-    )
-  }
+        if (this.hasHiddenTarget) {
+            this.hiddenTarget.value = value
+            this.hiddenTarget.dispatchEvent(new Event('input'))
+            this.hiddenTarget.dispatchEvent(new Event('change'))
+        } else {
+            this.inputTarget.value = value
+        }
 
-  onInputChange() {
-    this.element.removeAttribute("value")
-    this.fetchResults()
-  }
+        this.inputTarget.focus()
+        this.hideAndRemoveOptions()
 
-  identifyOptions() {
-    let id = 0
-    for (const el of this.resultsTarget.querySelectorAll(
-      '[role="option"]:not([id])'
-    )) {
-      el.id = `${this.resultsTarget.id}-option-${id++}`
-    }
-  }
-
-  hideAndRemoveOptions() {
-    this.resultsTarget.hidden = true
-    this.resultsTarget.innerHTML = null
-  }
-
-  fetchResults() {
-    const query = this.inputTarget.value.trim()
-    if (!query || query.length < this.minLengthValue) {
-      this.hideAndRemoveOptions()
-      return
+        this.element.dispatchEvent(
+            new CustomEvent('autocomplete.change', {
+                bubbles: true,
+                detail: { value: value, textValue: textValue }
+            })
+        )
     }
 
-    if (!this.hasUrlValue) return
+    onResultsClick(event) {
+        if (!(event.target instanceof Element)) return
+        const selected = event.target.closest('[role="option"]')
+        if (selected) this.commit(selected)
+    }
 
-    const headers = { "X-Requested-With": "XMLHttpRequest" }
-    const url = new URL(("/" + this.current_account + this.urlValue), window.location.href)
-    const params = new URLSearchParams(url.search.slice(1))
-    params.append("q", query)
-    url.search = params.toString()
+    onResultsMouseDown() {
+        this.mouseDown = true
+        this.resultsTarget.addEventListener(
+            'mouseup',
+            () => (this.mouseDown = false), { once: true }
+        )
+    }
 
-    this.element.dispatchEvent(new CustomEvent("loadstart"))
+    onInputChange() {
+        this.element.removeAttribute('value')
+        this.fetchResults()
+    }
 
-    fetch(url.toString(), { headers })
-      .then(response => response.text())
-      .then(html => {
-        this.resultsTarget.innerHTML = html
-        this.identifyOptions()
-        const hasResults = !!this.resultsTarget.querySelector('[role="option"]')
-        this.resultsTarget.hidden = !hasResults
-        this.element.dispatchEvent(new CustomEvent("load"))
-        this.element.dispatchEvent(new CustomEvent("loadend"))
-      })
-      .catch(() => {
-        this.element.dispatchEvent(new CustomEvent("error"))
-        this.element.dispatchEvent(new CustomEvent("loadend"))
-      })
-  }
+    identifyOptions() {
+        let id = 0
+        for (const el of this.resultsTarget.querySelectorAll(
+                '[role="option"]:not([id])'
+            )) {
+            el.id = `${this.resultsTarget.id}-option-${id++}`
+        }
+    }
 
-  open() {
-    if (!this.resultsTarget.hidden) return
-    this.resultsTarget.hidden = false
-    this.element.setAttribute("aria-expanded", "true")
-    this.element.dispatchEvent(
-      new CustomEvent("toggle", {
-        detail: { input: this.input, results: this.results }
-      })
-    )
-  }
+    hideAndRemoveOptions() {
+        this.resultsTarget.hidden = true
+        this.resultsTarget.innerHTML = null
+    }
 
-  close() {
-    if (this.resultsTarget.hidden) return
-    this.resultsTarget.hidden = true
-    this.inputTarget.removeAttribute("aria-activedescendant")
-    this.element.setAttribute("aria-expanded", "false")
-    this.element.dispatchEvent(
-      new CustomEvent("toggle", {
-        detail: { input: this.input, results: this.results }
-      })
-    )
-  }
+    fetchResults() {
+        const query = this.inputTarget.value.trim()
+        if (!query || query.length < this.minLengthValue) {
+            this.hideAndRemoveOptions()
+            return
+        }
 
-  extractTextValue = el =>
-    el.hasAttribute("data-autocomplete-label")
-      ? el.getAttribute("data-autocomplete-label")
-      : el.textContent.trim()
+        if (!this.hasUrlValue) return
+
+        const headers = { 'X-Requested-With': 'XMLHttpRequest' }
+        const url = new URL(
+            '/' + this.current_account + this.urlValue,
+            window.location.href
+        )
+        const params = new URLSearchParams(url.search.slice(1))
+        params.append('q', query)
+        url.search = params.toString()
+
+        this.element.dispatchEvent(new CustomEvent('loadstart'))
+
+        fetch(url.toString(), { headers })
+            .then(response => response.text())
+            .then(html => {
+                this.resultsTarget.innerHTML = html
+                this.identifyOptions()
+                const hasResults = !!this.resultsTarget.querySelector('[role="option"]')
+                this.resultsTarget.hidden = !hasResults
+                this.element.dispatchEvent(new CustomEvent('load'))
+                this.element.dispatchEvent(new CustomEvent('loadend'))
+            })
+            .catch(() => {
+                this.element.dispatchEvent(new CustomEvent('error'))
+                this.element.dispatchEvent(new CustomEvent('loadend'))
+            })
+    }
+
+    open() {
+        if (!this.resultsTarget.hidden) return
+        this.resultsTarget.hidden = false
+        this.element.setAttribute('aria-expanded', 'true')
+        this.element.dispatchEvent(
+            new CustomEvent('toggle', {
+                detail: { input: this.input, results: this.results }
+            })
+        )
+    }
+
+    close() {
+        if (this.resultsTarget.hidden) return
+        this.resultsTarget.hidden = true
+        this.inputTarget.removeAttribute('aria-activedescendant')
+        this.element.setAttribute('aria-expanded', 'false')
+        this.element.dispatchEvent(
+            new CustomEvent('toggle', {
+                detail: { input: this.input, results: this.results }
+            })
+        )
+    }
+
+    extractTextValue = el =>
+        el.hasAttribute('data-autocomplete-label') ?
+        el.getAttribute('data-autocomplete-label') :
+        el.textContent.trim()
 }

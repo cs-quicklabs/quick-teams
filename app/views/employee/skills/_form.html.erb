@@ -1,21 +1,51 @@
-<%= tailwind_form_with(model: skill, id: dom_id(skill), url: employee_skills_path(@employee)) do |form| %>
-  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
-    <%= render "shared/form_header", title: "Add New Skill", subtitle: "" %>
-    <div class="flex justify-center w-full max-w-sm lg:justify-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/skills?id=<%= @employee.id%>">
-      <div class="w-full max-w-sm lg:max-w-sm">
-        <div>
-          <label for="skill" class="block text-sm font-medium text-gray-700">Search to add new skill</label>
-          <div class="mt-1">
-            <input type="search" name="search" id="search" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" data-nav-search-target="input">
+      <!-- Main 3 column grid -->
+<div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
+  <!-- Left column -->
+  <div class="grid grid-cols-1 gap-4 lg:col-span-2" data-controller="infinite-scroll">
+    <section aria-labelledby="participants_section">
+      <h2 class="sr-only" id="section-1-title">Employee Skills</h2>
+      <div class="overflow-hidden bg-white">
+        <div class="p-4">
+          <div class="flex flex-wrap">
+            <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Employee Skills"%></p>
           </div>
-        </div>
-        <div class="relative">
-          <div class="absolute left-0 z-10 block w-full h-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-            <ul data-nav-search-target="results">
-            </ul>
+          <div id="employee-skills" class="flex ml-4">
+            <%= render partial: "skills", locals: {skills: skills, employee: employee}, cached: true %>
           </div>
         </div>
       </div>
+    </section>
+  </div>
+  <% if policy(employee).create_skill? %>
+    <!-- Right column -->
+    <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+      <section aria-labelledby="add-participant-section">
+        <h2 class="sr-only" id="section-2-title">Add New Skill</h2>
+        <div class="overflow-hidden bg-white">
+          <div class="px-4">
+            <%= tailwind_form_with(model: skill, id: dom_id(skill), url: employee_skills_path(employee)) do |form| %>
+              <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
+                <%= render "shared/form_header", title: "Add New Skill", subtitle: "" %>
+                <div class="flex justify-center w-full max-w-sm lg:justify-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/skills?id=<%= employee.id%>">
+                  <div class="w-full max-w-sm lg:max-w-sm">
+                    <div>
+                      <label for="skill" class="block text-sm font-medium text-gray-700">Search to add new skill</label>
+                      <div class="mt-1">
+                        <input type="search" name="search" id="search" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" data-nav-search-target="input">
+                      </div>
+                    </div>
+                    <div class="relative">
+                      <div class="absolute left-0 z-10 block w-full h-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                        <ul data-nav-search-target="results">
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </main>
+            <% end %>
+          </div>
+        </div>
+      </section>
     </div>
-  </main>
-<% end %>
+  <% end %>
