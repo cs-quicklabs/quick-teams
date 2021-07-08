@@ -51,7 +51,8 @@ Rails.application.routes.draw do
   get "/pricing", to: "static/static#pricing"
 
   get "/schedule", to: "schedules#index", as: "schedules"
-  get :search, controller: :search
+  get "search/people-projects", to: "search#people_projects"
+  get "/search/skills", to: "search#skills"
   get :goals, controller: :home
   get :events, controller: :home
 

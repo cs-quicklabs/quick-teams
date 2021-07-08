@@ -3,6 +3,6 @@ class Employee::SkillsController < Employee::BaseController
     authorize @employee, :show_skills?
 
     @skill = Skill.new
-    @skills = ["ios", "android", "AWS", "Storyboarding", "Design", "Photoshop", "Music Production", "TDD", "Code Igniter", "Sinatra", "React"]
+    @skills = @employee.skills
   end
 end

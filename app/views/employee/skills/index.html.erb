@@ -15,9 +15,9 @@
                 <div class="flex flex-wrap">
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Employee Skills"%></p>
                 </div>
-                <ul class="space-y-2" id="goals" data-infinite-scroll-target="entries">
-                  <%= render partial: "skill", collection: @skills, cached: true %>
-                </ul>
+                <div id="employee-skills" class="flex ml-4">
+                  <%= render partial: "skills", locals: {skills: @skills, employee: @employee}, cached: true %>
+                </div>
               </div>
             </div>
           </section>
