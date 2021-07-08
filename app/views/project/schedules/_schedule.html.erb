@@ -22,6 +22,19 @@
               </p>
             </div>
           </a>
+           <div>
+              <p class="text-sm font-medium text-gray-900 truncate">
+                <% if schedule.billable? %>
+                  <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full">
+                    Billable 
+                  </span>
+                <% else %>
+                <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full">
+                     Non-Billable 
+                  </span>
+                  <% end %>
+              </p>
+            </div>
           <div class="flex">
             <div class="whitespace-nowrap">
               <div class="text-sm text-gray-700"><%= schedule.display_occupancy %></div>
@@ -48,7 +61,11 @@
           <div class="flex">
             <div class="whitespace-nowrap">
               <div class="text-sm text-gray-900"><%= link_to "Edit", edit_project_schedule_path(@project, schedule), class: "btn-inline-edit" %></div>
+<<<<<<< HEAD
               <div class="text-sm text-gray-900"><%= link_to "Delete", [@project, schedule], method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?"} %></div>
+=======
+              <div class="text-sm text-gray-900"><%= link_to "Delete", [@project, schedule], method: :delete, class: "btn-inline-delete" , data: { confirm:'are you sure you want to delete schedule' }  %></div>
+>>>>>>> 2fef2d14b613f9d1d5d4626090f1a8e06c66219a
             </div>
           </div>
         </div>

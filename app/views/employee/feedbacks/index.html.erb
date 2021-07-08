@@ -11,15 +11,21 @@
             <h2 class="sr-only" id="section-1-title">Employee Feedbacks</h2>
             <div class="overflow-hidden bg-white">
               <div class="p-4">
+              <% if @feedbacks.empty? %>
+                <div class="flex items-center content-center justify-center my-8 text-base italic text-gray-900">
+                  No result found.
+                </div>
+              <% else %>
                 <div class="flex flex-wrap">
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Employee Feedbacks (" + @feedbacks.load.size.to_s + ")"%></p>
                 </div>
                 <ul class="space-y-6" id="feedbacks" data-infinite-scroll-target="entries">
                   <%= render partial: "feedback", collection: @feedbacks, cached: true%>
                 </ul>
+                <%  end %>
               </div>
             </div>
-            <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+            <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
               <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
             </div>
           </section>

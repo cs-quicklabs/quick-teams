@@ -4,6 +4,12 @@
     <%= render "shared/form_header", title: "Add New Participant", subtitle: "Add new project participant and fill in engagement level." %>
     <%= form.collection_select(:user_id, UserDecorator.decorate_collection(@project.potential_participants), :id, :display_name, {:prompt => 'Select Participant'}, :selected => schedule.user_id, :class=>"form-text-field mt-4" )%>
     <div>
+      <label for="billable" class="block text-sm font-medium text-gray-700">
+        Billable
+      </label>
+      <%= form.select :billable, Schedule::SCHEDULE_OPTIONS ,{}, class:'form-text-field mt-1' %>
+    </div>
+    <div>
       <label for="starts" class="block text-sm font-medium text-gray-700">
         Starts At
       </label>

@@ -9,6 +9,11 @@
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2" data-controller="infinite-scroll">
           <section aria-labelledby="participants_section">
+          <% if @milestones.empty? %>
+                <div class="flex items-center content-center justify-center my-8 text-base italic text-gray-900">
+                     No result found.
+                </div>
+            <% else %>     
             <h2 class="sr-only" id="section-1-title">Project Milestones</h2>
             <div class="overflow-hidden bg-white">
               <div class="p-4">
@@ -23,6 +28,7 @@
             <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
               <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
             </div>
+            <% end %>
           </section>
         </div>
         <% if presenter.show_add_milestone_form %>

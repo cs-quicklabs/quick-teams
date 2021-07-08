@@ -17,6 +17,11 @@
       <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
           <div class="overflow-hidden border-b border-gray-200 sm:rounded-lg" >
+          <% if @employees.empty? %>
+                <div class="flex items-center content-center justify-center my-8 text-base italic text-gray-900">
+                     No result found.
+                </div>
+            <% else %>
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
@@ -44,6 +49,7 @@
                 <%= render partial: "employee", collection: @employees, cached: true%>
               </tbody>
             </table>
+            <% end %>
           </div>
         </div>
       </div>

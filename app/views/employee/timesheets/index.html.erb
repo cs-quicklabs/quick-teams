@@ -1,3 +1,4 @@
+
 <% presenter = UserPresenter.new(@employee) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <%= render "employee/title", employee: @employee%>
@@ -11,6 +12,11 @@
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
               <div>
+              <% if @timesheets.empty? %>
+                <div class="flex items-center content-center justify-center my-8 text-base italic text-gray-900">
+                  No result found.
+                </div>
+              <% else %>
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
@@ -36,9 +42,10 @@
                   </tbody>
                 </table>
                 <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing last 30 days' timesheets only.</p>
-                <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+                <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
                     <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
                 </div>
+                <% end %>
               </div>
             </div>
           </section>

@@ -21,4 +21,9 @@ class Schedule < ApplicationRecord
       errors.add(:ends_at, "cannot be before the start date")
     end
   end
+  validates :billable, inclusion: { in: [true, false]}
+  SCHEDULE_OPTIONS = [
+    ['Billable', 'true'], 
+    ['Non-billable','false']
+  ]
 end

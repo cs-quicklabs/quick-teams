@@ -8,12 +8,18 @@
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2" data-controller="infinite-scroll">
           <section aria-labelledby="participants_section">
+          <% if @events.empty? %>
+                <div class="flex items-center content-center justify-center my-8 text-base italic text-gray-900">
+                     No result found.
+                </div>
+            <% else %>
             <h2 class="sr-only" id="section-1-title">Project Feedbacks</h2>
             <div class="overflow-hidden bg-white">
               <div class="p-4">
                 <div class="flex flex-wrap">
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Timeline"%></p>
                 </div>
+                
                 <ul data-infinite-scroll-target="entries">
                   <% @events.each do |event| %>
                     <%= render partial: "project/timeline/activity", locals: {event: event}%>
@@ -24,6 +30,7 @@
             <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
               <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
             </div>
+            <% end %>
           </section>
         </div>
       </div>

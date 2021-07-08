@@ -3,6 +3,7 @@
   <%= render "project/title", project: @project%>
   <main class="pb-8">
     <div class="">
+    
       <h1 class="sr-only">Page title</h1>
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1 lg:grid-cols-3">
@@ -11,6 +12,11 @@
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
               <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+              <% if @todos.empty? %>
+                <div class="flex items-center content-center justify-center my-8 text-base italic text-gray-900">
+                     No result found.
+                </div>
+            <% else %>
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
@@ -38,6 +44,7 @@
                 <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
                   <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
                 </div>
+                <% end %>
               </div>
             </div>
           </section>

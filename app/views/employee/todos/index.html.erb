@@ -11,7 +11,8 @@
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
               <div>
-                <table class="min-w-full divide-y divide-gray-200">
+              <%= turbo_frame_tag "todos"  do %>
+                <table class="min-w-full divide-y divide-gray-200" id ="table">
                   <thead class="bg-gray-50">
                     <tr>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -31,13 +32,25 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200" id="todos" data-infinite-scroll-target="entries">
+                   <% if @todos.empty? %> 
+                 <tr><td> <div class="w-full text-center sm:rounded-lg" id="not_found">
+                        <div class="px-4 py-5 sm:p-6">
+                          <h3 class="text-lg font-medium leading-6 text-center text-gray-900">
+                            No result found
+                          </h3></div></div>
+                    </td></tr>
+               <% else %> 
+                  <tbody class="bg-white divide-y divide-gray-200" id="todos" data-infinite-scroll-target="entries">  
                     <%= render partial: "employee/todos/todo", collection: @todos, cached: true %>
                   </tbody>
+                   <% end %>
                 </table>
-                <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
-                  <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                
+                <% end %>
+                <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                  <%= render partial: "shared/paginator", locals:{pagy: @pagy}%>
                 </div>
+             
               </div>
             </div>
           </section>
