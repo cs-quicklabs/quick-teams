@@ -21,7 +21,7 @@
     <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
       <section aria-labelledby="add-participant-section">
         <h2 class="sr-only" id="section-2-title">Add New Skill</h2>
-        <div class="overflow-hidden bg-white">
+        <div class="bg-white">
           <div class="px-4">
             <%= tailwind_form_with(model: skill, id: dom_id(skill), url: employee_skills_path(employee)) do |form| %>
               <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
@@ -35,7 +35,7 @@
                       </div>
                     </div>
                     <div class="relative">
-                      <div class="absolute left-0 z-10 block w-full h-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                      <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <ul data-nav-search-target="results">
                         </ul>
                       </div>
