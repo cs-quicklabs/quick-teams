@@ -71,10 +71,11 @@ export default class extends Controller {
                 '[aria-selected="true"]'
             )) {
             el.removeAttribute('aria-selected')
-            el.classList.remove('active')
+            el.classList.remove('bg-gray-100')
         }
         target.setAttribute('aria-selected', 'true')
-        target.classList.add('active')
+        target.classList.add('bg-gray-100')
+
         this.inputTarget.setAttribute('aria-activedescendant', target.id)
         target.scrollIntoView(false)
     }
@@ -118,7 +119,7 @@ export default class extends Controller {
                         '[aria-selected="true"]'
                     )
                     if (selected && !this.resultsTarget.hidden) {
-                        this.commit(selected)
+                        this.click(selected)
                         if (!this.hasSubmitOnEnterValue) {
                             event.preventDefault()
                         }
@@ -136,7 +137,7 @@ export default class extends Controller {
     commit(selected) {
         if (selected.getAttribute('aria-disabled') === 'true') return
 
-        if (selected instanceof HTMLAnchorElement) {
+        if (selected.parentElement instanceof HTMLAnchorElement) {
             selected.click()
             this.resultsTarget.hidden = true
             return
@@ -163,6 +164,14 @@ export default class extends Controller {
                 detail: { value: value, textValue: textValue }
             })
         )
+    }
+
+    click(selected) {
+        if (selected.getAttribute('aria-disabled') === 'true') return
+
+        selected.click()
+        this.resultsTarget.hidden = true
+        this.hideAndRemoveOptions()
     }
 
     onResultsClick(event) {
