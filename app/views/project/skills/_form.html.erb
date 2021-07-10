@@ -3,20 +3,20 @@
   <!-- Left column -->
   <div class="grid grid-cols-1 gap-4 lg:col-span-2">
     <section aria-labelledby="participants_section">
-      <h2 class="sr-only" id="section-1-title">Employee Skills</h2>
+      <h2 class="sr-only" id="section-1-title">Project Skills</h2>
       <div class="overflow-hidden bg-white">
         <div class="p-4">
           <div class="flex flex-wrap">
-            <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Employee Skills"%></p>
+            <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Skills"%></p>
           </div>
-          <div id="employee-skills" class="flex ml-4">
-            <%= render partial: "skills", locals: {skills: skills, employee: employee}, cached: true %>
+          <div id="project-skills" class="flex ml-4">
+            <%= render partial: "skills", locals: {skills: skills, project: project}, cached: true %>
           </div>
         </div>
       </div>
     </section>
   </div>
-  <% if policy(employee).create_skill? %>
+  <% if policy(project).create_skill? %>
     <!-- Right column -->
     <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
       <section aria-labelledby="add-participant-section">
@@ -25,7 +25,7 @@
           <div class="px-4">
             <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
               <%= render "shared/form_header", title: "Add New Skill", subtitle: "" %>
-              <div class="flex justify-center w-full max-w-sm lg:justify-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/employee/skills?id=<%= employee.id%>">
+              <div class="flex justify-center w-full max-w-sm lg:justify-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/project/skills?id=<%= project.id%>">
                 <div class="w-full max-w-sm lg:max-w-sm">
                   <div>
                     <label for="skill" class="block text-sm font-medium text-gray-700">Search to add new skill</label>

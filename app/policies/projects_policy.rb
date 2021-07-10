@@ -26,4 +26,8 @@ class ProjectsPolicy < Struct.new(:user, :projects)
   def destroy?
     user.admin?
   end
+
+  def show_skills?
+    user.admin?
+  end
 end

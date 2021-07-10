@@ -3,7 +3,11 @@ class SearchPolicy < Struct.new(:user, :search)
     user.admin?
   end
 
-  def skills?
+  def employee_skills?
+    true
+  end
+
+  def project_skills?
     true
   end
 end

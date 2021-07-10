@@ -56,7 +56,8 @@ Rails.application.routes.draw do
 
   get "/schedule", to: "schedules#index", as: "schedules"
   get "search/people-projects", to: "search#people_projects"
-  get "/search/skills", to: "search#skills"
+  get "/search/employee/skills", to: "search#employee_skills"
+  get "/search/project/skills", to: "search#project_skills"
   get :goals, controller: :home
   get :events, controller: :home
 

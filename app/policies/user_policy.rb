@@ -69,7 +69,9 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show_skills?
-    true
+    return true if user.admin?
+    return self_or_subordinate? if user.lead?
+    self?
   end
 
   def profile?

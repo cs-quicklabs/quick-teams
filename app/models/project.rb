@@ -13,6 +13,7 @@ class Project < ApplicationRecord
   has_many :todos
   has_many :lists, through: :todos, source: :user
   has_and_belongs_to_many :project_tags
+  has_and_belongs_to_many :skills
 
   belongs_to :discipline
   belongs_to :status, class_name: "ProjectStatus", optional: true
