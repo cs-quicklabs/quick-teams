@@ -1,5 +1,5 @@
 <% @skills.each do |skill|%>
-  <li role="option"  id="add" data-reflex="click->ProjectSkills#add" data-skill-id=<%= skill.id%> data-project-id=<%= @project.id%> class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+  <li role="option"  id="add-skill" data-reflex="click->ProjectSkills#add" data-skill-id=<%= skill.id%> data-project-id=<%= @project.id%> class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
     <%= skill.name %>
   </li>
 <% end %>
