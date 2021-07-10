@@ -1,6 +1,6 @@
 class SearchController < BaseController
   def people_projects
-    authorize :team, :index?
+    authorize :search
 
     like_keyword = "%#{params[:q]}%"
     @employees = User.for_current_account.active.where("first_name ILIKE ?", like_keyword).includes(:job)
@@ -12,7 +12,7 @@ class SearchController < BaseController
   end
 
   def skills
-    authorize :team, :index?
+    authorize :search
 
     like_keyword = "%#{params[:q]}%"
     @employee = User.find(params[:id])
