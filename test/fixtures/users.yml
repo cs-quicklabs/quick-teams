@@ -75,6 +75,8 @@ one:
   discipline: engineering
   manager: regular
   confirmed_at: 2021-03-18
+  people_tags: star
+  status: deployed
 
 two:
   first_name: Two Active
