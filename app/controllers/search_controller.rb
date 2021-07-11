@@ -28,7 +28,7 @@ class SearchController < BaseController
     like_keyword = "%#{params[:q]}%"
     @project = Project.find(params[:id])
     @skills = Skill.where("name ILIKE ?", like_keyword)
-      .limit(3).order(:name) - @project.skills
+      .limit(5).order(:name) - @project.skills
 
     render layout: false
   end
