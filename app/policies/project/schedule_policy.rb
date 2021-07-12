@@ -18,4 +18,9 @@ class Project::SchedulePolicy < ApplicationPolicy
   def edit?
     user.admin?
   end
+
+  def ex?
+    binding.irb
+    true
+  end
 end

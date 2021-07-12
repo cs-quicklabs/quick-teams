@@ -2,7 +2,7 @@ class Project::SchedulesController < Project::BaseController
   before_action :set_schedule, only: %i[ update destroy edit ]
 
   def index
-    authorize [:project, Schedule]
+    authorize [@project, Schedule], :ex?
 
     @schedule = Schedule.new
     @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] }).order(created_at: :desc)
