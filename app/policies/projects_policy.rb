@@ -11,10 +11,6 @@ class ProjectsPolicy < Struct.new(:user, :projects)
     user.admin?
   end
 
-  def show_project?(project)
-    user.admin? or user.managed_projects.include?(project)
-  end
-
   def edit?
     user.admin?
   end
@@ -24,10 +20,6 @@ class ProjectsPolicy < Struct.new(:user, :projects)
   end
 
   def destroy?
-    user.admin?
-  end
-
-  def show_skills?
     user.admin?
   end
 end

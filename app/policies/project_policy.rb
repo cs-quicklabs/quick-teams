@@ -33,8 +33,4 @@ class ProjectPolicy < ApplicationPolicy
   def show?
     user.admin?
   end
-
-  def create_skill?
-    user.admin?
-  end
 end
