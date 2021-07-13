@@ -71,4 +71,8 @@ class User < ApplicationRecord
   def has_managed_projects?
     managed_projects.count
   end
+
+  def is_manager?(project)
+    project.manager == self
+  end
 end

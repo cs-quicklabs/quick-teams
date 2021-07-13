@@ -1,5 +1,2 @@
-class Project::SkillPolicy < ApplicationPolicy
-  def index?
-    user.admin?
-  end
+class Project::SkillPolicy < Project::BaseProjectPolicy
 end

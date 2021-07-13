@@ -1,6 +1,6 @@
 class Project::SkillsController < Project::BaseController
   def index
-    authorize @project
+    authorize [@project, Skill]
 
     @skill = Skill.new
     @skills = @project.skills

@@ -1,25 +1,21 @@
-class Project::NotePolicy < ApplicationPolicy
+class Project::NotePolicy < Project::BaseProjectPolicy
   def update?
-    user.admin?
+    note = record.last
+    user.admin? or note.user_id == user.id
   end
 
   def create?
-    user.admin?
-  end
-
-  def index?
-    user.admin?
-  end
-
-  def show?
-    user.admin?
+    project = record.first
+    user.admin? or user.is_manager?(project)
   end
 
   def destroy?
-    user.admin?
+    note = record.last
+    user.admin? or note.user_id == user.id
   end
 
   def edit?
-    user.admin?
+    note = record.last
+    user.admin? or note.user_id == user.id
   end
 end

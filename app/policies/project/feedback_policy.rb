@@ -1,21 +1,5 @@
-class Project::FeedbackPolicy < ApplicationPolicy
+class Project::FeedbackPolicy < Project::BaseProjectPolicy
   def update?
-    user.admin? or record.user == user
-  end
-
-  def create?
-    user.admin?
-  end
-
-  def index?
-    user.admin?
-  end
-
-  def show?
-    user.admin?
-  end
-
-  def destroy?
-    user.admin?
+    user.admin? or record.last.user == user
   end
 end

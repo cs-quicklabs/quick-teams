@@ -2,7 +2,7 @@ class Project::MilestonesController < Project::BaseController
   before_action :set_milestone, only: %i[show destroy edit update]
 
   def index
-    authorize [:project, Goal]
+    authorize [@project, Goal]
 
     @milestone = Goal.new
     @pagy, @milestones = pagy_nil_safe(@project.milestones.includes(:user).order(created_at: :desc), items: LIMIT)
@@ -10,7 +10,7 @@ class Project::MilestonesController < Project::BaseController
   end
 
   def create
-    authorize [:project, Goal]
+    authorize [@project, Goal]
 
     @milestone = AddProjectMilestone.call(@project, milestone_params, current_user).result
     respond_to do |format|
@@ -26,7 +26,7 @@ class Project::MilestonesController < Project::BaseController
   end
 
   def destroy
-    authorize [:project, @milestone]
+    authorize [@project, @milestone]
     @milestone.destroy
     Event.where(eventable: @project, trackable: @milestone).touch_all #fixes cache issues in activity
     respond_to do |format|
@@ -35,18 +35,18 @@ class Project::MilestonesController < Project::BaseController
   end
 
   def show
-    authorize [:project, @milestone]
+    authorize [@project, @milestone]
 
     @comment = Comment.new
     fresh_when @milestone
   end
 
   def edit
-    authorize [:project, @milestone]
+    authorize [@project, @milestone]
   end
 
   def update
-    authorize [:project, @milestone]
+    authorize [@project, @milestone]
 
     respond_to do |format|
       if @milestone.update(milestone_params)
