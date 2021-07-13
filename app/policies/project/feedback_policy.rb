@@ -1,5 +1,9 @@
 class Project::FeedbackPolicy < Project::BaseProjectPolicy
   def update?
-    user.admin? or record.last.user == user
+    user.admin?
+  end
+
+  def show?
+    user.admin? or user.is_manager?(record.first)
   end
 end
