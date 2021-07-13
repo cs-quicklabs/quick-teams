@@ -2,7 +2,7 @@ class Employee::FeedbacksController < Employee::BaseController
   before_action :set_feedback, only: %i[show destroy edit update]
 
   def index
-    authorize @employee, :show_feedbacks?
+    authorize [@employee, Feedback]
 
     @feedback = Feedback.new
     @pagy, @feedbacks = pagy_nil_safe(employee_feedbacks, items: LIMIT)
@@ -10,7 +10,7 @@ class Employee::FeedbacksController < Employee::BaseController
   end
 
   def create
-    authorize @employee, :create_feedback?
+    authorize [@employee, Feedback]
 
     @feedback = AddEmployeeFeedback.call(@employee, feedback_params, current_user).result
 
@@ -27,7 +27,7 @@ class Employee::FeedbacksController < Employee::BaseController
   end
 
   def destroy
-    authorize [:employee, @feedback]
+    authorize [@employee, @feedback]
 
     @feedback.destroy
     Event.where(eventable: @employee, trackable: @feedback).touch_all #fixes cache issues in activity
@@ -37,17 +37,17 @@ class Employee::FeedbacksController < Employee::BaseController
   end
 
   def show
-    authorize [:employee, @feedback]
+    authorize [@employee, @feedback]
 
     fresh_when @feedback
   end
 
   def edit
-    authorize [:employee, @feedback]
+    authorize [@employee, @feedback]
   end
 
   def update
-    authorize [:employee, @feedback]
+    authorize [@employee, @feedback]
 
     respond_to do |format|
       if @feedback.update(feedback_params)

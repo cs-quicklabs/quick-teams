@@ -1,4 +1,4 @@
-class Employee::SchedulePolicy < ApplicationPolicy
+class User::SchedulePolicy < User::BaseUserPolicy
   def update?
     user.admin?
   end

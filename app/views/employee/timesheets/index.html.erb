@@ -37,7 +37,7 @@
                 </table>
                 <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing last 30 days' timesheets only.</p>
                 <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
-                    <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                  <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
                 </div>
               </div>
             </div>
@@ -47,7 +47,6 @@
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
-              <h2 class="sr-only" id="section-2-title">Add New Timesheet</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
                   <%= render partial: "employee/timesheets/form", locals: {timesheet: @timesheet, projects: @projects}%>
@@ -60,7 +59,6 @@
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
-              <h2 class="sr-only" id="section-2-title">Add New Timesheet</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
                   <% if presenter.show_timesheet_stats_menu(current_user) %>

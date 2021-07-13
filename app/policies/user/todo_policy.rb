@@ -1,4 +1,4 @@
-class Employee::TodoPolicy < ApplicationPolicy
+class User::TodoPolicy < User::BaseUserPolicy
   def update?
     true
   end

@@ -2,15 +2,15 @@ class Employee::TodosController < Employee::BaseController
   before_action :set_todo, only: %i[destroy]
 
   def index
-    authorize @employee, :show_todo?
+    authorize [@employee, Todo]
 
     @todo = Todo.new
     @pagy, @todos = pagy_nil_safe(@employee.todos.includes(:project, :user, :owner).order(completed: :asc).order(deadline: :asc), items: LIMIT)
-    render_partial("employee/todos/todo", collection: @todos) if stale?(@todos  + [@employee])
+    render_partial("employee/todos/todo", collection: @todos) if stale?(@todos + [@employee])
   end
 
   def create
-    authorize @employee, :create_todo?
+    authorize [@employee, Todo]
 
     @todo = AddEmployeeTodo.call(@employee, todo_params, current_user).result
 
@@ -27,7 +27,7 @@ class Employee::TodosController < Employee::BaseController
   end
 
   def destroy
-    authorize [:employee, @todo]
+    authorize [@employee, @todo]
 
     @todo = RemoveTodo.call(@todo, current_user).result
     respond_to do |format|

@@ -20,7 +20,7 @@
             </div>
           </section>
         </div>
-        <% if policy(@employee).create_schedule? %>
+        <% if policy([@employee, Schedule]).create? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">

@@ -1,4 +1,4 @@
-class Employee::TimesheetPolicy < ApplicationPolicy
+class User::TimesheetPolicy < User::BaseUserPolicy
   def update?
     user.admin?
   end

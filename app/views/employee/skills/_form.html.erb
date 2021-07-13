@@ -3,7 +3,6 @@
   <!-- Left column -->
   <div class="grid grid-cols-1 gap-4 lg:col-span-2">
     <section aria-labelledby="participants_section">
-      <h2 class="sr-only" id="section-1-title">Employee Skills</h2>
       <div class="overflow-hidden bg-white">
         <div class="p-4">
           <div class="flex flex-wrap">
@@ -16,11 +15,10 @@
       </div>
     </section>
   </div>
-  <% if policy(employee).create_skill? %>
+  <% if policy(employee, Skill).create? %>
     <!-- Right column -->
     <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
       <section aria-labelledby="add-participant-section">
-        <h2 class="sr-only" id="section-2-title">Add New Skill</h2>
         <div class="bg-white">
           <div class="px-4">
             <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">

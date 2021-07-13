@@ -1,4 +1,4 @@
-class Employee::GoalPolicy < ApplicationPolicy
+class User::FeedbackPolicy < User::BaseUserPolicy
   def update?
     edit?
   end
@@ -17,35 +17,28 @@ class Employee::GoalPolicy < ApplicationPolicy
     self?
   end
 
-  def comment?
-    editable?
-  end
-
   def destroy?
-    editable?
+    return false if record.published?
+    return true if user.admin?
+    return record.user == user if (user.lead? and subordinate?)
+    false
   end
 
   def edit?
-    editable?
+    (user.admin? or subordinate?) and !record.published?
   end
 
   private
 
   def self?
-    record.goalable == user
+    record.critiquable == user
   end
 
   def subordinate?
-    user.subordinate?(record.goalable)
+    user.subordinate?(record.critiquable)
   end
 
   def self_or_subordinate?
     self? or subordinate?
-  end
-
-  def editable?
-    return true if user.admin?
-    return subordinate? if user.lead?
-    false
   end
 end

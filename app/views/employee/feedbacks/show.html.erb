@@ -22,7 +22,7 @@
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to 'Back','javascript:history.back()', class:"btn-normal" %>
     </div>
-    <% if policy(@employee).edit_feedback?(@feedback) %>
+    <% if policy(@employee, @feedback).edit? %>
       <%= link_to 'Edit', edit_employee_feedback_path(@feedback.critiquable, @feedback), class:"btn-blue ml-3" %>
     <% end %>
   </div>

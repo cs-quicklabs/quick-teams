@@ -1,6 +1,6 @@
 class Employee::TimelineController < Employee::BaseController
   def index
-    authorize @employee, :show_timeline?
+    authorize [@employee, Timeline]
 
     collection = []
     if @employee.id == current_user.id # do not show what I am doing
@@ -10,6 +10,6 @@ class Employee::TimelineController < Employee::BaseController
     end
     @pagy, events_collection = pagy_nil_safe(collection.includes(:eventable, :trackable, :user), items: LIMIT)
     @events = events_collection.decorate
-    render_timeline("employee/timeline/activity", collection: @events) if stale?(@events  + [@employee])
+    render_timeline("employee/timeline/activity", collection: @events) if stale?(@events + [@employee])
   end
 end
