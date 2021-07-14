@@ -8,9 +8,11 @@ class User::SchedulePolicy < User::BaseUserPolicy
   end
 
   def index?
-    return true if user.admin?
+    employee = record.first
 
-    record.all { |schedule| schedule.user_id == user.id }
+    return true if user.admin?
+    return true if user.lead? and user.subordinate?(employee)
+    user.id == employee.id
   end
 
   def destroy?

@@ -18,24 +18,28 @@ class User::FeedbackPolicy < User::BaseUserPolicy
   end
 
   def destroy?
-    return false if record.published?
+    feedback = record.last
+    return false if feedback.published?
     return true if user.admin?
-    return record.user == user if (user.lead? and subordinate?)
+    return feedback.user == user if (user.lead? and subordinate?)
     false
   end
 
   def edit?
-    (user.admin? or subordinate?) and !record.published?
+    feedback = record.last
+    (user.admin? or subordinate?) and !feedback.published?
   end
 
   private
 
   def self?
-    record.critiquable == user
+    feedback = record.last
+    feedback.critiquable == user
   end
 
   def subordinate?
-    user.subordinate?(record.critiquable)
+    feedback = record.last
+    user.subordinate?(feedback.critiquable)
   end
 
   def self_or_subordinate?

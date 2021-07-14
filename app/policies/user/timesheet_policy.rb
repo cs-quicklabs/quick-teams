@@ -12,6 +12,7 @@ class User::TimesheetPolicy < User::BaseUserPolicy
   end
 
   def destroy?
-    user.admin? or record.user == user
+    timesheet = record.last
+    user.admin? or timesheet.user == user
   end
 end

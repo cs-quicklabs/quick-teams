@@ -16,7 +16,7 @@
       <div class="mt-2 space-x-2 text-sm">
         <span class="font-medium text-gray-500"><%= display_created_at(goal) %></span>
         <%= link_to "Show", employee_goal_path(@employee, goal), class: "btn-inline-edit pl-2" %>
-        <% if policy(@employee, goal).edit? %>
+        <% if policy([@employee, goal]).edit? %>
           <%= link_to "Edit", edit_employee_goal_path(@employee, goal), class: "btn-inline-delete pl-2" %>
           <%= link_to "Delete", employee_goal_path(@employee, goal), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
         <% end %>

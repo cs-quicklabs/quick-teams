@@ -32,11 +32,13 @@ class User::GoalPolicy < User::BaseUserPolicy
   private
 
   def self?
-    record.goalable == user
+    goal = record.last
+    goal.goalable == user
   end
 
   def subordinate?
-    user.subordinate?(record.goalable)
+    goal = record.last
+    user.subordinate?(goal.goalable)
   end
 
   def self_or_subordinate?
