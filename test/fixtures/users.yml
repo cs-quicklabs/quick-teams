@@ -250,6 +250,38 @@ member:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   confirmed_at: 2021-03-18
 
+manager:
+  first_name: Aashish
+  last_name: Dhawan (Manager)
+  active: true
+  email: manager@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+  permission: member
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: 2021-03-18
+
+super:
+  first_name: Aashish
+  last_name: Dhawan (Admin)
+  active: true
+  email: super@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+  permission: admin
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: 2021-03-18
+
 unconfirmed:
   first_name: Aashish
   last_name: Dhawan (Member)

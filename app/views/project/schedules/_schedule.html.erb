@@ -45,7 +45,7 @@
             </div>
           </div>
           <% if current_user.admin? %>
-            <div class="flex">
+            <div class="flex" id="billable-schedule">
               <% if schedule.billable? %>
                 <p class="flex items-center text-sm text-gray-500">
                   <svg class="flex-shrink-0 mr-1.5 h-4 w-4 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
