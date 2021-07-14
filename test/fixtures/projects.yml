@@ -31,7 +31,7 @@ archived:
 
 managed:
   name: Quickhands
-  archived: true
+  archived: false
   account: crownstack
   manager: manager
   discipline: engineering

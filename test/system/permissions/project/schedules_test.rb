@@ -23,6 +23,7 @@ class ProjectSchedulesTest < ApplicationSystemTestCase
     assert_selector "turbo-frame##{dom_id(schedule)}", text: "Edit"
     assert_selector "turbo-frame##{dom_id(schedule)}", text: "Delete"
     assert_selector "div#billable-schedule"
+    assert_selector "form#new_schedule"
     take_screenshot
   end
 
@@ -32,6 +33,7 @@ class ProjectSchedulesTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_url
     assert_no_selector "div#project-tabs", text: "Schedules"
+    assert_no_selector "form#new_schedule"
   end
 
   test "member can not see project schedule" do
@@ -40,6 +42,7 @@ class ProjectSchedulesTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_url
     assert_no_selector "div#project-tabs", text: "Schedules"
+    assert_no_selector "form#new_schedule"
   end
 
   test "manager can see project schedule without edit buttons" do
@@ -52,6 +55,7 @@ class ProjectSchedulesTest < ApplicationSystemTestCase
     assert_no_selector "turbo-frame##{dom_id(schedule)}", text: "Edit"
     assert_no_selector "turbo-frame##{dom_id(schedule)}", text: "Delete"
     assert_no_selector "div#billable-schedule"
+    assert_no_selector "form#new_schedule"
     take_screenshot
   end
 
@@ -62,5 +66,6 @@ class ProjectSchedulesTest < ApplicationSystemTestCase
     @project = projects(:one)
     visit page_url
     assert_no_selector "div#project-tabs", text: "Schedules"
+    assert_no_selector "form#new_schedule"
   end
 end
