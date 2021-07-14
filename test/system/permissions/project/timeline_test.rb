@@ -18,7 +18,7 @@ class ProjectTimelineTest < ApplicationSystemTestCase
     @employee = users(:super)
     sign_in @employee
     visit page_url
-    assert_text "Timeline"
+    assert_selector "div#project-tabs", text: "Timeline"
   end
 
   test "lead can not see project timeline" do
@@ -26,7 +26,7 @@ class ProjectTimelineTest < ApplicationSystemTestCase
     @employee = users(:lead)
     sign_in @employee
     visit page_url
-    assert_no_text "Timeline"
+    assert_no_selector "div#project-tabs", text: "Timeline"
   end
 
   test "member can not see project timeline" do
@@ -34,7 +34,7 @@ class ProjectTimelineTest < ApplicationSystemTestCase
     @employee = users(:member)
     sign_in @employee
     visit page_url
-    assert_no_text "Timeline"
+    assert_no_selector "div#project-tabs", text: "Timeline"
   end
 
   test "manager can not see project timeline" do
@@ -42,6 +42,6 @@ class ProjectTimelineTest < ApplicationSystemTestCase
     @employee = users(:manager)
     sign_in @employee
     visit page_url
-    assert_no_text "Timeline"
+    assert_no_selector "div#project-tabs", text: "Timeline"
   end
 end
