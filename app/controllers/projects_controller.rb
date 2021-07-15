@@ -9,7 +9,7 @@ class ProjectsController < BaseController
   end
 
   def show
-    authorize :projects
+    authorize @project
 
     redirect_to project_schedules_path(@project)
   end

@@ -22,4 +22,8 @@ class ProjectsPolicy < Struct.new(:user, :projects)
   def destroy?
     user.admin?
   end
+
+  def show?
+    user.admin? or user.is_manager?(record)
+  end
 end

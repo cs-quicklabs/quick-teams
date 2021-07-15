@@ -9,3 +9,15 @@ two:
   user: regular
   critiquable_type: Project
   critiquable: one
+
+three:
+  title: Some Random Feedback
+  user: regular
+  critiquable_type: Project
+  critiquable: managed
+
+four:
+  title: Some Random Feedback
+  user: manager
+  critiquable_type: Project
+  critiquable: managed
