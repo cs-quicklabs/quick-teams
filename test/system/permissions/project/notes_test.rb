@@ -5,7 +5,7 @@ class ProjectNotesTest < ApplicationSystemTestCase
     @employee = users(:regular)
     @account = @employee.account
     ActsAsTenant.current_tenant = @account
-    @project = projects(:one)
+    @project = projects(:managed)
     sign_in @employee
   end
 
@@ -14,23 +14,58 @@ class ProjectNotesTest < ApplicationSystemTestCase
   end
 
   test "admin can see project notes with edit buttons" do
+    sign_out @employee
+    @employee = users(:super)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Notes"
+    assert_selector "form#new_note"
+    note = @project.notes.first
+    assert_selector "turbo-frame##{dom_id(note)}", text: "Edit"
+    assert_selector "turbo-frame##{dom_id(note)}", text: "Delete"
+    note = @project.notes.last
+    assert_selector "turbo-frame##{dom_id(note)}", text: "Edit"
+    assert_selector "turbo-frame##{dom_id(note)}", text: "Delete"
   end
 
   test "lead can not see project notes" do
+    sign_out @employee
+    @employee = users(:lead)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Notes"
   end
 
   test "member can not see project notes" do
+    sign_out @employee
+    @employee = users(:member)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Notes"
   end
 
-  test "manager can see create project note" do
-  end
-
-  test "manager can see edit button for his notes" do
-  end
-
-  test "manager can not see edit button for someone elses notes" do
+  test "manager can see project note without edit buttons" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Notes"
+    assert_selector "form#new_note"
+    note = @project.notes.first
+    assert_no_selector "turbo-frame##{dom_id(note)}", text: "Edit"
+    assert_no_selector "turbo-frame##{dom_id(note)}", text: "Delete"
+    note = @project.notes.last
+    assert_selector "turbo-frame##{dom_id(note)}", text: "Edit"
+    assert_selector "turbo-frame##{dom_id(note)}", text: "Delete"
   end
 
   test "manger can not see notes other than his project notes" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    @project = projects(:one)
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Notes"
+    assert_no_selector "form#new_note"
   end
 end

@@ -3,3 +3,21 @@ one:
   notable_type: Project
   user: regular
   notable: one
+
+two:
+  body: this is some note
+  notable_type: Project
+  user: manager
+  notable: one
+
+three:
+  body: this is some note
+  notable_type: Project
+  user: regular
+  notable: managed
+
+four:
+  body: this is some note
+  notable_type: Project
+  user: manager
+  notable: managed
