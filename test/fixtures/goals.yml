@@ -30,3 +30,20 @@ four:
   deadline: 2021-06-30
   account: crownstack
   status: progress
+
+five:
+  title: Some Random Goal third
+  user: regular
+  goalable_type: Project
+  goalable: managed
+  deadline: 2021-06-30
+  account: crownstack
+
+six:
+  title: Some Random Goal third
+  user: manager
+  goalable_type: Project
+  goalable: managed
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress

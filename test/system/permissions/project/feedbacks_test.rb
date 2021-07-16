@@ -25,11 +25,19 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     assert_selector "div#project-tabs", text: "Feedbacks"
     assert_selector "form#new_feedback"
     feedback = @project.feedbacks.first
-    assert_selector "div##{dom_id(feedback)}", text: "Show"
-    assert_selector "div##{dom_id(feedback)}", text: "Delete"
+    assert_selector "div#buttons_#{dom_id(feedback)}", text: "Show"
+    assert_selector "div#buttons_#{dom_id(feedback)}", text: "Delete"
     feedback = @project.feedbacks.last
-    assert_selector "div##{dom_id(feedback)}", text: "Show"
-    assert_selector "div##{dom_id(feedback)}", text: "Delete"
+    assert_selector "div#buttons_#{dom_id(feedback)}", text: "Show"
+    assert_selector "div#buttons_#{dom_id(feedback)}", text: "Delete"
+  end
+
+  test "admin can see project feedback details" do
+    sign_out @employee
+    @employee = users(:super)
+    sign_in @employee
+    visit page_detail_url
+    assert_selector "div#feedback-detail"
   end
 
   test "lead can not see project feedbacks" do
@@ -73,12 +81,17 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#project-tabs", text: "Feedbacks"
     assert_no_selector "form#new_feedback"
-    feedback = @project.feedbacks.first
-    assert_selector "div##{dom_id(feedback)}", text: "Show"
-    assert_no_selector "div##{dom_id(feedback)}", text: "Delete"
-    feedback = @project.feedbacks.last
-    assert_selector "div##{dom_id(feedback)}", text: "Show"
-    assert_selector "div##{dom_id(feedback)}", text: "Delete" #can delete feedback added by him
+    feedbacks = @project.feedbacks
+
+    feedbacks.each do |feedback|
+      if feedback.user_id == @employee.id
+        assert_selector "div#buttons_#{dom_id(feedback)}", text: "Show"
+        assert_selector "div#buttons_#{dom_id(feedback)}", text: "Delete" #can delete feedback added by him
+      else
+        assert_selector "div#buttons_#{dom_id(feedback)}", text: "Show"
+        assert_no_selector "div#buttons_#{dom_id(feedback)}", text: "Delete"
+      end
+    end
   end
 
   test "manage can see project feedback detail page" do
@@ -105,6 +118,6 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     @feedback = @project.feedbacks.first
     sign_in @employee
     visit page_url
-    assert_no_selector "div#project-tabs", text: "Feedbacks"
+    assert_no_selector "div#feedback-detail"
   end
 end

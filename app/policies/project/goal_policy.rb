@@ -5,7 +5,8 @@ class Project::GoalPolicy < Project::BaseProjectPolicy
 
   def update?
     milestone = record.last
-    user.admin? or milestone.user_id == user.id
+    project = record.first
+    user.admin? or (user.is_manager?(project) and milestone.user_id == user.id)
   end
 
   def create?
@@ -15,11 +16,13 @@ class Project::GoalPolicy < Project::BaseProjectPolicy
 
   def destroy?
     milestone = record.last
-    user.admin? or milestone.user_id == user.id
+    project = record.first
+    user.admin? or (user.is_manager?(project) and milestone.user_id == user.id)
   end
 
   def edit?
     milestone = record.last
-    user.admin? or milestone.user_id == user.id
+    project = record.first
+    user.admin? or (user.is_manager?(project) and milestone.user_id == user.id)
   end
 end
