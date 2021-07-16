@@ -6,23 +6,34 @@ class Project::GoalPolicy < Project::BaseProjectPolicy
   def update?
     milestone = record.last
     project = record.first
-    user.admin? or (user.is_manager?(project) and milestone.user_id == user.id)
+    return false if project.archived?
+    return true if user.admin?
+
+    user.is_manager?(project) and milestone.user_id == user.id
   end
 
   def create?
     project = record.first
+    return false if project.archived?
+    return true if user.admin?
     user.admin? or user.is_manager?(project)
   end
 
   def destroy?
     milestone = record.last
     project = record.first
-    user.admin? or (user.is_manager?(project) and milestone.user_id == user.id)
+    return false if project.archived?
+    return true if user.admin?
+
+    user.is_manager?(project) and milestone.user_id == user.id
   end
 
   def edit?
     milestone = record.last
     project = record.first
-    user.admin? or (user.is_manager?(project) and milestone.user_id == user.id)
+    return false if project.archived?
+    return true if user.admin?
+
+    user.is_manager?(project) and milestone.user_id == user.id
   end
 end

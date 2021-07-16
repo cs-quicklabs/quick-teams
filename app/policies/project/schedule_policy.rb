@@ -1,6 +1,7 @@
 class Project::SchedulePolicy < Project::BaseProjectPolicy
   def create?
     project = record.first
-    user.admin? and not project.archived?
+    return false if project.archived?
+    user.admin?
   end
 end
