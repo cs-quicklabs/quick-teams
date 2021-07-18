@@ -3,11 +3,10 @@
   <%= render "project/title", project: @project%>
   <main class="pb-8">
     <div class="">
-      <h1 class="sr-only">Page title</h1>
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <!-- Left column -->
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2" id="todo-list">
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
               <div class="w-full overflow-hidden" data-controller="infinite-scroll">
@@ -46,7 +45,6 @@
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
-              <h2 class="sr-only" id="section-2-title">Add New Todo</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
                   <%= render partial: "project/todos/form", locals: { todo: @todo, errors: nil }%>

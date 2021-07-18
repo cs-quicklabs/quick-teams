@@ -33,3 +33,21 @@ four:
   completed: true
   owner: regular
   account: crownstack
+
+five:
+  user: regular
+  project: managed
+  title: Some Random Third Todo
+  deadline: 2021-03-31
+  completed: true
+  owner: regular
+  account: crownstack
+
+six:
+  user: actor
+  project: managed
+  title: Some Random Fourth Todo
+  deadline: 2021-03-31
+  completed: true
+  owner: regular
+  account: crownstack
