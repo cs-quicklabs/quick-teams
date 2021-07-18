@@ -3,15 +3,13 @@
   <%= render partial: "project/title", locals: {project: @project}%>
   <main class="pb-8">
     <div class="">
-      <h1 class="sr-only">Page title</h1>
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <!-- Left column -->
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2" id="timesheet-list"> 
           <% if @timesheets.size > 0 %>
             <section aria-labelledby="participants_section">
-              <h2 class="sr-only" id="section-1-title">Project Timesheets</h2>
-              <div class="overflow-hidden bg-white">
+              <div class="overflow-hidden bg-white" >
                 <div class="w-full overflow-hidden" data-controller="infinite-scroll">
                   <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -44,9 +42,8 @@
           </section>
         </div>
         <!-- Right column -->
-        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200" id="timesheet-stats">
           <section aria-labelledby="add-participant-section">
-            <h2 class="sr-only" id="section-2-title">Add New Timesheet</h2>
             <div class="overflow-hidden bg-white">
               <div class="px-4">
                 <div class="flex justify-center mt-4" data-project-id="<%= @project.id %>">

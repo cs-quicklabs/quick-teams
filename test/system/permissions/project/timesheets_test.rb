@@ -5,7 +5,7 @@ class ProjectTimesheetsTest < ApplicationSystemTestCase
     @employee = users(:regular)
     @account = @employee.account
     ActsAsTenant.current_tenant = @account
-    @project = projects(:one)
+    @project = projects(:managed)
     sign_in @employee
   end
 
@@ -14,17 +14,46 @@ class ProjectTimesheetsTest < ApplicationSystemTestCase
   end
 
   test "admin can see project timesheets" do
+    sign_out @employee
+    @employee = users(:super)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Timesheets"
+    assert_selector "div#timesheet-stats"
+    assert_selector "div#timesheet-list"
   end
 
   test "lead can not see project timesheets" do
+    sign_out @employee
+    @employee = users(:lead)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Timesheets"
   end
 
   test "member can not see project timesheets" do
+    sign_out @employee
+    @employee = users(:member)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Timesheets"
   end
 
   test "manager can see project timesheets" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Timesheets"
+    assert_selector "div#timesheet-stats"
+    assert_selector "div#timesheet-list"
   end
 
   test "manager can not see project timesheets of other projects" do
+    sign_out @employee
+    @employee = users(:manager)
+    @project = projects(:one)
+    sign_in @employee
+    assert_no_selector "div#project-tabs", text: "Timesheets"
   end
 end
