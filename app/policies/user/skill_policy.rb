@@ -1,11 +1,9 @@
 class User::SkillPolicy < User::BaseUserPolicy
   def create?
-    true
-  end
-
-  def index?
+    employee = record.first
+    return false unless employee.active?
     return true if user.admin?
-    return self_or_subordinate? if user.lead?
+    return subordinate? if user.lead?
     self?
   end
 end

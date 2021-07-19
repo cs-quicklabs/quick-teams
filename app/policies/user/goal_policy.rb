@@ -12,12 +12,6 @@ class User::GoalPolicy < User::BaseUserPolicy
     false
   end
 
-  def index?
-    return true if user.admin?
-    return self_or_subordinate? if user.lead?
-    self?
-  end
-
   def edit?
     return true if user.admin?
     return user.subordinate?(record.first) if user.lead?
@@ -40,25 +34,9 @@ class User::GoalPolicy < User::BaseUserPolicy
     editable?
   end
 
-  private
-
-  def self?
-    goal = record.last
-    goal.goalable == user
-  end
-
-  def subordinate?
-    goal = record.last
-    user.subordinate?(goal.goalable)
-  end
-
-  def self_or_subordinate?
-    self? or subordinate?
-  end
-
   def editable?
     return true if user.admin?
-    return subordinate? if user.lead?
+    return goal_for_subordinate? if user.lead?
     false
   end
 
@@ -67,5 +45,12 @@ class User::GoalPolicy < User::BaseUserPolicy
     return true if user.admin?
     return true if user.lead? and user.subordinate?(employee)
     false
+  end
+
+  private
+
+  def goal_for_subordinate?
+    goal = record.last
+    user.subordinate?(goal.goalable)
   end
 end

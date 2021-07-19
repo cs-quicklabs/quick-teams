@@ -20,6 +20,8 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Todos"
     assert_selector "form#new_todo"
     assert_selector "tbody#todos"
+
+    #can see delete button for employee todos
   end
 
   test "admin can see his own todos" do
@@ -30,6 +32,8 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Todos"
     assert_selector "form#new_todo"
     assert_selector "tbody#todos"
+
+    #can see delete button for his todos
   end
 
   test "lead can see subordinate todos" do
@@ -40,6 +44,10 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Todos"
     assert_selector "form#new_todo"
     assert_selector "tbody#todos"
+
+    #can see delete button for his created todos
+
+    #can not see delete button for his not created todos
   end
 
   test "lead can not see someone elses todos" do
@@ -50,7 +58,7 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     visit page_url
     assert_no_selector "div#employee-tabs", text: "Todos"
     assert_no_selector "form#new_todo"
-    assert_no_selectot "tbody#todos"
+    assert_no_selector "tbody#todos"
   end
 
   test "lead can see his own todos" do
@@ -61,6 +69,10 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Todos"
     assert_selector "form#new_todo"
     assert_selector "tbody#todos"
+
+    #can see delete button for his created todos
+    #can not see delete button for his not created todos
+
   end
 
   test "manager can not see someone elses todos" do
@@ -71,7 +83,7 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     visit page_url
     assert_no_selector "div#employee-tabs", text: "Todos"
     assert_no_selector "form#new_todo"
-    assert_no_selectot "tbody#todos"
+    assert_no_selector "tbody#todos"
   end
 
   test "manager can see his own todos" do
@@ -82,6 +94,10 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Todos"
     assert_selector "form#new_todo"
     assert_selector "tbody#todos"
+
+    #can see delete button for his created todos
+    #can not see delete button for his not created todos
+
   end
 
   test "member can see own todos" do
@@ -92,6 +108,10 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Todos"
     assert_selector "form#new_todo"
     assert_selector "tbody#todos"
+
+    #can see delete button for his created todos
+    #can not see delete button for his not created todos
+
   end
 
   test "member can not see someone elsees todo" do
@@ -102,6 +122,6 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     visit page_url
     assert_no_selector "div#employee-tabs", text: "Todos"
     assert_no_selector "form#new_todo"
-    assert_no_selectot "tbody#todos"
+    assert_no_selector "tbody#todos"
   end
 end
