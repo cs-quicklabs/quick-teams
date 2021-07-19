@@ -3,10 +3,6 @@ class User::SchedulePolicy < User::BaseUserPolicy
     user.admin?
   end
 
-  def create?
-    user.admin?
-  end
-
   def index?
     employee = record.first
 
@@ -21,5 +17,19 @@ class User::SchedulePolicy < User::BaseUserPolicy
 
   def edit?
     user.admin?
+  end
+
+  def create?
+    employee = record.first
+    return false unless employee.active?
+    return true if user.admin?
+    false
+  end
+
+  def show?
+    employee = record.first
+    return true if user.admin?
+    return true if user.lead? and user.subordinate?(employee)
+    user.id == employee.id
   end
 end

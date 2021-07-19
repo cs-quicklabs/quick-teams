@@ -14,4 +14,8 @@ class User::TodoPolicy < User::BaseUserPolicy
   def destroy?
     true
   end
+
+  def show?
+    true
+  end
 end

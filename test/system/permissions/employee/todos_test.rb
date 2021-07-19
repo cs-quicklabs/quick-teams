@@ -11,4 +11,97 @@ class EmployeeTodosTest < ApplicationSystemTestCase
   def page_url
     employee_todos_url(script_name: "/#{@account.id}", employee_id: @employee.id)
   end
+
+  test "admin can see employee todos" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Todos"
+    assert_selector "form#new_todo"
+    assert_selector "tbody#todos"
+  end
+
+  test "admin can see his own todos" do
+    sign_out @employee
+    @employee = users(:admin)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Todos"
+    assert_selector "form#new_todo"
+    assert_selector "tbody#todos"
+  end
+
+  test "lead can see subordinate todos" do
+    sign_out @employee
+    @employee = users(:lead).subordinates.first
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Todos"
+    assert_selector "form#new_todo"
+    assert_selector "tbody#todos"
+  end
+
+  test "lead can not see someone elses todos" do
+    sign_out @employee
+    @lead = users(:lead)
+    sign_in @lead
+    @employee = users(:admin)
+    visit page_url
+    assert_no_selector "div#employee-tabs", text: "Todos"
+    assert_no_selector "form#new_todo"
+    assert_no_selectot "tbody#todos"
+  end
+
+  test "lead can see his own todos" do
+    sign_out @employee
+    @employee = users(:lead)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Todos"
+    assert_selector "form#new_todo"
+    assert_selector "tbody#todos"
+  end
+
+  test "manager can not see someone elses todos" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:admin)
+    visit page_url
+    assert_no_selector "div#employee-tabs", text: "Todos"
+    assert_no_selector "form#new_todo"
+    assert_no_selectot "tbody#todos"
+  end
+
+  test "manager can see his own todos" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Todos"
+    assert_selector "form#new_todo"
+    assert_selector "tbody#todos"
+  end
+
+  test "member can see own todos" do
+    sign_out @employee
+    @employee = users(:member)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Todos"
+    assert_selector "form#new_todo"
+    assert_selector "tbody#todos"
+  end
+
+  test "member can not see someone elsees todo" do
+    sign_out @employee
+    @member = users(:member)
+    sign_in @member
+    @employee = users(:admin)
+    visit page_url
+    assert_no_selector "div#employee-tabs", text: "Todos"
+    assert_no_selector "form#new_todo"
+    assert_no_selectot "tbody#todos"
+  end
 end

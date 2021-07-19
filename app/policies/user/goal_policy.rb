@@ -4,17 +4,28 @@ class User::GoalPolicy < User::BaseUserPolicy
   end
 
   def create?
-    user.admin?
+    employee = record.first
+
+    return false unless employee.active?
+    return true if user.admin?
+    return true if user.lead? and user.subordinate?(employee)
+    false
   end
 
   def index?
-    true
-  end
-
-  def show?
     return true if user.admin?
     return self_or_subordinate? if user.lead?
     self?
+  end
+
+  def edit?
+    return true if user.admin?
+    return user.subordinate?(record.first) if user.lead?
+    false
+  end
+
+  def update?
+    edit? && goal.progress?
   end
 
   def comment?
@@ -48,6 +59,13 @@ class User::GoalPolicy < User::BaseUserPolicy
   def editable?
     return true if user.admin?
     return subordinate? if user.lead?
+    false
+  end
+
+  def comment?
+    employee = record.first
+    return true if user.admin?
+    return true if user.lead? and user.subordinate?(employee)
     false
   end
 end

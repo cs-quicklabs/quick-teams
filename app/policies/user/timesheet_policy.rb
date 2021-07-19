@@ -7,12 +7,15 @@ class User::TimesheetPolicy < User::BaseUserPolicy
     true
   end
 
-  def index?
-    true
-  end
-
   def destroy?
     timesheet = record.last
     user.admin? or timesheet.user == user
+  end
+
+  def index?
+    employee = record.first
+    return true if user.admin?
+    return true if user.lead? and user.subordinate?(employee)
+    user.id == employee.id
   end
 end
