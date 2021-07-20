@@ -2,8 +2,8 @@ class User::BaseUserPolicy < ApplicationPolicy
   def index?
     employee = record.first
     return true if user.admin?
-    return self_or_subordinate? if user.lead?
-    false
+    return true if user.lead? and user.subordinate?(employee)
+    user.id == employee.id
   end
 
   def create?

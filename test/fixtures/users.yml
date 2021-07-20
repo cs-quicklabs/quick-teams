@@ -296,3 +296,17 @@ unconfirmed:
   status: deployed
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+subordinate:
+  first_name: Aashish
+  last_name: Dhawan (Subordinate)
+  active: true
+  email: subordinate@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: lead
+  permission: member
+  status: deployed
+  people_tags: star

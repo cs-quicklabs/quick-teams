@@ -3,7 +3,7 @@ class User::TodoPolicy < User::BaseUserPolicy
     employee = record.first
     return false unless employee.active?
     return true if user.admin?
-    return subordinate? if user.lead?
+    return self_or_subordinate? if user.lead?
     self?
   end
 
@@ -12,6 +12,11 @@ class User::TodoPolicy < User::BaseUserPolicy
   end
 
   def destroy?
-    true
+    employee = record.first
+    todo = record.last
+    return false unless employee.active?
+    return true if user.admin?
+    return true if todo.user_id == user.id
+    false
   end
 end
