@@ -1,7 +1,7 @@
   <% skills.uniq.each do |skill| %>
   <span class="ml-2 inline-flex rounded items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-gray-100 text-gray-700">
    <a href="<%= skills_reports_path(ids: skill.id)%>" class="hover:underline"> 
-   <%= skill.name %>
+    <%= skill.name %>
    </a>
     <button id="remove" data-reflex="click->EmployeeSkills#remove" data-skill-id=<%= skill.id%> data-employee-id=<%= employee.id%> type="button" class="flex-shrink-0 ml-0.5 h-4 w-4 rounder inline-flex items-center justify-center text-gray-400 hover:bg-gray-200 hover:text-gray-500 focus:outline-none focus:bg-gray-500 focus:text-white">
       <svg class="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
