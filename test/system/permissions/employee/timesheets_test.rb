@@ -16,4 +16,25 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
   def subordinate_page_url
     employee_timesheets_url(script_name: "/#{@account.id}", employee_id: @employee.subordinates.first.id)
   end
+
+  test "admin can see timesheets for other employee" do
+  end
+
+  test "admin can see his own timesheets" do
+  end
+
+  test "lead can see his timesheets" do
+  end
+
+  test "lead can see his subordiates timesheet" do
+  end
+
+  test "lead can not see someone elseses timesheet" do
+  end
+
+  test "member can see his timesheet" do
+  end
+
+  test "member can not see someone elses timesheet" do
+  end
 end

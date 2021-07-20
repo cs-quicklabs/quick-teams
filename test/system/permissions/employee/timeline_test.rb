@@ -11,4 +11,13 @@ class EmployeeTimelineTest < ApplicationSystemTestCase
   def page_url
     employee_timeline_url(script_name: "/#{@account.id}", employee_id: @employee.id)
   end
+
+  test "admin can see timeline" do
+  end
+
+  test "lead can not see timeline" do
+  end
+
+  test "memeber can not see timeline" do
+  end
 end

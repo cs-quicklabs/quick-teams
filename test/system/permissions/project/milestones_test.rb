@@ -40,6 +40,8 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_detail_url
     assert_selector "div#milestone-detail"
+    #can see edit
+    #can comment
   end
 
   test "lead can not see project milestone" do
@@ -103,6 +105,8 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_detail_url
     assert_selector "div#milestone-detail"
+    # can edit milestone
+    # can comment on milestone
   end
 
   test "manager can not see project milestones for different project" do
