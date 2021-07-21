@@ -13,11 +13,26 @@ class EmployeeTimelineTest < ApplicationSystemTestCase
   end
 
   test "admin can see timeline" do
+    sign_out @employee
+    @employee = users(:super)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Timeline"
   end
 
   test "lead can not see timeline" do
+    sign_out @employee
+    @employee = users(:lead)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Timeline"
   end
 
   test "memeber can not see timeline" do
+    sign_out @employee
+    @employee = users(:member)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Timeline"
   end
 end
