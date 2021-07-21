@@ -17,4 +17,23 @@ class User::TimesheetPolicy < User::BaseUserPolicy
     timesheet = record.last
     user.admin? or timesheet.user == user
   end
+
+  def show_add_timesheet_form?
+    employee = record.first
+    employee.active && (employee.id == user.id) && employee.projects.size > 0
+  end
+
+  def show_timesheet_stats?
+    !show_add_timesheet_form?
+  end
+
+  def show_timesheet_stats_menu?
+    employee = record.first
+    show_timesheet_stats? && employee.active
+  end
+
+  def show_add_goal_form?
+    employee = record.first
+    employee.active
+  end
 end

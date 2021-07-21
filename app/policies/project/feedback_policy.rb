@@ -25,4 +25,9 @@ class Project::FeedbackPolicy < Project::BaseProjectPolicy
     return true if user.admin?
     user.is_manager?(project) and feedback.user == user
   end
+
+  def show_add_feedback_form?
+    project = record.first
+    !project.archived
+  end
 end

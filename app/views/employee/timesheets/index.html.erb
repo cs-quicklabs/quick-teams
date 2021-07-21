@@ -1,4 +1,3 @@
-<% presenter = UserPresenter.new(@employee) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <%= render "employee/title", employee: @employee%>
   <main class="pb-8">
@@ -42,7 +41,7 @@
             </div>
           </section>
         </div>
-        <% if presenter.show_add_timesheet_form(current_user) %>
+        <% if policy([@employee, Timesheet]).show_add_timesheet_form? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
@@ -54,13 +53,13 @@
             </section>
           </div>
         <% end %>
-        <% if presenter.show_timesheet_stats(current_user) %>
+        <% if policy([@employee, Timesheet]).show_timesheet_stats? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <% if presenter.show_timesheet_stats_menu(current_user) %>
+                  <% if policy([@employee, Timesheet]).show_timesheet_stats_menu? %>
                     <div class="flex justify-center mt-4" data-employee-id="<%= @employee.id %>">
                       <span class="relative z-0 inline-flex rounded-md shadow-sm">
                         <button type="button" data-reflex="click->EmployeeTimesheetsStats#last_week" data-reflex-dataset="combined" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
