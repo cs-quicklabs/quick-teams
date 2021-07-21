@@ -13,17 +13,46 @@ class EmployeeTeamTest < ApplicationSystemTestCase
   end
 
   test "admin can see team" do
+    sign_out @employee
+    @employee = users(:super)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Team"
   end
 
   test "lead can see his team" do
+    sign_out @employee
+    @employee = users(:lead)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Team"
   end
 
   test "lead can see his subordinate team" do
+    sign_out @employee
+    @lead = users(:lead)
+    sign_in @lead
+    @employee = @lead.subordinates.first
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Team"
   end
 
   test "lead can not see team of other employee" do
+    sign_out @employee
+    @lead = users(:lead)
+    sign_in @lead
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @lead.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Team"
   end
 
   test "member can not see team " do
+    sign_out @employee
+    @employee = users(:member)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#employee-tabs", text: "Team"
   end
 end
