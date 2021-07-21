@@ -23,7 +23,7 @@ three:
   account: crownstack
 
 four:
-  title: Some Random Goal third
+  title: Some Random Goal four
   user: regular
   goalable_type: Project
   goalable: unarchived
@@ -32,7 +32,7 @@ four:
   status: progress
 
 five:
-  title: Some Random Goal third
+  title: Some Random Goal five
   user: regular
   goalable_type: Project
   goalable: managed
@@ -40,7 +40,7 @@ five:
   account: crownstack
 
 six:
-  title: Some Random Goal third
+  title: Some Random Goal six
   user: manager
   goalable_type: Project
   goalable: managed

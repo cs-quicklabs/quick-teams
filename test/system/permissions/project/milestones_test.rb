@@ -6,6 +6,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     @account = @employee.account
     ActsAsTenant.current_tenant = @account
     @project = projects(:managed)
+    @milestone = @project.milestones.first
     sign_in @employee
   end
 
@@ -14,7 +15,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   end
 
   def page_detail_url
-    project_milestone_url(script_name: "/#{@account.id}", project_id: @project.id, id: @project.milestones.first.id)
+    project_milestone_url(script_name: "/#{@account.id}", project_id: @project.id, id: @milestone.id)
   end
 
   test "admin can see project milestones" do
@@ -24,14 +25,11 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#project-tabs", text: "Milestones"
     assert_selector "form#new_goal"
-    milestone = @project.milestones.first
-    assert_selector "div#buttons_#{dom_id(milestone)}", text: "Show"
-    assert_selector "div#buttons_#{dom_id(milestone)}", text: "Edit"
-    assert_selector "div#buttons_#{dom_id(milestone)}", text: "Delete"
-    milestone = @project.milestones.last
-    assert_selector "div#buttons_#{dom_id(milestone)}", text: "Show"
-    assert_selector "div#buttons_#{dom_id(milestone)}", text: "Edit"
-    assert_selector "div#buttons_#{dom_id(milestone)}", text: "Delete"
+    @project.milestones.each do |milestone|
+      assert_selector "div#buttons_#{dom_id(milestone)}", text: "Show"
+      assert_selector "div#buttons_#{dom_id(milestone)}", text: "Edit"
+      assert_selector "div#buttons_#{dom_id(milestone)}", text: "Delete"
+    end
   end
 
   test "admin can see project milestone details" do
@@ -41,7 +39,9 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     visit page_detail_url
     assert_selector "div#milestone-detail"
     #can see edit
+    assert_selector "a", text: "Edit"
     #can comment
+    assert_selector "div#add"
   end
 
   test "lead can not see project milestone" do
@@ -105,8 +105,9 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_detail_url
     assert_selector "div#milestone-detail"
-    # can edit milestone
+
     # can comment on milestone
+    assert_selector "div#add"
   end
 
   test "manager can not see project milestones for different project" do
