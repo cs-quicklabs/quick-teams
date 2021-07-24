@@ -18,6 +18,12 @@ class User::GoalPolicy < User::BaseUserPolicy
     false
   end
 
+  def show?
+    return true if user.admin?
+    return (goal_for_subordinate? or self?) if user.lead?
+    self?
+  end
+
   def update?
     edit? && goal.progress?
   end

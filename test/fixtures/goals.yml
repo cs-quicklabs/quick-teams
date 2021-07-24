@@ -47,3 +47,48 @@ six:
   deadline: 2021-06-30
   account: crownstack
   status: progress
+
+seven:
+  title: Some Random Goal seven
+  user: admin
+  goalable_type: User
+  goalable: admin
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+eight:
+  title: Some Random Goal eight
+  user: admin
+  goalable_type: User
+  goalable: lead
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+nine:
+  title: Some Random Goal nine
+  user: admin
+  goalable_type: User
+  goalable: member
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+ten:
+  title: Some Random Goal ten
+  user: admin
+  goalable_type: User
+  goalable: super
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+eleven:
+  title: Some Random Goal eleven
+  user: admin
+  goalable_type: User
+  goalable: subordinate
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
