@@ -176,6 +176,15 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     assert_no_selector "textarea#comment"
   end
 
+  test "member can not see someone elses goals" do
+    sign_out @employee
+    @member = users(:member)
+    sign_in @member
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @member.decorate.display_name
+  end
+
   test "member can not see someone elses goal details" do
     sign_out @employee
     @member = users(:member)

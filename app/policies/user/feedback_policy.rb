@@ -23,11 +23,16 @@ class User::FeedbackPolicy < User::BaseUserPolicy
     false
   end
 
+  def show?
+    return true if user.admin?
+    return (feedback_for_subordinate? or self?) if user.lead?
+    self?
+  end
+
   private
 
   def feedback_for_subordinate?
     feedback = record.last
     user.subordinate?(feedback.critiquable)
   end
-
 end

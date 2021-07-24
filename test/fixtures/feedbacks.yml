@@ -21,3 +21,47 @@ four:
   user: manager
   critiquable_type: Project
   critiquable: managed
+
+five:
+  title: Some Random Feedback five
+  user: admin
+  critiquable_type: User
+  critiquable: admin
+
+six:
+  title: Some Random Feedback six
+  user: admin
+  critiquable_type: User
+  critiquable: lead
+
+seven:
+  title: Some Random Feedback seven
+  user: admin
+  critiquable_type: User
+  critiquable: member
+
+eight:
+  title: Some Random Feedback eight
+  user: admin
+  critiquable_type: User
+  critiquable: super
+
+nine:
+  title: Some Random Feedback nine
+  user: admin
+  critiquable_type: User
+  critiquable: subordinate
+
+ten:
+  title: Some Random Feedback ten
+  user: admin
+  critiquable_type: User
+  critiquable: member
+  published: true
+
+eleven:
+  title: Some Random Feedback eleven
+  user: admin
+  critiquable_type: User
+  critiquable: lead
+  published: true
