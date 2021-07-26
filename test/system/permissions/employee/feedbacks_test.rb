@@ -78,7 +78,7 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     assert_no_selector "form#new_feedback"
     # can not edit, delete feedback for himself
     @employee.feedbacks.each do |feedback|
-      if feeback.published?
+      if feedback.published?
         assert_selector "li##{dom_id(feedback)}", text: "Show"
         assert_no_selector "li##{dom_id(feedback)}", text: "Edit"
         assert_no_selector "li##{dom_id(feedback)}", text: "Delete"

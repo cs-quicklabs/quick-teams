@@ -28,10 +28,6 @@ class User::GoalPolicy < User::BaseUserPolicy
     edit? && goal.progress?
   end
 
-  def comment?
-    editable?
-  end
-
   def destroy?
     editable?
   end
