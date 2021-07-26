@@ -36,7 +36,7 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_url
     assert_selector "div#employee-tabs", text: "Timesheets"
-    assert_selector "div#stats"
+    assert_selector "form#new_timesheet"
     @employee.timesheets.each do |timesheet|
       assert_selector "div##{dom_id(timesheet)}", text: "Delete"
     end
