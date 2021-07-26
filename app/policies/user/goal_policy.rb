@@ -25,6 +25,7 @@ class User::GoalPolicy < User::BaseUserPolicy
   end
 
   def update?
+    goal = record.last
     edit? && goal.progress?
   end
 
