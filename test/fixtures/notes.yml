@@ -1,23 +1,23 @@
 one:
-  body: this is some note
+  body: this is some note one
   notable_type: Project
   user: regular
   notable: one
 
 two:
-  body: this is some note
+  body: this is some note two
   notable_type: Project
   user: manager
   notable: one
 
 three:
-  body: this is some note
+  body: this is some note three
   notable_type: Project
   user: regular
   notable: managed
 
 four:
-  body: this is some note
+  body: this is some note four
   notable_type: Project
   user: manager
   notable: managed
