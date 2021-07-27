@@ -115,6 +115,15 @@ class UserPolicy < ApplicationPolicy
   def show_todo?
     true
   end
+  def show_documents?
+    true
+  end
+  def add_document_form
+    true
+  end
+  def create_document?
+    true
+  end
 
   def create_todo?
     true
@@ -125,6 +134,7 @@ class UserPolicy < ApplicationPolicy
     return true if user.lead? and user.subordinate?(record)
     user.id == record.id
   end
+  
 
   private
 

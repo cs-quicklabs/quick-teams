@@ -13,6 +13,7 @@ class Project::FeedbacksController < Project::BaseController
     authorize [:project, Feedback]
 
     @feedback = AddProjectFeedback.call(@project, feedback_params, current_user).result
+    binding.irb
     respond_to do |format|
       if @feedback.persisted?
         format.turbo_stream {
