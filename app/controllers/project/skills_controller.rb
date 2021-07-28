@@ -3,6 +3,8 @@ class Project::SkillsController < Project::BaseController
     authorize [@project, Skill]
 
     @skill = Skill.new
-    @skills = @project.skills
+    @skills = @project.skills.order("lower(name) asc")
+  
+
   end
 end
