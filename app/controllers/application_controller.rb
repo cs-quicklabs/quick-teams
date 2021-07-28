@@ -29,10 +29,9 @@ class ApplicationController < ActionController::Base
   def show_confirmation_alert(title, message)
     respond_to do |format|
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("modal", partial: "shared/modal", locals: { title: title, message: message, main_button_visible: true  })
+        render turbo_stream: turbo_stream.replace("modal", partial: "shared/modal", locals: { title: title, message: message, main_button_visible: true })
       }
     end
-
   end
 
   etag { heroku_version }

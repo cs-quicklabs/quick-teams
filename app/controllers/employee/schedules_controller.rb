@@ -3,7 +3,7 @@ class Employee::SchedulesController < Employee::BaseController
   before_action :set_project, only: %i[ update create ]
 
   def index
-    authorize @employee, :show_schedules?
+    authorize [@employee, Schedule]
 
     @schedule = Schedule.new
     @schedules = Schedule.where(user: @employee).includes(:project, :user).order(created_at: :desc)
@@ -12,7 +12,7 @@ class Employee::SchedulesController < Employee::BaseController
   end
 
   def update
-    authorize [:employee, @schedule]
+    authorize [@employee, @schedule]
 
     @schedule = UpdateSchedule.call(@schedule, @project, @employee, schedule_params, current_user).result
 
@@ -26,7 +26,7 @@ class Employee::SchedulesController < Employee::BaseController
   end
 
   def create
-    authorize [:employee, Schedule]
+    authorize [@employee, Schedule]
 
     @schedule = UpdateSchedule.call(Schedule.new, @project, @employee, schedule_params, current_user).result
 
@@ -43,11 +43,11 @@ class Employee::SchedulesController < Employee::BaseController
   end
 
   def edit
-    authorize [:employee, @schedule]
+    authorize [@employee, @schedule]
   end
 
   def destroy
-    authorize [:employee, @schedule]
+    authorize [@employee, @schedule]
 
     @schedule = RemoveSchedule.call(@schedule, current_user).result
     respond_to do |format|

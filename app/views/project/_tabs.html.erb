@@ -1,4 +1,4 @@
-<div>
+<div id="project-tabs">
   <div class="sm:hidden">
     <label for="tabs" class="sr-only">Select a tab</label>
     <select id="tabs" name="tabs" class="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -11,9 +11,11 @@
   <div class="hidden sm:block">
     <div class="border-b border-gray-200">
       <nav class="flex -mb-px space-x-8 lg:px-6" aria-label="Tabs">
-        <a href="<%= project_timeline_path %>" class="<%= current_page?(project_timeline_path) ? "selected-tab" : "unselected-tab"%>">
-          Timeline
-        </a>
+        <% if current_user.admin? %>
+          <a href="<%= project_timeline_path %>" class="<%= current_page?(project_timeline_path) ? "selected-tab" : "unselected-tab"%>">
+            Timeline
+          </a>
+        <% end %>
         <a href="<%= project_schedules_path %>" class="<%= current_page?(project_schedules_path) ? "selected-tab" : "unselected-tab"%>">
           Schedules
         </a>
@@ -25,12 +27,15 @@
         </a>
         <a href="<%= project_milestones_path %>" class="<%= current_page?(project_milestones_path) ? "selected-tab" : "unselected-tab"%>">
           Milestones
-        </a>        
+        </a>
         <a href="<%= project_todos_path %>" class="<%= current_page?(project_todos_path) ? "selected-tab" : "unselected-tab"%>">
           Todos
         </a>
         <a href="<%= project_timesheets_path %>" class="<%= current_page?(project_timesheets_path) ? "selected-tab" : "unselected-tab"%>">
           Timesheets
+        </a>
+        <a href="<%= project_skills_path %>" class="<%= current_page?(project_skills_path) ? "selected-tab" : "unselected-tab"%>">
+          TechStack
         </a>
       </nav>
     </div>

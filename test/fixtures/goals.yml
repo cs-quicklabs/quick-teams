@@ -23,10 +23,72 @@ three:
   account: crownstack
 
 four:
-  title: Some Random Goal third
+  title: Some Random Goal four
   user: regular
   goalable_type: Project
   goalable: unarchived
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+five:
+  title: Some Random Goal five
+  user: regular
+  goalable_type: Project
+  goalable: managed
+  deadline: 2021-06-30
+  account: crownstack
+
+six:
+  title: Some Random Goal six
+  user: manager
+  goalable_type: Project
+  goalable: managed
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+seven:
+  title: Some Random Goal seven
+  user: admin
+  goalable_type: User
+  goalable: admin
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+eight:
+  title: Some Random Goal eight
+  user: admin
+  goalable_type: User
+  goalable: lead
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+nine:
+  title: Some Random Goal nine
+  user: admin
+  goalable_type: User
+  goalable: member
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+ten:
+  title: Some Random Goal ten
+  user: admin
+  goalable_type: User
+  goalable: super
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+
+eleven:
+  title: Some Random Goal eleven
+  user: admin
+  goalable_type: User
+  goalable: subordinate
   deadline: 2021-06-30
   account: crownstack
   status: progress

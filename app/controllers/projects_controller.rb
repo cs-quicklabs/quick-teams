@@ -4,12 +4,12 @@ class ProjectsController < BaseController
   def index
     authorize :projects
 
-    @projects = Project.active.includes(:discipline, :participants, :manager, :status, :project_tags).order(:name)
+    @projects = policy_scope(Project)
     fresh_when @projects
   end
 
   def show
-    authorize :projects
+    authorize @project
 
     redirect_to project_schedules_path(@project)
   end

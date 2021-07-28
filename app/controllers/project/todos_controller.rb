@@ -2,7 +2,7 @@ class Project::TodosController < Project::BaseController
   before_action :set_todo, only: %i[destroy]
 
   def index
-    authorize [:project, Todo]
+    authorize [@project, Todo]
 
     @todo = Todo.new
     @pagy, @todos = pagy_nil_safe(@project.todos.includes({ user: [:role, :job] }).order(created_at: :desc), items: LIMIT)
@@ -10,7 +10,7 @@ class Project::TodosController < Project::BaseController
   end
 
   def create
-    authorize [:project, Todo]
+    authorize [@project, Todo]
 
     @todo = AddProjectTodo.call(@project, todo_params, current_user).result
     respond_to do |format|
@@ -26,7 +26,7 @@ class Project::TodosController < Project::BaseController
   end
 
   def destroy
-    authorize [:project, @todo]
+    authorize [@project, @todo]
 
     @todo = RemoveTodo.call(@todo, current_user).result
     respond_to do |format|

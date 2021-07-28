@@ -25,6 +25,7 @@ class User < ApplicationRecord
   has_many :events, as: :eventable
   has_many :notes
   has_many :timesheets
+  has_many :managed_projects, class_name: "Project", foreign_key: "manager_id"
   has_many :todos, class_name: "Todo", foreign_key: "owner_id"
   has_many :created_todos, class_name: "Todo", foreign_key: "user_id"
 
@@ -65,5 +66,13 @@ class User < ApplicationRecord
 
   def active_for_authentication?
     super and active
+  end
+
+  def has_managed_projects?
+    managed_projects.count
+  end
+
+  def is_manager?(project)
+    project.manager == self
   end
 end

@@ -27,9 +27,11 @@ class EmployeeTodosTest < ApplicationSystemTestCase
 
   test "can redirect to employee detail page on project click" do
     visit page_url
-    project = @employee.projects.first
-    click_on "#{project.name}"
-    assert_selector "a", text: "#{project.name}"
+    todo = @employee.todos.first
+    within "tr##{dom_id(todo)}" do
+      click_on "#{todo.project.name}"
+    end
+    assert_selector "a", text: "#{todo.project.name}"
   end
 
   test "can add new todo" do

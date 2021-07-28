@@ -12,20 +12,22 @@
       </a>
     </div>
   </td>
-  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
-    <% project.project_tags.uniq.each do |tag| %>
-      <a href="<%= projects_reports_path(tag: tag.id)%>" class="hover:underline">
-        <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= tag.color %>-800 bg-<%= tag.color %>-100 rounded-full">
-          <%= tag.name  %>
-        </span>
-      </a>
-    <%end %>
-  </td>
-  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
-    <% if !project.billable_resources.nil? %>
-      <%= project.billable_resources.to_s %>
-    <%end %>
-  </td>
+  <% if current_user.admin? %>
+    <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+      <% project.project_tags.uniq.each do |tag| %>
+        <a href="<%= projects_reports_path(tag: tag.id)%>" class="hover:underline">
+          <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= tag.color %>-800 bg-<%= tag.color %>-100 rounded-full">
+            <%= tag.name  %>
+          </span>
+        </a>
+      <%end %>
+    </td>
+    <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+      <% if !project.billable_resources.nil? %>
+        <%= project.billable_resources.to_s %>
+      <%end %>
+    </td>
+  <% end %>
   <td class="px-6 py-3 text-sm font-medium text-gray-500">
     <div class="flex items-center space-x-2">
       <div class="flex flex-shrink-0 -space-x-1">

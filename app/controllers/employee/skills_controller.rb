@@ -1,6 +1,6 @@
 class Employee::SkillsController < Employee::BaseController
   def index
-    authorize @employee, :show_skills?
+    authorize [@employee, Skill]
 
     @skill = Skill.new
     @skills = @employee.skills

@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   require "sidekiq-scheduler/web"
 
   mount Sidekiq::Web => "/sidekiq"
+  mount ActionCable.server => "/cable"
+  if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 
   namespace :account do
     resources :roles, except: [:new, :show]
@@ -52,13 +56,10 @@ Rails.application.routes.draw do
 
   get "/schedule", to: "schedules#index", as: "schedules"
   get "search/people-projects", to: "search#people_projects"
-  get "/search/skills", to: "search#skills"
+  get "/search/employee/skills", to: "search#employee_skills"
+  get "/search/project/skills", to: "search#project_skills"
   get :goals, controller: :home
   get :events, controller: :home
-
-  if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
 
   scope "/settings" do
     get "/profile", to: "user#profile", as: "profile"

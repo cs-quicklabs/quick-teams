@@ -1,4 +1,4 @@
-class Project::TimelinePolicy < Struct.new(:user, :timeline)
+class Project::TimelinePolicy < Project::BaseProjectPolicy
   def index?
     user.admin?
   end

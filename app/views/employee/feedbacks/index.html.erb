@@ -1,4 +1,3 @@
-<% presenter = UserPresenter.new(@employee) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <%= render "employee/title", employee: @employee%>
   <main class="pb-8">
@@ -8,7 +7,6 @@
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2" data-controller="infinite-scroll">
           <section aria-labelledby="participants_section">
-            <h2 class="sr-only" id="section-1-title">Employee Feedbacks</h2>
             <div class="overflow-hidden bg-white">
               <div class="p-4">
                 <div class="flex flex-wrap">
@@ -24,11 +22,10 @@
             </div>
           </section>
         </div>
-        <% if policy(@employee).create_feedback? %>
+        <% if policy([@employee, Feedback]).create? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
-              <h2 class="sr-only" id="section-2-title">Add New Feedback</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
                   <%= render "employee/feedbacks/form", feedback: @feedback%>

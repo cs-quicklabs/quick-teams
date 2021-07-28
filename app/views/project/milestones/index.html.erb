@@ -1,15 +1,12 @@
-<% presenter = ProjectPresenter.new(@project) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <%= render "project/title", project: @project%>
   <main class="pb-8">
     <div class="px-4 sm:px-6">
-      <h1 class="sr-only">Page title</h1>
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2" data-controller="infinite-scroll">
           <section aria-labelledby="participants_section">
-            <h2 class="sr-only" id="section-1-title">Project Milestones</h2>
             <div class="overflow-hidden bg-white">
               <div class="p-4">
                 <div class="flex flex-wrap">
@@ -25,11 +22,10 @@
             </div>
           </section>
         </div>
-        <% if presenter.show_add_milestone_form %>
+        <% if policy([@project, @milestone]).create? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
-              <h2 class="sr-only" id="section-2-title">Add New Milestone</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
                   <%= render partial: "project/milestones/form", locals: { milestone: @milestone }%>

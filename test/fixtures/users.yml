@@ -75,6 +75,8 @@ one:
   discipline: engineering
   manager: regular
   confirmed_at: 2021-03-18
+  people_tags: star
+  status: deployed
 
 two:
   first_name: Two Active
@@ -248,6 +250,38 @@ member:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   confirmed_at: 2021-03-18
 
+manager:
+  first_name: Aashish
+  last_name: Dhawan (Manager)
+  active: true
+  email: manager@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+  permission: member
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: 2021-03-18
+
+super:
+  first_name: Aashish
+  last_name: Dhawan (Admin)
+  active: true
+  email: super@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: actor
+  permission: admin
+  status: deployed
+  people_tags: star
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: 2021-03-18
+
 unconfirmed:
   first_name: Aashish
   last_name: Dhawan (Member)
@@ -262,3 +296,17 @@ unconfirmed:
   status: deployed
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+subordinate:
+  first_name: Aashish
+  last_name: Dhawan (Subordinate)
+  active: true
+  email: subordinate@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: lead
+  permission: member
+  status: deployed
+  people_tags: star

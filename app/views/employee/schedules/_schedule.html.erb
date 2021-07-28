@@ -42,7 +42,7 @@
               <% end %>
             </div>
           <% end %>
-          <% if policy([:employee, schedule]).update? %>
+          <% if policy([@employee, schedule]).update? %>
             <div class="flex">
               <div class="whitespace-nowrap">
                 <div class="text-sm text-gray-900"><%= link_to "Edit", edit_employee_schedule_path(@employee, schedule), class: "btn-inline-edit" %></div>

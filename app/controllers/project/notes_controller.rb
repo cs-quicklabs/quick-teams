@@ -2,15 +2,15 @@ class Project::NotesController < Project::BaseController
   before_action :set_note, only: %i[ destroy edit update ]
 
   def index
-    authorize [:project, Note]
+    authorize [@project, Note]
 
     @note = Note.new
     @pagy, @notes = pagy_nil_safe(@project.notes.includes(:user).order(created_at: :desc), items: LIMIT)
-    render_partial("project/notes/note", collection: @notes) if stale?(@notes + [@project]) 
+    render_partial("project/notes/note", collection: @notes) if stale?(@notes + [@project])
   end
 
   def destroy
-    authorize [:project, @note]
+    authorize [@project, @note]
 
     @note.destroy
     Event.where(eventable: @project, trackable: @note).touch_all #fixes cache issues in activity
@@ -20,11 +20,11 @@ class Project::NotesController < Project::BaseController
   end
 
   def edit
-    authorize [:project, @note]
+    authorize [@project, @note]
   end
 
   def update
-    authorize [:project, @note]
+    authorize [@project, @note]
 
     respond_to do |format|
       if @note.update(note_params)
@@ -36,7 +36,7 @@ class Project::NotesController < Project::BaseController
   end
 
   def create
-    authorize [:project, Note]
+    authorize [@project, Note]
 
     @note = AddNote.call(@project, note_params, current_user).result
     respond_to do |format|
