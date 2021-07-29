@@ -1,5 +1,3 @@
-
-
 <div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <!-- Page title & actions -->
   <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
@@ -13,10 +11,9 @@
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
     <%= render partial: "form"%>
-
-      <div class="w-full overflow-hidden" data-controller="infinite-scroll">
-        <!-- This example requires Tailwind CSS v2.0+ -->
-       <% if @skill_reports.size > 0 %>
+    <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+      <!-- This example requires Tailwind CSS v2.0+ -->
+      <% if @skill_reports.size > 0 %>
         <table class="min-w-full pb-6 divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -30,14 +27,14 @@
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
             <%= render partial: "list", collection: @skill_reports, as: :skill_report %>
-          </tbody> 
+          </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-              <%= render partial: "shared/paginator", locals:{pagy: @pagy}%>
-            </div>
-        <% else %>
-           <%== render partial: "shared/no_result_found", cached: true%>
-        <% end%>
-      </div>
+          <%= render partial: "shared/paginator", locals:{pagy: @pagy}%>
+        </div>
+      <% else %>
+        <%== render partial: "shared/no_result_found", cached: true%>
+      <% end%>
+    </div>
   </div>
 </div>

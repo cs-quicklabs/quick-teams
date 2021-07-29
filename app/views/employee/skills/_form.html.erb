@@ -9,7 +9,7 @@
             <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Employee Skills"%></p>
           </div>
           <div id="employee-skills" class="flex ml-4 flex-wrap ">
-            <%= render partial: "skills", locals: {skills: skills, employee: employee}, cached: true %>
+            <%= render partial: "skills", locals: {skills: skills, employee: employee, user: user}, cached: true %>
           </div>
         </div>
       </div>

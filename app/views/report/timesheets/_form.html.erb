@@ -18,7 +18,7 @@
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   Select Employee
                 </label>
-                <%= form.collection_select(:user_id, User.for_current_account.active.order(:first_name).decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class=>"form-text-field mt-1" )%>
               </div>
               <div>
                 <label for="billed" class="block text-sm font-medium text-gray-700">

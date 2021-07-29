@@ -4,7 +4,5 @@ class Project::SkillsController < Project::BaseController
 
     @skill = Skill.new
     @skills = @project.skills.order("lower(name) asc")
-  
-
   end
 end
