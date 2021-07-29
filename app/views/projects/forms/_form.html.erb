@@ -12,7 +12,7 @@
       <label for="manager" class="block mt-4 text-sm font-medium text-gray-700">
         Select Manager
       </label>
-      <%= form.collection_select(:manager_id, UserDecorator.decorate_collection(User.for_current_account.active.order(:first_name)), :id, :display_name, {:prompt => 'Select Manager'}, :selected => project.manager_id, :class=>"form-text-field mt-1"  ) %>
+      <%= form.collection_select(:manager_id, UserDecorator.decorate_collection(User.for_current_account.active.order(:first_name)), :id, :display_name_position, {:prompt => 'Select Manager'}, :selected => project.manager_id, :class=>"form-text-field mt-1"  ) %>
     </div>
     <div class="flex items-center justify-between">
       <div class="flex items-center">

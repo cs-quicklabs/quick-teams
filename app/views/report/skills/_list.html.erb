@@ -11,14 +11,9 @@
     <a href="<%= employee_schedules_path(skill_report) %>" class="truncate hover:text-gray-600 hover:underline">
        <div class="text-sm font-medium text-gray-900">
           <%= skill_report.display_name.titleize %>
-            <% unless skill_report.status.nil? %>
-              <span class="inline-flex px-2 text-xs font-semibold leading-5 text-black-800 bg-white-100 rounded-full">
-                <%= skill_report.status.name.titleize %>
-              </span>
-            <% end %>
           </div>
           <div class="text-sm text-gray-500">
-            <%= skill_report.role.name%>
+            <%= skill_report.display_position%>
           </div>
     </a>
     </div>

@@ -1,7 +1,7 @@
 <main class="relative z-0 flex-1 focus:outline-none">
   <%= render "employee/title", employee: @employee%>
   <main class="pb-8">
-    <div class="px-4 sm:px-6" id="skills">
+    <div class="px-4 sm:px-6  " id="skills">
       <%= render partial: "form", locals: {skills: @skills, employee: @employee, skill: @skill}, cached: true %>
     </div>
   </div>

@@ -15,6 +15,7 @@ class Report::SkillsController < Report::BaseController
       render_partial("report/skills/list", collection: @skill_reports, cached: false)
 
     end
+    
     end
 
   
