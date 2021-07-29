@@ -53,7 +53,7 @@
         <% end %>
         <% if policy(employee).show_documents? %>
           <a href="<%= employee_documents_path %>" class="<%= current_page?(employee_documents_path) ? "selected-tab" : "unselected-tab"%>">
-            Files
+            Documents
           </a>
         <% end %>
       </nav>
