@@ -11,9 +11,9 @@
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
     <%= render partial: "form"%>
-    <div class="w-full overflow-hidden" data-controller="infinite-scroll">
-      <!-- This example requires Tailwind CSS v2.0+ -->
-      <% if @skill_reports.size > 0 %>
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <% if @skill_reports.size > 0 %>
+      <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <table class="min-w-full pb-6 divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -32,9 +32,9 @@
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
           <%= render partial: "shared/paginator", locals:{pagy: @pagy}%>
         </div>
-      <% else %>
-        <%== render partial: "shared/no_result_found", cached: true%>
-      <% end%>
-    </div>
+      </div>
+    <% else %>
+      <%== render partial: "shared/no_result_found", cached: true%>
+    <% end%>
   </div>
 </div>
