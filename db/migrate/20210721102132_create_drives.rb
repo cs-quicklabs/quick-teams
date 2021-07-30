@@ -6,8 +6,6 @@ class CreateDrives < ActiveRecord::Migration[6.1]
       t.references :drive, polymorphic: true, null: false
 
       t.timestamps
-
-  
     end
   end
 end

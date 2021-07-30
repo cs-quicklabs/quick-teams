@@ -1,5 +1,5 @@
 class Employee::DocumentsController < Employee::BaseController
-  before_action :set_document, only: %i[show destroy]
+  before_action :set_document, only: %i[destroy]
 
   def index
     authorize [@employee, Document]
@@ -7,7 +7,7 @@ class Employee::DocumentsController < Employee::BaseController
     @document = Document.new
     @pagy, @documents = pagy_nil_safe(Document.where(document_type: "User").includes({ user: [:role, :job] }).order(created_at: :desc))
 
-    render_partial("employee/document/document", collection: @documents, cached: false)
+    render_partial("employee/documents/document", collection: @documents) if stale?(@documents + [@employee])
   end
 
   def create
@@ -34,12 +34,6 @@ class Employee::DocumentsController < Employee::BaseController
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@document) }
     end
-  end
-
-  def show
-    authorize [@employee, @document]
-
-    fresh_when @documents
   end
 
   private
