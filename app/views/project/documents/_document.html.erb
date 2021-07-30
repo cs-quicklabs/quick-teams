@@ -1,0 +1,28 @@
+<tr id="<%= dom_id document %>">
+ <%document = document.decorate %>
+  <td class="pr-20 pl-10 py-4 overflow-hidden text-sm text-gray-700 max-w-0">
+    <a href="<%= document.link %>" target="_blank"  class="block hover:underline" target="_top">
+      <div>
+        <p class="font-medium text-gray-900 max-w-0">
+          <span class="truncate"><%= highlight_hashtag(document.filename.titleize)%></span>
+        </p>
+      </div>
+    </a>
+  </td>
+  <td class=" w-full px-6 py-4 overflow-hidden text-sm text-gray-700 max-w-0">
+    <%= highlight_hashtag(document.comments.titleize) %>
+  </td>
+  <td class="  px-10 py-4 overflow-hidden text-sm text-gray-700 max-w-0  whitespace-nowrap">
+    <a href="<%= employee_documents_path(document.user)%>" class="block hover:underline" target="_top"> 
+    <%= document.user.display_name %>
+  </a>
+  </td>
+  <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+    <%= display_created_at(document) %>
+  </td>
+  <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+  <% if current_user.admin? or @project.manager == current_user %>
+    <%= link_to "Delete", project_document_path(@project, document.id), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
+  <% end %>
+  </td>
+</tr>

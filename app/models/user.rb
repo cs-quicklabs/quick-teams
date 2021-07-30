@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :projects, through: :schedules
   has_many :subordinates, class_name: "User", foreign_key: "manager_id"
   has_many :feedbacks, as: :critiquable
+  has_many :documents, as: :document
   has_many :goals, as: :goalable
   has_many :events, as: :eventable
   has_many :notes
