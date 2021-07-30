@@ -1,0 +1,50 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Nuggets
+      </h1>
+    </div>
+  </div>
+</div>
+  <main class="pb-8">
+    <div class="px-4 sm:px-6">
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2" data-controller="infinite-scroll">
+          <section aria-labelledby="participants_section">
+            <div class="overflow-hidden bg-white">
+              <div class="p-4">
+                <div class="flex flex-wrap">
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Nuggets"%></p>
+                </div>
+                <ul class="space-y-6" id="milestones" data-infinite-scroll-target="entries">
+                 
+                </ul>
+              </div>
+            </div>
+            <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+           
+            </div>
+          </section>
+        </div>
+        <% if policy(@nuggets).create? %>
+          <!-- Right column -->
+          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+            <section aria-labelledby="add-participant-section">
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <%= render partial: "form", locals: { nugget: @nugget }%>
+                </div>
+              </div>
+            </section>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </main>
+  <div class="pt-4 pl-16 pr-16">
+  </div>
+</main>

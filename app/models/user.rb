@@ -10,12 +10,14 @@ class User < ApplicationRecord
   scope :inactive, -> { where(active: false) }
   scope :active, -> { where(active: true) }
   scope :billable, -> { where(billable: true) }
+  scope :all_users, -> { includes(:job, :role, :discipline).where(account: Current.account).active.order(:first_name) }
 
   belongs_to :account
   belongs_to :manager, class_name: "User", optional: true
   belongs_to :discipline
   belongs_to :role
   belongs_to :job
+  
 
   has_many :schedules
   has_many :projects, through: :schedules
@@ -24,6 +26,7 @@ class User < ApplicationRecord
   has_many :goals, as: :goalable
   has_many :events, as: :eventable
   has_many :notes
+  has_many :nuggets
   has_many :timesheets
   has_many :managed_projects, class_name: "Project", foreign_key: "manager_id"
   has_many :todos, class_name: "Todo", foreign_key: "owner_id"

@@ -1,0 +1,20 @@
+<%= turbo_frame_tag dom_id(nugget) do %>
+ <%= form_with(model: nugget, id: dom_id(nugget), url: nuggets_path(@user  )) do |form| %>
+<main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+ 
+    <%= render "shared/form_messages", resource: nugget, message: local_assigns[:message] %>
+       <%= render "shared/form_header", title: "Add New Nugget", subtitle: "Add Nuggets for skill" %>
+     <%= form.text_field :title,  autocomplete: "off"%>
+    <div>
+      <label for="date" class="block text-sm font-medium text-gray-700">
+        Deadline
+      </label>
+      <%= form.date_field :deadline, class: 'form-text-field mt-1'%>
+    </div>
+    <%= form.rich_text_area :description%>
+    <div class="flex justify-end">
+      <%= form.submit "Add Nugget", class:"btn-blue cursor-pointer"%>
+   </div>
+   <% end %>
+  </main>
+<% end %>
