@@ -5,7 +5,7 @@ class Project::DocumentsController < Project::BaseController
     authorize [@project, Document]
 
     @document = Document.new
-    @pagy, @documents = pagy_nil_safe(Document.where(document_type: "Project").where(document_id: @project).includes({ user: [:role, :job] }).order(created_at: :desc))
+    @pagy, @documents = pagy_nil_safe(@project.documents.includes({ user: [:role, :job] }).order(created_at: :desc))
 
     render_partial("project/documents/document", collection: @documents) if stale?(@documents + [@project])
   end

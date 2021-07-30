@@ -1,4 +1,4 @@
-class Employee::DocumentPolicy < ApplicationPolicy
+class User::DocumentPolicy < User::BaseUserPolicy
   def create?
     user.admin?
   end
