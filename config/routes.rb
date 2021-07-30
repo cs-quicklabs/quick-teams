@@ -84,6 +84,7 @@ Rails.application.routes.draw do
     get "/todos/pending-todos-all", to: "report/todos#all_pending_todos", as: "all_pending_todos"
     get "/todos/recently-added", to: "report/todos#recently_added_todos", as: "recently_added_todos"
     get "/todos/recently-finished", to: "report/todos#recently_finished_todos", as: "recently_finished_todos"
+    get "/skills", to: "report/skills#index", as: "skills_reports"
   end
 
   get "/reports", to: "reports#index", as: "reports"
