@@ -23,7 +23,7 @@ class Project < ApplicationRecord
   scope :active, -> { where(archived: false) }
 
   def potential_participants
-    User.includes(:role).for_current_account.active.where.not(id: participants).order(:first_name)
+    User.includes(:job, :role, :discipline).for_current_account.active.where.not(id: participants).order(:first_name)
   end
 
   before_update :update_schedules, :if => :billable_changed?

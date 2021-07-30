@@ -2,7 +2,6 @@
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Participant", subtitle: "Add new project participant and fill in engagement level." %>
-    <%= @project.potential_participants[0].role.name%>
     <%= form.collection_select(:user_id, UserDecorator.decorate_collection(@project.potential_participants), :id, :display_name_position, {:prompt => 'Select Participant'}, :selected => schedule.user_id, :class=>"form-text-field mt-4" )%>
     <div>
       <label for="starts" class="block text-sm font-medium text-gray-700">
