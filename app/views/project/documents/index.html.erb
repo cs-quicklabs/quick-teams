@@ -1,13 +1,11 @@
-<% presenter = ProjectPresenter.new(@project) %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <%= render partial: "project/title", locals: {project: @project}%>
   <main class="pb-8">
     <div class="">
-      <h1 class="sr-only">Page title</h1>
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1  lg:grid-cols-3 ">
         <!-- Left column -->
-         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
               <div class="w-full overflow-hidden" data-controller="infinite-scroll">
@@ -32,17 +30,17 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200" id="todos" data-infinite-scroll-target="entries">
-                  <%= render partial: "document", collection: @documents, as: :document, cached: true%>
-              </tbody>
-              </table>
-            <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-              <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
-           </div>
+                    <%= render partial: "document", collection: @documents, as: :document, cached: true%>
+                  </tbody>
+                </table>
+                <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                  <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                </div>
               </div>
             </div>
           </section>
         </div>
-        <% if presenter.show_add_feedback_form %>
+        <% if policy([@project, Document]).create? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">

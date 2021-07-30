@@ -4,19 +4,19 @@
     <%= render "shared/form_header", title: "Add New Document", subtitle: "Add new Document to the project drive. " %>
     <div>
       <label for="filename" class="block text-sm font-medium text-gray-700">
-       Filename
+        Filename
       </label>
       <%= form.text_field :filename, class: 'form-text-field mt-1' %>
     </div>
     <div>
       <label for="link" class="block text-sm font-medium text-gray-700">
-       Link
+        Link
       </label>
       <%= form.text_field :link, class: 'form-text-field mt-1' %>
     </div>
     <div>
       <label for="comments" class="block text-sm font-medium text-gray-700">
-       Comments(optional)
+        Comments(optional)
       </label>
       <%= form.text_area :comments, class: 'form-text-field mt-1',  autocomplete: "off"%>
     </div>

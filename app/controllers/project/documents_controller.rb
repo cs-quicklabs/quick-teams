@@ -1,57 +1,54 @@
 class Project::DocumentsController < Project::BaseController
   before_action :set_document, only: %i[show destroy]
-    def index
 
-      authorize [:project, Document]
-     
-      @document = Document.new
-        @pagy, @documents = pagy_nil_safe(Document.where(document_type: "Project").where(document_id: @project).includes({ user: [:role, :job] }).order(created_at: :desc))
+  def index
+    authorize [@project, Document]
 
-        render_partial("project/document/document", collection: @documents, cached: false)
+    @document = Document.new
+    @pagy, @documents = pagy_nil_safe(Document.where(document_type: "Project").where(document_id: @project).includes({ user: [:role, :job] }).order(created_at: :desc))
 
-      end
-      def create
-        authorize [:project, Document]
-    
-        @document = AddProjectDocument.call(@project, document_params, current_user).result
-        respond_to do |format|
-          if @document.persisted?
-            format.turbo_stream {
-              render turbo_stream: turbo_stream.prepend(:documents, partial: "project/documents/document", locals: { document: @document }) +
-                                   turbo_stream.replace(Document.new, partial: "project/documents/form", locals: { document: Document.new })
-            }
-          else
-            format.turbo_stream { render turbo_stream: turbo_stream.replace(Document.new, partial: "project/documents/form", locals: { document: @document }) }
-          end
-        end
-         
-      end
-      def destroy
-        authorize [:project, @document]
-    
-        @document.destroy
-        Event.where(eventable: @project, trackable: @document).touch_all #fixes cache issues in activity
-        respond_to do |format|
-          format.turbo_stream { render turbo_stream: turbo_stream.remove(@document) }
-        end
-      end
-    
+    render_partial("project/document/document", collection: @documents, cached: false)
+  end
 
-      def show
-        authorize [:project, @document]
-    
-        fresh_when @documents
+  def create
+    authorize [@project, Document]
+
+    @document = AddProjectDocument.call(@project, document_params, current_user).result
+    respond_to do |format|
+      if @document.persisted?
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:documents, partial: "project/documents/document", locals: { document: @document }) +
+                               turbo_stream.replace(Document.new, partial: "project/documents/form", locals: { document: Document.new })
+        }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Document.new, partial: "project/documents/form", locals: { document: @document }) }
       end
-    
-      private
-    
-      def set_document
-       
-        @document ||= Document.find(params["id"])
-      end
-    
-      def document_params
-        params.require(:document).permit(:filename, :comments,:link)
-      end
-    
+    end
+  end
+
+  def destroy
+    authorize [@project, @document]
+
+    @document.destroy
+    Event.where(eventable: @project, trackable: @document).touch_all #fixes cache issues in activity
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@document) }
+    end
+  end
+
+  def show
+    authorize [@project, @document]
+
+    fresh_when @documents
+  end
+
+  private
+
+  def set_document
+    @document ||= Document.find(params["id"])
+  end
+
+  def document_params
+    params.require(:document).permit(:filename, :comments, :link)
+  end
 end

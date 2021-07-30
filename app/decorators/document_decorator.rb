@@ -1,5 +1,4 @@
 class DocumentDecorator < Draper::Decorator
-    delegate_all
-    decorates_association :user
-  end
-  
+  delegate_all
+  decorates_association :user
+end
