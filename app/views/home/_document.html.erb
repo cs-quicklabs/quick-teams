@@ -13,7 +13,7 @@
             <a href="<%= employee_timeline_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name%></a>
             <%= event.action_for_context %>.
              <% if event.trackable.nil?%>
-              which does not exist anymore.             
+              which does not exist anymore.
             <% end %>
           </p>
         </div>
