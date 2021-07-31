@@ -1,5 +1,5 @@
 class Project::DocumentsController < Project::BaseController
-  before_action :set_document, only: %i[destroy]
+  before_action :set_document, only: %i[show destroy edit update]
 
   def index
     authorize [@project, Document]
@@ -25,6 +25,24 @@ class Project::DocumentsController < Project::BaseController
       end
     end
   end
+  def edit
+    authorize [@project, @document]
+   
+  end
+  def update
+    authorize [@project, @document]
+
+    respond_to do |format|
+      if @document.update(document_params)
+     
+        format.html { redirect_to project_documents_path(@project), notice: "document was successfully updated." }
+      else
+        format.html { redirect_to edit_project_document_path(@document), alert: "Failed to update. Please try again." }
+      end
+    end
+  end
+
+
 
   def destroy
     authorize [@project, @document]

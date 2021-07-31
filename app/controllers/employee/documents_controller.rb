@@ -1,6 +1,5 @@
 class Employee::DocumentsController < Employee::BaseController
-  before_action :set_document, only: %i[destroy]
-
+  before_action :set_document, only: %i[show destroy edit update]
   def index
     authorize [@employee, Document]
 
@@ -25,6 +24,24 @@ class Employee::DocumentsController < Employee::BaseController
       end
     end
   end
+
+  def edit
+    authorize [@employee, @document]
+   
+  end
+  def update
+    authorize [@employee, @document]
+
+    respond_to do |format|
+      if @document.update(document_params)
+     
+        format.html { redirect_to employee_documents_path, notice: "document was successfully updated." }
+      else
+        format.html { redirect_to edit_employee_document_path(@document), alert: "Failed to update. Please try again." }
+      end
+    end
+  end
+
 
   def destroy
     authorize [@employee, @document]

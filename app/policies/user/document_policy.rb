@@ -14,4 +14,11 @@ class User::DocumentPolicy < User::BaseUserPolicy
   def destroy?
     user.admin?
   end
+
+  def edit?
+    true
+  end
+  def update?
+    true
+  end
 end

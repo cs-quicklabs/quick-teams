@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     resources :milestones, module: "project"
     resources :todos, module: "project"
     resources :skills, module: "project"
-    resources :documents, only: [:index, :show, :create, :destroy], module: "project"
+    resources :documents, only: [:index, :show, :create, :destroy, :edit, :update], module: "project"
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
 

@@ -1044,6 +1044,11 @@
   resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.0.0-beta.4.tgz#be6d7014902d45121f56358d360e0810bad4c19e"
   integrity sha512-koox7UeA2Na0tLBPesxNO3nk/gtezRxF33NHKbAx+zv5s2k1Xh/orB5xNr5dAckoUj3Pdpytnw41WH4QB1jYBg==
 
+"@neojp/tailwindcss-line-clamp-utilities@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@neojp/tailwindcss-line-clamp-utilities/-/tailwindcss-line-clamp-utilities-1.0.1.tgz#7ef12172e5f51e5fba5dd707ec5b36a48f338d77"
+  integrity sha512-DAzEbTSM7NLxTeWUdbipB3MNt/MesveqXRAnbLX/yNnzpqxRhakzFls/kY4r5LWFGSNl+AHe9khOd27wcp6Ylw==
+
 "@npmcli/move-file@^1.0.1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@npmcli/move-file/-/move-file-1.1.2.tgz#1a82c3e372f7cae9253eb66d72543d6b8685c674"
@@ -1150,6 +1155,11 @@
   integrity sha512-czfvEdY+J2Ogfd6RUSr/ZSUmDxTujr34M++YLnp2cCPC3oJ4kFvFMaRXA6cEXKw7F1hJuapdjXRjsXIEXGgORg==
   dependencies:
     mini-svg-data-uri "^1.2.3"
+
+"@tailwindcss/line-clamp@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.2.1.tgz#efafe556719c26a3926f0679a98307c4bc9270d2"
+  integrity sha512-Hq2KJY1+T2v7jw/mnT3mnC7CKbp5kj1XTqzSb2xbEt1j+JkxIR6N3ijsN/WevZtsKJfVE1KOejA/3IRKuhZEsQ==
 
 "@tailwindcss/postcss7-compat@^2.0.3", "tailwindcss@npm:@tailwindcss/postcss7-compat@^2.0.3":
   version "2.0.3"
@@ -7335,7 +7345,7 @@ stimulus@^2.0.0:
     "@stimulus/core" "^2.0.0"
     "@stimulus/webpack-helpers" "^2.0.0"
 
-stimulus_reflex@^3.4.1:
+stimulus_reflex@3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/stimulus_reflex/-/stimulus_reflex-3.4.1.tgz#2606aee3b2911b5939d68f65a75262fe3c626204"
   integrity sha512-YbFcuE4HndNe9RBQvF/Vu+7GDt0zLGdhQTXuGfLDVti1qggPG3kPgV1YBZ9volzBTGUmLp2PQbxG9j5AIyYp5A==
