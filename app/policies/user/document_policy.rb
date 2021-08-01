@@ -1,24 +1,25 @@
 class User::DocumentPolicy < User::BaseUserPolicy
-  def create?
-    user.admin?
-  end
-
-  def index?
-    user.admin?
-  end
-
-  def show?
-    user.admin?
-  end
-
   def destroy?
-    user.admin?
+    edit?
   end
 
   def edit?
-    true
+    employee = record.first
+    document = record.last
+    return false unless employee.active?
+    return true if user.admin?
+    document.user == user
   end
+
   def update?
-    true
+    edit?
+  end
+
+  def create?
+    employee = record.first
+    return false unless employee.active?
+    return true if user.admin?
+    return subordinate? if user.lead?
+    self?
   end
 end
