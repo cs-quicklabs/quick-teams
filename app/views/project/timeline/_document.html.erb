@@ -11,9 +11,11 @@
         <div>
           <p class="text-sm text-gray-500">
             <a href="<%= employee_timeline_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name%></a>
-            <%= event.action_for_context %>.
-             <% if event.trackable.nil?%>
+            <%= event.action_for_context %>
+            <% if event.trackable.nil?%>
               which does not exist anymore.             
+            <% else %>
+              named <a href="<%= ensure_protocol(event.trackable.link) %>" target="_blank" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.filename) %></a>
             <% end %>
           </p>
         </div>

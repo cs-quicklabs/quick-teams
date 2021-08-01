@@ -8,7 +8,6 @@ class AddEmployeeDocument < Patterns::Service
   def call
     begin
       add_document
-      add_event
     rescue
       document
     end
@@ -24,7 +23,7 @@ class AddEmployeeDocument < Patterns::Service
   end
 
   def add_event
-    employee.events.create(user: actor, action: "document", action_for_context: "added new document for employee", trackable: document)
+    employee.events.create(user: actor, action: "document", action_for_context: "added new document", trackable: document)
   end
 
   attr_reader :employee, :document, :actor

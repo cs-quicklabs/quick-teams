@@ -24,7 +24,7 @@ class AddProjectDocument < Patterns::Service
   end
 
   def add_event
-    project.events.create(user: actor, action: "document", action_for_context: "added new document in project", trackable: document)
+    project.events.create(user: actor, action: "document", action_for_context: "added new document", trackable: document)
   end
 
   attr_reader :project, :document, :actor
