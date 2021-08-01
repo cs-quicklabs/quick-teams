@@ -3,11 +3,11 @@
   <td class="px-10 py-4 overflow-auto text-sm text-gray-700">
     <div class="text-sm">
       <a href="<%= document.link %>" target="_blank"  class="font-medium text-gray-900 block hover:underline" target="_top">
-        <p class="line-clamp-2"> <%= highlight_hashtag(document.filename.titleize) %></p>
+        <p class="line-clamp-2"> <%= highlight_hashtag(document.filename) %></p>
       </a>
     </div>
     <div class="mt-1 text-sm text-gray-700 ">
-      <p class="line-clamp-3"><%= highlight_hashtag(document.comments.titleize)%></p>
+      <p class="line-clamp-3"><%= highlight_hashtag(document.comments)%></p>
     </div>
   </td>
   <td class="px-10 py-4  text-sm text-gray-700 max-w-0 align-top ">

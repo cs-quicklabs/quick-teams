@@ -8,7 +8,7 @@ class User::DocumentPolicy < User::BaseUserPolicy
     document = record.last
     return false unless employee.active?
     return true if user.admin?
-    document.user == user
+    document.user.id == user.id
   end
 
   def update?
