@@ -61,3 +61,19 @@ eight:
   link: www.google.com
   comments: this is a comment
   user: super
+
+nine:
+  documenter_type: Project
+  documenter: managed
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: super
+
+ten:
+  documenter_type: project
+  documenter: managed
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: manager

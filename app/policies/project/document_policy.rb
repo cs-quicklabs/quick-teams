@@ -1,23 +1,24 @@
 class Project::DocumentPolicy < Project::BaseProjectPolicy
-  def create?
-    user.admin?
-  end
-
-  def index?
-    user.admin?
-  end
-
-  def show?
-    user.admin?
-  end
-
   def destroy?
-    true
+    edit?
   end
+
   def edit?
-    true
+    project = record.first
+    document = record.last
+    return false if project.archived?
+    return true if user.admin?
+    document.user == user
   end
+
   def update?
-    true
+    edit?
+  end
+
+  def create?
+    project = record.first
+    return false if project.archived?
+    return true if user.admin?
+    user.admin? or user.is_manager?(project)
   end
 end
