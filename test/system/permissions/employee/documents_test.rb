@@ -51,6 +51,8 @@ class EmployeeDocumentsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Documents"
+    assert_selector "form#new_document"
+
     @employee.documents.each do |document|
       if document.user_id == @employee.id
         assert_selector "tr##{dom_id(document)}", text: "Edit"

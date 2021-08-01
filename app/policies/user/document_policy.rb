@@ -19,7 +19,7 @@ class User::DocumentPolicy < User::BaseUserPolicy
     employee = record.first
     return false unless employee.active?
     return true if user.admin?
-    return subordinate? if user.lead?
+    return (subordinate? or self?) if user.lead?
     self?
   end
 end
