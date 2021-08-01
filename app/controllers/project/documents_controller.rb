@@ -5,7 +5,7 @@ class Project::DocumentsController < Project::BaseController
     authorize [@project, Document]
 
     @document = Document.new
-    @pagy, @documents = pagy_nil_safe(@project.documents.includes({ user: [:role, :job] }).order(created_at: :desc))
+    @pagy, @documents = pagy_nil_safe(@project.documents.includes({ user: [:role, :job] }).order(created_at: :desc), items: LIMIT)
 
     render_partial("project/documents/document", collection: @documents) if stale?(@documents + [@project])
   end
@@ -25,24 +25,22 @@ class Project::DocumentsController < Project::BaseController
       end
     end
   end
+
   def edit
     authorize [@project, @document]
-   
   end
+
   def update
     authorize [@project, @document]
 
     respond_to do |format|
       if @document.update(document_params)
-     
         format.html { redirect_to project_documents_path(@project), notice: "document was successfully updated." }
       else
         format.html { redirect_to edit_project_document_path(@document), alert: "Failed to update. Please try again." }
       end
     end
   end
-
-
 
   def destroy
     authorize [@project, @document]
