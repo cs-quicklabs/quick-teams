@@ -3,11 +3,10 @@
     <%= tailwind_form_with(model: @document, id: dom_id(@document), url: employee_document_path(current_user), method: :patch) do |form| %>
       <main class="w-full px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
         <%= render "shared/form_messages", resource: @document, message: local_assigns[:message] %>
-        <%= render "shared/form_header", title: "Edit document for #{ current_user.decorate.display_name}", subtitle: "A document is created with mutual understanding with employee. Please make sure you are not changing document without invloving your team mate." %>
+        <%= render "shared/form_header", title: "Edit document for #{ current_user.decorate.display_name}", subtitle: "A document can be resume, Learning material, blogs or anything work related." %>
         <%= form.text_field :filename, "Filename", autocomplete: "off"%>
         <div>
-
-           <%= form.text_field :link, "Link", autocomplete: "off"%>
+          <%= form.text_field :link, "Link", autocomplete: "off"%>
         </div>
         <%= form.text_area :comments, "Comments"%>
         <div class="flex justify-end">
