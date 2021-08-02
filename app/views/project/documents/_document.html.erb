@@ -2,7 +2,7 @@
   <%document = document.decorate %>
   <td class="px-10 py-4 overflow-auto text-sm text-gray-700">
     <div class="text-sm">
-      <%= link_to document.filename, ensure_protocol(document.link), target:"_blank",  class: "font-medium text-gray-900 block hover:underline"%>
+      <%= link_to document.filename, ensure_protocol(document.link), target:"_blank",  class: "line-clamp-2 font-medium text-gray-900 block hover:underline"%>
     </div>
     <div class="mt-1 text-sm text-gray-700 ">
       <p class="line-clamp-3"><%= highlight_hashtag(document.comments)%></p>
