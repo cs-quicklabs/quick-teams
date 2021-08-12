@@ -76,7 +76,7 @@
                 <a href=<%= employee_schedules_path(current_user) %> class= "<%= current_page?(employee_schedules_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"><%= current_user.first_name %></a>
            <% end %>
               <% if (current_user.lead? || current_user.admin?)  %>
-                <a href=<%= nugget_path(current_user) %> class= "<%= current_page?(nuggets_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"> Nuggets </a>
+                <a href=<%= nuggets_path %> class= "<%= current_page?(nuggets_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"> Nuggets </a>
               <% end %>
             </div>
           </div>

@@ -1,4 +1,4 @@
-class NuggetsPolicy < Struct.new(:user, :nuggets)
+class User:: NuggetPolicy < User::BaseUserPolicy
     def create?
       true
     end
@@ -13,7 +13,13 @@ class NuggetsPolicy < Struct.new(:user, :nuggets)
       def show?
         true
       end
-      def destroy
+      def destroy?
+        true
+      end
+      def update?
+        true
+      end
+      def new? 
         true
       end
   end

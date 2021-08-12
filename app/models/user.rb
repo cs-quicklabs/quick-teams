@@ -26,7 +26,6 @@ class User < ApplicationRecord
   has_many :goals, as: :goalable
   has_many :events, as: :eventable
   has_many :notes
-  has_many :nuggets
   has_many :timesheets
   has_many :managed_projects, class_name: "Project", foreign_key: "manager_id"
   has_many :todos, class_name: "Todo", foreign_key: "owner_id"
@@ -36,6 +35,7 @@ class User < ApplicationRecord
   belongs_to :status, class_name: "PeopleStatus", optional: true
   has_and_belongs_to_many :people_tags
   has_and_belongs_to_many :skills
+  has_and_belongs_to_many :nuggets
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 

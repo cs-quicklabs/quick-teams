@@ -1,6 +1,13 @@
 class NuggetDecorator < Draper::Decorator
   delegate_all
-
+  decorates_association :user
+  
+  def display_title
+    "#{title}".titleize 
+  end
+  def display_body
+    "#{body}".titleize 
+  end
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
