@@ -15,7 +15,7 @@ class ProjectsPolicy < Struct.new(:user, :projects)
     user.admin?
   end
 
-  def new?
+  def new? 
     user.admin?
   end
 

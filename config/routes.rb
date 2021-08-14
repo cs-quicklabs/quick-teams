@@ -41,12 +41,14 @@ Rails.application.routes.draw do
     resources :goals, module: "employee"
     resources :todos, module: "employee"
     resources :skills, module: "employee"
+    resources :nuggets, module: "employee"
     resources :documents, module: "employee"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
   end
   resources :user
   resources :comments
+  resources :nuggets
 
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"
@@ -62,6 +64,8 @@ Rails.application.routes.draw do
   get "/search/project/skills", to: "search#project_skills"
   get :goals, controller: :home
   get :events, controller: :home
+
+
 
   scope "/settings" do
     get "/profile", to: "user#profile", as: "profile"

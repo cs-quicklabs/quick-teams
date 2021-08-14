@@ -1,0 +1,23 @@
+<main class="max-w-6xl px-4 pb-12 mx-auto space-y-6 lg:pb-16">
+  <div class="px-4">
+ <%= tailwind_form_with(model: @nugget, id: dom_id(@nugget), method: :patch) do |form| %>
+ <main class="w-full px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+   <%= render "shared/form_messages", resource: @nugget, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Edit Nugget for #{@nugget.skill.name}", subtitle: "A Nugget can be information, Learning material, blogs or related to skill." %>
+     <%= form.text_field :title, "Title", autocomplete: "off"%>
+         <%= form.rich_text_area :body, "Body" %>
+         <div>
+         <label for="body" class="block text-sm font-medium text-gray-700">
+       Skill
+      </label>
+       <%= form.collection_select(:skill_id, Skill.all, :id, :name, {:prompt => 'Select Skill'}, :class=>"form-text-field mt-1"  ) %>
+   </div>
+    <div class="flex justify-end">
+      <%= form.submit "Add Nugget", class:"btn-blue cursor-pointer"%>
+   </div>
+     </main>
+
+   <% end %>
+   </div>
+   </main>
+
