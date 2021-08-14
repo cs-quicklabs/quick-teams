@@ -5,12 +5,12 @@
    <%= render "shared/form_messages", resource: nugget, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add new Nugget", subtitle: "A Nugget can be information, Learning material, blogs or related to skill." %>
      <%= form.text_field :title, "Title", autocomplete: "off"%>
-         <%= form.rich_text_area :body, "Body" %>
+         <%= form.rich_text_area :body, "Body", class:"form-text-field"%>
          <div>
          <label for="body" class="block text-sm font-medium text-gray-700">
        Skill
       </label>
-       <%= form.collection_select(:skill_id, Skill.all, :id, :name, {:prompt => 'Select Skill'}, :class=>"form-text-field mt-1"  ) %>
+       <%= form.collection_select(:skill_id, Skill.all.order("LOWER(skills.name) ASC"), :id, :name, {:prompt => 'Select Skill'}, :class=>"form-text-field mt-1"  ) %>
    </div>
     <div class="flex justify-end">
       <%= form.submit "Add Nugget", class:"btn-blue cursor-pointer"%>
