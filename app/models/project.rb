@@ -7,6 +7,7 @@ class Project < ApplicationRecord
   belongs_to :manager, class_name: "User", optional: true
   has_many :notes, as: :notable
   has_many :feedbacks, as: :critiquable
+  has_many :documents, as: :documenter
   has_many :events, as: :eventable
   has_many :milestones, as: :goalable, class_name: "Goal"
   has_many :timesheets

@@ -45,6 +45,9 @@
          <% if policy([employee, Nugget]).index? %>
           <a href="<%= employee_nuggets_path %>" class="<%= current_page?(employee_nuggets_path) ? "selected-tab" : "unselected-tab"%>">
             Nuggets
+        <% if policy([employee, Document]).index? %>
+          <a href="<%= employee_documents_path %>" class="<%= current_page?(employee_documents_path) ? "selected-tab" : "unselected-tab"%>">
+            Documents
           </a>
         <% end %>
       </nav>
