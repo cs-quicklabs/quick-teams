@@ -13,33 +13,36 @@ class NuggetPolicy < ApplicationPolicy
       end
     end
   end
-    def create?
-      user.admin? || user.lead?
-    end
-    def edit?
-      user.admin? || user.lead?
-      end
-    
-      def index?
-        user.admin? || user.lead?
-      end
- 
-      def show?
-        true
-      end
 
-      def destroy?
-        user.admin? || user.lead?
-      end
-
-      def update?
-        user.admin? || user.lead?
-      end
-
-      def new? 
-        user.admin? || user.lead?
-      end
-      def publish?
-        user.admin? 
-      end
+  def create?
+    user.admin? || user.lead?
   end
+
+  def edit?
+    user.admin? || user.lead?
+  end
+
+  def index?
+    user.admin? || user.lead?
+  end
+
+  def show?
+    true
+  end
+
+  def destroy?
+    user.admin? || user.lead?
+  end
+
+  def update?
+    user.admin? || user.lead?
+  end
+
+  def new?
+    user.admin? || user.lead?
+  end
+
+  def publish?
+    user.admin?
+  end
+end

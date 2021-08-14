@@ -1,5 +1,5 @@
 class NuggetsController < ApplicationController
-    before_action :set_nugget, only: %i[ update create destroy edit ]
+  before_action :set_nugget, only: %i[ update create destroy edit ]
   before_action :set_nugget, only: %i[ update destroy edit ]
 
   def index
@@ -7,9 +7,8 @@ class NuggetsController < ApplicationController
     @nugget = Nugget.new
     nuggets = policy_scope(Nugget)
     @pagy, @nuggets = pagy_nil_safe(nuggets, items: 20)
-      render_partial("nuggets/nugget", collection: @nuggets, cached: true)
+    render_partial("nuggets/nugget", collection: @nuggets, cached: true)
   end
-  
 
   def new
     authorize :nugget
@@ -18,10 +17,10 @@ class NuggetsController < ApplicationController
 
   def show
     authorize :nugget
-    @nuggets= Nugget.find_by_id(params[:id])
+    @nuggets = Nugget.find_by_id(params[:id])
     fresh_when @nuggets
   end
- 
+
   def update
     authorize :nugget
     respond_to do |format|
@@ -38,7 +37,7 @@ class NuggetsController < ApplicationController
     @nugget = AddNugget.call(current_user, nugget_params).result
     respond_to do |format|
       if @nugget.errors.empty?
-          format.turbo_stream { redirect_to nuggets_path, notice: "Nugget was added successfully." }
+        format.turbo_stream { redirect_to nuggets_path, notice: "Nugget was added successfully." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Nugget.new, partial: "nuggets/form", locals: { nugget: @nugget }) }
       end
@@ -76,5 +75,4 @@ class NuggetsController < ApplicationController
     return pagy, collection.offset(pagy.offset).limit(pagy.items) if collection.respond_to?(:offset)
     return pagy, collection
   end
-
 end
