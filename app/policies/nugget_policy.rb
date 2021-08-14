@@ -7,9 +7,9 @@ class NuggetPolicy < ApplicationPolicy
 
     def resolve
       if @user.admin?
-        @scope.includes(:skill).order(published: :asc)
+        @scope.includes(:skill).order(published: :asc).order(created_at: :desc)
       elsif @user.lead?
-        Nugget.includes(:skill).where(user_id: @user).order(published: :asc)
+        Nugget.includes(:skill).where(user_id: @user).order(published: :asc).order(created_at: :desc)
       end
     end
   end

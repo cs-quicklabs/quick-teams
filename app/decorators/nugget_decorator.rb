@@ -3,7 +3,7 @@ class NuggetDecorator < Draper::Decorator
   decorates_association :user
   
   def display_title
-    "#{title}".titleize 
+    "#{title}".capitalize
   end
   def display_body
     "#{body}".titleize 
