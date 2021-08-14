@@ -6,7 +6,7 @@ class Report::SkillsController < Report::BaseController
     @ids = params[:ids]
     @skill_reports = ""
     @ids = params[:ids].kind_of?(Array) ? params[:ids].map(&:to_i) : [params[:ids].to_i]
-    @employees = User.for_current_account.active.includes(:job, :role, :skills).joins(:skills_users).where("skills_users.skill_id IN (?)", @ids).order("first_name ASC").order("LOWER(skills.name) ASC").references(:skills).uniq.reject(&:blank?)
+    @employees = User.for_current_account.active.includes(:job, :role, :skills).joins(:skills_users).where("skills_users.skill_id IN (?)", @ids).order("LOWER(skills.name) ASC").references(:skills).uniq.reject(&:blank?)
 
     # make sure all skills are treated as AND rather than OR
     @employees = @employees.select { |employee|
