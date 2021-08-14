@@ -3,9 +3,9 @@ class Employee::NuggetsController < Employee::BaseController
   def index
     authorize [@employee,Nugget]
     @nugget = Nugget.new
-    @id = params[:skill_id].to_i
+    @id = params[:skill_id]
 
-    if !@id.nil?
+    if !@id.presence
     nuggets = @employee.nuggets.select('nuggets_users.read as read','nuggets.*').includes(:skill).order('read').uniq
     else
       nuggets = @employee.nuggets.select('nuggets_users.read as read','nuggets.*').where(skill_id:@id).includes(:skill).order('read').uniq
