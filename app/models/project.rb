@@ -7,6 +7,7 @@ class Project < ApplicationRecord
   belongs_to :manager, class_name: "User", optional: true
   has_many :notes, as: :notable
   has_many :feedbacks, as: :critiquable
+  has_many :documents, as: :documenter
   has_many :events, as: :eventable
   has_many :milestones, as: :goalable, class_name: "Goal"
   has_many :timesheets
@@ -23,7 +24,7 @@ class Project < ApplicationRecord
   scope :active, -> { where(archived: false) }
 
   def potential_participants
-    User.for_current_account.active.where.not(id: participants).order(:first_name)
+    User.includes(:job, :role, :discipline).for_current_account.active.where.not(id: participants).order(:first_name)
   end
 
   before_update :update_schedules, :if => :billable_changed?

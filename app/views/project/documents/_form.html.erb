@@ -1,0 +1,27 @@
+<%= form_with(model: document, id: dom_id(document), url: project_documents_path(@project)) do |form| %>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: document, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New Document", subtitle: "A project document can be link to project documentation, design files, project report or something project related" %>
+    <div>
+      <label for="filename" class="block text-sm font-medium text-gray-700">
+        Filename
+      </label>
+      <%= form.text_field :filename, class: 'form-text-field mt-1' %>
+    </div>
+    <div>
+      <label for="link" class="block text-sm font-medium text-gray-700">
+        Link
+      </label>
+      <%= form.text_field :link, class: 'form-text-field mt-1' %>
+    </div>
+    <div>
+      <label for="comments" class="block text-sm font-medium text-gray-700">
+        Comments(optional)
+      </label>
+      <%= form.text_area :comments, class: 'form-text-field mt-1',  autocomplete: "off"%>
+    </div>
+    <div class="flex justify-end mt-6">
+      <%= form.submit "Add Document", class:"btn-blue cursor-pointer"%>
+    </div>
+  </main>
+<% end %>

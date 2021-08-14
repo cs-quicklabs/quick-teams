@@ -3,6 +3,6 @@ class Employee::SkillsController < Employee::BaseController
     authorize [@employee, Skill]
 
     @skill = Skill.new
-    @skills = @employee.skills
+    @skills = @employee.skills.order("lower(name) asc")
   end
 end

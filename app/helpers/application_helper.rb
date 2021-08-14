@@ -33,6 +33,19 @@ module ApplicationHelper
   end
 
   def login_options
-    @redirect_path ? {redirect_to: @redirect_path} : {}
+    @redirect_path ? { redirect_to: @redirect_path } : {}
+  end
+
+  def convert_string_to_url(text)
+    uri_reg = URI.regexp(%w[http https])
+    text.gsub(uri_reg) { %{#{$&}'} }
+  end
+
+  def ensure_protocol(url)
+    if url[/\A(http|https):\/\//i]
+      url
+    else
+      "http://" + url
+    end
   end
 end

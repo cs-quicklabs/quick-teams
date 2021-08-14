@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :milestones, module: "project"
     resources :todos, module: "project"
     resources :skills, module: "project"
+    resources :documents, only: [:index, :show, :create, :destroy, :edit, :update], module: "project"
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
 
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
     resources :goals, module: "employee"
     resources :todos, module: "employee"
     resources :skills, module: "employee"
+    resources :documents, module: "employee"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
   end
@@ -84,6 +86,7 @@ Rails.application.routes.draw do
     get "/todos/pending-todos-all", to: "report/todos#all_pending_todos", as: "all_pending_todos"
     get "/todos/recently-added", to: "report/todos#recently_added_todos", as: "recently_added_todos"
     get "/todos/recently-finished", to: "report/todos#recently_finished_todos", as: "recently_finished_todos"
+    get "/skills", to: "report/skills#index", as: "skills_reports"
   end
 
   get "/reports", to: "reports#index", as: "reports"
@@ -99,4 +102,5 @@ Rails.application.routes.draw do
 
   get "account/details", to: "account/account#index", as: "detail"
   patch "account/:id", to: "account/account#update", as: "update_account"
+  
 end

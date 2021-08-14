@@ -10,6 +10,7 @@ class User < ApplicationRecord
   scope :inactive, -> { where(active: false) }
   scope :active, -> { where(active: true) }
   scope :billable, -> { where(billable: true) }
+  scope :all_users, -> { includes(:job, :role, :discipline).where(account: Current.account).active.order(:first_name) }
 
   belongs_to :account
   belongs_to :manager, class_name: "User", optional: true
@@ -21,6 +22,7 @@ class User < ApplicationRecord
   has_many :projects, through: :schedules
   has_many :subordinates, class_name: "User", foreign_key: "manager_id"
   has_many :feedbacks, as: :critiquable
+  has_many :documents, as: :documenter
   has_many :goals, as: :goalable
   has_many :events, as: :eventable
   has_many :notes

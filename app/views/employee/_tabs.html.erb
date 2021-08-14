@@ -42,6 +42,11 @@
             Skills
           </a>
         <% end %>
+        <% if policy([employee, Document]).index? %>
+          <a href="<%= employee_documents_path %>" class="<%= current_page?(employee_documents_path) ? "selected-tab" : "unselected-tab"%>">
+            Documents
+          </a>
+        <% end %>
       </nav>
     </div>
   </div>
