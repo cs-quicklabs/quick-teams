@@ -5,7 +5,7 @@ class Project::FeedbacksController < Project::BaseController
     authorize [@project, Feedback]
 
     @feedback = Feedback.new
-    @pagy, @feedbacks = pagy_nil_safe(@project.feedbacks.includes(:user).order(created_at: :desc), items: LIMIT)
+    @pagy, @feedbacks = pagy_nil_safe(params, @project.feedbacks.includes(:user).order(created_at: :desc), items: LIMIT)
     render_partial("project/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks + [@project])
   end
 

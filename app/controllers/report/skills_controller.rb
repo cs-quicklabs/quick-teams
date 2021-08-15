@@ -12,7 +12,7 @@ class Report::SkillsController < Report::BaseController
     @employees = @employees.select { |employee|
       (employee.skill_ids & @ids).sort == @ids.sort
     }
-    @pagy, @skill_reports = pagy_nil_safe(@employees.reject(&:blank?))
+    @pagy, @skill_reports = pagy_nil_safe(params, @employees.reject(&:blank?))
 
     render_partial("report/skills/list", collection: @skill_reports, cached: false)
   end

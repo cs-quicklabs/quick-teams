@@ -5,7 +5,7 @@ class NuggetsController < BaseController
     authorize :nugget
     @nugget = Nugget.new
     nuggets = policy_scope(Nugget)
-    @pagy, @nuggets = pagy_nil_safe(nuggets, items: 20)
+    @pagy, @nuggets = pagy_nil_safe(params, nuggets, items: 20)
     render_partial("nuggets/nugget", collection: @nuggets, cached: true)
   end
 
