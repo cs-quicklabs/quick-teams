@@ -5,30 +5,30 @@
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         Nuggets
       </h1>
-      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= " (" + @nuggets.count.to_s + " Nuggets)"%></p>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @nuggets.count.to_s + " Nuggets)" %></p>
     </div>
-      <% if current_user.admin? || current_user.lead? %>
+    <% if current_user.admin? || current_user.lead? %>
       <div class="flex mt-4 sm:mt-0 sm:ml-4">
-        <%= link_to 'New Nugget', new_nugget_path, class:"btn-blue cursor-pointer" %>
+        <%= link_to "New Nugget", new_nugget_path, class: "btn-blue cursor-pointer" %>
       </div>
     <% end %>
   </div>
 </div>
-  <div class="flex w-full overflow-hidden bg-white">
+<div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
-     <div class="w-full overflow-hidden" data-controller="infinite-scroll">
-    <% if @nuggets.size > 0 %>
+    <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+      <% if @nuggets.size > 0 %>
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
               <th scope="col" class=" w-full pl-16 pr-8  py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                  Nugget
+                Nugget
               </th>
               <th scope="col" class="px-12 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                 Created_at
               </th>
               <th scope="col" class="px-16 py-3 text-xs font-medium text-left tracking-wider  text-gray-500 uppercase whitespace-nowrap">
-                  Added by
+                Added by
               </th>
               <th scope="col" class="px-12 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                 Skill
@@ -43,10 +43,10 @@
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-            <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
         </div>
-        <% else %>
-         <%= render partial: "shared/no_result_found", cached: true%>
-         <% end %>
+      <% else %>
+        <%= render partial: "shared/no_result_found", cached: true %>
+      <% end %>
     </div>
-</div>
+  </div>

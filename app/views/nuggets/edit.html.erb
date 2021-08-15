@@ -7,16 +7,15 @@
      <%= form.text_field :title, "Title", autocomplete: "off"%>
          <%= form.rich_text_area :body, "Body", class:"" %>
          <div>
-         <label for="body" class="block text-sm font-medium text-gray-700">
-       Skill
-      </label>
-       <%= form.collection_select(:skill_id, Skill.all.order("LOWER(skills.name) ASC"), :id, :name, {:prompt => 'Select Skill'}, :class=>"form-text-field mt-1"  ) %>
-   </div>
-    <div class="flex justify-end">
-      <%= form.submit "Edit Nugget", class:"btn-blue cursor-pointer"%>
-   </div>
+          <label for="body" class="block text-sm font-medium text-gray-700">
+              Skill
+            </label>
+            <%= form.collection_select(:skill_id, Skill.all.order("LOWER(skills.name) ASC"), :id, :name, {:prompt => 'Select Skill'}, :class=>"form-text-field mt-1"  ) %>
+        </div>
+      <div class="flex justify-end">
+        <%= form.submit "Edit Nugget", class:"btn-blue cursor-pointer"%>
+      </div>
      </main>
-
    <% end %>
    </div>
    </main>

@@ -65,8 +65,6 @@ Rails.application.routes.draw do
   get :goals, controller: :home
   get :events, controller: :home
 
-
-
   scope "/settings" do
     get "/profile", to: "user#profile", as: "profile"
     get "/password", to: "user#password", as: "setting_password"
@@ -106,5 +104,4 @@ Rails.application.routes.draw do
 
   get "account/details", to: "account/account#index", as: "detail"
   patch "account/:id", to: "account/account#update", as: "update_account"
-  
 end
