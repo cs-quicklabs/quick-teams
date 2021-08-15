@@ -1,5 +1,4 @@
-class NuggetsController < ApplicationController
-  before_action :set_nugget, only: %i[ update create destroy edit ]
+class NuggetsController < BaseController
   before_action :set_nugget, only: %i[ update destroy edit ]
 
   def index
@@ -68,11 +67,5 @@ class NuggetsController < ApplicationController
 
   def nugget_params
     params.require(:nugget).permit(:user_id, :title, :skill_id, :body, :published_on, :published)
-  end
-
-  def pagy_nil_safe(collection, vars = {})
-    pagy = Pagy.new(count: collection.count(:all), page: params[:page], **vars)
-    return pagy, collection.offset(pagy.offset).limit(pagy.items) if collection.respond_to?(:offset)
-    return pagy, collection
   end
 end
