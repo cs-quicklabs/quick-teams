@@ -4,6 +4,6 @@ class BaseController < ApplicationController
   after_action :verify_authorized
 
   def authenticate_account!
-    #raise Pundit::NotAuthorizedError unless current_user.account == Current.account
+    raise Pundit::NotAuthorizedError unless current_user.account == Current.account
   end
 end

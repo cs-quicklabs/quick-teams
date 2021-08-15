@@ -1,30 +1,29 @@
-
-  <%@nuggets = @nuggets.decorate %>
-   <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16" id="nugget">
+<% @nuggets = @nuggets.decorate %>
+<main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16" id="nugget">
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="milestone-detail">
-    <%= render partial: "shared/nuggets/title", locals: {goal: @nugget}%>
+    <%= render partial: "shared/nuggets/title", locals: { goal: @nugget } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-     <% if policy([Nugget]).edit? %>
-      <% if !@nuggets.published %>
-        <%= link_to 'Edit', edit_nugget_path(@nuggets), class:"border-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3" %>
+      <% if policy([Nugget]).edit? %>
+        <% if !@nuggets.published %>
+          <%= link_to "Edit", edit_nugget_path(@nuggets), class: "border-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3" %>
+        <% end %>
+        <%= link_to "Delete", nugget_path(@nuggets), method: :delete, class: "border-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3", data: { confirm: "Are you sure?" } %>
+      <% else %>
+        <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+        <% if @nuggets.read? %>
+          <p class="mt-3 text-sm md:mt-0 md:ml-6">
+            <button type="button" data-reflex="click->Nugget#read" data-nugget-id="<%= @nuggets.id %>" class="font-medium text-blue-700 cursor-pointer whitespace-nowrap hover:text-blue-600">Mark as read </button>
+          </p>
+        <% end %>
       <% end %>
-     <%= link_to "Delete", nugget_path(@nuggets), method: :delete, class: "border-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3", data: { confirm: "Are you sure?" } %>
-    <% else  %>
-        <%= link_to 'Back','javascript:history.back()', class:"btn-normal" %>
-        <%if @nuggets.read? %>
-     <p class="mt-3 text-sm md:mt-0 md:ml-6">
-              <button type="button" data-reflex="click->Nugget#read" data-nugget-id="<%= @nuggets.id%>" class="font-medium text-blue-700 cursor-pointer whitespace-nowrap hover:text-blue-600">Mark as read </button>
-            </p>
-      <% end %>
-    <% end  %>
     </div>
   </div>
-    <div class="mt-1 text-sm text-gray-900 sm:px-6 lg:px-8">
-      <p><%= @nuggets.body%></p>
-    </div>
-   <% if policy([Nugget]).publish? %>  
+  <div class="mt-1 text-sm text-gray-900 sm:px-6 lg:px-8">
+    <p><%= @nuggets.body %></p>
+  </div>
+  <% if policy([Nugget]).publish? %>
     <% if @nuggets.published? %>
-        <div class="p-4 rounded-md bg-green-50">
+      <div class="p-4 rounded-md bg-green-50">
         <div class="flex">
           <div class="flex-shrink-0">
             <!-- Heroicon name: solid/check-circle -->
@@ -36,12 +35,14 @@
             <p class="text-sm font-medium text-green-800">
               This nugget is  published and employees can see it. 
             </p>
-             <p class="mt-3 text-sm md:mt-0 md:ml-6">
-              <button type="button" data-reflex="click->Nugget#unpublish" data-nugget-id="<%= @nuggets.id%>" class="font-medium text-green-700 whitespace-nowrap hover:text-green-600">Unpublish</button>
+            <p class="mt-3 text-sm md:mt-0 md:ml-6">
+              <button type="button" data-reflex="click->Nugget#unpublish" data-nugget-id="<%= @nuggets.id %>" class="font-medium text-green-700 whitespace-nowrap hover:text-green-600">Unpublish</button>
             </p>
           </div>
-          <% else %>
-           <div class="p-4 rounded-md bg-blue-50">
+        </div>
+      </div>
+    <% else %>
+      <div class="p-4 rounded-md bg-blue-50">
         <div class="flex">
           <div class="flex-shrink-0">
             <!-- Heroicon name: solid/information-circle -->
@@ -54,9 +55,12 @@
               This Nugget has not been published and employee can not see it. 
             </p>
             <p class="mt-3 text-sm md:mt-0 md:ml-6">
-              <button type="button" data-reflex="click->Nugget#publish" data-nugget-id="<%= @nuggets.id%>" class="font-medium text-blue-700 cursor-pointer whitespace-nowrap hover:text-blue-600">Publish</button>
+              <button type="button" data-reflex="click->Nugget#publish" data-nugget-id="<%= @nuggets.id %>" class="font-medium text-blue-700 cursor-pointer whitespace-nowrap hover:text-blue-600">Publish</button>
             </p>
           </div>
-      <% end %>
+        </div>
+      </div>
     <% end %>
+  </div>
+<% end %>
 </main>

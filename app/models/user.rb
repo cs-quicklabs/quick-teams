@@ -17,7 +17,6 @@ class User < ApplicationRecord
   belongs_to :discipline
   belongs_to :role
   belongs_to :job
-  
 
   has_many :schedules
   has_many :projects, through: :schedules
