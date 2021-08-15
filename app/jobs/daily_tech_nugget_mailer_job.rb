@@ -5,11 +5,10 @@ class DailyTechNuggetMailerJob < ApplicationJob
       ActsAsTenant.current_tenant = account
       users = User.active.where(email_enabled: true, account: account)
       users.each do |user|
-        return unless user.id == 1
-        all_published_nuggets_for_user = Nugget.published.where(skill_id: user.skills.pluck(:id)).pluck(:id)
-        seen_nuggets = NuggetsUser.where(user_id: user.id).pluck(:nugget_id)
-        unseen_nuggets = all_published_nuggets_for_user - seen_nuggets
-        nugget_id = unseen_nuggets.sample
+        all_published_nugget_ids_for_user = Nugget.published.where(skill_id: user.skills.pluck(:id)).pluck(:id)
+        seen_nuggets_ids = NuggetsUser.where(user_id: user.id).pluck(:nugget_id)
+        unseen_nugget_ids = all_published_nugget_ids_for_user - seen_nuggets_ids
+        nugget_id = unseen_nugget_ids.sample
 
         if nugget_id.present?
           nugget = Nugget.find(nugget_id)
