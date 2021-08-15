@@ -13,7 +13,7 @@
        <%= form.collection_select(:skill_id, Skill.all.order("LOWER(skills.name) ASC"), :id, :name, {:prompt => 'Select Skill'}, :class=>"form-text-field mt-1"  ) %>
    </div>
     <div class="flex justify-end">
-      <%= form.submit "Add Nugget", class:"btn-blue cursor-pointer"%>
+      <%= form.submit "Edit Nugget", class:"btn-blue cursor-pointer"%>
    </div>
      </main>
 

@@ -12,7 +12,7 @@ class NuggetReflex < ApplicationReflex
     end  
     def read
         nugget = NuggetsUser.where(nugget_id:element.dataset["nugget-id"]).where(user_id:element.dataset["employee-id"])
-        nugget.update(read:true)
+        nugget.update(read: true)
       end
   end
   
