@@ -7,4 +7,10 @@ class Nugget < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :published_for_skill, ->(skill) { published.where(skill: skill) }
+
+  def self.query(params, includes = nil, order)
+    return [] if params.empty?
+    NuggetQuery.new(self.includes(includes), params, order).filter
+  end
+
 end
