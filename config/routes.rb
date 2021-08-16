@@ -90,6 +90,7 @@ Rails.application.routes.draw do
     get "/todos/recently-finished", to: "report/todos#recently_finished_todos", as: "recently_finished_todos"
     get "/skills", to: "report/skills#index", as: "skills_reports"
     get "/nuggets", to: "report/nuggets#index", as: "nuggets_reports"
+    
   end
 
   get "/reports", to: "reports#index", as: "reports"
