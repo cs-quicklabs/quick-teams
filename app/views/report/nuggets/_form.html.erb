@@ -9,19 +9,19 @@
           <%= form_with url: nuggets_reports_path, method: :get do |form| %>
             <main class="max-w-lg pt-6 pb-12 mx-auto space-y-4 lg:pb-16">
               <div>
-                <label for="date" class="block text-sm font-medium text-gray-700">
-                 Lead
+                <label for="users" class="block text-sm font-medium text-gray-700">
+                 Users
                 </label>
                 <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name_position, {:prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class=>"form-text-field mt-1" )%>
               </div>
               <div>
-                <label for="billed" class="block text-sm font-medium text-gray-700">
+                <label for="status" class="block text-sm font-medium text-gray-700">
                   Status
                 </label>
-                <%= form.select(:published, [["Any", ""], ["Published", "true"], ["In Review", "false"]], {:selected => (params["published"] if !params["pulished"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.select(:published, [["Any", ""], ["Published", "true"], ["In Review", "false"]], {:selected => (params["published"] if !params["published"].blank?) }, :class=>"form-text-field mt-1" )%>
               </div>
               <div>
-                <label for="billed" class="block text-sm font-medium text-gray-700">
+                <label for="skill" class="block text-sm font-medium text-gray-700">
                   Skill
                 </label>
                 <%= form.collection_select(:skill_id, Skill.all.order("LOWER(name) ASC"), :id, :name, {:prompt => "Select Skill", :selected => (params["skill_id"] if !params["skill_id"].blank?) }, :class=>"form-text-field mt-1" )%>

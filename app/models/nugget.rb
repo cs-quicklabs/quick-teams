@@ -5,7 +5,6 @@ class Nugget < ApplicationRecord
 
   validates_presence_of :title, :body
 
-  scope :published, -> { where(published: true) }
   scope :published_for_skill, ->(skill) { published.where(skill: skill) }
 
   def self.query(params, includes = nil, order)

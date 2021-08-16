@@ -3,7 +3,7 @@ class NuggetFilter
   
     KEYS = %i[
       user_id
-      status
+      published
       skill_id
     ].freeze
   

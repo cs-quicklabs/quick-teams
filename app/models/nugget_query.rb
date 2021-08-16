@@ -32,8 +32,8 @@ class NuggetQuery
         where(user_id: param)
       end
   
-      def status(param)
-        where(status: param)
+      def published(param)
+        where(published: param)
       end
   
       def skill_id(param)
