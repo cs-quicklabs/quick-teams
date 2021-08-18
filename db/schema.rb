@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_30_063156) do
+ActiveRecord::Schema.define(version: 2021_08_17_063909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,20 @@ ActiveRecord::Schema.define(version: 2021_07_30_063156) do
     t.index ["account_id"], name: "index_jobs_on_account_id"
   end
 
+  create_table "kbs", force: :cascade do |t|
+    t.string "document"
+    t.string "link"
+    t.bigint "user_id", null: false
+    t.bigint "discipline_id", null: false
+    t.bigint "job_id", null: false
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["discipline_id"], name: "index_kbs_on_discipline_id"
+    t.index ["job_id"], name: "index_kbs_on_job_id"
+    t.index ["user_id"], name: "index_kbs_on_user_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.text "body"
     t.string "notable_type"
@@ -166,13 +180,18 @@ ActiveRecord::Schema.define(version: 2021_07_30_063156) do
     t.string "title"
     t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
-    t.string "description"
     t.boolean "published", default: false
     t.datetime "published_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["skill_id"], name: "index_nuggets_on_skill_id"
     t.index ["user_id"], name: "index_nuggets_on_user_id"
+  end
+
+  create_table "nuggets_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "nugget_id", null: false
+    t.boolean "read", default: false
   end
 
   create_table "people_statuses", force: :cascade do |t|
@@ -393,9 +412,13 @@ ActiveRecord::Schema.define(version: 2021_07_30_063156) do
   add_foreign_key "goals", "accounts"
   add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
+  add_foreign_key "kbs", "disciplines"
+  add_foreign_key "kbs", "jobs"
+  add_foreign_key "kbs", "users"
   add_foreign_key "notes", "users"
   add_foreign_key "nuggets", "skills"
   add_foreign_key "nuggets", "users"
+  add_foreign_key "nuggets_users", "nuggets", name: "nuggets_users_nugget_id_fkey"
   add_foreign_key "people_statuses", "accounts"
   add_foreign_key "people_tags", "accounts"
   add_foreign_key "project_statuses", "accounts"

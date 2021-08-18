@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :events, as: :eventable
   has_many :notes
   has_many :timesheets
+  has_many :kbs
   has_many :managed_projects, class_name: "Project", foreign_key: "manager_id"
   has_many :todos, class_name: "Todo", foreign_key: "owner_id"
   has_many :created_todos, class_name: "Todo", foreign_key: "user_id"

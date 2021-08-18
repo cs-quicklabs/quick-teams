@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   end
   resources :user
   resources :comments
+  resources :kb
 
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"

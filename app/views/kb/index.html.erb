@@ -1,0 +1,63 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Knowledge base
+      </h1>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @kbs.count.to_s + " Knowlege Base)"%></p>
+    </div>
+    <% if current_user.admin? %>
+      <div class="flex mt-4 sm:mt-0 sm:ml-4">
+        <%= link_to 'New knowledge Base', new_kb_path, class:"btn-blue cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
+          <% if @kbs.count > 0 %>
+    <div class="sm:block">
+      <div class="inline-block min-w-full align-middle ">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="w-full px-16 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Document
+                      </th>
+                      <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Added by
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Department
+                      </th>
+                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Job
+                      </th>
+                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        tag
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left  text-gray-500 uppercase">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200" id="kbs" data-infinite-scroll-target="entries">
+                    <%= render partial: "kb", collection: @kbs, as: :kb, cached: true%>
+                  </tbody>
+                </table>
+                <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                  <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                </div>
+              </div>
+            </div>
+            <% else %>
+    <div class="w-full text-center sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg font-medium leading-6 text-center text-gray-900">
+          No result found
+        </h3>
+        <div class="mt-2 text-sm text-center text-gray-500">
+          <p>You have not created any project yet. Please click on New Project button to get started.</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</main>
