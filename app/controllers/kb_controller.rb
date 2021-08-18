@@ -6,8 +6,11 @@ class KbController < BaseController
       authorize :kb
   
       @kb = Kb.new
-      @pagy, @kbs = pagy(current_user.kbs.includes(:discipline, :user, :job).order(created_at: :desc), items: 10)
-  
+      if current_user.admin?
+        @pagy, @kbs = pagy(Kb.includes(:discipline, :job, :user).order(created_at: :desc), items: 10)
+      else
+        @pagy, @kbs = pagy(Kb.includes(:discipline, :job, :user).where(discipline_id: current_user.discipline.id).order(created_at: :desc), items: 10)
+      end
       render_partial("kb/kb", collection: @kbs) 
     end
 

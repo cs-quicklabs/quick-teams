@@ -12,9 +12,8 @@
     <label for="job" class="block mt-4 text-sm font-medium text-gray-700">Select Job</label>
       <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job'}, :selected => params[:job_id], :class=>"form-text-field mt-1") %>
     </div>
-      <%= form.text_field :tag , "Tags" %>
     <div class="flex justify-end mt-6">
-      <%= form.submit "Add Knowledge Base", class:"btn-blue cursor-pointer"%>
+      <%= form.submit "Add Document", class:"btn-blue cursor-pointer"%>
     </div>
   </main>
 <% end %>

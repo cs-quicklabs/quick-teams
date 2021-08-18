@@ -3,13 +3,13 @@
   <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
     <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
-        Knowledge base
+        Documents
       </h1>
-      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @kbs.count.to_s + " Knowlege Base)"%></p>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @kbs.count.to_s + " Documents)"%></p>
     </div>
     <% if current_user.admin? %>
       <div class="flex mt-4 sm:mt-0 sm:ml-4">
-        <%= link_to 'New knowledge Base', new_kb_path, class:"btn-blue cursor-pointer" %>
+        <%= link_to 'New Document', new_kb_path, class:"btn-blue cursor-pointer" %>
       </div>
     <% end %>
   </div>
@@ -30,9 +30,6 @@
                       </th>
                        <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                         Job
-                      </th>
-                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
-                        tag
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left  text-gray-500 uppercase">
                         Action

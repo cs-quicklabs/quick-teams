@@ -8,7 +8,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def display_name_position
-    "#{first_name} #{last_name}".titleize + " (#{role.name}" + " " + display_job_title + ")".titleize
+    "#{first_name} #{last_name}".titleize + " (" + display_role_title + " " + display_job_title + ")".titleize
   end
 
   def name

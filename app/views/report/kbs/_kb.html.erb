@@ -12,7 +12,7 @@
       <%= kb.user.display_name %>
     </a>
   </td>
-    <td class="px-6 py-3 text-sm text-gray-700 max-w-0 whitespace-nowrap">
+   <td class="px-6 py-3 text-sm text-gray-700 max-w-0 whitespace-nowrap">
     <div class="mt-1 text-sm text-gray-700">
       <p class=""><%= kb.discipline.name %></p>
     </div>
@@ -21,11 +21,5 @@
     <div class="mt-1 text-sm text-gray-700">
       <p class=""><%= kb.job.name %></p>
     </div>
-  </td>
-  <td class="px-6 py-3 text-sm font-medium text-left whitespace-nowrap">
-    <% if policy(kb).edit? %>
-     <%= link_to "Edit", edit_kb_path(kb), class: "btn-inline-edit pl-2" %>
-   <%= link_to "Delete", kb_path(kb), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
-    <% end %>
   </td>
 </tr>
