@@ -65,7 +65,7 @@ class KbController < BaseController
     end
   
     def kb_params
-      params.require(:kb).permit(:document, :link, :job_id, :discipline_id, :tag, :user_id )
+      params.require(:kb).permit(:document, :link, :job_id, :discipline_id, :comments, :user_id )
     end
   end
   

@@ -1,0 +1,9 @@
+<% @kbs.each do |kb|%>
+ <a href="<%= ensure_protocol(kb.link) %>" target="_blank"  class="font-medium text-gray-900 block hover:underline" target="_top">
+  <li role="option"  id="add-document"   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer">
+  
+    <%= kb.document %>
+
+  </li>
+      <a>
+<% end %>

@@ -3,6 +3,7 @@
     <%= render "shared/form_messages", resource: kb, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New knowledge Base", subtitle: "A knowledge Base can be link to resume, blogs or content you have written." %>
       <%= form.text_field :document, "Document" %>
+       <%= form.text_field :comments, "Comments (optional)" %>
       <%= form.text_field :link, "Link" %>
       <div>
       <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">Select Discipline</label>
