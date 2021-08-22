@@ -10,7 +10,7 @@
             <main class="max-w-lg pt-6 pb-12 mx-auto space-y-4 lg:pb-16">
               <div>
                 <label for="users" class="block text-sm font-medium text-gray-700">
-                 Users
+                  Users
                 </label>
                 <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name_position, {:prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class=>"form-text-field mt-1" )%>
               </div>
@@ -28,7 +28,7 @@
               </div>
               <div class="flex justify-end mt-6">
                 <%= link_to 'Reset', nuggets_reports_path, class: "btn-normal" %>
-                <%= form.submit "Search", class:"btn-blue cursor-pointer"%>
+                <%= form.submit "Search", class:"btn-blue"%>
               </div>
             </main>
           <% end %>

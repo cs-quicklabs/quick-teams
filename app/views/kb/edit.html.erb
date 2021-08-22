@@ -1,23 +1,23 @@
 <main class="max-w-6xl px-4 pb-12 mx-auto space-y-6 lg:pb-16">
   <div class="px-4">
-<%= tailwind_form_with(model: @kb, id: dom_id(@kb), url: kb_path) do |form| %>
-  <main class="max-w-6xl px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
-    <%= render "shared/form_messages", resource: @kb, message: local_assigns[:message] %>
-    <%= render "shared/form_header", title: "Add New knowledge Base", subtitle: "A knowledge Base can be link to resume, blogs or content you have written." %>
-      <%= form.text_field :document, "Document (optional)" %>
-      <%= form.text_field :link, "Link" %>
-      <div>
-      <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">Select Discipline</label>
-      <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, {:prompt => 'Select Discipline'}, :selected => params[:discipline_id], :class=>"form-text-field mt-1" ) %>
-   </div>
-    <div>
-    <label for="job" class="block mt-4 text-sm font-medium text-gray-700">Select Job</label>
-      <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job'}, :selected => params[:job_id], :class=>"form-text-field mt-1") %>
-    </div>
-    <div class="flex justify-end mt-6">
-      <%= form.submit "Update Document", class:"btn-blue cursor-pointer"%>
-    </div>
-  </main>
-<% end %>
+    <%= tailwind_form_with(model: @kb, id: dom_id(@kb), url: kb_path) do |form| %>
+      <main class="max-w-6xl px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+        <%= render "shared/form_messages", resource: @kb, message: local_assigns[:message] %>
+        <%= render "shared/form_header", title: "Add New knowledge Base", subtitle: "A knowledge Base can be link to resume, blogs or content you have written." %>
+        <%= form.text_field :document, "Document (optional)" %>
+        <%= form.text_field :link, "Link" %>
+        <div>
+          <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">Select Discipline</label>
+          <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, {:prompt => 'Select Discipline'}, :selected => params[:discipline_id], :class=>"form-text-field mt-1" ) %>
+        </div>
+        <div>
+          <label for="job" class="block mt-4 text-sm font-medium text-gray-700">Select Job</label>
+          <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job'}, :selected => params[:job_id], :class=>"form-text-field mt-1") %>
+        </div>
+        <div class="flex justify-end mt-6">
+          <%= form.submit "Update Document", class:"btn-blue"%>
+        </div>
+      </main>
+    <% end %>
   </div>
 </main>

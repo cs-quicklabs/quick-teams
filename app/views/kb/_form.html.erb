@@ -2,19 +2,19 @@
   <main class="max-w-6xl px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: kb, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New knowledge Base", subtitle: "A knowledge Base can be link to resume, blogs or content you have written." %>
-      <%= form.text_field :document, "Document" %>
-       <%= form.text_field :comments, "Comments (optional)" %>
-      <%= form.text_field :link, "Link" %>
-      <div>
+    <%= form.text_field :document, "Document" %>
+    <%= form.text_field :comments, "Comments (optional)" %>
+    <%= form.text_field :link, "Link" %>
+    <div>
       <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">Select Discipline</label>
       <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, {:prompt => 'Select Discipline'}, :selected => params[:discipline_id], :class=>"form-text-field mt-1" ) %>
-   </div>
+    </div>
     <div>
-    <label for="job" class="block mt-4 text-sm font-medium text-gray-700">Select Job</label>
+      <label for="job" class="block mt-4 text-sm font-medium text-gray-700">Select Job</label>
       <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job'}, :selected => params[:job_id], :class=>"form-text-field mt-1") %>
     </div>
     <div class="flex justify-end mt-6">
-      <%= form.submit "Add Document", class:"btn-blue cursor-pointer"%>
+      <%= form.submit "Add Document", class:"btn-blue"%>
     </div>
   </main>
 <% end %>
