@@ -3,14 +3,14 @@
     <%= tailwind_form_with(model: nugget, id: dom_id(nugget)) do |form| %>
       <main class="w-full px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
         <%= render "shared/form_messages", resource: nugget, message: local_assigns[:message] %>
-        <%= render "shared/form_header", title: "Add new Nugget", subtitle: "A Nugget can be information, Learning material, blogs or related to skill." %>
+        <%= render "shared/form_header", title: "Add New Nugget", subtitle: "A Nugget is a byte sized lesson assigned to a skill. A nugget is sent to a person who has subscribed to a skill on daily basis helping them to form leaning habbit. Nugget needs to be reviewed and approved by admin before it is published to people." %>
         <%= form.text_field :title, "Title", autocomplete: "off"%>
-        <%= form.rich_text_area :body, "Body", class:"form-text-field"%>
+        <%= form.rich_text_area :body, "Byte Sized Lesson", class:"form-text-field"%>
         <div>
           <label for="body" class="block text-sm font-medium text-gray-700">
-            Skill
+            Select Skill
           </label>
-          <%= form.collection_select(:skill_id, Skill.all.order("LOWER(skills.name) ASC"), :id, :name, {:prompt => 'Select Skill'}, :class=>"form-text-field mt-1"  ) %>
+          <%= form.collection_select(:skill_id, Skill.all.order("lower(skills.name) asc"), :id, :name, {:prompt => 'Select Skill'}, :class=>"form-text-field mt-1"  ) %>
         </div>
         <div class="flex justify-end">
           <%= form.submit "Add Nugget", class:"btn-blue cursor-pointer"%>

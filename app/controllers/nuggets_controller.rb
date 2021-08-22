@@ -1,5 +1,5 @@
 class NuggetsController < BaseController
-  before_action :set_nugget, only: %i[ update destroy edit ]
+  before_action :set_nugget, only: %i[ update destroy edit show ]
 
   def index
     authorize :nugget
@@ -16,8 +16,7 @@ class NuggetsController < BaseController
 
   def show
     authorize :nugget
-    @nuggets = Nugget.find_by_id(params[:id])
-    fresh_when @nuggets
+    fresh_when @nugget
   end
 
   def update
@@ -51,15 +50,11 @@ class NuggetsController < BaseController
     authorize :nugget
     @nugget.destroy
     respond_to do |format|
-      format.turbo_stream { redirect_to nuggets_path, notice: "nugget was removed successfully." }
+      format.turbo_stream { redirect_to nuggets_path, notice: "Nugget was removed successfully." }
     end
   end
 
   private
-
-  def set_user
-    @user ||= User.find(params["user_id"])
-  end
 
   def set_nugget
     @nugget ||= Nugget.find(params["id"])
