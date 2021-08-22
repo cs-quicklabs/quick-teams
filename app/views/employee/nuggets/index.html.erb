@@ -42,13 +42,11 @@
                   <%= render "shared/form_header", title: "Filter nuggets by skill", subtitle: "" %>
                   <div class="flex justify-center w-full max-w-sm lg:justify-end" >
                     <div class="w-full max-w-sm lg:max-w-sm">
-                      <div>
-                        <label for="skill" class="block text-sm font-medium text-gray-700"></label>
-                        <div class="mt-1">
-                          <%= tailwind_form_with(url: employee_nuggets_path, method: 'get') do |f|%>
-                            <%= f.collection_select(:skill_id, @employee.skills.all.order("LOWER(skills.name) ASC"), :id, :name,{:prompt => 'Select Skill', :selected =>params[:skill_id]}, :class=>"form-text-field mt-1", :onchange => ("javascript: this.form.submit();") ) %>
-                          <% end %>
-                        </div>
+                      <label for="skill" class="block text-sm font-medium text-gray-700"></label>
+                      <div class="mt-1">
+                        <%= tailwind_form_with(url: employee_nuggets_path, method: 'get') do |f|%>
+                          <%= f.collection_select(:skill_id, @employee.skills.all.order("LOWER(skills.name) ASC"), :id, :name,{:prompt => 'Select Skill', :selected =>params[:skill_id]}, :class=>"form-text-field mt-1", :onchange => ("javascript: this.form.submit();") ) %>
+                        <% end %>
                       </div>
                       <div class="relative">
                         <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">

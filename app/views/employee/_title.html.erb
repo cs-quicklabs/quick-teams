@@ -4,7 +4,9 @@
     <h1 class="text-3xl font-bold leading-tight text-gray-900">
       <%= employee.display_name %>
     </h1>
-    <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= employee.display_position%></p>
+    <% if current_user.admin? or current_user.lead? %>
+      <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= employee.display_position%></p>
+    <%end %>
     <% if current_user.admin? %>
       <div class="flex">
         <div id="employee-tags" class="flex ml-4">
