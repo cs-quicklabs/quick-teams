@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_12_115142) do
+ActiveRecord::Schema.define(version: 2021_08_19_061005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,21 @@ ActiveRecord::Schema.define(version: 2021_08_12_115142) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_jobs_on_account_id"
+  end
+
+  create_table "kbs", force: :cascade do |t|
+    t.string "document"
+    t.string "link"
+    t.bigint "user_id", null: false
+    t.bigint "discipline_id", null: false
+    t.bigint "job_id", null: false
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "comments"
+    t.index ["discipline_id"], name: "index_kbs_on_discipline_id"
+    t.index ["job_id"], name: "index_kbs_on_job_id"
+    t.index ["user_id"], name: "index_kbs_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -398,6 +413,9 @@ ActiveRecord::Schema.define(version: 2021_08_12_115142) do
   add_foreign_key "goals", "accounts"
   add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
+  add_foreign_key "kbs", "disciplines"
+  add_foreign_key "kbs", "jobs"
+  add_foreign_key "kbs", "users"
   add_foreign_key "notes", "users"
   add_foreign_key "nuggets", "skills"
   add_foreign_key "nuggets", "users"

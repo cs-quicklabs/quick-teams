@@ -3,11 +3,11 @@
   <td class="px-10 py-4 overflow-hidden text-sm text-gray-700 max-w-0">
     <div class="text-sm">
       <a href="<%= ensure_protocol(document.link) %>" target="_blank"  class="line-clamp-2 font-medium text-gray-900 block hover:underline" target="_top">
-        <%= highlight_hashtag(document.filename) %>
+        <%= document.display_filename %>
       </a>
     </div>
     <div class="mt-1 text-sm text-gray-700">
-      <p class="line-clamp-3"><%= highlight_hashtag(document.comments)%></p>
+      <p class="line-clamp-3"><%= document.comments%></p>
     </div>
   </td>
   <td class="px-6 py-4 overflow-hidden text-sm text-gray-700 max-w-0 whitespace-nowrap">

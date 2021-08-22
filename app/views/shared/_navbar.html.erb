@@ -77,6 +77,17 @@
                 <% end %>
                               <% if policy(:nugget).index? %>
                 <a href=<%= nuggets_path %> class= "<%= current_page?(nuggets_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"> Nuggets </a>
+              <% else  %>
+                <a href=<%= employee_schedules_path(current_user) %> class= "<%= current_page?(employee_schedules_path(current_user)) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>"><%= current_user.first_name %></a>
+              <% end %> 
+                <% if policy(:kb).index? %>
+                  <a href="<%=  kb_index_path %>" class="<%= current_page?( kb_index_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">
+                   Knowledge Base
+                  </a>
+                     <% end %>
+
+              <% if policy(:reports).index? %>
+                <a href=<%= reports_path %> class= "<%= current_page?(reports_path) ? "bg-gray-500 text-white hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>">Reports</a>
               <% end %>
 
               <% else %>
