@@ -14,14 +14,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
     <% if content_for?(:head) %>
       <%= yield(:head) %>
     <% end %>
   </head>
   <body>
     <% if user_signed_in? %>
-      <%= render "shared/navbar" %>
+      <%= render "shared/navbar/navbar" %>
       <div id="modal"></div>
     <% end %>
     <p class="text-sm font-medium text-center notice bg-green-50"><%= notice %></p>
