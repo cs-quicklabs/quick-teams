@@ -1,0 +1,26 @@
+<tr id="<%= dom_id(nugget) %>">
+  <% nugget=nugget.decorate %>
+  <td class="w-full px-16 py-4 overflow-auto text-sm text-gray-700">
+    <a href="<%= employee_nugget_path(@employee, nugget) %>" , class="truncate hover:text-gray-600 hover:underline">
+      <span class="text-gray-900 block whitespace-normal ">
+        <%= nugget.display_title %>
+      </span>
+    </a>
+  </td>
+  <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
+    <span class="inline-flex px-2 text-xs font-semibold text-left leading-5 text-gray-800 bg-gray-100 rounded-full">
+      <%= nugget.skill.name %>
+    </span>
+  </td>
+  <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
+    <% if nugget.read? %>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+        read
+      </span>
+    <% else %>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+        Unread
+      </span>
+    <% end %>
+  </td>
+</tr>

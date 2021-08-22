@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_30_063156) do
+ActiveRecord::Schema.define(version: 2021_08_12_115142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,13 +166,18 @@ ActiveRecord::Schema.define(version: 2021_07_30_063156) do
     t.string "title"
     t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
-    t.string "description"
     t.boolean "published", default: false
     t.datetime "published_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["skill_id"], name: "index_nuggets_on_skill_id"
     t.index ["user_id"], name: "index_nuggets_on_user_id"
+  end
+
+  create_table "nuggets_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "nugget_id", null: false
+    t.boolean "read", default: false
   end
 
   create_table "people_statuses", force: :cascade do |t|
@@ -396,6 +401,7 @@ ActiveRecord::Schema.define(version: 2021_07_30_063156) do
   add_foreign_key "notes", "users"
   add_foreign_key "nuggets", "skills"
   add_foreign_key "nuggets", "users"
+  add_foreign_key "nuggets_users", "nuggets", name: "nuggets_users_nugget_id_fkey"
   add_foreign_key "people_statuses", "accounts"
   add_foreign_key "people_tags", "accounts"
   add_foreign_key "project_statuses", "accounts"

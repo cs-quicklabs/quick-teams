@@ -1,0 +1,53 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Nuggets
+      </h1>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @nuggets.count.to_s + " Nuggets)" %></p>
+    </div>
+    <% if current_user.admin? || current_user.lead? %>
+      <div class="flex mt-4 sm:mt-0 sm:ml-4">
+        <%= link_to "New Nugget", new_nugget_path, class: "btn-blue cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+      <% if @nuggets.size > 0 %>
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class=" w-full pl-16 pr-8  py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Nugget
+              </th>
+              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Created_at
+              </th>
+              <th scope="col" class="px-8 py-3 text-xs font-medium text-left tracking-wider  text-gray-500 uppercase whitespace-nowrap">
+                Added by
+              </th>
+              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Skill
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200" id="nuggets" data-infinite-scroll-target="entries">
+            <%= render partial: "nugget", collection: @nuggets, as: :nugget, cached: false %>
+          </tbody>
+        </table>
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+        </div>
+      <% else %>
+        <%= render partial: "shared/no_result_found", cached: true %>
+      <% end %>
+    </div>
+  </div>
+</div>

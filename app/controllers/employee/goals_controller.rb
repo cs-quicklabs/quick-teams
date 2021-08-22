@@ -5,7 +5,7 @@ class Employee::GoalsController < Employee::BaseController
     authorize [@employee, Goal]
 
     @goal = Goal.new
-    @pagy, @goals = pagy_nil_safe(@employee.goals.includes(:user).order(created_at: :desc), items: LIMIT)
+    @pagy, @goals = pagy_nil_safe(params, @employee.goals.includes(:user).order(created_at: :desc), items: LIMIT)
     render_partial("employee/goals/goal", collection: @goals) if stale?(@goals + [@employee])
   end
 

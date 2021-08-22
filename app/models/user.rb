@@ -35,6 +35,7 @@ class User < ApplicationRecord
   belongs_to :status, class_name: "PeopleStatus", optional: true
   has_and_belongs_to_many :people_tags
   has_and_belongs_to_many :skills
+  has_and_belongs_to_many :nuggets
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 

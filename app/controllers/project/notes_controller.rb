@@ -5,7 +5,7 @@ class Project::NotesController < Project::BaseController
     authorize [@project, Note]
 
     @note = Note.new
-    @pagy, @notes = pagy_nil_safe(@project.notes.includes(:user).order(created_at: :desc), items: LIMIT)
+    @pagy, @notes = pagy_nil_safe(params, @project.notes.includes(:user).order(created_at: :desc), items: LIMIT)
     render_partial("project/notes/note", collection: @notes) if stale?(@notes + [@project])
   end
 

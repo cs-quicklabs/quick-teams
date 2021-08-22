@@ -1,0 +1,49 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Nuggets
+      </h1>
+    </div>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <%= render partial: "form"%>
+    <% if @nuggets.size > 0 %>
+      <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+     <table class="min-w-full pb-6 divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class=" w-full pl-16 pr-8  py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Nugget
+              </th>
+              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Created_at
+              </th>
+              <th scope="col" class="px-8 py-3 text-xs font-medium text-left tracking-wider  text-gray-500 uppercase whitespace-nowrap">
+                Added by
+              </th>
+              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Skill
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
+            <%= render partial: "nugget", collection: @nuggets, as: :nugget, cached: true%>
+          </tbody>
+        </table>
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+        </div>
+      </div>
+    <% else %>
+      <%= render partial: "shared/no_result_found", cached: true%>
+    <% end %>
+  </div>
+</div>

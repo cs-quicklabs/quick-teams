@@ -41,12 +41,14 @@ Rails.application.routes.draw do
     resources :goals, module: "employee"
     resources :todos, module: "employee"
     resources :skills, module: "employee"
+    resources :nuggets, module: "employee"
     resources :documents, module: "employee"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
   end
   resources :user
   resources :comments
+  resources :nuggets
 
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"
@@ -87,6 +89,8 @@ Rails.application.routes.draw do
     get "/todos/recently-added", to: "report/todos#recently_added_todos", as: "recently_added_todos"
     get "/todos/recently-finished", to: "report/todos#recently_finished_todos", as: "recently_finished_todos"
     get "/skills", to: "report/skills#index", as: "skills_reports"
+    get "/nuggets", to: "report/nuggets#index", as: "nuggets_reports"
+    
   end
 
   get "/reports", to: "reports#index", as: "reports"
@@ -102,5 +106,4 @@ Rails.application.routes.draw do
 
   get "account/details", to: "account/account#index", as: "detail"
   patch "account/:id", to: "account/account#update", as: "update_account"
-  
 end

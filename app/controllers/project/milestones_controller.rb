@@ -5,7 +5,7 @@ class Project::MilestonesController < Project::BaseController
     authorize [@project, Goal]
 
     @milestone = Goal.new
-    @pagy, @milestones = pagy_nil_safe(@project.milestones.includes(:user).order(created_at: :desc), items: LIMIT)
+    @pagy, @milestones = pagy_nil_safe(params, @project.milestones.includes(:user).order(created_at: :desc), items: LIMIT)
     render_partial("project/milestones/milestone", collection: @milestones) if stale?(@milestones + [@project])
   end
 

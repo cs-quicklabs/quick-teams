@@ -5,7 +5,7 @@ class Employee::DocumentsController < Employee::BaseController
     authorize [@employee, Document]
 
     @document = Document.new
-    @pagy, @documents = pagy_nil_safe(@employee.documents.includes({ user: [:role, :job] }).order(created_at: :desc), items: LIMIT)
+    @pagy, @documents = pagy_nil_safe(params, @employee.documents.includes({ user: [:role, :job] }).order(created_at: :desc), items: LIMIT)
 
     render_partial("employee/documents/document", collection: @documents) if stale?(@documents + [@employee])
   end

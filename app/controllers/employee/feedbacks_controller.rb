@@ -5,7 +5,7 @@ class Employee::FeedbacksController < Employee::BaseController
     authorize [@employee, Feedback]
 
     @feedback = Feedback.new
-    @pagy, @feedbacks = pagy_nil_safe(employee_feedbacks, items: LIMIT)
+    @pagy, @feedbacks = pagy_nil_safe(params, employee_feedbacks, items: LIMIT)
     render_partial("employee/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks + [@employee])
   end
 

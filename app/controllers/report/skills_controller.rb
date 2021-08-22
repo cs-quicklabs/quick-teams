@@ -6,13 +6,13 @@ class Report::SkillsController < Report::BaseController
     @ids = params[:ids]
     @skill_reports = ""
     @ids = params[:ids].kind_of?(Array) ? params[:ids].map(&:to_i) : [params[:ids].to_i]
-    @employees = User.for_current_account.active.includes(:job, :role, :skills).joins(:skills_users).where("skills_users.skill_id IN (?)", @ids).order("first_name ASC").order("LOWER(skills.name) ASC").references(:skills).uniq.reject(&:blank?)
+    @employees = User.for_current_account.active.includes(:job, :role, :skills).joins(:skills_users).where("skills_users.skill_id IN (?)", @ids).order("LOWER(skills.name) ASC").references(:skills).uniq.reject(&:blank?)
 
     # make sure all skills are treated as AND rather than OR
     @employees = @employees.select { |employee|
       (employee.skill_ids & @ids).sort == @ids.sort
     }
-    @pagy, @skill_reports = pagy_nil_safe(@employees.reject(&:blank?))
+    @pagy, @skill_reports = pagy_nil_safe(params, @employees.reject(&:blank?))
 
     render_partial("report/skills/list", collection: @skill_reports, cached: false)
   end

@@ -7,7 +7,7 @@ class Employee::TimesheetsController < Employee::BaseController
 
     @timesheet = Timesheet.new
     @employee_timesheets_stats = EmployeeTimesheetsStats.new(@employee, time_span)
-    @pagy, @timesheets = pagy_nil_safe(@employee.timesheets.includes(:project).last_30_days.order(date: :desc), items: LIMIT)
+    @pagy, @timesheets = pagy_nil_safe(params, @employee.timesheets.includes(:project).last_30_days.order(date: :desc), items: LIMIT)
     render_partial("employee/timesheets/timesheet", collection: @timesheets) if stale?(@timesheets + [@employee])
   end
 
