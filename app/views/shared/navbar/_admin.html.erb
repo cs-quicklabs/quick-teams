@@ -18,7 +18,7 @@
         <a href=<%= schedules_path %> class= "<%= current_page?(schedules_path) ? "nav-selected" : "nav-unselected" %>">Schedules</a>
       <% end %>
       <% if policy(:nugget).index? %>
-        <a href=<%= nuggets_path %> class= "<%= current_page?(nuggets_path(current_user)) ? "nav-selected" : "nav-unselected" %>"> Nuggets </a>
+        <a href=<%= nuggets_path %> class= "<%= current_page?(nuggets_path) ? "nav-selected" : "nav-unselected" %>"> Nuggets </a>
       <% end %>
       <% if policy(:kb).index? %>
         <a href=<%= kb_index_path %> class="<%= current_page?(kb_index_path) ? "nav-selected" : "nav-unselected" %>">Knowledge Base</a>
