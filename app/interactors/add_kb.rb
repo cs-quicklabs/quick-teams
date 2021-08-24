@@ -15,14 +15,13 @@ class AddKb < Patterns::Service
     end
   
     private
-  
     def add_kb
       kb.user_id = actor.id
       kb.save!
     end
   
     def add_event
-      project.events.create(user: actor, action: "knowledge base", action_for_context: "added new knowledge base", trackable: kb)
+      project.events.create(user: actor, action: "knowledge base", action_for_context: "added new Document", trackable: kb)
     end
   
     attr_reader :kb, :actor

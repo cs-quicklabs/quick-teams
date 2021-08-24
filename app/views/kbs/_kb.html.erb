@@ -20,9 +20,10 @@
       <p class=""><%= kb.discipline.name %></p>
     </div>
   </td>
+  
 <td class="px-6 py-3   text-sm text-gray-700  whitespace-nowrap">
     <div class="mt-1 text-sm text-gray-700">
-      <p class=""><%= kb.job.name %></p>
+      <p class=""> <%=  kb.job ? kb.job.name  : current_user.job.name %> 
     </div>
   </td>
   <td class="px-6 py-3 text-sm font-medium text-left whitespace-nowrap">

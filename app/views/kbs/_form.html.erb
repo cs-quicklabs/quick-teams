@@ -1,5 +1,5 @@
-<%= tailwind_form_with(model: kb, id: dom_id(kb), url: kb_index_path) do |form| %>
-  <main class="max-w-6xl px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+<main class="max-w-6xl px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+<%= tailwind_form_with(model: kb, id: dom_id(kb)) do |form| %>
     <%= render "shared/form_messages", resource: kb, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Document", subtitle: "A knowledge Base can be link to resume, blogs or content you have written." %>
     <%= form.text_field :document, "Document" %>
@@ -11,10 +11,15 @@
     </div>
     <div>
       <label for="job" class="block mt-4 text-sm font-medium text-gray-700">Select Job</label>
-      <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job'}, :selected => params[:job_id], :class=>"form-text-field mt-1") %>
+    <select name="kb[job_id]" class="form-text-field mt-1">
+    <% Job.order(:name).each do |job| %>
+        <option value="<%= job.id %>"><%= job.name %></option>
+    <% end %>
+    <option value=" ">Select all</option>
+</select>
     </div>
     <div class="flex justify-end mt-6">
-     <%= form.submit "Save Document", class:"btn-blue"%>
+     <%= form.submit "Save Document ", class:"btn-blue"%>
     </div>
-  </main>
 <% end %>
+ </main>
