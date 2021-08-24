@@ -2,6 +2,7 @@
     "name": "skia",
     "private": true,
     "dependencies": {
+        "3.0.0": "^3.0.0",
         "@fullhuman/postcss-purgecss": "3.0",
         "@hotwired/turbo-rails": "^7.0.0-beta.5",
         "@rails/actioncable": "^6.0.0",
@@ -17,6 +18,7 @@
         "autoprefixer": "^9",
         "node-sass": "^4.12.1",
         "postcss": "^8",
+        "ruby": "^0.6.1",
         "stimulus": "^2.0.0",
         "stimulus-checkbox-select-all": "^4.0.0",
         "stimulus_reflex": "3.4.1",
