@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   resources :user
   resources :comments
   resources :nuggets
-  resources :kb
+  resources :kbs
 
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"
