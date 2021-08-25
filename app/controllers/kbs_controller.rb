@@ -1,4 +1,4 @@
-class KbController < BaseController
+class KbsController < BaseController
   include Pagy::Backend
   before_action :set_kb, only: %i[show destroy edit update]
 
@@ -9,7 +9,7 @@ class KbController < BaseController
     if current_user.admin?
       @pagy, @kbs = pagy(Kb.includes(:discipline, :job, :user).order(created_at: :desc), items: 10)
     else
-      @pagy, @kbs = pagy(Kb.includes(:discipline, :job, :user).where(discipline_id: current_user.discipline.id).order(created_at: :desc), items: 10)
+      @pagy, @kbs = pagy(Kb.includes(:discipline, :job, :user).where(discipline_id: current_user.discipline.id, job_id: [nil, current_user.job.id]).order(created_at: :desc), items: 10)
     end
     render_partial("kb/kb", collection: @kbs)
   end
@@ -22,10 +22,11 @@ class KbController < BaseController
   def create
     authorize :kb
 
-    @knowledge = AddKb.call(kb_params, current_user).result
+    @kb = AddKb.call(kb_params, current_user).result
+    binding.irb
     respond_to do |format|
-      if @knowledge.errors.empty?
-        format.html { redirect_to kb_index_path, notice: "Knowledge Base was successfully Added." }
+      if @kb.errors.empty?
+        format.html { redirect_to kbs_path, notice: "Document was successfully Added." }
       else
         format.html { redirect_to new_kb_path, alert: "Failed to add knowledge base. Please try again." }
       end
@@ -33,15 +34,16 @@ class KbController < BaseController
   end
 
   def edit
-    authorize @kb
+    authorize :kb
   end
 
   def update
     authorize @kb
-
+    @kb.update(kb_params)
+    binding.irb
     respond_to do |format|
       if @kb.update(kb_params)
-        format.html { redirect_to kb_index_path, notice: "Knowledge Base was successfully updated." }
+        format.html { redirect_to kbs_path, notice: "Knowledge Base was successfully updated." }
       else
         format.html { redirect_to edit_kb_path(@kb), alert: "Failed to update. Please try again." }
       end

@@ -5,7 +5,7 @@
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         Documents
       </h1>
-      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @kbs.load.size.to_s + " Documents)"%></p>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @kbs.load.size.to_s + " Documents)" %></p>
     </div>
     <% if current_user.admin? %>
       <div class="flex justify-end w-full max-w-sm px-2 lg:ml-6 lg:justify-end place-self-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/documents">
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="flex mt-4 sm:mt-0 sm:ml-4">
-        <%= link_to 'New Document', new_kb_path, class:"btn-blue" %>
+        <%= link_to "New Document", new_kb_path, class: "btn-blue" %>
       </div>
     <% end %>
   </div>
@@ -56,15 +56,15 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" id="kbs" data-infinite-scroll-target="entries">
-            <%= render partial: "kb", collection: @kbs, as: :kb, cached: true%>
+            <%= render partial: "kb", collection: @kbs, as: :kb, cached: true %>
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-          <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
         </div>
       </div>
     </div>
   <% else %>
-    <%= render partial: "shared/no_result_found"%>
+    <%= render partial: "shared/no_result_found" %>
   <% end %>
 </main>

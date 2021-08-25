@@ -1,0 +1,67 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: super
+
+two:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: lead
+
+three:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: member
+
+four:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: admin
+
+five:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: super
+
+six:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: super
+
+seven:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: super
+
+eight:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: super
+
+nine:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: super
+
+ten:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: manager
+
+eleven:
+  filename: Resume
+  link: www.google.com
+  comments: this is a comment
+  user: manager
