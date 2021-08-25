@@ -15,6 +15,7 @@ class KbTest < ApplicationSystemTestCase
   def page_url
     kb_index_url(script_name: "/#{@account.id}")
   end
+
   test "can show index if logged in" do
     visit page_url
     take_screenshot
@@ -51,7 +52,6 @@ class KbTest < ApplicationSystemTestCase
       end
     end
   end
-
 
   test "lead can not see someone elses kbs" do
     sign_out @employee
