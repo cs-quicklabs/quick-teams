@@ -9,7 +9,7 @@ class NuggetPolicy < ApplicationPolicy
       if @user.admin?
         @scope.includes(:skill).order(published: :asc).order(created_at: :desc)
       elsif @user.lead?
-        Nugget.includes(:skill).where(user_id: @user).order(published: :asc).order(created_at: :desc)
+        @scope.includes(:skill).where(user_id: @user).order(published: :asc).order(created_at: :desc)
       end
     end
   end
@@ -19,7 +19,11 @@ class NuggetPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.admin? || user.lead?
+    nugget = record.first
+    return false if nugget.published?
+    return true if user.admin?
+    return nugget.user == user if user.lead?
+    false
   end
 
   def index?
@@ -35,7 +39,7 @@ class NuggetPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || user.lead?
+    edit?
   end
 
   def new?

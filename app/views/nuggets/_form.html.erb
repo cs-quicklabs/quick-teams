@@ -13,6 +13,7 @@
           <%= form.collection_select(:skill_id, Skill.all.order("lower(skills.name) asc"), :id, :name, {:prompt => 'Select Skill'}, :class=>"form-text-field mt-1"  ) %>
         </div>
         <div class="flex justify-end">
+          <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
           <%= form.submit "Save Nugget", class:"btn-blue"%>
         </div>
       </main>

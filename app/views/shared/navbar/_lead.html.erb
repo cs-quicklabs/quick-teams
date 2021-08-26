@@ -13,7 +13,7 @@
         <a href=<%= nuggets_path %> class= "<%= current_page?(nuggets_path) ? "nav-selected" : "nav-unselected" %>"> Nuggets </a>
       <% end %>
       <% if policy(:kb).index? %>
-        <a href="<%= kb_index_path %>" class="<%= current_page?(kb_index_path) ? "nav-selected" : "nav-unselected" %>">Knowledge Base</a>
+        <a href="<%= kbs_path %>" class="<%= current_page?(kbs_path) ? "nav-selected" : "nav-unselected" %>">Knowledge Base</a>
       <% end %>
     </div>
   </div>

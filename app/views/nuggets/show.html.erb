@@ -3,7 +3,7 @@
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="milestone-detail">
     <%= render partial: "shared/nuggets/title", locals: { nugget: @nugget } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <% if policy([Nugget]).edit? %>
+      <% if policy([@nugget]).edit? %>
         <% unless @nugget.published %>
           <%= link_to "Edit", edit_nugget_path(@nugget), class: "btn-blue" %>
         <% end %>
@@ -14,7 +14,7 @@
   <div class="mt-1 text-sm text-gray-900 sm:px-6 lg:px-8">
     <p><%= @nugget.body %></p>
   </div>
-  <% if policy([Nugget]).publish? %>
+  <% if policy([@nugget]).publish? %>
     <% if @nugget.published? %>
       <div class="p-4 rounded-md bg-green-50">
         <div class="flex">

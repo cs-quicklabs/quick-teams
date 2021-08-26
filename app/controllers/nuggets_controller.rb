@@ -15,17 +15,17 @@ class NuggetsController < BaseController
   end
 
   def show
-    authorize :nugget
+    authorize @nugget
     fresh_when @nugget
   end
 
   def update
-    authorize :nugget
+    authorize @nugget
     respond_to do |format|
       if @nugget.update(nugget_params)
-        format.turbo_stream { redirect_to nugget_path(@nugget), notice: "Nugget was added successfully." }
+        format.turbo_stream { redirect_to nugget_path(@nugget), notice: "Nugget was updated successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@nugget, partial: "nuggets/form", locals: { nugget: @nugget }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@nugget, partial: "nuggets/form", locals: { nugget: @nugget, title: "Edit Nugget" }) }
       end
     end
   end
@@ -37,17 +37,17 @@ class NuggetsController < BaseController
       if @nugget.errors.empty?
         format.turbo_stream { redirect_to nuggets_path, notice: "Nugget was added successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Nugget.new, partial: "nuggets/form", locals: { nugget: @nugget }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Nugget.new, partial: "nuggets/form", locals: { nugget: @nugget, title: "Add New Nugget" }) }
       end
     end
   end
 
   def edit
-    authorize :nugget
+    authorize [@nugget]
   end
 
   def destroy
-    authorize :nugget
+    authorize @nugget
     @nugget.destroy
     respond_to do |format|
       format.turbo_stream { redirect_to nuggets_path, notice: "Nugget was removed successfully." }
