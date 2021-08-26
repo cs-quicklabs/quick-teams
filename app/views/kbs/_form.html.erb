@@ -5,20 +5,24 @@
       <%= render "shared/form_header", title: "Add New Document", subtitle: "A knowledge Base can be 'How to' guide, 'training' guide or another useful document needed by people to do their job" %>
       <%= form.text_field :document, "Document" %>
       <%= form.text_field :link, "Link" %>
-      <%= form.text_field :comments, "Comments (optional)" %>
+      <%= form.text_area :comments, "Comments (optional)" %>
       <div>
         <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">People with following Discipline can see this document</label>
-        <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, { :prompt => "Select Discipline" }, :selected => params[:discipline_id], :class => "form-text-field mt-1") %>
-        <p class="mt-2 text-xs text-gray-500" id="email-description">Leaving unselected means everyone can see this document irrespective of their Discipline</p>
+        <select name="kb[discipline_id]" class="form-text-field mt-1">
+          <option value="<%= nil %>">Anyone can see</option>
+          <% Discipline.order(:name).each do |discipline| %>
+            <option value=""><%= discipline.name %></option>
+          <% end %>
+        </select>
       </div>
       <div>
         <label for="job" class="block mt-4 text-sm font-medium text-gray-700">People with following Job can see this document</label>
         <select name="kb[job_id]" class="form-text-field mt-1">
+          <option value="">Anyone can see</option>
           <% Job.order(:name).each do |job| %>
             <option value="<%= job.id %>"><%= job.name %></option>
           <% end %>
         </select>
-        <p class="mt-2 text-xs text-gray-500" id="email-description">Leaving unselected means everyone can see this document irrespective of their Job</p>
       </div>
       <div class="flex justify-end mt-6">
         <%= form.submit "Save Document ", class: "btn-blue" %>
