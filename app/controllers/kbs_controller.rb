@@ -9,7 +9,7 @@ class KbsController < BaseController
     if current_user.admin?
       @pagy, @kbs = pagy(Kb.includes(:discipline, :job, :user).order(created_at: :desc), items: 10)
     else
-      @pagy, @kbs = pagy(Kb.includes(:discipline, :job, :user).where(discipline_id: current_user.discipline.id, job_id: [nil, current_user.job.id]).order(created_at: :desc), items: 10)
+      @pagy, @kbs = pagy(Kb.includes(:discipline, :job, :user).where(discipline_id: [nil, current_user.discipline.id], job_id: [nil, current_user.job.id]).order(created_at: :desc), items: 10)
     end
     render_partial("kb/kb", collection: @kbs)
   end
@@ -23,7 +23,6 @@ class KbsController < BaseController
     authorize :kb
 
     @kb = AddKb.call(kb_params, current_user).result
-    binding.irb
     respond_to do |format|
       if @kb.errors.empty?
         format.html { redirect_to kbs_path, notice: "Document was successfully Added." }

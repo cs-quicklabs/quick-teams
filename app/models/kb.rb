@@ -5,8 +5,7 @@ class Kb < ApplicationRecord
 
   belongs_to :user
   belongs_to :job, optional: true
-
-  belongs_to :discipline
+  belongs_to :discipline, optional: true
   validates :link, :url => true
 
   def self.query(params, includes = nil, order)

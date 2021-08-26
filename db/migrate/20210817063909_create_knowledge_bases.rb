@@ -4,8 +4,8 @@ class CreateKnowledgeBases < ActiveRecord::Migration[6.1]
       t.string :document
       t.string :link
       t.references :user, null: false, foreign_key: true
-      t.references :discipline, null: false, foreign_key: true
-      t.references :job, null: false, foreign_key: true
+      t.references :discipline, foreign_key: true
+      t.references :job, foreign_key: true
       t.string :tag
 
       t.timestamps

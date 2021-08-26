@@ -155,8 +155,8 @@ ActiveRecord::Schema.define(version: 2021_08_19_061005) do
     t.string "document"
     t.string "link"
     t.bigint "user_id", null: false
-    t.bigint "discipline_id", null: false
-    t.bigint "job_id", null: false
+    t.bigint "discipline_id"
+    t.bigint "job_id"
     t.string "tag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
