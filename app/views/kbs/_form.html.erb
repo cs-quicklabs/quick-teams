@@ -1,25 +1,28 @@
-<main class="max-w-6xl px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+<main class="max-w-lg px-4 pb-12 mx-auto space-y-6 lg:pb-16">
   <%= tailwind_form_with(model: kb, id: dom_id(kb)) do |form| %>
-    <%= render "shared/form_messages", resource: kb, message: local_assigns[:message] %>
-    <%= render "shared/form_header", title: "Add New Document", subtitle: "A knowledge Base can be link to resume, blogs or content you have written." %>
-    <%= form.text_field :document, "Document" %>
-    <%= form.text_field :comments, "Comments (optional)" %>
-    <%= form.text_field :link, "Link" %>
-    <div>
-      <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">Select Discipline</label>
-      <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, { :prompt => "Select Discipline" }, :selected => params[:discipline_id], :class => "form-text-field mt-1") %>
-    </div>
-    <div>
-      <label for="job" class="block mt-4 text-sm font-medium text-gray-700">Select Job</label>
-      <select name="kb[job_id]" class="form-text-field mt-1">
-        <% Job.order(:name).each do |job| %>
-          <option value="<%= job.id %>"><%= job.name %></option>
-        <% end %>
-        <option value=" ">Select all</option>
-      </select>
-    </div>
-    <div class="flex justify-end mt-6">
-      <%= form.submit "Save Document ", class: "btn-blue" %>
-    </div>
+    <main class="w-full px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+      <%= render "shared/form_messages", resource: kb, message: local_assigns[:message] %>
+      <%= render "shared/form_header", title: "Add New Document", subtitle: "A knowledge Base can be 'How to' guide, 'training' guide or another useful document needed by people to do their job" %>
+      <%= form.text_field :document, "Document" %>
+      <%= form.text_field :link, "Link" %>
+      <%= form.text_field :comments, "Comments (optional)" %>
+      <div>
+        <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">People with following Discipline can see this document</label>
+        <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, { :prompt => "Select Discipline" }, :selected => params[:discipline_id], :class => "form-text-field mt-1") %>
+        <p class="mt-2 text-xs text-gray-500" id="email-description">Leaving unselected means everyone can see this document irrespective of their Discipline</p>
+      </div>
+      <div>
+        <label for="job" class="block mt-4 text-sm font-medium text-gray-700">People with following Job can see this document</label>
+        <select name="kb[job_id]" class="form-text-field mt-1">
+          <% Job.order(:name).each do |job| %>
+            <option value="<%= job.id %>"><%= job.name %></option>
+          <% end %>
+        </select>
+        <p class="mt-2 text-xs text-gray-500" id="email-description">Leaving unselected means everyone can see this document irrespective of their Job</p>
+      </div>
+      <div class="flex justify-end mt-6">
+        <%= form.submit "Save Document ", class: "btn-blue" %>
+      </div>
+    </main>
   <% end %>
 </main>
