@@ -1,4 +1,8 @@
 class Kb < ApplicationRecord
+  include PgSearch::Model
+
+  pg_search_scope :search_title, against: :document, using: { tsearch: { dictionary: "english" } }
+
   belongs_to :user
   belongs_to :job, optional: true
 

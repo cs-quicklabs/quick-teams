@@ -40,7 +40,6 @@ class KbsController < BaseController
   def update
     authorize @kb
     @kb.update(kb_params)
-    binding.irb
     respond_to do |format|
       if @kb.update(kb_params)
         format.html { redirect_to kbs_path, notice: "Knowledge Base was successfully updated." }
