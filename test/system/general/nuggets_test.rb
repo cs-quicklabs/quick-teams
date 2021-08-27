@@ -5,6 +5,7 @@ class NuggetsTest < ApplicationSystemTestCase
     @user = users(:regular)
     @account = @user.account
     ActsAsTenant.current_tenant = @account
+    @nuggets = @user.nuggets.includes(:user)
     @nugget = @user.nuggets.first
     sign_in @user
   end
@@ -18,6 +19,10 @@ class NuggetsTest < ApplicationSystemTestCase
   end
 
   test "admin can see nuggets" do
+    visit page_url
+    take_screenshot
+    assert_selector "h1", text: "Nuggets"
+    assert_text "New Nugget"
   end
 
   test "lead can see nuggets created by him" do

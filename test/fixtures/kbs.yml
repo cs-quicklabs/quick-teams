@@ -1,67 +1,73 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  filename: Resume
+  document: Resume one
   link: www.google.com
   comments: this is a comment
   user: super
 
 two:
-  filename: Resume
+  document: Resume two
   link: www.google.com
   comments: this is a comment
   user: lead
 
 three:
-  filename: Resume
+  document: Resume three
   link: www.google.com
   comments: this is a comment
   user: member
 
 four:
-  filename: Resume
+  document: Resume four
   link: www.google.com
   comments: this is a comment
   user: admin
 
 five:
-  filename: Resume
+  document: Resume five
   link: www.google.com
   comments: this is a comment
   user: super
 
 six:
-  filename: Resume
+  document: Resume six
   link: www.google.com
   comments: this is a comment
   user: super
 
 seven:
-  filename: Resume
+  document: Resume seven
   link: www.google.com
   comments: this is a comment
   user: super
 
 eight:
-  filename: Resume
+  document: Resume eight
   link: www.google.com
   comments: this is a comment
   user: super
 
 nine:
-  filename: Resume
+  document: Resume nine 
   link: www.google.com
   comments: this is a comment
   user: super
 
 ten:
-  filename: Resume
+  document: Resume ten
   link: www.google.com
   comments: this is a comment
   user: manager
 
 eleven:
-  filename: Resume
+  document: Resume eleven
   link: www.google.com
   comments: this is a comment
   user: manager
+
+tweleve:
+  document: Resume tweleve
+  link: www.google.com
+  comments: this is a comment
+  user: regular

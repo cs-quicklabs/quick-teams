@@ -3,5 +3,5 @@
 one:
   title: This is a title
   user: regular
-  skill: Ruby
+  skill: ruby
   published: true
