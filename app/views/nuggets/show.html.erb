@@ -4,9 +4,7 @@
     <%= render partial: "shared/nuggets/title", locals: { nugget: @nugget } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <% if policy([@nugget]).edit? %>
-        <% unless @nugget.published %>
           <%= link_to "Edit", edit_nugget_path(@nugget), class: "btn-blue" %>
-        <% end %>
         <%= link_to "Delete", nugget_path(@nugget), method: :delete, class: "btn-red", data: { confirm: "Are you sure?" } %>
       <% end %>
     </div>
@@ -28,7 +26,7 @@
               This nugget is published and employees can see it. 
             </p>
             <p class="mt-3 text-sm md:mt-0 md:ml-6">
-              <button type="button" data-reflex="click->Nugget#unpublish" data-nugget-id="<%= @nugget.id %>" class="font-medium text-green-700 whitespace-nowrap hover:text-green-600">Unpublish</button>
+              <button type="button" id="publish-button"  data-reflex="click->Nugget#unpublish" data-nugget-id="<%= @nugget.id %>" class="font-medium text-green-700 whitespace-nowrap hover:text-green-600">Unpublish</button>
             </p>
           </div>
         </div>
@@ -46,7 +44,7 @@
               This Nugget has not been published and employee can not see it. 
             </p>
             <p class="mt-3 text-sm md:mt-0 md:ml-6">
-              <button type="button" data-reflex="click->Nugget#publish" data-nugget-id="<%= @nugget.id %>" class="font-medium text-blue-700 cursor-pointer whitespace-nowrap hover:text-blue-600">Publish</button>
+              <button type="button" id="publish-button" data-reflex="click->Nugget#publish" data-nugget-id="<%= @nugget.id %>" class="font-medium text-blue-700 cursor-pointer whitespace-nowrap hover:text-blue-600">Publish</button>
             </p>
           </div>
         </div>

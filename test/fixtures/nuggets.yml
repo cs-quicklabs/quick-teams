@@ -5,3 +5,21 @@ one:
   user: regular
   skill: ruby
   published: true
+
+two:
+  title: This is a title
+  user: lead
+  skill: ruby
+  published: true
+
+three:
+  title: This is a title
+  user: lead
+  skill: ruby
+  published: true
+
+four:
+  title: This is a title
+  user: lead
+  skill: ruby
+  published: false

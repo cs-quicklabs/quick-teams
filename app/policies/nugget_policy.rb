@@ -20,8 +20,8 @@ class NuggetPolicy < ApplicationPolicy
 
   def edit?
     nugget = record.first
-    return false if nugget.published?
     return true if user.admin?
+    return false if nugget.published?
     return nugget.user == user if user.lead?
     false
   end

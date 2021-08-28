@@ -79,4 +79,8 @@ class User < ApplicationRecord
   def is_manager?(project)
     project.manager == self
   end
+
+  def added_nuggets
+    Nugget.where(user: self).includes(:user)
+  end
 end

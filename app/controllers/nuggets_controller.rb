@@ -20,7 +20,7 @@ class NuggetsController < BaseController
   end
 
   def update
-    authorize @nugget
+    authorize [@nugget]
     respond_to do |format|
       if @nugget.update(nugget_params)
         format.turbo_stream { redirect_to nugget_path(@nugget), notice: "Nugget was updated successfully." }
