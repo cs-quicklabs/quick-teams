@@ -47,7 +47,7 @@
                         <%= tailwind_form_with(url: employee_nuggets_path, method: "get") do |f| %>
                           <%= f.collection_select(:skill_id, @employee.skills.all.order("LOWER(skills.name) ASC"), :id, :name, { :prompt => "Select Skill", :selected => params[:skill_id] }, :class => "form-text-field mt-1", :onchange => ("javascript: this.form.submit();")) %>
                           <div class="flex justify-end mt-1 w-full">
-                            <%= link_to "Clear Filter", employee_nuggets_path, class: "btn-inline-edit" %>
+                            <%= link_to "Clear Filter", employee_nuggets_path(@employee), class: "btn-inline-edit" %>
                           </div>
                         <% end %>
                       </div>
