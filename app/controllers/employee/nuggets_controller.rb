@@ -15,9 +15,9 @@ class Employee::NuggetsController < Employee::BaseController
 
   def filtered_nuggets
     unless params[:skill_id].present?
-      nuggets = @employee.nuggets.select("nuggets_users.read as read", "nuggets.*").includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
+      nuggets = @employee.published_nuggets
     else
-      nuggets = @employee.nuggets.select("nuggets_users.read as read", "nuggets.*").where(skill_id: @id).includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
+      nuggets = @employee.published_nuggets_for_skill(params[:skill_id])
     end
   end
 

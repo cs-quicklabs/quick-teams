@@ -83,4 +83,12 @@ class User < ApplicationRecord
   def added_nuggets
     Nugget.where(user: self).includes(:user)
   end
+
+  def published_nuggets
+    nuggets.where(published: true).select("nuggets_users.read as read", "nuggets.*").includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
+  end
+
+  def published_nuggets_for_skill(id)
+    nuggets.where(published: true).select("nuggets_users.read as read", "nuggets.*").where(skill_id: id).includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
+  end
 end

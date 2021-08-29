@@ -12,7 +12,9 @@ regular:
   status: deployed
   people_tags: star
   confirmed_at: 2021-03-18
-  sign_in_count: 1
+  sign_in_count: 1  
+  nuggets: one, four, five
+  skills: ruby, python
 
 actor:
   first_name: Rachita

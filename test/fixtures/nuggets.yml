@@ -23,3 +23,9 @@ four:
   user: lead
   skill: ruby
   published: false
+
+five:
+  title: This is a title
+  user: lead
+  skill: python
+  published: true

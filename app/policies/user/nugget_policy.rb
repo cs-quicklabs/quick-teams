@@ -1,29 +1,11 @@
 class User::NuggetPolicy < User::BaseUserPolicy
-  def create?
-    true
-  end
-
-  def edit?
-    true
-  end
-
   def index?
     true
   end
 
   def show?
-    true
-  end
-
-  def destroy?
-    true
-  end
-
-  def update?
-    true
-  end
-
-  def new?
-    true
+    employee = record.first
+    nugget = record.second
+    employee.published_nuggets.include?(nugget)
   end
 end
