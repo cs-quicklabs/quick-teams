@@ -33,7 +33,7 @@
     <% end %>
   </div>
   <% if @kbs.size > 0 %>
-    <div class="sm:block">
+    <div class="sm:block" data-controller="infinite-scroll">
       <div class="inline-block min-w-full align-middle ">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
@@ -41,7 +41,7 @@
               <th scope="col" class="w-full px-16 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Document
               </th>
-              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="px-14 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                 Added by
               </th>
               <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
@@ -50,9 +50,11 @@
               <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                 Job
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left  text-gray-500 uppercase">
-                Action
-              </th>
+              <% if policy(@kb).edit? %>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left  text-gray-500 uppercase">
+                  Action
+                </th>
+              <% end %>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" id="kbs" data-infinite-scroll-target="entries">

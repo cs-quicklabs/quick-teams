@@ -1,78 +1,93 @@
 require "application_system_test_case"
-require "nokogiri"
 
 class KbTest < ApplicationSystemTestCase
-  include ActionMailer::TestHelper
-
   setup do
-    @actor = users(:actor)
-    @account = @actor.account
-    ActsAsTenant.current_tenant = @account
     @employee = users(:regular)
-    sign_in @actor
+    @account = @employee.account
+    ActsAsTenant.current_tenant = @account
+    sign_in @employee
   end
 
   def page_url
-    kb_index_url(script_name: "/#{@account.id}")
+    kbs_url(script_name: "/#{@account.id}")
   end
 
-  test "can show index if logged in" do
+  def new_page_url
+    new_kb_url(script_name: "/#{@account.id}")
+  end
+
+  test "can visit index page if logged in" do
     visit page_url
     take_screenshot
-    assert_selector "h1", text: "kbs"
-    assert_text "New kb"
+    assert_selector "h1", text: "Documents"
   end
 
-  test "admin can see own kbs" do
+  test "can not visit index if not logged in" do
     sign_out @employee
-    @employee = users(:super)
-    sign_in @employee
     visit page_url
-    assert_selector "form#new_kb"
-    @kbs.each do |kb|
-      assert_selector "tr##{dom_id(kb)}", text: "Edit"
-      assert_selector "tr##{dom_id(kb)}", text: "Delete"
+    assert_selector "h1", text: "Sign in to your account"
+  end
+
+  test "admin can see all documents" do
+    visit page_url
+    @documents = Kb.all
+    @documents.each do |document|
+      assert_selector "tr", id: "#{dom_id(document)}"
     end
   end
 
-  test "lead can see and add own kbs" do
-    sign_out @employee
-    @employee = users(:lead)
-    sign_in @employee
-    visit page_url
-    assert_selector "form#new_kb"
-
-    @kbs.each do |kb|
-      if kb.user_id == @employee.id
-        assert_selector "tr##{dom_id(kb)}", text: "Edit"
-        assert_selector "tr##{dom_id(kb)}", text: "Delete"
-      else
-        assert_no_selector "tr##{dom_id(kb)}", text: "Edit"
-        assert_no_selector "tr##{dom_id(kb)}", text: "Delete"
-      end
-    end
-  end
-
-  test "lead can not see someone elses kbs" do
+  test "lead can see documents related to him" do
     sign_out @employee
     @lead = users(:lead)
     sign_in @lead
-    @employee = users(:admin)
     visit page_url
+    @documents = Kb.visible_documents_for_user(@lead)
+    @documents.each do |document|
+      assert_includes [nil, @lead.discipline], document.discipline
+      assert_includes [nil, @lead.job], document.job
+    end
   end
 
-  test "member can see his kbs" do
-    sign_out @employee
-    @employee = users(:member)
-    sign_in @employee
-    visit page_url
-  end
-
-  test "member can not see someone elses kbs" do
+  test "member can see documents related to him" do
     sign_out @employee
     @member = users(:member)
     sign_in @member
-    @employee = users(:admin)
     visit page_url
+    @documents = Kb.visible_documents_for_user(@member)
+    @documents.each do |document|
+      assert_includes [nil, @member.discipline], document.discipline
+      assert_includes [nil, @member.job], document.job
+    end
+  end
+
+  test "admin can add document" do
+    visit new_page_url
+    fill_in "Document", with: "Test document"
+    fill_in "Link", with: "www.google.com"
+    fill_in "kb_comments", with: "These are some comments"
+    click_on "Save Document"
+    assert_selector "p.notice", text: "Document was successfully Added."
+  end
+
+  test "can not add document with wrong params" do
+    visit new_page_url
+    click_on "Save Document"
+    assert_selector "p.notice", text: "Failed to add knowledge base. Please try again."
+  end
+
+  test "lead can not add document" do
+    sign_out @employee
+    @lead = users(:lead)
+    sign_in @lead
+    visit new_page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+  end
+
+  test "member can not add document" do
+    sign_out @employee
+    @member = users(:member)
+    sign_in @member
+    visit new_page_url
+    assert_selector "h1", text: @employee.decorate.display_name
   end
 end

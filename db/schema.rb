@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_19_061005) do
+ActiveRecord::Schema.define(version: 2021_08_29_140956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,8 @@ ActiveRecord::Schema.define(version: 2021_08_19_061005) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "comments"
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_kbs_on_account_id"
     t.index ["discipline_id"], name: "index_kbs_on_discipline_id"
     t.index ["job_id"], name: "index_kbs_on_job_id"
     t.index ["user_id"], name: "index_kbs_on_user_id"
@@ -185,6 +187,8 @@ ActiveRecord::Schema.define(version: 2021_08_19_061005) do
     t.datetime "published_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_nuggets_on_account_id"
     t.index ["skill_id"], name: "index_nuggets_on_skill_id"
     t.index ["user_id"], name: "index_nuggets_on_user_id"
   end
@@ -418,11 +422,13 @@ ActiveRecord::Schema.define(version: 2021_08_19_061005) do
   add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
   add_foreign_key "jobs", "accounts", name: "jobs_account_id_fkey"
+  add_foreign_key "kbs", "accounts"
   add_foreign_key "kbs", "disciplines"
   add_foreign_key "kbs", "jobs"
   add_foreign_key "kbs", "users"
   add_foreign_key "notes", "users"
   add_foreign_key "notes", "users", name: "notes_user_id_fkey"
+  add_foreign_key "nuggets", "accounts"
   add_foreign_key "nuggets", "skills"
   add_foreign_key "nuggets", "users"
   add_foreign_key "people_statuses", "accounts"

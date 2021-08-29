@@ -1,5 +1,4 @@
 require "application_system_test_case"
-require "nokogiri"
 
 class EmployeeDocumentsTest < ApplicationSystemTestCase
   include ActionMailer::TestHelper

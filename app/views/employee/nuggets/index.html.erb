@@ -1,13 +1,13 @@
 <main class="relative z-0 flex-1 focus:outline-none">
-  <%= render "employee/title", employee: @employee%>
+  <%= render "employee/title", employee: @employee %>
   <main class="pb-8">
     <div class="" id="nuggets">
       <div class="grid items-start grid-cols-1 lg:grid-cols-3 ">
         <!-- Left column -->
-        <div class="grid grid-cols-1 lg:col-span-2">
+        <div class="grid grid-cols-1 lg:col-span-2" >
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
-              <div id="employee-nuggets" class="flex  flex-wrap ">
+              <div id="employee-nuggets" class="flex  flex-wrap " data-controller="infinite-scroll">
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
@@ -27,7 +27,7 @@
                   </tbody>
                 </table>
                 <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-                  <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                  <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
                 </div>
               </div>
             </div>
@@ -44,10 +44,10 @@
                     <div class="w-full max-w-sm lg:max-w-sm">
                       <label for="skill" class="block text-sm font-medium text-gray-700"></label>
                       <div class="mt-1">
-                        <%= tailwind_form_with(url: employee_nuggets_path, method: 'get') do |f|%>
-                          <%= f.collection_select(:skill_id, @employee.skills.all.order("LOWER(skills.name) ASC"), :id, :name,{:prompt => 'Select Skill', :selected =>params[:skill_id]}, :class=>"form-text-field mt-1", :onchange => ("javascript: this.form.submit();") ) %>
+                        <%= tailwind_form_with(url: employee_nuggets_path, method: "get") do |f| %>
+                          <%= f.collection_select(:skill_id, @employee.skills.all.order("LOWER(skills.name) ASC"), :id, :name, { :prompt => "Select Skill", :selected => params[:skill_id] }, :class => "form-text-field mt-1", :onchange => ("javascript: this.form.submit();")) %>
                           <div class="flex justify-end mt-1 w-full">
-                            <%= link_to 'Clear Filter', employee_nuggets_path, class: "btn-inline-edit" %>
+                            <%= link_to "Clear Filter", employee_nuggets_path, class: "btn-inline-edit" %>
                           </div>
                         <% end %>
                       </div>
