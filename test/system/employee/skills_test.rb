@@ -29,8 +29,8 @@ class EmployeeSkillsTest < ApplicationSystemTestCase
     visit page_url
     fill_in "search-skills", with: "u"
     find("#add-skill").click
-    assert_selector "#employee-skills", text: "Ruby"
-    find("#remove-skill").click
+    assert_selector "#employee-skills", text: "Vue"
+    first("#remove-skill").click
     assert_no_selector "#employee-skills", text: "Ruby"
   end
 end

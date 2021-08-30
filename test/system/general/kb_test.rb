@@ -72,7 +72,7 @@ class KbTest < ApplicationSystemTestCase
   test "can not add document with wrong params" do
     visit new_page_url
     click_on "Save Document"
-    assert_selector "p.notice", text: "Failed to add knowledge base. Please try again."
+    assert_selector "p.alert", text: "Failed to add knowledge base. Please try again."
   end
 
   test "lead can not add document" do

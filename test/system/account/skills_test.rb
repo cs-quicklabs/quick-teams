@@ -54,7 +54,7 @@ class SkillsTest < ApplicationSystemTestCase
 
   test "can delete a skill" do
     visit page_url
-    skill = skills(:ruby)
+    skill = skills(:android)
 
     assert_selector "li", text: skill.name
     find("li", text: skill.name).click_on("Delete")

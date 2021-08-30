@@ -138,11 +138,11 @@ class NuggetsTest < ApplicationSystemTestCase
 
   test "member can not delete nugget" do
     sign_out @user
-    @lead = users(:member)
+    @member = users(:member)
     sign_in @member
     @nugget = Nugget.first
     visit nugget_url(script_name: "/#{@account.id}", id: @nugget.id)
-    assert_selector "h1", text: @member.decorate.display_name
+    assert_no_text "Delete"
   end
 
   test "admin can publish a nugget" do

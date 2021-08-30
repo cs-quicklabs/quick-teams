@@ -69,13 +69,13 @@ class ProjectDocumentsTest < ApplicationSystemTestCase
 
   test "can edit document" do
     visit edit_page_url
-    title = "Some Random Document Title Edited"
+    title = "Some Document Edited"
     fill_in "document_filename", with: ""
     fill_in "document_filename", with: title
     take_screenshot
     click_on "Edit Document"
     assert_selector "p.notice", text: "document was successfully updated."
-    assert_selector "tr##{dom_id(@document)}", text: "Some Random Document Title Edited"
+    assert_selector "tr##{dom_id(@document)}", text: "Some Document Edited"
     take_screenshot
   end
 

@@ -5,3 +5,11 @@ ruby:
 python:
   name: Python
   account: crownstack
+
+android:
+  name: Android
+  account: crownstack
+
+vue:
+  name: Vue
+  account: crownstack

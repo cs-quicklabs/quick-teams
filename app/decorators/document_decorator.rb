@@ -3,6 +3,6 @@ class DocumentDecorator < Draper::Decorator
   decorates_association :user
 
   def display_filename
-    "#{filename}".capitalize
+    "#{filename}"
   end
 end
