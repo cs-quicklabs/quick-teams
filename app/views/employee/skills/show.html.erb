@@ -1,0 +1,29 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Employee Skills Report
+      </h1>
+    </div>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <div class="pt-4">
+      <%= form_tag(skills_reports_path, method: 'get', :name => 'skill_select') do %>
+        <main class="max-w-md mt-6 pb-12 mx-auto space-y-4 lg:pb-16">
+          <div>
+            <% @skills.each do |skill| %>
+              <label class="block text-sm font-medium pb-1 text-gray-700 whitespace-nowrap">
+                <%= check_box_tag "ids[#{skill.id}]", skill.id, params[:ids] && @ids.include?(skill.id), :name => "ids[]",  class: "mr-5 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 ", :onchange => ("javascript: document.skill_select.submit();")%>
+                <%=skill.name%>
+              </label>
+            <% end %>
+          </div>
+        </main>
+      <% end %>
+    </div>
+    <!-- This example requires Tailwind CSS v2.0+ -->
+  </div>
+</div>
