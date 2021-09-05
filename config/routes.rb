@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     resources :documents, module: "employee"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
+    get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
   end
   resources :user
   resources :comments

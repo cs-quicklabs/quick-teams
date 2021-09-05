@@ -21,7 +21,7 @@
       <section aria-labelledby="add-participant-section">
         <div class="bg-white">
           <div class="px-4">
-            <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
+            <main class="max-w-lg px-4 pt-6 pb-4 mx-auto space-y-6 lg:pb-16 z-10">
               <%= render "shared/form_header", title: "Add New Skill", subtitle: "" %>
               <div class="flex justify-center w-full max-w-sm lg:justify-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/employee/skills?id=<%= employee.id%>">
                 <div class="w-full max-w-sm lg:max-w-sm">
@@ -38,6 +38,11 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="">
+                <a href="<%= employee_show_skills_path(@employee) %>" class="text-sm font-medium text-blue-700 hover:underline whitespace-nowrap">
+                  show all skills
+                </a>
               </div>
             </main>
           </div>
