@@ -1,0 +1,12 @@
+        <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+            <% skills.each do |skill| %>
+             <li class="relative py-2 " data-reflex="click->EmployeeSkills#select" data-skill-id=<%= skill.id%> data-employee-id=<%= employee.id%> data-skill-value=<%=  employee_skills.include?(skill)%> >
+            <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg  focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+              <label class="block text-sm font-medium pb-1 text-gray-700 whitespace-nowrap">
+                <%= check_box_tag skill.id, skill.id,  employee_skills.include?(skill), :name => "ids[]",  class: "mr-5 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 "%>
+                <%=skill.name.titleize %>
+              </label>
+              </li>
+  <!-- More files... -->
+            <% end %>
+            </ul>
