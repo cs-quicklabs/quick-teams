@@ -21,6 +21,6 @@ class EmployeeSkillsReflex < ApplicationReflex
         employee.skills << Skill.find(element.dataset["skill-id"])
        end
     skills= Skill.order("lower(name) asc")
-    morph "#skill_select", render(partial: "employee/skills/list", locals: { employee: employee, employee_skills: employee.skills, user: current_user, skills: skills })
+    morph "#show-skills", render(partial: "employee/skills/list", locals: { employee: employee, employee_skills: employee.skills, user: current_user, skills: skills })
   end
 end
