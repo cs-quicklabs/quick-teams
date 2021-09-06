@@ -1,12 +1,12 @@
-        <ul role="list" class="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-6">
-            <% skills.each do |skill| %>
-             <li class="relative pt-2" data-reflex="click->EmployeeSkills#select" data-skill-id=<%= skill.id%> data-employee-id=<%= employee.id%> data-skill-value=<%=  employee_skills.include?(skill)%> >
-            <div class="group block w-full aspect-w-7 aspect-h-7 rounded-lg  ">
-              <label class="block text-sm font-medium pb-1 text-gray-700 min-w-sm" id="<%= dom_id(skill) %>">
-                <%= check_box_tag skill.id, skill.id,  employee_skills.include?(skill), :name => "ids[]",  class: "mr-2 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 "%>
-                <%=skill.name.capitalize %>
-              </label>
-              </li>
-  <!-- More files... -->
-            <% end %>
-            </ul>
+<ul role="list" class="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-6">
+  <% skills.each do |skill| %>
+    <li class="relative pt-2" data-reflex="click->EmployeeSkills#select"  data-skill-id=<%= skill.id%> data-employee-id=<%= employee.id%> data-skill-value=<%=  employee_skills.include?(skill)%> >
+      <div class="group block w-full aspect-w-7 aspect-h-7 rounded-lg  ">
+        <label class="block text-sm font-medium pb-1 text-gray-700 min-w-sm" >
+          <%= check_box_tag dom_id(skill), skill.id,  employee_skills.include?(skill), :name => "ids[]",  class: "mr-2 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 "%>
+          <%=skill.name.capitalize %>
+        </label>
+      </li>
+      <!-- More files... -->
+    <% end %>
+  </ul>

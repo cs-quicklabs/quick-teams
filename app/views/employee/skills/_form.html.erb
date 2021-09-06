@@ -36,25 +36,23 @@
                         <ul data-nav-search-target="results">
                         </ul>
                       </div>
-
-                  </div>
-                  <div class="relative" id="show-skills">
-                    <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                      <ul data-nav-search-target="results">
-                      </ul>
+                    </div>
+                    <div class="relative" >
+                      <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                        <ul data-nav-search-target="results">
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-            </main>
-              <div class="px-4">
+              </main>
+              <div class="px-4" id="show-skills">
                 <a href="<%= employee_show_skills_path(@employee) %>" class="btn-inline-edit hover:underline ">
-                 <p class= "text-right mr-2 "> or show all skills</p>
+                  <p class= "text-right mr-2 "> or show all skills</p>
                 </a>
               </div>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
-  <% end %>
+        </section>
+      </div>
+    <% end %>
