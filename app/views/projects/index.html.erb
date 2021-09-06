@@ -7,9 +7,11 @@
       </h1>
       <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @projects.count.to_s + " projects)"%></p>
     </div>
-    <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <%= link_to 'New Project', new_project_path, class:"btn-blue cursor-pointer" %>
-    </div>
+    <% if current_user.admin? %>
+      <div class="flex mt-4 sm:mt-0 sm:ml-4">
+        <%= link_to 'New Project', new_project_path, class:"btn-blue" %>
+      </div>
+    <% end %>
   </div>
   <!-- Projects table (small breakpoint and up) -->
   <% if @projects.count > 0 %>
@@ -21,12 +23,14 @@
               <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                 <span class="lg:pl-2">Project</span>
               </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                Tags
-              </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+)%>
-              </th>
+              <% if current_user.admin? %>
+                <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  Tags
+                </th>
+                <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+)%>
+                </th>
+              <% end %>
               <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                 Participants
               </th>

@@ -1,0 +1,57 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  document: Resume one
+  link: www.google.com
+  comments: this is a comment
+  user: super
+  account: crownstack
+
+two:
+  document: Resume two
+  link: www.google.com
+  comments: this is a comment
+  user: lead
+  account: crownstack
+
+three:
+  document: Resume three
+  link: www.google.com
+  comments: this is a comment
+  user: member
+  account: crownstack
+
+four:
+  document: Resume four
+  link: www.google.com
+  comments: this is a comment
+  user: admin
+  account: crownstack
+
+five:
+  document: Resume five
+  link: www.google.com
+  comments: this is a comment
+  user: super
+  account: crownstack
+
+ten:
+  document: Resume ten
+  link: www.google.com
+  comments: this is a comment
+  user: manager
+  account: crownstack
+
+eleven:
+  document: Resume eleven
+  link: www.google.com
+  comments: this is a comment
+  user: manager
+  account: crownstack
+
+tweleve:
+  document: Resume tweleve
+  link: www.google.com
+  comments: this is a comment
+  user: regular
+  account: crownstack

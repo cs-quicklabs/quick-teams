@@ -1,0 +1,36 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: This is a title
+  user: regular
+  skill: ruby
+  published: true
+  account: crownstack
+
+two:
+  title: This is a title
+  user: lead
+  skill: ruby
+  published: true
+  account: crownstack
+
+three:
+  title: This is a title
+  user: lead
+  skill: ruby
+  published: true
+  account: crownstack
+
+four:
+  title: This is a title
+  user: lead
+  skill: ruby
+  published: false
+  account: crownstack
+
+five:
+  title: This is a title
+  user: lead
+  skill: python
+  published: true
+  account: crownstack

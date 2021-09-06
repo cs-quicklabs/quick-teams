@@ -17,6 +17,8 @@
     <%= display_date(todo.deadline) %>
   </td>
   <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+  <% if policy([todo.owner, todo]).destroy?%>
     <%= link_to "Delete", employee_todo_path(todo.user, todo), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
+    <% end %>
   </td>
 </tr>

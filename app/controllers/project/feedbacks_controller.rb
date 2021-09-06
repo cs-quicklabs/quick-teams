@@ -2,15 +2,15 @@ class Project::FeedbacksController < Project::BaseController
   before_action :set_feedback, only: %i[show destroy]
 
   def index
-    authorize [:project, Feedback]
+    authorize [@project, Feedback]
 
     @feedback = Feedback.new
-    @pagy, @feedbacks = pagy_nil_safe(@project.feedbacks.includes(:user).order(created_at: :desc), items: LIMIT)
+    @pagy, @feedbacks = pagy_nil_safe(params, @project.feedbacks.includes(:user).order(created_at: :desc), items: LIMIT)
     render_partial("project/feedbacks/feedback", collection: @feedbacks) if stale?(@feedbacks + [@project])
   end
 
   def create
-    authorize [:project, Feedback]
+    authorize [@project, Feedback]
 
     @feedback = AddProjectFeedback.call(@project, feedback_params, current_user).result
     respond_to do |format|
@@ -26,7 +26,7 @@ class Project::FeedbacksController < Project::BaseController
   end
 
   def destroy
-    authorize [:project, @feedback]
+    authorize [@project, @feedback]
 
     @feedback.destroy
     Event.where(eventable: @project, trackable: @feedback).touch_all #fixes cache issues in activity
@@ -36,7 +36,7 @@ class Project::FeedbacksController < Project::BaseController
   end
 
   def show
-    authorize [:project, @feedback]
+    authorize [@project, @feedback]
 
     fresh_when @feedbacks
   end

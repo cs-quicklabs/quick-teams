@@ -16,7 +16,7 @@ class SchedulesController < BaseController
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
 
-    @pagy, @employees = pagy_nil_safe(employees, items: 20)
+    @pagy, @employees = pagy_nil_safe(params, employees, items: 20)
     if stale?(@employees)
       respond_to do |format|
         format.html
@@ -26,12 +26,6 @@ class SchedulesController < BaseController
         }
       end
     end
-  end
-
-  def pagy_nil_safe(collection, vars = {})
-    pagy = Pagy.new(count: collection.count(:all), page: params[:page], **vars)
-    return pagy, collection.offset(pagy.offset).limit(pagy.items) if collection.respond_to?(:offset)
-    return pagy, collection
   end
 
   def update

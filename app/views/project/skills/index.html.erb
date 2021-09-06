@@ -1,0 +1,9 @@
+<main class="relative z-0 flex-1 focus:outline-none">
+  <%= render "project/title", project: @project%>
+  <main class="pb-8">
+    <div class="px-4 sm:px-6" id="skills">
+      <%= render partial: "form", locals: {skills: @skills, project: @project, skill: @skill, user: current_user}, cached: false %>
+    </div>
+  </div>
+</main>
+</main>

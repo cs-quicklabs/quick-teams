@@ -1,10 +1,10 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
-  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="milestone-detail">
     <%= render partial: "shared/goals/title", locals: {goal: @milestone}%>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to 'Back','javascript:history.back()', class:"btn-normal" %>
-      <% if current_user.admin? %>
+      <% if policy([@project, @milestone]).edit? %>
         <%= link_to 'Edit', edit_project_milestone_path(@milestone.goalable, @milestone), class:"btn-blue ml-3" %>
       <% end  %>
     </div>

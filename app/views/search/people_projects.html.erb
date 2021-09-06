@@ -1,7 +1,7 @@
 <% @employees.each do |result|%>
   <a href="<%= employee_team_path(result) %>">
     <li role="option" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
-      <%= result.first_name + " " + result.last_name %> (<%= result.job.name %>)
+      <%= result.first_name + " " + result.last_name %> (<%= result.job.name if !result.job.blank? %>)
     </li>
   </a>
 <% end %>

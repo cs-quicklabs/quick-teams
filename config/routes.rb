@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   require "sidekiq-scheduler/web"
 
   mount Sidekiq::Web => "/sidekiq"
+  mount ActionCable.server => "/cable"
+  if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 
   namespace :account do
     resources :roles, except: [:new, :show]
@@ -26,6 +30,7 @@ Rails.application.routes.draw do
     resources :milestones, module: "project"
     resources :todos, module: "project"
     resources :skills, module: "project"
+    resources :documents, only: [:index, :show, :create, :destroy, :edit, :update], module: "project"
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
 
@@ -36,11 +41,16 @@ Rails.application.routes.draw do
     resources :goals, module: "employee"
     resources :todos, module: "employee"
     resources :skills, module: "employee"
+    resources :nuggets, module: "employee"
+    resources :documents, module: "employee"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
+    get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
   end
   resources :user
   resources :comments
+  resources :nuggets
+  resources :kbs
 
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"
@@ -52,13 +62,11 @@ Rails.application.routes.draw do
 
   get "/schedule", to: "schedules#index", as: "schedules"
   get "search/people-projects", to: "search#people_projects"
-  get "/search/skills", to: "search#skills"
+  get "/search/employee/skills", to: "search#employee_skills"
+  get "/search/project/skills", to: "search#project_skills"
+  get "/search/documents", to: "search#documents"
   get :goals, controller: :home
   get :events, controller: :home
-
-  if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
 
   scope "/settings" do
     get "/profile", to: "user#profile", as: "profile"
@@ -83,6 +91,9 @@ Rails.application.routes.draw do
     get "/todos/pending-todos-all", to: "report/todos#all_pending_todos", as: "all_pending_todos"
     get "/todos/recently-added", to: "report/todos#recently_added_todos", as: "recently_added_todos"
     get "/todos/recently-finished", to: "report/todos#recently_finished_todos", as: "recently_finished_todos"
+    get "/skills", to: "report/skills#index", as: "skills_reports"
+    get "/nuggets", to: "report/nuggets#index", as: "nuggets_reports"
+    get "/kbs", to: "report/kbs#index", as: "kbs_reports"
   end
 
   get "/reports", to: "reports#index", as: "reports"

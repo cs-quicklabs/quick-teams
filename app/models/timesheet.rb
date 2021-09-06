@@ -2,7 +2,7 @@ class Timesheet < ApplicationRecord
   acts_as_tenant :account
 
   validates :user, :project, :description, presence: true
-  validates :date, presence: true, inclusion: { in: ((Date.today - 30.days)..Time.now.to_date), message: "can be within last 30 days only" }
+  validates :date, presence: true, inclusion: { in: ((Date.today - 30.days)..(Time.now.to_date + 1)), message: "can be within last 30 days only" }
   validates :hours, presence: true, numericality: { greater_than_or_equal_to: 0, less_than: 24 }
 
   belongs_to :project

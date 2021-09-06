@@ -1,0 +1,72 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Documents
+      </h1>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @kbs.load.size.to_s + " Documents)" %></p>
+    </div>
+    <% if current_user.admin? %>
+      <div class="flex justify-end w-full max-w-sm px-2 lg:ml-6 lg:justify-end place-self-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/documents">
+        <div class="w-full max-w-sm lg:max-w-sm ">
+          <div class="relative ">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none" >
+              <!-- Heroicon name: solid/search -->
+              <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <input id="search" name="search" class="pl-10 pr-3 form-text-field" placeholder="Search Document" type="search" data-nav-search-target="input">
+          </div>
+          <div class="relative">
+            <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg  focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              <ul data-nav-search-target="results">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex mt-4 sm:mt-0 sm:ml-4">
+        <%= link_to "New Document", new_kb_path, class: "btn-blue" %>
+      </div>
+    <% end %>
+  </div>
+  <% if @kbs.size > 0 %>
+    <div class="sm:block" data-controller="infinite-scroll">
+      <div class="inline-block min-w-full align-middle ">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="w-full px-16 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Document
+              </th>
+              <th scope="col" class="px-14 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Added by
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Department
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Job
+              </th>
+              <% if policy(@kb).edit? %>
+                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left  text-gray-500 uppercase">
+                  Action
+                </th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200" id="kbs" data-infinite-scroll-target="entries">
+            <%= render partial: "kb", collection: @kbs, as: :kb, cached: true %>
+          </tbody>
+        </table>
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <%= render partial: "shared/no_result_found" %>
+  <% end %>
+</main>

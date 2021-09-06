@@ -1,0 +1,28 @@
+<tr id="<%= dom_id kb %>">
+  <%kb = kb.decorate %>
+  <td class="px-16 py-3  text-sm text-gray-700 max-w-0">
+    <div class="text-sm">
+      <a href="<%= ensure_protocol(kb.link) %>" target="_blank"  class="font-medium text-gray-900 block hover:underline" target="_top">
+        <%= kb.display_document %>
+      </a>
+    </div>
+     <div class="mt-1 text-sm text-gray-700">
+      <p class="line-clamp-3"><%= kb.comments%></p>
+    </div>
+    </td>
+      <td class="px-6 py-3  text-sm text-gray-700 max-w-0 whitespace-nowrap">
+    <a href="#" class="block hover:underline" target="_top">
+      <%= kb.user.display_name %>
+    </a>
+  </td>
+   <td class="px-6 py-3 text-sm text-gray-700 max-w-0 whitespace-nowrap">
+    <div class="mt-1 text-sm text-gray-700">
+      <p class=""><%= kb.discipline.name %></p>
+    </div>
+  </td>
+<td class="px-6 py-3   text-sm text-gray-700  whitespace-nowrap">
+    <div class="mt-1 text-sm text-gray-700">
+      <p class=""><%= kb.job.name %></p>
+    </div>
+  </td>
+</tr>

@@ -10,21 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_08_031235) do
+ActiveRecord::Schema.define(version: 2021_08_29_140956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "abouts", force: :cascade do |t|
-    t.string "email"
-    t.string "description"
-    t.bigint "user_id", null: false
-    t.bigint "project_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_abouts_on_project_id"
-    t.index ["user_id"], name: "index_abouts_on_user_id"
-  end
 
   create_table "accounts", force: :cascade do |t|
     t.string "name"
@@ -100,6 +89,19 @@ ActiveRecord::Schema.define(version: 2021_07_08_031235) do
     t.index ["account_id"], name: "index_disciplines_on_account_id"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.string "filename"
+    t.string "link"
+    t.bigint "user_id", null: false
+    t.string "comments"
+    t.string "documenter_type", null: false
+    t.bigint "documenter_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["documenter_type", "documenter_id"], name: "index_documents_on_documenter"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.integer "user_id"
     t.string "action"
@@ -149,6 +151,23 @@ ActiveRecord::Schema.define(version: 2021_07_08_031235) do
     t.index ["account_id"], name: "index_jobs_on_account_id"
   end
 
+  create_table "kbs", force: :cascade do |t|
+    t.string "document"
+    t.string "link"
+    t.bigint "user_id", null: false
+    t.bigint "discipline_id"
+    t.bigint "job_id"
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "comments"
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_kbs_on_account_id"
+    t.index ["discipline_id"], name: "index_kbs_on_discipline_id"
+    t.index ["job_id"], name: "index_kbs_on_job_id"
+    t.index ["user_id"], name: "index_kbs_on_user_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.text "body"
     t.string "notable_type"
@@ -158,6 +177,26 @@ ActiveRecord::Schema.define(version: 2021_07_08_031235) do
     t.bigint "user_id", null: false
     t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
     t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "nuggets", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.bigint "skill_id", null: false
+    t.boolean "published", default: false
+    t.datetime "published_on"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_nuggets_on_account_id"
+    t.index ["skill_id"], name: "index_nuggets_on_skill_id"
+    t.index ["user_id"], name: "index_nuggets_on_user_id"
+  end
+
+  create_table "nuggets_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "nugget_id", null: false
+    t.boolean "read", default: false, null: false
   end
 
   create_table "people_statuses", force: :cascade do |t|
@@ -223,6 +262,11 @@ ActiveRecord::Schema.define(version: 2021_07_08_031235) do
     t.index ["discipline_id"], name: "index_projects_on_discipline_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id"
     t.index ["status_id"], name: "index_projects_on_status_id"
+  end
+
+  create_table "projects_skills", id: false, force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "skill_id", null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -360,8 +404,6 @@ ActiveRecord::Schema.define(version: 2021_07_08_031235) do
     t.index ["status_id"], name: "index_users_on_status_id"
   end
 
-  add_foreign_key "abouts", "projects"
-  add_foreign_key "abouts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", name: "active_storage_attachments_blob_id_fkey"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
@@ -372,6 +414,7 @@ ActiveRecord::Schema.define(version: 2021_07_08_031235) do
   add_foreign_key "comments", "users"
   add_foreign_key "disciplines", "accounts"
   add_foreign_key "disciplines", "accounts", name: "disciplines_account_id_fkey"
+  add_foreign_key "documents", "users"
   add_foreign_key "events", "accounts"
   add_foreign_key "feedbacks", "users"
   add_foreign_key "feedbacks", "users", name: "feedbacks_user_id_fkey"
@@ -379,8 +422,15 @@ ActiveRecord::Schema.define(version: 2021_07_08_031235) do
   add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
   add_foreign_key "jobs", "accounts", name: "jobs_account_id_fkey"
+  add_foreign_key "kbs", "accounts"
+  add_foreign_key "kbs", "disciplines"
+  add_foreign_key "kbs", "jobs"
+  add_foreign_key "kbs", "users"
   add_foreign_key "notes", "users"
   add_foreign_key "notes", "users", name: "notes_user_id_fkey"
+  add_foreign_key "nuggets", "accounts"
+  add_foreign_key "nuggets", "skills"
+  add_foreign_key "nuggets", "users"
   add_foreign_key "people_statuses", "accounts"
   add_foreign_key "people_statuses", "accounts", name: "people_statuses_account_id_fkey"
   add_foreign_key "people_tags", "accounts"

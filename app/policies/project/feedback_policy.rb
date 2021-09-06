@@ -1,21 +1,39 @@
-class Project::FeedbackPolicy < ApplicationPolicy
+class Project::FeedbackPolicy < Project::BaseProjectPolicy
   def update?
-    user.admin? or record.user == user
-  end
-
-  def create?
-    user.admin?
-  end
-
-  def index?
-    user.admin?
+    project = record.first
+    user.admin? and not project.archived?
   end
 
   def show?
-    user.admin?
+    project = record.first
+    user.admin? or user.is_manager?(project)
+  end
+
+  def edit?
+    project = record.first
+    feedback = record.last
+    return false if project.archived?
+    return true if user.admin?
+
+    user.is_manager?(project) and feedback.user == user
   end
 
   def destroy?
+    project = record.first
+    feedback = record.last
+    return false if project.archived?
+    return true if user.admin?
+    user.is_manager?(project) and feedback.user == user
+  end
+
+  def create?
+    project = record.first
+    return false if project.archived?
     user.admin?
+  end
+
+  def show_add_feedback_form?
+    project = record.first
+    !project.archived
   end
 end

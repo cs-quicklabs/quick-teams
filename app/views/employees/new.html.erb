@@ -8,7 +8,7 @@
     <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, {:prompt => 'Select Discipline'}, :selected => @employee.discipline_id, :class=>"form-text-field mt-1" ) %>
     <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job'}, :selected => @employee.job_id, :class=>"form-text-field mt-1" ) %>
     <%= form.collection_select(:role_id, Role.order(:name), :id, :name, {:prompt => 'Select Role'}, :selected => @employee.role_id, :class=>"form-text-field mt-1" ) %>
-    <%= form.collection_select(:manager_id, UserDecorator.decorate_collection(User.for_current_account.active.order(:first_name)), :id, :display_name, {:prompt => 'Select Manager'}, :selected => @employee.manager_id, :class=>"form-text-field mt-1" ) %>
+    <%= form.collection_select(:manager_id, User.all_users.decorate, :id, :display_name_position, {:prompt => 'Select Manager'}, :selected => @employee.manager_id, :class=>"form-text-field mt-1" ) %>
     <div class="flex items-center justify-between">
       <div class="flex items-center">
         <%= form.check_box :billable, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
@@ -27,7 +27,7 @@
     </div>
     <div class="flex justify-end">
       <%= link_to 'Back', 'javascript:history.back()', class:"btn-normal" %>
-      <%= form.submit "Save", class:"btn-blue cursor-pointer"%>
+      <%= form.submit "Save", class:"btn-blue"%>
     </div>
   </main>
 <% end %>

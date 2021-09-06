@@ -10,6 +10,7 @@ class User < ApplicationRecord
   scope :inactive, -> { where(active: false) }
   scope :active, -> { where(active: true) }
   scope :billable, -> { where(billable: true) }
+  scope :all_users, -> { includes(:job, :role, :discipline).where(account: Current.account).active.order(:first_name) }
 
   belongs_to :account
   belongs_to :manager, class_name: "User", optional: true
@@ -21,10 +22,13 @@ class User < ApplicationRecord
   has_many :projects, through: :schedules
   has_many :subordinates, class_name: "User", foreign_key: "manager_id"
   has_many :feedbacks, as: :critiquable
+  has_many :documents, as: :documenter
   has_many :goals, as: :goalable
   has_many :events, as: :eventable
   has_many :notes
   has_many :timesheets
+  has_many :kbs
+  has_many :managed_projects, class_name: "Project", foreign_key: "manager_id"
   has_many :todos, class_name: "Todo", foreign_key: "owner_id"
   has_many :created_todos, class_name: "Todo", foreign_key: "user_id"
 
@@ -32,6 +36,7 @@ class User < ApplicationRecord
   belongs_to :status, class_name: "PeopleStatus", optional: true
   has_and_belongs_to_many :people_tags
   has_and_belongs_to_many :skills
+  has_and_belongs_to_many :nuggets
 
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 
@@ -65,5 +70,25 @@ class User < ApplicationRecord
 
   def active_for_authentication?
     super and active
+  end
+
+  def has_managed_projects?
+    managed_projects.count
+  end
+
+  def is_manager?(project)
+    project.manager == self
+  end
+
+  def added_nuggets
+    Nugget.where(user: self).includes(:user)
+  end
+
+  def published_nuggets
+    nuggets.where(published: true).select("nuggets_users.read as read", "nuggets.*").includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
+  end
+
+  def published_nuggets_for_skill(id)
+    nuggets.where(published: true).select("nuggets_users.read as read", "nuggets.*").where(skill_id: id).includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
   end
 end

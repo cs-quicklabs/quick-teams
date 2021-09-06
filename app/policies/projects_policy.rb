@@ -1,6 +1,6 @@
 class ProjectsPolicy < Struct.new(:user, :projects)
   def index?
-    user.admin?
+    user.admin? or user.has_managed_projects?
   end
 
   def update?
@@ -11,19 +11,19 @@ class ProjectsPolicy < Struct.new(:user, :projects)
     user.admin?
   end
 
-  def show?
-    user.admin?
-  end
-
   def edit?
     user.admin?
   end
 
-  def new?
+  def new? 
     user.admin?
   end
 
   def destroy?
     user.admin?
+  end
+
+  def show?
+    user.admin? or user.is_manager?(record)
   end
 end

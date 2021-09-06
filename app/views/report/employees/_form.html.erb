@@ -12,7 +12,7 @@
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   Manager
                 </label>
-                <%= form.collection_select(:manager_id, User.for_current_account.active.order(:first_name).decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["manager_id"] if !params["manager_id"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:manager_id, User.all_users.decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["manager_id"] if !params["manager_id"].blank?) }, :class=>"form-text-field mt-1" )%>
               </div>
               <div>
                 <label for="billed" class="block text-sm font-medium text-gray-700">
@@ -40,7 +40,7 @@
               </div>
               <div class="flex justify-end mt-6">
                 <%= link_to 'Reset', employees_reports_path, class: "btn-normal" %>
-                <%= form.submit "Search", class:"btn-blue cursor-pointer"%>
+                <%= form.submit "Search", class:"btn-blue"%>
               </div>
             </main>
           <% end %>

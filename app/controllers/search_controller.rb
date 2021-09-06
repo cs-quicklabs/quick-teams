@@ -1,6 +1,6 @@
 class SearchController < BaseController
   def people_projects
-    authorize :team, :index?
+    authorize :search
 
     like_keyword = "%#{params[:q]}%"
     @employees = User.for_current_account.active.where("first_name ILIKE ?", like_keyword).includes(:job)
@@ -11,14 +11,36 @@ class SearchController < BaseController
     render layout: false
   end
 
-  def skills
-    authorize :team, :index?
+  def employee_skills
+    authorize :search
 
     like_keyword = "%#{params[:q]}%"
     @employee = User.find(params[:id])
     @skills = Skill.where("name ILIKE ?", like_keyword)
       .limit(3).order(:name) - @employee.skills
 
+    render layout: false
+  end
+
+  def project_skills
+    authorize :search
+
+    like_keyword = "%#{params[:q]}%"
+    @project = Project.find(params[:id])
+    @skills = Skill.where("name ILIKE ?", like_keyword)
+      .limit(5).order(:name) - @project.skills
+
+    render layout: false
+  end
+
+  def documents
+    authorize :search
+
+    # like_keyword = "%#{params[:q]}%"
+    # @kbs = Kb.where("document ILIKE ?", like_keyword)
+    #   .limit(5).order(:document)
+
+    @kbs = Kb.search_title(params[:q])
     render layout: false
   end
 end

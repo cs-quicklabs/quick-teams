@@ -5,7 +5,7 @@ class Report::EmployeesController < Report::BaseController
     entries = User.for_current_account.active.includes(:status).query(employees_filter_params)
     @stats = EmployeesStats.new(entries)
 
-    @pagy, @employees = pagy_nil_safe(entries, items: LIMIT)
+    @pagy, @employees = pagy_nil_safe(params, entries, items: LIMIT)
     render_partial("report/employees/employee", collection: @employees, cached: false)
   end
 

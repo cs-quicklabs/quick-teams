@@ -10,8 +10,7 @@
             <%= form.hidden_field :user_id, :value => current_user.id %>
             <%= form.hidden_field :goal_id, :value => goal.id %>
             <div>
-              <label for="comment" class="sr-only">About</label>
-              <textarea id="comment" name="comment[title]" rows="3" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Add a comment"></textarea>
+              <textarea id="comment" name="comment[title]" rows="3" class="form-text-field" placeholder="Add a comment"></textarea>
             </div>
             <div data-controller="dropdown"  class="flex items-center justify-between mt-3">
               <div class="flex">

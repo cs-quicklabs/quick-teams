@@ -1,25 +1,39 @@
-class Project::GoalPolicy < ApplicationPolicy
+class Project::GoalPolicy < Project::BaseProjectPolicy
+  def show?
+    user.admin? or user.is_manager?(record.first)
+  end
+
   def update?
-    user.admin?
+    milestone = record.last
+    project = record.first
+    return false if project.archived?
+    return true if user.admin?
+
+    user.is_manager?(project) and milestone.user_id == user.id
   end
 
   def create?
-    user.admin?
-  end
-
-  def index?
-    user.admin?
-  end
-
-  def show?
-    user.admin?
+    project = record.first
+    return false if project.archived?
+    return true if user.admin?
+    user.admin? or user.is_manager?(project)
   end
 
   def destroy?
-    user.admin?
+    milestone = record.last
+    project = record.first
+    return false if project.archived?
+    return true if user.admin?
+
+    user.is_manager?(project) and milestone.user_id == user.id
   end
 
   def edit?
-    user.admin?
+    milestone = record.last
+    project = record.first
+    return false if project.archived?
+    return true if user.admin?
+
+    user.is_manager?(project) and milestone.user_id == user.id
   end
 end

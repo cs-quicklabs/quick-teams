@@ -18,13 +18,13 @@
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   Created By
                 </label>
-                <%= form.collection_select(:created_by, User.for_current_account.active.order(:first_name).decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["created_by"] if !params["created_by"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:created_by, User.all_users.decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["created_by"] if !params["created_by"].blank?) }, :class=>"form-text-field mt-1" )%>
               </div>
               <div>
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   Created For
                 </label>
-                <%= form.collection_select(:created_for, User.for_current_account.active.order(:first_name).decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["created_for"] if !params["created_for"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:created_for, User.all_users.decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["created_for"] if !params["created_for"].blank?) }, :class=>"form-text-field mt-1" )%>
               </div>
               <div>
                 <label for="date" class="block text-sm font-medium text-gray-700">
@@ -52,7 +52,7 @@
               </div>
               <div class="flex justify-end mt-6">
                 <%= link_to 'Reset', goals_reports_path, class: "btn-normal" %>
-                <%= form.submit "Search", class:"btn-blue cursor-pointer"%>
+                <%= form.submit "Search", class:"btn-blue"%>
               </div>
             </main>
           <% end %>

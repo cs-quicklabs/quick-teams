@@ -28,3 +28,10 @@ archived:
   manager: regular
   discipline: engineering
   archived_on: 2021-02-01
+
+managed:
+  name: Quickhands
+  archived: false
+  account: crownstack
+  manager: manager
+  discipline: engineering

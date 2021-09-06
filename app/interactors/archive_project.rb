@@ -10,7 +10,7 @@ class ArchiveProject < Patterns::Service
       clear_todos
       discard_milestones
       archive
-      add_event    
+      add_event
     rescue
       project
     end
@@ -22,6 +22,7 @@ class ArchiveProject < Patterns::Service
 
   def clear_schedule
     project.schedules.destroy_all
+    project.billable_resources = 0.0
   end
 
   def archive
@@ -38,11 +39,10 @@ class ArchiveProject < Patterns::Service
   def discard_milestones
     project.milestones.where(status: :progress).each do |goal|
       params = { user_id: actor.id, goal_id: goal.id, title: "Discarding as project has been archived.", status: "stale" }
-      goal.comments <<  Comment.new(params)
+      goal.comments << Comment.new(params)
       goal.update_attribute("status", "discarded")
     end
   end
-
 
   def add_event
     project.events.create(user: actor, action: "archived", action_for_context: "archived", trackable: project)

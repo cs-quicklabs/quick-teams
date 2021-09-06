@@ -1,56 +1,58 @@
-<div>
-  <div class="sm:hidden">
-    <label for="tabs" class="sr-only">Select a tab</label>
-    <select id="tabs" name="tabs" class="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      <option>Team</option>
-      <option>Schedule</option>
-      <option>Feedback</option>
-      <option>Timeline</option>
-    </select>
-  </div>
+<div id="employee-tabs">
   <div class="hidden sm:block">
     <div class="border-b border-gray-200">
       <nav class="flex -mb-px space-x-8 lg:px-8" aria-label="Tabs">
-        <% if policy(employee).show_timeline? %>
-          <a href="<%= employee_timeline_path %>" class="<%= current_page?(employee_timeline_path) ? "selected-tab" : "unselected-tab"%>">
+        <% if policy([employee, Timeline]).index? %>
+          <a href="<%= employee_timeline_path %>" class="<%= current_page?(employee_timeline_path) ? "selected-tab" : "unselected-tab" %>">
             Timeline
           </a>
         <% end %>
-        <% if policy(employee).show_team? %>
-          <a href="<%= employee_team_path %>" class="<%= current_page?(employee_team_path) ? "selected-tab" : "unselected-tab"%>">
+        <% if policy([employee, Team]).index? %>
+          <a href="<%= employee_team_path %>" class="<%= current_page?(employee_team_path) ? "selected-tab" : "unselected-tab" %>">
             Team
           </a>
         <% end %>
-        <% if policy(employee).show_schedules? %>
-          <a href="<%= employee_schedules_path %>" class="<%= current_page?(employee_schedules_path) ? "selected-tab" : "unselected-tab"%>">
+        <% if policy([employee, Schedule]).index? %>
+          <a href="<%= employee_schedules_path %>" class="<%= current_page?(employee_schedules_path) ? "selected-tab" : "unselected-tab" %>">
             Schedules
           </a>
         <% end %>
-        <% if policy(employee).show_feedbacks? %>
-          <a href="<%= employee_feedbacks_path %>" class="<%= current_page?(employee_feedbacks_path) ? "selected-tab" : "unselected-tab"%>">
+        <% if policy([employee, Feedback]).index? %>
+          <a href="<%= employee_feedbacks_path %>" class="<%= current_page?(employee_feedbacks_path) ? "selected-tab" : "unselected-tab" %>">
             Feedbacks
           </a>
         <% end %>
-        <% if policy(employee).show_goals? %>
-          <a href="<%= employee_goals_path %>" class="<%= current_page?(employee_goals_path) ? "selected-tab" : "unselected-tab"%>">
+        <% if policy([employee, Goal]).index? %>
+          <a href="<%= employee_goals_path %>" class="<%= current_page?(employee_goals_path) ? "selected-tab" : "unselected-tab" %>">
             Goals
           </a>
         <% end %>
-        <% if policy(employee).show_todo? %>
-          <a href="<%= employee_todos_path %>" class="<%= current_page?(employee_todos_path) ? "selected-tab" : "unselected-tab"%>">
+        <% if policy([employee, Todo]).index? %>
+          <a href="<%= employee_todos_path %>" class="<%= current_page?(employee_todos_path) ? "selected-tab" : "unselected-tab" %>">
             Todos
           </a>
         <% end %>
-        <% if policy(employee).show_timesheets? %>
-          <a href="<%= employee_timesheets_path %>" class="<%= current_page?(employee_timesheets_path) ? "selected-tab" : "unselected-tab"%>">
+        <% if policy([employee, Timesheet]).index? %>
+          <a href="<%= employee_timesheets_path %>" class="<%= current_page?(employee_timesheets_path) ? "selected-tab" : "unselected-tab" %>">
             Timesheets
           </a>
         <% end %>
-        <% if policy(employee).show_skills? %>
-          <a href="<%= employee_skills_path %>" class="<%= current_page?(employee_skills_path) ? "selected-tab" : "unselected-tab"%>">
+        <% if policy([employee, Skill]).index? %>
+          <a href="<%= employee_skills_path %>" class="<%= current_page?(employee_skills_path) ? "selected-tab" : "unselected-tab" %>">
             Skills
+          </a>
+        <% end %>
+         <% if policy([employee, Nugget]).index? %>
+          <a href="<%= employee_nuggets_path %>" class="<%= current_page?(employee_nuggets_path) ? "selected-tab" : "unselected-tab" %>">
+            Nuggets
+          </a>
+        <% end %>
+        <% if policy([employee, Document]).index? %>
+          <a href="<%= employee_documents_path %>" class="<%= current_page?(employee_documents_path) ? "selected-tab" : "unselected-tab" %>">
+            Documents
           </a>
         <% end %>
       </nav>
     </div>
   </div>
+</div>

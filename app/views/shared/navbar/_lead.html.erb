@@ -1,0 +1,20 @@
+<div class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+  <div class="flex items-center flex-shrink-0">
+    <img class="block w-auto h-8 lg:hidden" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+    <img class="hidden w-auto h-8 lg:block" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow">
+  </div>
+  <div class="hidden sm:block sm:ml-6">
+    <div class="flex space-x-4">
+      <a href=<%= employee_team_path(current_user) %> class= "<%= current_page?(employee_team_path(current_user)) ? "nav-selected" : "nav-unselected" %>"><%= current_user.first_name %></a>
+      <% if current_user.has_managed_projects? %>
+        <a href=<%= projects_path %> class= "<%= current_page?(projects_path) ? "nav-selected" : "nav-unselected" %>">Projects</a>
+      <% end %>
+      <% if policy(:nugget).index? %>
+        <a href=<%= nuggets_path %> class= "<%= current_page?(nuggets_path) ? "nav-selected" : "nav-unselected" %>"> Nuggets </a>
+      <% end %>
+      <% if policy(:kb).index? %>
+        <a href="<%= kbs_path %>" class="<%= current_page?(kbs_path) ? "nav-selected" : "nav-unselected" %>">Knowledge Base</a>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -2,15 +2,15 @@ class Employee::GoalsController < Employee::BaseController
   before_action :set_goal, only: %i[show destroy edit update]
 
   def index
-    authorize @employee, :show_goals?
+    authorize [@employee, Goal]
 
     @goal = Goal.new
-    @pagy, @goals = pagy_nil_safe(@employee.goals.includes(:user).order(created_at: :desc), items: LIMIT)
-    render_partial("employee/goals/goal", collection: @goals) if stale?(@goals  + [@employee])
+    @pagy, @goals = pagy_nil_safe(params, @employee.goals.includes(:user).order(created_at: :desc), items: LIMIT)
+    render_partial("employee/goals/goal", collection: @goals) if stale?(@goals + [@employee])
   end
 
   def create
-    authorize @employee, :create_goal?
+    authorize [@employee, Goal]
 
     @goal = AddEmployeeGoal.call(@employee, goal_params, current_user).result
 
@@ -27,7 +27,7 @@ class Employee::GoalsController < Employee::BaseController
   end
 
   def destroy
-    authorize [:employee, @goal]
+    authorize [@employee, @goal]
 
     @goal.destroy
     Event.where(eventable: @employee, trackable: @goal).touch_all #fixes cache issues in activity
@@ -37,18 +37,18 @@ class Employee::GoalsController < Employee::BaseController
   end
 
   def show
-    authorize [:employee, @goal]
+    authorize [@employee, @goal]
 
     @comment = Comment.new
     fresh_when @goal
   end
 
   def edit
-    authorize [:employee, @goal]
+    authorize [@employee, @goal]
   end
 
   def update
-    authorize [:employee, @goal]
+    authorize [@employee, @goal]
 
     respond_to do |format|
       if @goal.update(goal_params)

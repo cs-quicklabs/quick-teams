@@ -1,21 +1,7 @@
-class Project::SchedulePolicy < ApplicationPolicy
-  def update?
-    user.admin?
-  end
-
+class Project::SchedulePolicy < Project::BaseProjectPolicy
   def create?
-    user.admin?
-  end
-
-  def index?
-    user.admin?
-  end
-
-  def destroy?
-    user.admin?
-  end
-
-  def edit?
+    project = record.first
+    return false if project.archived?
     user.admin?
   end
 end

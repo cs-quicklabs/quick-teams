@@ -1,0 +1,19 @@
+<% @nugget = @nugget.decorate %>
+<main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="milestone-detail">
+    <h3 class="text-2xl font-bold leading-tight text-gray-900">
+      <%= @nugget.display_title %>
+    </h3>
+    <div class="flex mt-4 sm:mt-0 sm:ml-4">
+      <%= link_to "Back", employee_nuggets_path(@employee), class: "btn-normal" %>
+      <% unless @nugget.read? %>
+        <p class="mt-3 text-sm md:mt-0 md:ml-2">
+          <button type="button" data-reflex="click->Nugget#read" data-nugget-id="<%= @nugget.id %>" data-employee-id="<%= @employee.id %>" class="btn-blue">Mark as read </button>
+        </p>
+      <% end %>
+    </div>
+  </div>
+  <div class="mt-1 text-sm text-gray-900 sm:px-6 lg:px-8">
+    <p><%= @nugget.body %></p>
+  </div>
+</main>
