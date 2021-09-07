@@ -26,33 +26,32 @@
               <%= render "shared/form_header", title: "Add New Skill", subtitle: "" %>
               <div class="flex justify-center w-full max-w-sm lg:justify-end"  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/employee/skills?id=<%= employee.id%>">
                 <div class="w-full max-w-sm lg:max-w-sm">
-                  <div>
-                    <label for="skill" class="block text-sm font-medium text-gray-700">Search to add new skill</label>
-                    <div class="mt-1">
-                      <input type="search" name="search" id="search-skills" class="form-text-field" data-nav-search-target="input">
+                  <label for="skill" class="block text-sm font-medium text-gray-700">Search to add new skill</label>
+                  <div class="mt-1">
+                    <input type="search" name="search" id="search-skills" class="form-text-field" data-nav-search-target="input">
+                  </div>
+                  <div class="relative">
+                    <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-0 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                      <ul data-nav-search-target="results">
+                      </ul>
                     </div>
-                    <div class="relative">
-                      <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-0 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                        <ul data-nav-search-target="results">
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="relative" >
-                      <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                        <ul data-nav-search-target="results">
-                        </ul>
-                      </div>
+                  </div>
+                  <div class="relative" >
+                    <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                      <ul data-nav-search-target="results">
+                      </ul>
                     </div>
                   </div>
                 </div>
-              </main>
-              <div class="px-4" id="show-skills">
-                <a href="<%= employee_show_skills_path(@employee) %>" class="btn-inline-edit hover:underline ">
-                  <p class= "text-right mr-2 "> or show all skills</p>
-                </a>
               </div>
+            </main>
+            <div class="px-4" id="show-skills">
+              <a href="<%= "employees/#{employee.id}/show_skills" %>" class="btn-inline-edit hover:underline ">
+                <p class= "text-right mr-2 "> or show all skills</p>
+              </a>
             </div>
           </div>
-        </section>
-      </div>
-    <% end %>
+        </div>
+      </section>
+    </div>
+  <% end %>
