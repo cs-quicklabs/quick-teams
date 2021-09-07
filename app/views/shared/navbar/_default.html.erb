@@ -2,8 +2,11 @@
   <%= render "shared/navbar/admin"%>
 <% elsif current_user.lead? %>
   <%= render "shared/navbar/lead"%>
+  <%= render "shared/navbar/dropdown"%>
 <% elsif current_user.member? %>
   <%= render "shared/navbar/member"%>
+  <%= render "shared/navbar/dropdown"%>
 <% else %>
   <%= render "shared/navbar/member"%>
+  <%= render "shared/navbar/dropdown"%>
 <% end %>
