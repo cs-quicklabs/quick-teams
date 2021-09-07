@@ -18,9 +18,9 @@
                 <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">Select Department</label>
                 <select name="discipline_id" class="form-text-field mt-1">
                   <% if (params["discipline_id"] && params["discipline_id"].nil?) %>
-                    <option value="" selected="selected">Anyone can see</option>
+                    <option value="" selected="selected">Everyone</option>
                   <% else %>
-                    <option value="">Anyone can see</option>
+                    <option value="">Everyone</option>
                   <% end %>
                   <% Discipline.order(:name).each do |discipline| %>
                     <% if (params["discipline_id"] && params["discipline_id"] == discipline.id.to_s) %>
@@ -35,9 +35,9 @@
                 <label for="job" class="block mt-4 text-sm font-medium text-gray-700">Select Job</label>
                 <select name="job_id" class="form-text-field mt-1">
                   <% if (params["job_id"] && params["job_id"].nil?) %>
-                    <option value="" selected="selected">Anyone can see</option>
+                    <option value="" selected="selected">Everyone</option>
                   <% else %>
-                    <option value="">Anyone can see</option>
+                    <option value="">Everyone</option>
                   <% end %>
                   <% Job.order(:name).each do |job| %>
                     <% if (params["job_id"] && params["job_id"] == job.id.to_s) %>
