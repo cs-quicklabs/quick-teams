@@ -4,7 +4,7 @@
       <nav class="px-3">
         <div>
           <h3 class="text-xs font-semibold tracking-wider text-gray-500 uppercase" id="teams-headline">
-            Filter Documents
+            Filter Documents report
           </h3>
           <%= form_with url: kbs_reports_path, method: :get do |form| %>
             <main class="max-w-lg pt-6 pb-12 mx-auto space-y-4 lg:pb-16">
@@ -16,11 +16,37 @@
               </div>
               <div>
                 <label for="discipline" class="block mt-4 text-sm font-medium text-gray-700">Select Department</label>
-                <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, {:prompt => 'Select Discipline', :selected => (params["discipline_id"] if !params["discipline_id"].blank?)}, :class=>"form-text-field mt-1" ) %>
+                <select name="discipline_id" class="form-text-field mt-1">
+                  <% if (params["discipline_id"] && params["discipline_id"].nil?) %>
+                    <option value="" selected="selected">Anyone can see</option>
+                  <% else %>
+                    <option value="">Anyone can see</option>
+                  <% end %>
+                  <% Discipline.order(:name).each do |discipline| %>
+                    <% if (params["discipline_id"] && params["discipline_id"] == discipline.id.to_s) %>
+                      <option selected= "selected" value="<%= discipline.id %>"><%= discipline.name %></option>
+                    <% else %>
+                      <option value="<%= discipline.id %>"><%= discipline.name %></option>
+                    <% end %>
+                  <% end %>
+                </select>
               </div>
               <div>
                 <label for="job" class="block mt-4 text-sm font-medium text-gray-700">Select Job</label>
-                <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job', :selected => (params["job_id"] if !params["job_id"].blank?) }, :class=>"form-text-field mt-1") %>
+                <select name="job_id" class="form-text-field mt-1">
+                  <% if (params["job_id"] && params["job_id"].nil?) %>
+                    <option value="" selected="selected">Anyone can see</option>
+                  <% else %>
+                    <option value="">Anyone can see</option>
+                  <% end %>
+                  <% Job.order(:name).each do |job| %>
+                    <% if (params["job_id"] && params["job_id"] == job.id.to_s) %>
+                      <option selected= "selected" value="<%= job.id %>"><%= job.name %></option>
+                    <% else %>
+                      <option value="<%= job.id %>"><%= job.name %></option>
+                    <% end %>
+                  <% end %>
+                </select>
               </div>
               <div class="flex justify-end mt-6">
                 <%= link_to 'Reset', kbs_reports_path, class: "btn-normal" %>
