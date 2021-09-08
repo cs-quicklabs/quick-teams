@@ -1,0 +1,2 @@
+class KPIsController < BaseController
+end
