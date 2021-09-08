@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_29_140956) do
+ActiveRecord::Schema.define(version: 2021_09_08_025308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(version: 2021_08_29_140956) do
   create_table "nuggets_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "nugget_id", null: false
-    t.boolean "read", default: false, null: false
+    t.boolean "read", default: false
   end
 
   create_table "people_statuses", force: :cascade do |t|
@@ -301,6 +301,63 @@ ActiveRecord::Schema.define(version: 2021_08_29_140956) do
   create_table "skills_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
+  end
+
+  create_table "survey_answers", force: :cascade do |t|
+    t.integer "attempt_id"
+    t.integer "question_id"
+    t.integer "option_id"
+    t.integer "score", default: 0
+    t.boolean "correct"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "survey_attempts", force: :cascade do |t|
+    t.integer "participant_id"
+    t.integer "survey_id"
+    t.boolean "winner"
+    t.string "comment"
+    t.integer "score"
+  end
+
+  create_table "survey_options", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "weight", default: 0
+    t.string "text"
+    t.boolean "correct"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "survey_participant", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "survey_questions", force: :cascade do |t|
+    t.integer "survey_id"
+    t.string "text"
+    t.string "category"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "survey_surveys", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "account_id"
+    t.string "survey_for"
+    t.integer "attempts_number", default: 0
+    t.boolean "finished", default: false
+    t.boolean "active", default: false
+    t.integer "winning_score", default: 0
+    t.integer "survey_type", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "taggings", force: :cascade do |t|
