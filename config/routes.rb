@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   resources :nuggets
   resources :kbs
   resources :kpis
+  resources :surveys
 
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"
