@@ -3,6 +3,7 @@ class Survey::Survey < ActiveRecord::Base
   acts_as_tenant :account
 
   enum survey_type: [:checklist, :score, :kpi]
+  enum survey_for: [:people, :employee, :client]
 
   # relations
   has_many :attempts, :dependent => :destroy

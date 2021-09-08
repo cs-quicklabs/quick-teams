@@ -1,0 +1,33 @@
+ <main class="max-w-6xl px-4 pb-12 mx-auto space-y-6 lg:pb-16">
+  <div class="px-4">
+    <%= tailwind_form_with(model: survey, id: dom_id(survey), url: surveys_path) do |form| %>
+      <main class="w-full px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+        <%= render "shared/form_messages", resource: survey, message: local_assigns[:message] %>
+        <%= render "shared/form_header", title: title, subtitle: "A Survey list of questions. A survey is sent to a people to know daily activities." %>
+        <input type="hidden" name="remember" value="true">
+        <div class=" -space-y-px">
+          <%= form.text_field :name, "Survey", required: true, autocomplete: "off"%>
+          <div class="sm:col-span-4 pt-6">
+            <%= form.text_area :description, "Survey Description", required: true, class:"form-text-field"%>
+          </div>
+          <div class="sm:col-span-4 pt-6">
+            <label for="email" class="block text-sm font-medium text-gray-700">
+              Survey Type
+            </label>
+            <%= form.select(:survey_type, [["Checklist", "checklist"], ["Score", "score"], ["Kpi", "kpi"]], {:prompt => "Select Survey Type", :selected => (params["survey_type"] if !params["survey_type"].blank?) },  :class=>"form-text-field mt-1") %>
+          </div>
+          <div class="sm:col-span-4 pt-6">
+            <label for="email" class="block text-sm font-medium text-gray-700">
+              Survey For
+            </label>
+            <%= form.select(:survey_for, [["People", 0], ["Employee", 1], ["Client", 1]], {:prompt => "Select Survey For", :selected => (params["survey_for"] if !params["survey_for"].blank?) },  :class=>"form-text-field mt-1" ) %>
+          </div>
+          <div class="flex justify-end pt-5">
+            <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+            <%= form.submit " Add Survey", class:"btn-blue"%>
+          </div>
+        </div>
+      </main>
+    <% end %>
+  </div>
+</main>

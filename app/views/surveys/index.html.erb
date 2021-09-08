@@ -20,10 +20,16 @@
               <th scope="col" class="w-full px-16 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Surveys
               </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Survey type
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Survey for
+              </th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" id="kbs" data-infinite-scroll-target="entries">
-            <%= render partial: "survey", collection: @surveys, as: :kb, cached: true %>
+            <%= render partial: "survey", collection: @surveys, as: :survey, cached: true %>
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
