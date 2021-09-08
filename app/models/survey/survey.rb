@@ -2,11 +2,7 @@ class Survey::Survey < ActiveRecord::Base
   self.table_name = "survey_surveys"
   acts_as_tenant :account
 
-  #   acceptable_attributes :name, :description,
-  #     :finished,
-  #     :active,
-  #     :attempts_number,
-  #     :questions_attributes => Survey::Question::AccessibleAttributes
+  enum survey_type: [:checklist, :score, :kpi]
 
   # relations
   has_many :attempts, :dependent => :destroy
