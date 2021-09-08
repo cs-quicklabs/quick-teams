@@ -36,6 +36,17 @@ class Project < ApplicationRecord
     participants.touch_all
   end
 
+  def reset_billable_resources
+    self.update_attribute(:billable_resources, calculate_billable_resources)
+  end
+
+  def calculate_billable_resources
+    self.schedules.reduce(0.0) do |sum, schedule|
+      sum += schedule.billable ? (schedule.occupancy / 100.0) : 0.0
+      sum
+    end
+  end
+
   def self.query(params, includes = nil)
     return [] if params.empty?
     ProjectQuery.new(self.includes(:manager), params).filter
