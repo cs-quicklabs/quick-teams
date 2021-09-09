@@ -11,6 +11,7 @@ class Employee::SkillsController < Employee::BaseController
   def show_skills
     authorize [User, Skill]
     @skills = Skill.order("lower(name) asc")
+    @employee_skills = @employee.skills
   end
 
   private
