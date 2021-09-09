@@ -27,6 +27,7 @@ class GoalDecorator < Draper::Decorator
     elsif goal.missed?
       "red"
     else goal.discarded?
-      "gray"     end
+      "gray"     
+    end
   end
 end

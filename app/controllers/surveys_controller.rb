@@ -3,7 +3,7 @@ class SurveysController < BaseController
 
   def index
     authorize :surveys
-    @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.where.not(survey_type: :kpi).order(:name), items: 10)
+    @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.where.not(survey_type: :Kpi).order(:name), items: 10)
   end
 
   def new
@@ -30,6 +30,7 @@ class SurveysController < BaseController
   def create
     authorize :surveys
     @survey = Survey::Survey.new(survey_params)
+    @survey.actor_id = current_user.id
     redirect_to survey_path(@survey) if @survey.save
   end
 
@@ -43,6 +44,7 @@ class SurveysController < BaseController
     @clone = Survey::Survey.new
     @clone.name = @survey.name + " (Copy)"
     @clone.survey_type = @survey.survey_type
+      @clone.actor_id = current_user.id
     @clone.description = @survey.description.nil? ? "N/A" : @survey.description
     @clone.save
 
@@ -74,6 +76,6 @@ class SurveysController < BaseController
   end
 
   def survey_params
-    params.require(:survey_survey).permit(:name, :survey_type, :description, :survey_for)
+    params.require(:survey_survey).permit(:name, :survey_type, :description, :survey_for, :actor_id)
   end
 end

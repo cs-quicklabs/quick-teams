@@ -2,8 +2,8 @@ class Survey::Survey < ActiveRecord::Base
   self.table_name = "survey_surveys"
   acts_as_tenant :account
 
-  enum survey_type: [:checklist, :score, :kpi]
-  enum survey_for: [:project, :employee, :client]
+  enum survey_type: [:Checklist, :Score, :Kpi]
+  enum survey_for: [:Project, :Employee, :Client]
 
   # relations
   has_many :attempts, :dependent => :destroy

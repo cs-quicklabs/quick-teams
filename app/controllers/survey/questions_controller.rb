@@ -4,7 +4,7 @@ class Survey::QuestionsController < Survey::BaseController
 
   def index
     authorize [:survey, :question]
-    @questions= Survey::Question.where(survey_id:@survey).limit(50)
+    @pagy, @questions= pagy_nil_safe(params, Survey::Question.where(survey_id:@survey), items: 100)
      @question = Survey::Question.new
   end
 
@@ -74,6 +74,6 @@ class Survey::QuestionsController < Survey::BaseController
   end
 
   def question_params
-    params.require(:survey_question).permit(:text, :description, :survey_id, :category)
+    params.require(:survey_question).permit(:text, :description, :survey_id, :category, :explanation)
   end
 end

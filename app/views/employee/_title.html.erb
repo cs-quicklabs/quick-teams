@@ -38,7 +38,7 @@
         <%= render partial: 'employee/status', locals: {employee: employee}%>
       </div>
       <!-- This example requires Tailwind CSS v2.0+ -->
-      <div class="relative inline-block mr-4 -mt-1 text-left" x-data="{open: false}" @keydown.window.escape="open = false" >
+      <div class="relative inline-block mr-4  text-left" x-data="{open: false}" @keydown.window.escape="open = false" >
         <div>
           <button @click="open = !open" type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
             Status
@@ -59,7 +59,7 @@
         </div>
       </div>
       <div>
-        <%= link_to 'Edit', edit_employee_path(employee), class:"btn-normal" %>
+        <%= link_to 'Edit', edit_employee_path(employee), class:" btn-normal" %>
       </div>
       <% if employee.active %>
         <div>
@@ -67,7 +67,7 @@
         </div>
       <% else %>
         <div>
-          <%= link_to 'Activate', activate_user_path(employee), class:" ml-4 btn-normal", data: { confirm: "Are you sure?" } %>
+          <%= link_to 'Activate', activate_user_path(employee), class:"ml-4 btn-normal", data: { confirm: "Are you sure?" } %>
         </div>
       <% end %>
     </div>

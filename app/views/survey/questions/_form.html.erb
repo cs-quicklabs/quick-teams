@@ -13,14 +13,22 @@
         Question Description (optional)
       </label>
       <%= form.text_area :description, class: 'form-text-field mt-1',  autocomplete: "off"%>
+      <p class="mt-2 text-xs text-gray-500" id="question-description">We'll only use this for spam.</p>
+    </div>
+    <div>
+     <label for="comments" class="block text-sm font-medium text-gray-700">
+        Question Explanation (optional)
+      </label>
+      <%= form.text_area :explanation, class: 'form-text-field mt-1',  autocomplete: "off"%>
+      <p class="mt-2 text-xs text-gray-500" id="question-explanation">We'll only use this for spam.</p>
     </div>
     <div>
       <label for="comments" class="block text-sm font-medium text-gray-700">
         Category (optional)
       </label>
-      <%= form.text_area :category,  class: 'form-text-field mt-1',  autocomplete: "off"%>
+      <%= form.text_field :category,  class: 'form-text-field mt-1',  autocomplete: "off"%>
     </div>
-    <div class="flex justify-end mt-6">
-      <%= form.submit "Add Question", class:"btn-blue ml-3 mt-6"%>
+    <div class="flex justify-end mt-4">
+      <%= form.submit "Add Question", class:"btn-blue ml-3 "%>
   </main>
 <% end %>

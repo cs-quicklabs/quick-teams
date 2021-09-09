@@ -14,6 +14,8 @@
                 </div>
                 <ul class="divide-y divide-gray-200" id="questions">
                    <%= render partial: "question", collection: @questions, as: :question, cached: true %>
+                    <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                     <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
                     </ul>
               </div>
             </div>
