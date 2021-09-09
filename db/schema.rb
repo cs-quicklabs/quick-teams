@@ -353,8 +353,8 @@ ActiveRecord::Schema.define(version: 2021_09_08_025308) do
   create_table "survey_surveys", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "account_id"
-    t.string "survey_for"
+    t.integer "account_id", default: 0
+    t.integer "survey_for", default: 0
     t.integer "attempts_number", default: 0
     t.boolean "finished", default: false
     t.boolean "active", default: false

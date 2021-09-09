@@ -1,4 +1,6 @@
 class SurveysController < BaseController
+  before_action :set_survey, only: %i[ show edit update destroy clone]
+
   def index
     authorize :surveys
     @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.where.not(survey_type: :kpi).order(:name), items: 10)
@@ -33,12 +35,12 @@ class SurveysController < BaseController
 
   def show
     authorize :surveys
-    @question = Survey::Question.new
+    redirect_to survey_questions_path(@survey)
   end
 
   def clone
     authorize :surveys
-    @clone = Survey.new
+    @clone = Survey::Survey.new
     @clone.name = @survey.name + " (Copy)"
     @clone.survey_type = @survey.survey_type
     @clone.description = @survey.description.nil? ? "N/A" : @survey.description
