@@ -317,6 +317,7 @@ ActiveRecord::Schema.define(version: 2021_09_08_025308) do
     t.bigint "participant_id", null: false
     t.bigint "actor_id", null: false
     t.integer "survey_id"
+    t.boolean "submitted", default: false
     t.boolean "winner"
     t.string "comment"
     t.integer "score"
