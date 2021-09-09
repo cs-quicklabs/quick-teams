@@ -14,13 +14,13 @@
             <label for="email" class="block text-sm font-medium text-gray-700">
               Survey Type
             </label>
-            <%= form.select(:survey_type, [["Checklist", "checklist"], ["Score", "score"], ["Kpi", "kpi"]], {:prompt => "Select Survey Type", :selected => (params["survey_type"] if !params["survey_type"].blank?) },  :class=>"form-text-field mt-1") %>
+            <%= form.select(:survey_type, Survey::Survey.survey_types.keys, {:prompt => "Select Survey Type", :selected => (params["survey_type"] if !params["survey_type"].blank?) },  :class=>"form-text-field mt-1") %>
           </div>
           <div class="sm:col-span-4 pt-6">
             <label for="email" class="block text-sm font-medium text-gray-700">
               Survey For
             </label>
-            <%= form.select(:survey_for, [["People", 0], ["Employee", 1], ["Client", 1]], {:prompt => "Select Survey For", :selected => (params["survey_for"] if !params["survey_for"].blank?) },  :class=>"form-text-field mt-1" ) %>
+            <%= form.select(:survey_for, Survey::Survey.survey_fors.keys, {:prompt => "Select Survey For", :selected => (params["survey_for"] if !params["survey_for"].blank?) },  :class=>"form-text-field mt-1" ) %>
           </div>
           <div class="flex justify-end pt-5">
             <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>

@@ -1,5 +1,4 @@
-
-class SurveysPolicy < Struct.new(:user, :surveys)
+class Survey::BaseSurveyPolicy < ApplicationPolicy
   def index?
     user.admin? 
   end
@@ -12,22 +11,15 @@ class SurveysPolicy < Struct.new(:user, :surveys)
     user.admin?
   end
 
-  def edit?
-    user.admin?
-  end
-
-  def new? 
-    user.admin?
-  end
-
   def destroy?
     user.admin?
   end
 
-  def show?
-    user.admin? 
+  def edit?
+    user.admin?
   end
-    def clone?
+
+  def show?
     user.admin?
   end
 end
