@@ -1,0 +1,55 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "employee/title", employee: @employee%>
+  <main class="pb-8">
+    <div class="">
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1 lg:grid-cols-3">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+          <section aria-labelledby="participants_section">
+            <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
+              <div>
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Survey
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Taken By
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Date
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200" id="todos" data-infinite-scroll-target="entries">
+                    <%= render partial: "filled_survey", collection: @filled_surveys, as: :survey, cached: true %>
+                  </tbody>
+                </table>
+                <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+                  <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <section aria-labelledby="add-participant-section">
+            <div class="overflow-hidden bg-white">
+              <div class="px-4">
+                <%= render partial: "survey", collection: @surveys, as: :survey, cached: true %>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div class="pt-4 pl-16 pr-16">
+  </div>
+</main>

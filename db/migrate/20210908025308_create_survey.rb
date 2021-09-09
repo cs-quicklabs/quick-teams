@@ -11,6 +11,7 @@ class CreateSurvey < ActiveRecord::Migration[6.1]
       t.boolean :active, :default => false
       t.integer :winning_score, :default => 0
       t.string :survey_type, :default => 0
+      t.references :actor, null: false, foreign_key: { to_table: :users }
 
       t.timestamps
     end
@@ -20,6 +21,7 @@ class CreateSurvey < ActiveRecord::Migration[6.1]
       t.string :text
       t.string :category
       t.string :description
+      t.string :explanation
 
       t.timestamps
     end
@@ -34,7 +36,8 @@ class CreateSurvey < ActiveRecord::Migration[6.1]
     end
 
     create_table :survey_attempts do |t|
-      t.integer :participant_id
+      t.references :participant, null: false, foreign_key: { to_table: :users }
+      t.references :actor, null: false, foreign_key: { to_table: :users }
       t.integer :survey_id
       t.boolean :winner
       t.string :comment

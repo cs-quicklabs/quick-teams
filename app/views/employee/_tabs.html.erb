@@ -52,6 +52,11 @@
             Documents
           </a>
         <% end %>
+        <% if policy([employee, :survey]).index? %>
+          <a href="<%= employee_surveys_path %>" class="<%= current_page?(employee_surveys_path) ? "selected-tab" : "unselected-tab" %>">
+            Surveys
+          </a>
+        <% end %>
       </nav>
     </div>
   </div>

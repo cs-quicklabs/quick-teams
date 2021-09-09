@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     resources :skills, module: "employee"
     resources :nuggets, module: "employee"
     resources :documents, module: "employee"
+    resources :surveys, module: "employee", only: [:index, :show, :destroy]
+    resources :kpis, module: "employee", only: [:index, :show, :destroy]
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
     get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"

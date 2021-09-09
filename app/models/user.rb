@@ -91,4 +91,12 @@ class User < ApplicationRecord
   def published_nuggets_for_skill(id)
     nuggets.where(published: true).select("nuggets_users.read as read", "nuggets.*").where(skill_id: id).includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
   end
+
+  def surveys
+    Survey::Survey.where(survey_for: :employee)
+  end
+
+  def filled_surveys
+    Survey::Attempt.where(participant_id: id).or(Survey::Attempt.where(actor_id: id))
+  end
 end
