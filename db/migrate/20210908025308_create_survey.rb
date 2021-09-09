@@ -39,6 +39,7 @@ class CreateSurvey < ActiveRecord::Migration[6.1]
       t.references :participant, null: false, foreign_key: { to_table: :users }
       t.references :actor, null: false, foreign_key: { to_table: :users }
       t.integer :survey_id
+      t.boolean :submitted, :default => false
       t.boolean :winner
       t.string :comment
 
