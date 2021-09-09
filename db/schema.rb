@@ -359,8 +359,8 @@ ActiveRecord::Schema.define(version: 2021_09_08_025308) do
     t.boolean "finished", default: false
     t.boolean "active", default: false
     t.integer "winning_score", default: 0
-    t.string "survey_type", default: "0"
     t.bigint "actor_id", null: false
+    t.integer "survey_type", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["actor_id"], name: "index_survey_surveys_on_actor_id"
