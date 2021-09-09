@@ -52,8 +52,12 @@ Rails.application.routes.draw do
   resources :nuggets
   resources :kbs
   resources :kpis
-  resources :surveys
-
+  resources :surveys do
+    resources :questions, module: "survey"
+     get "attempts", to: "survey/attempts#index", as: "attempts"
+  end
+  get "/surveys/:id/clone", to: "surveys#clone", as: "clone_survey"
+ 
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"
 

@@ -1,4 +1,4 @@
-class Survey::ReportsController < ApplicationController
+class Surveys::ReportsController < Surveys::BaseController
   def checklist
     @attempt = Survey::Attempt.find(params[:id])
     respond_to do |format|
