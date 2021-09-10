@@ -5,8 +5,7 @@ class Survey::AttemptsController < Survey::BaseController
 
   def index
     authorize [:survey, :attempt]
-    @attempts = Survey::Attempt.joins(:user).find_by_survey_id(@survey.id).limit(50)
-    binding.irb
+    @attempts = Survey::Attempt.where(survey: @survey)
   end
 
   def new
