@@ -25,6 +25,7 @@ class User < ApplicationRecord
   has_many :documents, as: :documenter
   has_many :goals, as: :goalable
   has_many :events, as: :eventable
+  has_many :attempts, class_name: "Survey::Attempt", foreign_key: "participant_id"
   has_many :notes
   has_many :timesheets
   has_many :kbs
@@ -93,7 +94,7 @@ class User < ApplicationRecord
   end
 
   def surveys
-    Survey::Survey.where(survey_for: :Employee)
+    Survey::Survey.surveys.where(survey_for: :employee)
   end
 
   def filled_surveys

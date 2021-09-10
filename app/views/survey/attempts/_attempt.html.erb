@@ -1,7 +1,7 @@
 <tr class="bg-white ">
               <td class="py-3 px-10  whitespace-nowrap text-sm font-xs text-gray-900">
-                <a href="<%= attempt.survey.survey_type===0 ? checklist_report_path(attempt.id) : score_report_path(attempt.id)%>" class="bg-white py-2 px-4 text-sm font-xs text-gray-700 hover:underline focus:outline-none">
-                  <%= attempt.survey.name.capitalize %>
+                <a href=" <%=survey_attempt_preview_path(@survey, attempt)%>" class="bg-white py-2 px-4 text-sm font-xs text-gray-700 hover:underline focus:outline-none">
+                  <%= @attempt.user.decorate.display_name  %>
                 </a>
               </td>
                <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">

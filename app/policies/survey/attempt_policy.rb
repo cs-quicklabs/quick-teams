@@ -1,25 +1,29 @@
 class Survey::AttemptPolicy < Survey::BaseSurveyPolicy
   def index?
-    user.admin?
+    true
   end
 
   def new?
-    user.admin?
+     true
   end
 
   def edit?
-    user.admin?
+    true
   end
 
   def create?
-    user.admin?
+   true
   end
 
   def show?
-    user.admin?
+    true
   end
 
   def update?
-    user.admin?
+     true
+  end
+
+  def preview?
+   true
   end
 end
