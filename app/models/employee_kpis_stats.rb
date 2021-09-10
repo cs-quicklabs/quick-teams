@@ -32,7 +32,7 @@ class EmployeeKpisStats
     contributions = []
     categories.each do |category|
       score = score(category, all_questions, all_answers)
-      contribution = Contribution.new(category, score)
+      contribution = StatsContribution.new(category, score)
       contributions.push(contribution)
     end
 
@@ -52,7 +52,7 @@ class EmployeeKpisStats
   end
 end
 
-class Contribution
+class StatsContribution
   def initialize(category, score)
     @category = category
     @score = score
