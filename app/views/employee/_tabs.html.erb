@@ -57,6 +57,11 @@
             Surveys
           </a>
         <% end %>
+        <% if policy([employee, :kpi]).index? %>
+          <a href="<%= employee_kpis_path %>" class="<%= current_page?(employee_kpis_path) ? "selected-tab" : "unselected-tab" %>">
+            KPIs
+          </a>
+        <% end %>
       </nav>
     </div>
   </div>

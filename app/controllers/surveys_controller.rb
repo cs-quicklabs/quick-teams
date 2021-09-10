@@ -3,7 +3,7 @@ class SurveysController < BaseController
 
   def index
     authorize :surveys
-    @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.surveys.order(:name), items: LIMIT)
+    @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.all.order(:name), items: LIMIT)
   end
 
   def new
