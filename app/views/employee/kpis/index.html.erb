@@ -6,48 +6,26 @@
       <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-          <section aria-labelledby="participants_section">
-            <div class="overflow-hidden bg-white">
-              <div class="p-4">
-                <div class="flex flex-wrap">
-                  <p class="pb-4 mt-1 text-sm font-medium text-gray-900 truncate"><%="KPIs Question set (" + @kpi.questions.load.size.to_s + ")"%></p>
+          <% unless @kpi.nil? %>
+            <section aria-labelledby="participants_section">
+              <div class="overflow-hidden bg-white">
+                <div class="p-4">
+                  <div class="flex flex-wrap">
+                    <p class="pb-4 mt-1 text-sm font-medium text-gray-900 truncate"><%="KPIs Questions set (" + @kpi.questions.load.size.to_s + ")"%></p>
+                  </div>
+                  <ul class="divide-y divide-gray-200" id="questions">
+                    <%= render partial: "question", collection: @kpi.questions, as: :question, cached: true %>
+                  </ul>
                 </div>
-                <ul class="divide-y divide-gray-200" id="questions">
-                  <%= render partial: "question", collection: @kpi.questions, as: :question, cached: true %>
-                </ul>
               </div>
-            </div>
-          </section>
+            </section>
+          <% end %>
         </div>
         <!-- Right column -->
         <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
-          <section aria-labelledby="add-participant-section">
-            <div class="overflow-hidden bg-white">
-              <div class="px-4 justify-between flex border-b border-gray-200">
-                <div class="p-5">
-                  <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    KPIs
-                  </h3>
-                  <p class="mt-2 max-w-4xl text-sm text-gray-500">Squad Leader KPIs </p>
-                </div>
-                <div class="px-4 p-4 bg-white overflow-hidden">
-                  <dd class="text-3xl font-semibold text-gray-900 text-right">
-                    <%= @stats.average_score.to_s %>
-                  </dd>
-                  <dt class="text-sm font-medium text-gray-500 truncate">
-                    Score (out of 10)
-                  </dt>
-                </div>
-              </div>
-              <div class="mt-5">
-                <%= render partial: "contribution", collection: @stats.contributions, as: :contribution, cached: true %>
-              </div>
-            </div>
-          </section>
+          <%= render partial: "stats", locals: {kpi: @kpi, stats: @stats } %>
         </div>
       </div>
     </div>
   </main>
-  <div class="pt-4 pl-16 pr-16">
-  </div>
 </main>

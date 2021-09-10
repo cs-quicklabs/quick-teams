@@ -10,8 +10,8 @@ class EmployeeSurveyStatsReflex < ApplicationReflex
     if total_responses == 0
       message = "No answer to this question yet."
     else
-      average_score = answers.map(&:score).sum / total_responses
-      message = "Average score is #{average_score} in #{total_responses} responses."
+      average_score = answers.map(&:score).sum.to_f / total_responses
+      message = "Average score is #{average_score.round(1)} in #{total_responses} responses."
     end
 
     morph "#summary_#{question.id}", render(partial: "employee/kpis/summary", locals: { message: message, color: color })
