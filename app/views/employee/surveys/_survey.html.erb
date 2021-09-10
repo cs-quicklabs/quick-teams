@@ -1,5 +1,7 @@
 <li class="flex px-2 py-2">
   <div class="w-full ml-3">
-    <p class="text-sm font-medium text-gray-500"><%= survey.name %></p>
+    <a class="hover:underline" href="<%= new_survey_attempt_path(survey, participant_id: @employee.id) %>">
+      <p class="text-sm font-medium text-gray-500"><%= survey.name %></p>
+    </a>
   </div>
 </li>

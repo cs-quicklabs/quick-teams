@@ -99,6 +99,6 @@ class User < ApplicationRecord
   end
 
   def filled_surveys
-    Survey::Attempt.where(participant_id: id).or(Survey::Attempt.where(actor_id: id))
+    Survey::Attempt.where(actor_id: id, survey_id: surveys.ids)
   end
 end

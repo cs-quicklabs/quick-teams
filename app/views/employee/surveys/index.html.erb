@@ -19,15 +19,15 @@
                         Taken By
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Date
+                        On Date
                       </th>
                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
-                        Action
+                        Score
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200" id="todos" data-infinite-scroll-target="entries">
-                    <%= render partial: "filled_survey", collection: @filled_surveys, as: :survey, cached: true %>
+                  <tbody class="bg-white divide-y divide-gray-200" id="filled_surveys" data-infinite-scroll-target="entries">
+                    <%= render partial: "filled_survey", collection: @filled_surveys, as: :attempt, cached: true %>
                   </tbody>
                 </table>
                 <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
@@ -39,21 +39,23 @@
         </div>
         <!-- Right column -->
         <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
-          <section aria-labelledby="add-participant-section">
-            <div class="overflow-hidden bg-white">
-              <div class="px-4">
-                <div class="p-5 border-b border-gray-200">
-                  <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Take a Survey
-                  </h3>
-                  <p class="mt-2 max-w-4xl text-sm text-gray-500">Following surveys are available for you to take. </p>
+          <% if current_user.admin? or current_user == @employee%>
+            <section aria-labelledby="add-participant-section">
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <div class="p-5 border-b border-gray-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                      Take a Survey
+                    </h3>
+                    <p class="mt-2 max-w-4xl text-sm text-gray-500">Following surveys are available for you to take. </p>
+                  </div>
+                  <ul class="divide-y divide-gray-200">
+                    <%= render partial: "survey", collection: @surveys, as: :survey, cached: true %>
+                  </ul>
                 </div>
-                <ul class="divide-y divide-gray-200">
-                  <%= render partial: "survey", collection: @surveys, as: :survey, cached: true %>
-                </ul>
               </div>
-            </div>
-          </section>
+            </section>
+          <% end %>
         </div>
       </div>
     </div>
