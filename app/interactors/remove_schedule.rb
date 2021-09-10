@@ -9,7 +9,6 @@ class RemoveSchedule < Patterns::Service
   def call
     begin
       remove_schedule
-      update_billable_resources
       add_event
       send_email
     rescue
@@ -23,18 +22,7 @@ class RemoveSchedule < Patterns::Service
 
   def remove_schedule
     schedule.destroy
-  end
-
-  def update_billable_resources
-    project.billable_resources = billable_resources
-    project.save!
-  end
-
-  def billable_resources
-    project.schedules.reduce(0.0) do |sum, schedule|
-      sum += schedule.billable ? (schedule.occupancy / 100.0) : 0.0
-      sum
-    end
+    project.reset_billable_resources
   end
 
   def add_event

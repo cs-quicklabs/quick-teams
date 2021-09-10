@@ -18,6 +18,8 @@
         <% if policy(:nugget).index? %>
           <a href=<%= nuggets_path %> class= "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role= "menuitem"> Nuggets </a>
         <% end %>
+            <a><%= link_to "Surveys", surveys_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
+            <a><%= link_to "KPIs", kpis_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
           </div>
         </div>
       </div>

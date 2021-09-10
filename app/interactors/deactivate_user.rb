@@ -36,7 +36,11 @@ class DeactivateUser < Patterns::Service
   end
 
   def clear_schedules
-    Schedule.where(user: user).destroy_all
+    schedules = Schedule.where(user: user)
+    schedules.each do |schedule|
+      schedule.destroy
+      schedule.project.reset_billable_resources
+    end
   end
 
   def deactivate

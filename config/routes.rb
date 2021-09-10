@@ -43,14 +43,23 @@ Rails.application.routes.draw do
     resources :skills, module: "employee"
     resources :nuggets, module: "employee"
     resources :documents, module: "employee"
+    resources :surveys, module: "employee", only: [:index, :show, :destroy]
+    resources :kpis, module: "employee", only: [:index, :show, :destroy]
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
+    get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
   end
   resources :user
   resources :comments
   resources :nuggets
   resources :kbs
-
+  resources :kpis
+  resources :surveys do
+    resources :questions, module: "survey"
+     get "attempts", to: "survey/attempts#index", as: "attempts"
+  end
+  get "/surveys/:id/clone", to: "surveys#clone", as: "clone_survey"
+ 
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"
 

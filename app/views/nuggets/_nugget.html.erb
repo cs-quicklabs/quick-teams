@@ -8,7 +8,7 @@
   <td class="px-8 py-3  text-sm text-gray-700 max-w-0  ">
     <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= display_created_at(nugget) %> </span>
   </td>
-  <td class="px-8 py-3  text-sm text-gray-700 max-w-0  ">
+  <td class="px-8 py-3  text-sm text-gray-700 max-w-full line-clamp-1  ">
     <a href=<%= nuggets_reports_path(user_id:nugget.user.id)%> class="block hover:underline " target="_top">
       <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= nugget.user.display_name %> </span>
     </a>

@@ -4,7 +4,7 @@
     <img class="hidden w-auto h-8 lg:block" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow">
   </div>
   <div class="hidden sm:block sm:ml-6">
-    <div class="flex space-x-4">
+    <div class="flex space-x-2">
       <% if policy(:home).index? %>
         <a href=<%= home_path %> class= <%= current_page?(home_path) ? "nav-selected" : "nav-unselected" %>>Dashboard</a>
       <% end %>

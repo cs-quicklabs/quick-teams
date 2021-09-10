@@ -1,0 +1,43 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render partial: "surveys/title", locals: {survey: @survey}%>
+  <main class="pb-8">
+    <div class="">
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1  lg:grid-cols-3 ">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+          <section aria-labelledby="participants_section">
+            <div class="overflow-hidden bg-white">
+              <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200" id="documents" data-infinite-scroll-target="entries">
+                  </tbody>
+                </table>
+                <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <% if policy([:surveys]).create? %>
+          <!-- Right column -->
+          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+            <section aria-labelledby="add-participant-section">
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <%= render partial: "surveys/questions/form", locals: { question: @question} %>
+                </div>
+              </div>
+            </section>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </main>
+  <div class="pt-4 pl-16 pr-16">
+  </div>
+</main>

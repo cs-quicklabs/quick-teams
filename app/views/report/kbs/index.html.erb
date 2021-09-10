@@ -17,19 +17,19 @@
         <table class="min-w-full pb-6 divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-                      <th scope="col" class="w-full px-16 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Document
-                      </th>
-                      <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
-                        Added by
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
-                        Department
-                      </th>
-                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
-                        Job
-                      </th>
-                    </tr>
+              <th scope="col" class="w-full px-16 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Document
+              </th>
+              <th scope="col" class="px-12 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Added by
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Department
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Job
+              </th>
+            </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
             <%= render partial: "kb", collection: @kbs, as: :kb %>
