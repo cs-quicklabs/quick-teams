@@ -1,6 +1,12 @@
-class Surveys::ReportsController < Surveys::BaseController
+class Survey::ReportsController < Survey::BaseController
+   before_action :set_survey, only: [:checklist, :submit, :score, :download, :pdf]
+   before_action :set_attempt, only: [:checklist, :submit, :score, :download, :pdf]
+
+
   def checklist
+     authorize [:survey, :report]
     @attempt = Survey::Attempt.find(params[:id])
+     @participant = User.find(@attempt.participant_id)
     respond_to do |format|
       format.html
       format.pdf do
@@ -16,7 +22,9 @@ class Surveys::ReportsController < Surveys::BaseController
   end
 
   def score
+         authorize [:survey, :report]
     @attempt = Survey::Attempt.find(params[:id])
+       @participant = User.find(@attempt.participant_id)
     respond_to do |format|
       format.html
       format.pdf do
@@ -32,12 +40,29 @@ class Surveys::ReportsController < Surveys::BaseController
   end
 
   def submit
-    @attempt = Attempt.find(params[:id])
-    @attempt.update_attribute("comment", params[:comment])
+      authorize [:survey, :report]
+    @attempt = Survey::Attempt.find(params[:id])
+    @attempt.update("comment": params[:comment], "submitted":true)
+    redirect_to survey_attempt_preview_path(@survey, @attempt)
+  end
+
+  def download
+         authorize [:survey, :report]
+   @attempt = Survey::Attempt.find(params[:id])
+    @attempt.update_attribute("comment", params[:comment], "submitted":true)
     if @attempt.survey.survey_type == 0
-      redirect_to surveys_checklist_pdf_path(@attempt, format: :pdf)
+      redirect_to survey_report_checklist_pdf_path(@survey, @attempt, format: :pdf)
     else
-      redirect_to surveys_score_pdf_path(@attempt, format: :pdf)
+      redirect_to survey_report_score_pdf_path(@survey, @attempt, format: :pdf)
+    end
+  end
+
+    def pdf
+         authorize [:survey, :report]
+  if @attempt.survey.survey_type == 0
+      redirect_to survey_report_checklist_pdf_path(@survey, @attempt, format: :pdf)
+    else
+      redirect_to survey_report_score_pdf_path(@survey, @attempt, format: :pdf)
     end
   end
 
@@ -45,5 +70,11 @@ class Surveys::ReportsController < Surveys::BaseController
 
   def attempt_params
     params.permit(:id, :comment)
+  end
+  def set_survey
+     @survey = Survey::Survey.find(params[:survey_id])
+  end
+def set_attempt
+     @attempt = Survey::Attempt.find(params[:id])
   end
 end

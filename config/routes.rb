@@ -56,7 +56,15 @@ Rails.application.routes.draw do
   resources :kpis
   resources :surveys do
     resources :questions, module: "survey"
-    get "attempts", to: "survey/attempts#index", as: "attempts"
+     resources :attempts, module: "survey"
+     get "/pdf/checklist/:id", to: "survey/reports#checklist", as: "report_checklist_pdf"
+  get "/pdf/score/:id", to: "survey/reports#score", as: "report_score_pdf"
+  get "/reports/checklist/:id", to: "survey/reports#checklist", as: "checklist_report"
+  get "/reports/score/:id", to: "survey/reports#score", as: "score_report"
+    get "/attempts/:id/preview", to: "survey/attempts#preview", as: "attempt_preview"
+      get "/attempts/:id/submit", to: "survey/reports#submit", as: "attempt_submit"
+       get "/attempts/:id/download", to: "survey/reports#download", as: "attempt_download"
+        get "/attempts/:id/pdf", to: "survey/reports#pdf", as: "attempt_pdf"
   end
   get "/surveys/:id/clone", to: "surveys#clone", as: "clone_survey"
 

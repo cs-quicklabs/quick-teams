@@ -8,7 +8,7 @@ class Survey::Attempt < ActiveRecord::Base
 
   # relations
   belongs_to :survey
-  belongs_to :participant
+  belongs_to :user
   has_many :answers, :dependent => :destroy
   accepts_nested_attributes_for :answers,
     :reject_if => ->(q) { q[:question_id].blank? || q[:option_id].blank? }

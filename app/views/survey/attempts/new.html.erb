@@ -1,0 +1,30 @@
+<div class="min-h-full flex  justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+       Select Participant
+      </h3>
+      <p class="mt-1 text-sm text-gray-500">
+        <%= @survey.name %>
+      </p>
+    </div>
+    <%= form_with(model: @attempt, id: dom_id(@attempt),url: survey_attempts_path(@survey.id)) do |form| %>
+      <div class="mt-8 space-y-6">
+        <input type="hidden" name="remember" value="true">
+        <div class=" -space-y-px">
+          <div>
+             <%= form.collection_select(:participant_id, User.all_users.decorate, :id, :display_name_position, {:prompt => 'Select Participant', :selected => (@attempt.participant_id if @attempt.participant_id)}, :required => true, :class=>"form-text-field mt-1"  ) %>
+          </div>
+        </div>
+        <div class="pt-5">
+          <div class="flex justify-end">
+            <%= link_to 'Back','javascript:history.back()', class:"bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-g-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 no-underline" %>
+            <button type="submit" class="ml-3  inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Start
+            </button>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
