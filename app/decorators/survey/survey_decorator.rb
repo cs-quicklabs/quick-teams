@@ -1,22 +1,23 @@
 class Survey::SurveyDecorator < Draper::Decorator
   delegate_all
+
   def survey_type_color
-    if self.Checklist?
+    if self.checklist?
       "yellow"
-    elsif self.Kpi?
+    elsif self.kpi?
       "green"
-    elsif self.Score?
+    elsif self.score?
       "gray"
     end
-end
-    
-def survey_for_color
-    if self.Employee?
+  end
+
+  def survey_for_color
+    if self.employee?
       "yellow"
-    elsif self.Client?
+    elsif self.client?
       "gray"
-    elsif self.Project?
-     "gray" 
+    elsif self.project?
+      "gray"
     end
-end
+  end
 end

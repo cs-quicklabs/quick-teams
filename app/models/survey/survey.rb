@@ -2,8 +2,8 @@ class Survey::Survey < ActiveRecord::Base
   self.table_name = "survey_surveys"
   acts_as_tenant :account
 
-  enum survey_type: [:Checklist, :Score, :Kpi]
-  enum survey_for: [:Project, :Employee, :Client]
+  enum survey_type: [:checklist, :score, :kpi]
+  enum survey_for: [:project, :employee, :client]
 
   # relations
   has_many :attempts, :dependent => :destroy
@@ -15,6 +15,8 @@ class Survey::Survey < ActiveRecord::Base
   # scopes
   scope :active, -> { where(:active => true) }
   scope :inactive, -> { where(:active => false) }
+  scope :surveys, -> { where(survey_type: [:checklist, :score]) }
+  scope :kpis, -> { where(survey_type: :kpi) }
 
   # validations
   validates :attempts_number, :numericality => { :only_integer => true, :greater_than => -1 }
