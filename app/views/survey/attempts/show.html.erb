@@ -13,7 +13,7 @@
     <div class="">
       <fieldset class="space-y-5">
         <% survey.questions.each do |question| %>
-          <% if survey.survey_type == 0 %>
+          <% if survey.checklist? %>
             <%= render partial: 'checklist_question', locals: { question: question, attempt: @attempt } %>
           <% else %>
             <%= render partial: 'score_question', locals: { question: question, attempt: @attempt } %>

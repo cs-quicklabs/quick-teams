@@ -52,7 +52,7 @@ class SurveysController < BaseController
       q = Survey::Question.new(text: question.text, description: question.description, survey_id: @clone.id)
       q.save
 
-      if @survey.survey_type == 0 #checklist
+      if @survey.checklist? #checklist
         Survey::Option.new(text: "Yes", question: q, correct: true, weight: 1).save
         Survey::Option.new(text: "No", question: q, correct: false, weight: 0).save
       else
