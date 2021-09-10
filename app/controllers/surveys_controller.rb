@@ -1,9 +1,9 @@
 class SurveysController < BaseController
-  before_action :set_survey, only: %i[ show edit update destroy clone]
+  before_action :set_survey, only: %i[ show edit update destroy clone ]
 
   def index
     authorize :surveys
-    @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.where.not(survey_type: :Kpi).order(:name), items: 10)
+    @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.where.not(survey_type: :Kpi).order(:name), items: LIMIT)
   end
 
   def new
@@ -44,7 +44,7 @@ class SurveysController < BaseController
     @clone = Survey::Survey.new
     @clone.name = @survey.name + " (Copy)"
     @clone.survey_type = @survey.survey_type
-      @clone.actor_id = current_user.id
+    @clone.actor_id = current_user.id
     @clone.description = @survey.description.nil? ? "N/A" : @survey.description
     @clone.save
 
@@ -61,12 +61,6 @@ class SurveysController < BaseController
     end
 
     redirect_to survey_path(@clone)
-  end
-
-  def pagy_nil_safe(params, collection, vars = {})
-    pagy = Pagy.new(count: collection.count(:all), page: params[:page], **vars)
-    return pagy, collection.offset(pagy.offset).limit(pagy.items) if collection.respond_to?(:offset)
-    return pagy, collection
   end
 
   private

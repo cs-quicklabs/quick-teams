@@ -5,13 +5,13 @@
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         KPIs
       </h1>
-      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @kpis.load.size.to_s + " KPIs)" %></p>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @surveys.load.size.to_s + " KPIs)" %></p>
     </div>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <%= link_to "New KPI Survey", new_kpi_path, class: "btn-blue" %>
+      <%= link_to "New KPI", new_kpi_path, class: "btn-blue" %>
     </div>
   </div>
-  <% if @kpis.size > 0 %>
+  <% if @surveys.size > 0 %>
     <div class="sm:block" data-controller="infinite-scroll">
       <div class="inline-block min-w-full align-middle ">
         <table class="min-w-full divide-y divide-gray-200">
@@ -23,7 +23,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" id="kbs" data-infinite-scroll-target="entries">
-            <%= render partial: "kpi", collection: @kpis, as: :kb, cached: true %>
+            <%= render partial: "survey", collection: @surveys, as: :survey, cached: true %>
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
