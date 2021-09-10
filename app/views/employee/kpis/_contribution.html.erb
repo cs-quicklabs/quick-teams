@@ -1,0 +1,26 @@
+<div class="relative px-8">
+  <div class="flex items-center justify-between">
+    <div>
+      <span class="text-xs font-medium inline-block py-1 uppercase">
+        <%= contribution.category %>
+      </span>
+    </div>
+    <div class="text-right">
+      <span class="text-xs font-semibold inline-block">
+        <%= contribution.score %>
+      </span>
+    </div>
+  </div>
+  <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+    <% if contribution.score >= 70 %>
+      <div style="width:<%= contribution.score%>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500">
+      </div>
+    <% elsif contribution.score >= 50 and contribution.score < 70%>
+      <div style="width:<%= contribution.score%>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500">
+      </div>
+    <% else %>
+      <div style="width:<%= contribution.score%>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+      </div>
+    <% end %>
+  </div>
+</div>

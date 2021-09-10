@@ -18,6 +18,7 @@ class User < ApplicationRecord
   belongs_to :role
   belongs_to :job
 
+  belongs_to :kpi, class_name: "Survey::Survey", optional: true
   has_many :schedules
   has_many :projects, through: :schedules
   has_many :subordinates, class_name: "User", foreign_key: "manager_id"

@@ -1,17 +1,17 @@
 <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="project-header">
   <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
     <h1 class="text-3xl font-bold leading-tight text-gray-900">
-      <%= survey.name.titleize %>
+      <%= survey.name %>
     </h1>
   </div>
-     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <div id="employee-status" class="flex">
+  <div class="flex mt-4 sm:mt-0 sm:ml-4">
+    <div id="employee-status" class="flex">
       <%= link_to 'Clone', clone_survey_path(@survey), class:" inline-block mr-4  text-left mr-4 btn-normal", data: {confirm: "Are you sure? This will create a new survey by copying everything from this survey?"}  %>
-       </div>
-      <div>
+    </div>
+    <div>
       <%= link_to 'Edit', edit_survey_path(@survey), class:" btn-normal" %>
-       </div>
-      <div>
+    </div>
+    <div>
       <%= link_to 'Delete', survey_path(@survey), method: :delete, class:" ml-4 btn-red", data: {confirm: "Are you sure?"} %>
     </div>
   </div>
