@@ -5,7 +5,7 @@ class Survey::AttemptsController < Survey::BaseController
 
   def index
     authorize [:survey, :attempt]
-    @attempts = Survey::Attempt.where(survey: @survey)
+    @attempts = Survey::Attempt.where(survey: @survey).where(submitted:true)
   end
 
   def new
@@ -29,7 +29,7 @@ class Survey::AttemptsController < Survey::BaseController
   def preview
     authorize [:survey, :attempt]
 
-    if @attempt.survey.survey_type == 0
+    if @attempt.survey.checklist?
       redirect_to survey_checklist_report_path(@survey, @attempt)
     else
       redirect_to survey_score_report_path(@survey, @attempt)
