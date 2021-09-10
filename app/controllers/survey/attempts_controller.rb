@@ -1,5 +1,5 @@
 class Survey::AttemptsController < Survey::BaseController
-  before_action :set_survey, only: [:index, :edit, :update, :destroy, :show]
+  before_action :set_survey, only: [:index, :update, :destroy, :show, :new, :create, :submit]
 
   def index
 
@@ -14,14 +14,16 @@ class Survey::AttemptsController < Survey::BaseController
 
   def create
     authorize [:survey, :attempt]
-    @participant = Survey::Participant.create(name: params[:name], email: params[:email])
-    @attempt = Survey::Attempt.create(survey: @survey, participant: @participant)
-    redirect_to survey_new_attempt_path(@attempt)
+    @attempt = Survey::Attempt.new(attempt_params)
+    @attempt.survey_id=@survey.id
+    @attempt.actor_id=current_user.id
+    @attempt.save
+    redirect_to survey_attempt_path(@survey, @attempt)
   end
 
   def show
      authorize [:survey, :attempt]
-    @attempt = Attempt.find(params[:id])
+    @attempt = Survey::Attempt.find(params[:id])
   end
 
   def submit
@@ -38,5 +40,11 @@ class Survey::AttemptsController < Survey::BaseController
 
   def set_survey
      @survey = Survey::Survey.find(params[:survey_id])
+  end
+  def attempt_params
+    params.require(:survey_attempt).permit(:participant_id, :actor_id, :survey_id)
+  end
+   def participant_params
+    params.permit(:name, :email)
   end
 end
