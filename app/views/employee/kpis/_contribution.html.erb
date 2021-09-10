@@ -12,14 +12,15 @@
     </div>
   </div>
   <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-    <% if contribution.score >= 70 %>
-      <div style="width:<%= contribution.score%>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500">
+    <% score = contribution.score * 10 %>
+    <% if score >= 80 %>
+      <div style="width:<%= score %>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-400">
       </div>
-    <% elsif contribution.score >= 50 and contribution.score < 70%>
-      <div style="width:<%= contribution.score%>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500">
+    <% elsif score >= 50 and score < 80 %>
+      <div style="width:<%= score %>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-400">
       </div>
     <% else %>
-      <div style="width:<%= contribution.score%>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+      <div style="width:<%= score %>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-400">
       </div>
     <% end %>
   </div>

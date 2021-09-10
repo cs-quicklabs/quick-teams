@@ -19,15 +19,13 @@ class EmployeeKpisStats
 
     return 0 if total_marks == 0
     overall_average = total_score / total_marks
-    overall_average.round(2)
+    overall_average.round(2) * 10
   end
 
   def contributions
     attempts = @kpi.attempts.where(participant_id: @employee.id)
-    all_answers = []
-    attempts.each do |attempt|
-      all_answers.concat(attempt.answers)
-    end
+    all_answers_ids = attempts.map(&:answers).flatten.map(&:id)
+    all_answers = Survey::Answer.where(id: all_answers_ids)
     all_questions = Survey::Question.where(survey_id: @kpi.id)
     categories = all_questions.map(&:category).uniq
 
@@ -50,7 +48,7 @@ class EmployeeKpisStats
     end
     return 0 if total_marks == 0
     overall_score = score / total_marks
-    overall_score.round(2)
+    overall_score.round(2) * 10
   end
 end
 

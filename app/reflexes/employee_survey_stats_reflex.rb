@@ -4,7 +4,7 @@ class EmployeeSurveyStatsReflex < ApplicationReflex
     survey = question.survey
     employee = User.find(element.dataset["employee-id"])
     attempts = survey.attempts.where(participant: employee)
-    answers = attempts.map(&:answers).flatten.compact
+    answers = Survey::Answer.where(attempt: attempts, question: question)
     total_responses = answers.count
     color = "bg-gray-50"
     if total_responses == 0
