@@ -42,7 +42,15 @@
           <section aria-labelledby="add-participant-section">
             <div class="overflow-hidden bg-white">
               <div class="px-4">
-                <%= render partial: "survey", collection: @surveys, as: :survey, cached: true %>
+                <div class="p-5 border-b border-gray-200">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Take a Survey
+                  </h3>
+                  <p class="mt-2 max-w-4xl text-sm text-gray-500">Following surveys are available for you to take. </p>
+                </div>
+                <ul class="divide-y divide-gray-200">
+                  <%= render partial: "survey", collection: @surveys, as: :survey, cached: true %>
+                </ul>
               </div>
             </div>
           </section>
