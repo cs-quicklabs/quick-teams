@@ -18,6 +18,6 @@ class Employee::SkillsController < Employee::BaseController
   private
 
   def set_user
-    @employee = User.find(params["employee_id"]).decorate
+    @employee = User.find(params["employee_id"])
   end
 end

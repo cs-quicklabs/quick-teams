@@ -1,16 +1,15 @@
-class EmployeeKpisStats
-  attr_accessor :stats, :employee, :kpi, :average_score, :contributions
+class Survey::Stats::SurveyStats
+  attr_accessor :stats, :object, :survey, :average_score, :contributions
 
-  def initialize(employee, kpi)
-    @employee = employee
-    @kpi = kpi
+  def initialize(object, survey)
+    @object = object
+    @survey = survey
   end
 
   def average_score
-    attempts = @kpi.attempts.where(participant_id: @employee.id, participant_type: "User")
     total_score = 0
     total_marks = 0
-    attempts.each do |attempt|
+    all_attempts.each do |attempt|
       score = attempt.correct_answers.reduce(0.0) { |sum, answer| sum + answer.score }
       total_score += score
       total = (attempt.answers.count * 10)
@@ -23,10 +22,9 @@ class EmployeeKpisStats
   end
 
   def contributions
-    attempts = @kpi.attempts.where(participant_id: @employee.id, participant_type: "User")
-    all_answers_ids = attempts.map(&:answers).flatten.map(&:id)
+    all_answers_ids = all_attempts.map(&:answers).flatten.map(&:id)
     all_answers = Survey::Answer.where(id: all_answers_ids)
-    all_questions = Survey::Question.where(survey_id: @kpi.id)
+    all_questions = Survey::Question.where(survey_id: @survey.id)
     categories = all_questions.map(&:category).uniq
 
     contributions = []
@@ -49,6 +47,10 @@ class EmployeeKpisStats
     return 0 if total_marks == 0
     overall_score = (score / total_marks) * 10
     overall_score.round(2)
+  end
+
+  def all_attempts
+    @survey.attempts.where(participant_id: @object.id, participant_type: @object.class.name)
   end
 end
 

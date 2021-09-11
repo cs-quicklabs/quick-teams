@@ -16,7 +16,7 @@ class Project::KpisController < Project::BaseController
 
     @kpi = @project.kpi
     unless @kpi.nil?
-      @stats = ProjectKpisStats.new(@project, @kpi)
+      @stats = Survey::Stats::ProjectCsatStats.new(@project, @kpi)
     end
   end
 end
