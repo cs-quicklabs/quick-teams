@@ -1,13 +1,14 @@
-class Survey::Stats::SurveyStats
-  attr_accessor :stats, :object, :survey, :average_score, :contributions
+class Survey::Stats::SurveyParticipantStats
+  attr_accessor :stats, :participant, :survey, :average_score, :contributions
 
-  def initialize(object, survey)
-    @object = object
+  def initialize(survey, participant)
     @survey = survey
+    @participant = participant
   end
 
   def average_score
-    total_score, total_marks = 0
+    total_score = 0
+    total_marks = 0
     all_attempts.each do |attempt|
       score = attempt.correct_answers.reduce(0.0) { |sum, answer| sum + answer.score }
       total_score += score
@@ -51,7 +52,7 @@ class Survey::Stats::SurveyStats
   end
 
   def all_attempts
-    @survey.attempts.where(participant_id: @object.id, participant_type: @object.class.name)
+    @survey.attempts.where(participant_id: @participant.id, participant_type: @participant.class.name)
   end
 end
 

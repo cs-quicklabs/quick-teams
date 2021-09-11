@@ -16,7 +16,7 @@ class Employee::KpisController < Employee::BaseController
 
     @kpi = @employee.kpi
     unless @kpi.nil?
-      @stats = Survey::Stats::EmployeeKpisStats.new(@employee, @kpi)
+      @stats = Survey::Stats::SurveyParticipantStats.new(@kpi, @employee)
     end
   end
 end
