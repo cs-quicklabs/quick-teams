@@ -1,6 +1,10 @@
 class ProjectDecorator < Draper::Decorator
   delegate_all
 
+  def display_name
+    name
+  end
+
   def display_discipline
     "in #{project.discipline.name}"
   end

@@ -10,7 +10,7 @@ class EmployeeSurveyStatsReflex < ApplicationReflex
 
   def employee_question_stats(question, employee)
     survey = question.survey
-    attempts = survey.attempts.where(participant_id: employee.id)
+    attempts = survey.attempts.where(participant_id: employee.id, participant_type: "User")
     answers = Survey::Answer.where(attempt_id: attempts.ids, question: question)
     total_responses = answers.count
     average_score = 0.0

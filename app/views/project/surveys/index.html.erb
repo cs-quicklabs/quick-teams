@@ -1,5 +1,5 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "employee/title", employee: @employee%>
+  <%= render "project/title", project: @project%>
   <main class="pb-8">
     <div class="">
       <!-- Main 3 column grid -->
@@ -45,7 +45,7 @@
         </div>
         <!-- Right column -->
         <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
-          <% if current_user.admin? or current_user == @employee%>
+          <% if current_user.admin?%>
             <section aria-labelledby="add-participant-section">
               <div class="overflow-hidden bg-white">
                 <div class="px-4">

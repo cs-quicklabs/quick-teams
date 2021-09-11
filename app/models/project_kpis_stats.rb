@@ -1,13 +1,13 @@
-class EmployeeKpisStats
-  attr_accessor :stats, :employee, :kpi, :average_score, :contributions
+class ProjectKpisStats
+  attr_accessor :stats, :project, :kpi, :average_score, :contributions
 
-  def initialize(employee, kpi)
-    @employee = employee
+  def initialize(project, kpi)
+    @project = project
     @kpi = kpi
   end
 
   def average_score
-    attempts = @kpi.attempts.where(participant_id: @employee.id, participant_type: "User")
+    attempts = @kpi.attempts.where(participant_id: @project.id, participant_type: "Project")
     total_score = 0
     total_marks = 0
     attempts.each do |attempt|
@@ -23,7 +23,7 @@ class EmployeeKpisStats
   end
 
   def contributions
-    attempts = @kpi.attempts.where(participant_id: @employee.id, participant_type: "User")
+    attempts = @kpi.attempts.where(participant_id: @project.id, participant_type: "Project")
     all_answers_ids = attempts.map(&:answers).flatten.map(&:id)
     all_answers = Survey::Answer.where(id: all_answers_ids)
     all_questions = Survey::Question.where(survey_id: @kpi.id)
