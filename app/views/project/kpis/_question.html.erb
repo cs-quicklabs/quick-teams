@@ -1,0 +1,12 @@
+<%= turbo_frame_tag dom_id(question) do %>
+  <li class="py-3 flex border-b border-gray-200" data-project-id=<%= @project.id %> data-question-id=<%= question.id %>>
+    <div class="ml-3 w-full">
+      <p class="text-xs font-medium text-gray-500 uppercase"><%= question.category.capitalize %></p>
+      <p class="text-sm font-semibold text-gray-900"><%= question.text.capitalize %></p>
+      <p class="text-sm text-gray-500"><%= question.explanation.capitalize %></p>
+      <div id=<%= "summary_" + question.id.to_s %> data-reflex="click->EmployeeSurveyStats#summary" data-reflex-dataset="combined"  >
+        <p  class="btn-inline-edit underline mt-2 text-xs" >View summary</p>
+      </div>
+    </div>
+  </li>
+<% end %>

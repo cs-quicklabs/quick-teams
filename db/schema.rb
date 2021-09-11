@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_11_105700) do
+ActiveRecord::Schema.define(version: 2021_09_11_121024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(version: 2021_09_11_105700) do
     t.bigint "status_id"
     t.boolean "billable", default: true
     t.decimal "billable_resources", precision: 4, scale: 2
+    t.integer "kpi_id"
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["discipline_id"], name: "index_projects_on_discipline_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id"

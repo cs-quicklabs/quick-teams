@@ -5,6 +5,8 @@ class Project < ApplicationRecord
   has_many :participants, through: :schedules, source: :user
 
   belongs_to :manager, class_name: "User", optional: true
+  belongs_to :kpi, class_name: "Survey::Survey", optional: true
+
   has_many :notes, as: :notable
   has_many :feedbacks, as: :critiquable
   has_many :documents, as: :documenter

@@ -1,4 +1,4 @@
-class Project::ChecklistsController < Project::BaseController
+class Project::SurveysController < Project::BaseController
   def index
     authorize [@project, :survey]
 
