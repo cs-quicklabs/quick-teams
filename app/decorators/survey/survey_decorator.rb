@@ -20,4 +20,13 @@ class Survey::SurveyDecorator < Draper::Decorator
       "gray"
     end
   end
+  def display_survey_type
+    
+    if self.kpi?
+      "KPIs"
+    else 
+      survey_type.titleize
+    end
+      
+  end
 end

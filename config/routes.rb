@@ -65,6 +65,7 @@ Rails.application.routes.draw do
       get "/attempts/:id/submit", to: "survey/reports#submit", as: "attempt_submit"
        get "/attempts/:id/download", to: "survey/reports#download", as: "attempt_download"
         get "/attempts/:id/pdf", to: "survey/reports#pdf", as: "attempt_pdf"
+         get "/search", to: "search#surveys"
   end
   get "/surveys/:id/clone", to: "surveys#clone", as: "clone_survey"
 
