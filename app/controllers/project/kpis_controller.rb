@@ -18,5 +18,7 @@ class Project::KpisController < Project::BaseController
     unless @kpi.nil?
       @stats = Survey::Stats::SurveyParticipantStats.new(@kpi, @project)
     end
+
+    render "shared/surveys/stats"
   end
 end

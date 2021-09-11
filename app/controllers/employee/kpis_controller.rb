@@ -18,5 +18,7 @@ class Employee::KpisController < Employee::BaseController
     unless @kpi.nil?
       @stats = Survey::Stats::SurveyParticipantStats.new(@kpi, @employee)
     end
+
+    render "shared/surveys/stats"
   end
 end
