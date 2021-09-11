@@ -2,11 +2,11 @@
 <tr id="<%= dom_id survey %>">
   <td class="px-6 py-3  text-sm text-gray-700 max-w-0">
    <a href="<%= survey_path(survey) %>" target="_top"  class="font-medium text-gray-900 block hover:underline" target="_top">
-    <div class="text-sm">    
-        <%= survey.name.capitalize %>
+    <div class="text-sm line-clamp-2">    
+       <p class="line-clamp-2"> <%= survey.name.capitalize %></p>
     </div>
     <div class="mt-1 text-xs text-gray-700">
-      <p class="line-clamp-3"><%= survey.description.capitalize %></p>
+      <p class="line-clamp-2"><%= survey.description.capitalize %></p>
     </div>
     </a>
   </td>

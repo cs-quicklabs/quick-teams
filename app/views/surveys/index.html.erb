@@ -5,6 +5,7 @@
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         Select Survey
       </h1>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @surveys.load.size.to_s + " Surveys)" %></p>
     </div>
     <div class="flex  w-full max-w-3xl px-2 lg:ml-6 "  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/surveys">
       <div class="w-full  ">
@@ -57,7 +58,7 @@
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+          <%= render partial: "shared/paginator", locals: { pagy: @pagy } %>
         </div>
       </div>
     </div>
