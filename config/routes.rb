@@ -44,7 +44,9 @@ Rails.application.routes.draw do
     resources :nuggets, module: "employee"
     resources :documents, module: "employee"
     resources :surveys, module: "employee", only: [:index, :show, :destroy]
-    resources :kpis, module: "employee", only: [:index, :show, :destroy]
+    resources :kpis, module: "employee", only: [:index, :show, :destroy] do
+      get "stats", to: "kpis#stats", as: "stats"
+    end
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
     get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
@@ -56,18 +58,18 @@ Rails.application.routes.draw do
   resources :kpis
   resources :surveys do
     resources :questions, module: "survey"
-     resources :attempts, module: "survey"
-     get "/pdf/checklist/:id", to: "survey/reports#checklist", as: "report_checklist_pdf"
-  get "/pdf/score/:id", to: "survey/reports#score", as: "report_score_pdf"
-  get "/reports/checklist/:id", to: "survey/reports#checklist", as: "checklist_report"
-  get "/reports/score/:id", to: "survey/reports#score", as: "score_report"
+    resources :attempts, module: "survey"
+    get "/pdf/checklist/:id", to: "survey/reports#checklist", as: "report_checklist_pdf"
+    get "/pdf/score/:id", to: "survey/reports#score", as: "report_score_pdf"
+    get "/reports/checklist/:id", to: "survey/reports#checklist", as: "checklist_report"
+    get "/reports/score/:id", to: "survey/reports#score", as: "score_report"
     get "/attempts/:id/preview", to: "survey/attempts#preview", as: "attempt_preview"
-      get "/attempts/:id/submit", to: "survey/reports#submit", as: "attempt_submit"
-       get "/attempts/:id/download", to: "survey/reports#download", as: "attempt_download"
-        get "/attempts/:id/pdf", to: "survey/reports#pdf", as: "attempt_pdf"
-        
+    get "/attempts/:id/submit", to: "survey/reports#submit", as: "attempt_submit"
+    get "/attempts/:id/download", to: "survey/reports#download", as: "attempt_download"
+    get "/attempts/:id/pdf", to: "survey/reports#pdf", as: "attempt_pdf"
+    get "/search", to: "search#surveys"
   end
-   
+
   get "/surveys/:id/clone", to: "surveys#clone", as: "clone_survey"
 
   devise_for :users, controllers: { registrations: "registrations" }

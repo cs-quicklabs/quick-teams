@@ -4,7 +4,7 @@ class Survey::AttemptPolicy < Survey::BaseSurveyPolicy
   end
 
   def new?
-     true
+    true
   end
 
   def edit?
@@ -12,7 +12,7 @@ class Survey::AttemptPolicy < Survey::BaseSurveyPolicy
   end
 
   def create?
-   true
+    true
   end
 
   def show?
@@ -20,10 +20,14 @@ class Survey::AttemptPolicy < Survey::BaseSurveyPolicy
   end
 
   def update?
-     true
+    true
   end
 
   def preview?
-   true
+    true
+  end
+
+  def destroy?
+    true
   end
 end

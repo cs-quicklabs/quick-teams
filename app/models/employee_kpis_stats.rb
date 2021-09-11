@@ -18,8 +18,8 @@ class EmployeeKpisStats
     end
 
     return 0 if total_marks == 0
-    overall_average = total_score / total_marks
-    overall_average.round(2) * 10
+    overall_average = (total_score / total_marks) * 10
+    overall_average.round(2)
   end
 
   def contributions
@@ -47,8 +47,8 @@ class EmployeeKpisStats
       sum + answer.score
     end
     return 0 if total_marks == 0
-    overall_score = score / total_marks
-    overall_score.round(2) * 10
+    overall_score = (score / total_marks) * 10
+    overall_score.round(2)
   end
 end
 
@@ -64,5 +64,9 @@ class StatsContribution
 
   def score
     @score
+  end
+
+  def display_score
+    "#{@score}"
   end
 end

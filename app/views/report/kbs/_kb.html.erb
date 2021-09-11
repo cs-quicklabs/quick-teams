@@ -1,6 +1,6 @@
 <tr id="<%= dom_id kb %>">
   <%kb = kb.decorate %>
-  <td class="px-16 py-3  text-sm text-gray-700 max-w-0">
+  <td class="px-8 py-3  text-sm text-gray-700 max-w-0">
     <div class="text-sm">
       <a href="<%= ensure_protocol(kb.link) %>" target="_blank"  class="font-medium text-gray-900 block hover:underline" target="_top">
         <%= kb.document %>
@@ -10,7 +10,7 @@
       <p class="line-clamp-3"><%= kb.comments%></p>
     </div>
   </td>
-  <td class="px-6 py-3  text-sm text-gray-700 max-w-full whitespace-nowrap ">
+  <td class="px-8 py-3  text-sm text-gray-700 max-w-full whitespace-nowrap ">
     <div class=" text-sm text-gray-700">
       <p class="line-clamp-1">
         <a href="#" class="block hover:underline " target="_top">
@@ -19,12 +19,12 @@
       </p>
     </div>
   </td>
-  <td class="px-6 py-3 text-sm text-gray-700 max-w-0 whitespace-nowrap">
+  <td class="px-8 py-3 text-sm text-gray-700 max-w-0 whitespace-nowrap">
     <div class=" text-sm text-gray-700">
       <p class=""> <%= kb.discipline ? kb.discipline.name : "Everyone" %></p>
     </div>
   </td>
-  <td class="px-6 py-3   text-sm text-gray-700  whitespace-nowrap">
+  <td class="px-8 py-3   text-sm text-gray-700  whitespace-nowrap">
     <div class=" text-sm text-gray-700">
       <p class=""> <%= kb.job ? kb.job.name : "Everyone" %></p>
     </div>

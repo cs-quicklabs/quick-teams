@@ -1,6 +1,6 @@
 class Survey::AttemptsController < Survey::BaseController
   before_action :set_survey, only: [:index, :update, :destroy, :show, :new, :create, :preview]
-  before_action :set_attempt, only: [:preview, :show]
+  before_action :set_attempt, only: [:preview, :show, :destroy, :update]
   before_action :set_participant, only: [:preview]
 
   def index
@@ -34,6 +34,15 @@ class Survey::AttemptsController < Survey::BaseController
       redirect_to survey_checklist_report_path(@survey, @attempt)
     else
       redirect_to survey_score_report_path(@survey, @attempt)
+    end
+  end
+
+  def destroy
+    authorize [@attempt]
+
+    @attempt.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@attempt) }
     end
   end
 
