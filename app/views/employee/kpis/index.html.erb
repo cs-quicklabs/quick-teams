@@ -11,10 +11,10 @@
               <div class="overflow-hidden bg-white">
                 <div class="p-4">
                   <div class="flex flex-wrap">
-                    <p class="pb-4 mt-1 text-sm font-medium text-gray-900 truncate"><%="KPIs Questions set (" + @kpi.questions.load.size.to_s + ")"%></p>
+                    <p class=" mt-1 text-sm font-medium text-gray-900 truncate"><%="KPIs Questions set (" + @kpi.questions.load.size.to_s + ")"%></p>
                   </div>
                   <ul class="divide-y divide-gray-200" id="questions">
-                    <%= render partial: "question", collection: @kpi.questions, as: :question, cached: true %>
+                    <%= render partial: "question", collection: @kpi.questions, as: :question, cached: false %>
                   </ul>
                 </div>
               </div>
