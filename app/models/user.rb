@@ -99,6 +99,6 @@ class User < ApplicationRecord
   end
 
   def filled_surveys
-    Survey::Attempt.where(actor_id: id, survey_id: surveys.ids)
+    Survey::Attempt.includes(:survey).where(actor_id: id, survey_id: surveys.ids)
   end
 end
