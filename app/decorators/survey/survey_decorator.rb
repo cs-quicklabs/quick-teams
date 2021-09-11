@@ -15,7 +15,7 @@ class Survey::SurveyDecorator < Draper::Decorator
     if self.employee?
       "yellow"
     elsif self.client?
-      "gray"
+      "green"
     elsif self.project?
       "gray"
     end

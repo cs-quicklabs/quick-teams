@@ -3,17 +3,17 @@
   <td class="px-6 py-3 max-w-0">
     <a href="<%= survey_path(survey) %>" target="_top"  class="block hover:underline" target="_top">
       <div class="text-sm font-medium text-gray-900">
-        <%= survey.name.upcase_first %>
+       <p class="line-clamp-2"> <%= survey.name.upcase_first %></p>
       </div>
       <div class="mt-1 text-sm text-gray-500">
-        <p class="line-clamp-3"><%= survey.description.upcase_first %></p>
+        <p class="line-clamp-2"><%= survey.description.upcase_first %></p>
       </div>
     </a>
   </td>
   <td class="px-4 py-3  text-sm text-gray-700 max-w-full whitespace-nowrap">
     <div class="mt-1 text-sm text-gray-700">
       <a href="<%= employee_team_path(survey.actor_id) %>" class="truncate hover:text-gray-600 hover:underline">
-        <p class="line-clamp-3"><%= survey.actor.decorate.display_name %></p>
+        <p class=""><%= survey.actor.decorate.display_name %></p>
       </a>
     </div>
   </td>
@@ -25,7 +25,7 @@
   </td>
   <td class="px-4 py-3  text-sm text-gray-700 max-w-fullb whitespace-nowrap">
     <div class="mt-1 text-sm text-gray-700">
-      <p class="line-clamp-3"><%= display_date(survey.created_at) %></p>
+      <p class=""><%= display_date(survey.created_at) %></p>
     </div>
   </td>
 </tr>

@@ -1,9 +1,10 @@
 class SurveysController < BaseController
+   include Pagy::Backend
   before_action :set_survey, only: %i[ show edit update destroy clone ]
 
   def index
     authorize :surveys
-    @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.includes(:actor).all.order(:name), items: LIMIT)
+    @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.includes(:actor).all.order(created_at: :desc), items: LIMIT)
     fresh_when @surveys
   end
 
@@ -62,6 +63,11 @@ class SurveysController < BaseController
     end
 
     redirect_to survey_path(@clone)
+  end
+   def pagy_nil_safe(params, collection, vars = {})
+    pagy = Pagy.new(count: collection.count(:all), page: params[:page], **vars)
+    return pagy, collection.offset(pagy.offset).limit(pagy.items) if collection.respond_to?(:offset)
+    return pagy, collection
   end
 
   private
