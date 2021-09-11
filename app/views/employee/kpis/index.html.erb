@@ -28,12 +28,12 @@
           <% end %>
           <% if policy([@employee, :kpi]).record? %>
             <div class="text-center mt-4">
-              <h3 class="mt-2 text-sm font-medium text-gray-900">Add New Assessment</h3>
+              <h3 class="mt-2 text-sm font-medium text-gray-900">Record New Assessment</h3>
               <p class="mt-1 text-sm text-gray-500 px-8">
                 <%= @employee.decorate.display_name %> has been assigned <%= @kpi.name.upcase_first %>. Please click on button below to record a new assessment.
               </p>
               <div class="mt-2">
-                <%= link_to "Record Assessment", new_survey_attempt_path(@kpi, participant_id: @employee.id), class: "btn-blue" %>
+                <%= link_to "Record Assessment", new_survey_attempt_path(@kpi, participant_id: @employee.id), class: "btn-blue", data: { confirm: "The result of your assessment will be used to calculate overall KPIs performance. Are you sure you want to proceed?"} %>
               </div>
             </div>
           <% end %>
