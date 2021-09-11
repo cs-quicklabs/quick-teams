@@ -7,7 +7,7 @@ class EmployeeKpisStats
   end
 
   def average_score
-    attempts = @kpi.attempts.where(participant_id: @employee.id)
+    attempts = @kpi.attempts.where(participant_id: @employee.id, participant_type: "User")
     total_score = 0
     total_marks = 0
     attempts.each do |attempt|
@@ -23,7 +23,7 @@ class EmployeeKpisStats
   end
 
   def contributions
-    attempts = @kpi.attempts.where(participant_id: @employee.id)
+    attempts = @kpi.attempts.where(participant_id: @employee.id, participant_type: "User")
     all_answers_ids = attempts.map(&:answers).flatten.map(&:id)
     all_answers = Survey::Answer.where(id: all_answers_ids)
     all_questions = Survey::Question.where(survey_id: @kpi.id)

@@ -7,7 +7,7 @@ class Employee::KpisController < Employee::BaseController
     @kpi = @employee.kpi
 
     unless @kpi.nil?
-      fresh_when @kpi.attempts.where(participant_id: @employee.id) + [@employee]
+      fresh_when @kpi.attempts.where(participant_id: @employee.id, participant_type: "User") + [@employee]
     end
   end
 

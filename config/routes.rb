@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :todos, module: "project"
     resources :skills, module: "project"
     resources :documents, only: [:index, :show, :create, :destroy, :edit, :update], module: "project"
+    resources :checklists, module: "project", only: [:index, :show, :destroy]
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
 

@@ -10,8 +10,10 @@ class Survey::AttemptsController < Survey::BaseController
 
   def new
     authorize [:survey, :attempt]
-    if params[:participant_id]
-      attempt = create_attempt(params[:participant_id])
+    if params[:participant_id] && params[:participant_type]
+      @klass = params[:participant_type].capitalize.constantize
+      participant = @klass.find(params[:participant_id])
+      attempt = create_attempt(participant)
       redirect_to survey_attempt_path(@survey, attempt)
     else
       @attempt = Survey::Attempt.new
@@ -21,7 +23,11 @@ class Survey::AttemptsController < Survey::BaseController
   def create
     authorize [:survey, :attempt]
     participant_id = params[:participant_id].present? ? params[:participant_id] : attempt_params[:participant_id]
-    attempt = create_attempt(participant_id)
+    participant_type = params[:participant_type].present? ? params[:participant_type] : attempt_params[:participant_type]
+    @klass = participant_type.capitalize.constantize
+    participant = @klass.find(participant_id)
+
+    attempt = create_attempt(participant)
     redirect_to survey_attempt_path(@survey, attempt)
   end
 
@@ -49,9 +55,9 @@ class Survey::AttemptsController < Survey::BaseController
 
   private
 
-  def create_attempt(participant_id)
+  def create_attempt(participant)
     attempt = Survey::Attempt.new
-    attempt.participant_id = participant_id
+    attempt.participant = participant
     attempt.survey_id = @survey.id
     attempt.actor_id = current_user.id
     attempt.save

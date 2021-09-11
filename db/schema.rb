@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_10_134425) do
+ActiveRecord::Schema.define(version: 2021_09_11_105700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 2021_09_10_134425) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "comments"
-    t.bigint "account_id", default: 1, null: false
+    t.bigint "account_id", null: false
     t.index ["account_id"], name: "index_kbs_on_account_id"
     t.index ["discipline_id"], name: "index_kbs_on_discipline_id"
     t.index ["job_id"], name: "index_kbs_on_job_id"
@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(version: 2021_09_10_134425) do
     t.datetime "published_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "account_id", default: 1, null: false
+    t.bigint "account_id", null: false
     t.index ["account_id"], name: "index_nuggets_on_account_id"
     t.index ["skill_id"], name: "index_nuggets_on_skill_id"
     t.index ["user_id"], name: "index_nuggets_on_user_id"
@@ -285,8 +285,7 @@ ActiveRecord::Schema.define(version: 2021_09_10_134425) do
     t.date "starts_at"
     t.date "ends_at"
     t.integer "occupancy"
-    t.boolean "billable"
-    t.integer "billed"
+    t.boolean "billable", default: true
     t.index ["project_id"], name: "index_schedules_on_project_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
@@ -324,6 +323,7 @@ ActiveRecord::Schema.define(version: 2021_09_10_134425) do
     t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "participant_type", null: false
     t.index ["actor_id"], name: "index_survey_attempts_on_actor_id"
     t.index ["participant_id"], name: "index_survey_attempts_on_participant_id"
   end
@@ -473,39 +473,53 @@ ActiveRecord::Schema.define(version: 2021_09_10_134425) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", name: "active_storage_attachments_blob_id_fkey"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", name: "active_storage_variant_records_blob_id_fkey"
   add_foreign_key "clients", "accounts"
+  add_foreign_key "clients", "accounts", name: "clients_account_id_fkey"
   add_foreign_key "comments", "goals"
   add_foreign_key "comments", "users"
   add_foreign_key "disciplines", "accounts"
+  add_foreign_key "disciplines", "accounts", name: "disciplines_account_id_fkey"
   add_foreign_key "documents", "users"
   add_foreign_key "events", "accounts"
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "feedbacks", "users", name: "feedbacks_user_id_fkey"
   add_foreign_key "goals", "accounts"
   add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
+  add_foreign_key "jobs", "accounts", name: "jobs_account_id_fkey"
   add_foreign_key "kbs", "accounts"
   add_foreign_key "kbs", "disciplines"
   add_foreign_key "kbs", "jobs"
   add_foreign_key "kbs", "users"
   add_foreign_key "notes", "users"
+  add_foreign_key "notes", "users", name: "notes_user_id_fkey"
   add_foreign_key "nuggets", "accounts"
   add_foreign_key "nuggets", "skills"
   add_foreign_key "nuggets", "users"
-  add_foreign_key "nuggets_users", "nuggets", name: "nuggets_users_nugget_id_fkey"
   add_foreign_key "people_statuses", "accounts"
+  add_foreign_key "people_statuses", "accounts", name: "people_statuses_account_id_fkey"
   add_foreign_key "people_tags", "accounts"
+  add_foreign_key "people_tags", "accounts", name: "people_tags_account_id_fkey"
   add_foreign_key "project_statuses", "accounts"
+  add_foreign_key "project_statuses", "accounts", name: "project_statuses_account_id_fkey"
   add_foreign_key "project_tags", "accounts"
+  add_foreign_key "project_tags", "accounts", name: "project_tags_account_id_fkey"
   add_foreign_key "projects", "disciplines"
+  add_foreign_key "projects", "disciplines", name: "projects_discipline_id_fkey"
   add_foreign_key "projects", "project_statuses", column: "status_id"
   add_foreign_key "projects", "users", column: "manager_id"
+  add_foreign_key "projects", "users", column: "manager_id", name: "projects_manager_id_fkey"
   add_foreign_key "roles", "accounts"
+  add_foreign_key "roles", "accounts", name: "roles_account_id_fkey"
   add_foreign_key "schedules", "projects"
+  add_foreign_key "schedules", "projects", name: "schedules_project_id_fkey"
   add_foreign_key "schedules", "users"
+  add_foreign_key "schedules", "users", name: "schedules_user_id_fkey"
   add_foreign_key "skills", "accounts"
-  add_foreign_key "skills_users", "skills", name: "skills_users_skill_id_fkey"
-  add_foreign_key "skills_users", "users", name: "skills_users_user_id_fkey"
+  add_foreign_key "skills", "accounts", name: "skills_account_id_fkey"
   add_foreign_key "survey_attempts", "users", column: "actor_id"
   add_foreign_key "survey_attempts", "users", column: "participant_id"
   add_foreign_key "survey_surveys", "users", column: "actor_id"
@@ -519,8 +533,12 @@ ActiveRecord::Schema.define(version: 2021_09_10_134425) do
   add_foreign_key "todos", "users"
   add_foreign_key "todos", "users", column: "owner_id"
   add_foreign_key "users", "disciplines"
+  add_foreign_key "users", "disciplines", name: "users_discipline_id_fkey"
   add_foreign_key "users", "jobs"
+  add_foreign_key "users", "jobs", name: "users_job_id_fkey"
   add_foreign_key "users", "people_statuses", column: "status_id"
   add_foreign_key "users", "roles"
+  add_foreign_key "users", "roles", name: "users_role_id_fkey"
   add_foreign_key "users", "users", column: "manager_id"
+  add_foreign_key "users", "users", column: "manager_id", name: "users_manager_id_fkey"
 end

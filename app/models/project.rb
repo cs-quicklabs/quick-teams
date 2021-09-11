@@ -12,6 +12,8 @@ class Project < ApplicationRecord
   has_many :milestones, as: :goalable, class_name: "Goal"
   has_many :timesheets
   has_many :todos
+  has_many :attempts, as: :participant
+
   has_many :lists, through: :todos, source: :user
   has_and_belongs_to_many :project_tags
   has_and_belongs_to_many :skills
@@ -50,5 +52,13 @@ class Project < ApplicationRecord
   def self.query(params, includes = nil)
     return [] if params.empty?
     ProjectQuery.new(self.includes(:manager), params).filter
+  end
+
+  def surveys
+    Survey::Survey.surveys.where(survey_for: :project)
+  end
+
+  def filled_surveys
+    Survey::Attempt.includes(:survey).where(participant_id: id, survey_id: surveys.ids, participant_type: "Project")
   end
 end
