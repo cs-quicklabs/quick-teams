@@ -23,7 +23,9 @@
         </div>
         <!-- Right column -->
         <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
-          <%= render partial: "stats", locals: {kpi: @kpi, stats: @stats } %>
+          <%= turbo_frame_tag "stats", src: "/#{@employee.account.id}/employees/#{@employee.id}/kpis/#{@kpi.id}/stats", target: "_top", loading: :lazy  do %>
+            <p class="pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Hold on a sec while I fetch stats...</p>
+          <% end %>
           <% if policy([@employee, :kpi]).record? %>
             <div class="text-center mt-4">
               <h3 class="mt-2 text-sm font-medium text-gray-900">Add New Assessment</h3>
