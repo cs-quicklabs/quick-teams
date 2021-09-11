@@ -6,7 +6,7 @@ class NuggetsController < BaseController
     @nugget = Nugget.new
     nuggets = policy_scope(Nugget)
     @pagy, @nuggets = pagy_nil_safe(params, nuggets, items: 20)
-    render_partial("nuggets/nugget", collection: @nuggets, cached: true)
+    render_partial("nuggets/nugget", collection: @nuggets, cached: true) if stale?(@nuggets)
   end
 
   def new

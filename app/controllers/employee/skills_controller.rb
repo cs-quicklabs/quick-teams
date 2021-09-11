@@ -6,6 +6,7 @@ class Employee::SkillsController < Employee::BaseController
 
     @skill = Skill.new
     @skills = @employee.skills.order("lower(name) asc")
+    fresh_when @skills + [@employee]
   end
 
   def show_skills

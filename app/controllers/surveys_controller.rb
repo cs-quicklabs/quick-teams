@@ -4,6 +4,7 @@ class SurveysController < BaseController
   def index
     authorize :surveys
     @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.all.order(:name), items: LIMIT)
+    fresh_when @surveys
   end
 
   def new
