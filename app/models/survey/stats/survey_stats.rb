@@ -7,8 +7,7 @@ class Survey::Stats::SurveyStats
   end
 
   def average_score
-    total_score = 0
-    total_marks = 0
+    total_score, total_marks = 0
     all_attempts.each do |attempt|
       score = attempt.correct_answers.reduce(0.0) { |sum, answer| sum + answer.score }
       total_score += score
@@ -39,11 +38,13 @@ class Survey::Stats::SurveyStats
 
   def score(category, questions, answers)
     return 0 if answers.empty?
+
     category_question_answers = answers.where(question_id: questions.where(category: category).map(&:id))
     total_marks = category_question_answers.count * 10
     score = category_question_answers.reduce(0.0) do |sum, answer|
       sum + answer.score
     end
+
     return 0 if total_marks == 0
     overall_score = (score / total_marks) * 10
     overall_score.round(2)
