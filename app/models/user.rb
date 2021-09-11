@@ -27,6 +27,7 @@ class User < ApplicationRecord
   has_many :goals, as: :goalable
   has_many :events, as: :eventable
   has_many :attempts, class_name: "Survey::Attempt", foreign_key: "participant_id"
+  has_many :surveys, class_name: "Survey::Survey", foreign_key: "actor__id"
   has_many :notes
   has_many :timesheets
   has_many :kbs

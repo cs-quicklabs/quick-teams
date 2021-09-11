@@ -1,19 +1,31 @@
 <%survey = survey.decorate %>
 <tr id="<%= dom_id survey %>">
-  <td class="px-16 py-3  text-sm text-gray-700 max-w-0">
-    <div class="text-sm">
-      <a href="<%= survey_path(survey) %>" target="_top"  class="font-medium text-gray-900 block hover:underline" target="_top">
-        <%= survey.name %>
-      </a>
-    </div>
-    <div class="mt-1 text-sm text-gray-700">
-      <p class="line-clamp-3"><%= survey.description %></p>
-    </div>
-  </td>
   <td class="px-6 py-3  text-sm text-gray-700 max-w-0">
-    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_type_color %>-100 text-<%= survey.survey_type_color %>-800"><%= survey.survey_type %></span>
+   <a href="<%= survey_path(survey) %>" target="_top"  class="font-medium text-gray-900 block hover:underline" target="_top">
+    <div class="text-sm">    
+        <%= survey.name.capitalize %>
+    </div>
+    <div class="mt-1 text-xs text-gray-700">
+      <p class="line-clamp-3"><%= survey.description.capitalize %></p>
+    </div>
+    </a>
   </td>
-  <td class="px-6 py-3  text-sm text-gray-700 max-w-0">
-    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_for_color %>-100 text-<%= survey.survey_for_color %>-800"><%= survey.survey_for %></span>
+    <td class="px-4 py-3  text-sm text-gray-700 max-w-full whitespace-nowrap">
+   <div class="mt-1 text-sm text-gray-700">
+      <p class="line-clamp-3"><%= survey.actor.decorate.display_name %></p>
+    </div>
   </td>
+
+  <td class="px-4 py-3  text-sm text-gray-700 max-w-0">
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_type_color %>-100 text-<%= survey.survey_type_color %>-800"><%= survey.decorate.display_survey_type %></span>
+  </td>
+  <td class="px-4 py-3  text-sm text-gray-700 max-w-0">
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_for_color %>-100 text-<%= survey.survey_for_color %>-800"><%= survey.survey_for.titleize %></span>
+  </td>
+     <td class="px-4 py-3  text-sm text-gray-700 max-w-fullb whitespace-nowrap">
+   <div class="mt-1 text-sm text-gray-700">
+      <p class="line-clamp-3"><%= display_date(survey.created_at) %></p>
+    </div>
+  </td>
+
 </tr>
