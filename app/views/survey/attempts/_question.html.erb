@@ -1,9 +1,10 @@
-<div class="relative flex items-start w-full pt-2" id="<%= dom_id(question)%>">
-  <div class="ml-3 text-sm w-full">
-    <label for="comments" class="font-medium text-gray-700 overflow-y-auto"><%= question.text %></label>
-    <p id="comments-description" class="text-gray-500 overflow-y-auto"><%= question.description %></p>
+<div class=" flex items-start w-full pt-2" id="<%= dom_id(question)%>">
+  <div class="ml-3 text-sm w-full py-4">
+  <p class="text-xs font-medium text-gray-500 uppercase"><%= question.category.upcase_first %></p>
+    <p class="text-sm font-semibold text-gray-900"><%= question.text.upcase_first %></p>
+    <p class="text-xs font-medium text-gray-500"><%= question.description.upcase_first %></p>
   </div>
-  <div class="flex justify-self-end ">
+  <div class="flex ml-2">
     <% question.options.each do |option| %>
       <%= render partial: 'option', locals: { option: option, question: question, attempt: attempt } %>
     <% end %>
