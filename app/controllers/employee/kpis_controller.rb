@@ -1,7 +1,22 @@
 class Employee::KpisController < Employee::BaseController
+  before_action :set_employee, only: [:stats, :index]
+
   def index
     authorize [@employee, :kpi]
+
     @kpi = @employee.kpi
-    @stats = EmployeeKpisStats.new(@employee, @kpi) unless @kpi.nil?
+
+    unless @kpi.nil?
+      fresh_when @kpi.attempts.where(participant_id: @employee.id) + [@employee]
+    end
+  end
+
+  def stats
+    authorize [@employee, :kpi]
+
+    @kpi = @employee.kpi
+    unless @kpi.nil?
+      @stats = EmployeeKpisStats.new(@employee, @kpi)
+    end
   end
 end

@@ -1,7 +1,7 @@
 <% if kpi.nil? %>
   <% if current_user.admin? %>
   <% else %>
-    <p class="mt-2 p-4 max-w-4xl text-sm text-gray-500">No KPIs have been assinged yet.</p>
+    <p class="mt-2 p-4 max-w-4xl text-sm text-gray-500">No KPIs have been assinged yet. If you are an admin, you can set KPIs from surveys page. If not, please connect with the admin. </p>
   <% end %>
 <% else %>
   <section aria-labelledby="add-participant-section">
@@ -19,18 +19,10 @@
             <p class="mt-2 max-w-4xl text-sm text-gray-500"><%= kpi.name %></p>
           <% end %>
         </div>
-        <div class="px-4 p-4 bg-white overflow-hidden">
-          <dd class="text-3xl font-semibold text-gray-900 text-right">
-            <%= stats.average_score.to_s %>
-          </dd>
-          <dt class="text-sm font-medium text-gray-500 truncate">
-            Score (out of 10)
-          </dt>
-        </div>
       </div>
-      <div class="mt-5">
-        <%= render partial: "contribution", collection: stats.contributions, as: :contribution, cached: true %>
-      </div>
+      <%= turbo_frame_tag "stats", src: "/#{@employee.account.id}/employees/#{@employee.id}/kpis/#{@kpi.id}/stats", target: "_top", loading: :lazy  do %>
+        <p class="pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Hold on a sec while I fetch stats...</p>
+      <% end %>
     </div>
   </section>
 <% end %>

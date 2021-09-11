@@ -1,0 +1,7 @@
+<turbo-frame id="events">
+  <ul>
+    <% @stats.contributions.each do |contribution| %>
+      <%= render partial: "contribution", locals: {contribution: contribution}%>
+    <% end %>
+  </ul>
+</turbo-frame>
