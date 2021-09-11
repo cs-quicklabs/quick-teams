@@ -5,7 +5,7 @@ class SurveysController < BaseController
   def index
     authorize :surveys
     @pagy, @surveys = pagy_nil_safe(params, Survey::Survey.includes(:actor).all.order(created_at: :desc), items: LIMIT)
-    fresh_when @surveys
+    render_partial("surveys/survey", collection: @surveys, cached: true) if stale?(@surveys)
   end
 
   def new
