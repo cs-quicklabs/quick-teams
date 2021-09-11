@@ -25,7 +25,7 @@
       </div>
       <ul>
         <% @stats.contributions.each do |contribution| %>
-          <%= render partial: "contribution", locals: {contribution: contribution}%>
+          <%= render partial: "shared/surveys/progress_bar", locals: {title: contribution.category, score: contribution.score, scale: 10 }%>
         <% end %>
       </ul>
     </div>
