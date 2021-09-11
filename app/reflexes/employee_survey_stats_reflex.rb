@@ -5,7 +5,7 @@ class EmployeeSurveyStatsReflex < ApplicationReflex
     total_responses, average_score = employee_question_stats(question, employee)
     color, message = color_message_for(total_responses, average_score)
 
-    morph "#summary_#{question.id}", render(partial: "employee/kpis/summary", locals: { message: message, color: color })
+    morph "#summary_#{question.id}", render(partial: "shared/surveys/summary", locals: { message: message, color: color })
   end
 
   def employee_question_stats(question, employee)
