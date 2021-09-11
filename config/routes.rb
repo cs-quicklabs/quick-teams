@@ -69,6 +69,7 @@ Rails.application.routes.draw do
     get "/attempts/:id/pdf", to: "survey/reports#pdf", as: "attempt_pdf"
     get "/search", to: "search#surveys"
   end
+
   get "/surveys/:id/clone", to: "surveys#clone", as: "clone_survey"
 
   devise_for :users, controllers: { registrations: "registrations" }
@@ -84,6 +85,7 @@ Rails.application.routes.draw do
   get "/search/employee/skills", to: "search#employee_skills"
   get "/search/project/skills", to: "search#project_skills"
   get "/search/documents", to: "search#documents"
+  get "/search/surveys", to: "search#surveys"
   get :goals, controller: :home
   get :events, controller: :home
 

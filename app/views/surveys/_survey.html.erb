@@ -12,7 +12,9 @@
   </td>
   <td class="px-4 py-3  text-sm text-gray-700 max-w-full whitespace-nowrap">
     <div class="mt-1 text-sm text-gray-700">
-      <p class="line-clamp-3"><%= survey.actor.decorate.display_name %></p>
+      <a href="<%= employee_team_path(survey.actor_id) %>" class="truncate hover:text-gray-600 hover:underline">
+        <p class="line-clamp-3"><%= survey.actor.decorate.display_name %></p>
+      </a>
     </div>
   </td>
   <td class="px-4 py-3  text-sm text-gray-700 max-w-0">

@@ -13,4 +13,7 @@ class SearchPolicy < Struct.new(:user, :search)
   def documents?
     user.admin?
   end
+    def surveys?
+    user.admin?
+  end
 end
