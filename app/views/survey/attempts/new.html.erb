@@ -1,15 +1,15 @@
 <div class="min-h-full flex  justify-center py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-md w-full space-y-8">
+  <div class="max-w-md w-full space-y-4">
     <div>
       <h3 class="text-lg leading-6 font-medium text-gray-900">
        Select Participant
       </h3>
       <p class="mt-1 text-sm text-gray-500">
-        <%= @survey.name %>
+        <%= @survey.name.upcase_first %>
       </p>
     </div>
     <%= form_with(model: @attempt, id: dom_id(@attempt),url: survey_attempts_path(@survey.id)) do |form| %>
-      <div class="mt-8 space-y-6">
+      <div class="mt-5 space-y-2">
         <input type="hidden" name="remember" value="true">
         <div class=" -space-y-px">
           <div>

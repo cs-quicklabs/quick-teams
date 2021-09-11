@@ -11,7 +11,7 @@ class Survey::AttemptsController < Survey::BaseController
   def new
     authorize [:survey, :attempt]
     if params[:participant_id]
-      attempt = create_attempt(params[:participant_id])
+      attempt = create_attempt(params[:participant_id]) 
       redirect_to survey_attempt_path(@survey, attempt)
     else
       @attempt = Survey::Attempt.new
