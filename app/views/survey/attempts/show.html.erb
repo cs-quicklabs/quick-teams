@@ -1,31 +1,38 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
+<% participant = @attempt.participant.decorate %>
+<% actor = @attempt.actor.decorate %>
 <% survey = @attempt.survey %>
 <div class="min-h-full flex justify-center py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-4xl w-full space-y-8 ">
     <div>
-      <h3 class="text-xl leading-6 font-medium text-gray-900 text-center">
+      <h3 class="text-2xl leading-6 font-medium text-gray-900 text-center">
         <%= survey.name.titleize %>
       </h3>
       <p class="mt-1 w-full text-sm text-gray-500 text-center">
-        <%= @attempt.participant.decorate.display_name_position %>
-       <%if @attempt.submitted? %>
-        <p class="mt-1 w-full text-sm text-gray-500 text-center"> <%= @attempt.participant.decorate.display_name %> submitted this survey on <%= display_date(@attempt.created_at)%></p>
-      <% end %>
+        <p class="mt-1 w-full font-semibold text-center"> Participant: <%= participant.display_name %></p>
+        <% if @attempt.submitted? %>
+          <p class="mt-1 w-full text-sm text-gray-500 text-center"> <%= actor.display_name %> started this survey on <%= display_date(@attempt.created_at) %>. This survey has been submitted.</p>
+        <% else %>
+          <p class="mt-1 w-full text-sm text-gray-500 text-center"> <%= actor.display_name %> started this survey on <%= display_date(@attempt.created_at) %>. We are waiting for this survey to get submitted.</p>
+        <% end %>
       </p>
     </div>
     <div class="">
       <fieldset class="space-y-5">
         <% survey.questions.each do |question| %>
           <% if survey.checklist? %>
-            <%= render partial: 'checklist_question', locals: { question: question, attempt: @attempt } %>
+            <%= render partial: "checklist_question", locals: { question: question, attempt: @attempt} %>
           <% else %>
-            <%= render partial: 'score_question', locals: { question: question, attempt: @attempt } %>
+            <%= render partial: "score_question", locals: { question: question, attempt: @attempt } %>
           <% end %>
         <% end %>
       </fieldset>
       <div class=" flex justify-end py-12">
-        <%= link_to 'Back','javascript:history.back()', class:"btn-normal" %>
-        <%= link_to "Preview", survey_attempt_preview_path,  class:"btn-blue" %>
+        <% if @attempt.submitted? %>
+          <%= link_to "See Report", survey_attempt_preview_path, class: "btn-blue" %>
+        <% else %>
+          <%= link_to "Finish it Later", "javascript:history.back()", class: "btn-normal" %>
+          <%= link_to "Preview and Submit", survey_attempt_preview_path, class: "btn-blue" %>
+        <% end %>
       </div>
     </div>
   </div>

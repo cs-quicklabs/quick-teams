@@ -1,10 +1,10 @@
 <tr class="bg-white ">
-              <td class="py-3 px-10  whitespace-nowrap text-sm font-xs text-gray-900">
-                <a href=" <%=survey_attempt_preview_path(@survey, attempt)%>" class="bg-white py-2 px-4 text-sm font-xs text-gray-700 hover:underline focus:outline-none">
-                  <%= attempt.survey.name  %>
-                </a>
-              </td>
-               <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">
-                  <%= attempt.participant.decorate.display_name.titleize %>
-              </td> 
-            </tr>
+  <td class="py-3 px-10  whitespace-nowrap text-sm font-xs text-gray-900">
+    <a href=" <%= survey_attempt_preview_path(@survey, attempt) %>" class="bg-white py-2 px-4 text-sm font-xs text-gray-700 hover:underline focus:outline-none">
+      <%= attempt.survey.name %>
+    </a>
+  </td>
+  <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">
+    <%= attempt.participant.decorate.display_name.titleize %>
+  </td>
+</tr>

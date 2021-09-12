@@ -1,6 +1,7 @@
 class Survey::AttemptsController < Survey::BaseController
   before_action :set_survey, only: [:index, :update, :destroy, :show, :new, :create, :preview]
-  before_action :set_attempt, only: [:preview, :show, :destroy, :update]
+  before_action :set_attempt, only: [:destroy, :update]
+  before_action :set_attempt_with_survey, only: [:preview, :show]
   before_action :set_participant, only: [:preview]
 
   def index
@@ -75,6 +76,10 @@ class Survey::AttemptsController < Survey::BaseController
 
   def set_attempt
     @attempt = Survey::Attempt.find(params[:id])
+  end
+
+  def set_attempt_with_survey
+    @attempt = Survey::Attempt.includes(:answers, survey: [:questions]).find(params[:id])
   end
 
   def set_participant

@@ -48,6 +48,8 @@ class Survey::Stats::SurveyParticipantStats
     contributions
   end
 
+  private
+
   def score(category, questions, answers)
     return 0 if answers.empty?
 
