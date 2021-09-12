@@ -5,13 +5,12 @@ class Survey::ReportsController < Survey::BaseController
 
   def checklist
      authorize [:survey, :report]
-    @attempt = Survey::Attempt.find(params[:id])
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "#{@attempt.participant.first_name}_#{@attempt.survey.name}",
+        render pdf: "#{@attempt.participant.decorate.display_name}_#{@attempt.survey.name}",
                page_size: "A4",
-               template: "survey/pdf/checklist.html.erb",
+               template: "survey/pdf/pdf.html.erb",
                layout: "pdf.html",
                lowquality: true,
                zoom: 1,
@@ -22,10 +21,11 @@ class Survey::ReportsController < Survey::BaseController
 
   def score
          authorize [:survey, :report]
+
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "#{@attempt.participant.first_name}_#{@attempt.survey.name}",
+        render pdf: "#{@attempt..participant.decorate.display.name}_#{@attempt.survey.name}",
                page_size: "A4",
                template: "survey/pdf/score.html.erb",
                layout: "pdf.html",

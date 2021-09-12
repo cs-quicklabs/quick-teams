@@ -43,11 +43,6 @@ class Survey::AttemptsController < Survey::BaseController
 
   def preview
     authorize [:survey, :attempt]
-    if @attempt.survey.checklist?
-      redirect_to survey_checklist_report_path(@survey, @attempt)
-    else
-      redirect_to survey_score_report_path(@survey, @attempt)
-    end
   end
 
   def destroy
