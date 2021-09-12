@@ -36,7 +36,7 @@
                   <%= @employee.decorate.display_name %> has been assigned <%= @kpi.name.upcase_first %>. Please click on button below to record a new assessment.
                 </p>
                 <div class="mt-2">
-                  <%= link_to "Record Assessment", new_survey_attempt_path(@kpi, participant_id: @employee.id, participant_type: "User"), class: "btn-blue", data: { confirm: "The result of your assessment will be used to calculate overall KPIs performance. Are you sure you want to proceed?"} %>
+                  <%= link_to "Record Assessment", new_survey_attempt_path(@kpi, participant_id: @employee.id), class: "btn-blue", data: { confirm: "The result of your assessment will be used to calculate overall KPIs performance. Are you sure you want to proceed?"} %>
                 </div>
               </div>
             <% end %>

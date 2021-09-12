@@ -97,7 +97,7 @@ class User < ApplicationRecord
   end
 
   def surveys
-    Survey::Survey.surveys.where(survey_for: :employee)
+    Survey::Survey.surveys.where(survey_for: :user)
   end
 
   def filled_surveys

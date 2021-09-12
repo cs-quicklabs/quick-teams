@@ -3,8 +3,8 @@ class Survey::Survey < ActiveRecord::Base
   acts_as_tenant :account
 
   enum survey_type: [:checklist, :score, :kpi]
-  enum survey_for: [:project, :employee, :client]
- belongs_to :actor, class_name: "User", foreign_key: "actor_id"
+  enum survey_for: [:project, :user, :client]
+  belongs_to :actor, class_name: "User", foreign_key: "actor_id"
 
   # relations
   has_many :attempts, :dependent => :destroy
