@@ -34,6 +34,13 @@ class Survey::AttemptsController < Survey::BaseController
     authorize [:survey, :attempt]
   end
 
+  def survey_questions
+    authorize [:survey, :attempt], :show?
+    @survey = Survey::Survey.find(params[:survey_id])
+    @attempt = Survey::Attempt.find(params[:attempt_id])
+    @questions = @attempt.survey.questions
+  end
+
   def preview
     authorize [:survey, :attempt]
     if @attempt.survey.checklist?

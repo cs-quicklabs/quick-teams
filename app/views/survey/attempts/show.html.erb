@@ -17,15 +17,9 @@
       </p>
     </div>
     <div class="">
-      <fieldset class="space-y-5">
-        <% survey.questions.each do |question| %>
-          <% if survey.checklist? %>
-            <%= render partial: "checklist_question", locals: { question: question, attempt: @attempt} %>
-          <% else %>
-            <%= render partial: "score_question", locals: { question: question, attempt: @attempt } %>
-          <% end %>
-        <% end %>
-      </fieldset>
+      <%= turbo_frame_tag "survey_questions", src: "/#{Current.account.id}/surveys/#{@attempt.survey.id}/attempts/#{@attempt.id}/questions", target: "_top", loading: :lazy  do %>
+        <p class="pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Hold on a sec while I fetch questions...</p>
+      <% end %>
       <div class=" flex justify-end py-12">
         <% if @attempt.submitted? %>
           <%= link_to "See Report", survey_attempt_preview_path, class: "btn-blue" %>

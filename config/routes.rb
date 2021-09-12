@@ -63,7 +63,9 @@ Rails.application.routes.draw do
   resources :kpis
   resources :surveys do
     resources :questions, module: "survey"
-    resources :attempts, module: "survey"
+    resources :attempts, module: "survey" do
+      get "questions", to: "attempts#survey_questions", as: "survey_questions"
+    end
     get "/pdf/checklist/:id", to: "survey/reports#checklist", as: "report_checklist_pdf"
     get "/pdf/score/:id", to: "survey/reports#score", as: "report_score_pdf"
     get "/reports/checklist/:id", to: "survey/reports#checklist", as: "checklist_report"
