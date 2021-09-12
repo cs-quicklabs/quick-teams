@@ -2,7 +2,7 @@ class ProjectDecorator < Draper::Decorator
   delegate_all
 
   def display_name
-    name
+    name.upcase_first
   end
 
   def display_discipline

@@ -11,22 +11,20 @@ class Survey::AttemptsController < Survey::BaseController
 
   def new
     authorize [:survey, :attempt]
-    if params[:participant_id] && params[:participant_type]
-      @klass = params[:participant_type].capitalize.constantize
-      participant = @klass.find(params[:participant_id])
+    participant = resolve_participant
+    if participant
       attempt = create_attempt(participant)
       redirect_to survey_attempt_path(@survey, attempt)
     else
       @attempt = Survey::Attempt.new
+      @participants = potential_participants
     end
   end
 
   def create
     authorize [:survey, :attempt]
-    participant_id = params[:participant_id].present? ? params[:participant_id] : attempt_params[:participant_id]
-    participant_type = params[:participant_type].present? ? params[:participant_type] : attempt_params[:participant_type]
-    @klass = participant_type.capitalize.constantize
-    participant = @klass.find(participant_id)
+    @klass = @survey.survey_for.capitalize.constantize
+    participant = @klass.find(attempt_params[:participant_id])
 
     attempt = create_attempt(participant)
     redirect_to survey_attempt_path(@survey, attempt)
@@ -38,11 +36,6 @@ class Survey::AttemptsController < Survey::BaseController
 
   def preview
     authorize [:survey, :attempt]
-    if @attempt.survey.checklist?
-      redirect_to survey_checklist_report_path(@survey, @attempt)
-    else
-      redirect_to survey_score_report_path(@survey, @attempt)
-    end
   end
 
   def destroy
@@ -55,6 +48,27 @@ class Survey::AttemptsController < Survey::BaseController
   end
 
   private
+
+  def resolve_participant
+    participant = nil
+    if params[:participant_id]
+      @klass = @survey.survey_for.capitalize.constantize
+      participant = @klass.find(params[:participant_id])
+    end
+    participant
+  end
+
+  def potential_participants
+    participants = []
+    survey_for = @survey.survey_for.capitalize
+    if survey_for == "User"
+      participants = User.all_users.decorate
+    elsif survey_for == "Project"
+      participants = Project.active.decorate
+    elsif survey_for == "Client"
+      participants = Client.all
+    end
+  end
 
   def create_attempt(participant)
     attempt = Survey::Attempt.new

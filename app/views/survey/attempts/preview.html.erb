@@ -1,0 +1,59 @@
+<% actor = @attempt.actor.decorate %>
+<% participant = @attempt.participant.decorate %>
+<% survey = @attempt.survey %>
+<% attempt = @attempt.decorate %>
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none ">
+  <!-- Page title & actions -->
+  <div class="px-10 py-8 border-b border-gray-200 sm:flex sm:justify-between sm:px-6 lg:px-8">
+      <div>
+      <h3 class="text-2xl leading-6 font-medium text-gray-900">
+        <%= survey.name.titleize %>
+      </h3>
+      <p class="mt-1 w-full text-sm text-gray-500 ">
+        <p class="mt-1 w-full font-semibold "> Participant: <%= participant.display_name %></p>
+        <% if @attempt.submitted? %>
+          <p class="mt-1 w-full text-sm text-gray-500"> <%= actor.display_name %> started this survey on <%= display_date(@attempt.created_at) %>. This survey has been submitted.</p>
+        <% else %>
+          <p class="mt-1 w-full text-sm text-gray-500 "> <%= actor.display_name %> started this survey on <%= display_date(@attempt.created_at) %>. We are waiting for this survey to get submitted.</p>
+        <% end %>
+      </p>
+    </div>
+       <div class=" px-6">
+      <h3 class="text-2xl leading-6 font-medium text-gray-900">
+          Score: 
+           <% if survey.checklist? %>
+           <%= @attempt.correct_answers.count %>/<%= @attempt.survey.questions.count %>
+           <% else %>
+          <%score = @attempt.correct_answers.reduce(0.0) { |sum, answer| sum + answer.score}%>
+        <%total = (@attempt.answers.count * 10) %>
+        <%percentage = (score/total) * 100.0 %>
+        <% end %>
+      </h3>
+    </div>
+  </div>
+    <div class=" w-full ">
+    <div class="pb-8">
+      <table class="min-w-full divide-y divide-gray-200 pb-8 border-b border-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              #         </th>
+            <th scope="col" class="px-6 py-3 w-full text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Score</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Verdict</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+        <% if survey.checklist? %>
+          <%= render partial: 'survey/reports/preview_checklist', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
+          <% else %>
+           <%= render partial: 'survey/reports/preview_score', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
+        <% end %>
+         </tbody>
+      </table>
+    </div>
+  </div>
+  <div>
+   <%= render partial: 'survey/reports/download_pdf', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
+  </div>
+</main>
