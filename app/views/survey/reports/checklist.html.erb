@@ -1,10 +1,18 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <!-- Page title & actions -->
   <div class="px-10 py-8 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
-    <div class=" items-baseline px-12">
-      <h1 class="text-lg leading-tight text-gray-900">
-        <%= @attempt.participant.decorate.display_name %></h1>
-      <h4 class="text-md leading-tight text-gray-900"><%= @attempt.survey.name.titleize %></h4>
+      <div>
+      <h3 class="text-2xl leading-6 font-medium text-gray-900 text-center">
+        <%= survey.name.titleize %>
+      </h3>
+      <p class="mt-1 w-full text-sm text-gray-500 text-center">
+        <p class="mt-1 w-full font-semibold text-center"> Participant: <%= participant.display_name %></p>
+        <% if @attempt.submitted? %>
+          <p class="mt-1 w-full text-sm text-gray-500 text-center"> <%= actor.display_name %> started this survey on <%= display_date(@attempt.created_at) %>. This survey has been submitted.</p>
+        <% else %>
+          <p class="mt-1 w-full text-sm text-gray-500 text-center"> <%= actor.display_name %> started this survey on <%= display_date(@attempt.created_at) %>. We are waiting for this survey to get submitted.</p>
+        <% end %>
+      </p>
     </div>
     <div class=" px-52">
       <h4 class="text-lg leading-tight text-gray-900 ">
@@ -13,7 +21,7 @@
   </div>
   <div class=" w-full ">
     <div class="pb-8">
-      <table class="min-w-full divide-y divide-gray-200">
+      <table class="min-w-full divide-y divide-gray-200 border-b border-gray-200">
         <thead class="bg-gray-50">
           <tr>
             <th scope="col" class="px-20 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
