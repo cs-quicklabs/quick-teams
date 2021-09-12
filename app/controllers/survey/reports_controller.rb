@@ -1,10 +1,9 @@
 class Survey::ReportsController < Survey::BaseController
-   before_action :set_survey, only: [:checklist, :submit, :score, :download, :pdf]
-   before_action :set_attempt, only: [:checklist, :submit, :score, :download, :pdf]
-
+  before_action :set_survey, only: [:checklist, :submit, :score, :download, :pdf]
+  before_action :set_attempt, only: [:checklist, :submit, :score, :download, :pdf]
 
   def checklist
-     authorize [:survey, :report]
+    authorize [:survey, :report]
     respond_to do |format|
       format.html
       format.pdf do
@@ -20,14 +19,14 @@ class Survey::ReportsController < Survey::BaseController
   end
 
   def score
-         authorize [:survey, :report]
+    authorize [:survey, :report]
 
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "#{@attempt..participant.decorate.display.name}_#{@attempt.survey.name}",
+        render pdf: "#{@attempt.participant.decorate.display_name}_#{@attempt.survey.name}",
                page_size: "A4",
-               template: "survey/pdf/score.html.erb",
+               template: "survey/pdf/pdf.html.erb",
                layout: "pdf.html",
                lowquality: true,
                zoom: 1,
@@ -37,16 +36,16 @@ class Survey::ReportsController < Survey::BaseController
   end
 
   def submit
-      authorize [:survey, :report]
+    authorize [:survey, :report]
     @attempt = Survey::Attempt.find(params[:id])
-    @attempt.update("comment": params[:comment], "submitted":true)
+    @attempt.update("comment": params[:comment], "submitted": true)
     redirect_to employee_surveys_path(@attempt.participant)
   end
 
   def download
-         authorize [:survey, :report]
-   @attempt = Survey::Attempt.find(params[:id])
-    @attempt.update_attribute("comment", params[:comment], "submitted":true)
+    authorize [:survey, :report]
+    @attempt = Survey::Attempt.find(params[:id])
+    @attempt.update_attribute("comment", params[:comment], "submitted": true)
     if @attempt.survey.checklist?
       redirect_to survey_report_checklist_pdf_path(@survey, @attempt, format: :pdf)
     else
@@ -54,9 +53,9 @@ class Survey::ReportsController < Survey::BaseController
     end
   end
 
-    def pdf
-         authorize [:survey, :report]
-  if @attempt.survey.checklist?
+  def pdf
+    authorize [:survey, :report]
+    if @attempt.survey.checklist?
       redirect_to survey_report_checklist_pdf_path(@survey, @attempt, format: :pdf)
     else
       redirect_to survey_report_score_pdf_path(@survey, @attempt, format: :pdf)
@@ -66,9 +65,10 @@ class Survey::ReportsController < Survey::BaseController
   private
 
   def set_survey
-     @survey = Survey::Survey.find(params[:survey_id])
+    @survey = Survey::Survey.find(params[:survey_id])
   end
-def set_attempt
-     @attempt = Survey::Attempt.find(params[:id])
+
+  def set_attempt
+    @attempt = Survey::Attempt.find(params[:id])
   end
 end
