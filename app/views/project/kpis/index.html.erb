@@ -14,7 +14,7 @@
                     <p class=" mt-1 text-sm font-medium text-gray-900 truncate"><%="KPIs Questions set (" + @kpi.questions.load.size.to_s + ")"%></p>
                   </div>
                   <ul class="divide-y divide-gray-200" id="questions">
-                    <%= render partial: "question", collection: @kpi.questions, as: :question, cached: false %>
+                    <%= render partial: "shared/surveys/question", collection: @kpi.questions, locals: {as: :question, participant: @project}, cached: false %>
                   </ul>
                 </div>
               </div>

@@ -1,9 +1,20 @@
 class Survey::Stats::SurveyParticipantStats
-  attr_accessor :stats, :participant, :survey, :average_score, :contributions
+  attr_accessor :stats, :participant, :survey, :question, :average_score, :contributions
 
   def initialize(survey, participant)
     @survey = survey
     @participant = participant
+  end
+
+  def stats_for(question)
+    attempts = survey.attempts.where(participant_id: participant.id, participant_type: participant.class.name)
+    answers = Survey::Answer.where(attempt_id: attempts.ids, question: question)
+    total_responses = answers.count
+    average_score = 0.0
+    if total_responses > 0
+      average_score = answers.map(&:score).sum.to_f / total_responses
+    end
+    return total_responses, average_score
   end
 
   def average_score
