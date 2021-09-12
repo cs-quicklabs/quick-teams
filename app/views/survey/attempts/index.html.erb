@@ -1,7 +1,5 @@
-<% actor = @attempt.actor.decorate %>
-<% survey = @attempt.survey %>
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "employee/title", employee: @employee%>
+  <%= render "survey/title",survey: @survey%>
   <main class="pb-8">
     <div class="">
       <!-- Main 3 column grid -->
@@ -13,6 +11,9 @@
                     <tr>
                       <th scope="col" class="w-full px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                         Survey
+                      </th>
+                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Taken for
                       </th>
                       <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                         Taken By
@@ -32,7 +33,7 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200" id="filled_surveys" data-infinite-scroll-target="entries">
-                    <%= render partial: "filled_survey", collection: @filled_surveys, as: :attempt, cached: true %>
+                    <%= render partial: "attempt", collection: @attempts, as: :attempt, cached: true %>
                   </tbody>
                 </table>
                 <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">

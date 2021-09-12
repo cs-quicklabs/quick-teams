@@ -22,12 +22,12 @@
       <% end %>
       <div class=" flex justify-end py-12">
         <% if @attempt.submitted? %>
-          <%= link_to "See Report", survey_attempt_preview_path, class: "btn-blue" %>
+          <%= link_to "See Report", survey_report_preview_path, class: "btn-blue" %>
         <% else %>
           <% unless survey.kpi? %>
             <%= link_to "Finish it Later", "javascript:history.back()", class: "btn-normal" %>
           <% end %>
-          <%= link_to "Preview and Submit", survey_attempt_preview_path, class: "btn-blue" %>
+          <%= link_to "Preview and Submit", survey_report_preview_path, class: "btn-blue" %>
         <% end %>
       </div>
     </div>

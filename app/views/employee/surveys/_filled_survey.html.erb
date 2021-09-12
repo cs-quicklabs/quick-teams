@@ -1,7 +1,7 @@
 <tr id="<%= dom_id(attempt) %>">
   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-full">
     <% if attempt.submitted? %>
-      <a class="hover:underline" href="<%= survey_attempt_preview_path(attempt.survey, attempt) %>">
+      <a class="hover:underline" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
         <%= attempt.survey.name %>
       </a>
     <% else %>

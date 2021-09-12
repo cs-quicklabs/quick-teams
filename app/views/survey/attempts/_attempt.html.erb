@@ -1,19 +1,48 @@
-<tr class="bg-white ">
-  <td class="py-3 px-10  whitespace-nowrap text-sm font-xs text-gray-900">
-    <a href=" <%= survey_attempt_preview_path(@survey, attempt) %>" class="bg-white py-2 px-4 text-sm font-xs text-gray-700 hover:underline focus:outline-none">
-      <%= attempt.survey.name %>
+<% actor = attempt.actor.decorate %>
+<% survey = attempt.survey %>
+<% participant = attempt.participant.decorate %>
+<tr class="bg-white " id="<%= dom_id(attempt) %>">
+  <td class="py-3 px-6  whitespace-nowrap text-sm font-xs text-gray-900">
+    <% if attempt.submitted? %>
+      <a class="hover:underline" href="<%= survey_report_preview_path(survey, attempt) %>">
+      <% else %>
+      <a class="hover:underline" href="<%= survey_attempt_path(attempt.survey, attempt) %>">
+      <%end %>
+      <%= survey.name.upcase_first %>
     </a>
   </td>
-  <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">
-   <p> <%= attempt.participant.display_name %></p>
+    <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
+   <p> <%= participant.display_name %></p>
   </td>
-  <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">
-    <p> <%= attempt.participant.decorate.display_name %></p>
+  <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
+   <p> <%= actor.display_name %></p>
   </td>
-  <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">
-   <p> <%= attempt.participant.decorate.display_name %></p>
+
+  <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
+    <p> <%= display_date(attempt.created_at) %></p>
   </td>
-  <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">
-    <p> <%= attempt.participant.decorate.display_name %></p>
+  <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
+   <p> <%= attempt.score %></p>
+  </td>
+    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full flex">
+   <% if attempt.submitted? %>
+      Submitted
+      <!-- Heroicon name: solid/check-circle -->
+      <svg class="ml-1 flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+      </svg>
+    <% else %>
+      InProgress
+      <svg class="ml-1 flex-shrink-0 mr-1.5 h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+      </svg>
+    <% end %>
+  </td>
+  <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
+    <% if current_user.admin?%>
+      <%= link_to 'Delete', survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?"} %>
+    <% elsif attempt.submitted? == false and current_user == attempt.actor %>
+      <%= link_to 'Delete', survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?"} %>
+    <% end %>
   </td>
 </tr>

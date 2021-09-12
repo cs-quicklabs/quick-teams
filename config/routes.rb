@@ -66,12 +66,10 @@ Rails.application.routes.draw do
     resources :attempts, module: "survey" do
       get "questions", to: "attempts#survey_questions", as: "survey_questions"
     end
-    get "/pdf/checklist/:id", to: "survey/reports#checklist", as: "report_checklist_pdf"
-    get "/pdf/score/:id", to: "survey/reports#score", as: "report_score_pdf"
-    get "/attempts/:id/preview", to: "survey/attempts#preview", as: "attempt_preview"
-    get "/attempts/:id/submit", to: "survey/reports#submit", as: "attempt_submit"
-    get "/attempts/:id/download", to: "survey/reports#download", as: "attempt_download"
-    get "/attempts/:id/pdf", to: "survey/reports#pdf", as: "attempt_pdf"
+    get "reports/pdf/:id", to: "survey/reports#checklist", as: "report_pdf"
+    get "/attempts/:id/preview", to: "survey/attempts#preview", as: "report_preview"
+    get "/reports/:id/submit", to: "survey/reports#submit", as: "report_submit"
+    get "/reports/:id/download", to: "survey/reports#download", as: "report_download"
     get "/search", to: "search#surveys"
   end
 

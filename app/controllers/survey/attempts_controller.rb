@@ -1,12 +1,12 @@
 class Survey::AttemptsController < Survey::BaseController
   before_action :set_survey, only: [:index, :update, :destroy, :show, :new, :create, :preview]
-  before_action :set_attempt, only: [:destroy, :update]
+  before_action :set_attempt, only: [:destroy, :update, ]
   before_action :set_attempt_with_survey, only: [:preview, :show]
   before_action :set_participant, only: [:preview]
 
   def index
     authorize [:survey, :attempt]
-    @attempts = Survey::Attempt.where(survey: @survey).where(submitted: true)
+    @pagy, @attempts = pagy_nil_safe(params, Survey::Attempt.all.where(survey: @survey), items:10)
   end
 
   def new
