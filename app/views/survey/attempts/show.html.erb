@@ -30,7 +30,9 @@
         <% if @attempt.submitted? %>
           <%= link_to "See Report", survey_attempt_preview_path, class: "btn-blue" %>
         <% else %>
-          <%= link_to "Finish it Later", "javascript:history.back()", class: "btn-normal" %>
+          <% unless survey.kpi? %>
+            <%= link_to "Finish it Later", "javascript:history.back()", class: "btn-normal" %>
+          <% end %>
           <%= link_to "Preview and Submit", survey_attempt_preview_path, class: "btn-blue" %>
         <% end %>
       </div>
