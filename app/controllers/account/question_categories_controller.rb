@@ -17,11 +17,11 @@ class Account::QuestionCategoriesController < Account::BaseController
     authorize :account
 
     @question_category = QuestionCategory.new(question_category_params)
-    @question_category.account_id=@account.id
+    @question_category.account_id = @account.id
     respond_to do |format|
       if @question_category.save
-          format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend(:question_category, partial: "account/question_categories/question_category", locals: { question_category: @question_category }) +
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:question_categories, partial: "account/question_categories/question_category", locals: { question_category: @question_category }) +
                                turbo_stream.replace(QuestionCategory.new, partial: "account/question_categories/form", locals: { question_category: QuestionCategory.new, message: "Survey question category was created successfully." })
         }
       else
@@ -30,9 +30,10 @@ class Account::QuestionCategoriesController < Account::BaseController
     end
   end
 
-   def edit
+  def edit
     authorize :account
   end
+
   def update
     authorize :account
 
@@ -56,7 +57,7 @@ class Account::QuestionCategoriesController < Account::BaseController
 
   private
 
-   def set_account
+  def set_account
     @account ||= Account.find(current_user.account_id)
   end
 
