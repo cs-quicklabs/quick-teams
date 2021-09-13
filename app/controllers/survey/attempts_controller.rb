@@ -6,7 +6,7 @@ class Survey::AttemptsController < Survey::BaseController
 
   def index
     authorize [:survey, :attempt]
-    @pagy, @attempts = pagy_nil_safe(params, Survey::Attempt.all.where(survey: @survey), items:10)
+    @pagy, @attempts = pagy_nil_safe(params, Survey::Attempt.all.where(survey: @survey).order(created_at: :desc), items:10)
   end
 
   def new

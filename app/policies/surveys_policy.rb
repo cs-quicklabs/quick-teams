@@ -30,4 +30,7 @@ class SurveysPolicy < Struct.new(:user, :surveys)
     def clone?
     user.admin?
   end
+   def assignees?
+    user.admin?
+  end
 end

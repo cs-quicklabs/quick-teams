@@ -1,0 +1,70 @@
+<% @assigns = @assigns.decorate %>
+<main class="relative z-0 flex-1 focus:outline-none">
+  <%= render "survey/title", survey: @survey %>
+  <main class="pb-8">
+    <div class="" id="assignees">
+      <div class="grid items-start grid-cols-1 lg:grid-cols-3 ">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 lg:col-span-2" >
+          <section aria-labelledby="participants_section">
+            <div class="overflow-hidden bg-white">
+              <div id="employee-assignees" class="flex  flex-wrap " data-controller="infinite-scroll">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class=" w-full px-6  py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        assignee
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200" id="assignees" data-infinite-scroll-target="entries">
+                    <%= render partial: "assignee", collection: @assignees, as: :assignee, cached: false %>
+                  </tbody>
+                </table>
+                <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                  <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <section aria-labelledby="add-participant-section">
+            <div class="bg-white">
+              <div class="px-4">
+                <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
+                  <%= render "shared/form_header", title: "Filter assignees by Skill", subtitle: "" %>
+                  <div class="flex justify-center w-full max-w-sm lg:justify-end" >
+                    <div class="w-full max-w-sm lg:max-w-sm">
+                      <label for="skill" class="block text-sm font-medium text-gray-700"></label>
+                      <div class="mt-1">
+                        <%= tailwind_form_with(url: survey_assignees_path(@survey), method: "post") do |f| %>
+                          <%= f.collection_select(:assign_id, @assigns, :id, :display_name, { :prompt => "Select assign", :selected => params[:id] }, :class => "form-text-field mt-1") %>
+                          <div class="flex justify-end  mt-1 w-full">
+                            <button type="submit" class="mt-4  inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                               Add assignee
+                              </button>
+                          </div>
+                        <% end %>
+                      </div>
+                      <div class="relative">
+                        <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                          <ul data-nav-search-target="results">
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </main>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</main>

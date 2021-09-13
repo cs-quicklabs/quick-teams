@@ -1,6 +1,6 @@
 class SurveysController < BaseController
   include Pagy::Backend
-  before_action :set_survey, only: %i[ show edit update destroy clone ]
+  before_action :set_survey, only: %i[ show edit update destroy clone assignees]
 
   def index
     authorize :surveys
@@ -48,10 +48,9 @@ class SurveysController < BaseController
     redirect_to survey_path(@clone)
   end
 
-  def pagy_nil_safe(params, collection, vars = {})
-    pagy = Pagy.new(count: collection.count(:all), page: params[:page], **vars)
-    return pagy, collection.offset(pagy.offset).limit(pagy.items) if collection.respond_to?(:offset)
-    return pagy, collection
+  def assignees
+
+ 
   end
 
   private

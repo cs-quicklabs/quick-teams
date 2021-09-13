@@ -15,6 +15,7 @@
       <%= form.text_area :description, class: 'form-text-field mt-1',  autocomplete: "off"%>
       <p class="mt-2 text-xs text-gray-500" id="question-description">We'll only use this for spam.</p>
     </div>
+  <% if @survey.kpi? %>
     <div>
       <label for="comments" class="block text-sm font-medium text-gray-700">
         Question Explanation (optional)
@@ -22,6 +23,7 @@
       <%= form.text_area :explanation, class: 'form-text-field mt-1',  autocomplete: "off"%>
       <p class="mt-2 text-xs text-gray-500" id="question-explanation">We'll only use this for spam.</p>
     </div>
+    <% end %>
     <div>
       <label for="comments" class="block text-sm font-medium text-gray-700">
         Category (optional)

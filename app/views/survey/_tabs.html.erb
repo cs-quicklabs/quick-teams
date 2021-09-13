@@ -8,6 +8,11 @@
         <a href="<%= survey_attempts_path %>" class="<%= current_page?(survey_attempts_path) ? "selected-tab" : "unselected-tab"%>">
           Attempts
         </a>
+        <% if @survey.kpi? %>
+        <a href="<%= survey_assignees_path %>" class="<%= current_page?(survey_assignees_path) ? "selected-tab" : "unselected-tab"%>">
+          Assignees
+        </a>
+        <% end %>
       </nav>
     </div>
   </div>

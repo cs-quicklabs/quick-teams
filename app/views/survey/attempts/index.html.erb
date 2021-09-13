@@ -1,19 +1,19 @@
-<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "survey/title",survey: @survey%>
+<main class="relative z-0 flex-1 focus:outline-none">
+  <%= render "survey/title", survey: @survey %>
   <main class="pb-8">
-    <div class="">
-      <!-- Main 3 column grid -->
+    <div class="" id="assignees">
+      <div class="grid items-start grid-cols-1 lg:grid-cols-3 ">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 lg:col-span-2" >
           <section aria-labelledby="participants_section">
+            <div class="overflow-hidden bg-white">
             <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
               <div>
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
-                      <th scope="col" class="w-full px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Survey
-                      </th>
-                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
-                        Taken for
+                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Participant
                       </th>
                       <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
                         Taken By
@@ -43,5 +43,21 @@
             </div>
           </section>
     </div>
-  </main>
+  <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <section aria-labelledby="add-participant-section">
+            <div class="bg-white">
+              <div class="px-4">
+                <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
+                  <%= render "shared/form_header", title: "Assignee Score", subtitle: "" %>
+                  <div class="flex justify-center w-full max-w-sm lg:justify-end" >
+                    <div class="w-full max-w-sm lg:max-w-sm">
+                    </div>
+            </div>
+            </main>
+            </div>
+            </div>
+            </section>
+    </div>
+
+</main>
 </main>
