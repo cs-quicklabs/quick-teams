@@ -12,7 +12,7 @@ class Survey::SurveyDecorator < Draper::Decorator
   end
 
   def survey_for_color
-    if self.employee?
+    if self.user?
       "yellow"
     elsif self.client?
       "green"
@@ -20,13 +20,20 @@ class Survey::SurveyDecorator < Draper::Decorator
       "gray"
     end
   end
+
   def display_survey_type
-    
     if self.kpi?
       "KPIs"
-    else 
+    else
       survey_type.titleize
     end
-      
+  end
+
+  def display_survey_for
+    if self.user?
+      "Employee"
+    else
+      survey_type.titleize
+    end
   end
 end

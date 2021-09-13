@@ -2,10 +2,10 @@
 <% participant = @attempt.participant.decorate %>
 <% survey = @attempt.survey %>
 <% attempt = @attempt.decorate %>
-<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none ">
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none px-64">
   <!-- Page title & actions -->
   <div class="px-10 py-8 border-b border-gray-200 sm:flex sm:justify-between sm:px-6 lg:px-8">
-      <div>
+    <div>
       <h3 class="text-2xl leading-6 font-medium text-gray-900">
         <%= survey.name.titleize %>
       </h3>
@@ -18,20 +18,20 @@
         <% end %>
       </p>
     </div>
-       <div class=" px-6">
+    <div class=" px-6">
       <h3 class="text-2xl leading-6 font-medium text-gray-900">
-          Score: 
-           <% if survey.checklist? %>
-           <%= @attempt.correct_answers.count %>/<%= @attempt.survey.questions.count %>
-           <% else %>
+        Score: 
+        <% if survey.checklist? %>
+          <%= @attempt.correct_answers.count %>/<%= @attempt.survey.questions.count %>
+        <% else %>
           <%score = @attempt.correct_answers.reduce(0.0) { |sum, answer| sum + answer.score}%>
-        <%total = (@attempt.answers.count * 10) %>
-        <%percentage = (score/total) * 100.0 %>
+          <%total = (@attempt.answers.count * 10) %>
+          <%percentage = (score/total) * 100.0 %>
         <% end %>
       </h3>
     </div>
   </div>
-    <div class=" w-full ">
+  <div class=" w-full ">
     <div class="pb-8">
       <table class="min-w-full divide-y divide-gray-200 pb-8 border-b border-gray-200">
         <thead class="bg-gray-50">
@@ -44,16 +44,16 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-        <% if survey.checklist? %>
-          <%= render partial: 'survey/reports/preview_checklist', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
+          <% if survey.checklist? %>
+            <%= render partial: 'survey/reports/preview_checklist', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
           <% else %>
-           <%= render partial: 'survey/reports/preview_score', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
-        <% end %>
-         </tbody>
+            <%= render partial: 'survey/reports/preview_score', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
+          <% end %>
+        </tbody>
       </table>
     </div>
   </div>
   <div>
-   <%= render partial: 'survey/reports/download_pdf', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
+    <%= render partial: 'survey/reports/download_pdf', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
   </div>
 </main>

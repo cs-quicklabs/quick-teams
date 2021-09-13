@@ -3,7 +3,7 @@
   <td class="px-6 py-3 max-w-0">
     <a href="<%= survey_path(survey) %>" target="_top"  class="block hover:underline" target="_top">
       <div class="text-sm font-medium text-gray-900">
-       <p class="line-clamp-2"> <%= survey.name.upcase_first %></p>
+        <p class="line-clamp-2"> <%= survey.name.upcase_first %></p>
       </div>
       <div class="mt-1 text-sm text-gray-500">
         <p class="line-clamp-2"><%= survey.description.upcase_first %></p>
@@ -21,7 +21,7 @@
     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_type_color %>-100 text-<%= survey.survey_type_color %>-800"><%= survey.decorate.display_survey_type %></span>
   </td>
   <td class="px-4 py-3  text-sm text-gray-700 max-w-0">
-    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_for_color %>-100 text-<%= survey.survey_for_color %>-800"><%= survey.survey_for.titleize %></span>
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_for_color %>-100 text-<%= survey.survey_for_color %>-800"><%= survey.decorate.display_survey_for %></span>
   </td>
   <td class="px-4 py-3  text-sm text-gray-700 max-w-fullb whitespace-nowrap">
     <div class="mt-1 text-sm text-gray-700">

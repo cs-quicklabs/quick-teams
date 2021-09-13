@@ -1,14 +1,15 @@
 <%= turbo_frame_tag dom_id(question) do %>
-<li class="py-3 flex border-b border-gray-200" >
-  <div class="ml-3 w-full">
-   <p class="text-xs text-gray-500 uppercase"><%= question.category.capitalize %></p>
-    <p class="text-sm font-medium text-gray-900"><%= question.text.capitalize %></p>
-    <p class="text-sm text-gray-500"><%= question.description.capitalize %></p>
-  </div>
-  <div class="flex align-right">
-    <div class="px-6 py-3 whitespace-nowrap  text-sm font-medium">
-     <%= link_to "Edit", edit_survey_question_path(@survey, question), class: "btn-inline-edit" %>
-     <%= link_to "Delete", survey_question_path(@survey, question), method: :delete,  class: "btn-inline-delete", data: {confirm: "Are you sure?"} %>
-  </div>
-</li>
+  <li class="py-3 flex border-b border-gray-200" >
+    <div class="ml-3 w-full">
+      <p class="text-xs text-gray-500 uppercase"><%= question.category.capitalize %></p>
+      <p class="text-sm font-medium text-gray-900"><%= question.text.capitalize %></p>
+      <p class="text-sm text-gray-500"><%= question.description.capitalize %></p>
+    </div>
+    <div class="flex align-right">
+      <div class="px-6 py-3 whitespace-nowrap  text-sm font-medium">
+        <%= link_to "Edit", edit_survey_question_path(@survey, question), class: "btn-inline-edit" %>
+        <%= link_to "Delete", survey_question_path(@survey, question), method: :delete,  class: "btn-inline-delete", data: {confirm: "Are you sure?"} %>
+      </div>
+    </div>
+  </li>
 <% end %>

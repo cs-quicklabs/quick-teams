@@ -1,6 +1,5 @@
 class Survey::BaseController < BaseController
-  before_action :set_survey, only: %i[index show edit update create destroy]
-  after_action :verify_authorized
+  before_action :set_survey, only: %i[show edit update destroy]
   include Pagy::Backend
 
   LIMIT = 20
