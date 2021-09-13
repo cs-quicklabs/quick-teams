@@ -17,6 +17,7 @@ class Employee::KpisController < Employee::BaseController
     @kpi = @employee.kpi
     unless @kpi.nil?
       @stats = Survey::Stats::SurveyParticipantStats.new(@kpi, @employee)
+      binding.irb
     end
 
     render "shared/surveys/stats"
