@@ -5,6 +5,7 @@ class Survey::QuestionsController < Survey::BaseController
   def index
     authorize [:survey, :question]
     @pagy, @questions= pagy_nil_safe(params, Survey::Question.where(survey_id:@survey), items: 100)
+    @question_categories=QuestionCategory.all.order(:name)
      @question = Survey::Question.new
   end
 

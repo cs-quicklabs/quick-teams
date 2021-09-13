@@ -3,11 +3,11 @@ class Survey::AssigneesController < Survey::BaseController
     def index
             authorize [:survey,:assignee]
      if @survey.project?
-      @pagy, @assignees = pagy_nil_safe(params, Project.where(kpi_id:@survey), items:LIMIT)
-      @assigns= Project.where.not(kpi_id:@survey).or(Project.where(kpi_id:nil))
+      @pagy, @assignees = pagy_nil_safe(params, Project.where(kpi_id:@survey).order(:name), items:LIMIT)
+      @assigns= Project.where(kpi_id:nil).order(:name)
      else
-     @pagy, @assignees=pagy_nil_safe(params,User.where(kpi_id:@survey.id), items:LIMIT)
-      @assigns= User.where.not(kpi_id:@survey).or(User.where(kpi_id:nil))
+     @pagy, @assignees=pagy_nil_safe(params,User.where(kpi_id:@survey.id).order(:first_name), items:LIMIT)
+      @assigns= User.where(kpi_id:nil).order(:first_name)
      end
     end
 

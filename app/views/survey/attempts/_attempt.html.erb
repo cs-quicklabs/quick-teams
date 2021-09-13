@@ -29,7 +29,16 @@
       </svg>
     <% end %>
   </td>
-  <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
+  <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
+     <% if attempt.submitted? %>
+          <a class="btn-normal mr-4" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
+          view
+          </a>
+        <% else %>
+          <a class="btn-normal mr-4" href="<%= survey_attempt_path(attempt.survey, attempt) %>">
+            view
+          </a>
+    <% end %>
     <% if current_user.admin?%>
       <%= link_to 'Delete', survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?"} %>
     <% elsif attempt.submitted? == false and current_user == attempt.actor %>

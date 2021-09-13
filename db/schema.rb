@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_11_121024) do
+ActiveRecord::Schema.define(version: 2021_09_13_120035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -346,6 +346,14 @@ ActiveRecord::Schema.define(version: 2021_09_11_121024) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "survey_question_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_survey_question_categories_on_account_id"
+  end
+
   create_table "survey_questions", force: :cascade do |t|
     t.integer "survey_id"
     t.string "text"
@@ -510,6 +518,7 @@ ActiveRecord::Schema.define(version: 2021_09_11_121024) do
   add_foreign_key "skills_users", "users", name: "skills_users_user_id_fkey"
   add_foreign_key "survey_attempts", "users", column: "actor_id"
   add_foreign_key "survey_attempts", "users", column: "participant_id"
+  add_foreign_key "survey_question_categories", "accounts"
   add_foreign_key "survey_surveys", "users", column: "actor_id"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "accounts"

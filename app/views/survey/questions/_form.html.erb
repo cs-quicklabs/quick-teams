@@ -26,9 +26,9 @@
     <% end %>
     <div>
       <label for="comments" class="block text-sm font-medium text-gray-700">
-        Category (optional)
+        Category 
       </label>
-      <%= form.text_field :category,  class: 'form-text-field mt-1',  autocomplete: "off"%>
+       <%= form.collection_select(:category, @question_categories, :id, :name, { :prompt => "Select Category", :selected => params[:category] }, :class => "form-text-field mt-1" , :required=>true) %>
     </div>
     <div class="flex justify-end mt-4">
       <%= form.submit "Add Question", class:"btn-blue ml-3 "%>

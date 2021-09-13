@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :clients, except: [:new, :show]
     resources :tags, only: [:destroy, :index]
     resources :preferences, only: [:index]
+     resources :question_categories, except: [:new, :show]
   end
 
   resources :projects do
@@ -66,7 +67,6 @@ Rails.application.routes.draw do
      resources :assignees, module: "survey", as: "assignees"
     resources :attempts, module: "survey" do
       get "questions", to: "attempts#survey_questions", as: "survey_questions"
-       
     end
     get "reports/pdf/:id", to: "survey/reports#checklist", as: "report_pdf"
     get "/attempts/:id/preview", to: "survey/attempts#preview", as: "report_preview"
