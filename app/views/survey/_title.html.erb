@@ -4,7 +4,7 @@
       <%= survey.name.upcase_first %>
     </h1>
     <p class="mt-1 text-sm font-medium text-gray-500 truncate"><%= survey.description.upcase_first %></p>
-    <p class="mt-1 w-full text-sm text-gray-500 text-center"> This is a <%= @survey.decorate.display_survey_type %> survey which is intended for <%= @survey.decorate.display_survey_for %>.</p>
+    <p class="mt-1 text-sm text-gray-500"> This is a <%= @survey.decorate.display_survey_type %> survey which is intended for <%= @survey.decorate.display_survey_for %>.</p>
   </div>
   <div class="flex mt-4 sm:mt-0 sm:ml-4">
     <div class="mr-4">

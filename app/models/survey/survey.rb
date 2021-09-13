@@ -40,6 +40,29 @@ class Survey::Survey < ActiveRecord::Base
     return !((current_number_of_attempts >= upper_bound) && (upper_bound != 0))
   end
 
+  def clone_for_actor(actor)
+    clone = Survey::Survey.new
+    clone.name = self.name + " (Copy)"
+    clone.survey_type = self.survey_type
+    clone.actor_id = actor.id
+    clone.description = self.description.nil? ? "N/A" : self.description
+    clone.save
+
+    self.questions.each do |question|
+      q = Survey::Question.new(text: question.text, description: question.description, survey_id: clone.id, category: question.category, explanation: question.explanation)
+      q.save
+
+      if self..checklist? #checklist
+        Survey::Option.new(text: "Yes", question: q, correct: true, weight: 1).save
+        Survey::Option.new(text: "No", question: q, correct: false, weight: 0).save
+      else
+        Survey::Option.new(text: "Score", question: q, correct: true, weight: 10).save
+      end
+    end
+
+    clone
+  end
+
   private
 
   # a surveys only can be activated if has one or more questions

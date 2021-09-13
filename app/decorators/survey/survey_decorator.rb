@@ -33,7 +33,7 @@ class Survey::SurveyDecorator < Draper::Decorator
     if self.user?
       "Employee"
     else
-      survey_type.titleize
+      survey_for.titleize
     end
   end
 end

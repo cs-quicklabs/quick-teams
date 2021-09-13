@@ -1,5 +1,5 @@
 class SurveysController < BaseController
-   include Pagy::Backend
+  include Pagy::Backend
   before_action :set_survey, only: %i[ show edit update destroy clone ]
 
   def index
@@ -43,28 +43,12 @@ class SurveysController < BaseController
 
   def clone
     authorize :surveys
-    @clone = Survey::Survey.new
-    @clone.name = @survey.name + " (Copy)"
-    @clone.survey_type = @survey.survey_type
-    @clone.actor_id = current_user.id
-    @clone.description = @survey.description.nil? ? "N/A" : @survey.description
-    @clone.save
 
-    @survey.questions.each do |question|
-      q = Survey::Question.new(text: question.text, description: question.description, survey_id: @clone.id)
-      q.save
-
-      if @survey.checklist? #checklist
-        Survey::Option.new(text: "Yes", question: q, correct: true, weight: 1).save
-        Survey::Option.new(text: "No", question: q, correct: false, weight: 0).save
-      else
-        Survey::Option.new(text: "Score", question: q, correct: true, weight: 10).save
-      end
-    end
-
+    @clone = @survey.clone_for_actor(current_user)
     redirect_to survey_path(@clone)
   end
-   def pagy_nil_safe(params, collection, vars = {})
+
+  def pagy_nil_safe(params, collection, vars = {})
     pagy = Pagy.new(count: collection.count(:all), page: params[:page], **vars)
     return pagy, collection.offset(pagy.offset).limit(pagy.items) if collection.respond_to?(:offset)
     return pagy, collection
