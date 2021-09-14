@@ -3,7 +3,7 @@ class Survey::AttemptDecorator < Draper::Decorator
 
   def display_score
     if survey.checklist?
-      score.to_s
+      "#{score.to_s}/#{survey.questions.count.to_s}"
     else
       score.to_s + "%"
     end

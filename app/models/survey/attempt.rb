@@ -1,11 +1,6 @@
 class Survey::Attempt < ActiveRecord::Base
   self.table_name = "survey_attempts"
 
-  #   acceptable_attributes :winner, :survey, :survey_id,
-  #     :participant,
-  #     :participant_id,
-  #     :answers_attributes => ::Survey::Answer::AccessibleAttributes
-
   # relations
   belongs_to :survey
   belongs_to :actor, class_name: "User", foreign_key: "actor_id"
@@ -40,6 +35,26 @@ class Survey::Attempt < ActiveRecord::Base
 
   def self.high_score
     return scores.first.score
+  end
+
+  def submit
+    self.score = calculate_score
+  end
+
+  def score
+    submitted? ? super : calculate_score
+  end
+
+  def calculate_score
+    score = 0
+    if survey.checklist?
+      correct_answers.count.times { score += 1 }
+    else
+      score = correct_answers.reduce(0.0) { |sum, answer| sum + answer.score }
+      total = (answers.count * 10)
+      percentage = (score / total) * 100.0
+      score = percentage.round(2)
+    end
   end
 
   private

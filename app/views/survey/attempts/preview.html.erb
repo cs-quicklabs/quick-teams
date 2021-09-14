@@ -20,14 +20,7 @@
     </div>
     <div class=" px-6">
       <h3 class="text-2xl leading-6 font-medium text-gray-900">
-        Score: 
-        <% if survey.checklist? %>
-          <%= @attempt.correct_answers.count %>/<%= @attempt.survey.questions.count %>
-        <% else %>
-          <% score = @attempt.correct_answers.reduce(0.0) { |sum, answer| sum + answer.score } %>
-          <% total = (@attempt.answers.count * 10) %>
-          <% percentage = (score / total) * 100.0 %>
-        <% end %>
+        Score: <%= attempt.display_score %>
       </h3>
     </div>
   </div>
