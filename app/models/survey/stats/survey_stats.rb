@@ -34,12 +34,13 @@ class Survey::Stats::SurveyStats
     all_answers_ids = all_attempts.map(&:answers).flatten.map(&:id)
     all_answers = Survey::Answer.where(id: all_answers_ids)
     all_questions = Survey::Question.where(survey_id: @survey.id)
-    categories = all_questions.map(&:category).uniq
+    all_categories_ids = all_questions.map(&:question_category_id).uniq
+    categories = Survey::QuestionCategory.where(id: all_categories_ids)
 
     contributions = []
     categories.each do |category|
       score = score(category, all_questions, all_answers)
-      contribution = StatsContribution.new(category, score)
+      contribution = StatsContribution.new(category.name, score)
       contributions.push(contribution)
     end
 
@@ -55,7 +56,8 @@ class Survey::Stats::SurveyStats
   def score(category, questions, answers)
     return 0 if answers.empty?
 
-    category_question_answers = answers.where(question_id: questions.where(category: category).map(&:id))
+    category = 
+    category_question_answers = answers.where(question_id: questions.where(question_category: category).map(&:id))
     total_marks = category_question_answers.count * 10
     score = category_question_answers.reduce(0.0) do |sum, answer|
       sum + answer.score

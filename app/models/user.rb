@@ -102,6 +102,6 @@ class User < ApplicationRecord
   end
 
   def filled_surveys
-    Survey::Attempt.includes(:survey).where(actor_id: id, survey_id: surveys.ids, participant_type: "User")
+    Survey::Attempt.includes(:survey, :actor, :participant).where(actor_id: id, survey_id: surveys.ids, participant_type: "User")
   end
 end
