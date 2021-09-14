@@ -4,17 +4,18 @@ class Survey::QuestionsController < Survey::BaseController
 
   def index
     authorize [:survey, :question]
-    @pagy, @questions= pagy_nil_safe(params, Survey::Question.where(survey_id:@survey), items: 100)
-    @question_categories=QuestionCategory.all.order(:name)
-     @question = Survey::Question.new
+    @pagy, @questions = pagy_nil_safe(params, Survey::Question.includes(:question_category).where(survey_id: @survey), items: LIMIT)
+    @question_categories = Survey::QuestionCategory.all.order(:name)
+    @question = Survey::Question.new
   end
 
   def edit
     authorize [:survey, :question]
   end
+
   def new
     authorize [:survey, :question]
-     @question = Survey::Question.new(question_params)
+    @question = Survey::Question.new(question_params)
   end
 
   def destroy
@@ -26,7 +27,7 @@ class Survey::QuestionsController < Survey::BaseController
   def update
     authorize [:survey, :question]
     @question.update(question_params)
-     respond_to do |format|
+    respond_to do |format|
       if @question.errors.empty?
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/question", locals: { question: @question }) }
       else
@@ -36,7 +37,7 @@ class Survey::QuestionsController < Survey::BaseController
   end
 
   def create
-   authorize [:survey, :question]
+    authorize [:survey, :question]
     @question = Survey::Question.new(question_params)
     @question.survey = @survey
     @question.save

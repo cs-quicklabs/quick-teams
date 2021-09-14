@@ -2,7 +2,7 @@ class Survey::BaseController < BaseController
   before_action :set_survey, only: %i[show edit update destroy]
   include Pagy::Backend
 
-  LIMIT = 20
+  LIMIT = 30
 
   private
 

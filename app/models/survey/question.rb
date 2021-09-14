@@ -5,6 +5,7 @@ class Survey::Question < ActiveRecord::Base
 
   # relations
   belongs_to :survey
+  belongs_to :question_category
   has_many :options, :dependent => :destroy
   accepts_nested_attributes_for :options,
     :reject_if => ->(a) { a[:text].blank? },

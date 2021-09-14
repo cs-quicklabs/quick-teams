@@ -1,12 +1,12 @@
 class Survey::AttemptsController < Survey::BaseController
-  before_action :set_survey, only: [:index, :update, :destroy, :show, :new, :create, :preview]
-  before_action :set_attempt, only: [:destroy, :update, ]
+  before_action :set_survey, only: [:index, :update, :destroy, :show, :new, :create, :preview, :survey_questions]
+  before_action :set_attempt, only: [:destroy, :update]
   before_action :set_attempt_with_survey, only: [:preview, :show]
   before_action :set_participant, only: [:preview]
 
   def index
     authorize [:survey, :attempt]
-    @pagy, @attempts = pagy_nil_safe(params, Survey::Attempt.all.where(survey: @survey).order(created_at: :desc), items:10)
+    @pagy, @attempts = pagy_nil_safe(params, Survey::Attempt.all.where(survey: @survey).order(created_at: :desc), items: 10)
   end
 
   def new
@@ -36,9 +36,8 @@ class Survey::AttemptsController < Survey::BaseController
 
   def survey_questions
     authorize [:survey, :attempt], :show?
-    @survey = Survey::Survey.find(params[:survey_id])
     @attempt = Survey::Attempt.find(params[:attempt_id])
-    @questions = @attempt.survey.questions
+    @questions = @attempt.survey.questions.includes(:options)
   end
 
   def preview
