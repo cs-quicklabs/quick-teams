@@ -1,7 +1,7 @@
 <tr id="<%= dom_id timesheet %>">
   <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
     <% if current_user.admin? %>
-      <a href="<%= project_timesheets_path(timesheet.project)%>" class="block hover:underline">
+      <a href="<%= project_timesheets_path(timesheet.project) %>" class="block hover:underline">
         <%= timesheet.project.name %>
       </a>
     <% else %>
@@ -9,13 +9,13 @@
     <% end %>
   </td>
   <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-500 max-w-0">
-    <%= timesheet.description%>
+    <%= timesheet.description %>
   </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
     <%= display_date(timesheet.date) %>
   </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-    <%= timesheet.hours%>
+    <%= timesheet.hours %>
   </td>
   <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
     <%= link_to "Delete", employee_timesheet_path(@employee, timesheet), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>

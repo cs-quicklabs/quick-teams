@@ -1,7 +1,6 @@
-
 class SurveysPolicy < Struct.new(:user, :surveys)
   def index?
-    user.admin? 
+    user.admin?
   end
 
   def update?
@@ -16,7 +15,7 @@ class SurveysPolicy < Struct.new(:user, :surveys)
     user.admin?
   end
 
-  def new? 
+  def new?
     user.admin?
   end
 
@@ -25,12 +24,14 @@ class SurveysPolicy < Struct.new(:user, :surveys)
   end
 
   def show?
-    user.admin? 
-  end
-    def clone?
     user.admin?
   end
-   def assignees?
+
+  def clone?
+    user.admin?
+  end
+
+  def assignees?
     user.admin?
   end
 end

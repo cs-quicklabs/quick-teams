@@ -5,5 +5,4 @@ class FeedbacksMailerPreview < ActionMailer::Preview
   def publish
     FeedbacksMailer.publish
   end
-
 end

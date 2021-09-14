@@ -1,5 +1,5 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "employee/title", employee: @employee%>
+  <%= render "employee/title", employee: @employee %>
   <main class="pb-8">
     <div class="">
       <!-- Main 3 column grid -->
@@ -34,7 +34,7 @@
                   </tbody>
                 </table>
                 <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
-                  <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                  <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
                 </div>
               </div>
             </div>
@@ -46,7 +46,7 @@
             <section aria-labelledby="add-participant-section">
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render partial: "employee/todos/form", locals: {todo: @todo, errors: nil }%>
+                  <%= render partial: "employee/todos/form", locals: { todo: @todo, errors: nil } %>
                 </div>
               </div>
             </section>

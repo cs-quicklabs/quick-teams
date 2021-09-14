@@ -1,9 +1,9 @@
           <% attempt.survey.questions.each_with_index do |question, index| %>
             <tr class="bg-white ">
               <td class="py-3  px-6 text-sm font-medium text-gray-900">
-                <%= index + 1  %></td>
+                <%= index + 1 %></td>
               <td class="py-3 px-6 w-full text-sm font-medium text-gray-900"><%= question.text.upcase_first %></td>
-              <% attempted_option = question.attempted_option(attempt)%>
+              <% attempted_option = question.attempted_option(attempt) %>
               <td class="py-3 px-6 text-sm font-medium text-gray-900"><%= attempted_option.nil? ? "" : attempted_option.text.upcase_first %></td>
               <td class="py-3  px-6 text-sm font-medium text-gray-900">
                 <% if question.attempted_answer(attempt).nil? %>

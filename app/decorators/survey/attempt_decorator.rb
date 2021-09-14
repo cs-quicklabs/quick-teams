@@ -8,7 +8,4 @@ class Survey::AttemptDecorator < Draper::Decorator
       score.to_s + "%"
     end
   end
-
-
-
 end

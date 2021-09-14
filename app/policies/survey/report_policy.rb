@@ -3,19 +3,19 @@ class Survey::ReportPolicy < Survey::BaseSurveyPolicy
     true
   end
 
-   def score?
+  def score?
     true
   end
 
- def submit?
-   true
+  def submit?
+    true
   end
 
-   def download?
-   true
+  def download?
+    true
   end
 
-   def pdf?
-   true
+  def pdf?
+    true
   end
 end

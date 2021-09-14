@@ -1,8 +1,8 @@
 <% @attempt.survey.questions.each_with_index do |question, index| %>
   <tr>
-    <td><%= index + 1  %></td>
+    <td><%= index + 1 %></td>
     <td ><%= question.text.upcase_first %></td>
-    <% attempted_option = question.attempted_option(@attempt)%>
+    <% attempted_option = question.attempted_option(@attempt) %>
     <td ><%= attempted_option.nil? ? "" : attempted_option.text.upcase_first %></td>
     <td >
       <% if question.attempted_answer(@attempt).nil? %>

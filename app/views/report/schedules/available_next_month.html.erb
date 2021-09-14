@@ -5,7 +5,7 @@
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         Available By Next Month
       </h1>
-      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @employees.count.to_s + " employees)"%></p>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @employees.count.to_s + " employees)" %></p>
     </div>
   </div>
 </div>
@@ -28,7 +28,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <%= render partial: "schedule", collection: @employees, as: :employee, cached: true%>
+            <%= render partial: "schedule", collection: @employees, as: :employee, cached: true %>
           </tbody>
         </table>
       </div>

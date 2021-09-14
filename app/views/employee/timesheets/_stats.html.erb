@@ -37,11 +37,11 @@
 </div>
 <% if employee_stats.contributions.size > 0 %>
   <div class="flex flex-wrap px-4 mt-6">
-    <p class="text-sm font-medium text-gray-900 truncate"><%= "Top Contributions"%></p>
+    <p class="text-sm font-medium text-gray-900 truncate"><%= "Top Contributions" %></p>
   </div>
 <% end %>
 <ul class="divide-y divide-gray-200">
-  <% employee_stats.contributions.each do |contribution|%>
+  <% employee_stats.contributions.each do |contribution| %>
     <li class="flex px-2 py-2">
       <% if current_user.admin? %>
         <!-- Somehow normal rails path are not working in stimulus reflex render so putting this hack -->

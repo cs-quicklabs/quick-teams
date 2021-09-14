@@ -26,6 +26,7 @@ class SurveyPolicy < ApplicationPolicy
   def update?
     user.admin?
   end
+
   def clone?
     user.admin?
   end

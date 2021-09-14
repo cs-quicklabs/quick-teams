@@ -2,33 +2,33 @@
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: schedule, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Participant", subtitle: "Add new project participant and fill in engagement level." %>
-    <%= form.collection_select(:user_id, UserDecorator.decorate_collection(@project.potential_participants), :id, :display_name_position, {:prompt => 'Select Participant'}, :selected => schedule.user_id, :class=>"form-text-field mt-4" )%>
+    <%= form.collection_select(:user_id, UserDecorator.decorate_collection(@project.potential_participants), :id, :display_name_position, { :prompt => "Select Participant" }, :selected => schedule.user_id, :class => "form-text-field mt-4") %>
     <div>
       <label for="starts" class="block text-sm font-medium text-gray-700">
         Starts At
       </label>
-      <%= form.date_field :starts_at, class: 'form-text-field mt-1' %>
+      <%= form.date_field :starts_at, class: "form-text-field mt-1" %>
     </div>
     <div>
       <label for="ends" class="block text-sm font-medium text-gray-700">
         Ends At
       </label>
-      <%= form.date_field :ends_at, class: 'form-text-field mt-1' %>
+      <%= form.date_field :ends_at, class: "form-text-field mt-1" %>
     </div>
     <div>
       <label for="occupancy" class="block text-sm font-medium text-gray-700">
         Occupancy (%)
       </label>
-      <%= form.text_field :occupancy, class: 'form-text-field mt-1', placeholder: "1 to 100 percent", autocomplete: "off"%>
+      <%= form.text_field :occupancy, class: "form-text-field mt-1", placeholder: "1 to 100 percent", autocomplete: "off" %>
     </div>
     <div>
       <label for="billable" class="block text-sm font-medium text-gray-700">
         Billable
       </label>
-      <%= form.select :billable, Schedule::SCHEDULE_OPTIONS, {}, class:'form-text-field mt-1' %>
+      <%= form.select :billable, Schedule::SCHEDULE_OPTIONS, {}, class: "form-text-field mt-1" %>
     </div>
     <div class="flex justify-end mt-6">
-      <%= form.submit "Add Participant", class:"btn-blue"%>
+      <%= form.submit "Add Participant", class: "btn-blue" %>
     </div>
   </main>
 <% end %>

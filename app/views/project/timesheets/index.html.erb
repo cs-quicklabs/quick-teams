@@ -1,5 +1,5 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render partial: "project/title", locals: {project: @project}%>
+  <%= render partial: "project/title", locals: { project: @project } %>
   <main class="pb-8">
     <div class="">
       <!-- Main 3 column grid -->
@@ -28,12 +28,12 @@
                       </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
-                      <%= render partial: "project/timesheets/timesheet", collection: @timesheets, cached: true%>
+                      <%= render partial: "project/timesheets/timesheet", collection: @timesheets, cached: true %>
                     </tbody>
                   </table>
                   <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing last 30 days' timesheets only.</p>
                   <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
-                    <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                    <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
                   </div>
                 </div>
               </div>
@@ -59,7 +59,7 @@
                   </span>
                 </div>
                 <div id="stats">
-                  <%= render partial: "project/timesheets/stats", locals: {project_stats: @project_timesheets_stats, title: @project_timesheets_stats.title }, cached: true%>
+                  <%= render partial: "project/timesheets/stats", locals: { project_stats: @project_timesheets_stats, title: @project_timesheets_stats.title }, cached: true %>
                 </div>
               </div>
             </div>

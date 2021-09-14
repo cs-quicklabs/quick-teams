@@ -4,17 +4,17 @@
   </h3>
   <div class="flex mt-4 space-x-3">
     <div class="flex-shrink-0">
-      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
     </div>
     <div>
       <div class="text-sm">
-        <a href="<%= goal_path(goal)%>" class="font-medium text-gray-900 hover:underline"><%= goal.goalable.decorate.name%></a>
+        <a href="<%= goal_path(goal) %>" class="font-medium text-gray-900 hover:underline"><%= goal.goalable.decorate.name %></a>
         <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium <%= goal_status_color(goal) %>">
           <%= goal.status.to_s %>
         </span>
       </div>
       <div class="mt-1 space-x-2 text-sm">
-        <span class="font-medium text-gray-500">Created By <%= goal.user.decorate.display_name%> on <%= display_created_at(goal) %> with deadline on  <%= display_date(goal.deadline) %></span>
+        <span class="font-medium text-gray-500">Created By <%= goal.user.decorate.display_name %> on <%= display_created_at(goal) %> with deadline on  <%= display_date(goal.deadline) %></span>
       </div>
     </div>
   </div>

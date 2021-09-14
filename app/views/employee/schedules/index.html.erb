@@ -1,5 +1,5 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render "employee/title", employee: @employee%>
+  <%= render "employee/title", employee: @employee %>
   <main class="pb-8">
     <div class="px-4 sm:px-6">
       <!-- Main 3 column grid -->
@@ -10,10 +10,10 @@
             <div class="overflow-hidden bg-white">
               <div class="p-4", id="project-participants">
                 <div class="flex flex-wrap">
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%="Employee Schedules (" + @schedules.load.size.to_s + ")"%></p>
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Employee Schedules (" + @schedules.load.size.to_s + ")" %></p>
                 </div>
                 <ul class="divide-y divide-gray-200" id="schedules">
-                  <%= render partial: "employee/schedules/schedule", collection: @schedules, cached: true%>
+                  <%= render partial: "employee/schedules/schedule", collection: @schedules, cached: true %>
                 </ul>
               </div>
             </div>

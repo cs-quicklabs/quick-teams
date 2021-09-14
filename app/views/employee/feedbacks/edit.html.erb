@@ -3,12 +3,12 @@
     <%= tailwind_form_with(model: @feedback, id: dom_id(@feedback), url: employee_feedback_path(@employee, @feedback), method: :patch) do |form| %>
       <main class="w-full px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
         <%= render "shared/form_messages", resource: @feedback, message: local_assigns[:message] %>
-        <%= render "shared/form_header", title: "Edit Feedback for #{ @employee.decorate.display_name}", subtitle: "A feedback can be added for employee which might be useful in performace review later. Feedback will be visible to employee after approval from Admin." %>
-        <%= form.text_field :title, "Title", autocomplete: "off"%>
-        <%= form.rich_text_area :body, "Description"%>
+        <%= render "shared/form_header", title: "Edit Feedback for #{@employee.decorate.display_name}", subtitle: "A feedback can be added for employee which might be useful in performace review later. Feedback will be visible to employee after approval from Admin." %>
+        <%= form.text_field :title, "Title", autocomplete: "off" %>
+        <%= form.rich_text_area :body, "Description" %>
         <div class="flex justify-end">
-          <%= link_to 'Back', 'javascript:history.back()', class:"btn-normal" %>
-          <%= form.submit "Edit Feedback", class:"btn-blue"%>
+          <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+          <%= form.submit "Edit Feedback", class: "btn-blue" %>
         </div>
       </main>
     <% end %>

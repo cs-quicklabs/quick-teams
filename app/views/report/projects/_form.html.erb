@@ -12,23 +12,23 @@
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   Manager
                 </label>
-                <%= form.collection_select(:manager_id, User.all_users.decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["manager_id"] if !params["manager_id"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:manager_id, User.all_users.decorate, :id, :display_name, { :prompt => "Select Employee", :selected => (params["manager_id"] if !params["manager_id"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div>
                 <label for="billed" class="block text-sm font-medium text-gray-700">
                   Status
                 </label>
-                <%= form.collection_select(:status, ProjectStatus.all.order(:name), :id, :name, {:prompt => "Select Status", :selected => (params["status"] if !params["status"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:status, ProjectStatus.all.order(:name), :id, :name, { :prompt => "Select Status", :selected => (params["status"] if !params["status"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div>
                 <label for="billed" class="block text-sm font-medium text-gray-700">
                   Tag
                 </label>
-                <%= form.collection_select(:tag, ProjectTag.all.order(:name), :id, :name, {:prompt => "Select Tag", :selected => (params["tag"] if !params["tag"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:tag, ProjectTag.all.order(:name), :id, :name, { :prompt => "Select Tag", :selected => (params["tag"] if !params["tag"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div class="flex justify-end mt-6">
-                <%= link_to 'Reset', projects_reports_path, class: "btn-normal" %>
-                <%= form.submit "Search", class:"btn-blue"%>
+                <%= link_to "Reset", projects_reports_path, class: "btn-normal" %>
+                <%= form.submit "Search", class: "btn-blue" %>
               </div>
             </main>
           <% end %>

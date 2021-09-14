@@ -3,7 +3,7 @@
   <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
       <div class="flex items-center">
       <div class="flex-shrink-0 w-10 h-10">
-        <%= image_tag "male-placeholder-image.png", class:"w-10 h-10 rounded-full"%>
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
       </div>
       <div class="ml-4">
         <a href="<%= employee_surveys_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">
@@ -16,13 +16,13 @@
             <% end %>
           </div>
           <div class="text-sm text-gray-500">
-            <%= assignee.display_position%>
+            <%= assignee.display_position %>
           </div>
         </a>
       </div>
     </div>
   </td>
   <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
-   <%= link_to 'Delete', survey_assignee_path(@survey, assignee), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?"} %>
+   <%= link_to "Delete", survey_assignee_path(@survey, assignee), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
   </td>
 </tr>

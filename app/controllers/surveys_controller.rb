@@ -1,6 +1,6 @@
 class SurveysController < BaseController
   include Pagy::Backend
-  before_action :set_survey, only: %i[ show edit update destroy clone assignees]
+  before_action :set_survey, only: %i[ show edit update destroy clone assignees ]
 
   def index
     authorize :surveys
@@ -49,8 +49,6 @@ class SurveysController < BaseController
   end
 
   def assignees
-
- 
   end
 
   private

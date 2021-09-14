@@ -1,6 +1,6 @@
 class Survey::BaseSurveyPolicy < ApplicationPolicy
   def index?
-    user.admin? 
+    user.admin?
   end
 
   def update?

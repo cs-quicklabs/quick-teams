@@ -10,10 +10,12 @@ class SearchPolicy < Struct.new(:user, :search)
   def project_skills?
     true
   end
+
   def documents?
     user.admin?
   end
-    def surveys?
+
+  def surveys?
     user.admin?
   end
 end

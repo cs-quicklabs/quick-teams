@@ -1,9 +1,9 @@
-<%employee = employee.decorate %>
-<tr id="<%= dom_id(employee)%>">
+<% employee = employee.decorate %>
+<tr id="<%= dom_id(employee) %>">
   <td class="px-6 py-4 whitespace-nowrap">
     <div class="flex items-center">
       <div class="flex-shrink-0 w-10 h-10">
-        <%= image_tag "male-placeholder-image.png", class:"w-10 h-10 rounded-full"%>
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
       </div>
       <div class="ml-4">
         <a href="<%= employee_schedules_path(employee) %>" class="truncate hover:text-gray-600 hover:underline">
@@ -16,7 +16,7 @@
             <% end %>
           </div>
           <div class="text-sm text-gray-500">
-            <%= employee.display_position%>
+            <%= employee.display_position %>
           </div>
         </a>
       </div>
@@ -46,7 +46,7 @@
             <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-red-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
             </svg>
-            <%= employee.display_occupied_till%>
+            <%= employee.display_occupied_till %>
           </p>
         </div>
       </div>
@@ -54,7 +54,7 @@
   </td>
   <td class="px-6 py-4 whitespace-nowrap">
     <span class="inline-flex px-2 text-xl font-semibold leading-5  <%= employee.overall_occupancy > 100 ? "text-red-500" : (employee.overall_occupancy < 60 ? "text-green-500" : "text-gray-900") %>">
-      <%= employee.display_occupancy%>
+      <%= employee.display_occupancy %>
     </span>
   </td>
 </tr>

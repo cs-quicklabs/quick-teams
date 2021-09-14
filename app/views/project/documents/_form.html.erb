@@ -6,22 +6,22 @@
       <label for="filename" class="block text-sm font-medium text-gray-700">
         Filename
       </label>
-      <%= form.text_field :filename, class: 'form-text-field mt-1' %>
+      <%= form.text_field :filename, class: "form-text-field mt-1" %>
     </div>
     <div>
       <label for="link" class="block text-sm font-medium text-gray-700">
         Link
       </label>
-      <%= form.text_field :link, class: 'form-text-field mt-1' %>
+      <%= form.text_field :link, class: "form-text-field mt-1" %>
     </div>
     <div>
       <label for="comments" class="block text-sm font-medium text-gray-700">
         Comments(optional)
       </label>
-      <%= form.text_area :comments, class: 'form-text-field mt-1',  autocomplete: "off"%>
+      <%= form.text_area :comments, class: "form-text-field mt-1", autocomplete: "off" %>
     </div>
     <div class="flex justify-end mt-6">
-      <%= form.submit "Add Document", class:"btn-blue"%>
+      <%= form.submit "Add Document", class: "btn-blue" %>
     </div>
   </main>
 <% end %>

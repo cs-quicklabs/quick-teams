@@ -1,6 +1,6 @@
 <% @attempt.survey.questions.each_with_index do |question, index| %>
   <tr>
-    <td scope="row"><%= index + 1  %></td>
+    <td scope="row"><%= index + 1 %></td>
     <td colspan="1"><%= question.text %></td>
     <td><%= question.marked_score(@attempt).to_s %></td>
     <td>

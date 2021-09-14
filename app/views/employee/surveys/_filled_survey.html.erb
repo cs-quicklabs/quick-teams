@@ -34,10 +34,10 @@
     <% end %>
   </td>
   <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
-    <% if current_user.admin?%>
-      <%= link_to 'Delete', survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?"} %>
+    <% if current_user.admin? %>
+      <%= link_to "Delete", survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     <% elsif attempt.submitted? == false and current_user == attempt.actor %>
-      <%= link_to 'Delete', survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?"} %>
+      <%= link_to "Delete", survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     <% end %>
   </td>
 </tr>

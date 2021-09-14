@@ -36,7 +36,8 @@ class Survey::SurveyDecorator < Draper::Decorator
       survey_for.titleize
     end
   end
-    def display_name
+
+  def display_name
     name.upcase_first
   end
 end

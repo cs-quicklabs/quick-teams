@@ -5,16 +5,16 @@
       <div class="flex items-center flex-1 min-w-0">
         <div class="flex-1 min-w-0 md:grid md:grid-cols-4 md:gap-4">
           <% if current_user.admin? %>
-            <a href="<%= project_schedules_path(schedule.project)%>" class="block hover:underline" target="_top">
+            <a href="<%= project_schedules_path(schedule.project) %>" class="block hover:underline" target="_top">
               <div class="flex">
                 <div class="whitespace-nowrap">
-                  <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.project.name%></p>
+                  <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.project.name %></p>
                 </div>
               </div>
             </a>
           <% else %>
             <div>
-              <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.project.name%></p>
+              <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.project.name %></p>
             </div>
           <% end %>
           <div class="flex">
@@ -46,7 +46,7 @@
             <div class="flex">
               <div class="whitespace-nowrap">
                 <div class="text-sm text-gray-900"><%= link_to "Edit", edit_employee_schedule_path(@employee, schedule), class: "btn-inline-edit" %></div>
-                <div class="text-sm text-gray-900"><%= link_to "Delete", employee_schedule_path(@employee, schedule), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?"} %></div>
+                <div class="text-sm text-gray-900"><%= link_to "Delete", employee_schedule_path(@employee, schedule), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %></div>
               </div>
             </div>
           <% end %>

@@ -1,13 +1,13 @@
   <main class="pb-10 mx-auto max-w-7xl lg:py-12 lg:px-8">
   <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
-    <%= render 'shared/archive_menu'%>
+    <%= render "shared/archive_menu" %>
     <main class="max-w-xl px-4 pb-12 lg:col-span-8">
       <div class="overflow-hidden bg-white">
         <div class="pb-4 ml-4">
           <%= render "shared/form_header", title: "Deactivated Users", subtitle: @employees.load.size > 0 ? "Following users have been deactivated." : "No record found." %>
         </div>
         <ul>
-          <%= render partial: "employees/deactivated_user", collection: @employees, as: :employee, cached: true%>
+          <%= render partial: "employees/deactivated_user", collection: @employees, as: :employee, cached: true %>
         </ul>
       </div>
     </main>

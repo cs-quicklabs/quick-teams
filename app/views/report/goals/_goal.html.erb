@@ -1,31 +1,31 @@
 <tr>
-  <% if goal.goalable_type == "User"%>
+  <% if goal.goalable_type == "User" %>
     <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-900 max-w-0">
-      <a href="<%= employee_goal_path(goal.goalable, goal)%>" class="block hover:text-gray-900 hover:underline">
+      <a href="<%= employee_goal_path(goal.goalable, goal) %>" class="block hover:text-gray-900 hover:underline">
         <%= highlight_hashtag(goal.title) %>
       </a>
     </td>
   <% else %>
     <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-900 max-w-0">
-      <a href="<%= project_milestone_path(goal.goalable, goal)%>" class="block hover:text-gray-900 hover:underline">
+      <a href="<%= project_milestone_path(goal.goalable, goal) %>" class="block hover:text-gray-900 hover:underline">
         <%= highlight_hashtag(goal.title) %>
       </a>
     </td>
   <% end %>
   <td class="px-6 py-4 text-sm font-medium text-gray-500 whitespace-nowrap">
-    <a href="<%= employee_goals_path(goal.user)%>" class="block hover:text-gray-900 hover:underline">
+    <a href="<%= employee_goals_path(goal.user) %>" class="block hover:text-gray-900 hover:underline">
       <%= goal.user.decorate.display_name %>
     </a>
   </td>
-  <% if goal.goalable_type == "User"%>
+  <% if goal.goalable_type == "User" %>
     <td class="px-6 py-4 text-sm font-medium text-gray-500 whitespace-nowrap">
-      <a href="<%= employee_goals_path(goal.goalable)%>" class="block hover:text-gray-900 hover:underline">
+      <a href="<%= employee_goals_path(goal.goalable) %>" class="block hover:text-gray-900 hover:underline">
         <%= goal.goalable.decorate.display_name %>
       </a>
     </td>
   <% else %>
     <td class="px-6 py-4 text-sm font-medium text-gray-500 whitespace-nowrap">
-      <a href="<%= project_milestones_path(goal.goalable)%>" class="block hover:text-gray-900 hover:underline">
+      <a href="<%= project_milestones_path(goal.goalable) %>" class="block hover:text-gray-900 hover:underline">
         <%= goal.goalable.name %>
       </a>
     </td>
@@ -37,8 +37,8 @@
     <%= display_date(goal.deadline) %>
   </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-<%= goal.decorate.color%>-100 text-<%= goal.decorate.color%>-800">
-      <%= goal.status%>
+    <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-<%= goal.decorate.color %>-100 text-<%= goal.decorate.color %>-800">
+      <%= goal.status %>
     </span>
   </td>
 </tr>

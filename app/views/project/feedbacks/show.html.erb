@@ -8,24 +8,24 @@
         </h3>
         <div class="flex mt-4 space-x-3">
           <div class="flex-shrink-0">
-            <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+            <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
           </div>
           <div>
             <div class="text-sm">
-              <a href="<%= project_feedbacks_path(@project) %>" class="font-medium text-gray-900 hover:underline"><%= @feedback.critiquable.name%></a>
+              <a href="<%= project_feedbacks_path(@project) %>" class="font-medium text-gray-900 hover:underline"><%= @feedback.critiquable.name %></a>
             </div>
             <div class="mt-1 space-x-2 text-sm">
-              <span class="font-medium text-gray-500">Created By <%= @feedback.user.decorate.display_name%> on <%= display_created_at(@feedback) %></span>
+              <span class="font-medium text-gray-500">Created By <%= @feedback.user.decorate.display_name %> on <%= display_created_at(@feedback) %></span>
             </div>
           </div>
         </div>
       </div>
       <div class="flex mt-4 sm:mt-0 sm:ml-4">
-        <%= link_to 'Back', 'javascript:history.back()', class:"btn-normal" %>
+        <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
       </div>
     </div>
     <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
-      <p><%= @feedback.body%></p>
+      <p><%= @feedback.body %></p>
     </div>
   </main>
 <% end %>

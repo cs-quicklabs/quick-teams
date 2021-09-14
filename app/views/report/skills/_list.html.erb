@@ -1,9 +1,9 @@
 <% skill_report = skill_report.decorate %>
-<tr id="<%= dom_id(skill_report)%>">
+<tr id="<%= dom_id(skill_report) %>">
   <td class="w-1/3 px-6 py-4 overflow-hidden text-sm text-gray-700 max-w-0">
     <div class="flex items-center">
       <div class="flex-shrink-0 w-10 h-10">
-        <%= image_tag "male-placeholder-image.png", class:"w-10 h-10 rounded-full"%>
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
       </div>
       <div class="ml-4">
         <a href="<%= employee_skills_path(skill_report) %>" class="truncate hover:text-gray-600 hover:underline">
@@ -11,7 +11,7 @@
             <%= skill_report.display_name.titleize %>
           </div>
           <div class="text-sm text-gray-500">
-            <%= skill_report.display_position%>
+            <%= skill_report.display_position %>
           </div>
         </a>
       </div>

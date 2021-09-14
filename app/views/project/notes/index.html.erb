@@ -1,5 +1,5 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render partial: "project/title", locals: {project: @project}%>
+  <%= render partial: "project/title", locals: { project: @project } %>
   <main class="pb-8">
     <div class="px-4 sm:px-6">
       <!-- Main 3 column grid -->
@@ -11,15 +11,15 @@
             <div class="overflow-hidden bg-white" >
               <div class="p-4">
                 <div class="flex flex-wrap">
-                  <p class="mt-1 text-sm font-medium text-gray-900 truncate"><%="Project Notes"%></p>
+                  <p class="mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Notes" %></p>
                 </div>
                 <ul class="space-y-6" id="notes" data-infinite-scroll-target="entries">
-                  <%= render partial: "note", collection: @notes, as: :note, cached: true%>
+                  <%= render partial: "note", collection: @notes, as: :note, cached: true %>
                 </ul>
               </div>
             </div>
             <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-              <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+              <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
             </div>
           </section>
         </div>
@@ -30,12 +30,12 @@
               <h2 class="sr-only" id="section-2-title">Add New Note</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render partial: "project/notes/form", locals:{ note:  @note }%>
+                  <%= render partial: "project/notes/form", locals: { note: @note } %>
                 </div>
               </div>
             </section>
           </div>
-        <%end %>
+        <% end %>
       </div>
     </div>
   </main>

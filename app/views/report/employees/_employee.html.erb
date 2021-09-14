@@ -1,9 +1,9 @@
 <% employee = employee.decorate %>
-<tr id ="<%= dom_id(employee)%>">
+<tr id ="<%= dom_id(employee) %>">
   <td class="px-6 py-4 whitespace-nowrap">
     <div class="flex items-center">
       <div class="flex-shrink-0 w-10 h-10">
-        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
       </div>
       <a href="<%= employee_team_path(employee) %>" class="truncate hover:text-gray-600 hover:underline">
         <div class="ml-4">
@@ -18,8 +18,8 @@
     </div>
   </td>
   <td class="px-6 py-4 whitespace-nowrap">
-    <div class="text-sm text-gray-900"><%= employee.display_position%></div>
-    <div class="text-sm text-gray-500"><%= employee.display_discipline_title%></div>
+    <div class="text-sm text-gray-900"><%= employee.display_position %></div>
+    <div class="text-sm text-gray-500"><%= employee.display_discipline_title %></div>
   </td>
   <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
     <a href="<%= employee_team_path(employee.manager) if !employee.manager.nil? %>" class="truncate hover:text-gray-600 hover:underline">
@@ -29,9 +29,9 @@
   <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
     <% unless employee.status.nil? %>
       <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= employee.status.color %>-800 bg-<%= employee.status.color %>-100 rounded-full">
-        <%= employee.status.name  %>
+        <%= employee.status.name %>
       </span>
-    <%end %>
+    <% end %>
   </td>
   <td class="px-6 py-4 whitespace-nowrap">
     <div class="text-sm text-gray-500"><%= employee.permission.titleize %></div>

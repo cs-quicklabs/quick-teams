@@ -10,7 +10,7 @@
 </div>
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
-    <%= render partial: "form"%>
+    <%= render partial: "form" %>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <% if @kbs.size > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
@@ -36,11 +36,11 @@
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-          <%= render partial: "shared/paginator", locals:{pagy: @pagy}%>
+          <%= render partial: "shared/paginator", locals: { pagy: @pagy } %>
         </div>
       </div>
     <% else %>
-      <%== render partial: "shared/no_result_found", cached: true%>
-    <% end%>
+      <%== render partial: "shared/no_result_found", cached: true %>
+    <% end %>
   </div>
 </div>

@@ -24,9 +24,9 @@
         <% if survey.checklist? %>
           <%= @attempt.correct_answers.count %>/<%= @attempt.survey.questions.count %>
         <% else %>
-          <%score = @attempt.correct_answers.reduce(0.0) { |sum, answer| sum + answer.score}%>
-          <%total = (@attempt.answers.count * 10) %>
-          <%percentage = (score/total) * 100.0 %>
+          <% score = @attempt.correct_answers.reduce(0.0) { |sum, answer| sum + answer.score } %>
+          <% total = (@attempt.answers.count * 10) %>
+          <% percentage = (score / total) * 100.0 %>
         <% end %>
       </h3>
     </div>
@@ -45,15 +45,15 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <% if survey.checklist? %>
-            <%= render partial: 'survey/reports/preview_checklist', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
+            <%= render partial: "survey/reports/preview_checklist", locals: { attempt: @attempt, survey: survey, actor: actor, participant: participant } %>
           <% else %>
-            <%= render partial: 'survey/reports/preview_score', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
+            <%= render partial: "survey/reports/preview_score", locals: { attempt: @attempt, survey: survey, actor: actor, participant: participant } %>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
   <div>
-    <%= render partial: 'survey/reports/download_pdf', locals: {  attempt: @attempt , survey: survey, actor: actor, participant: participant} %>
+    <%= render partial: "survey/reports/download_pdf", locals: { attempt: @attempt, survey: survey, actor: actor, participant: participant } %>
   </div>
 </main>

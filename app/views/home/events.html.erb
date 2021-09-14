@@ -3,7 +3,7 @@
     <% @events.each do |event| %>
       <% if lookup_context.template_exists?(event.action, "home", true) %>
         <% cache event do %>
-          <%= render partial: event.action, locals: {event: event}%>
+          <%= render partial: event.action, locals: { event: event } %>
         <% end %>
       <% end %>
     <% end %>

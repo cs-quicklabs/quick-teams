@@ -12,23 +12,23 @@
                 <label for="users" class="block text-sm font-medium text-gray-700">
                   Users
                 </label>
-                <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name_position, {:prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div>
                 <label for="status" class="block text-sm font-medium text-gray-700">
                   Status
                 </label>
-                <%= form.select(:published, [["Any", ""], ["Published", "true"], ["In Review", "false"]], {:selected => (params["published"] if !params["published"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.select(:published, [["Any", ""], ["Published", "true"], ["In Review", "false"]], { :selected => (params["published"] if !params["published"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div>
                 <label for="skill" class="block text-sm font-medium text-gray-700">
                   Skill
                 </label>
-                <%= form.collection_select(:skill_id, Skill.all.order("LOWER(name) ASC"), :id, :name, {:prompt => "Select Skill", :selected => (params["skill_id"] if !params["skill_id"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:skill_id, Skill.all.order("LOWER(name) ASC"), :id, :name, { :prompt => "Select Skill", :selected => (params["skill_id"] if !params["skill_id"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div class="flex justify-end mt-6">
-                <%= link_to 'Reset', nuggets_reports_path, class: "btn-normal" %>
-                <%= form.submit "Search", class:"btn-blue"%>
+                <%= link_to "Reset", nuggets_reports_path, class: "btn-normal" %>
+                <%= form.submit "Search", class: "btn-blue" %>
               </div>
             </main>
           <% end %>
