@@ -14,7 +14,7 @@
   <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
     <p> <%= attempt.score %></p>
   </td>
-  <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full flex">
+  <td class="px-4 py-3 whitespace-nowrap text-sm font-xs mt-2 text-gray-500 max-w-full flex">
     <% if attempt.submitted? %>
       Submitted
       <!-- Heroicon name: solid/check-circle -->
@@ -29,19 +29,19 @@
     <% end %>
   </td>
   <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
-    <% if attempt.submitted? %>
-      <a class="btn-normal mr-4" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
-        view
-      </a>
-    <% else %>
-      <a class="btn-normal mr-4" href="<%= survey_attempt_path(attempt.survey, attempt) %>">
-        view
-      </a>
-    <% end %>
     <% if current_user.admin? %>
       <%= link_to "Delete", survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     <% elsif attempt.submitted? == false and current_user == attempt.actor %>
       <%= link_to "Delete", survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
+    <% end %>
+    <% if attempt.submitted? %>
+      <a class="ml-4 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
+        view
+      </a>
+    <% else %>
+      <a class="ml-4 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="<%= survey_attempt_path(attempt.survey, attempt) %>">
+        view
+      </a>
     <% end %>
   </td>
 </tr>

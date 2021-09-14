@@ -11,6 +11,7 @@ class Survey::QuestionsController < Survey::BaseController
 
   def edit
     authorize [:survey, :question]
+    @question_categories = Survey::QuestionCategory.all.order(:name)
   end
 
   def new
@@ -48,7 +49,7 @@ class Survey::QuestionsController < Survey::BaseController
       if @question.persisted?
         format.turbo_stream {
           render turbo_stream: turbo_stream.prepend(:questions, partial: "survey/questions/question", locals: { question: @question }) +
-                               turbo_stream.replace(Survey::Question.new, partial: "survey/questions/form", locals: { question: Survey::Question.new })
+                               turbo_stream.replace(Survey::Question.new, partial: "survey/questions/form", locals: { question: Survey::Question.new, question_categories: Survey::QuestionCategory.all.order(:name) })
         }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Survey::Question.new, partial: "survey/questions/form", locals: { question: @question }) }
@@ -76,6 +77,6 @@ class Survey::QuestionsController < Survey::BaseController
   end
 
   def question_params
-    params.require(:survey_question).permit(:text, :description, :survey_id, :category, :explanation)
+    params.require(:survey_question).permit(:text, :description, :survey_id, :question_category_id, :explanation)
   end
 end

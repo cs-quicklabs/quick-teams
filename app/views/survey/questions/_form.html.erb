@@ -15,20 +15,20 @@
       <%= form.text_area :description, class: "form-text-field mt-1", autocomplete: "off" %>
       <p class="mt-2 text-xs text-gray-500" id="question-description">We'll only use this for spam.</p>
     </div>
-  <% if @survey.kpi? %>
-    <div>
-      <label for="comments" class="block text-sm font-medium text-gray-700">
-        Question Explanation (optional)
-      </label>
-      <%= form.text_area :explanation, class: "form-text-field mt-1", autocomplete: "off" %>
-      <p class="mt-2 text-xs text-gray-500" id="question-explanation">We'll only use this for spam.</p>
-    </div>
+    <% if @survey.kpi? %>
+      <div>
+        <label for="comments" class="block text-sm font-medium text-gray-700">
+          Question Explanation (optional)
+        </label>
+        <%= form.text_area :explanation, class: "form-text-field mt-1", autocomplete: "off" %>
+        <p class="mt-2 text-xs text-gray-500" id="question-explanation">We'll only use this for spam.</p>
+      </div>
     <% end %>
     <div>
       <label for="comments" class="block text-sm font-medium text-gray-700">
         Category 
       </label>
-       <%= form.collection_select(:category, @question_categories, :id, :name, { :prompt => "Select Category", :selected => params[:category] }, :class => "form-text-field mt-1", :required => true) %>
+      <%= form.collection_select(:question_category_id, question_categories, :id, :name, { :prompt => "Select Category", :selected => params[:question_category_id] }, :class => "form-text-field mt-1", :required => true) %>
     </div>
     <div class="flex justify-end mt-4">
       <%= form.submit "Add Question", class: "btn-blue ml-3 " %>

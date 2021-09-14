@@ -14,28 +14,29 @@
                 </div>
                 <ul class="divide-y divide-gray-200" id="questions">
                   <%= render partial: "question", collection: @questions, as: :question, cached: true %>
-                  <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-                    <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
-                  </ul>
+                </ul>
+                <div class="justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                  <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <% if policy([:surveys]).create? %>
+          <!-- Right column -->
+          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+            <section aria-labelledby="add-participant-section">
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <%= render partial: "survey/questions/form", locals: { question: @question, question_categories: @question_categories } %>
                 </div>
               </div>
             </section>
           </div>
-          <% if policy([:surveys]).create? %>
-            <!-- Right column -->
-            <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
-              <section aria-labelledby="add-participant-section">
-                <div class="overflow-hidden bg-white">
-                  <div class="px-4">
-                    <%= render partial: "survey/questions/form", locals: { question: @question } %>
-                  </div>
-                </div>
-              </section>
-            </div>
-          <% end %>
-        </div>
+        <% end %>
       </div>
-    </main>
-    <div class="pt-4 pl-16 pr-16">
     </div>
   </main>
+  <div class="pt-4 pl-16 pr-16">
+  </div>
+</main>

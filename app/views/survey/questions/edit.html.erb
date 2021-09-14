@@ -26,7 +26,7 @@
             <label for="comments" class="block text-sm font-medium text-gray-700">
               Category (optional)
             </label>
-            <%= form.text_field :category, class: "form-text-field mt-1", autocomplete: "off" %>
+            <%= form.collection_select(:question_category_id, @question_categories, :id, :name, { :prompt => "Select Category", :selected => @question.question_category_id }, :class => "form-text-field mt-1", :required => true) %>
           </div>
           <div class="content-end">
             <%= form.submit "Save", class: "btn-blue ml-3 mt-2" %>
