@@ -7,7 +7,8 @@ class Survey::AttemptsController < Survey::BaseController
 
   def index
     authorize [:survey, :attempt]
-    @pagy, @attempts = pagy_nil_safe(params, Survey::Attempt.all.where(survey: @survey).order(created_at: :desc), items: LIMIT)
+    @pagy, @attempts = pagy_nil_safe(params, Survey::Attempt.includes(:actor, :participant, :survey, :answers).where(survey: @survey).order(created_at: :desc), items: LIMIT)
+    fresh_when(@attempts + [@survey])
   end
 
   def new
@@ -100,7 +101,7 @@ class Survey::AttemptsController < Survey::BaseController
   end
 
   def set_attempt_with_survey
-    @attempt = Survey::Attempt.includes(:answers, survey: [:questions]).find(params[:id])
+    @attempt = Survey::Attempt.includes(:actor, :participant, :answers, survey: [:questions]).find(params[:id])
   end
 
   def set_participant

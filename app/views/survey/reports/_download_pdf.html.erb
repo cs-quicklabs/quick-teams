@@ -9,9 +9,6 @@
       </div>
       <div class=" sm:col-span-4 px-6 flex justify-end overflow-y-auto py-6">
         <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
-        <button type="submit" class="btn-normal ml-4" target="_blank">
-          Submit and Download PDF
-        </button>
         <%= link_to "Submit", survey_report_submit_path(@survey, @attempt), class: "ml-4 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
       </div>
     <% end %>
@@ -26,7 +23,7 @@
     </div>
     <div class=" sm:col-span-4 px-6 flex justify-end  overflow-y-auto py-6">
       <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
-      <%= link_to "Download PDF", survey_report_pdf_path(@survey, @attempt), target: "_blank", class: "btn-blue" %>
+      <%= link_to "Download PDF", survey_report_pdf_path(@survey, @attempt, format: :pdf), target: "_blank", class: "btn-blue" %>
     </div>
   <% end %>
 </div>

@@ -52,9 +52,12 @@ class Survey::Attempt < ActiveRecord::Base
     else
       score = correct_answers.reduce(0.0) { |sum, answer| sum + answer.score }
       total = (answers.count * 10)
-      percentage = (score / total) * 100.0
-      score = percentage.round(2)
+      unless total == 0
+        percentage = (score / total) * 100.0
+        score = percentage.round(2)
+      end
     end
+    score
   end
 
   private

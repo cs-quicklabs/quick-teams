@@ -26,14 +26,14 @@ class SurveysController < BaseController
   def update
     authorize :surveys
     @survey.update(survey_params)
-    redirect_to survey_path(@survey)
+    redirect_to survey_questions_path(@survey)
   end
 
   def create
     authorize :surveys
     @survey = Survey::Survey.new(survey_params)
     @survey.actor_id = current_user.id
-    redirect_to survey_path(@survey) if @survey.save
+    redirect_to survey_questions_path(@survey) if @survey.save
   end
 
   def show
@@ -45,7 +45,7 @@ class SurveysController < BaseController
     authorize :surveys
 
     @clone = @survey.clone_for_actor(current_user)
-    redirect_to survey_path(@clone)
+    redirect_to survey_questions_path(@clone)
   end
 
   def assignees

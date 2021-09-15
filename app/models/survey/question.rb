@@ -6,7 +6,9 @@ class Survey::Question < ActiveRecord::Base
   # relations
   belongs_to :survey
   belongs_to :question_category
+  belongs_to :attempt
   has_many :options, :dependent => :destroy
+  has_many :answers, :dependent => :destroy
   accepts_nested_attributes_for :options,
     :reject_if => ->(a) { a[:text].blank? },
     :allow_destroy => true
@@ -31,7 +33,7 @@ class Survey::Question < ActiveRecord::Base
   end
 
   def attempted_answer(attempt)
-    Survey::Answer.where(:attempt => attempt, :question => self).first
+    answers.select { |a| a.attempt_id == attempt.id }.first
   end
 
   def marked_score(attempt)

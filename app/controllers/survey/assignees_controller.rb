@@ -10,6 +10,7 @@ class Survey::AssigneesController < Survey::BaseController
       @pagy, @assignees = pagy_nil_safe(params, User.all_users.where(kpi_id: @survey.id).order(:first_name), items: LIMIT)
       @assigns = User.where(kpi_id: nil).order(:first_name)
     end
+    fresh_when @assignees + @assigns + [@survey]
   end
 
   def create
