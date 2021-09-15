@@ -33,7 +33,7 @@ class Survey::Stats::SurveyStats
   def contributions
     all_answers_ids = all_attempts.map(&:answers).flatten.map(&:id)
     all_answers = Survey::Answer.where(id: all_answers_ids)
-    all_questions = Survey::Question.where(survey_id: @survey.id)
+    all_questions = Survey::Question.where(survey_id: @survey.id).order_by_category
     all_categories_ids = all_questions.map(&:question_category_id).uniq
     categories = Survey::QuestionCategory.where(id: all_categories_ids)
 
