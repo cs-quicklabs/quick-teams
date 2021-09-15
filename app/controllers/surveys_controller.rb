@@ -20,7 +20,9 @@ class SurveysController < BaseController
   def destroy
     authorize :surveys
     @survey.destroy
-    redirect_to surveys_path
+    respond_to do |format|
+      format.turbo_stream { redirect_to surveys_path, notice: "Survey was removed successfully." }
+    end
   end
 
   def update
@@ -45,7 +47,9 @@ class SurveysController < BaseController
     authorize :surveys
 
     @clone = @survey.clone_for_actor(current_user)
-    redirect_to survey_questions_path(@clone)
+    respond_to do |format|
+      format.turbo_stream { redirect_to survey_path(@clone), notice: "Survey was cloned successfully." }
+    end
   end
 
   def assignees

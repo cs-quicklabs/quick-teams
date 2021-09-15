@@ -328,3 +328,18 @@ subordinate:
   permission: member
   status: deployed
   people_tags: star
+
+hansika:
+  id: 1 
+  first_name: Hansika
+  last_name: Dhawan (Subordinate)
+  active: true
+  email: hansika@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: lead
+  permission: member
+  status: deployed
+  people_tags: star
