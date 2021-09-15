@@ -6,7 +6,6 @@ class Survey::Question < ActiveRecord::Base
   # relations
   belongs_to :survey
   belongs_to :question_category
-  belongs_to :attempt
   has_many :options, :dependent => :destroy
   has_many :answers, :dependent => :destroy
   accepts_nested_attributes_for :options,
@@ -15,6 +14,10 @@ class Survey::Question < ActiveRecord::Base
 
   # validations
   validates :text, :presence => true, :allow_blank => false
+
+  scope :order_by_category, -> {
+      order(question_category_id: :asc, created_at: :asc)
+    }
 
   def correct_options
     return options.correct
@@ -33,7 +36,7 @@ class Survey::Question < ActiveRecord::Base
   end
 
   def attempted_answer(attempt)
-    answers.select { |a| a.attempt_id == attempt.id }.first
+    attempt.answers.select { |a| a.question_id == id }.first
   end
 
   def marked_score(attempt)

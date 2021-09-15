@@ -20,14 +20,13 @@ class Survey::ReportsController < Survey::BaseController
 
   def submit
     authorize [:survey, :report]
-    @attempt.update("comment": params[:comment], "submitted": true, score: @attempt.calculate_score)
+    @attempt.update("comment": params[:survey_attempt][:comment], "submitted": true, score: @attempt.calculate_score)
     redirect_to resolve_redirect_path
   end
 
   def download
     authorize [:survey, :report]
-    @attempt.update("comment": params[:comment], "submitted": true, score: @attempt.calculate_score)
-    @attempt.submit
+    @attempt.update("comment": params[:survey_attempt][:comment], "submitted": true, score: @attempt.calculate_score)
     redirect_to survey_report_pdf_path(@survey, @attempt, format: :pdf)
   end
 

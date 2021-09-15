@@ -70,7 +70,7 @@ Rails.application.routes.draw do
     end
     get "reports/pdf/:id", to: "survey/reports#pdf", as: "report_pdf"
     get "/attempts/:id/preview", to: "survey/attempts#preview", as: "report_preview"
-    get "/reports/:id/submit", to: "survey/reports#submit", as: "report_submit"
+    patch "/reports/:id/submit", to: "survey/reports#submit", as: "report_submit"
     patch "/reports/:id/download", to: "survey/reports#download", as: "report_download"
     get "/search", to: "search#surveys"
   end

@@ -1,4 +1,4 @@
-<% attempt.survey.questions.each_with_index do |question, index| %>
+<% attempt.survey.questions.order_by_category.each_with_index do |question, index| %>
   <tr class="bg-white ">
     <td class="py-3  px-6 text-sm font-medium text-gray-900">
       <%= index + 1 %></td>

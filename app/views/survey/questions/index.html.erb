@@ -28,7 +28,7 @@
             <section aria-labelledby="add-participant-section">
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render partial: "survey/questions/form", locals: { question: @question, question_categories: @question_categories } %>
+                  <%= render partial: "survey/questions/form", locals: { survey: @survey, question: @question, question_categories: @question_categories } %>
                 </div>
               </div>
             </section>

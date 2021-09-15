@@ -1,4 +1,4 @@
-<%= form_with(model: question, id: dom_id(question), url: survey_questions_path(@survey)) do |form| %>
+<%= form_with(model: question, id: dom_id(question), url: survey_questions_path(survey)) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: question, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Question", subtitle: "Please fill in detail of new question" %>
@@ -15,7 +15,7 @@
       <%= form.text_area :description, class: "form-text-field mt-1", autocomplete: "off" %>
       <p class="mt-2 text-xs text-gray-500" id="question-description">This is question description which will be visible to person filling the survey as question detail.</p>
     </div>
-    <% if @survey.kpi? %>
+    <% if survey.kpi? %>
       <div>
         <label for="comments" class="block text-sm font-medium text-gray-700">
           Question Explanation (optional)

@@ -4,7 +4,7 @@ class Survey::QuestionsController < Survey::BaseController
 
   def index
     authorize [:survey, :question]
-    @pagy, @questions = pagy_nil_safe(params, Survey::Question.includes(:question_category).where(survey_id: @survey), items: LIMIT)
+    @pagy, @questions = pagy_nil_safe(params, Survey::Question.includes(:question_category).where(survey_id: @survey).order_by_category, items: LIMIT)
     @question_categories = Survey::QuestionCategory.all.order(:name)
     @question = Survey::Question.new
     fresh_when @questions + @question_categories + [@survey]
@@ -17,7 +17,7 @@ class Survey::QuestionsController < Survey::BaseController
 
   def new
     authorize [:survey, :question]
-    @question = Survey::Question.new(question_params)
+    @question = Survey::Question.new
   end
 
   def destroy
@@ -31,9 +31,9 @@ class Survey::QuestionsController < Survey::BaseController
     @question.update(question_params)
     respond_to do |format|
       if @question.errors.empty?
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/question", locals: { question: @question }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/question", locals: { survey: @survey, question: Survey::Question.new, question_categories: Survey::QuestionCategory.all.order(:name) }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/form", locals: { question: @question }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/form", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name) }) }
       end
     end
   end
@@ -50,10 +50,10 @@ class Survey::QuestionsController < Survey::BaseController
       if @question.persisted?
         format.turbo_stream {
           render turbo_stream: turbo_stream.prepend(:questions, partial: "survey/questions/question", locals: { question: @question }) +
-                               turbo_stream.replace(Survey::Question.new, partial: "survey/questions/form", locals: { question: Survey::Question.new, question_categories: Survey::QuestionCategory.all.order(:name) })
+                               turbo_stream.replace(Survey::Question.new, partial: "survey/questions/form", locals: { survey: @survey, question: Survey::Question.new, question_categories: Survey::QuestionCategory.all.order(:name), message: "Question was added successfully." })
         }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Survey::Question.new, partial: "survey/questions/form", locals: { question: @question }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Survey::Question.new, partial: "survey/questions/form", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name) }) }
       end
     end
   end

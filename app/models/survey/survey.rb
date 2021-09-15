@@ -49,7 +49,7 @@ class Survey::Survey < ActiveRecord::Base
     clone.save
 
     self.questions.each do |question|
-      q = Survey::Question.new(text: question.text, description: question.description, survey_id: clone.id, category: question.category, explanation: question.explanation)
+      q = Survey::Question.new(text: question.text, description: question.description, survey_id: clone.id, question_category: question.question_category, explanation: question.explanation)
       q.save
 
       if self..checklist? #checklist

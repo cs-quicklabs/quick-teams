@@ -35,7 +35,7 @@
         <% end %>
       </tbody>
     </table>
-    <% if @attempt.comment? %>
+    <% unless @attempt.comment.blank? %>
       <div class="overflow-y-auto w-full d-flex mt-5">
         <span class="align-text-bottom mt-20 ">
           <h4 class="align-text-bottom ml-8 font-weight-normal">Comment: </h4>

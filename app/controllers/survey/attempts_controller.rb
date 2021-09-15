@@ -39,7 +39,7 @@ class Survey::AttemptsController < Survey::BaseController
   def survey_questions
     authorize [:survey, :attempt], :show?
     @attempt = Survey::Attempt.find(params[:attempt_id])
-    @questions = @attempt.survey.questions.includes(:options)
+    @questions = @attempt.survey.questions.includes(:options, :question_category).order_by_category
   end
 
   def preview
