@@ -2,7 +2,7 @@
   <tr class="bg-white ">
     <td class="py-3  px-6 text-sm font-medium text-gray-900">
       <%= index + 1 %></td>
-    <td class="py-3 px-6 w-full  text-sm font-medium text-gray-900"><%= question.text.upcase_first%></td>
+    <td class="py-3 px-6 w-full  text-sm font-medium text-gray-900"><%= question.text.upcase_first %></td>
     <td class="py-3 px-6 text-sm font-medium text-gray-900"><%= question.marked_score(attempt).to_s %></td>
     <td class="py-3  px-6 text-sm font-medium text-gray-900">
       <% if question.marked_score(attempt) == 0 %>
