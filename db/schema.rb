@@ -368,7 +368,7 @@ ActiveRecord::Schema.define(version: 2021_09_18_052114) do
   create_table "survey_surveys", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "account_id", default: 0
+    t.bigint "account_id", null: false
     t.integer "survey_for", default: 0
     t.integer "attempts_number", default: 0
     t.boolean "finished", default: false
@@ -378,6 +378,7 @@ ActiveRecord::Schema.define(version: 2021_09_18_052114) do
     t.integer "survey_type", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_survey_surveys_on_account_id"
     t.index ["actor_id"], name: "index_survey_surveys_on_actor_id"
   end
 
@@ -534,6 +535,7 @@ ActiveRecord::Schema.define(version: 2021_09_18_052114) do
   add_foreign_key "survey_attempts", "users", column: "actor_id"
   add_foreign_key "survey_attempts", "users", column: "participant_id"
   add_foreign_key "survey_question_categories", "accounts"
+  add_foreign_key "survey_surveys", "accounts"
   add_foreign_key "survey_surveys", "users", column: "actor_id"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "accounts"

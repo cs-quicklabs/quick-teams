@@ -1,10 +1,16 @@
 class Survey::Survey < ActiveRecord::Base
-  self.table_name = "survey_surveys"
   acts_as_tenant :account
 
+  self.table_name = "survey_surveys"
+
   enum survey_type: [:checklist, :score, :kpi]
+<<<<<<< HEAD
   enum survey_for: [:project, :user, :client, :adhoc]
   belongs_to :actor, class_name: "User", foreign_key: "actor_id"
+=======
+  enum survey_for: [:project, :user, :client]
+  belongs_to :actor, class_name: "User"
+>>>>>>> f0be2a7 (suveys test)
 
   # relations
   has_many :attempts, :dependent => :destroy
@@ -50,7 +56,7 @@ class Survey::Survey < ActiveRecord::Base
     clone.save
 
     self.questions.each do |question|
-      q = Survey::Question.new(text: question.text, description: question.description, survey_id: clone.id, question_category: question.question_category, explanation: question.explanation)
+      q = Survey::Question.new(text: question.text, description: question.description, survey_id: clone.id, question_category_id: question.question_category_id, explanation: question.explanation)
       q.save
 
       if self.checklist? #checklist

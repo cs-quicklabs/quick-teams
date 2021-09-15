@@ -20,7 +20,13 @@ class SurveysController < BaseController
   def destroy
     authorize :surveys
     @survey.destroy
+<<<<<<< HEAD
     redirect_to surveys_path, notice: "Survey was removed successfully."
+=======
+    respond_to do |format|
+      format.turbo_stream { redirect_to surveys_path, notice: "Survey was removed successfully." }
+    end
+>>>>>>> f0be2a7 (suveys test)
   end
 
   def update
