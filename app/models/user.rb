@@ -43,8 +43,6 @@ class User < ApplicationRecord
   has_and_belongs_to_many :skills
   has_and_belongs_to_many :nuggets
 
-  validates :email, uniqueness: true
-
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 
   def potential_projects

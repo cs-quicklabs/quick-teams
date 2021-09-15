@@ -28,7 +28,7 @@ class ProjectSkillsTest < ApplicationSystemTestCase
 
   test "can add and remove skills" do
     visit page_url
-    fill_in "search-skills", with: "u"
+    fill_in "search-skills", with: "rub"
     find("#add-skill").click
     assert_selector "#project-skills", text: "Ruby"
     find("#remove-skill").click
