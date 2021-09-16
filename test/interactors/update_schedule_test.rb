@@ -9,7 +9,7 @@ class UpdateScheduleTest < ActiveSupport::TestCase
     @project = projects(:one)
     @employee = users(:regular)
     @actor = users(:actor)
-    @params = { user_id: @employee.id, starts_at: "2021-03-26", ends_at: "2021-04-01", occupancy: 100 }
+    @params = { user_id: @employee.id, starts_at: "2021-03-26", ends_at: "2021-04-01", occupancy: 100, billable: true }
   end
 
   test "can update schedule" do
