@@ -19,7 +19,7 @@
           </button>
           <div  x-show="opentags"
         @click.away="opentags = false" class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg hide ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-            <% if @tags.empty?  %>
+            <% if @tags.empty? %>
               <div class="py-1" role="none">
                 <p @click="opentags = false" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 " > No project tag added yet</p>
                 <a href=<%= account_project_tags_path %>  class=" block px-4 py-2 text-sm text-indigo-700 hover:bg-gray-50 hover:underline"> Add Project Tags</a>
@@ -54,7 +54,7 @@
           </div>
           <div  x-show="open"
         @click.away="open = false" class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg hide ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-            <% if @statuses.empty?  %>
+            <% if @statuses.empty? %>
               <div class="py-1" role="none">
                 <p @click="opentags = false" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 " > No project status added yet</p>
                 <a href=<%= account_project_statuses_path %>  class=" block px-4 py-2 text-sm text-indigo-700 hover:bg-gray-50 hover:underline"> Add Project Status</a>
