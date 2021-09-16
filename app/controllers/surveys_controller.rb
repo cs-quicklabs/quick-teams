@@ -28,14 +28,14 @@ class SurveysController < BaseController
   def update
     authorize :surveys
     @survey.update(survey_params)
-    redirect_to survey_questions_path(@survey)
+    redirect_to survey_questions_path(@survey), notice: "Survey was updated successfully."
   end
 
   def create
     authorize :surveys
     @survey = Survey::Survey.new(survey_params)
     @survey.actor_id = current_user.id
-    redirect_to survey_questions_path(@survey) if @survey.save
+    redirect_to survey_questions_path(@survey), notice: "Survey was created successfully." if @survey.save
   end
 
   def show
@@ -47,9 +47,7 @@ class SurveysController < BaseController
     authorize :surveys
 
     @clone = @survey.clone_for_actor(current_user)
-    respond_to do |format|
-      format.turbo_stream { redirect_to survey_path(@clone), notice: "Survey was cloned successfully." }
-    end
+    redirect_to survey_path(@clone), notice: "Survey was cloned successfully."
   end
 
   def assignees

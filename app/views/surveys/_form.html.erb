@@ -4,13 +4,13 @@
     <%= render "shared/form_header", title: title, subtitle: "A Survey list of questions. A survey can be a checklist or score. KPIs are also score survey." %>
     <input type="hidden" name="remember" value="true">
     <div class=" -space-y-px">
-      <%= form.text_field :name, "Survey", required: true, autocomplete: "off" %>
+      <%= form.text_field :name, "Name", required: true, autocomplete: "off" %>
       <div class="sm:col-span-2 pt-6">
         <%= form.text_area :description, "Survey Description", required: true, class: "form-text-field" %>
       </div>
       <div class="sm:col-span-2 pt-6">
         <label for="email" class="block text-sm font-medium text-gray-700">
-          Select survey Type
+          Select Survey Type
         </label>
         <%= form.select(:survey_type, [["Checklist", "checklist"], ["Score", "score"], ["KPIs", "kpi"]], { :prompt => "Select Survey Type", :selected => (params["survey_type"] if !params["survey_type"].blank?) }, :class => "form-text-field mt-1", :required => true) %>
       </div>

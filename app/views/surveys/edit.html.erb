@@ -4,7 +4,7 @@
     <%= render "shared/form_header", title: "Edit Survey", subtitle: "A Survey list of questions. A survey can be a checklist or score. KPIs are also score survey." %>
     <input type="hidden" name="remember" value="true">
     <div class=" -space-y-px">
-      <%= form.text_field :name, "Survey", required: true, autocomplete: "off" %>
+      <%= form.text_field :name, "Name", required: true, autocomplete: "off" %>
       <div class="sm:col-span-4 pt-6">
         <%= form.text_area :description, "Survey Description", required: true, class: "form-text-field" %>
       </div>
