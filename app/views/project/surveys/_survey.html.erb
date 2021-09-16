@@ -1,7 +1,6 @@
 <li class="flex px-2 py-2">
   <div class="w-full ml-3">
-    <a class="hover:underline" href="<%= new_survey_attempt_path(survey, participant_id: @project.id) %>">
-      <p class="text-sm font-medium text-gray-500"><%= survey.name %></p>
-    </a>
-  </div>
+    <%= link_to survey.name.upcase_first, new_survey_attempt_path(survey, participant_id: @project.id), class: "hover:underline text-sm font-medium text-gray-500", data: { confirm: "Are you sure you want to take a survey?" } %>
+  </a>
+</div>
 </li>
