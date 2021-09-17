@@ -1,10 +1,6 @@
 class Survey::QuestionDecorator < Draper::Decorator
   delegate_all
 
-  def display_text
-    text.upcase_first
-  end
-
   def display_description
     description.nil? ? "" : description.upcase_first
   end
