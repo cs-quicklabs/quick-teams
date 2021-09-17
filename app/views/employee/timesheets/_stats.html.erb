@@ -1,10 +1,10 @@
 <div class="flex flex-wrap p-4">
   <% if current_user.admin? %>
     <a class="w-full hover:underline" href="<%= "/" + Current.account.id.to_s + "/report/timesheets?" + "user_id=" + employee_stats.employee.id.to_s + "&from_date=" + employee_stats.from_date.to_s + "&to_date=" + employee_stats.to_date.to_s %>">
-      <p class="text-sm font-medium text-gray-900 truncate"><%= employee_stats.title %></p>
+      <p class="text-sm font-medium text-gray-900"><%= employee_stats.title %></p>
     </a>
   <% else %>
-    <p class="text-sm font-medium text-gray-900 truncate"><%= employee_stats.title %></p>
+    <p class="text-sm font-medium text-gray-900"><%= employee_stats.title %></p>
   <% end %>
 </div>
 <div>

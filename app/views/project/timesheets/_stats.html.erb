@@ -2,10 +2,10 @@
   <% if current_user.admin? %>
     <!-- Somehow normal rails path are not working in stimulus reflex render so putting this hack -->
     <a class="w-full hover:underline" href="<%= "/" + Current.account.id.to_s + "/report/timesheets?" + "project_id=" + project_stats.project.id.to_s + "&from_date=" + project_stats.from_date.to_s + "&to_date=" + project_stats.to_date.to_s %>">
-      <p class="text-sm font-medium text-gray-900 truncate"><%= project_stats.title %></p>
+      <p class="text-sm font-medium text-gray-900"><%= project_stats.title %></p>
     </a>
   <% else %>
-    <p class="text-sm font-medium text-gray-900 truncate"><%= project_stats.title %></p>
+    <p class="text-sm font-medium text-gray-900"><%= project_stats.title %></p>
   <% end %>
 </div>
 <div>

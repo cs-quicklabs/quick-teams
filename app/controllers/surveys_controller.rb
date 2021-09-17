@@ -20,20 +20,27 @@ class SurveysController < BaseController
   def destroy
     authorize :surveys
     @survey.destroy
-    redirect_to surveys_path
+    redirect_to surveys_path, notice: "Survey was removed successfully."
   end
 
   def update
     authorize :surveys
-    @survey.update(survey_params)
-    redirect_to survey_questions_path(@survey)
+    if @survey.update(survey_params)
+      redirect_to survey_questions_path(@survey), notice: "Survey was updated successfully."
+    else
+      redirect_to edit_survey_path(@survey), alert: "Failed to update survey."
+    end
   end
 
   def create
     authorize :surveys
     @survey = Survey::Survey.new(survey_params)
     @survey.actor_id = current_user.id
-    redirect_to survey_questions_path(@survey) if @survey.save
+    if @survey.save
+      redirect_to survey_questions_path(@survey)
+    else
+      redirect_to new_survey_path, alert: "Failed to create survey."
+    end
   end
 
   def show
@@ -45,7 +52,11 @@ class SurveysController < BaseController
     authorize :surveys
 
     @clone = @survey.clone_for_actor(current_user)
-    redirect_to survey_questions_path(@clone)
+    if @clone.id.nil?
+      redirect_to new_survey_path, alert: "Failed to clone survey. You can try creating a new one."
+    else
+      redirect_to survey_questions_path(@clone), notice: "Survey was cloned successfully."
+    end
   end
 
   def assignees
