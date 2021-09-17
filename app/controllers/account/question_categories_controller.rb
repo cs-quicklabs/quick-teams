@@ -41,7 +41,7 @@ class Account::QuestionCategoriesController < Account::BaseController
       if @question_category.update(question_category_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@question_category, partial: "account/question_categories/question_category", locals: { question_category: @question_category, message: "Survey question category updated successfully." }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question_category, template: "account/question_categories/form", locals: { question_category: @question_category, messages: @question_category.errors.full_messages }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question_category, template: "account/question_categories/edit", locals: { question_category: @question_category, messages: @question_category.errors.full_messages }) }
       end
     end
   end

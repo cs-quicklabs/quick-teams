@@ -5,3 +5,80 @@ one:
   account: crownstack
   survey_for: 1
   survey_type: 1
+
+two: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: project 
+  survey_type: kpi
+
+ three: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: employee
+  survey_type:  kpi 
+ 
+four: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: project
+  survey_type: score
+
+five: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: employee 
+  survey_type: score
+
+ six: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: project 
+  survey_type: checklist
+
+seven: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: employee
+  survey_type: checklist
+
+eight: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: client
+  survey_type: kpi
+
+nine: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: client
+  survey_type: score
+
+ ten: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: client
+  survey_type: checklist
+ 
+
+
+
+ 

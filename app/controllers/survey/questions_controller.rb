@@ -22,8 +22,7 @@ class Survey::QuestionsController < Survey::BaseController
 
   def destroy
     authorize [:survey, :question]
-    @question.destroy
-    redirect_to survey_path(@survey), alert: "Question was Deleted"
+    redirect_to survey_path(@survey), alert: "Question was deleted" if @question.destroy
   end
 
   def update
@@ -31,7 +30,7 @@ class Survey::QuestionsController < Survey::BaseController
     @question.update(question_params)
     respond_to do |format|
       if @question.errors.empty?
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/question", locals: { survey: @survey, question: Survey::Question.new, question_categories: Survey::QuestionCategory.all.order(:name) }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/question", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name), message: "Question was updated successfully." }) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/form", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name) }) }
       end
