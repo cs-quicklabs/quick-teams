@@ -37,7 +37,7 @@ class SurveysController < BaseController
     @survey = Survey::Survey.new(survey_params)
     @survey.actor_id = current_user.id
     if @survey.save
-      redirect_to survey_questions_path(@survey)
+      redirect_to survey_questions_path(@survey), notice: "Survey was created successfully."
     else
       redirect_to new_survey_path, alert: "Failed to create survey."
     end
