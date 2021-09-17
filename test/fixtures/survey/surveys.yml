@@ -1,0 +1,8 @@
+one:
+  name: project checklist survey
+  description: Survey Campaign
+  survey_type: checklist
+  survey_for: project
+  account: crownstack
+  actor: regular
+
