@@ -18,6 +18,7 @@ class User < ApplicationRecord
   belongs_to :role
   belongs_to :job
 
+  belongs_to :kpi, class_name: "Survey::Survey", optional: true
   has_many :schedules
   has_many :projects, through: :schedules
   has_many :subordinates, class_name: "User", foreign_key: "manager_id"
@@ -25,6 +26,10 @@ class User < ApplicationRecord
   has_many :documents, as: :documenter
   has_many :goals, as: :goalable
   has_many :events, as: :eventable
+  #has_many :attempts, class_name: "Survey::Attempt", foreign_key: "participant_id", as: :participant
+  has_many :attempts, as: :participant
+  has_many :surveys, class_name: "Survey::Survey", foreign_key: "actor__id"
+  has_many :attempt, class_name: "Survey::Attempt", foreign_key: "actor__id"
   has_many :notes
   has_many :timesheets
   has_many :kbs
@@ -38,6 +43,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :skills
   has_and_belongs_to_many :nuggets
 
+  validates :email, uniqueness: true
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 
   def potential_projects
@@ -90,5 +96,13 @@ class User < ApplicationRecord
 
   def published_nuggets_for_skill(id)
     nuggets.where(published: true).select("nuggets_users.read as read", "nuggets.*").where(skill_id: id).includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
+  end
+
+  def surveys
+    Survey::Survey.surveys.where(survey_for: :user)
+  end
+
+  def filled_surveys
+    Survey::Attempt.includes(:survey, :actor, :participant).where(actor_id: id, survey_id: surveys.ids, participant_type: "User")
   end
 end

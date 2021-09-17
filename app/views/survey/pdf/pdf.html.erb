@@ -1,0 +1,47 @@
+<% actor = @attempt.actor.decorate %>
+<% participant = @attempt.participant.decorate %>
+<% survey = @attempt.survey %>
+<% attempt = @attempt.decorate %>
+<div class="d-inline-block">
+  <h2  class="mt-1 w-full font-semibold "><%= @attempt.participant.decorate.display_name %></h2>
+  <h3 class="text-2xl leading-6 font-medium text-gray-900">
+    <%= survey.name.titleize %>
+  </h3>
+  <p class="mt-1 w-full text-sm text-gray-500 ">
+    <p class="mt-1 w-full text-sm text-gray-500"> <%= actor.display_name %> started this survey on <%= display_date(@attempt.created_at) %>. This survey has been submitted.</p>
+  </p>
+</div>
+<div class="d-inline-block float-end  align-top pb-4 pr-4">
+  <h2 class="bold">
+    Score: <%= attempt.display_score %>
+  </h3>
+</div>
+<div class=" pb-12 d-flex justify-content-start">
+  <div>
+    <table class="table mt-2">
+      <thead>
+        <tr class="d-flex ">
+          <th scope="col-1 px-1" style="text-align: left">#</th>
+          <th class="col-11 px-1" style="text-align: left">Question</th>
+          <th class="col-1 px-1" style="text-align: left">Answer</th>
+          <th scope="col-1 px-1" style="text-align: left">Verdict</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% if survey.checklist? %>
+          <%= render partial: "survey/pdf/pdf_checklist", locals: { attempt: @attempt, survey: survey, actor: actor, participant: participant } %>
+        <% else %>
+          <%= render partial: "survey/pdf/pdf_score", locals: { attempt: @attempt, survey: survey, actor: actor, participant: participant } %>
+        <% end %>
+      </tbody>
+    </table>
+    <% unless @attempt.comment.blank? %>
+      <div class="overflow-y-auto w-full d-flex mt-5">
+        <span class="align-text-bottom mt-20 ">
+          <h4 class="align-text-bottom ml-8 font-weight-normal">Comment: </h4>
+          <h4 class="mt-20 align-text-bottom font-weight-normal"><%= @attempt.comment %></h4>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>

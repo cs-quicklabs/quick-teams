@@ -4,6 +4,7 @@ class Nugget < ApplicationRecord
   belongs_to :user
   belongs_to :skill
   has_rich_text :body
+  has_many :nuggets_users, :dependent => :destroy
 
   validates_presence_of :title, :body
 

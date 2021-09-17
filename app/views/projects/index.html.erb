@@ -5,11 +5,11 @@
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         Projects
       </h1>
-      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @projects.count.to_s + " projects)"%></p>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @projects.count.to_s + " projects)" %></p>
     </div>
     <% if current_user.admin? %>
       <div class="flex mt-4 sm:mt-0 sm:ml-4">
-        <%= link_to 'New Project', new_project_path, class:"btn-blue" %>
+        <%= link_to "New Project", new_project_path, class: "btn-blue" %>
       </div>
     <% end %>
   </div>
@@ -28,7 +28,7 @@
                   Tags
                 </th>
                 <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+)%>
+                  Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+) %>
                 </th>
               <% end %>
               <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
@@ -46,7 +46,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-100">
-            <%= render partial: "project", collection: @projects, cached: true%>
+            <%= render partial: "project", collection: @projects, cached: true %>
           </tbody>
         </table>
       </div>

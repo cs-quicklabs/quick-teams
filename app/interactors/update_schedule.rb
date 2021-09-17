@@ -30,17 +30,9 @@ class UpdateSchedule < Patterns::Service
 
   def update_billable_resources
     if project.billable
-      project.billable_resources = billable_resources
-      project.save!
+      project.reset_billable_resources
     else
       schedule.billable = false
-    end
-  end
-
-  def billable_resources
-    project.schedules.reduce(0.0) do |sum, schedule|
-      sum += schedule.billable ? (schedule.occupancy / 100.0) : 0.0
-      sum
     end
   end
 

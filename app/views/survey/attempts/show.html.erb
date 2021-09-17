@@ -1,0 +1,36 @@
+<% participant = @attempt.participant.decorate %>
+<% actor = @attempt.actor.decorate %>
+<% survey = @attempt.survey %>
+<div class="min-h-full flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl w-full space-y-8 ">
+    <div>
+      <h3 class="text-2xl leading-6 font-medium text-gray-900 text-center">
+        <%= survey.name.upcase_first %>
+      </h3>
+      <p class="mt-1 w-full text-sm text-gray-500 text-center">
+        <p class="mt-1 w-full font-semibold text-center"> Participant: <%= participant.display_name %></p>
+        <% if @attempt.submitted? %>
+          <p class="mt-1 w-full text-sm text-gray-500 text-center"> <%= actor.display_name %> started this survey on <%= display_date(@attempt.created_at) %>. This survey has been submitted.</p>
+        <% else %>
+          <p class="mt-1 w-full text-sm text-gray-500 text-center"> <%= actor.display_name %> started this survey on <%= display_date(@attempt.created_at) %>. We are waiting for this survey to get submitted.</p>
+        <% end %>
+        <p class="mt-1 w-full text-sm text-gray-500 text-center"> This is a <%= @attempt.survey.survey_type %> survey which is intended for <%= @attempt.survey.survey_for %>.</p>
+      </p>
+    </div>
+    <div class="">
+      <%= turbo_frame_tag "survey_questions", src: "/#{Current.account.id}/surveys/#{@attempt.survey.id}/attempts/#{@attempt.id}/questions", target: "_top", loading: :lazy do %>
+        <p class="pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Hold on a sec while I fetch questions...</p>
+      <% end %>
+      <div class=" flex justify-end py-12">
+        <% if @attempt.submitted? %>
+          <%= link_to "See Report", survey_report_preview_path, class: "btn-blue" %>
+        <% else %>
+          <% unless survey.kpi? %>
+            <%= link_to "Finish it Later", "javascript:history.back()", class: "btn-normal" %>
+          <% end %>
+          <%= link_to "Preview and Submit", survey_report_preview_path, class: "btn-blue" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

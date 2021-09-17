@@ -10,37 +10,37 @@
 </div>
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
-    <%= render partial: "form"%>
+    <%= render partial: "form" %>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <% if @kbs.size > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <table class="min-w-full pb-6 divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-                      <th scope="col" class="w-full px-16 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                        Document
-                      </th>
-                      <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
-                        Added by
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
-                        Department
-                      </th>
-                       <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
-                        Job
-                      </th>
-                    </tr>
+              <th scope="col" class="w-full px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Document
+              </th>
+              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Added by
+              </th>
+              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Department
+              </th>
+              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                Job
+              </th>
+            </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
             <%= render partial: "kb", collection: @kbs, as: :kb %>
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-          <%= render partial: "shared/paginator", locals:{pagy: @pagy}%>
+          <%= render partial: "shared/paginator", locals: { pagy: @pagy } %>
         </div>
       </div>
     <% else %>
-      <%== render partial: "shared/no_result_found", cached: true%>
-    <% end%>
+      <%== render partial: "shared/no_result_found", cached: true %>
+    <% end %>
   </div>
 </div>

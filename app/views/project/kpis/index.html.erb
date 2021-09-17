@@ -1,0 +1,48 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "project/title", project: @project %>
+  <main class="pb-8">
+    <div class="">
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1 lg:grid-cols-3">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+          <% unless @kpi.nil? %>
+            <section aria-labelledby="participants_section">
+              <div class="overflow-hidden bg-white">
+                <div class="p-4">
+                  <div class="flex flex-wrap">
+                    <p class=" mt-1 text-sm font-medium text-gray-900 truncate"><%= "KPIs Questions set (" + @kpi.questions.load.size.to_s + ")" %></p>
+                  </div>
+                  <ul class="divide-y divide-gray-200" id="questions">
+                    <%= render partial: "shared/surveys/question", collection: @kpi.questions, locals: { as: :question, participant: @project }, cached: false %>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          <% end %>
+        </div>
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <% if @kpi.nil? %>
+            <p class="mt-2 p-4 max-w-4xl text-sm text-gray-500">No KPIs have been assinged yet. If you are an admin, you can set KPIs from surveys page. If not, please connect with the admin. </p>
+          <% else %>
+            <%= turbo_frame_tag "stats", src: "/#{@project.account.id}/projects/#{@project.id}/kpis/#{@kpi.id}/stats", target: "_top", loading: :lazy do %>
+              <p class="pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Hold on a sec while I fetch stats...</p>
+            <% end %>
+            <% if policy([@project, :kpi]).record? %>
+              <div class="text-center mt-4">
+                <h3 class="mt-2 text-sm font-medium text-gray-900">Record New Assessment</h3>
+                <p class="mt-1 text-sm text-gray-500 px-8">
+                  <%= @project.decorate.display_name %> has been assigned <%= @kpi.name.upcase_first %>. Please click on button below to record a new assessment.
+                </p>
+                <div class="mt-2">
+                  <%= link_to "Record Assessment", new_survey_attempt_path(@kpi, participant_id: @project.id), class: "btn-blue", data: { confirm: "The result of your assessment will be used to calculate overall KPIs performance. Are you sure you want to proceed?" } %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </main>
+</main>

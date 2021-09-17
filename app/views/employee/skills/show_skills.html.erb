@@ -1,0 +1,29 @@
+<% @employee = @employee.decorate %>
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-2xl font-bold leading-tight text-gray-900 pt-2">
+        <%= @employee.display_name %>'s skills 
+      </h1>
+    </div>
+    <div>
+      <p class="text-right pr-10">
+        <%= link_to "Back", employee_skills_path(@employee), class: "btn-normal " %>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <div class="py-10 px-6" id="show-skills">
+      <ul role="list" class="grid grid-cols-2 gap-x-6 gap-y-4 lg:grid-cols-5 xl:gap-x-6">
+        <% @employee_skills.load %>
+        <% @skills.each do |skill| %>
+          <%= render partial: "skill", locals: { employee: @employee, skill: skill, selected: @employee_skills.include?(skill) } %>
+        <% end %>
+      </ul>
+    </div>
+  </main>
+</div>
+</div>

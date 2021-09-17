@@ -1,0 +1,33 @@
+<turbo-frame id="stats">
+  <section aria-labelledby="add-participant-section">
+    <div class="overflow-hidden bg-white">
+      <div class="px-4 justify-between flex">
+        <div class="p-5">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            KPIs Stats
+          </h3>
+          <% if current_user.admin? %>
+            <a class="hover:underline" href="<%= survey_path(@kpi) %>">
+              <p class="mt-2 max-w-4xl text-sm text-gray-500"><%= @kpi.name %></p>
+            </a>
+          <% else %>
+            <p class="mt-2 max-w-4xl text-sm text-gray-500"><%= @kpi.name %></p>
+          <% end %>
+        </div>
+        <div class="px-4 p-4 bg-white overflow-hidden">
+          <dd class="text-3xl font-semibold text-gray-900 text-right">
+            <%= @stats.average_score.to_s %>
+          </dd>
+          <dt class="text-sm font-medium text-gray-500 truncate">
+            Score (out of 10)
+          </dt>
+        </div>
+      </div>
+      <ul>
+        <% @stats.contributions.each do |contribution| %>
+          <%= render partial: "shared/surveys/progress_bar", locals: { title: contribution.category, score: contribution.score, scale: 10 } %>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+</turbo-frame>

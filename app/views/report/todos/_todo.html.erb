@@ -5,14 +5,14 @@
   </td>
   <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
     <% if current_user.admin? && !todo.project.nil? %>
-      <a href="<%= project_todos_path(todo.project)%>" class="block hover:underline">
+      <a href="<%= project_todos_path(todo.project) %>" class="block hover:underline">
         <%= todo.project.name %>
       </a>
     <% end %>
   </td>
   <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
-    <% if current_user.admin?%>
-      <a href="<%= employee_todos_path(todo.owner)%>" class="block hover:underline">
+    <% if current_user.admin? %>
+      <a href="<%= employee_todos_path(todo.owner) %>" class="block hover:underline">
         <%= todo.owner.display_name %>
       </a>
     <% end %>

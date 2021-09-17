@@ -2,16 +2,16 @@
   <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-4 lg:pb-16">
     <%= render "shared/form_messages", resource: @employee, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Employee", subtitle: "Please add detail of new employee." %>
-    <%= form.text_field :first_name, "First Name"%>
-    <%= form.text_field :last_name, "Last Name"%>
-    <%= form.text_field :email, "Email"%>
-    <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, {:prompt => 'Select Discipline'}, :selected => @employee.discipline_id, :class=>"form-text-field mt-1" ) %>
-    <%= form.collection_select(:job_id, Job.order(:name), :id, :name, {:prompt => 'Select Job'}, :selected => @employee.job_id, :class=>"form-text-field mt-1" ) %>
-    <%= form.collection_select(:role_id, Role.order(:name), :id, :name, {:prompt => 'Select Role'}, :selected => @employee.role_id, :class=>"form-text-field mt-1" ) %>
-    <%= form.collection_select(:manager_id, User.all_users.decorate, :id, :display_name_position, {:prompt => 'Select Manager'}, :selected => @employee.manager_id, :class=>"form-text-field mt-1" ) %>
+    <%= form.text_field :first_name, "First Name" %>
+    <%= form.text_field :last_name, "Last Name" %>
+    <%= form.text_field :email, "Email" %>
+    <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, { :prompt => "Select Discipline" }, :selected => @employee.discipline_id, :class => "form-text-field mt-1") %>
+    <%= form.collection_select(:job_id, Job.order(:name), :id, :name, { :prompt => "Select Job" }, :selected => @employee.job_id, :class => "form-text-field mt-1") %>
+    <%= form.collection_select(:role_id, Role.order(:name), :id, :name, { :prompt => "Select Role" }, :selected => @employee.role_id, :class => "form-text-field mt-1") %>
+    <%= form.collection_select(:manager_id, User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Manager" }, :selected => @employee.manager_id, :class => "form-text-field mt-1") %>
     <div class="flex items-center justify-between">
       <div class="flex items-center">
-        <%= form.check_box :billable, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
+        <%= form.check_box :billable, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
         <label for="remember_me" class="block ml-2 text-sm text-gray-900">
           This resource can be put on client work and can generate direct revenue. Leave unchecked if resource is not directly billable.
         </label>
@@ -19,15 +19,15 @@
     </div>
     <div class="flex items-center justify-between">
       <div class="flex items-center">
-        <%= form.check_box :invite, name: "invite", class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
+        <%= form.check_box :invite, name: "invite", class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
         <label for="remember_me" class="block ml-2 text-sm text-gray-900">
           Invite this user to join Skia. User will be sent an invitation email to confirm.
         </label>
       </div>
     </div>
     <div class="flex justify-end">
-      <%= link_to 'Back', 'javascript:history.back()', class:"btn-normal" %>
-      <%= form.submit "Save", class:"btn-blue"%>
+      <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+      <%= form.submit "Save", class: "btn-blue" %>
     </div>
   </main>
 <% end %>

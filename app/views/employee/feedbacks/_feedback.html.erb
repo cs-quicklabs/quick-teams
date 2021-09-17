@@ -1,18 +1,18 @@
 <li id="<%= dom_id feedback %>">
   <div class="flex space-x-3">
     <div class="flex-shrink-0">
-      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full"%>
+      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
     </div>
     <div>
       <div class="text-sm">
-        <a href="#" class="font-medium text-gray-900"><%= feedback.user.decorate.display_name%></a>
+        <a href="#" class="font-medium text-gray-900"><%= feedback.user.decorate.display_name %></a>
         <% if feedback.published? %>
           <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
             Published
           </span>
-        <%end%>
+        <% end %>
         <div class="mt-1 text-sm text-gray-700">
-          <p><%= highlight_hashtag(feedback.title)%></p>
+          <p><%= highlight_hashtag(feedback.title) %></p>
         </div>
         <div class="mt-2 space-x-2 text-sm">
           <span class="font-medium text-gray-500"><%= display_created_at(feedback) %></span>

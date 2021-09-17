@@ -6,8 +6,8 @@ class KbsController < BaseController
     authorize :kb
 
     @kb = Kb.new
-    @pagy, @kbs = pagy(policy_scope(Kb), items: 10)
-    render_partial("kb/kb", collection: @kbs)
+    @pagy, @kbs = pagy(policy_scope(Kb), items: LIMIT)
+    render_partial("kbs/kb", collection: @kbs)
   end
 
   def new

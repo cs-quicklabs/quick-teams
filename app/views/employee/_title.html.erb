@@ -5,12 +5,12 @@
       <%= employee.display_name %>
     </h1>
     <% if current_user.admin? or current_user.lead? %>
-      <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= employee.display_position%></p>
-    <%end %>
+      <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= employee.display_position %></p>
+    <% end %>
     <% if current_user.admin? %>
       <div class="flex">
         <div id="employee-tags" class="flex ml-4">
-          <%= render partial: 'employee/tags', locals: {employee: employee, tags: employee.people_tags }%>
+          <%= render partial: "employee/tags", locals: { employee: employee, tags: employee.people_tags } %>
         </div>
         <div class="relative inline-block mr-4 text-left" x-data="{opentags: false}" @keydown.window.escape="opentags = false" >
           <button id="add" @click="opentags = !opentags" type="button" class="inline-flex items-center p-1 ml-2 text-white bg-indigo-600 border border-transparent rounded-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -21,56 +21,68 @@
           </button>
           <div  x-show="opentags"
           @click.away="opentags = false" class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg hide ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-            <div class="py-1" role="none">
-              <% @tags.each do |tag|%>
-                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                <a @click="opentags = false" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-reflex="click->EmployeeTags#change" data-employee-id=<%= employee.id%> data-tag-id=<%= tag.id%> ><%= tag.name %></a>
-              <% end %>
+            <% if @tags.empty? %>
+              <div class="py-1" role="none">
+                <p @click="opentags = false" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 " > No people tag added yet</p>
+                <a href=<%= account_people_tags_path %>  class=" block px-4 py-2 text-sm text-indigo-700 hover:bg-gray-50 hover:underline"> Add People Tags</a>
+              <% else %>
+                <div class="py-1" role="none">
+                  <% @tags.each do |tag| %>
+                    <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                    <a @click="opentags = false" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-reflex="click->EmployeeTags#change" data-employee-id=<%= employee.id %> data-tag-id=<%= tag.id %> ><%= tag.name %></a>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-  <% if current_user.admin? %>
-    <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <div id="employee-status" class="flex">
-        <%= render partial: 'employee/status', locals: {employee: employee}%>
-      </div>
-      <!-- This example requires Tailwind CSS v2.0+ -->
-      <div class="relative inline-block mr-4 -mt-1 text-left" x-data="{open: false}" @keydown.window.escape="open = false" >
-        <div>
-          <button @click="open = !open" type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
-            Status
-            <!-- Heroicon name: solid/chevron-down -->
-            <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
+      <% end %>
+    </div>
+    <% if current_user.admin? %>
+      <div class="flex mt-4 sm:mt-0 sm:ml-4">
+        <div id="employee-status" class="flex">
+          <%= render partial: "employee/status", locals: { employee: employee } %>
         </div>
-        <div  x-show="open"
-        @click.away="open = false" class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg hide ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-          <div class="py-1" role="none">
-            <% @statuses.each do |status|%>
-              <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-              <a @click="open = false" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-reflex="click->EmployeeStatus#change" data-employee-id=<%= employee.id%> data-status-id=<%= status.id%> ><%= status.name %></a>
-            <% end %>
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="relative inline-block mr-4  text-left" x-data="{open: false}" @keydown.window.escape="open = false" >
+          <div>
+            <button @click="open = !open" type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
+              Status
+              <!-- Heroicon name: solid/chevron-down -->
+              <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
           </div>
-        </div>
-      </div>
-      <div>
-        <%= link_to 'Edit', edit_employee_path(employee), class:"btn-normal" %>
-      </div>
-      <% if employee.active %>
-        <div>
-          <%= link_to 'Deactivate', deactivate_user_path(employee), class:" ml-4 btn-normal", data: { confirm: "Are you sure?" } %>
-        </div>
-      <% else %>
-        <div>
-          <%= link_to 'Activate', activate_user_path(employee), class:" ml-4 btn-normal", data: { confirm: "Are you sure?" } %>
+          <div  x-show="open"
+        @click.away="open = false" class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg hide ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            <% if @statuses.empty? %>
+              <div class="py-1" role="none">
+                <p @click="opentags = false" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 " > No people status added yet</p>
+                <a href=<%= account_people_statuses_path %>  class=" block px-4 py-2 text-sm text-indigo-700 hover:bg-gray-50 hover:underline"> Add People Status</a>
+              <% else %>
+                <div class="py-1" role="none">
+                  <% @statuses.each do |status| %>
+                    <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                    <a @click="open = false" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-reflex="click->EmployeeStatus#change" data-employee-id=<%= employee.id %> data-status-id=<%= status.id %> ><%= status.name %></a>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div>
+            <%= link_to "Edit", edit_employee_path(employee), class: " btn-normal" %>
+          </div>
+          <% if employee.active %>
+            <div>
+              <%= link_to "Deactivate", deactivate_user_path(employee), class: " ml-4 btn-normal", data: { confirm: "Are you sure?" } %>
+            </div>
+          <% else %>
+            <div>
+              <%= link_to "Activate", activate_user_path(employee), class: "ml-4 btn-normal", data: { confirm: "Are you sure?" } %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
-  <% end %>
-</div>
-<%= render partial: 'employee/tabs', locals: {employee: employee }%>
+    <%= render partial: "employee/tabs", locals: { employee: employee } %>

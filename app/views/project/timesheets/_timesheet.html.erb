@@ -1,16 +1,16 @@
 <tr>
   <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-    <a href="<%= employee_timesheets_path(timesheet.user)%>" class="block hover:underline">
+    <a href="<%= employee_timesheets_path(timesheet.user) %>" class="block hover:underline">
       <%= timesheet.user.decorate.display_name %>
     </a>
   </td>
   <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-700 max-w-0">
-    <%= timesheet.description%>
+    <%= timesheet.description %>
   </td>
   <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
     <%= display_date(timesheet.date) %>
   </td>
   <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
-    <%= timesheet.hours%>
+    <%= timesheet.hours %>
   </td>
 </tr>

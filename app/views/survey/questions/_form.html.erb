@@ -1,0 +1,39 @@
+<%= form_with(model: question, id: dom_id(question), url: survey_questions_path(survey)) do |form| %>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: question, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New Question", subtitle: "Please fill in detail of new question" %>
+    <div>
+      <label for="filename" class="block text-sm font-medium text-gray-700">
+        Question 
+      </label>
+      <%= form.text_area :text, required: true, class: "form-text-field mt-1" %>
+    </div>
+    <div>
+      <label for="comments" class="block text-sm font-medium text-gray-700">
+        Question Description (optional)
+      </label>
+      <%= form.text_area :description, class: "form-text-field mt-1", autocomplete: "off" %>
+      <p class="mt-2 text-xs text-gray-500" id="question-description">This is question description which will be visible to person filling the survey as question detail.</p>
+    </div>
+    <% if survey.kpi? %>
+      <div>
+        <label for="comments" class="block text-sm font-medium text-gray-700">
+          Question Explanation (optional)
+        </label>
+        <%= form.text_area :explanation, class: "form-text-field mt-1", autocomplete: "off" %>
+        <p class="mt-2 text-xs text-gray-500" id="question-explanation">Question explanation will be visible to person for who KPIs are being filled so that person knows on which parameters he is being judged. </p>
+      </div>
+    <% end %>
+    <div>
+      <label for="comments" class="block text-sm font-medium text-gray-700">
+        Category 
+      </label>
+      <%= form.collection_select(:question_category_id, question_categories, :id, :name, { :prompt => "Select Category", :selected => params[:question_category_id] }, :class => "form-text-field mt-1", :required => true) %>
+      <p class="mt-2 text-xs text-gray-500" id="question-description">New categories can be added from 
+        <a  href="<%= account_question_categories_path %>" class="text-indigo-700 hover:underline">Account > Question Categories. </a>
+        Questions are grouped based on categories. Also KPI stats are presented in terms of Categories.</p>
+    </div>
+    <div class="flex justify-end mt-4">
+      <%= form.submit "Add Question", class: "btn-blue ml-3 " %>
+    </main>
+  <% end %>

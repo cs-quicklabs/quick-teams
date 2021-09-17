@@ -12,47 +12,47 @@
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   Select Project
                 </label>
-                <%= form.collection_select(:project_id, Project.active.order(:name), :id, :name, {:prompt => "Select Project", :selected => (params["project_id"] if !params["project_id"].blank?)}, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:project_id, Project.active.order(:name), :id, :name, { :prompt => "Select Project", :selected => (params["project_id"] if !params["project_id"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div>
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   Select Employee
                 </label>
-                <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name, {:prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name, { :prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div>
                 <label for="billed" class="block text-sm font-medium text-gray-700">
                   People With Status
                 </label>
-                <%= form.collection_select(:status, PeopleStatus.all.order(:name), :id, :name, {:prompt => "Select Status", :selected => (params["status"] if !params["status"].blank?) }, :class=>"form-text-field mt-1" )%>
+                <%= form.collection_select(:status, PeopleStatus.all.order(:name), :id, :name, { :prompt => "Select Status", :selected => (params["status"] if !params["status"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div>
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   From Date
                 </label>
-                <%= form.date_field :from_date, class: 'form-text-field mt-1', value:  params["from_date"].blank? ? (Date.today - 6.days).to_s(:db) : params["from_date"] %>
+                <%= form.date_field :from_date, class: "form-text-field mt-1", value: params["from_date"].blank? ? (Date.today - 6.days).to_s(:db) : params["from_date"] %>
               </div>
               <div>
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   To Date
                 </label>
-                <%= form.date_field :to_date, class: 'form-text-field mt-1', value:  params["to_date"].blank? ? Date.today.to_s(:db) : params["to_date"] %>
+                <%= form.date_field :to_date, class: "form-text-field mt-1", value: params["to_date"].blank? ? Date.today.to_s(:db) : params["to_date"] %>
               </div>
               <div>
                 <label for="billed" class="block text-sm font-medium text-gray-700">
                   Billable
                 </label>
-                <%= form.select(:billable, [["Billable or not", ""], ["Show Only Billable", 1], ["Show Only Unbillable", 0]], {selected: params["billable"]},  :class=>"form-text-field mt-1") %>
+                <%= form.select(:billable, [["Billable or not", ""], ["Show Only Billable", 1], ["Show Only Unbillable", 0]], { selected: params["billable"] }, :class => "form-text-field mt-1") %>
               </div>
               <div>
                 <label for="billed" class="block text-sm font-medium text-gray-700">
                   Billed
                 </label>
-                <%= form.select(:billed, [["Billed or not", ""], ["Show Only Billed", 1], ["Show Only Unbilled", 0]], {selected: params["billed"]},  :class=>"form-text-field mt-1") %>
+                <%= form.select(:billed, [["Billed or not", ""], ["Show Only Billed", 1], ["Show Only Unbilled", 0]], { selected: params["billed"] }, :class => "form-text-field mt-1") %>
               </div>
               <div class="flex justify-end mt-6">
-                <%= link_to 'Reset', timesheets_reports_path, class: "btn-normal" %>
-                <%= form.submit "Search", class:"btn-blue"%>
+                <%= link_to "Reset", timesheets_reports_path, class: "btn-normal" %>
+                <%= form.submit "Search", class: "btn-blue" %>
               </div>
             </main>
           <% end %>

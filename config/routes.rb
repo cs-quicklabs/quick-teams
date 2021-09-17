@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :clients, except: [:new, :show]
     resources :tags, only: [:destroy, :index]
     resources :preferences, only: [:index]
+    resources :question_categories, except: [:new, :show]
   end
 
   resources :projects do
@@ -31,6 +32,11 @@ Rails.application.routes.draw do
     resources :todos, module: "project"
     resources :skills, module: "project"
     resources :documents, only: [:index, :show, :create, :destroy, :edit, :update], module: "project"
+    resources :surveys, module: "project", only: [:index, :show, :destroy]
+    resources :kpis, module: "project", only: [:index, :show, :destroy] do
+      get "stats", to: "kpis#stats", as: "stats"
+    end
+
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
 
@@ -43,13 +49,33 @@ Rails.application.routes.draw do
     resources :skills, module: "employee"
     resources :nuggets, module: "employee"
     resources :documents, module: "employee"
+    resources :surveys, module: "employee", only: [:index, :show, :destroy]
+    resources :kpis, module: "employee", only: [:index, :show, :destroy] do
+      get "stats", to: "kpis#stats", as: "stats"
+    end
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
+    get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
   end
   resources :user
   resources :comments
   resources :nuggets
   resources :kbs
+  resources :kpis
+  resources :surveys do
+    resources :questions, module: "survey"
+    resources :assignees, module: "survey", as: "assignees"
+    resources :attempts, module: "survey" do
+      get "questions", to: "attempts#survey_questions", as: "survey_questions"
+    end
+    get "reports/pdf/:id", to: "survey/reports#pdf", as: "report_pdf"
+    get "/attempts/:id/preview", to: "survey/attempts#preview", as: "report_preview"
+    patch "/reports/:id/submit", to: "survey/reports#submit", as: "report_submit"
+    patch "/reports/:id/download", to: "survey/reports#download", as: "report_download"
+    get "/search", to: "search#surveys"
+  end
+
+  get "/surveys/:id/clone", to: "surveys#clone", as: "clone_survey"
 
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"
@@ -64,6 +90,7 @@ Rails.application.routes.draw do
   get "/search/employee/skills", to: "search#employee_skills"
   get "/search/project/skills", to: "search#project_skills"
   get "/search/documents", to: "search#documents"
+  get "/search/surveys", to: "search#surveys"
   get :goals, controller: :home
   get :events, controller: :home
 

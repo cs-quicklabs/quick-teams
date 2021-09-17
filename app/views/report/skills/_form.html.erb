@@ -12,13 +12,13 @@
             </span>
             <div>
               <div class="pt-4">
-                <%= form_tag(skills_reports_path, method: 'get', :name => 'skill_select') do %>
+                <%= form_tag(skills_reports_path, method: "get", :name => "skill_select") do %>
                   <main class="max-w-md mt-6 pb-12 mx-auto space-y-4 lg:pb-16">
                     <div>
                       <% @skills.each do |skill| %>
                         <label class="block text-sm font-medium pb-1 text-gray-700 whitespace-nowrap">
-                          <%= check_box_tag "ids[#{skill.id}]", skill.id, params[:ids] && @ids.include?(skill.id), :name => "ids[]",  class: "mr-5 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 ", :onchange => ("javascript: document.skill_select.submit();")%>
-                          <%=skill.name%>
+                          <%= check_box_tag "ids[#{skill.id}]", skill.id, params[:ids] && @ids.include?(skill.id), :name => "ids[]", class: "mr-5 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 ", :onchange => ("javascript: document.skill_select.submit();") %>
+                          <%= skill.name %>
                         </label>
                       <% end %>
                     </div>

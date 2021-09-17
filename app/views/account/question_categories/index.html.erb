@@ -1,0 +1,13 @@
+  <main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
+  <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+    <%= render "shared/account_menu" %>
+    <main class="max-w-xl pb-12 px-4 lg:col-span-6">
+      <div id="question_categories_form">
+        <%= render "form", question_category: @question_category %>
+      </div>
+      <div id="question_categories">
+        <%= render partial: "account/question_categories/question_category", collection: @question_categories %>
+      </div>
+    </main>
+  </div>
+</main>

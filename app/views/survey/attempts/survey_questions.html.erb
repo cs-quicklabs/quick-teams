@@ -1,0 +1,9 @@
+<turbo-frame id="survey_questions">
+  <% @questions.each do |question| %>
+    <% if @survey.checklist? %>
+      <%= render partial: "checklist_question", locals: { question: question, attempt: @attempt } %>
+    <% else %>
+      <%= render partial: "score_question", locals: { question: question, attempt: @attempt } %>
+    <% end %>
+  <% end %>
+</turbo-frame>

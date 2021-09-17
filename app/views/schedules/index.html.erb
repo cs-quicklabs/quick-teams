@@ -19,13 +19,13 @@
                 Teams
               </h3>
               <div class="mt-1 space-y-1" role="group" aria-labelledby="teams-headline">
-                <a href="<%= schedules_path%>" class="<%= request.params[:job].nil? ? "selected" : "unselected"%>">
+                <a href="<%= schedules_path %>" class="<%= request.params[:job].nil? ? "selected" : "unselected" %>">
                   <span class="ml-2 truncate">
                     All
                   </span>
                 </a>
                 <% @jobs.each do |job| %>
-                  <a href="<%= schedules_path(:job => job.id)%>" class="<%= request.params[:job].to_i == job.id  ? "selected" : "unselected"%>">
+                  <a href="<%= schedules_path(:job => job.id) %>" class="<%= request.params[:job].to_i == job.id ? "selected" : "unselected" %>">
                     <span class="ml-2 truncate">
                       <%= job.name %>
                     </span>
@@ -55,11 +55,11 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
-            <%= render partial: "schedules/schedule", collection: @employees, as: :employee, cached: true%>
+            <%= render partial: "schedules/schedule", collection: @employees, as: :employee, cached: true %>
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-          <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
         </div>
       </div>
     <% end %>

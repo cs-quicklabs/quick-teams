@@ -8,7 +8,7 @@ class Project::BaseController < BaseController
   LIMIT = 20
 
   def set_project
-    @project ||= Project.find(params["project_id"]).decorate
+    @project ||= Project.find(params["project_id"])
   end
 
   def set_statuses

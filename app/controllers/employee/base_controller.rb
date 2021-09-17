@@ -10,7 +10,7 @@ class Employee::BaseController < BaseController
   private
 
   def set_employee
-    @employee ||= User.find(params["employee_id"]).decorate
+    @employee ||= User.find(params["employee_id"])
   end
 
   def set_statuses

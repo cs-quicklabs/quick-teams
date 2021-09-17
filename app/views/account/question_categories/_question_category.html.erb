@@ -1,0 +1,12 @@
+<%= turbo_frame_tag dom_id(question_category) do %>
+  <li class="flex py-4 border-b border-gray-200">
+    <div class="flex items-center w-full ml-3">
+      <div class="flex-shrink-0 w-2.5 h-2.5 rounded-full " aria-hidden="true"></div>
+      <p class="w-full ml-2 text-sm font-medium text-gray-900"><%= question_category.name.titleize %></p>
+      <div class="flex">
+        <%= link_to "Edit", edit_account_question_category_path(question_category), class: "btn-inline-edit" %>
+        <%= link_to "Delete", account_question_category_path(question_category), method: :delete, class: "pl-2 btn-inline-delete" %>
+      </div>
+    </div>
+  </li>
+<% end %>

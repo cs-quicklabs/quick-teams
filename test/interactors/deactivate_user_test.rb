@@ -41,15 +41,15 @@ class DeactivateUserTest < ActiveSupport::TestCase
     assert Project.where(manager_id: user.id).count == 0
   end
 
-  test "can clear pending todos" do 
-    assert @user.todos.pending.count != 0 
+  test "can clear pending todos" do
+    assert @user.todos.pending.count != 0
     user = DeactivateUser.call(@user, @actor).result
-    assert user.todos.pending.count == 0 
+    assert user.todos.pending.count == 0
   end
 
-  test "can discard pending goals" do 
-    assert @user.goals.pending.count != 0 
+  test "can discard pending goals" do
+    assert @user.goals.pending.count != 0
     user = DeactivateUser.call(@user, @actor).result
-    assert user.goals.pending.count == 0 
+    assert user.goals.pending.count == 0
   end
 end

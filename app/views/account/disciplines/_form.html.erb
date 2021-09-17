@@ -2,9 +2,9 @@
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: discipline, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Disciplines", subtitle: "Discipline indicates the type of work a person does within the organization, also known as ‘department.’ Examples include design, research, and development." %>
-    <%= form.text_field :name, "Add New Discipline", autocomplete: "off"%>
+    <%= form.text_field :name, "Add New Discipline", autocomplete: "off" %>
     <div class="flex justify-end">
-      <%= form.submit "Save", class:"btn-blue"%>
+      <%= form.submit "Save", class: "btn-blue" %>
     </div>
   </div>
 <% end %>

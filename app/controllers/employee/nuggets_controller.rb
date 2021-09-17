@@ -6,7 +6,7 @@ class Employee::NuggetsController < Employee::BaseController
     @nugget = Nugget.new
 
     @pagy, @nuggets = pagy_nil_safe(params, filtered_nuggets, items: 20)
-    render_partial("employee/nuggets/nugget", collection: @nuggets, cached: true)
+    render_partial("employee/nuggets/nugget", collection: @nuggets, cached: true) if stale?(@nuggets + [@employee])
   end
 
   def show

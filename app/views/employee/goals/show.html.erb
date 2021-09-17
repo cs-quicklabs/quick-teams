@@ -1,17 +1,17 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
-    <%= render partial: "shared/goals/title", locals: {goal: @goal}%>
+    <%= render partial: "shared/goals/title", locals: { goal: @goal } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <%= link_to 'Back','javascript:history.back()', class:"btn-normal" %>
+      <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
       <% if policy([@employee, @goal]).edit? %>
-        <%= link_to 'Edit', edit_employee_goal_path(@goal.goalable, @goal), class:"btn-blue ml-3" %>
+        <%= link_to "Edit", edit_employee_goal_path(@goal.goalable, @goal), class: "btn-blue ml-3" %>
       <% end %>
     </div>
   </div>
   <% cache @goal do %>
     <div class="text-sm text-gray-700 sm:px-6 lg:px-8">
-      <p><%= @goal.body%></p>
+      <p><%= @goal.body %></p>
     </div>
   <% end %>
   <!-- Comments-->
@@ -23,12 +23,12 @@
         </div>
         <div class="px-4 py-6 sm:px-6">
           <ul class="space-y-4" id="comments">
-            <%= render partial: "shared/comments/comment", collection: @goal.comments.includes(:user), as: :comment, cached: true%>
+            <%= render partial: "shared/comments/comment", collection: @goal.comments.includes(:user), as: :comment, cached: true %>
           </ul>
         </div>
       </div>
       <% if policy([@employee, @goal]).comment? %>
-        <%= render partial: "shared/comments/add", locals: {goal: @goal, comment: @comment }%>
+        <%= render partial: "shared/comments/add", locals: { goal: @goal, comment: @comment } %>
       <% end %>
     </div>
   </section>

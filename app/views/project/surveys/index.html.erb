@@ -1,0 +1,71 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "project/title", project: @project %>
+  <main class="pb-8">
+    <div class="">
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1 lg:grid-cols-3">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+          <section aria-labelledby="participants_section">
+            <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
+              <div>
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="w-full px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        Survey
+                      </th>
+                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Taken By
+                      </th>
+                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        On Date
+                      </th>
+                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Score
+                      </th>
+                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Status
+                      </th>
+                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200" id="filled_surveys" data-infinite-scroll-target="entries">
+                    <%= render partial: "filled_survey", collection: @filled_surveys, as: :attempt, cached: true %>
+                  </tbody>
+                </table>
+                <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+                  <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <% if policy([@project, :survey]).take? %>
+            <section aria-labelledby="add-participant-section">
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <div class="p-5 border-b border-gray-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                      Take a Survey
+                    </h3>
+                    <p class="mt-2 max-w-4xl text-sm text-gray-500">Following surveys are available for you to take. </p>
+                  </div>
+                  <ul class="divide-y divide-gray-200">
+                    <%= render partial: "survey", collection: @surveys, as: :survey, cached: false %>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div class="pt-4 pl-16 pr-16">
+  </div>
+</main>

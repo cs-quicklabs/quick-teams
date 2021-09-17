@@ -5,10 +5,10 @@
       <%= @nugget.display_title %>
     </h3>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <%= link_to "Back", employee_nuggets_path(@employee), class: "btn-normal" %>
+      <p class=" "> <%= link_to "Back", employee_nuggets_path(@employee), class: "btn-normal py-2 whitespace-nowrap" %></p>
       <% unless @nugget.read? %>
-        <p class="mt-3 text-sm md:mt-0 md:ml-2">
-          <button type="button" data-reflex="click->Nugget#read" data-nugget-id="<%= @nugget.id %>" data-employee-id="<%= @employee.id %>" class="btn-blue">Mark as read </button>
+        <p class="mt-3 text-sm md:mt-0 md:ml-2 whitespace-nowrap">
+          <button type="button" data-reflex="click->Nugget#read" data-nugget-id="<%= @nugget.id %>" data-employee-id="<%= @employee.id %>" class="btn-blue py-2 whitespace-nowrap">Mark as read </button>
         </p>
       <% end %>
     </div>

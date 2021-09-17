@@ -1,0 +1,27 @@
+<div class="relative px-8">
+  <div class="flex items-center justify-between">
+    <div>
+      <span class="text-xs font-medium inline-block py-1 uppercase">
+        <%= title %>
+      </span>
+    </div>
+    <div class="text-right">
+      <span class="text-xs font-semibold inline-block">
+        <%= score.to_s %>
+      </span>
+    </div>
+  </div>
+  <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+    <% percentage = (score / scale) * 100 %>
+    <% if percentage >= 80 %>
+      <div style="width:<%= percentage %>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-400">
+      </div>
+    <% elsif percentage >= 50 and percentage < 80 %>
+      <div style="width:<%= percentage %>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-400">
+      </div>
+    <% else %>
+      <div style="width:<%= percentage %>%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-400">
+      </div>
+    <% end %>
+  </div>
+</div>

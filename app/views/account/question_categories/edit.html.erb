@@ -1,0 +1,17 @@
+<%= turbo_frame_tag dom_id(@question_category) do %>
+  <%= form_with(model: @question_category, id: dom_id(@question_category), url: account_question_category_path(@question_category)) do |form| %>
+    <% if local_assigns[:messages] && defined?(messages) && !messages.nil? %>
+      <% messages.each do |message| %>
+        <p class="mt-2 text-sm text-red-600"><%= message %></p>
+      <% end %>
+    <% end %>
+    <li class="flex w-full py-4 border-b border-gray-200">
+      <div class="w-full">
+        <%= form.text_field :name, class: "form-text-field", autocomplete: "off" %>
+      </div>
+      <div class="flex">
+        <%= form.submit "Save", class: "btn-blue ml-3" %>
+      </div>
+    </li>
+  <% end %>
+<% end %>

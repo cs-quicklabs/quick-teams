@@ -10,7 +10,7 @@
 </div>
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
-    <%= render partial: "form"%>
+    <%= render partial: "form" %>
     <% if @projects.size > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -24,7 +24,7 @@
                 Tags
               </th>
               <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+)%>
+                Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+) %>
               </th>
               <th class="py-3 pr-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                 Lead
@@ -38,15 +38,15 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
-            <%= render partial: "project", collection: @projects, as: :project, cached: true%>
+            <%= render partial: "project", collection: @projects, as: :project, cached: true %>
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-          <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
         </div>
       </div>
     <% else %>
-      <%= render partial: "shared/no_result_found", cached: true%>
+      <%= render partial: "shared/no_result_found", cached: true %>
     <% end %>
   </div>
 </div>

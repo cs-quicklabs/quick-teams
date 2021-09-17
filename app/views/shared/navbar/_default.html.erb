@@ -1,9 +1,9 @@
 <% if current_user.admin? %>
-  <%= render "shared/navbar/admin"%>
+  <%= render "shared/navbar/admin" %>
 <% elsif current_user.lead? %>
-  <%= render "shared/navbar/lead"%>
+  <%= render "shared/navbar/lead" %>
 <% elsif current_user.member? %>
-  <%= render "shared/navbar/member"%>
+  <%= render "shared/navbar/member" %>
 <% else %>
-  <%= render "shared/navbar/member"%>
+  <%= render "shared/navbar/member" %>
 <% end %>

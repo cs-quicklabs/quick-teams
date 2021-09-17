@@ -3,7 +3,7 @@
     <%= render "shared/form_messages", resource: @schedule, message: local_assigns[:message] %>
     <li>
       <label for="name" class="block mt-3 ml-3 text-sm font-bold text-gray-700">
-        <%= "Edit " + @schedule.project.name + "'s schedule"%>
+        <%= "Edit " + @schedule.project.name + "'s schedule" %>
       </label>
       <div class="flex pt-2 pb-4 border-b border-gray-200">
         <div class="flex w-full ml-3">
@@ -11,29 +11,29 @@
             <label for="starts" class="block text-sm font-medium text-gray-700">
               Starts At
             </label>
-            <%= form.hidden_field :project_id, value: @schedule.project_id%>
-            <%= form.date_field :starts_at, class: "form-text-field mt-1"%>
+            <%= form.hidden_field :project_id, value: @schedule.project_id %>
+            <%= form.date_field :starts_at, class: "form-text-field mt-1" %>
           </div>
           <div class="w-full ml-4">
             <label for="ends" class="block text-sm font-medium text-gray-700">
               Ends At
             </label>
-            <%= form.date_field :ends_at, class: "form-text-field mt-1"%>
+            <%= form.date_field :ends_at, class: "form-text-field mt-1" %>
           </div>
           <div class="w-full ml-4">
             <label for="ends" class="block text-sm font-medium text-gray-700">
               Occupancy(%)
             </label>
-            <%= form.text_field :occupancy, class: "form-text-field mt-1", autocomplete: "off"%>
+            <%= form.text_field :occupancy, class: "form-text-field mt-1", autocomplete: "off" %>
           </div>
           <% if @schedule.project.billable %>
             <div class="w-full ml-4">
               <label for="billable" class="block text-sm font-medium text-gray-700">
                 Billable
               </label>
-              <%= form.select :billable, Schedule::SCHEDULE_OPTIONS ,{}, class:'form-text-field mt-1' %>
+              <%= form.select :billable, Schedule::SCHEDULE_OPTIONS, {}, class: "form-text-field mt-1" %>
             </div>
-          <% else  %>
+          <% else %>
             <div class="w-full ml-4">
               <label for="billable" class="block text-sm font-medium text-gray-700">
                 Billable
@@ -42,9 +42,9 @@
                 Project is non billable hence this schedule is non-billable as well.
               </label>
             </div>
-          <% end  %>
+          <% end %>
           <div class="content-end">
-            <%= form.submit "Save", class:"btn-blue ml-3 mt-6"%>
+            <%= form.submit "Save", class: "btn-blue ml-3 mt-6" %>
           </div>
         </div>
       </div>

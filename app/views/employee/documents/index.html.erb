@@ -1,5 +1,5 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
-  <%= render partial: "employee/title", locals: {employee: @employee}%>
+  <%= render partial: "employee/title", locals: { employee: @employee } %>
   <main class="pb-8">
     <div class="">
       <h1 class="sr-only">Page title</h1>
@@ -28,11 +28,11 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200" id="documents" data-infinite-scroll-target="entries">
-                    <%= render partial: "document", collection: @documents, as: :document, cached: true%>
+                    <%= render partial: "document", collection: @documents, as: :document, cached: true %>
                   </tbody>
                 </table>
                 <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-                  <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+                  <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
                 </div>
               </div>
             </div>
@@ -45,7 +45,7 @@
               <h2 class="sr-only" id="section-2-title">Add New document</h2>
               <div class="overflow-hidden bg-white">
                 <div class="px-4">
-                  <%= render partial: "form", locals: { document: @document} %>
+                  <%= render partial: "form", locals: { document: @document } %>
                 </div>
               </div>
             </section>

@@ -1,0 +1,27 @@
+<div class="absolute inset-y-0 right-0 items-center flex-shrink-0 pr-2 py-2 sm:static sm:inset-auto sm:pr-0">
+  <!-- Profile dropdown -->
+  <div @click.away="open = false" class="relative z-10 " x-data="{ open: false }">
+    <div>
+      <button @click="open = !open" class="flex  text-white text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+        </svg>
+      </button>
+    </div>
+    <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-48 mt-2 origin-top-right rounded-md shadow-lg">
+      <div class="absolute right-0 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg w-60 ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+        <div class="border-t border-gray-100">
+          <div>
+            <% if policy(:kb).index? %>
+              <a href=<%= kbs_path %> class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Knowledge Base</a>
+            <% end %>
+            <% if policy(:nugget).index? %>
+              <a href=<%= nuggets_path %> class= "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role= "menuitem"> Nuggets </a>
+            <% end %>
+            <a><%= link_to "Surveys & KPIs", surveys_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

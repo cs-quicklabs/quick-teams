@@ -43,4 +43,12 @@ class SearchController < BaseController
     @kbs = Kb.search_title(params[:q])
     render layout: false
   end
+
+  def surveys
+    authorize :search
+    like_keyword = "%#{params[:q]}%"
+    @surveys = Survey::Survey.where("name ILIKE ?", like_keyword)
+      .limit(10).order(:name)
+    render layout: false
+  end
 end

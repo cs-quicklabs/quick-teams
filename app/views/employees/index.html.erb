@@ -5,10 +5,10 @@
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         People
       </h1>
-      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @pagy.count.to_s + " employees)"%></p>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @pagy.count.to_s + " employees)" %></p>
     </div>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <%= link_to 'Add Member', new_employee_path, class:"btn-blue" %>
+      <%= link_to "Add Member", new_employee_path, class: "btn-blue" %>
     </div>
   </div>
   <!-- This example requires Tailwind CSS v2.0+ -->
@@ -41,7 +41,7 @@
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
-                <%= render partial: "employee", collection: @employees, cached: true%>
+                <%= render partial: "employee", collection: @employees, cached: true %>
               </tbody>
             </table>
           </div>
@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="flex justify-end mt-2 mb-6 mr-2">
-      <%== render partial: "shared/paginator", locals:{pagy: @pagy}%>
+      <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
     </div>
   </div>
 </main>

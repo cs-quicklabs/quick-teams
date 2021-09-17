@@ -4,5 +4,68 @@ one:
   survey_type: checklist
   survey_for: project
   account: crownstack
-  actor: regular
+  actors: regular
 
+two:
+  name: project checklist survey
+  description: Survey Campaign
+  survey_type: score
+  survey_for: project
+  account: crownstack
+  actors: regular
+
+three:
+  name: project checklist survey
+  description: Survey Campaign
+  survey_type: kpi
+  survey_for: project
+  account: crownstack
+  actors: regular
+
+four:
+  name: project checklist survey
+  description: Survey Campaign
+  survey_type: checklist
+  survey_for: employee
+  account: crownstack
+  actors: regular
+
+five:
+  name: project checklist survey
+  description: Survey Campaign
+  survey_type: checklist
+  survey_for: client
+  account: crownstack
+  actors: regular
+
+six:
+  name: project checklist survey
+  description: Survey Campaign
+  survey_type: score
+  survey_for: project
+  account: crownstack
+  actors: regular
+
+seven:
+  name: project checklist survey
+  description: Survey Campaign
+  survey_type: score
+  survey_for: project
+  account: crownstack
+  actors: regular
+
+eight:
+  name: project checklist survey
+  description: Survey Campaign
+  survey_type: score
+  survey_for: client
+  account: crownstack
+  actors: regular
+
+ nine:
+  name: project checklist survey
+  description: Survey Campaign
+  survey_type: checklist
+  survey_for: project
+  account: crownstack
+  actors: regular 

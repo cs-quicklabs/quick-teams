@@ -3,11 +3,11 @@
     <main class="w-full mx-auto space-y-2">
       <%= render "shared/form_messages", resource: @note, message: local_assigns[:message] %>
       <label for="name" class="block mt-2 text-sm font-bold text-gray-700">
-        <%= "Edit Note"%>
+        <%= "Edit Note" %>
       </label>
-      <%= form.text_area :body, class: "resize-y form-text-field h-48"%>
+      <%= form.text_area :body, class: "resize-y form-text-field h-48" %>
       <div class="flex justify-end">
-        <%= form.submit "Edit Note", class:"btn-blue"%>
+        <%= form.submit "Edit Note", class: "btn-blue" %>
       </div>
     </main>
   <% end %>

@@ -1,11 +1,11 @@
 <main class="pb-10 mx-auto max-w-7xl lg:py-12 lg:px-8">
   <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
-    <%= render 'shared/account_menu'%>
+    <%= render "shared/account_menu" %>
     <main class="max-w-xl px-4 pb-12 lg:col-span-6">
       <%= render "shared/form_header", title: "Account Preferences", subtitle: "Setup your account preferences." %>
       <ul class="mt-2 divide-y divide-gray-200">
         <li class="flex items-center py-4">
-          <%= check_box_tag "email_enabled", nil, @account.email_enabled, data: { reflex: "click->AccountNotificationReflex#toggle_email_notification", id: @account.id}, class: "mr-5 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"%>
+          <%= check_box_tag "email_enabled", nil, @account.email_enabled, data: { reflex: "click->AccountNotificationReflex#toggle_email_notification", id: @account.id }, class: "mr-5 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
           <div class="flex flex-col">
             <p class="text-sm font-medium text-gray-900" id="privacy-option-1-label">
               Enable Company wide email notifications

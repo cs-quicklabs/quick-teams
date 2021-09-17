@@ -1,0 +1,13 @@
+<% question = question.decorate %>
+<div class="items-start w-full pt-6" id="<%= dom_id(question) %>">
+  <div class="ml-3 text-sm w-full">
+    <p class="text-xs font-medium text-gray-500 uppercase"><%= question.display_category %></p>
+    <p class="text-sm font-semibold text-gray-900"><%= question.display_text %></p>
+    <p class="text-xs font-medium text-gray-500"><%= question.display_description %></p>
+  </div>
+  <div class="flex justify-self-end py-2">
+    <% question.options.each do |option| %>
+      <%= render partial: "option", locals: { option: option, question: question, attempt: attempt } %>
+    <% end %>
+  </div>
+</div>
