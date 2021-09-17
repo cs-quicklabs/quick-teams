@@ -8,7 +8,7 @@ class Survey::AttemptsController < Survey::BaseController
   def index
     authorize [:survey, :attempt]
     @pagy, @attempts = pagy_nil_safe(params, Survey::Attempt.includes(:actor, :participant, :survey, :answers).where(survey: @survey).order(created_at: :desc), items: LIMIT)
-    fresh_when(@attempts + [@survey])
+    render_partial("survey/attempts/attempt", collection: @attempts, cached: true) if stale?(@attempts + [@survey])
   end
 
   def new

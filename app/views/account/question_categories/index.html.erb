@@ -6,7 +6,7 @@
         <%= render "form", question_category: @question_category %>
       </div>
       <div id="question_categories">
-        <%= render @question_categories %>
+        <%= render partial: "account/question_categories/question_category", collection: @question_categories %>
       </div>
     </main>
   </div>
