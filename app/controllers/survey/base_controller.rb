@@ -7,6 +7,6 @@ class Survey::BaseController < BaseController
   private
 
   def set_survey
-    @survey ||= Survey.find(params[:id])
+    @survey ||= Survey::Survey.find(params[:id])
   end
 end

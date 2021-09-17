@@ -48,7 +48,7 @@ class Survey::Attempt < ActiveRecord::Base
   def calculate_score
     score = 0
     if survey.checklist?
-      correct_answers.count.times { score += 1 }
+      score = correct_answers.count.times { score += 1 }
     else
       score = correct_answers.reduce(0.0) { |sum, answer| sum + answer.score }
       total = (answers.count * 10)

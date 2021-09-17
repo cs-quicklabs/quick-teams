@@ -55,7 +55,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
   test "update touches user" do
     updated_at = @user.updated_at
-    schedule = Schedule.new(user: @user, project: @project, starts_at: Time.now, ends_at: Time.now, occupancy: 100)
+    schedule = Schedule.new(user: @user, project: @project, starts_at: Time.now, ends_at: Time.now, occupancy: 100, billable: true)
     schedule.save!
     updated_at_touched = @user.updated_at
     assert_not_equal updated_at, updated_at_touched
@@ -63,7 +63,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
   test "update touches project" do
     updated_at = @project.updated_at
-    schedule = Schedule.new(user: @user, project: @project, starts_at: Time.now, ends_at: Time.now, occupancy: 100)
+    schedule = Schedule.new(user: @user, project: @project, starts_at: Time.now, ends_at: Time.now, occupancy: 100, billable: true)
     schedule.save!
     updated_at_touched = @project.updated_at
     assert_not_equal updated_at, updated_at_touched

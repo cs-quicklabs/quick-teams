@@ -22,13 +22,15 @@ class ProjectSkillsTest < ApplicationSystemTestCase
 
   test "can not visit index if not logged in" do
     sign_out @employee
+
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
 
   test "can add and remove skills" do
     visit page_url
-    fill_in "search-skills", with: "u"
+    fill_in "search-skills", with: "Ruby"
+    sleep(0.5)
     find("#add-skill").click
     assert_selector "#project-skills", text: "Ruby"
     find("#remove-skill").click

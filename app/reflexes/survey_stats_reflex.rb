@@ -7,18 +7,18 @@ class SurveyStatsReflex < ApplicationReflex
   end
 
   def color_message_for(total_responses, average_score)
-    color = "bg-gray-50"
+    color = "bg-gray-100"
     message = "No answer to this question yet."
     if total_responses > 0
       message = "Average score is #{average_score.round(1)} in #{total_responses} responses."
     end
 
     if average_score >= 8
-      color = "bg-green-50"
+      color = "bg-green-100"
     elsif average_score >= 4
-      color = "bg-yellow-50"
+      color = "bg-yellow-100"
     else
-      color = "bg-red-50"
+      color = "bg-red-100"
     end
     return color, message
   end

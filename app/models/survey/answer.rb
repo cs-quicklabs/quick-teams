@@ -4,7 +4,7 @@ class Survey::Answer < ActiveRecord::Base
   #acceptable_attributes :attempt, :option, :correct, :option_id, :question, :question_id
 
   # associations
-  belongs_to :attempt
+  belongs_to :attempt, touch: true
   belongs_to :option
   belongs_to :question
 
