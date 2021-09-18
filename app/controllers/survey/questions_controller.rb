@@ -22,7 +22,10 @@ class Survey::QuestionsController < Survey::BaseController
 
   def destroy
     authorize [:survey, :question]
-    redirect_to survey_path(@survey), alert: "Question was deleted" if @question.destroy
+    @question.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@question) }
+    end
   end
 
   def update
