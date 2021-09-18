@@ -4,7 +4,7 @@ class Survey::QuestionsController < Survey::BaseController
 
   def index
     authorize [:survey, :question]
-    @pagy, @questions = pagy_nil_safe(params, Survey::Question.includes(:question_category).where(survey_id: @survey).order_by_category, items: LIMIT)
+    @pagy, @questions = pagy_nil_safe(params, Survey::Question.includes(:question_category, :survey).where(survey_id: @survey).order_by_category, items: LIMIT)
     @question_categories = Survey::QuestionCategory.all.order(:name)
     @question = Survey::Question.new
     render_partial("survey/questions/question", collection: @questions, cached: true) if stale?(@questions + @question_categories + [@survey])
