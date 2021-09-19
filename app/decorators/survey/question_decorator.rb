@@ -12,4 +12,8 @@ class Survey::QuestionDecorator < Draper::Decorator
   def display_category
     question_category.nil? ? "" : question_category.name.capitalize
   end
+
+  def display_text
+    text.nil? ? "" : text.upcase_first
+  end
 end
