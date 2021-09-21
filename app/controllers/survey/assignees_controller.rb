@@ -5,10 +5,10 @@ class Survey::AssigneesController < Survey::BaseController
     authorize [:survey, :assignee]
     if @survey.project?
       @pagy, @assignees = pagy_nil_safe(params, Project.active.where(kpi_id: @survey).order(:name), items: LIMIT)
-      @assigns = Project.where(kpi_id: nil).order(:name)
+      @assigns = Project.active.where(kpi_id: nil).order(:name)
     else
       @pagy, @assignees = pagy_nil_safe(params, User.all_users.where(kpi_id: @survey.id).order(:first_name), items: LIMIT)
-      @assigns = User.where(kpi_id: nil).order(:first_name)
+      @assigns = User.all_users.where(kpi_id: nil).order(:first_name)
     end
     render_partial("survey/assignees/assignee", collection: @assignees, cached: true) if stale?(@assignees + @assigns + [@survey])
   end
