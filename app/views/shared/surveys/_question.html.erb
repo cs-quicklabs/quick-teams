@@ -3,7 +3,7 @@
   <li class="py-3 flex border-b border-gray-200" data-participant-type=<%= participant.class.name %> data-participant-id=<%= participant.id %> data-question-id=<%= question.id %>>
     <div class="ml-3 w-full">
       <p class="text-xs font-medium text-gray-500 uppercase"><%= question.display_category %></p>
-      <p class="text-sm font-semibold text-gray-900"><%= question.display_text %></p>
+      <p class="text-sm font-semibold text-gray-900"><%= question.text.upcase_first %></p>
       <p class="text-sm text-gray-500"><%= question.display_explanation %></p>
       <div id=<%= "summary_" + question.id.to_s %>   >
         <p  data-reflex="click->SurveyParticipantStats#summary" data-reflex-dataset="combined" class="btn-inline-edit underline mt-2 text-xs" >View summary</p>
