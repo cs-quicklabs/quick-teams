@@ -47,6 +47,10 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
 
+  def name
+    "#{first_name} #{last_name}".titleize
+  end
+
   def potential_projects
     participated_project_ids = schedules.pluck(:project_id)
     Project.active.where.not(id: participated_project_ids)

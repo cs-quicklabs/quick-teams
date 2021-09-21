@@ -13,7 +13,7 @@
         <input type="hidden" name="remember" value="true">
         <div class=" -space-y-px">
           <div>
-            <%= form.collection_select(:participant_id, @participants, :id, :display_name, { :prompt => "Select Participant", :selected => (@attempt.participant_id if @attempt.participant_id) }, :required => true, :class => "form-text-field mt-1") %>
+            <%= form.collection_select(:participant_id, @participants.decorate.sort_by(&:name), :id, :display_name, { :prompt => "Select Participant", :selected => (@attempt.participant_id if @attempt.participant_id) }, :required => true, :class => "form-text-field mt-1") %>
           </div>
         </div>
         <div class="pt-5">
