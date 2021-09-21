@@ -40,8 +40,6 @@ class Survey::Survey < ActiveRecord::Base
     return !((current_number_of_attempts >= upper_bound) && (upper_bound != 0))
   end
 
-
-
   def clone_for_actor(actor)
     clone = Survey::Survey.new
     clone.name = self.name + " (Copy)"

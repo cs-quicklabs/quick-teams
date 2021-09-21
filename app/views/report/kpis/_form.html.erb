@@ -11,7 +11,7 @@
               <div>
                 <input value=2 type="hidden" name="survey_type" id="survey_type" value=2>
                 <label for="users" class="block text-sm font-medium text-gray-700">
-                  Users
+                  Select Employee
                 </label>
                 <%= form.collection_select(:participant_id, User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Employee", :selected => (params["participant_id"] if !params["participant_id"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
