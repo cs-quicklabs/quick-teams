@@ -10,6 +10,8 @@ class Survey::Survey < ActiveRecord::Base
   # relations
   has_many :attempts, :dependent => :destroy
   has_many :questions, :dependent => :destroy
+  has_many :users
+  has_many :projects
   accepts_nested_attributes_for :questions,
     :reject_if => ->(q) { q[:text].blank? },
     :allow_destroy => true

@@ -97,17 +97,6 @@ class SurveysTest < ApplicationSystemTestCase
     assert_selector "p.notice", text: "Survey was cloned successfully."
   end
 
-  test "can attempt a survey" do
-    visit page_url
-    find(id: dom_id(@survey)).click
-    within "#survey-header" do
-      click_on "Attempt"
-    end
-    take_screenshot
-    assert_selector "h3", text: "Select Participant"
-    assert text: @survey.name
-  end
-
   test "can delete survey" do
     visit page_url
     find(id: dom_id(@survey)).click

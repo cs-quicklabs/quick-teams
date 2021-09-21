@@ -35,7 +35,7 @@
       <%= link_to "Delete", survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     <% end %>
     <a class="ml-4 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
-      view
+      View
     </a>
   </td>
 </tr>

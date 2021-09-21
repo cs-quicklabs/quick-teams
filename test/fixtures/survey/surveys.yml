@@ -7,28 +7,28 @@ one:
   survey_type: 1
 
 two: 
-  name: Project Initiation Checklist
+  name: Score Initiation Project
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: project 
-  survey_type: kpi
+  survey_for: 1
+  survey_type: 2
 
- three: 
+three: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: employee
-  survey_type:  kpi 
+  survey_for: 2
+  survey_type: 1
  
 four: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: project
-  survey_type: score
+  survey_for: 2
+  survey_type: 3
 
 five: 
   name: Project Initiation Checklist
@@ -38,7 +38,7 @@ five:
   survey_for: employee 
   survey_type: score
 
- six: 
+six: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
@@ -70,7 +70,7 @@ nine:
   survey_for: client
   survey_type: score
 
- ten: 
+ten: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
