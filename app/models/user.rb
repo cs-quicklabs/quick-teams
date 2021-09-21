@@ -11,6 +11,7 @@ class User < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :billable, -> { where(billable: true) }
   scope :all_users, -> { includes(:job, :role, :discipline).where(account: Current.account).active.order(:first_name) }
+  scope :available, -> { all_users }
 
   belongs_to :account
   belongs_to :manager, class_name: "User", optional: true

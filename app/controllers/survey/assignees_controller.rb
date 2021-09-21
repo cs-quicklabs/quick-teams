@@ -3,40 +3,33 @@ class Survey::AssigneesController < Survey::BaseController
 
   def index
     authorize [:survey, :assignee]
-    if @survey.project?
-      @pagy, @assignees = pagy_nil_safe(params, Project.active.where(kpi_id: @survey).order(:name), items: LIMIT)
-      @assigns = Project.active.where(kpi_id: nil).order(:name)
-    else
-      @pagy, @assignees = pagy_nil_safe(params, User.all_users.where(kpi_id: @survey.id).order(:first_name), items: LIMIT)
-      @assigns = User.all_users.where(kpi_id: nil).order(:first_name)
-    end
+
+    klass = @survey.survey_for.capitalize.constantize
+    @pagy, @assignees = pagy_nil_safe(params, klass.available.where(kpi_id: @survey), items: LIMIT)
+    @assigns = klass.available.where(kpi_id: nil)
     render_partial("survey/assignees/assignee", collection: @assignees, cached: true) if stale?(@assignees + @assigns + [@survey])
   end
 
   def create
     authorize [:survey, :assignee]
-    if @survey.project?
-      Project.where(id: params[:assign_id]).update(kpi_id: @survey.id)
-    else
-      User.where(id: params[:assign_id]).update(kpi_id: @survey.id)
-    end
+
+    klass = @survey.survey_for.capitalize.constantize
+    klass.where(id: assignee_params[:assign_id]).update(kpi_id: @survey.id)
     redirect_to survey_assignees_path(@survey)
   end
 
   def destroy
     authorize [:survey, :assignee]
-    if @survey.project?
-      Project.where(id: params[:id]).update(kpi_id: nil)
-    else
-      User.where(id: params[:id]).update(kpi_id: nil)
-    end
+
+    klass = @survey.survey_for.capitalize.constantize
+    klass.where(id: params[:id]).update(kpi_id: nil)
     redirect_to survey_assignees_path(@survey)
   end
 
   private
 
   def set_survey
-    @survey = Survey::Survey.find(params[:survey_id])
+    @survey ||= Survey::Survey.find(params[:survey_id])
   end
 
   def assignee_params
