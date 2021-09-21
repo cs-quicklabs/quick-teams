@@ -68,14 +68,9 @@ class Survey::AttemptsController < Survey::BaseController
 
   def potential_participants
     participants = []
-    survey_for = @survey.survey_for.capitalize
-    if survey_for == "User"
-      participants = User.all_users.decorate
-    elsif survey_for == "Project"
-      participants = Project.active.decorate
-    elsif survey_for == "Client"
-      participants = Client.all
-    end
+    klass = @survey.survey_for.capitalize.constantize
+    participants = klass.available if klass.respond_to?(:available)
+    participants
   end
 
   def create_attempt(participant)

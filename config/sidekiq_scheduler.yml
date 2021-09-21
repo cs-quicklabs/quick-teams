@@ -9,3 +9,9 @@ send_daily_tech_nugget:
   class: DailyTechNuggetMailerJob
   queue: default
   description: 'This job sends a daily tech nugget to employees Monday to Friday 10:00 AM'
+
+reset_unread_tech_nugget:
+  cron: '0 10 * * MON'
+  class: WeeklyNuggetResetMailerJob
+  queue: default
+  description: 'This job resets unread tech nuggets older than 7 days every Monday 10:00 AM'

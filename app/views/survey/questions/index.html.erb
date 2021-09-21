@@ -5,14 +5,14 @@
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1  lg:grid-cols-3 ">
         <!-- Left column -->
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2 " data-controller="infinite-scroll">
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
               <div class="p-4", id="project-participants">
                 <div class="flex flex-wrap">
-                  <p class="pb-4 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Survey Questions (" + @questions.load.size.to_s + ")" %></p>
+                  <p class="pb-4 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Survey Questions" %></p>
                 </div>
-                <ul class="divide-y divide-gray-200" id="questions">
+                <ul class="divide-y divide-gray-200" id="questions" data-infinite-scroll-target="entries">
                   <%= render partial: "question", collection: @questions, as: :question, cached: true %>
                 </ul>
                 <div class="justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
