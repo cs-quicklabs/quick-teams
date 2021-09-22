@@ -47,7 +47,7 @@ class Survey::Survey < ActiveRecord::Base
     clone = Survey::Survey.new
     clone.name = self.name + " (Copy)"
     clone.survey_type = self.survey_type
-
+    clone.survey_for = self.survey_for
     clone.actor_id = actor.id
     clone.description = self.description.nil? ? "N/A" : self.description
     clone.save
@@ -56,7 +56,7 @@ class Survey::Survey < ActiveRecord::Base
       q = Survey::Question.new(text: question.text, description: question.description, survey_id: clone.id, question_category_id: question.question_category_id, explanation: question.explanation)
       q.save
 
-      if self..checklist? #checklist
+      if self.checklist? #checklist
         Survey::Option.new(text: "Yes", question: q, correct: true, weight: 1).save
         Survey::Option.new(text: "No", question: q, correct: false, weight: 0).save
       else

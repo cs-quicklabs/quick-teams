@@ -3,7 +3,9 @@
 <% participant = attempt.participant.decorate %>
 <tr class="bg-white " id="<%= dom_id(attempt) %>">
   <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">
-    <p> <%= participant.display_name %></p>
+    <a class= "hover:underline" href="<%= employee_surveys_path(participant) %>">
+      <p> <%= participant.display_name %></p>
+    </a>
   </td>
   <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
     <p> <%= actor.display_name %></p>

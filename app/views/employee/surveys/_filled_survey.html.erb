@@ -5,9 +5,15 @@
         <%= attempt.survey.name %>
       </a>
     <% else %>
-      <a class="hover:underline" href="<%= survey_attempt_path(attempt.survey, attempt) %>">
-        <%= attempt.survey.name %>
-      </a>
+      <% if attempt.participant == current_user %>
+        <a class="hover:underline" href="<%= survey_attempt_path(attempt.survey, attempt) %>">
+          <%= attempt.survey.name %>
+        </a>
+      <% else %>
+        <a class="hover:underline" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
+          <%= attempt.survey.name %>
+        </a>
+      <% end %>
     <% end %>
   </td>
   <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">

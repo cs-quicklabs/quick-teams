@@ -3,13 +3,10 @@ class Survey::AssigneesController < Survey::BaseController
 
   def index
     authorize [:survey, :assignee]
-    if @survey.project?
-      @pagy, @assignees = pagy_nil_safe(params, Project.where(kpi_id: @survey).order(:name), items: LIMIT)
-      @assigns = Project.active.where(kpi_id: nil).order(:name)
-    else
-      @pagy, @assignees = pagy_nil_safe(params, User.all_users.where(kpi_id: @survey.id).order(:first_name), items: LIMIT)
-      @assigns = User.where(kpi_id: nil).order(:first_name)
-    end
+
+    klass = @survey.survey_for.capitalize.constantize
+    @pagy, @assignees = pagy_nil_safe(params, klass.available.where(kpi_id: @survey), items: LIMIT)
+    @assigns = klass.available.where(kpi_id: nil)
     render_partial("survey/assignees/assignee", collection: @assignees, cached: true) if stale?(@assignees + @assigns + [@survey])
   end
 
@@ -59,7 +56,7 @@ class Survey::AssigneesController < Survey::BaseController
   private
 
   def set_survey
-    @survey = Survey::Survey.find(params[:survey_id])
+    @survey ||= Survey::Survey.find(params[:survey_id])
   end
 
   def assignee_params

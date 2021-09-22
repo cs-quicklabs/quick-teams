@@ -11,6 +11,7 @@ class User < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :billable, -> { where(billable: true) }
   scope :all_users, -> { includes(:job, :role, :discipline).where(account: Current.account).active.order(:first_name) }
+  scope :available, -> { all_users }
 
   belongs_to :account
   belongs_to :manager, class_name: "User", optional: true
@@ -45,6 +46,10 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
+
+  def name
+    "#{first_name} #{last_name}".titleize
+  end
 
   def potential_projects
     participated_project_ids = schedules.pluck(:project_id)

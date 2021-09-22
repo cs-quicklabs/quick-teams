@@ -22,6 +22,11 @@ class Survey::Attempt < ActiveRecord::Base
           where(:participant_id => participant.try(:id))
         }
 
+  def self.query(params, includes = nil, order)
+    return [] if params.empty?
+    Survey::AttemptQuery.new(self.includes(includes), params, order).filter
+  end
+
   # callbacks
   before_create :collect_scores
 

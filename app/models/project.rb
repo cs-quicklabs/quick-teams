@@ -26,6 +26,7 @@ class Project < ApplicationRecord
 
   scope :archived, -> { where(archived: true) }
   scope :active, -> { where(archived: false) }
+  scope :available, -> { active }
 
   def potential_participants
     User.includes(:job, :role, :discipline).for_current_account.active.where.not(id: participants).order(:first_name)
