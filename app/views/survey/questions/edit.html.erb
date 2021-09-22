@@ -14,14 +14,16 @@
             <label for="comments" class="block text-sm font-medium text-gray-700">
               Question Description (optional)
             </label>
-            <%= form.text_field :description, class: "form-text-field mt-1", autocomplete: "off" %>
+            <%= form.text_area :description, class: "form-text-field mt-1", autocomplete: "off" %>
           </div>
-          <div class="w-full px-4 py-2">
-            <label for="comments" class="block text-sm font-medium text-gray-700">
-              Question Explanation (optional)
-            </label>
-            <%= form.text_field :explanation, class: "form-text-field mt-1", autocomplete: "off" %>
-          </div>
+          <% if @survey.kpi? %>
+            <div class="w-full px-4 py-2">
+              <label for="comments" class="block text-sm font-medium text-gray-700">
+                Question Explanation (optional)
+              </label>
+              <%= form.text_area :explanation, class: "form-text-field mt-1", autocomplete: "off" %>
+            </div>
+          <% end %>
           <div class="w-full px-4 py-2">
             <label for="comments" class="block text-sm font-medium text-gray-700">
               Category (optional)

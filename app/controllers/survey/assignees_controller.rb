@@ -1,5 +1,6 @@
 class Survey::AssigneesController < Survey::BaseController
   before_action :set_survey, only: [:index, :create, :destroy]
+  before_action :set_assignee, only: [:create]
 
   def index
     authorize [:survey, :assignee]
@@ -13,20 +14,42 @@ class Survey::AssigneesController < Survey::BaseController
   def create
     authorize [:survey, :assignee]
 
-    klass = @survey.survey_for.capitalize.constantize
-    klass.where(id: assignee_params[:assign_id]).update(kpi_id: @survey.id)
-    redirect_to survey_assignees_path(@survey)
+    @assigns = @klass.available.where(kpi_id: nil)
+    respond_to do |format|
+      if @assignee.update(kpi_id: @survey.id)
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.prepend(:assignees, partial: "survey/assignees/assignee", locals: { assignee: @assignee }) +
+                               turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Assignee was added successfully." })
+        }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Unable to add assgnee. Plese try again later" }) }
+      end
+    end
   end
 
   def destroy
     authorize [:survey, :assignee]
-
     klass = @survey.survey_for.capitalize.constantize
-    klass.where(id: params[:id]).update(kpi_id: nil)
-    redirect_to survey_assignees_path(@survey)
+    @assignee = klass.find(params[:id])
+    @assigns = klass.available.where(kpi_id: nil)
+    respond_to do |format|
+      if @assignee.update(kpi_id: nil)
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Assignee was deleted." }) +
+                               turbo_stream.remove(@assignee)
+        }
+      else
+        render turbo_stream: turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Unable to delete Assignee" })
+      end
+    end
   end
 
   private
+
+  def set_assignee
+    @klass = @survey.survey_for.capitalize.constantize
+    @assignee = @klass.find(assignee_params[:assign_id])
+  end
 
   def set_survey
     @survey ||= Survey::Survey.find(params[:survey_id])
