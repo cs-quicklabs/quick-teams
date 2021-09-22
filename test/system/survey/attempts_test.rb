@@ -5,12 +5,17 @@ class AttemptsTest < ApplicationSystemTestCase
     @employee = users(:regular)
     @account = @employee.account
     @survey = survey_surveys(:one)
+    @attempt = survey_attempts(:one)
     ActsAsTenant.current_tenant = @account
     sign_in @employee
   end
 
   def page_url
     survey_attempts_url(script_name: "/#{@account.id}", survey_id: @survey.id)
+  end
+
+  def attempt_url
+    survey_attempt_url(script_name: "/#{@account.id}", survey_id: @survey.id, id: @attempt.id)
   end
 
   test "can visit index page if logged in" do
@@ -28,20 +33,25 @@ class AttemptsTest < ApplicationSystemTestCase
   end
 
   test "can attempt a survey" do
+    visit attempt_url
+    click_on "Preview and Submit"
+    take_screenshot
+    fill_in "survey_attempt_comment", with: "This is a comment"
+    click_on "Submit"
+    sleep(0.2)
     visit page_url
-    click_on "Attempt"
+    assert_selector "td", text: "Submitted"
+    find(id: dom_id(@attempt)).click_link("View")
     take_screenshot
-    find(:select, id: "survey_attempt_participant_id").find(:xpath, "option[3]").select_option
-    click_on "Start"
-    take_screenshot
+    assert_selector "h4", text: "This is a comment"
   end
 
   test "can view  attempt" do
     visit page_url
     take_screenshot
-    if @survey.attempts > 0
-      attempt = @survey.attempts.first
-      find("tr", id: dom_id(attempt)).click_link("View")
+    @attempt = @survey.attempts.first
+    if find("tr", id: dom_id(@attempt))
+      find("tr", id: dom_id(@attempt)).click_link("View")
       assert_selector "h1", text: @survey.name
       assert_selector "p", text: "Participant"
       assert_selector "h3", text: "Score"
@@ -52,12 +62,12 @@ class AttemptsTest < ApplicationSystemTestCase
   test "can delete attempt" do
     visit page_url
     take_screenshot
-    if @survey.attempts > 0
-      attempt = @survey.attempts.first
+    @attempt = @survey.attempts.first
+    if find("tr", id: dom_id(@attempt))
       page.accept_confirm do
-        find("tr", id: dom_id(attempt)).click_link("Delete")
+        find("tr", id: dom_id(@attempt)).click_link("Delete")
       end
-      assert_not_selector dom_id(attempt)
+      assert_no_selector dom_id(@attempt), text: @attempt.survey
     end
     take_screenshot
   end

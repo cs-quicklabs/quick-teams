@@ -3,82 +3,29 @@ one:
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: 1
-  survey_type: 1
+  survey_for: user
+  survey_type: checklist
 
 two: 
   name: Score Initiation Project
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: 1
-  survey_type: 2
+  survey_for: user
+  survey_type: score
 
 three: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: 2
-  survey_type: 1
+  survey_for: user
+  survey_type: score
  
 four: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: 2
-  survey_type: 3
-
-five: 
-  name: Project Initiation Checklist
-  description: Survey Description
-  actor: regular
-  account: crownstack
-  survey_for: employee 
+  survey_for: user
   survey_type: score
-
-six: 
-  name: Project Initiation Checklist
-  description: Survey Description
-  actor: regular
-  account: crownstack
-  survey_for: project 
-  survey_type: checklist
-
-seven: 
-  name: Project Initiation Checklist
-  description: Survey Description
-  actor: regular
-  account: crownstack
-  survey_for: employee
-  survey_type: checklist
-
-eight: 
-  name: Project Initiation Checklist
-  description: Survey Description
-  actor: regular
-  account: crownstack
-  survey_for: client
-  survey_type: kpi
-
-nine: 
-  name: Project Initiation Checklist
-  description: Survey Description
-  actor: regular
-  account: crownstack
-  survey_for: client
-  survey_type: score
-
-ten: 
-  name: Project Initiation Checklist
-  description: Survey Description
-  actor: regular
-  account: crownstack
-  survey_for: client
-  survey_type: checklist
- 
-
-
-
- 
