@@ -5,7 +5,7 @@ class SurveysTest < ApplicationSystemTestCase
     @user = users(:regular)
     @account = @user.account
     ActsAsTenant.current_tenant = @account
-    @survey = survey_surveys(:one)
+    @survey = survey_surveys(:user)
     sign_in @user
   end
 

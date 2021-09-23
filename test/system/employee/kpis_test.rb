@@ -5,7 +5,7 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     @employee = users(:regular)
     @account = @employee.account
     ActsAsTenant.current_tenant = @account
-    @survey = survey_surveys(:two)
+    @survey = survey_surveys(:userkpi)
     sign_in @employee
   end
 
@@ -21,7 +21,7 @@ class EmployeeKpisTest < ApplicationSystemTestCase
   end
 
   test "can not show index if not logged in" do
-    sign_out @user
+    sign_out @employee
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
@@ -34,6 +34,10 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     sleep(5)
     assert_selector "h3", text: @survey.name
     assert_selector "p", text: "Participant: #{@employee.decorate.display_name}"
+    take_screenshot
+    click_on "Preview and Submit"
+    fill_in "survey_attempt_comment", with: "This is a comment"
+    click_on "Submit"
     take_screenshot
   end
 

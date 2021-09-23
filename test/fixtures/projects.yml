@@ -6,7 +6,6 @@ one:
   account: crownstack
   project_tags: risk
   status: tentative
-  kpi: three
 
 two:
   name: Buildboard

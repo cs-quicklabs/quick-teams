@@ -5,7 +5,7 @@ class QuestionsTest < ApplicationSystemTestCase
     @user = users(:regular)
     @account = @user.account
     ActsAsTenant.current_tenant = @account
-    @survey = survey_surveys(:one)
+    @survey = survey_surveys(:user)
     sign_in @user
   end
 
@@ -33,7 +33,7 @@ class QuestionsTest < ApplicationSystemTestCase
     fill_in "survey_question_description", with: "This is a sample Question Description"
     select survey_question_categories(:one).name, from: "survey_question_question_category_id"
     click_on "Add Question"
-    assert_selector "p" text: "Question was added successfully."
+    assert_selector "p", text: "Question was added successfully."
     take_screenshot
   end
 
@@ -50,7 +50,9 @@ class QuestionsTest < ApplicationSystemTestCase
     find("li", id: "#{@question.id}").click_link("Edit")
     fill_in "survey_question_text", with: "question 1"
     click_on "Save"
-    assert_selector "p" text: "Question was updated successfully."
+    assert_text "Question 1"
+    assert_no_text "Save"
+    take_screenshot
   end
 
   test "can not edit a survey with invalid name" do
@@ -69,6 +71,6 @@ class QuestionsTest < ApplicationSystemTestCase
       find("li", id: "#{@question.id}").click_link("Delete")
     end
     take_screenshot
-    assert_selector "p.alert", text: "Question was deleted"
+    assert_no_text @question.decorate.display_text
   end
 end

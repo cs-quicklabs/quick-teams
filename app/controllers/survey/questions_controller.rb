@@ -30,12 +30,11 @@ class Survey::QuestionsController < Survey::BaseController
 
   def update
     authorize [:survey, :question]
-    @question.update(question_params)
     respond_to do |format|
-      if @question.errors.empty?
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/question", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name), notice: "Question was updated successfully." }) }
+      if @question.update(question_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/question", locals: { survey: @survey, question: @question, notice: "Question was updated successfully." }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/form", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name) }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/edit", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name), alert: "Question was not updated." }) }
       end
     end
   end

@@ -15,7 +15,7 @@ regular:
   sign_in_count: 1  
   nuggets: one, four, five
   skills: ruby, python
-  kpi: two
+  kpi: userkpi
 
 actor:
   first_name: Rachita

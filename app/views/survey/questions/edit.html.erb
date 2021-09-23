@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(@question) do %>
   <%= form_with(model: @question, id: dom_id(@question), url: survey_question_path(@survey, @question)) do |form| %>
-    <%= render "shared/form_messages", resource: @question, message: local_assigns[:message] %>
+    <%= render "shared/form_messages", resource: @survey, message: local_assigns[:message] %>
     <li>
       <div class="flex pt-2 pb-4 border-b border-gray-200">
         <div class="w-full ml-3">

@@ -20,7 +20,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
   end
 
   test "can not show index if not logged in" do
-    sign_out @user
+    sign_out @employee
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
@@ -34,12 +34,25 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     assert_selector "h3", text: @survey.name
     assert_selector "p", text: "Participant: #{@employee.decorate.display_name}"
     take_screenshot
+    click_on "Preview and Submit"
+    fill_in "survey_attempt_comment", with: "This is a comment"
+    click_on "Submit"
+    take_screenshot
   end
 
   test "can view  attempt" do
     visit page_url
+    @survey = @employee.surveys.first
+    page.accept_confirm do
+      find("li", id: dom_id(@survey)).click_link
+    end
+    assert_selector "h3", text: @survey.name
+    assert_selector "p", text: "Participant: #{@employee.decorate.display_name}"
+    click_on "Preview and Submit"
+    fill_in "survey_attempt_comment", with: "This is a comment"
+    click_on "Submit"
     take_screenshot
-    @attempt = survey_attempts(:one)
+    @attempt = @survey.attempts.last
     if @attempt
       find("tr", id: dom_id(@attempt)).click_link(@attempt.survey.name)
       assert_selector "h3", text: @attempt.survey.name
@@ -51,8 +64,17 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
 
   test "can delete attempt" do
     visit page_url
+    @survey = @employee.surveys.first
+    page.accept_confirm do
+      find("li", id: dom_id(@survey)).click_link
+    end
+    assert_selector "h3", text: @survey.name
+    assert_selector "p", text: "Participant: #{@employee.decorate.display_name}"
+    click_on "Preview and Submit"
+    fill_in "survey_attempt_comment", with: "This is a comment"
+    click_on "Submit"
     take_screenshot
-    @attempt = survey_attempts(:one)
+    @attempt = @survey.attempts.last
     if @attempt
       page.accept_confirm do
         find("tr", id: dom_id(@attempt)).click_link("Delete")

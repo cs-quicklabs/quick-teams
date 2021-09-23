@@ -19,7 +19,7 @@ class AssigneesTest < ApplicationSystemTestCase
     assert_selector "h1", text: @survey.name
     assert_selector "div#survey-tabs", text: "Assignees"
     assert_selector "div#employee-assignees"
-    assert_selector "form#add-assignee"
+    assert_selector "section#add-assignee"
   end
 
   test "can not show index if not logged in" do
@@ -32,7 +32,7 @@ class AssigneesTest < ApplicationSystemTestCase
     visit page_url
     find(:select, id: "assign_id").find(:xpath, "option[3]").select_option
     click_on "Add Assignee"
-    assert_selector "p.notice", text: "Assignee was added successfully."
+    assert_selector "p", text: "Assignee was added successfully."
   end
 
   test "can delete a question" do
@@ -46,6 +46,6 @@ class AssigneesTest < ApplicationSystemTestCase
       find("tr", id: dom_id(@assignee)).click_link("Delete")
     end
     take_screenshot
-    assert_selector "p.alert", text: "Assignee was deleted"
+    assert_selector "p", text: "Assignee was deleted"
   end
 end

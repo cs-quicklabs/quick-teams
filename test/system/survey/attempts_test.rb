@@ -4,8 +4,8 @@ class AttemptsTest < ApplicationSystemTestCase
   setup do
     @employee = users(:regular)
     @account = @employee.account
-    @survey = survey_surveys(:one)
-    @attempt = survey_attempts(:one)
+    @survey = survey_surveys(:user)
+    @attempt = survey_attempts(:user)
     ActsAsTenant.current_tenant = @account
     sign_in @employee
   end
@@ -34,6 +34,7 @@ class AttemptsTest < ApplicationSystemTestCase
 
   test "can attempt a survey" do
     visit attempt_url
+    sleep(5)
     click_on "Preview and Submit"
     take_screenshot
     fill_in "survey_attempt_comment", with: "This is a comment"
