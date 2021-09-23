@@ -8,4 +8,12 @@ class Survey::AttemptDecorator < Draper::Decorator
       score.to_s + "%"
     end
   end
+
+  def survey_url
+    if self.participant.class.name == "Project"
+      project_surveys_path(participant)
+    elsif self.participant.class.name == "User"
+      self.survey.kpi? ? employee_kpis_path(participant) : employee_surveys_path(participant)
+    end
+  end
 end
