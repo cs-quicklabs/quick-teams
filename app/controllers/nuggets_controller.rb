@@ -49,7 +49,6 @@ class NuggetsController < BaseController
   def destroy
     authorize @nugget
     @nugget.destroy
-
     respond_to do |format|
       format.turbo_stream { redirect_to nuggets_path, notice: "Nugget was removed successfully." }
     end
