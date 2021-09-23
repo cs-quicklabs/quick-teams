@@ -33,7 +33,10 @@
               <p class="text-xs font-medium text-gray-500 uppercase"><%= question.display_category %></p>
               <p class="text-sm font-semibold text-gray-900 mt-1"><%= question.display_text %></p>
               <p class="text-sm  text-gray-500 mt-1"><%= question.display_description %></p>
-              <%= tailwind_form_with(model: attempt, id: dom_id(attempt), url: new_survey_attempt_path(question.survey)) do |form| %>
+              <%= tailwind_form_with(model: attempt, id: dom_id(attempt), url: "surveys/#{question.survey.id}/assessment") do |form| %>
+                <%= form.hidden_field :actor_id, value: actor.id %>
+                <%= form.hidden_field :participant_id, value: participant.id %>
+                <%= form.hidden_field :question_id, value: question.id %>
                 <div class="flex py-2 mt-1">
                   <% 10.times do |i| %>
                     <div class="ml-1 inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor:pointer">
@@ -44,19 +47,19 @@
                 <main class="max-w-lg mx-auto space-y-6 mt-2">
                   <%= form.text_area :comment, "Comment (Optional)" %>
                 </main>
+                <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                  <% if main_button_visible %>
+                    <button type="submit" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+                      Save
+                    </button>
+                  <% end %>
+                  <button type="button" class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm" data-action="modal#close">
+                    Cancel
+                  </button>
+                </div>
               <% end %>
             </div>
           </div>
-        </div>
-        <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-          <% if main_button_visible %>
-            <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
-              Save
-            </button>
-          <% end %>
-          <button type="button" class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm" data-action="modal#close">
-            Cancel
-          </button>
         </div>
       </div>
     </div>
