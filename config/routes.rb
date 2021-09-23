@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
     get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
+    post "/surveys/:survey_id/assessment", to: "employee/surveys#quick_assessment"
   end
   resources :user
   resources :comments
