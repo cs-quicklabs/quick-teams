@@ -7,12 +7,12 @@ one:
   survey_type: checklist
 
 two: 
-  name: Score Initiation Project
+  name: KPI Initiation Project
   description: Survey Description
   actor: regular
   account: crownstack
   survey_for: user
-  survey_type: score
+  survey_type: kpi
 
 three: 
   name: Project Initiation Checklist
