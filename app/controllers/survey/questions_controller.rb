@@ -24,17 +24,18 @@ class Survey::QuestionsController < Survey::BaseController
     authorize [:survey, :question]
     @question.destroy
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@question), locals: { message: "Question was deleted successfully." } }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@question) }
     end
   end
 
   def update
     authorize [:survey, :question]
+    @question.update(question_params)
     respond_to do |format|
-      if @question.update(question_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/question", locals: { survey: @survey, question: @question, notice: "Question was updated successfully." }) }
+      if @question.errors.empty?
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/question", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name), notice: "Question was updated successfully." }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/edit", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name), alert: "Question was not updated." }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@question, partial: "survey/questions/form", locals: { survey: @survey, question: @question, question_categories: Survey::QuestionCategory.all.order(:name) }) }
       end
     end
   end
