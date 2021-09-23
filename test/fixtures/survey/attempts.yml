@@ -4,8 +4,8 @@ one:
   survey: one
   participant_type: User
 
-two:
+project:
   participant: member
   actor: regular
-  survey: one
-  participant_type: User
+  survey: project
+  participant_type: Project

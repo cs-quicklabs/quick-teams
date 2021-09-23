@@ -1,4 +1,4 @@
-one: 
+user: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
@@ -6,7 +6,7 @@ one:
   survey_for: user
   survey_type: checklist
 
-two: 
+userkpi: 
   name: KPI Initiation Project
   description: Survey Description
   actor: regular
@@ -14,18 +14,18 @@ two:
   survey_for: user
   survey_type: kpi
 
-three: 
+projectkpi: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: user
-  survey_type: score
+  survey_for: project
+  survey_type: kpi
  
-four: 
+project: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: user
+  survey_for: project
   survey_type: score

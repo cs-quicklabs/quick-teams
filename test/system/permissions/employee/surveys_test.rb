@@ -23,46 +23,56 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Surveys"
   end
 
-  test "can not show index if not logged in" do
-    sign_out @user
+  test "lead can see his surveyss" do
+    sign_out @employee
+    @employee = users(:lead)
+    sign_in @employee
     visit page_url
-    assert_selector "h1", text: "Sign in to your account"
+    take_screenshot
+    assert_equal @survey.account.name, "Crownstack technologies"
+    assert_selector "div#employee-tabs", text: "surveys"
   end
 
-  test "can attempt a survey" do
-    visit page_url
-    @survey = @employee.surveys.first
-    page.accept_confirm do
-      find("li", id: dom_id(@survey)).click_link
-    end
-    assert_selector "h3", text: @survey.name
-    assert_selector "p", text: "Participant: #{@employee.decorate.display_name}"
+  test "lead can see his subordiates surveys" do
+    sign_out @employee
+    @employee = users(:lead)
+    sign_in @employee
+    visit subordinate_page_url
     take_screenshot
+    assert_equal @survey.account.name, "Crownstack technologies"
+    assert_selector "div#employee-tabs", text: "surveys"
   end
 
-  test "can view  attempt" do
+  test "lead can not see someone elseses surveys" do
+    sign_out @employee
+    @lead = users(:lead)
+    sign_in @lead
+    @employee = users(:admin)
     visit page_url
     take_screenshot
-    @attempt = survey_attempts(:one)
-    if @attempt
-      find("tr", id: dom_id(@attempt)).click_link(@attempt.survey.name)
-      assert_selector "h3", text: @attempt.survey.name
-      assert_selector "p", text: "Participant: #{@employee.decorate.display_name}"
-      assert_selector "h3", text: "Score"
-    end
-    take_screenshot
+    assert_selector "h1", text: @lead.decorate.display_name
+    assert_selector "div#employee-tabs", text: "surveys"
   end
 
-  test "can delete attempt" do
+  test "member can see his surveys" do
+    sign_out @employee
+    @employee = users(:member)
+    sign_in @employee
     visit page_url
     take_screenshot
-    @attempt = survey_attempts(:one)
-    if @attempt
-      page.accept_confirm do
-        find("tr", id: dom_id(@attempt)).click_link("Delete")
-      end
-      assert_no_selector dom_id(@attempt), text: @attempt.survey
-    end
+    assert_equal @survey.account.name, "Crownstack technologies"
+    assert_selector "div#employee-tabs", text: "surveys"
+  end
+
+  test "member can not see someone elses surveys" do
+    sign_out @employee
+    @member = users(:member)
+    sign_in @member
+    @employee = users(:admin)
+    visit page_url
     take_screenshot
+    binding.irb
+    assert_selector "h1", text: @member.decorate.display_name
+    assert_selector "div#employee-tabs", text: "surveys"
   end
 end
