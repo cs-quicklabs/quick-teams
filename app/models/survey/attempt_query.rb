@@ -41,7 +41,7 @@ class Survey::AttemptQuery
     end
 
     def to_date(param)
-      where("survey_attempts.created_at <= ?", Date.parse(param.to_s))
+      where("survey_attempts.created_at <= ?", DateTime.parse(param + "T24:00"))
     end
   end
 end
