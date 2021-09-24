@@ -1,5 +1,5 @@
 <% assignee_decorated = assignee.decorate %>
-<% if assignee.class.name == "UserDecorator" %>
+<% if assignee_decorated.class.name == "UserDecorator" %>
   <tr id="<%= dom_id(assignee) %>">
     <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
       <div class="flex items-center">
@@ -7,7 +7,7 @@
           <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
         </div>
         <div class="ml-4">
-          <a href="<%= employee_surveys_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">
+          <a href="<%= employee_kpis_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">
             <div class="text-sm font-medium text-gray-900">
               <%= assignee_decorated.display_name %>
               <% unless assignee.status.nil? %>
