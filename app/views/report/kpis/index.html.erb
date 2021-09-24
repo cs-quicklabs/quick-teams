@@ -12,7 +12,7 @@
   <div class="flex w-full">
     <%= render partial: "form" %>
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <% if @kpis.size>0  %>
+    <% if @kpis.size > 0 %>
       <div class="w-full overflow-auto" data-controller="infinite-scroll">
         <table class="min-w-full pb-6 divide-y divide-gray-200">
           <thead class="bg-gray-50">

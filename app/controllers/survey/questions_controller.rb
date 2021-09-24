@@ -24,7 +24,7 @@ class Survey::QuestionsController < Survey::BaseController
     authorize [:survey, :question]
     @question.destroy
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@question) }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@question), locals: { message: "Question was deleted successfully." } }
     end
   end
 
