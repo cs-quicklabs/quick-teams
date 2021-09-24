@@ -41,7 +41,7 @@
               </div>
             <% end %>
             <% if policy([@employee, :kpi]).self_record? %>
-              <div class="text-center mt-4">
+              <div class="text-center mt-2">
                 <h3 class="mt-2 text-sm font-medium text-gray-900">Record Self Assessment</h3>
                 <p class="mt-1 text-sm text-gray-500 px-8">
                   You have been assigned <%= @kpi.name.upcase_first %>. Please click on button below to record a new self assessment.

@@ -21,7 +21,7 @@ class Survey::ReportsController < Survey::BaseController
   def submit
     authorize [:survey, :report]
     @attempt.update("comment": params[:survey_attempt][:comment], "submitted": true, score: @attempt.calculate_score)
-    redirect_to resolve_redirect_path
+    redirect_to resolve_redirect_path(@attempt)
   end
 
   def download
@@ -31,14 +31,6 @@ class Survey::ReportsController < Survey::BaseController
   end
 
   private
-
-  def resolve_redirect_path
-    if @attempt.participant.class.name == "Project"
-      @attempt.survey.kpi? ? project_kpis_path(@attempt.participant) : project_surveys_path(@attempt.participant)
-    elsif @attempt.participant.class.name == "User"
-      @attempt.survey.kpi? ? employee_kpis_path(@attempt.participant) : employee_surveys_path(@attempt.participant)
-    end
-  end
 
   def set_survey
     @survey = Survey::Survey.find(params[:survey_id])

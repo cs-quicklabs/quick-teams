@@ -2,20 +2,20 @@
   <% participant = kpi.participant.decorate %>
   <% actor = kpi.actor.decorate %>
   <% kpi = kpi.decorate %>
-  <td class="w-5/12 px-6 py-3  text-sm text-gray-700 ">
+  <td class="w-6/12 px-6 py-3  text-sm text-gray-700 ">
     <a class="hover:underline" href="<%= survey_report_preview_path(kpi.survey, kpi) %>">
       <%= kpi.survey.name.upcase_first %>
     </a>
   </td>
-  <td class="px-6 py-3  text-sm text-gray-700 max-w-0 whitespace-nowrap">
+  <td class="px-6 py-3  text-sm text-gray-700  whitespace-nowrap">
     <a class="hover:underline" href="<%= employee_kpis_path(participant) %>">
       <%= participant.display_name %>
     </a>
   </td>
-  <td class="px-2 py-3  text-sm text-gray-700 max-w-0 whitespace-nowrap truncate">
-    <%= kpi.score %><%= (kpi.survey.survey_type === 'score' || kpi.survey.survey_type === 'kpi') ? "%" : "" %>
+  <td class="px-2 py-3  text-sm text-gray-700  whitespace-nowrap truncate">
+    <%= kpi.display_score %>
   </td>
-  <td class="px-6 py-3  text-sm text-gray-700 max-w-0 whitespace-nowrap">
+  <td class="px-6 py-3  text-sm text-gray-700  whitespace-nowrap">
     <%= actor.display_name %>
   </td>
   <td class="px-4 py-3  text-sm font-xs  text-gray-500  max-w-0  ">
