@@ -1,5 +1,5 @@
 <% assignee_decorated = assignee.decorate %>
-<% if assignee.class.name == "UserDecorator" %>
+<% if assignee_decorated.class.name == "UserDecorator" %>
   <tr id="<%= dom_id(assignee) %>">
     <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
       <div class="flex items-center">
@@ -10,11 +10,9 @@
           <a href="<%= employee_kpis_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">
             <div class="text-sm font-medium text-gray-900">
               <%= assignee_decorated.display_name %>
-              <% unless assignee.status.nil? %>
-                <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= assignee.status.color %>-800 bg-<%= assignee.status.color %>-100 rounded-full">
-                  <%= assignee.status.name.titleize %>
-                </span>
-              <% end %>
+              <div id="employee-tags" class="inline-flex">
+                <%= render partial: "employee/display_tags", locals: { employee: assignee, tags: assignee.people_tags } %>
+              </div>
             </div>
             <div class="text-sm text-gray-500">
               <%= assignee_decorated.display_position %>

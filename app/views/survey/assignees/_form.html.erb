@@ -9,7 +9,7 @@
             <label for="skill" class="block text-sm font-medium text-gray-700"></label>
             <div class="mt-1">
               <%= tailwind_form_with(url: survey_assignees_path(survey), method: "post") do |f| %>
-                <%= f.collection_select(:assign_id, assigns.decorate, :id, :display_name, { :prompt => "Select Assignee", :selected => (params[:assign_id] if params[:assign_id]) }, :class => "form-text-field mt-1") %>
+                <%= f.collection_select(:assign_id, assigns.decorate, :id, :display_name, { :prompt => "Select Assignee" }, :class => "form-text-field mt-1") %>
                 <div class="flex justify-end  mt-1 w-full">
                   <button type="submit" class="mt-4  inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Add Assignee

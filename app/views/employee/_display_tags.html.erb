@@ -1,0 +1,7 @@
+<% if employee.people_tags.load.size > 0 %>
+  <% employee.people_tags.uniq.each do |tag| %>
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-<%= tag.color %>-100 text-<%= tag.color %>-800 ml-2">
+      <%= tag.name %>
+    </span>
+  <% end %>
+<% end %>

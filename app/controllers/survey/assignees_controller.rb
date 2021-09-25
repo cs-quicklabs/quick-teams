@@ -22,7 +22,7 @@ class Survey::AssigneesController < Survey::BaseController
                                turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Assignee was added successfully." })
         }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Unable to add assgnee. Plese try again later" }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Unable to add assignee. Plese try again later" }) }
       end
     end
   end
@@ -31,16 +31,13 @@ class Survey::AssigneesController < Survey::BaseController
     authorize [:survey, :assignee]
     klass = @survey.survey_for.capitalize.constantize
     @assignee = klass.find(params[:id])
+    @assignee.update(kpi_id: nil)
     @assigns = klass.available.where(kpi_id: nil)
     respond_to do |format|
-      if @assignee.update(kpi_id: nil)
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Assignee was deleted." }) +
-                               turbo_stream.remove(@assignee)
-        }
-      else
-        render turbo_stream: turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Unable to delete Assignee" })
-      end
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey }) +
+                             turbo_stream.remove(@assignee)
+      }
     end
   end
 
