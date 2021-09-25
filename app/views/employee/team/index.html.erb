@@ -1,10 +1,10 @@
 <main class="relative z-0 flex-1  focus:outline-none">
   <%= render "employee/title", employee: @employee %>
   <div class="px-4 sm:px-6">
-    <div class=" overflow-hidden bg-white">
+    <div class="bg-white">
       <div class="p-4">
         <div class="flex flex-wrap">
-          <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Team Members(" + @subordinates.load.size.to_s + ")" %></p>
+          <p class="pb-2 mt-1 text-sm font-medium text-gray-900"><%= "Team Members(" + @subordinates.load.size.to_s + ")" %></p>
         </div>
         <ul class="divide-y divide-gray-200">
           <%= render partial: "employee/team/employee", collection: @subordinates, as: :employee, cached: true %>

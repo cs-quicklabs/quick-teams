@@ -3,7 +3,7 @@
 <% participant = attempt.participant.decorate %>
 <tr class="bg-white " id="<%= dom_id(attempt) %>">
   <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">
-    <a class= "hover:underline" href="<%= employee_surveys_path(participant) %>">
+    <a class= "hover:underline" href="<%= resolve_redirect_path(attempt) %>">
       <p> <%= participant.display_name %></p>
     </a>
   </td>
@@ -14,7 +14,7 @@
     <p> <%= display_date(attempt.created_at) %></p>
   </td>
   <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
-    <p> <%= attempt.score %></p>
+    <p> <%= attempt.decorate.display_score %></p>
   </td>
   <td class="px-4 py-3 whitespace-nowrap text-sm font-xs mt-2 text-gray-500 max-w-full flex">
     <% if attempt.submitted? %>

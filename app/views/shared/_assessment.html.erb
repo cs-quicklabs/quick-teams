@@ -39,14 +39,14 @@
                 <%= form.hidden_field :question_id, value: question.id %>
                 <div>
                   <label for="rating" class="block mt-4 text-sm font-medium text-gray-700">
-                    Select Score
+                    Select Score (between 1 to 10)
                   </label>
                   <%= form.number_field :rating, in: 1..10, step: 1, class: "form-text-field" %>
                 </div>
-                <main class="max-w-lg mx-auto space-y-6 mt-2">
+                <main class="max-w-lg mx-auto space-y-6 mt-4">
                   <%= form.text_area :comment, "Comment (Optional)" %>
                 </main>
-                <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                <div class="sm:mt-4 sm:flex sm:flex-row-reverse">
                   <% if main_button_visible %>
                     <button type="submit" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
                       Save

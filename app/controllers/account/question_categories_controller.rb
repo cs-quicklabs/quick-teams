@@ -5,7 +5,7 @@ class Account::QuestionCategoriesController < Account::BaseController
   def index
     authorize :account
 
-    @question_categories = Survey::QuestionCategory.all.order(created_at: :desc)
+    @question_categories = Survey::QuestionCategory.all.order(:name)
     @question_category = Survey::QuestionCategory.new
   end
 

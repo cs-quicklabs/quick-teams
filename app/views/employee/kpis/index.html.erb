@@ -14,7 +14,7 @@
                     <p class=" mt-1 text-sm font-medium text-gray-900 truncate"><%= "KPIs Questions set (" + @kpi.questions.load.size.to_s + ")" %></p>
                   </div>
                   <ul class="divide-y divide-gray-200" id="questions">
-                    <%= render partial: "shared/surveys/question", collection: @kpi.questions.order_by_category, locals: { as: :question, participant: @employee }, cached: true %>
+                    <%= render partial: "shared/surveys/question", collection: @kpi.questions.order_by_category, locals: { as: :question, participant: @employee }, cached: false %>
                   </ul>
                 </div>
               </div>
@@ -41,7 +41,7 @@
               </div>
             <% end %>
             <% if policy([@employee, :kpi]).self_record? %>
-              <div class="text-center mt-4">
+              <div class="text-center mt-2">
                 <h3 class="mt-2 text-sm font-medium text-gray-900">Record Self Assessment</h3>
                 <p class="mt-1 text-sm text-gray-500 px-8">
                   You have been assigned <%= @kpi.name.upcase_first %>. Please click on button below to record a new self assessment.

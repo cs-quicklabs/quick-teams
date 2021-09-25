@@ -2,34 +2,39 @@
   <% participant = kpi.participant.decorate %>
   <% actor = kpi.actor.decorate %>
   <% kpi = kpi.decorate %>
-  <td class="w-2/5 px-6 py-3  text-sm text-gray-700 max-w-0">
+  <td class="w-6/12 px-6 py-3  text-sm text-gray-700 ">
     <a class="hover:underline" href="<%= survey_report_preview_path(kpi.survey, kpi) %>">
       <%= kpi.survey.name.upcase_first %>
     </a>
   </td>
-  <td class="px-6 py-3  text-sm text-gray-700 max-w-0">
+  <td class="px-6 py-3  text-sm text-gray-700  whitespace-nowrap">
     <a class="hover:underline" href="<%= employee_kpis_path(participant) %>">
       <%= participant.display_name %>
     </a>
   </td>
-  <td class="px-6 py-3  text-sm text-gray-700 max-w-0 whitespace-nowrap">
+  <td class="px-2 py-3  text-sm text-gray-700  whitespace-nowrap truncate">
+    <%= kpi.display_score %>
+  </td>
+  <td class="px-6 py-3  text-sm text-gray-700  whitespace-nowrap">
     <%= actor.display_name %>
   </td>
-  <td class="px-4 py-3 whitespace-nowrap text-sm font-xs  text-gray-500  flex">
-    <% if kpi.submitted? %>
-      <!-- Heroicon name: solid/check-circle -->
-      <svg class="ml-1 flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-      </svg>
-      Submitted
-    <% else %>
-      <svg class="ml-1 flex-shrink-0 mr-1.5 h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-      </svg>
-      In Progress
-    <% end %>
+  <td class="px-4 py-3  text-sm font-xs  text-gray-500  max-w-0  ">
+    <div class= "ml-4 flex whitespace-nowrap">
+      <% if kpi.submitted? %>
+        <!-- Heroicon name: solid/check-circle -->
+        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        Submitted
+      <% else %>
+        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+        In Progress
+      <% end %>
+    </div>
   </td>
-  <td class="px-6 py-3  text-sm text-gray-700 max-w-0 whitespace-nowrap">
+  <td class="px-8 py-3  text-sm text-gray-700  whitespace-nowrap">
     <%= display_date(kpi.created_at) %>
   </td>
 </tr>

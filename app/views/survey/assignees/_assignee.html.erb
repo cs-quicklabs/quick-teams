@@ -7,14 +7,12 @@
           <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
         </div>
         <div class="ml-4">
-          <a href="<%= employee_surveys_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">
+          <a href="<%= employee_kpis_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">
             <div class="text-sm font-medium text-gray-900">
               <%= assignee_decorated.display_name %>
-              <% unless assignee.status.nil? %>
-                <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= assignee.status.color %>-800 bg-<%= assignee.status.color %>-100 rounded-full">
-                  <%= assignee.status.name.titleize %>
-                </span>
-              <% end %>
+              <div id="employee-tags" class="inline-flex">
+                <%= render partial: "employee/display_tags", locals: { employee: assignee, tags: assignee.people_tags } %>
+              </div>
             </div>
             <div class="text-sm text-gray-500">
               <%= assignee_decorated.display_position %>
@@ -23,7 +21,7 @@
         </div>
       </div>
     </td>
-    <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
+    <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap intems-center">
       <%= link_to "Delete", survey_assignee_path(@survey, assignee), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     </td>
   </tr>
