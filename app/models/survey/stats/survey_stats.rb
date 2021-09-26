@@ -22,6 +22,10 @@ class Survey::Stats::SurveyStats
 
   def stats_for(question)
     answers = Survey::Answer.where(attempt_id: all_attempts.ids, question: question)
+    stats_for_answers(answers)
+  end
+
+  def stats_for_answers(answers)
     total_responses = answers.count
     average_score = 0.0
     if total_responses > 0
