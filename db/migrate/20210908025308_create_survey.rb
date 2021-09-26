@@ -4,7 +4,7 @@ class CreateSurvey < ActiveRecord::Migration[6.1]
     create_table :survey_surveys do |t|
       t.string :name
       t.text :description
-      t.references :account, null: false, foreign_key: true
+      t.integer :account_id, :default => 0
       t.integer :survey_for, :default => 0
       t.integer :attempts_number, :default => 0
       t.boolean :finished, :default => false
