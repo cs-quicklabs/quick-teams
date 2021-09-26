@@ -44,7 +44,11 @@ class Survey::AssigneesController < Survey::BaseController
   private
 
   def set_assignee
-    @klass = @survey.survey_for.capitalize.constantize
+    klass = @survey.survey_for
+    if klass = "adhoc"
+      klass == user
+    end
+    @klass = klass.capitalize.constantize
     @assignee = @klass.find(assignee_params[:assign_id])
   end
 
