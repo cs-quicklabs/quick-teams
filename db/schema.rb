@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_09_18_052114) do
   create_table "clients", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.bigint "account_id", null: false
+    t.integer "account_id", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_clients_on_account_id"
