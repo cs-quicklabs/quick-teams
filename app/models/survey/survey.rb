@@ -4,13 +4,8 @@ class Survey::Survey < ActiveRecord::Base
   self.table_name = "survey_surveys"
 
   enum survey_type: [:checklist, :score, :kpi]
-<<<<<<< HEAD
   enum survey_for: [:project, :user, :client, :adhoc]
   belongs_to :actor, class_name: "User", foreign_key: "actor_id"
-=======
-  enum survey_for: [:project, :user, :client]
-  belongs_to :actor, class_name: "User"
->>>>>>> f0be2a7 (suveys test)
 
   # relations
   has_many :attempts, :dependent => :destroy

@@ -18,7 +18,7 @@
         <label for="email" class="block text-sm font-medium text-gray-700">
           Select for whom this survey is intended
         </label>
-        <%= form.select(:survey_for, [["Project", "project"], ["Employee", "user"], ["Client", "client"],["Adhoc Employee", "adhoc"]], { :prompt => "Select Survey For", :selected => (params["survey_for"] if !params["survey_for"].blank?) }, :class => "form-text-field mt-1", :required => true) %>
+        <%= form.select(:survey_for, [["Project", "project"], ["Employee", "user"], ["Client", "client"], ["Adhoc Employee", "adhoc"]], { :prompt => "Select Survey For", :selected => (params["survey_for"] if !params["survey_for"].blank?) }, :class => "form-text-field mt-1", :required => true) %>
       </div>
       <div class="flex justify-end pt-5">
         <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
