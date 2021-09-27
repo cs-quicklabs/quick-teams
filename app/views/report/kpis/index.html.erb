@@ -14,30 +14,30 @@
     <!-- This example requires Tailwind CSS v2.0+ -->
     <% if @kpis.size > 0 %>
       <div class="w-full overflow-auto" data-controller="infinite-scroll">
-        <table class="min-w-full pb-6 divide-y divide-gray-200">
+        <table class="table">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="w-6/12 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-6/12 table-head">
                 KPI
               </th>
-              <th scope="col" class=" px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class=" table-head">
                 Participant
               </th>
-              <th scope="col" class=" px-2  py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="  table-head">
                 score
               </th>
-              <th scope="col" class=" px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class=" table-head">
                 Taken by
               </th>
-              <th scope="col" class="pr-6 pl-10 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class=" table-head px-10">
                 Status
               </th>
-              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class=" table-head">
                 created at
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
+          <tbody class="table-body" data-infinite-scroll-target="entries">
             <%= render partial: "kpi", collection: @kpis, as: :kpi %>
           </tbody>
         </table>

@@ -17,35 +17,35 @@
   <% if @projects.count > 0 %>
     <div class="hidden sm:block">
       <div class="inline-block min-w-full align-middle border-b border-gray-200">
-        <table class="min-w-full">
+        <table class="table">
           <thead>
-            <tr class="border-gray-200">
-              <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+            <tr class="border-gray-200 bg-gray-50 border-b">
+              <th class=" table-head ">
                 <span class="lg:pl-2">Project</span>
               </th>
               <% if current_user.admin? %>
-                <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                <th class="table-head ">
                   Tags
                 </th>
-                <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                <th class="table-head">
                   Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+) %>
                 </th>
               <% end %>
-              <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class=" table-head ">
                 Participants
               </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class="table-head ">
                 Lead
               </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class="table-head ">
                 Created At
               </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class="table-head ">
                 Status
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-100">
+          <tbody class="table-body">
             <%= render partial: "project", collection: @projects, cached: true %>
           </tbody>
         </table>

@@ -33,27 +33,27 @@
   <% if @surveys.size > 0 %>
     <div class="sm:block" data-controller="infinite-scroll">
       <div class="inline-block min-w-full align-middle ">
-        <table class="min-w-full divide-y divide-gray-200">
+        <table class="table">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="w-full px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-full  table-head">
                 Surveys
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class=" table-head ">
                 Added by
               </th>
-              <th scope="col" class="px-2 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="table-head">
                 Survey type
               </th>
-              <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="table-head">
                 Survey for
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class=" table-head ">
                 Created on
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200" id="surveys" data-infinite-scroll-target="entries">
+          <tbody class="table-body" id="surveys" data-infinite-scroll-target="entries">
             <%= render partial: "survey", collection: @surveys, as: :survey, cached: true %>
           </tbody>
         </table>

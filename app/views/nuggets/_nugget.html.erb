@@ -1,24 +1,24 @@
 <tr id="<%= dom_id nugget %>">
   <% nugget = nugget.decorate %>
-  <td class=" w-full px-8 py-3 whitespace-nowrap text-sm text-gray-700">
+  <td class=" w-full table-cell">
     <a href="<%= nugget_path(nugget) %>", class="truncate hover:text-gray-600 hover:underline">
       <span class="text-gray-900 block whitespace-normal "><%= nugget.display_title %></span>
     </a>
   </td>
-  <td class="px-8 py-3  text-sm text-gray-700">
+  <td class="table-cell">
     <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= display_created_at(nugget) %> </span>
   </td>
-  <td class="px-8 py-3  text-sm text-gray-700 max-w-full line-clamp-1  ">
+  <td class="table-cell line-clamp-1  ">
     <a href=<%= nuggets_reports_path(user_id: nugget.user.id) %> class="block hover:underline " target="_top">
       <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= nugget.user.display_name %> </span>
     </a>
   </td>
-  <td class="px-8 py-3 text-sm text-gray-700 whitespace-nowrap ">
+  <td class="table-cell whitespace-nowrap ">
     <span class="inline-flex px-2 text-xs font-semibold text-left leading-5 text-gray-800 bg-gray-100 rounded-full">
-      <%= nugget.skill.name %>
+      <%= nugget.skill.name.upcase_first %>
     </span>
   </td>
-  <td class="px-8 py-3 text-sm text-gray-700 whitespace-nowrap ">
+  <td class="table-cell whitespace-nowrap ">
     <% if nugget.published? %>
       <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
         Published

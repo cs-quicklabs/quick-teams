@@ -1,24 +1,24 @@
 <tr id="<%= dom_id todo %>">
   <% todo = todo.decorate %>
-  <td class="px-6 py-4 overflow-hidden text-sm text-gray-500 truncate whitespace-nowrap max-w-0">
+  <td class="table-cell">
     <%= check_box_tag "completed", nil, todo.completed, data: { reflex: "click->TodoReflex#toggle_employee_todo", id: todo.id }, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
   </td>
-  <td class="w-full px-6 py-4 overflow-hidden text-sm text-gray-700 max-w-0">
+  <td class="w-full table-cell">
     <p><%= highlight_hashtag(auto_link_urls_in_text(todo.title)) %></p>
   </td>
-  <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
+  <td class="table-cell">
     <% if current_user.admin? && !todo.project.nil? %>
       <a href="<%= project_todos_path(todo.project) %>" class="block hover:underline">
         <%= todo.project.name %>
       </a>
     <% end %>
   </td>
-  <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <%= display_date(todo.deadline) %>
   </td>
-  <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-  <% if policy([todo.owner, todo]).destroy? %>
-    <%= link_to "Delete", employee_todo_path(todo.user, todo), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
+  <td class="table-cell">
+    <% if policy([todo.owner, todo]).destroy? %>
+      <%= link_to "Delete", employee_todo_path(todo.user, todo), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
     <% end %>
   </td>
 </tr>

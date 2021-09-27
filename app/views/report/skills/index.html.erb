@@ -14,18 +14,18 @@
     <!-- This example requires Tailwind CSS v2.0+ -->
     <% if @skill_reports.size > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
-        <table class="min-w-full pb-6 divide-y divide-gray-200">
+        <table class="table">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="w-1/3 px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-1/3 table-head">
                 Name
               </th>
-              <th scope="col" class="w-2/3 px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-2/3 table-head">
                 skills
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
+          <tbody class="table-body" data-infinite-scroll-target="entries">
             <%= render partial: "list", collection: @skill_reports, as: :skill_report %>
           </tbody>
         </table>

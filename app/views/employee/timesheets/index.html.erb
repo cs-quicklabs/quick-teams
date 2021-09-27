@@ -9,27 +9,27 @@
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
               <div>
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="table">
                   <thead class="bg-gray-50">
                     <tr>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      <th scope="col" class="table-head">
                         Project
                       </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      <th scope="col" class="table-head">
                         Task
                       </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      <th scope="col" class="table-head">
                         Date
                       </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      <th scope="col" class="table-head">
                         Hours
                       </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
+                      <th scope="col" class="table-head">
                         Action
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200" id="timesheets" data-infinite-scroll-target="entries">
+                  <tbody class="table-body" id="timesheets" data-infinite-scroll-target="entries">
                     <%= render partial: "employee/timesheets/timesheet", collection: @timesheets, cached: true %>
                   </tbody>
                 </table>

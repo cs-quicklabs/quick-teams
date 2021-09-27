@@ -1,7 +1,7 @@
 <% project = project.decorate %>
 <tr>
-  <td class="w-full px-6 py-3 text-sm font-medium text-gray-900 max-w-0 whitespace-nowrap">
-    <div class="flex items-center space-x-3 lg:pl-2">
+  <td class="w-full table-cell whitespace-nowrap">
+    <div class="flex items-center  font-medium">
       <span class="w-2.5 h-2.5  font-semibold leading-5 bg-<%= project.status.nil? ? "white" : project.status.color %>-400 rounded-full">
       </span>
       <a href="<%= project_schedules_path(project) %>" class="truncate hover:text-gray-600 hover:underline">
@@ -13,7 +13,7 @@
     </div>
   </td>
   <% if current_user.admin? %>
-    <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+    <td class="table-cell whitespace-nowrap">
       <% project.project_tags.uniq.each do |tag| %>
         <a href="<%= projects_reports_path(tag: tag.id) %>" class="hover:underline">
           <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= tag.color %>-800 bg-<%= tag.color %>-100 rounded-full">
@@ -22,13 +22,13 @@
         </a>
       <% end %>
     </td>
-    <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+    <td class="table-cell whitespace-nowrap">
       <% if !project.billable_resources.nil? %>
         <%= project.billable_resources.to_s %>
       <% end %>
     </td>
   <% end %>
-  <td class="px-6 py-3 text-sm font-medium text-gray-500">
+  <td class="table-cell">
     <div class="flex items-center space-x-2">
       <div class="flex flex-shrink-0 -space-x-1">
         <% project.display_participants_count.times do %>
@@ -38,15 +38,15 @@
       <span class="flex-shrink-0 text-xs font-medium leading-5"><%= project.display_additional_participants %></span>
     </div>
   </td>
-  <td class="py-3 text-sm text-left text-gray-500 md:table-cell whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <a href="<%= employee_team_path(project.manager) if !project.manager.nil? %>" class="truncate hover:text-gray-600 hover:underline">
       <%= project.display_manager_name %>
     </a>
   </td>
-  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <%= display_created_at(project) %>
   </td>
-  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <% unless project.status.nil? %>
       <a href="<%= projects_reports_path(status: project.status.id) %>" class="hover:underline">
         <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">

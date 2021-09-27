@@ -8,21 +8,21 @@
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
               <div id="employee-nuggets" class="flex  flex-wrap " data-controller="infinite-scroll">
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="table">
                   <thead class="bg-gray-50">
                     <tr>
-                      <th scope="col" class=" w-full pl-16 pr-8  py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      <th scope="col" class=" w-full table-head">
                         Nugget
                       </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                      <th scope="col" class=" table-head">
                         Skill
                       </th>
-                      <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                      <th scope="col" class="table-head">
                         Status
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200" id="nuggets" data-infinite-scroll-target="entries">
+                  <tbody class="table-body" id="nuggets" data-infinite-scroll-target="entries">
                     <%= render partial: "nugget", collection: @nuggets, as: :nugget, cached: false %>
                   </tbody>
                 </table>

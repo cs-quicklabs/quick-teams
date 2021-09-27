@@ -2,23 +2,23 @@
   <% participant = kpi.participant.decorate %>
   <% actor = kpi.actor.decorate %>
   <% kpi = kpi.decorate %>
-  <td class="w-6/12 px-6 py-3  text-sm text-gray-700 ">
+  <td class="w-6/12  table-cell ">
     <a class="hover:underline" href="<%= survey_report_preview_path(kpi.survey, kpi) %>">
       <%= kpi.survey.name.upcase_first %>
     </a>
   </td>
-  <td class="px-6 py-3  text-sm text-gray-700  whitespace-nowrap">
+  <td class=" table-cell  whitespace-nowrap">
     <a class="hover:underline" href="<%= employee_kpis_path(participant) %>">
       <%= participant.display_name %>
     </a>
   </td>
-  <td class="px-2 py-3  text-sm text-gray-700  whitespace-nowrap truncate">
+  <td class="table-cell whitespace-nowrap ">
     <%= kpi.display_score %>
   </td>
-  <td class="px-6 py-3  text-sm text-gray-700  whitespace-nowrap">
+  <td class=" table-cell  whitespace-nowrap">
     <%= actor.display_name %>
   </td>
-  <td class="px-4 py-3  text-sm font-xs  text-gray-500  max-w-0  ">
+  <td class=" table-cell ">
     <div class= "ml-4 flex whitespace-nowrap">
       <% if kpi.submitted? %>
         <!-- Heroicon name: solid/check-circle -->
@@ -34,7 +34,7 @@
       <% end %>
     </div>
   </td>
-  <td class="px-8 py-3  text-sm text-gray-700  whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <%= display_date(kpi.created_at) %>
   </td>
 </tr>

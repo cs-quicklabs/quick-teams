@@ -8,12 +8,12 @@ class Survey::BaseController < BaseController
   private
 
   def resolve_redirect_path(attempt)
-    if @attempt.survey.survey_for == "project"
-      @attempt.survey.kpi? ? project_kpis_path(@attempt.participant) : project_surveys_path(@attempt.participant)
-    elsif @attempt.survey.survey_for == "user"
-      @attempt.survey.kpi? ? employee_kpis_path(@attempt.participant) : employee_surveys_path(@attempt.participant)
+    if attempt.survey.survey_for == "project"
+      attempt.survey.kpi? ? project_kpis_path(attempt.participant) : project_surveys_path(attempt.participant)
+    elsif attempt.survey.survey_for == "user"
+      attempt.survey.kpi? ? employee_kpis_path(attempt.participant) : employee_surveys_path(attempt.participant)
     elsif @attempt.survey.survey_for == "adhoc"
-      survey_attempts_path(@attempt.survey)
+      survey_attempts_path(attempt.survey)
     end
   end
 
