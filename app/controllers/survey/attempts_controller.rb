@@ -25,7 +25,7 @@ class Survey::AttemptsController < Survey::BaseController
 
   def create
     authorize [:survey, :attempt]
-    @klass = resolve_survey_for
+    @klass = @survey.survey_for.resolve_class.capitalize.constantize
     participant = @klass.find(attempt_params[:participant_id])
 
     attempt = create_attempt(participant)
@@ -60,7 +60,7 @@ class Survey::AttemptsController < Survey::BaseController
   def resolve_participant
     participant = nil
     if params[:participant_id]
-      @klass = @survey.survey_for.capitalize.constantize
+      @klass = @survey.survey_for.resolve_class.capitalize.constantize
       participant = @klass.find(params[:participant_id])
     end
     participant
@@ -68,11 +68,7 @@ class Survey::AttemptsController < Survey::BaseController
 
   def potential_participants
     participants = []
-    klass = @survey.survey_for.capitalize
-    if klass === "Adhoc"
-      klass = "User"
-    end
-    klass = klass.constantize
+    klass = @survey.survey_for.resolve_class.capitalize.constantize
     participants = klass.available if klass.respond_to?(:available)
     participants
   end

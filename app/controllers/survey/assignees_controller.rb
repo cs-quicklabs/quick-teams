@@ -5,7 +5,7 @@ class Survey::AssigneesController < Survey::BaseController
   def index
     authorize [:survey, :assignee]
 
-    klass = @survey.survey_for.capitalize.constantize
+    klass = @survey.survey_for.resolve_class.capitalize.constantize
     @pagy, @assignees = pagy_nil_safe(params, klass.available.where(kpi_id: @survey), items: LIMIT)
     @assigns = klass.available.where(kpi_id: nil)
     render_partial("survey/assignees/assignee", collection: @assignees, cached: true) if stale?(@assignees + @assigns + [@survey])
@@ -29,7 +29,7 @@ class Survey::AssigneesController < Survey::BaseController
 
   def destroy
     authorize [:survey, :assignee]
-    klass = @survey.survey_for.capitalize.constantize
+    klass = @survey.survey_for.resolve_class.capitalize.constantize
     @assignee = klass.find(params[:id])
     @assignee.update(kpi_id: nil)
     @assigns = klass.available.where(kpi_id: nil)
@@ -44,11 +44,7 @@ class Survey::AssigneesController < Survey::BaseController
   private
 
   def set_assignee
-    klass = @survey.survey_for
-    if klass = "adhoc"
-      klass == user
-    end
-    @klass = klass.capitalize.constantize
+    @klass = @survey.survey_for.resolve_class.capitalize.constantize
     @assignee = @klass.find(assignee_params[:assign_id])
   end
 
