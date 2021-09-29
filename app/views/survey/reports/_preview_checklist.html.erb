@@ -1,11 +1,11 @@
 <% attempt.survey.questions.order_by_category.each_with_index do |question, index| %>
   <tr class="bg-white ">
-    <td class="py-3  px-6 text-sm font-medium text-gray-900">
+    <td class="table-cell">
       <%= index + 1 %></td>
-    <td class="py-3 px-6 w-full text-sm font-medium text-gray-900"><%= question.text.upcase_first %></td>
+    <td class="table-cell"><%= question.text.upcase_first %></td>
     <% attempted_option = question.attempted_option(attempt) %>
-    <td class="py-3 px-6 text-sm font-medium text-gray-900"><%= attempted_option.nil? ? "" : attempted_option.text.upcase_first %></td>
-    <td class="py-3  px-6 text-sm font-medium text-gray-900">
+    <td class="table-cell"><%= attempted_option.nil? ? "" : attempted_option.text.upcase_first %></td>
+    <td class="table-cell">
       <% if question.attempted_answer(attempt).nil? %>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="orange" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>

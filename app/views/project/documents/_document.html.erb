@@ -1,6 +1,6 @@
 <tr id="<%= dom_id document %>">
   <% document = document.decorate %>
-  <td class="px-6 py-4 overflow-auto text-sm text-gray-700">
+  <td class="table-cell">
     <div class="text-sm">
       <%= link_to document.display_filename, ensure_protocol(document.link), target: "_blank", class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
@@ -8,26 +8,18 @@
       <p class="line-clamp-3"><%= highlight_hashtag(document.comments) %></p>
     </div>
   </td>
-  <td class="px-6 py-4 text-sm text-gray-700 align-top whitespace-nowrap">
+  <td class="table-cell align-top whitespace-nowrap">
     <a href="<%= employee_documents_path(document.user) %>" class="block hover:underline" target="_top">
       <%= document.user.display_name %>
     </a>
   </td>
-  <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
+  <td class="table-cell whitespace-nowrap align-top">
     <%= display_created_at(document) %>
   </td>
-  <td class="px-6 py-4 text-sm font-medium text-left  whitespace-nowrap align-top">
+  <td class="table-cell  align-top">
     <% if policy([@project, document]).edit? %>
-      <div class="flex">
-        <div class="whitespace-nowrap">
-          <div class="text-sm text-gray-900">
-            <%= link_to "Edit", edit_project_document_path(@project, document), class: "btn-inline-edit pl-2" %>
-          </div>
-          <div class="text-sm text-gray-900">
-            <%= link_to "Delete", project_document_path(@project, document.id), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
-          </div>
-        </div>
-      </div>
+      <%= link_to "Edit", edit_project_document_path(@project, document), class: "btn-inline-edit pl-2" %>
+      <%= link_to "Delete", project_document_path(@project, document.id), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
     <% end %>
   </td>
 </tr>

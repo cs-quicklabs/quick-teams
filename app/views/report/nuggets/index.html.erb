@@ -14,27 +14,27 @@
     <% if @nuggets.size > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <!-- This example requires Tailwind CSS v2.0+ -->
-        <table class="min-w-full pb-6 divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+        <table class="table">
+          <thead class="bg-gray-50 ">
             <tr>
-              <th scope="col" class=" w-full px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class=" w-full table-head">
                 Nugget
               </th>
-              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="table-head ">
                 Created At
               </th>
-              <th scope="col" class="px-8 py-3 text-xs font-medium text-left tracking-wider  text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="table-head">
                 Added by
               </th>
-              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="table-head ">
                 Skill
               </th>
-              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="table-head ">
                 Status
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
+          <tbody class="table-body" data-infinite-scroll-target="entries">
             <%= render partial: "nugget", collection: @nuggets, as: :nugget, cached: true %>
           </tbody>
         </table>

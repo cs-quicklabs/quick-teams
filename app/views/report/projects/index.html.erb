@@ -14,30 +14,30 @@
     <% if @projects.size > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <!-- This example requires Tailwind CSS v2.0+ -->
-        <table class="min-w-full pb-6 divide-y divide-gray-200">
+        <table class="table">
           <thead class="bg-gray-50">
             <tr class="border-gray-200">
-              <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class="table-head border-b border-gray-200 bg-gray-50">
                 <span class="lg:pl-2">Project</span>
               </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class="table-head">
                 Tags
               </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class="table-head">
                 Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+) %>
               </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class="table-head">
                 Lead
               </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class="table-head">
                 Created At
               </th>
-              <th class="py-3 pr-6 text-xs font-medium tracking-wider text-right text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+              <th class="table-head">
                 Status
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
+          <tbody class="table-body" data-infinite-scroll-target="entries">
             <%= render partial: "project", collection: @projects, as: :project, cached: true %>
           </tbody>
         </table>

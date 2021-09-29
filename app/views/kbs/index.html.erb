@@ -35,29 +35,29 @@
   <% if @kbs.size > 0 %>
     <div class="sm:block" data-controller="infinite-scroll">
       <div class="inline-block min-w-full align-middle ">
-        <table class="min-w-full divide-y divide-gray-200">
+        <table class="table">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="w-full px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-full table-head">
                 Document
               </th>
-              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="table-head">
                 Added by
               </th>
-              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="table-head">
                 Department
               </th>
-              <th scope="col" class="px-8 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+              <th scope="col" class="table-head">
                 Job
               </th>
               <% if policy(@kb).edit? %>
-                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left  text-gray-500 uppercase">
+                <th scope="col" class="table-head">
                   Action
                 </th>
               <% end %>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200" id="kbs" data-infinite-scroll-target="entries">
+          <tbody class="table-body" id="kbs" data-infinite-scroll-target="entries">
             <%= render partial: "kb", collection: @kbs, as: :kb, cached: true %>
           </tbody>
         </table>

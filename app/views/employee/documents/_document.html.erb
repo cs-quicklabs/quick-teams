@@ -1,6 +1,6 @@
 <tr id="<%= dom_id document %>">
   <% document = document.decorate %>
-  <td class="px-10 py-4 overflow-hidden text-sm text-gray-700 max-w-0">
+  <td class="table-cell ">
     <div class="text-sm">
       <a href="<%= ensure_protocol(document.link) %>" target="_blank"  class="line-clamp-2 font-medium text-gray-900 block hover:underline" target="_top">
         <%= document.display_filename %>
@@ -10,15 +10,15 @@
       <p class="line-clamp-3"><%= document.comments %></p>
     </div>
   </td>
-  <td class="px-6 py-4 overflow-hidden text-sm text-gray-700 max-w-0 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <a href="<%= employee_documents_path(document.user) %>" class="block hover:underline" target="_top">
       <%= document.user.display_name %>
     </a>
   </td>
-  <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <%= display_created_at(document) %>
   </td>
-  <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+  <td class="table-cell ">
     <% if policy([@employee, document]).edit? %>
       <%= link_to "Edit", edit_employee_document_path(@employee, document), class: "btn-inline-edit pl-2" %>
       <%= link_to "Delete", employee_document_path(@employee, document.id), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>

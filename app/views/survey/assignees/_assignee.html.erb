@@ -1,7 +1,7 @@
 <% assignee_decorated = assignee.decorate %>
 <% if assignee_decorated.class.name == "UserDecorator" %>
   <tr id="<%= dom_id(assignee) %>">
-    <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
+    <td class="table-cell whitespace-nowrap ">
       <div class="flex items-center">
         <div class="flex-shrink-0 w-10 h-10">
           <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
@@ -21,13 +21,13 @@
         </div>
       </div>
     </td>
-    <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap intems-center">
+    <td class="table-cell whitespace-nowrap ">
       <%= link_to "Delete", survey_assignee_path(@survey, assignee), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     </td>
   </tr>
 <% else %>
   <tr id="<%= dom_id(assignee) %>">
-    <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
+    <td class="table-cell whitespace-nowrap">
       <div class="flex items-center">
         <div class="ml-4">
           <a href="<%= project_surveys_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </td>
-    <td class="px-6 py-4 text-sm text-gray-700 whitespace-nowrap align-top">
+    <td class="table-cell whitespace-nowrap>
       <%= link_to "Delete", survey_assignee_path(@survey, assignee), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     </td>
   </tr>
