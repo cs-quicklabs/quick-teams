@@ -1,0 +1,11 @@
+user:
+  participant: member
+  actor: regular
+  survey: user
+  participant_type: User
+
+project:
+  participant: member
+  actor: regular
+  survey: project
+  participant_type: Project

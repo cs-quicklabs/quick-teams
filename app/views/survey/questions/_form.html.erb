@@ -3,13 +3,13 @@
     <%= render "shared/form_messages", resource: question, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Question", subtitle: "Please fill in detail of new question" %>
     <div>
-      <label for="filename" class="block text-sm font-medium text-gray-700">
+      <label for="Question" class="block text-sm font-medium text-gray-700">
         Question 
       </label>
       <%= form.text_area :text, required: true, class: "form-text-field mt-1" %>
     </div>
     <div>
-      <label for="comments" class="block text-sm font-medium text-gray-700">
+      <label for="Question Description" class="block text-sm font-medium text-gray-700">
         Question Description (optional)
       </label>
       <%= form.text_area :description, class: "form-text-field mt-1", autocomplete: "off" %>
@@ -17,7 +17,7 @@
     </div>
     <% if survey.kpi? %>
       <div>
-        <label for="comments" class="block text-sm font-medium text-gray-700">
+        <label for="Question Explanation" class="block text-sm font-medium text-gray-700">
           Question Explanation (optional)
         </label>
         <%= form.text_area :explanation, class: "form-text-field mt-1", autocomplete: "off" %>
@@ -25,7 +25,7 @@
       </div>
     <% end %>
     <div>
-      <label for="comments" class="block text-sm font-medium text-gray-700">
+      <label for="Category " class="block text-sm font-medium text-gray-700">
         Category 
       </label>
       <%= form.collection_select(:question_category_id, question_categories, :id, :name, { :prompt => "Select Category", :selected => params[:question_category_id] }, :class => "form-text-field mt-1", :required => true) %>

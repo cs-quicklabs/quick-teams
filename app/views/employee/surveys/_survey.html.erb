@@ -1,4 +1,4 @@
-<li class="flex px-2 py-2">
+<li class="flex px-2 py-2" id="<%= dom_id(survey) %>">
   <div class="w-full ml-3">
     <%= link_to survey.name.upcase_first, new_survey_attempt_path(survey, participant_id: @employee.id), class: "hover:underline text-sm font-medium text-gray-500", data: { confirm: "Are you sure you want to take this survey?" } %>
   </div>

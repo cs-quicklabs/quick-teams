@@ -10,7 +10,7 @@
         <p class="text-sm text-gray-500"><%= question.display_description %></p>
       <% end %>
       <div class= "inline-flex">
-        <p  data-reflex="click->SurveyParticipantStats#summary" data-reflex-dataset="combined" class="btn-inline-edit underline mt-2 text-xs" >View summary</p>
+        <button  data-reflex="click->SurveyParticipantStats#summary" data-reflex-dataset="combined" class="btn-inline-edit underline mt-2 text-xs" >View summary</button>
         <% if policy([participant, :kpi]).record? %>
           <p  data-reflex="click->EmployeeKpi#assessment" data-reflex-dataset="combined" class="btn-inline-edit underline mt-2 text-xs px-4" >Quick Assessment</p>
         <% end %>

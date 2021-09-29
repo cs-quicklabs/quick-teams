@@ -1,7 +1,31 @@
-one: 
+user: 
   name: Project Initiation Checklist
   description: Survey Description
   actor: regular
   account: crownstack
-  survey_for: 1
-  survey_type: 1
+  survey_for: user
+  survey_type: checklist
+
+userkpi: 
+  name: KPI Initiation Project
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: user
+  survey_type: kpi
+
+projectkpi: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: project
+  survey_type: kpi
+ 
+project: 
+  name: Project Initiation Checklist
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: project
+  survey_type: score

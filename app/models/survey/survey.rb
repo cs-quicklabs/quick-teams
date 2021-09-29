@@ -1,6 +1,7 @@
 class Survey::Survey < ActiveRecord::Base
-  self.table_name = "survey_surveys"
   acts_as_tenant :account
+
+  self.table_name = "survey_surveys"
 
   enum survey_type: [:checklist, :score, :kpi]
   enum survey_for: [:project, :user, :client, :adhoc]
@@ -9,6 +10,8 @@ class Survey::Survey < ActiveRecord::Base
   # relations
   has_many :attempts, :dependent => :destroy
   has_many :questions, :dependent => :destroy
+  has_many :users
+  has_many :projects
   accepts_nested_attributes_for :questions,
     :reject_if => ->(q) { q[:text].blank? },
     :allow_destroy => true
@@ -50,7 +53,7 @@ class Survey::Survey < ActiveRecord::Base
     clone.save
 
     self.questions.each do |question|
-      q = Survey::Question.new(text: question.text, description: question.description, survey_id: clone.id, question_category: question.question_category, explanation: question.explanation)
+      q = Survey::Question.new(text: question.text, description: question.description, survey_id: clone.id, question_category_id: question.question_category_id, explanation: question.explanation)
       q.save
 
       if self.checklist? #checklist

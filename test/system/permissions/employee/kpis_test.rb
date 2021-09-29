@@ -1,49 +1,43 @@
 require "application_system_test_case"
 
-class EmployeeSurveysTest < ApplicationSystemTestCase
+class EmployeeKpisTest < ApplicationSystemTestCase
   setup do
     @employee = users(:regular)
     @account = @employee.account
     ActsAsTenant.current_tenant = @account
+    @survey = survey_surveys(:two)
     sign_in @employee
   end
 
   def page_url
-    employee_surveys_url(script_name: "/#{@account.id}", employee_id: @employee.id)
+    employee_kpis_url(script_name: "/#{@account.id}", employee_id: @employee.id)
   end
 
-  test "admin can see surveys" do
-    sign_out @employee
-    @employee = users(:super)
-    sign_in @employee
-    visit page_url
-    take_screenshot
-    survey = survey_surveys(:one)
-    assert_equal survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "Surveys"
+  def subordinate_page_url
+    employee_kpis_url(script_name: "/#{@account.id}", employee_id: @employee.subordinates.first.id)
   end
 
-  test "lead can see his surveyss" do
+  test "lead can see his KPIss" do
     sign_out @employee
     @employee = users(:lead)
     sign_in @employee
     visit page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "KPIs"
   end
 
-  test "lead can see his subordiates surveys" do
+  test "lead can see his subordiates KPIs" do
     sign_out @employee
     @employee = users(:lead)
     sign_in @employee
     visit subordinate_page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "KPIs"
   end
 
-  test "lead can not see someone elseses surveys" do
+  test "lead can not see someone elseses KPIs" do
     sign_out @employee
     @lead = users(:lead)
     sign_in @lead
@@ -51,20 +45,20 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: @lead.decorate.display_name
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "KPIs"
   end
 
-  test "member can see his surveys" do
+  test "member can see his KPIs" do
     sign_out @employee
     @employee = users(:member)
     sign_in @employee
     visit page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "KPIs"
   end
 
-  test "member can not see someone elses surveys" do
+  test "member can not see someone elses KPIs" do
     sign_out @employee
     @member = users(:member)
     sign_in @member
@@ -73,6 +67,6 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     take_screenshot
     binding.irb
     assert_selector "h1", text: @member.decorate.display_name
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "KPIs"
   end
 end

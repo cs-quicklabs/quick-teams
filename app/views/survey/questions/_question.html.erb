@@ -1,6 +1,6 @@
 <% question = question.decorate %>
 <%= turbo_frame_tag dom_id(question) do %>
-  <li class="py-3 flex border-b border-gray-200"  data-question-id=<%= question.id %>>
+  <li class="py-3 flex border-b border-gray-200"  id=<%= question.id %>>
     <div class="ml-3 w-full">
       <p class="text-xs text-gray-500 uppercase"><%= question.display_category %></p>
       <p class="text-sm font-medium text-gray-900"><%= question.text.upcase_first %></p>
