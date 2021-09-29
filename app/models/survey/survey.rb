@@ -3,7 +3,7 @@ class Survey::Survey < ActiveRecord::Base
   acts_as_tenant :account
 
   enum survey_type: [:checklist, :score, :kpi]
-  enum survey_for: [:project, :user, :client]
+  enum survey_for: [:project, :user, :client, :adhoc]
   belongs_to :actor, class_name: "User", foreign_key: "actor_id"
 
   # relations
