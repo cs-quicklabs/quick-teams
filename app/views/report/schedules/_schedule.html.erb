@@ -1,6 +1,6 @@
 <% employee = employee.decorate %>
 <tr id="<%= dom_id(employee) %>">
-  <td class="px-6 py-4 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <div class="flex items-center">
       <div class="flex-shrink-0 w-10 h-10">
         <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
@@ -22,7 +22,7 @@
       </div>
     </div>
   </td>
-  <td class="px-6 py-4 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <div class="text-sm text-gray-900">
       <%= employee.display_participated_projects %>
     </div>
@@ -52,7 +52,7 @@
       </div>
     <% end %>
   </td>
-  <td class="px-6 py-4 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <span class="inline-flex px-2 text-xl font-semibold leading-5  <%= employee.overall_occupancy > 100 ? "text-red-500" : (employee.overall_occupancy < 60 ? "text-green-500" : "text-gray-900") %>">
       <%= employee.display_occupancy %>
     </span>

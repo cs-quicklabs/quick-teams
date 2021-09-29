@@ -9,30 +9,30 @@
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
               <div>
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="table">
                   <thead class="bg-gray-50">
                     <tr>
-                      <th scope="col" class="w-full px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                      <th scope="col" class="w-full table-head">
                         Survey
                       </th>
-                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                      <th scope="col" class="table-head">
                         Taken By
                       </th>
-                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                      <th scope="col" class="table-head">
                         On Date
                       </th>
-                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                      <th scope="col" class="table-head">
                         Score
                       </th>
-                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                      <th scope="col" class="table-head">
                         Status
                       </th>
-                      <th scope="col" class="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase whitespace-nowrap">
+                      <th scope="col" class="table-head">
                         Action
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200" id="filled_surveys" data-infinite-scroll-target="entries">
+                  <tbody class="table-body" id="filled_surveys" data-infinite-scroll-target="entries">
                     <%= render partial: "filled_survey", collection: @filled_surveys, as: :attempt, cached: true %>
                   </tbody>
                 </table>

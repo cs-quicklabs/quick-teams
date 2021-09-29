@@ -73,11 +73,20 @@ class Survey::AttemptsController < Survey::BaseController
     participants
   end
 
+  def resolve_survey_for
+    klass = @survey.survey_for.capitalize
+    if klass === "Adhoc"
+      klass = "User"
+    end
+    klass = klass.constantize
+  end
+
   def create_attempt(participant)
     attempt = Survey::Attempt.new
     attempt.participant = participant
     attempt.survey_id = @survey.id
     attempt.actor_id = current_user.id
+
     attempt.save
 
     attempt

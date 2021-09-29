@@ -1,8 +1,8 @@
 <tr id="<%= dom_id(attempt) %>">
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-full">
+  <td class="table-cell w-full">
     <% if attempt.submitted? %>
       <a class="hover:underline" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
-        <%= attempt.survey.name %>
+        <%= attempt.survey.name.upcase_first %>
       </a>
     <% else %>
       <% if attempt.participant == current_user %>
@@ -16,13 +16,13 @@
       <% end %>
     <% end %>
   </td>
-  <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
+  <td class="table-cell whitespace-nowrap ">
     <%= attempt.actor.decorate.display_name %>
   </td>
-  <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
+  <td class="table-cell whitespace-nowrap ">
     <%= display_created_at(attempt) %>
   </td>
-  <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
+  <td class="table-cell whitespace-nowrap ">
     <%= attempt.decorate.display_score %>
   </td>
   <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full flex">
@@ -39,7 +39,7 @@
       In Progress
     <% end %>
   </td>
-  <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
+  <td class="table-cell">
     <% if current_user.admin? %>
       <%= link_to "Delete", survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     <% elsif attempt.submitted? == false and current_user == attempt.actor %>

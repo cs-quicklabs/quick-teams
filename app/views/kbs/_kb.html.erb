@@ -1,6 +1,6 @@
 <tr id="<%= dom_id kb %>">
   <% kb = kb.decorate %>
-  <td class="px-8 py-3  text-sm text-gray-700 max-w-0">
+  <td class="table-cell">
     <div class="text-sm">
       <a href="<%= ensure_protocol(kb.link) %>" target="_blank"  class="font-medium text-gray-900 block hover:underline" target="_top">
         <%= kb.document %>
@@ -10,27 +10,27 @@
       <p class="line-clamp-3"><%= kb.comments %></p>
     </div>
   </td>
-  <td class="px-8 py-3  text-sm text-gray-700 max-w-full whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <p class="line-clamp-1 ">
       <a href="<%= kbs_reports_path(user_id: kb.user.id) %>" class="block hover:underline" target="_top">
         <%= kb.user.display_name %>
       </a>
     </p>
   </td>
-  <td class="px-8 py-3 text-sm text-gray-700 whitespace-nowrap align-middle">
+  <td class="table-cell whitespace-nowrap align-middle">
     <div class="mt-1 text-sm text-gray-700">
       <p class=""> <%= kb.discipline ? kb.discipline.name : "Everyone" %></p>
     </div>
   </td>
-  <td class="px-8 py-3   text-sm text-gray-700  whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <div class="mt-1 text-sm text-gray-700">
       <p class=""> <%= kb.job ? kb.job.name : "Everyone" %></p>
     </div>
   </td>
   <% if policy(kb).edit? %>
-    <td class="px-8 py-3 text-sm font-medium text-left whitespace-nowrap">
+    <td class="table-cell">
       <%= link_to "Edit", edit_kb_path(kb), class: "btn-inline-edit" %>
-      <%= link_to "Delete", kb_path(kb), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
+      <%= link_to "Delete", kb_path(kb), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     </td>
   <% end %>
 </tr>

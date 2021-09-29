@@ -15,30 +15,30 @@
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <%= render partial: "stats", locals: { stats: @stats } %>
         <!-- This example requires Tailwind CSS v2.0+ -->
-        <table class="min-w-full pb-6 divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+        <table class="table">
+          <thead class="bg-gray-50 border-gray-200 border-b">
             <tr>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Title
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Created By
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Created_For
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Created On
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Deadline
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Status
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
+          <tbody class="table-body" data-infinite-scroll-target="entries">
             <%= render partial: "goal", collection: @goals, as: :goal, cached: true %>
           </tbody>
         </table>

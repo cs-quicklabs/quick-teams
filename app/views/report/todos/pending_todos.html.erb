@@ -13,24 +13,24 @@
   <div class="flex w-full">
     <% if @todos.size > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
-        <table class="min-w-full pb-6 divide-y divide-gray-200">
+        <table class="table">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Todo
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Project
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Owner
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="table-head">
                 Due Date
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200" data-infinite-scroll-target="entries">
+          <tbody class="table-body" data-infinite-scroll-target="entries">
             <%= render partial: "todo", collection: @todos, as: :todo, cached: true %>
           </tbody>
         </table>

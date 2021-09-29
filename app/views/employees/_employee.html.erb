@@ -1,6 +1,6 @@
 <% employee = employee.decorate %>
 <tr id ="<%= dom_id(employee) %>">
-  <td class="px-6 py-4 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <div class="flex items-center">
       <div class="flex-shrink-0 w-10 h-10">
         <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
@@ -17,16 +17,16 @@
       </a>
     </div>
   </td>
-  <td class="px-6 py-4 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <div class="text-sm text-gray-900"><%= employee.display_position %></div>
     <div class="text-sm text-gray-500"><%= employee.display_discipline_title %></div>
   </td>
-  <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <a href="<%= employee_team_path(employee.manager) if !employee.manager.nil? %>" class="truncate hover:text-gray-600 hover:underline">
       <%= employee.display_manager_name %>
     </a>
   </td>
-  <td class="px-6 py-3 text-sm font-medium text-gray-500">
+  <td class="table-cell">
     <div class="flex items-center space-x-2">
       <div class="flex flex-shrink-0 -space-x-1">
         <% employee.display_team_members_count.times do %>
@@ -36,7 +36,7 @@
       <span class="flex-shrink-0 text-xs font-medium leading-5"><%= employee.display_additional_team_members %></span>
     </div>
   </td>
-  <td class="px-6 py-3 text-sm text-right text-gray-500 md:table-cell whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <% unless employee.status.nil? %>
       <a href="<%= employees_reports_path(status: employee.status.id) %>" class="hover:underline">
         <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= employee.status.color %>-800 bg-<%= employee.status.color %>-100 rounded-full">
@@ -45,7 +45,7 @@
       </a>
     <% end %>
   </td>
-  <td class="px-6 py-4 whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <div class="text-sm text-gray-500"><%= employee.permission.titleize %></div>
     <% if employee.sign_in_count > 0 %>
       <p class="flex items-center text-sm text-gray-500">

@@ -2,21 +2,21 @@
 <% survey = attempt.survey %>
 <% participant = attempt.participant.decorate %>
 <tr class="bg-white " id="<%= dom_id(attempt) %>">
-  <td class="py-3 px-6 whitespace-nowrap text-sm font-xs text-gray-900">
+  <td class=" whitespace-nowrap  table-cell">
     <a class= "hover:underline" href="<%= resolve_redirect_path(attempt) %>">
       <p> <%= participant.display_name %></p>
     </a>
   </td>
-  <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
+  <td class=" whitespace-nowrap  table-cell">
     <p> <%= actor.display_name %></p>
   </td>
-  <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
+  <td class=" whitespace-nowrap  table-cell">
     <p> <%= display_date(attempt.created_at) %></p>
   </td>
-  <td class="py-3 px-4 whitespace-nowrap text-sm font-xs text-gray-900">
+  <td class=" whitespace-nowrap  table-cell">
     <p> <%= attempt.decorate.display_score %></p>
   </td>
-  <td class="px-4 py-3 whitespace-nowrap text-sm font-xs mt-2 text-gray-500 max-w-full flex">
+  <td class="whitespace-nowrap text-sm font-xs mt-4 text-gray-500 max-w-full flex">
     <% if attempt.submitted? %>
       <!-- Heroicon name: solid/check-circle -->
       <svg class="ml-1 flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -30,7 +30,7 @@
       In Progress
     <% end %>
   </td>
-  <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 max-w-full">
+  <td class="table-cell">
     <% if current_user.admin? %>
       <%= link_to "Delete", survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
     <% elsif attempt.submitted? == false and current_user == attempt.actor %>
