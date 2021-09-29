@@ -26,7 +26,10 @@ end
 
 class String
   def resolve_class
-    return "user" if self == "adhoc"
-    self
+    klass = self
+    if self == "adhoc"
+      klass = "user"
+    end
+    klass.capitalize.constantize
   end
 end
