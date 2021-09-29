@@ -1,6 +1,5 @@
 class Nugget < ApplicationRecord
   acts_as_tenant :account
-
   belongs_to :user
   belongs_to :skill
   has_rich_text :body

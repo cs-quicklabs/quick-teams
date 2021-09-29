@@ -15,6 +15,7 @@ regular:
   sign_in_count: 1  
   nuggets: one, four, five
   skills: ruby, python
+  kpi: userkpi
 
 actor:
   first_name: Rachita
@@ -328,3 +329,5 @@ subordinate:
   permission: member
   status: deployed
   people_tags: star
+
+
