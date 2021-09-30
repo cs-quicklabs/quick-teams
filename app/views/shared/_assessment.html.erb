@@ -41,10 +41,10 @@
                   <label for="rating" class="block mt-4 text-sm font-medium text-gray-700">
                     Select Score (between 1 to 10)
                   </label>
-                  <%= form.number_field :rating, in: 1..10, step: 1, class: "form-text-field" %>
+                  <%= form.number_field :rating, in: 1..10, step: 1, class: "form-text-field", required: true %>
                 </div>
                 <main class="max-w-lg mx-auto space-y-6 mt-4">
-                  <%= form.text_area :comment, "Comment (Optional)" %>
+                  <%= form.text_area :comment, "Comment (required)", required: true %>
                 </main>
                 <div class="sm:mt-4 sm:flex sm:flex-row-reverse">
                   <% if main_button_visible %>
