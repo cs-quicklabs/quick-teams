@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   mount Sidekiq::Web => "/sidekiq"
   mount ActionCable.server => "/cable"
+
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
