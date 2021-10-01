@@ -45,7 +45,6 @@ gem "rails-patterns"
 gem "pagy"
 gem "devise-pwned_password"
 gem "aws-sdk-s3", "~> 1.87"
-gem "stimulus_reflex", "~> 3.4"
 gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
 gem "rack-mini-profiler", "~> 2.0"
 gem "newrelic_rpm"
@@ -90,3 +89,5 @@ gem "wkhtmltopdf-binary"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "pg_search"
+
+gem "stimulus_reflex", "~> 3.4"
