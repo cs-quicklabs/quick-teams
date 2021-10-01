@@ -1,15 +1,5 @@
-// Load all the controllers within this directory and all subdirectories. 
-// Controller files must be named *_controller.js.
+// Import and register all your controllers from the importmap under controllers/*
 
-import { Application } from "stimulus"
-import { definitionsFromContext } from "stimulus/webpack-helpers"
-import StimulusReflex from 'stimulus_reflex'
-import consumer from '../channels/consumer'
-import controller from '../controllers/application_controller'
-
-const application = Application.start()
-const context = require.context("controllers", true, /_controller\.js$/)
-application.load(definitionsFromContext(context))
-
-StimulusReflex.initialize(application, { consumer, controller, isolate: true })
-StimulusReflex.debug = process.env.RAILS_ENV === 'development'
+import { application } from "controllers/application"
+import { registerControllersFrom } from "@hotwired/stimulus-importmap-autoloader"
+registerControllersFrom("controllers", application)

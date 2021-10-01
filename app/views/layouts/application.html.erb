@@ -13,10 +13,14 @@
     <%= javascript_include_tag "application", 'data-turbolinks-track': "reload" %>
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
     <%= stylesheet_pack_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
+    <%= stylesheet_link_tag "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <% if content_for?(:head) %>
-      <%= yield(:head) %>
+    <main class="container mx-auto mt-28 px-5 flex">
+        <%= yield(:head) %>
     <% end %>
+    <%= javascript_importmap_tags %>
   </head>
   <body>
     <% if user_signed_in? %>
@@ -25,6 +29,8 @@
     <% end %>
     <p class="text-sm font-medium text-center notice bg-green-50"><%= notice %></p>
     <p class="text-sm font-medium text-center alert bg-red-50"><%= alert %></p>
-    <%= yield %>
+    <main class="container mx-auto mt-28 px-5 flex">
+      <%= yield %>
+    </main>
   </body>
 </html>
