@@ -12,17 +12,17 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "sass-rails", ">= 6"
 
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails", ">= 0.3.4"
+# Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
+gem "jsbundling-rails", "~> 0.1.0"
+
+# Bundle and process CSS [https://github.com/rails/cssbundling-rails]
+gem "cssbundling-rails", ">= 0.1.0"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", ">= 0.7.11"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails", ">= 0.4.0"
-
-# Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
-gem "tailwindcss-rails", ">= 0.4.3"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0", :require => ["redis", "redis/connection/hiredis"]

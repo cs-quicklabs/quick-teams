@@ -131,6 +131,8 @@ GEM
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
+    cssbundling-rails (0.2.4)
+      railties (>= 6.0.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise-pwned_password (0.1.9)
@@ -167,9 +169,9 @@ GEM
     image_processing (1.12.1)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    importmap-rails (0.7.6)
-      rails (>= 6.0.0)
     jmespath (1.4.0)
+    jsbundling-rails (0.1.9)
+      railties (>= 6.0.0)
     launchy (2.5.0)
       addressable (~> 2.7)
     letter_opener (1.7.0)
@@ -332,8 +334,6 @@ GEM
       rack
       rails (>= 5.2)
       redis
-    tailwindcss-rails (0.5.0)
-      rails (>= 6.0.0)
     thor (1.1.0)
     thread-local (1.1.0)
     thread_safe (0.3.6)
@@ -384,6 +384,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  cssbundling-rails (>= 0.1.0)
   devise!
   devise-pwned_password
   devise_invitable (~> 2.0.0)
@@ -391,7 +392,7 @@ DEPENDENCIES
   hiredis
   hotwire-rails
   image_processing (~> 1.2)
-  importmap-rails (>= 0.3.4)
+  jsbundling-rails (~> 0.1.0)
   launchy
   letter_opener
   letter_opener_web
@@ -418,7 +419,6 @@ DEPENDENCIES
   stackprof
   stimulus-rails (>= 0.4.0)
   stimulus_reflex (~> 3.4)
-  tailwindcss-rails (>= 0.4.3)
   turbo-rails (>= 0.7.11)
   tzinfo-data
   valid_url

@@ -11,15 +11,15 @@
     <% end %>
     <meta name="turbo-cache-control" content="no-cache">
     <%= javascript_include_tag "application", 'data-turbolinks-track': "reload" %>
-    <%= stylesheet_link_tag "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <% if content_for?(:head) %>
-      <main class="container mx-auto mt-28 px-5 flex">
+      <main>
         <%= yield(:head) %>
       </main>
     <% end %>
-    <%= javascript_importmap_tags %>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
   <body>
     <% if user_signed_in? %>
@@ -28,7 +28,7 @@
     <% end %>
     <p class="text-sm font-medium text-center notice bg-green-50"><%= notice %></p>
     <p class="text-sm font-medium text-center alert bg-red-50"><%= alert %></p>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main>
       <%= yield %>
     </main>
   </body>
