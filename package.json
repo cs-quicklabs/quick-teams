@@ -4,10 +4,11 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.0.0",
     "@hotwired/turbo-rails": "^7.0.1",
+    "@rails/ujs": "^6.1.4-1",
     "autoprefixer": "^10.3.6",
     "esbuild": "^0.13.3",
     "postcss": "^8.3.8",
-    "stimulus_reflex": "3.4.1",
+    "stimulus_reflex": "^3.5.0-pre3",
     "tailwindcss": "^2.2.16"
   },
   "scripts": {

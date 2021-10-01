@@ -67,6 +67,11 @@
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.1.4.tgz#c3c5a9f8302c429af9722b6c50ab48049016d2a3"
   integrity sha512-0LmSKJTuo2dL6BQ+9xxLnS9lbkyfz2mBGeBnQ2J7o9Bn0l0q+ZC6VuoZMZZXPvABI4QT7Nfknv5WhfKYL+boew==
 
+"@rails/ujs@^6.1.4-1":
+  version "6.1.4-1"
+  resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-6.1.4-1.tgz#37507fe288a1c7c3a593602aa4dea42e5cb5797f"
+  integrity sha512-Fewm2wHk1n6Kf4E86dzzHDJOFg4EWcSHH3FsMEGs59bTdmf7099mjkOssOQtBqju4R39iaAOQNui7r8P+Q5Dgg==
+
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
@@ -171,10 +176,10 @@ bytes@^3.0.0:
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
   integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
 
-"cable_ready@>= 4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-4.5.0.tgz#1207218dd16934d12addfbd34c26ead853570672"
-  integrity sha512-9bom1DuYe1teBdRckgKWjg+rWRLWrkOvkhzlXkhb33X+Pfu/QK9e4vGk6hGK9PVKVr0SYZC41dByFGknW4spLg==
+cable_ready@5.0.0-pre4:
+  version "5.0.0-pre4"
+  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-5.0.0-pre4.tgz#19e6720fcdc9e2614a4df0b7347ec4f2d126d249"
+  integrity sha512-1GdK/kcWPpk7yJWfCgKNaU/KlcTO4oOBiuYWXq+V7k9JYDrXFc07A4CzzxKj/0NRSwVFX1+QSyFgMnU5nZFLZA==
   dependencies:
     morphdom "^2.6.1"
 
@@ -964,13 +969,13 @@ source-map-js@^0.6.2:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-0.6.2.tgz#0bb5de631b41cfbda6cfba8bd05a80efdfd2385e"
   integrity sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==
 
-stimulus_reflex@3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/stimulus_reflex/-/stimulus_reflex-3.4.1.tgz#2606aee3b2911b5939d68f65a75262fe3c626204"
-  integrity sha512-YbFcuE4HndNe9RBQvF/Vu+7GDt0zLGdhQTXuGfLDVti1qggPG3kPgV1YBZ9volzBTGUmLp2PQbxG9j5AIyYp5A==
+stimulus_reflex@^3.5.0-pre3:
+  version "3.5.0-pre3"
+  resolved "https://registry.yarnpkg.com/stimulus_reflex/-/stimulus_reflex-3.5.0-pre3.tgz#4d98cb17c8a8293f75cb8298aff6607e38d0bd45"
+  integrity sha512-OBXRB14i8xIehrf6ksToj8w7zLKRUHp6ezjJBnR3EEwITF3+nU2Rq4PScG6dg75UHiPzK647zgQbiGUQLyIx7w==
   dependencies:
     "@rails/actioncable" ">= 6.0"
-    cable_ready ">= 4.5.0"
+    cable_ready "5.0.0-pre4"
 
 supports-color@^5.3.0:
   version "5.5.0"
