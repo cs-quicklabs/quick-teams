@@ -9,7 +9,7 @@ StimulusReflex.configure do |config|
   # Enable/disable exiting / warning when the sanity checks fail options:
   # `:exit` or `:warn` or `:ignore`
 
-  config.on_failed_sanity_checks = :exit
+  # config.on_failed_sanity_checks = :exit
 
   # Enable/disable exiting / warning when there's a new StimulusReflex release
   # `:exit` or `:warn` or `:ignore`
@@ -44,7 +44,6 @@ StimulusReflex.configure do |config|
   #
   # Learn more about registering Rack middleware in Rails here: https://guides.rubyonrails.org/rails_on_rack.html#configuring-middleware-stack
 
-  config.middleware.use AccountMiddleware
   # config.middleware.use FirstRackMiddleware
   # config.middleware.use SecondRackMiddleware
 end

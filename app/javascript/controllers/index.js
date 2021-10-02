@@ -19,4 +19,13 @@ import NavSearchController from "./nav_search_controller"
 application.register("nav-search", NavSearchController)
 
 import ConfirmationController from "./confirmation_controller"
+import StimulusReflex from 'stimulus_reflex'
+import consumer from '../channels/consumer'
+import controller from '../controllers/application_controller'
+import CableReady from 'cable_ready'
 application.register("confirmation", ConfirmationController)
+application.consumer = consumer
+StimulusReflex.initialize(application, { controller, isolate: true })
+StimulusReflex.debug = process.env.RAILS_ENV === 'development'
+CableReady.initialize({ consumer })
+ application.consumer = consumer

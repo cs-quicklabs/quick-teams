@@ -23,6 +23,11 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
+"@hotwired/stimulus-webpack-helpers@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz#4cd74487adeca576c9865ac2b9fe5cb20cef16dd"
+  integrity sha512-wa/zupVG0eWxRYJjC1IiPBdt3Lruv0RqGN+/DTMmUWUyMAEB27KXmVY6a8YpUVTM7QwVuaLNGW4EqDgrS2upXQ==
+
 "@hotwired/stimulus@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.0.0.tgz#45171e61417af60f0e546665c52fae5b67295cee"
@@ -964,7 +969,14 @@ source-map-js@^0.6.2:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-0.6.2.tgz#0bb5de631b41cfbda6cfba8bd05a80efdfd2385e"
   integrity sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==
 
-stimulus_reflex@^3.5.0-pre3:
+"stimulus@https://github.com/stimulusreflex/stimulus/raw/master/stimulus-v3.0.0.tgz":
+  version "3.0.0"
+  resolved "https://github.com/stimulusreflex/stimulus/raw/master/stimulus-v3.0.0.tgz#7d0c2c81ab6301751eacae4900405c9e5858aa51"
+  dependencies:
+    "@hotwired/stimulus" "^3.0.0"
+    "@hotwired/stimulus-webpack-helpers" "^1.0.0"
+
+stimulus_reflex@3.5.0-pre3:
   version "3.5.0-pre3"
   resolved "https://registry.yarnpkg.com/stimulus_reflex/-/stimulus_reflex-3.5.0-pre3.tgz#4d98cb17c8a8293f75cb8298aff6607e38d0bd45"
   integrity sha512-OBXRB14i8xIehrf6ksToj8w7zLKRUHp6ezjJBnR3EEwITF3+nU2Rq4PScG6dg75UHiPzK647zgQbiGUQLyIx7w==
