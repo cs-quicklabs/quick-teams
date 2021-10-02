@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-import { Rails } from "@rails/ujs"
 
 export default class extends Controller {
     static targets = ["entries", "pagination"]
@@ -33,14 +32,21 @@ export default class extends Controller {
         if (next_page == null) { return }
         let url = next_page.href
 
-        Rails.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'json',
-            success: (data) => {
-                this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
-                this.paginationTarget.innerHTML = data.pagination
-            }
+        fetch(url, {
+            method: 'GET', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
         })
+        .then(response => response.json())
+        .then(data => {
+            this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
+            this.paginationTarget.innerHTML = data.pagination
+
+        })
+        .catch((error) => {
+            console.log('error:', error);
+        });       
     }
 }
