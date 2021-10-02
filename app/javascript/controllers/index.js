@@ -17,3 +17,6 @@ application.register("modal", ModalController)
 
 import NavSearchController from "./nav_search_controller"
 application.register("nav-search", NavSearchController)
+
+import ConfirmationController from "./confirmation_controller"
+application.register("confirmation", ConfirmationController)

@@ -4,7 +4,7 @@
       <p class="w-full text-sm font-medium text-gray-900"><%= role.name %></p>
       <div class="flex">
         <%= link_to "Edit", edit_account_role_path(role), class: "btn-inline-edit" %>
-        <%= link_to "Delete", account_role_path(role), method: :delete, class: "btn-inline-delete pl-2" %>
+        <%= link_to "Delete", account_role_path(role), data: { "turbo-method": :delete }, class: "btn-inline-delete pl-2" %>
       </div>
     </div>
   </li>

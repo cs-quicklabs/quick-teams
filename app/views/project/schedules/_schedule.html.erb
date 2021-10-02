@@ -67,7 +67,12 @@
             <div class="flex col-span-1">
               <div class="whitespace-nowrap">
                 <div class="text-sm text-gray-900"><%= link_to "Edit", edit_project_schedule_path(@project, schedule), class: "btn-inline-edit" %></div>
-                <div class="text-sm text-gray-900"><%= link_to "Delete", [@project, schedule], method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %></div>
+                <div class="text-sm text-gray-900"><%= link_to "Delete", [@project, schedule], class: "btn-inline-delete", data: {
+                "turbo-method": :delete,
+                controller: "confirmation",
+                "confirmation-message-value": 'Are you sure?',
+                action: "confirmation#confirm"
+              } %></div>
               </div>
             </div>
           </div>
