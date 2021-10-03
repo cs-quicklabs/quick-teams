@@ -79,7 +79,7 @@
             </div>
           <% else %>
             <div>
-              <%= link_to "Activate", activate_user_path(employee), class: "ml-4 btn-normal", data: { confirm: "Are you sure?" } %>
+              <%= confirm_button(activate_user_path(employee, text: "Activate", style: "ml-4 btn-normal"))%>
             </div>
           <% end %>
         </div>
