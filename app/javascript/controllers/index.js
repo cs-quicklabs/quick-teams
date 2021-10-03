@@ -26,6 +26,5 @@ import CableReady from 'cable_ready'
 application.register("confirmation", ConfirmationController)
 application.consumer = consumer
 StimulusReflex.initialize(application, { controller, isolate: true })
-StimulusReflex.debug = process.env.RAILS_ENV === 'development'
 CableReady.initialize({ consumer })
  application.consumer = consumer
