@@ -11,15 +11,15 @@
     <% end %>
     <meta name="turbo-cache-control" content="no-cache">
     <%= javascript_include_tag "application", 'data-turbolinks-track': "reload" %>
-    <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <% if content_for?(:head) %>
       <main>
         <%= yield(:head) %>
       </main>
     <% end %>
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "actiontext", "data-turbo-track": "reload" %>
   </head>
   <body>
     <% if user_signed_in? %>
