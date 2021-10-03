@@ -2,9 +2,9 @@
   <li class="flex py-4 border-b border-gray-200">
     <div class="flex w-full ml-3">
       <p class="w-full text-sm font-medium text-gray-900"><%= job.name %></p>
-      <div class="flex">
-        <%= link_to "Edit", edit_account_job_path(job), class: "btn-inline-edit" %>
-        <%= link_to "Delete", account_job_path(job), method: :delete, class: "btn-inline-delete pl-2" %>
+      <div class="flex justify-end space-x-2">
+        <%= edit_button(edit_account_job_path(job)) %>
+        <%= delete_button(account_job_path(job)) %>
       </div>
     </div>
   </li>

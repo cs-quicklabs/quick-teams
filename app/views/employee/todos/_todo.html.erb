@@ -18,7 +18,7 @@
   </td>
   <td class="table-cell">
     <% if policy([todo.owner, todo]).destroy? %>
-      <%= link_to "Delete", employee_todo_path(todo.user, todo), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
+      <%= delete_button(employee_todo_path(todo.user, todo)) %>
     <% end %>
   </td>
 </tr>

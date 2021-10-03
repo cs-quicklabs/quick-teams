@@ -4,8 +4,10 @@
     <%= render partial: "shared/nuggets/title", locals: { nugget: @nugget } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <% if policy([@nugget]).edit? %>
-          <%= link_to "Edit", edit_nugget_path(@nugget), class: "btn-blue" %>
-        <%= link_to "Delete", nugget_path(@nugget), method: :delete, class: "btn-red", data: { confirm: "Are you sure?" } %>
+        <div class="flex justify-end items-center space-x-2">
+          <%= styled_edit_button(edit_nugget_path(@nugget), "btn-blue") %>
+          <%= styled_delete_button(nugget_path(@nugget), "btn-red") %>
+        </div>
       <% end %>
     </div>
   </div>

@@ -20,8 +20,10 @@
   </td>
   <td class="table-cell ">
     <% if policy([@employee, document]).edit? %>
-      <%= link_to "Edit", edit_employee_document_path(@employee, document), class: "btn-inline-edit pl-2" %>
-      <%= link_to "Delete", employee_document_path(@employee, document.id), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
+      <div class="flex justify-end space-x-2">
+        <%= edit_button(edit_employee_document_path(@employee, document)) %>
+        <%= delete_button(employee_document_path(@employee, document.id)) %>
+      </div>
     <% end %>
   </td>
 </tr>

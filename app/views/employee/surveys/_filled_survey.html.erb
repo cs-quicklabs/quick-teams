@@ -41,9 +41,9 @@
   </td>
   <td class="table-cell">
     <% if current_user.admin? %>
-      <%= link_to "Delete", survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
+      <%= delete_button(survey_attempt_path(attempt.survey, attempt)) %>
     <% elsif attempt.submitted? == false and current_user == attempt.actor %>
-      <%= link_to "Delete", survey_attempt_path(attempt.survey, attempt), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
+      <%= delete_button(survey_attempt_path(attempt.survey, attempt)) %>
     <% end %>
   </td>
 </tr>

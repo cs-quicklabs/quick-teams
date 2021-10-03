@@ -16,7 +16,7 @@
           <%= link_to "Show", project_feedback_path(@project, feedback), class: "btn-inline-edit" %>
         <% end %>
         <% if policy([@project, feedback]).destroy? %>
-          <%= link_to "Delete", project_feedback_path(@project, feedback), method: :delete, class: "pl-2 btn-inline-delete", data: { confirm: "Are you sure?" } %>
+          <%= delete_button(project_feedback_path(@project, feedback)) %>
         <% end %>
       </div>
     </div>

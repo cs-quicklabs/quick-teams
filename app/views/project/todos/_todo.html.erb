@@ -19,6 +19,6 @@
     <%= display_created_at(todo) %>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <%= link_to "Delete", project_todo_path(todo.project, todo), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
+    <%= delete_button(project_todo_path(todo.project, todo)) %>
   </td>
 </tr>

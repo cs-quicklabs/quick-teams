@@ -22,7 +22,7 @@
       </div>
     </td>
     <td class="table-cell whitespace-nowrap ">
-      <%= link_to "Delete", survey_assignee_path(@survey, assignee), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
+      <%= delete_button(survey_assignee_path(@survey, assignee)) %>
     </td>
   </tr>
 <% else %>
@@ -38,8 +38,8 @@
         </div>
       </div>
     </td>
-    <td class="table-cell whitespace-nowrap>
-      <%= link_to "Delete", survey_assignee_path(@survey, assignee), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
+    <td class="table-cell whitespace-nowrap">
+      <%= delete_button(survey_assignee_path(@survey, assignee)) %>
     </td>
   </tr>
 <% end %>

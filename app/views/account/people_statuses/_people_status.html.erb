@@ -3,9 +3,9 @@
     <div class="flex items-center w-full ml-3">
       <div class="flex-shrink-0 w-2.5 h-2.5 rounded-full bg-<%= people_status.color %>-400" aria-hidden="true"></div>
       <p class="w-full ml-2 text-sm font-medium text-gray-900"><%= people_status.name.titleize %></p>
-      <div class="flex">
-        <%= link_to "Edit", edit_account_people_status_path(people_status), class: "btn-inline-edit" %>
-        <%= link_to "Delete", account_people_status_path(people_status), method: :delete, class: "btn-inline-delete pl-2" %>
+      <div class="flex justify-end space-x-2">
+        <%= edit_button(edit_account_people_status_path(jopeople_statusb)) %>
+        <%= delete_button(account_people_status_path(people_status)) %>
       </div>
     </div>
   </li>

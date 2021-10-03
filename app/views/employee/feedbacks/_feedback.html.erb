@@ -18,10 +18,10 @@
           <span class="font-medium text-gray-500"><%= display_created_at(feedback) %></span>
           <%= link_to "Show", employee_feedback_path(@employee, feedback), class: "btn-inline-edit pl-2" %>
           <% if policy([@employee, feedback]).edit? %>
-            <%= link_to "Edit", edit_employee_feedback_path(@employee, feedback), class: "btn-inline-delete pl-2" %>
+            <%= edit_button(edit_employee_feedback_path(@employee, feedback)) %>
           <% end %>
           <% if policy([@employee, feedback]).destroy? %>
-            <%= link_to "Delete", employee_feedback_path(@employee, feedback), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
+            <%= delete_button(employee_feedback_path(@employee, feedback)) %>
           <% end %>
         </div>
       </div>

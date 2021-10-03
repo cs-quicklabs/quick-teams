@@ -29,8 +29,10 @@
   </td>
   <% if policy(kb).edit? %>
     <td class="table-cell">
-      <%= link_to "Edit", edit_kb_path(kb), class: "btn-inline-edit" %>
-      <%= link_to "Delete", kb_path(kb), method: :delete, class: "btn-inline-delete", data: { confirm: "Are you sure?" } %>
+      <div class="flex justify-end items-center space-x-2">
+        <%= edit_button(edit_kb_path(kb)) %>
+        <%= delete_button(kb_path(kb)) %>
+      </div>
     </td>
   <% end %>
 </tr>

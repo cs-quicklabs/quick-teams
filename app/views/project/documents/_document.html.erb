@@ -18,8 +18,10 @@
   </td>
   <td class="table-cell  align-top">
     <% if policy([@project, document]).edit? %>
-      <%= link_to "Edit", edit_project_document_path(@project, document), class: "btn-inline-edit pl-2" %>
-      <%= link_to "Delete", project_document_path(@project, document.id), method: :delete, class: "btn-inline-delete pl-2", data: { confirm: "Are you sure?" } %>
+      <div class="flex justify-end items-center space-x-2">
+        <%= edit_button(edit_project_document_path(@project, document)) %>
+        <%= delete_button(project_document_path(@project, document.id)) %>
+      </div>
     <% end %>
   </td>
 </tr>

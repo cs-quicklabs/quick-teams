@@ -16,8 +16,8 @@
     </div>
     <div class="flex align-right">
       <div class="px-6 py-3 whitespace-nowrap  text-sm font-medium">
-        <%= link_to "Edit", edit_survey_question_path(question.survey, question), class: "btn-inline-edit" %>
-        <%= link_to "Delete", survey_question_path(question.survey, question), method: :delete, class: "btn-inline-delete ml-1", data: { confirm: "Are you sure?" } %>
+        <%= edit_button(edit_survey_question_path(question.survey, question)) %>
+        <%= delete_button(survey_question_path(question.survey, question)) %>
       </div>
     </div>
   </li>

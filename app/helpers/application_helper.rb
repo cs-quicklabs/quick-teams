@@ -65,4 +65,21 @@ module ApplicationHelper
 
     out.html_safe
   end
+
+  def styled_edit_button(path, style)
+    out = link_to "Edit", path, class: style
+
+    out.html_safe
+  end
+
+  def styled_delete_button(path, style)
+    out = link_to "Delete", path, class: style, data: {
+                                    "turbo-method": :delete,
+                                    controller: "confirmation",
+                                    "confirmation-message-value": "Are you sure?",
+                                    action: "confirmation#confirm",
+                                  }
+
+    out.html_safe
+  end
 end
