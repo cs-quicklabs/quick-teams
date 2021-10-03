@@ -6,9 +6,9 @@
         <p class="w-full text-sm font-medium text-gray-900"><%= client.name.titleize %></p>
         <p class="text-sm text-gray-500"><%= client.email %></p>
       </div>
-      <div class="flex justify-end">
-        <%= link_to "Edit", edit_account_client_path(client), class: "btn-inline-edit" %>
-        <%= link_to "Delete", account_client_path(client), method: :delete, class: "btn-inline-delete pl-2" %>
+      <div class="flex justify-end space-x-2">
+        <%= edit_button(edit_account_client_path(client)) %>
+        <%= delete_button(account_client_path(client)) %>
       </div>
     </div>
   </li>
