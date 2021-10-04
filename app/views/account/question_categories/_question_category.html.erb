@@ -1,8 +1,7 @@
 <%= turbo_frame_tag dom_id(question_category) do %>
   <li class="flex py-4 border-b border-gray-200">
-    <div class="flex items-center w-full ml-3">
-      <div class="flex-shrink-0 w-2.5 h-2.5 rounded-full " aria-hidden="true"></div>
-      <p class="w-full ml-2 text-sm font-medium text-gray-900"><%= question_category.name.titleize %></p>
+    <div class="flex w-full ml-3">
+      <p class="w-full text-sm font-medium text-gray-900"><%= question_category.name %></p>
       <div class="flex justify-end space-x-2">
         <%= edit_button(edit_account_question_category_path(question_category)) %>
         <%= delete_button(account_question_category_path(question_category)) %>
