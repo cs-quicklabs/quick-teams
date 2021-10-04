@@ -75,11 +75,11 @@
           </div>
           <% if employee.active %>
             <div>
-              <%= confirm_button(deactivate_user_path(employee), "Deactivate", "Are you sure?") %>
+              <%= confirm_button(deactivate_user_path(employee), "Deactivate", "Are you sure?", "ml-4 btn-normal") %>
             </div>
           <% else %>
             <div>
-              <%= confirm_button(activate_user_path(employee), "Activate", "Are you sure?") %>
+              <%= confirm_button(activate_user_path(employee), "Activate", "Are you sure?", "ml-4  btn-normal") %>
             </div>
           <% end %>
         </div>
