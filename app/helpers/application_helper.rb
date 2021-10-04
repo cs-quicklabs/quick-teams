@@ -60,6 +60,16 @@ module ApplicationHelper
     out.html_safe
   end
 
+  def confim_button(path, title, message)
+    out = link_to title, path, class: "btn-inline-delete", data: {
+                                 controller: "confirmation",
+                                 "confirmation-message-value": message,
+                                 action: "confirmation#confirm",
+                               }
+
+    out.html_safe
+  end
+
   def edit_button(path)
     out = link_to "Edit", path, class: "btn-inline-edit"
 

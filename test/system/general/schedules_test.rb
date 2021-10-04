@@ -26,8 +26,12 @@ class SchedulesTest < ApplicationSystemTestCase
 
   test "can navigate with jobs menu" do
     visit page_url
-    find(:xpath, "/html/body/div[4]/div/div[1]/div/div/nav/div/div/a[2]").click
-    assert_current_path("/#{@account.id}/schedule?job=#{jobs(:developer).id}")
+    job = jobs(:developer)
+    within "nav#menu" do
+      find("a", id: dom_id(job)).click
+    end
+
+    assert_current_path("/#{@account.id}/schedule?job=#{job.id}")
   end
 
   test "can navigate to employee page" do

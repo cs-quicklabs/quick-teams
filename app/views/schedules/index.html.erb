@@ -13,7 +13,7 @@
     <div class="flex flex-col pt-5 pb-4 border-r border-gray-200">
       <div class="flex flex-col flex-1 w-64 h-0 overflow-y-auto">
         <div class="relative inline-block px-3 text-left">
-          <nav class="px-3">
+          <nav id="menu" class="px-3">
             <div>
               <h3 class="px-3 text-xs font-semibold tracking-wider text-gray-500 uppercase" id="teams-headline">
                 Teams
@@ -25,7 +25,7 @@
                   </span>
                 </a>
                 <% @jobs.each do |job| %>
-                  <a href="<%= schedules_path(:job => job.id) %>" class="<%= request.params[:job].to_i == job.id ? "selected" : "unselected" %>">
+                  <a id="<%= dom_id(job) %>" href="<%= schedules_path(:job => job.id) %>" class="<%= request.params[:job].to_i == job.id ? "selected" : "unselected" %>">
                     <span class="ml-2 truncate">
                       <%= job.name %>
                     </span>
