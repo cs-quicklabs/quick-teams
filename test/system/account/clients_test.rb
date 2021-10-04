@@ -51,7 +51,7 @@ class ClientsTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_client_url(clients(:mayank), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
   end
 
   test "can delete a client" do
@@ -59,7 +59,9 @@ class ClientsTest < ApplicationSystemTestCase
     client = clients(:mayank)
 
     assert_selector "li", text: client.name
-    find("li", text: client.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: client.name).click_on("Delete")
+    end
     assert_no_selector "li", text: client.name
   end
 

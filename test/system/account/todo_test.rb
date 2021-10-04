@@ -16,7 +16,9 @@ class TodoTest < ApplicationSystemTestCase
     tag = tags(:one)
 
     assert_selector "li", text: tag.name
-    find("li", text: tag.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: tag.name).click_on("Delete")
+    end
     assert_no_selector "li", text: tag.name
   end
 end

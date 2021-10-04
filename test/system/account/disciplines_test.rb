@@ -49,7 +49,7 @@ class DisciplinesTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_discipline_url(disciplines(:engineering), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
   end
 
   test "can delete a discipline" do
@@ -57,7 +57,9 @@ class DisciplinesTest < ApplicationSystemTestCase
     discipline = disciplines(:hr)
 
     assert_selector "li", text: discipline.name
-    find("li", text: discipline.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: discipline.name).click_on("Delete")
+    end
     assert_no_selector "li", text: discipline.name
   end
 
@@ -107,7 +109,9 @@ class DisciplinesTest < ApplicationSystemTestCase
     discipline = disciplines(:engineering)
 
     assert_selector "li", text: discipline.name
-    find("li", text: discipline.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: discipline.name).click_on("Delete")
+    end
     take_screenshot
     assert_text "Unable to Delete Record"
     click_on "Cancel"

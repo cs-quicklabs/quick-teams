@@ -49,7 +49,7 @@ class RolesTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_role_url(roles(:senior), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
   end
 
   test "can delete a role" do
@@ -57,7 +57,9 @@ class RolesTest < ApplicationSystemTestCase
     role = roles(:junior)
 
     assert_selector "li", text: role.name
-    find("li", text: role.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: role.name).click_on("Delete")
+    end
     assert_no_selector "li", text: role.name
   end
 
@@ -106,7 +108,9 @@ class RolesTest < ApplicationSystemTestCase
     role = roles(:senior)
 
     assert_selector "li", text: role.name
-    find("li", text: role.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: role.name).click_on("Delete")
+    end
     take_screenshot
     assert_text "Unable to Delete Record"
     click_on "Cancel"

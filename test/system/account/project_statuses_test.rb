@@ -50,7 +50,7 @@ class ProjectStatusesTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_project_status_url(project_statuses(:tentative), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
   end
 
   test "can delete a project status" do
@@ -58,7 +58,9 @@ class ProjectStatusesTest < ApplicationSystemTestCase
     project_status = project_statuses(:unused)
 
     assert_selector "li", text: project_status.name
-    find("li", text: project_status.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: project_status.name).click_on("Delete")
+    end
     assert_no_selector "li", text: project_status.name
   end
 
@@ -110,7 +112,9 @@ class ProjectStatusesTest < ApplicationSystemTestCase
     project_status = project_statuses(:tentative)
 
     assert_selector "li", text: project_status.name
-    find("li", text: project_status.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: project_status.name).click_on("Delete")
+    end
     take_screenshot
     assert_text "Unable to Delete Record"
     click_on "Cancel"

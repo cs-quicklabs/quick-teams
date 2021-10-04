@@ -49,7 +49,7 @@ class SkillsTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_skill_url(skills(:ruby), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
   end
 
   test "can delete a skill" do
@@ -57,7 +57,9 @@ class SkillsTest < ApplicationSystemTestCase
     skill = skills(:android)
 
     assert_selector "li", text: skill.name
-    find("li", text: skill.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: skill.name).click_on("Delete")
+    end
     assert_no_selector "li", text: skill.name
   end
 

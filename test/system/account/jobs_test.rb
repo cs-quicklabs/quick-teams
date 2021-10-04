@@ -49,7 +49,7 @@ class JobsTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_job_url(jobs(:developer), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
   end
 
   test "can delete a job" do
@@ -57,7 +57,10 @@ class JobsTest < ApplicationSystemTestCase
     job = jobs(:developer)
 
     assert_selector "li", text: job.name
-    find("li", text: job.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: job.name).click_on("Delete")
+    end
+
     assert_no_selector "li", text: job.name
   end
 
@@ -106,7 +109,9 @@ class JobsTest < ApplicationSystemTestCase
     job = jobs(:ios)
 
     assert_selector "li", text: job.name
-    find("li", text: job.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: job.name).click_on("Delete")
+    end
     take_screenshot
     assert_text "Unable to Delete Record"
     click_on "Cancel"

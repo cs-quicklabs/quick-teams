@@ -3,8 +3,10 @@
     <div class="flex w-full ml-3">
       <p class="w-full text-sm font-medium text-gray-900"><%= role.name %></p>
       <div class="flex">
-        <%= link_to "Edit", edit_account_role_path(role), class: "btn-inline-edit" %>
-        <%= link_to "Delete", account_role_path(role), data: { "turbo-method": :delete }, class: "btn-inline-delete pl-2" %>
+        <div class="flex justify-end space-x-2">
+          <%= edit_button(edit_account_role_path(role)) %>
+          <%= delete_button(account_role_path(role)) %>
+        </div>
       </div>
     </div>
   </li>

@@ -50,7 +50,7 @@ class ProjectTagsTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_project_tag_url(project_tags(:risk), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
   end
 
   test "can delete a project tag" do
@@ -58,7 +58,9 @@ class ProjectTagsTest < ApplicationSystemTestCase
     project_tag = project_tags(:risk)
 
     assert_selector "li", text: project_tag.name
-    find("li", text: project_tag.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: project_tag.name).click_on("Delete")
+    end
     assert_no_selector "li", text: project_tag.name
   end
 

@@ -49,14 +49,16 @@ class QuestionCategroiesTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_question_category_url(survey_question_categories(:one), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
   end
 
   test "can delete a question category" do
     visit page_url
     question_category = survey_question_categories(:one)
     assert_selector "li", text: question_category.name
-    find("li", text: question_category.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: question_category.name).click_on("Delete")
+    end
     assert_no_selector "li", text: question_category.name
   end
 

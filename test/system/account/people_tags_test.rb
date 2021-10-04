@@ -50,7 +50,7 @@ class PeopleTagsTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_people_tag_url(people_tags(:star), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
   end
 
   test "can delete a tag" do
@@ -58,7 +58,9 @@ class PeopleTagsTest < ApplicationSystemTestCase
     people_tag = people_tags(:star)
 
     assert_selector "li", text: people_tag.name
-    find("li", text: people_tag.name).click_on("Delete")
+    page.accept_confirm do
+      find("li", text: people_tag.name).click_on("Delete")
+    end
     assert_no_selector "li", text: people_tag.name
   end
 
