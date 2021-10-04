@@ -73,11 +73,11 @@
           </div>
           <% if !project.archived %>
             <div>
-              <%= link_to "Archive", archive_project_path(project), class: " ml-4 btn-normal ", data: { confirm: "Are you sure?" } %>
+              <%= confirm_button(archive_project_path(project), "Archive", "Are you sure?", "ml-4 btn-normal" ) %>
             </div>
           <% else %>
             <div>
-              <%= link_to "Restore", unarchive_project_path(project), class: " ml-4 btn-normal  ", data: { confirm: "Are you sure?" } %>
+              <%= confirm_button(unarchive_project_path(project), "Restore", "Are you sure?", "ml-4 btn-normal" ) %>
             </div>
           <% end %>
         <% end %>
