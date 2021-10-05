@@ -71,7 +71,6 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     @employee = users(:admin)
     visit page_url
     take_screenshot
-    binding.irb
     assert_selector "h1", text: @member.decorate.display_name
     assert_selector "div#employee-tabs", text: "surveys"
   end
