@@ -29,3 +29,20 @@ project:
   account: crownstack
   survey_for: project
   survey_type: score
+
+one: 
+  name: Project Initiation Checklist one
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: project
+  survey_type: score
+
+two: 
+  name: Project Initiation Checklist one
+  description: Survey Description
+  actor: regular
+  account: crownstack
+  survey_for: project
+  survey_type: score
+

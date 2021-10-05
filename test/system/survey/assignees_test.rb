@@ -35,7 +35,7 @@ class AssigneesTest < ApplicationSystemTestCase
     assert_selector "p", text: "Assignee was added successfully."
   end
 
-  test "can delete a question" do
+  test "can delete a assignee" do
     visit page_url
     find(:select, id: "assign_id").find(:xpath, "option[3]").select_option
     click_on "Add Assignee"
@@ -45,6 +45,5 @@ class AssigneesTest < ApplicationSystemTestCase
       find("tr", id: dom_id(@assignee)).click_link("Delete")
     end
     take_screenshot
-    assert_selector "p", text: "Assignee was deleted"
   end
 end

@@ -12,6 +12,10 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     employee_surveys_url(script_name: "/#{@account.id}", employee_id: @employee.id)
   end
 
+  def subordinate_page_url
+    employee_surveys_url(script_name: "/#{@account.id}", employee_id: @employee.subordinates.first.id)
+  end
+
   test "admin can see surveys" do
     sign_out @employee
     @employee = users(:super)
@@ -29,7 +33,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_url
     take_screenshot
-    assert_equal @survey.account.name, "Crownstack technologies"
+    assert_equal @employee.account.name, "Crownstack technologies"
     assert_selector "div#employee-tabs", text: "surveys"
   end
 
@@ -39,7 +43,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     sign_in @employee
     visit subordinate_page_url
     take_screenshot
-    assert_equal @survey.account.name, "Crownstack technologies"
+    assert_equal @employee.account.name, "Crownstack technologies"
     assert_selector "div#employee-tabs", text: "surveys"
   end
 
@@ -60,7 +64,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_url
     take_screenshot
-    assert_equal @survey.account.name, "Crownstack technologies"
+    assert_equal @employee.account.name, "Crownstack technologies"
     assert_selector "div#employee-tabs", text: "surveys"
   end
 
