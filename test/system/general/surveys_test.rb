@@ -46,7 +46,7 @@ class SurveysTest < ApplicationSystemTestCase
     fill_in "Name", with: "Survey Campaign"
     fill_in "Description", with: "This is a sample Survey Description"
     select "KPIs", from: "survey_survey_survey_type"
-    select "Employee", from: "survey_survey_survey_for"
+    select "All Employees", from: "survey_survey_survey_for"
     click_on "Add Survey"
     take_screenshot
     assert_selector "p.notice", text: "Survey was created successfully."

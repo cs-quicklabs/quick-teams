@@ -31,7 +31,6 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     page.accept_confirm do
       click_on "Record Self Assessment"
     end
-    sleep(5)
     assert_selector "h3", text: @survey.name
     assert_selector "p", text: "Participant: #{@employee.decorate.display_name}"
     take_screenshot

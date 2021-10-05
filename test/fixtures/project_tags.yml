@@ -5,5 +5,5 @@ risk:
 
 uat:
   name: In UAT
-  color: yello
+  color: yellow
   account: crownstack

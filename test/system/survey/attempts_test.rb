@@ -34,12 +34,10 @@ class AttemptsTest < ApplicationSystemTestCase
 
   test "can attempt a survey" do
     visit attempt_url
-    sleep(5)
     click_on "Preview and Submit"
     take_screenshot
     fill_in "survey_attempt_comment", with: "This is a comment"
     click_on "Submit"
-    sleep(0.2)
     visit page_url
     assert_selector "td", text: "Submitted"
     find(id: dom_id(@attempt)).click_link("View")

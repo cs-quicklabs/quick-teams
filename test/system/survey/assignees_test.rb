@@ -40,7 +40,6 @@ class AssigneesTest < ApplicationSystemTestCase
     find(:select, id: "assign_id").find(:xpath, "option[3]").select_option
     click_on "Add Assignee"
     take_screenshot
-    sleep(0.1)
     @assignee = User.where(kpi_id: @survey).first
     page.accept_confirm do
       find("tr", id: dom_id(@assignee)).click_link("Delete")
