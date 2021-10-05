@@ -20,7 +20,7 @@ class SurveysController < BaseController
   def destroy
     authorize :surveys
     @survey.destroy
-    redirect_to surveys_path, notice: "Survey was removed successfully."
+    redirect_to surveys_path, status: 303, notice: "Survey was removed successfully."
   end
 
   def update

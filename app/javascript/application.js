@@ -4,3 +4,5 @@ import "./controllers"
 import 'trix'
 import '@rails/actiontext'
 import '@rails/activestorage'
+import '@tailwindcss/line-clamp'
+import '@tailwindcss/forms'

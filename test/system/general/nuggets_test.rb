@@ -83,6 +83,8 @@ class NuggetsTest < ApplicationSystemTestCase
     @nugget = Nugget.where(published: false).first
     visit edit_nugget_url(script_name: "/#{@account.id}", id: @nugget.id)
     fill_in "Title", with: "Test Nugget Edited"
+    binding.irb
+
     fill_in_rich_text_area dom_id(@nugget), with: "This is nugget body"
     select skills(:ruby).name, from: "nugget_skill_id"
     click_on "Save Nugget"
