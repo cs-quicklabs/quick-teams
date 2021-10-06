@@ -326,7 +326,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stackprof (0.2.17)
-    stimulus-rails (0.6.0)
+    stimulus-rails (0.6.1)
       rails (>= 6.0.0)
     stimulus_reflex (3.5.0.pre3)
       cable_ready (= 5.0.0.pre4)
@@ -428,7 +428,7 @@ DEPENDENCIES
   wkhtmltopdf-binary
 
 RUBY VERSION
-   ruby 3.0.0p0
+   ruby 3.0.2p107
 
 BUNDLED WITH
    2.2.22
