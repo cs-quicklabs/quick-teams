@@ -18,5 +18,8 @@
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css"
-  }
+  },
+  "engines": {
+        "node": "12.16.2"
+    }
 }
