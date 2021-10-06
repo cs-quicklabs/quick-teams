@@ -30,7 +30,7 @@
       In Progress
     <% end %>
   </td>
-  <td class="table-cell">
+  <td class="table-cell whitespace-nowrap">
     <% if current_user.admin? %>
       <%= delete_button(survey_attempt_path(attempt.survey, attempt)) %>
     <% elsif attempt.submitted? == false and current_user == attempt.actor %>
