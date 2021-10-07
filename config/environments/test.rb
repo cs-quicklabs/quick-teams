@@ -35,6 +35,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
+  Rails.application.config.active_storage.variant_processor = :mini_magick
 
   config.action_mailer.perform_caching = false
 
