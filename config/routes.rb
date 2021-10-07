@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :schedules, module: "project"
     resources :notes, module: "project"
+    resources :risks, module: "project"
     resources :feedbacks, only: [:index, :show, :create, :destroy], module: "project"
     resources :timesheets, module: "project"
     resources :milestones, module: "project"
