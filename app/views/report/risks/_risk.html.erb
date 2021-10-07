@@ -19,10 +19,10 @@
       </div>
     </td>
     <td class="table-cell whitespace-nowrap">
-      <a href="#" class="font-medium text-gray-900"><%= risk.project.decorate.display_name %></a>
+      <a href="<%=project_risks_path(risk.project)%>" class="hover:underline"><%= risk.project.decorate.display_name %></a>
     </td>
     <td class="table-cell whitespace-nowrap">
-      <a href="#" class="font-medium text-gray-900"><%= risk.user.decorate.display_name %></a>
+      <a href="<%= employee_team_path(risk.user) %>" class="hover:underline"><%= risk.user.decorate.display_name %></a>
     </td>
     <td class="table-cell whitespace-nowrap">
       <span class="font-medium text-gray-500"><%= display_created_at(risk) %></span>
