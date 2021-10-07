@@ -3,15 +3,15 @@
     <td class=" w-full table-cell">
       <div class="mt-2 space-x-2 inline-flex">
         <div class="flex-1">
-          <% if risk.status?  %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-<%=risk.decorate.risk_status_color%>-700" viewBox="0 0 20 20" fill="currentColor">
+          <% if risk.status? %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-<%= risk.decorate.risk_status_color %>-700" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
             </svg>
           <% else %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-<%=risk.decorate.risk_status_color%>-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-<%= risk.decorate.risk_status_color %>-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
             </svg>
-          <%end%>
+          <% end %>
         </div>
         <div class="flex-1">
           <p class="whitespace-pre-wrap"><%= risk.body.upcase_first %></p>
@@ -19,7 +19,7 @@
       </div>
     </td>
     <td class="table-cell whitespace-nowrap">
-      <a href="<%=project_risks_path(risk.project)%>" class="hover:underline"><%= risk.project.decorate.display_name %></a>
+      <a href="<%= project_risks_path(risk.project) %>" class="hover:underline"><%= risk.project.decorate.display_name %></a>
     </td>
     <td class="table-cell whitespace-nowrap">
       <a href="<%= employee_team_path(risk.user) %>" class="hover:underline"><%= risk.user.decorate.display_name %></a>

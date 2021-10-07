@@ -28,4 +28,3 @@ application.consumer = consumer
 StimulusReflex.initialize(application, { controller, isolate: true })
 CableReady.initialize({ consumer })
  application.consumer = consumer
-application.consumer = consumer
