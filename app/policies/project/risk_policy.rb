@@ -1,8 +1,6 @@
 class Project::RiskPolicy < Project::BaseProjectPolicy
   def update?
-    project = record.first
-    note = record.last
-    (user.admin? or note.user_id == user.id) and not project.archived?
+    true
   end
 
   def index?
@@ -10,17 +8,14 @@ class Project::RiskPolicy < Project::BaseProjectPolicy
   end
 
   def create?
-   project = record.first
-    return false if project.archived?
-    return true if user.admin?
-    user.is_manager?(project)
+    true
   end
 
   def destroy?
-    project = record.first
-    note = record.last
-    return false if project.archived?
-    return true if user.admin?
-    note.user_id == user.id
+    true
+  end
+
+  def edit?
+    true
   end
 end
