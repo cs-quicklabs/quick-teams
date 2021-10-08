@@ -20,6 +20,11 @@ class ProjectNotesTest < ApplicationSystemTestCase
     assert_text "Risk"
     assert_text "Add New Risk"
   end
+  test "can not show add risks when project is archived" do
+    archived_project = projects(:archived)
+    visit project_feedbacks_url(script_name: "/#{@account.id}", project_id: archived_project.id)
+    assert_no_text "Add New Risk"
+  end
 
   test "can not visit index page if not logged in" do
     sign_out @employee
