@@ -28,7 +28,7 @@ class ProjectRisksTest < ApplicationSystemTestCase
     assert_selector "tr##{dom_id(risk)}", text: "Delete"
   end
 
-  test "lead can not see project notes" do
+  test "lead can not see project risks" do
     sign_out @employee
     @employee = users(:lead)
     sign_in @employee
@@ -36,7 +36,7 @@ class ProjectRisksTest < ApplicationSystemTestCase
     assert_no_selector "div#project-tabs", text: "Risks"
   end
 
-  test "member can not see project notes" do
+  test "member can not see project risks" do
     sign_out @employee
     @employee = users(:member)
     sign_in @employee
@@ -59,7 +59,7 @@ class ProjectRisksTest < ApplicationSystemTestCase
     assert_selector "tr##{dom_id(risk)}", text: "Delete"
   end
 
-  test "manger can not see risks other than his project notes" do
+  test "manger can not see risks other than his project risks" do
     sign_out @employee
     @employee = users(:manager)
     sign_in @employee
