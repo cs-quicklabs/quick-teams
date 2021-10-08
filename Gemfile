@@ -35,7 +35,7 @@ gem "image_processing", "~> 1.2"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
-gem "devise", github: "strobilomyces/devise", branch: "patch-1"
+gem "devise", github: "heartcombo/devise", branch: "master"
 gem "devise_invitable", "~> 2.0.0"
 gem "rubocop", require: false
 gem "acts_as_tenant"

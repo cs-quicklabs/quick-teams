@@ -1,14 +1,7 @@
 GIT
-  remote: https://github.com/mimemagicrb/mimemagic.git
-  revision: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
-  ref: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
-  specs:
-    mimemagic (0.3.5)
-
-GIT
-  remote: https://github.com/strobilomyces/devise.git
-  revision: 755e84b7228f19be0e82bdc5486073715b2a32ed
-  branch: patch-1
+  remote: https://github.com/heartcombo/devise.git
+  revision: bb879f715435d536195d6d7b927ec54975e44716
+  branch: master
   specs:
     devise (4.8.0)
       bcrypt (~> 3.0)
@@ -16,6 +9,13 @@ GIT
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+
+GIT
+  remote: https://github.com/mimemagicrb/mimemagic.git
+  revision: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
+  ref: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
+  specs:
+    mimemagic (0.3.5)
 
 GEM
   remote: https://rubygems.org/
@@ -89,7 +89,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.510.0)
+    aws-partitions (1.512.0)
     aws-sdk-core (3.121.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -326,7 +326,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stackprof (0.2.17)
-    stimulus-rails (0.6.1)
+    stimulus-rails (0.7.0)
       rails (>= 6.0.0)
     stimulus_reflex (3.5.0.pre3)
       cable_ready (= 5.0.0.pre4)
