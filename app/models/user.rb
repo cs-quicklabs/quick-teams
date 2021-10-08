@@ -32,6 +32,7 @@ class User < ApplicationRecord
   has_many :surveys, class_name: "Survey::Survey", foreign_key: "actor__id"
   has_many :attempt, class_name: "Survey::Attempt", foreign_key: "actor__id"
   has_many :notes
+  has_many :risks
   has_many :timesheets
   has_many :kbs
   has_many :managed_projects, class_name: "Project", foreign_key: "manager_id"
