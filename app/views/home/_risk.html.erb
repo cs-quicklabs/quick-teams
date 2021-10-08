@@ -10,15 +10,10 @@
       <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
         <div>
           <p class="text-sm text-gray-500">
-            <a href="<%= employee_timeline_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
-            updated risk
+            <a href="<%=employee_team_path(event.user)%>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name %></a>
+            Added a risk
             for
-            <%= project_risks_path(event.eventable) %>
-            <a href="" class="font-medium text-gray-900 hover:underline">
-            </a>
-            <%= event.action_for_context %>
-            in
-            <a href="" class="font-medium text-gray-900 hover:underline"><%= event.eventable %></a>
+            <a href="<%=project_risks_path(event.eventable)%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name %></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">
