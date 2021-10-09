@@ -12,12 +12,12 @@
     <%= form.rich_text_area :body, "Description" %>
     <% if !@project.manager_id.nil? %>
       <div class="flex  inline-flex ">
-        <%= form.check_box :permission,  class: "mr-2 mt-1  w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
+        <%= form.check_box :permission, class: "mr-2 mt-1  w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
         <span class="text-sm font-medium text-gray-700 mt-1" id="privacy-option-1-label">
-          Allow <%=@project.manager.decorate.display_name%> to comment on the milestone
+          Allow <%= @project.manager.decorate.display_name %> to comment on the milestone
         </span>
       </div>
-    <%end%>
+    <% end %>
     <div class="flex justify-end">
       <%= form.submit "Add Milestone", class: "btn-blue" %>
     </div>
