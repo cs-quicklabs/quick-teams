@@ -14,6 +14,7 @@ class Project < ApplicationRecord
   has_many :milestones, as: :goalable, class_name: "Goal"
   has_many :timesheets
   has_many :todos
+  has_many :risks
   has_many :attempts, as: :participant
 
   has_many :lists, through: :todos, source: :user

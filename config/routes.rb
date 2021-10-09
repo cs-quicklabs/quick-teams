@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :schedules, module: "project"
     resources :notes, module: "project"
+    resources :risks, module: "project"
     resources :feedbacks, only: [:index, :show, :create, :destroy], module: "project"
     resources :timesheets, module: "project"
     resources :milestones, module: "project"
@@ -108,6 +109,7 @@ Rails.application.routes.draw do
     get "/timesheets", to: "report/timesheets#index", as: "timesheets_reports"
     get "/employees", to: "report/employees#index", as: "employees_reports"
     get "/projects", to: "report/projects#index", as: "projects_reports"
+    get "/risks", to: "report/risks#index", as: "projects_risks_reports"
 
     get "/goals", to: "report/goals#index", as: "goals_reports"
     get "/schedules/available", to: "report/schedules#available", as: "available_schedules_reports"
