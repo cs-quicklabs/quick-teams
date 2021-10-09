@@ -1,20 +1,18 @@
 class Project::RisksController < Project::BaseController
   before_action :set_risk, only: %i[ destroy edit update ]
-  include ActionView::RecordIdentifier
 
   def index
     authorize [@project, :risk]
 
     @risk = Risk.new
     @pagy, @risks = pagy_nil_safe(params, @project.risks.includes(:user).order(:status), items: LIMIT)
-    render_partial("project/risks/risk", collection: @risks) if stale?(@risks + [@project])
+    render_partial("project/risks/risk", collection: @risks, cached: true) if stale?(@risks + [@project])
   end
 
   def destroy
     authorize [@project, @risk]
 
     @risk.destroy
-    Event.where(eventable: @project, trackable: @risk).touch_all #fixes cache issues in activity
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(@risk) }
     end
