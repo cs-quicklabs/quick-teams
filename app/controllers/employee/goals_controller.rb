@@ -11,7 +11,6 @@ class Employee::GoalsController < Employee::BaseController
 
   def create
     authorize [@employee, Goal]
-
     @goal = AddEmployeeGoal.call(@employee, goal_params, current_user).result
 
     respond_to do |format|
@@ -66,6 +65,6 @@ class Employee::GoalsController < Employee::BaseController
   end
 
   def goal_params
-    params.require(:goal).permit(:title, :body, :deadline)
+    params.require(:goal).permit(:title, :body, :deadline, :permission)
   end
 end

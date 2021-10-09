@@ -20,6 +20,7 @@ class User::GoalPolicy < User::BaseUserPolicy
 
   def show?
     return true if user.admin?
+
     return (goal_for_subordinate? or self?) if user.lead?
     self?
   end
@@ -45,6 +46,7 @@ class User::GoalPolicy < User::BaseUserPolicy
 
   def comment?
     employee = record.first
+    return true if goal_permission?
     return true if user.admin?
     return true if user.lead? and user.subordinate?(employee)
     false
@@ -55,5 +57,10 @@ class User::GoalPolicy < User::BaseUserPolicy
   def goal_for_subordinate?
     goal = record.last
     user.subordinate?(goal.goalable)
+  end
+
+  def goal_permission?
+    goal = record.last
+    goal.permission?
   end
 end
