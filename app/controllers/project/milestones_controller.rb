@@ -16,7 +16,7 @@ class Project::MilestonesController < Project::BaseController
     respond_to do |format|
       if @milestone.persisted?
         format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend(:milestones, partial: "project/milestones/milestone", locals: { milestone: @milestone, project: @project }) +
+          render turbo_stream: turbo_stream.prepend(:milestones, partial: "project/milestones/milestone", locals: { milestone: @milestone }) +
                                turbo_stream.replace(Goal.new, partial: "project/milestones/form", locals: { milestone: Goal.new })
         }
       else
@@ -36,6 +36,7 @@ class Project::MilestonesController < Project::BaseController
 
   def show
     authorize [@project, @milestone]
+
     @comment = Comment.new
     fresh_when @milestone
   end
