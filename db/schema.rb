@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_01_061018) do
+ActiveRecord::Schema.define(version: 2021_10_07_085141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,6 +272,17 @@ ActiveRecord::Schema.define(version: 2021_10_01_061018) do
     t.bigint "skill_id", null: false
   end
 
+  create_table "risks", force: :cascade do |t|
+    t.text "body"
+    t.boolean "status", default: true, null: false
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_risks_on_project_id"
+    t.index ["user_id"], name: "index_risks_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.bigint "account_id", null: false
@@ -523,6 +534,8 @@ ActiveRecord::Schema.define(version: 2021_10_01_061018) do
   add_foreign_key "projects", "project_statuses", column: "status_id"
   add_foreign_key "projects", "users", column: "manager_id"
   add_foreign_key "projects", "users", column: "manager_id", name: "projects_manager_id_fkey"
+  add_foreign_key "risks", "projects"
+  add_foreign_key "risks", "users"
   add_foreign_key "roles", "accounts"
   add_foreign_key "roles", "accounts", name: "roles_account_id_fkey"
   add_foreign_key "schedules", "projects"
