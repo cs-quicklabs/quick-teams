@@ -1,0 +1,10 @@
+<%= form_with(model: risk, id: dom_id(risk), url: project_risks_path(@project)) do |form| %>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: risk, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New Risk", subtitle: "If there is a risk to this project, please add here." %>
+    <%= form.text_area :body, class: "resize-y form-text-field h-24" %>
+    <div class="flex justify-end">
+      <%= form.submit "Add Risk", class: "btn-blue" %>
+    </div>
+  </main>
+<% end %>
