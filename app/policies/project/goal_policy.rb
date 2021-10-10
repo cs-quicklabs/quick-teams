@@ -22,7 +22,8 @@ class Project::GoalPolicy < Project::BaseProjectPolicy
   def comment?
     project = record.first
     milestone = record.last
-    return true if milestone.permission?
+    return true if user.admin?
+    return true if user.is_manager?(project)
   end
 
   def destroy?

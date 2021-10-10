@@ -2,7 +2,7 @@ class CommentsController < BaseController
   before_action :set_goal, only: :create
 
   def create
-    authorize @goal, :comment?
+    authorize [@goal.goalable, @goal], :comment?
 
     @comment = AddComment.call(comment_params, @goal, params[:commit], current_user).result
     respond_to do |format|
