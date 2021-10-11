@@ -34,7 +34,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_equal @employee.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "Surveys"
   end
 
   test "lead can see his subordiates surveys" do
@@ -44,7 +44,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     visit subordinate_page_url
     take_screenshot
     assert_equal @employee.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "Surveys"
   end
 
   test "lead can not see someone elseses surveys" do
@@ -55,7 +55,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: @lead.decorate.display_name
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "Surveys"
   end
 
   test "member can see his surveys" do
@@ -65,7 +65,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_equal @employee.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "Surveys"
   end
 
   test "member can not see someone elses surveys" do
@@ -76,6 +76,6 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: @member.decorate.display_name
-    assert_selector "div#employee-tabs", text: "surveys"
+    assert_selector "div#employee-tabs", text: "Surveys"
   end
 end
