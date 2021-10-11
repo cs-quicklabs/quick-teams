@@ -8,6 +8,8 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     @account = @actor.account
     ActsAsTenant.current_tenant = @account
     @employee = users(:regular)
+    @goal = @employee.goals.where(permission: false).first
+    @second = @employee.goals.where(permission: true).first
     sign_in @actor
   end
 
@@ -16,7 +18,11 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   end
 
   def page_detail_url
-    employee_goal_url(script_name: "/#{@account.id}", employee_id: @employee.id, id: @employee.goals.first.id)
+    employee_goal_url(script_name: "/#{@account.id}", employee_id: @employee.id, id: @goal.id)
+  end
+
+  def second_page_detail_url
+    employee_goal_url(script_name: "/#{@account.id}", employee_id: @employee.id, id: @second.id)
   end
 
   test "admin can see own goals" do
@@ -170,9 +176,13 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     @employee = users(:member)
     sign_in @employee
     visit page_detail_url
-    assert_selector "h3", text: @employee.goals.first.title
+    assert_selector "h3", text: @goal.title
     #can not comment on goal
     assert_no_selector "textarea#comment"
+    visit second_page_detail_url
+    assert_selector "h3", text: @second.title
+    #can not comment on goal
+    assert_selector "textarea#comment"
   end
 
   test "member can not see someone elses goals" do
