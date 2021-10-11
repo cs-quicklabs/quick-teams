@@ -12,6 +12,12 @@
           <%= form.date_field :deadline, class: "form-text-field mt-1" %>
         </div>
         <%= form.rich_text_area :body, "Description" %>
+        <div class="flex  inline-flex ">
+          <%= form.check_box :permission, class: "mr-2 mt-1  w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
+          <span class="text-sm font-medium text-gray-700 mt-1" id="privacy-option-1-label">
+            Allow <%= @employee.decorate.display_name %> to comment on the goal
+          </span>
+        </div>
         <div class="flex justify-end">
           <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
           <%= form.submit "Edit Goal", class: "btn-blue" %>

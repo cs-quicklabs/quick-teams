@@ -6,6 +6,7 @@ one:
   deadline: 2021-04-01
   account: crownstack
 
+
 two:
   title: Some Random Goal second
   user: regular
@@ -13,6 +14,7 @@ two:
   goalable: regular
   deadline: 2021-06-30
   account: crownstack
+  permission: true
 
 three:
   title: Some Random Goal third
@@ -74,6 +76,8 @@ nine:
   deadline: 2021-06-30
   account: crownstack
   status: progress
+  permission: false
+
 
 ten:
   title: Some Random Goal ten
@@ -92,3 +96,13 @@ eleven:
   deadline: 2021-06-30
   account: crownstack
   status: progress
+
+twelve:
+  title: Some Random Goal twelve
+  user: admin
+  goalable_type: User
+  goalable: member
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+  permission: true
