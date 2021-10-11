@@ -44,7 +44,7 @@ class ProjectRisksTest < ApplicationSystemTestCase
     assert_no_selector "div#project-tabs", text: "Risks"
   end
 
-  test "manager can see project risk without edit buttons" do
+  test "manager can see project risk with edit buttons" do
     sign_out @employee
     @employee = users(:manager)
     sign_in @employee
@@ -52,9 +52,6 @@ class ProjectRisksTest < ApplicationSystemTestCase
     assert_selector "div#project-tabs", text: "Risks"
     assert_selector "form#new_risk"
     risk = @project.risks.first
-    assert_no_selector "tr##{dom_id(risk)}", text: "Mitigate"
-    assert_no_selector "tr##{dom_id(risk)}", text: "Delete"
-    risk = @project.risks.last
     assert_selector "tr##{dom_id(risk)}", text: "Mitigate"
     assert_selector "tr##{dom_id(risk)}", text: "Delete"
   end

@@ -2,7 +2,11 @@ class Project::RiskPolicy < Project::BaseProjectPolicy
   def update?
     project = record.first
     risk = record.last
-    (user.admin? or risk.user_id == user.id) and not project.archived?
+    (user.admin? or user.is_manager?(project)) and not project.archived?
+  end
+
+  def edit?
+    update?
   end
 
   def index?
