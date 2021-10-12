@@ -14,6 +14,7 @@ class Survey::AttemptsController < Survey::BaseController
   def new
     authorize [:survey, :attempt]
     participant = resolve_participant
+
     if participant
       attempt = create_attempt(participant)
       redirect_to survey_attempt_path(@survey, attempt)
@@ -86,7 +87,6 @@ class Survey::AttemptsController < Survey::BaseController
     attempt.participant = participant
     attempt.survey_id = @survey.id
     attempt.actor_id = current_user.id
-
     attempt.save
 
     attempt
