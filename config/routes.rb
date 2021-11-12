@@ -89,6 +89,9 @@ Rails.application.routes.draw do
   get "/pricing", to: "static/static#pricing"
 
   get "/schedule", to: "schedules#index", as: "schedules"
+  get "/occupancy/:id", to: "schedules#occupancy", as: "schedules_occupancy"
+  get "/occupancy", to: "schedules#occupancy", as: "account_occupancy"
+
   get "search/people-projects", to: "search#people_projects"
   get "/search/employee/skills", to: "search#employee_skills"
   get "/search/project/skills", to: "search#project_skills"

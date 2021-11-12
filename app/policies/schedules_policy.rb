@@ -26,4 +26,8 @@ class SchedulesPolicy < Struct.new(:user, :schedules)
   def destroy?
     user.admin?
   end
+
+  def occupancy?
+    user.admin?
+  end
 end

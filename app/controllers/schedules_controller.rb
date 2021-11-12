@@ -70,6 +70,18 @@ class SchedulesController < BaseController
     end
   end
 
+  def occupancy
+    authorize :schedules
+
+    if params[:id]
+      job = Job.find(params[:id])
+      @occupancy = JobOccupancy.occupancy_for_job(job)
+    else
+      @occupancy = JobOccupancy.occupancy_for_account(current_user.account)
+    end
+    render "shared/occupancy"
+  end
+
   private
 
   def set_project
