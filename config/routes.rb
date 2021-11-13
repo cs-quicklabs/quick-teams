@@ -83,10 +83,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   post "/register", to: "registrations#create"
 
-  root to: "static/static#home"
+  root to: "home#index"
   get "/home", to: "home#index", as: "home"
-  get "/contact", to: "static/static#contact"
-  get "/pricing", to: "static/static#pricing"
 
   get "/schedule", to: "schedules#index", as: "schedules"
   get "/occupancy/:id", to: "schedules#occupancy", as: "schedules_occupancy"
