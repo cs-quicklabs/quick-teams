@@ -109,6 +109,7 @@ class Survey::AttemptsController < Survey::BaseController
   end
 
   def set_participant
-    @participant = User.find(@attempt.participant_id)
+    @klass = @attempt.survey.survey_for.resolve_class
+    @participant = @klass.find(@attempt.participant_id)
   end
 end
