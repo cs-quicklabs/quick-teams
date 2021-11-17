@@ -6,7 +6,7 @@
         <div class="flex-shrink-0">
           <%= image_tag "male-placeholder-image.png", class: "w-12 h-12 rounded-full" %>
         </div>
-        <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-8 md:gap-4">
+        <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-4 md:gap-4">
           <% if current_user.admin? %>
             <a href="<%= employee_schedules_path(schedule.user) %>" class="block hover:underline col-span-3" target="_top">
               <div>
