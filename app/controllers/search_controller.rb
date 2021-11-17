@@ -2,11 +2,11 @@ class SearchController < BaseController
   def people_projects
     authorize :search
 
-    like_keyword = "%#{params[:q]}%"
-    @employees = User.for_current_account.active.where("first_name ILIKE ?", like_keyword).includes(:job)
-      .or(User.for_current_account.active.where("last_name ILIKE ?", like_keyword).includes(:job))
+    like_keyword = "%#{params[:q]}%".split(/\s+/)
+    @employees = User.for_current_account.active.where("first_name ILIKE ?", like_keyword[0]).includes(:job)
+      .or(User.for_current_account.active.where("last_name ILIKE ?", like_keyword[1]).includes(:job))
       .limit(3).order(:first_name)
-    @projects = Project.active.where("name ILIKE ?", like_keyword).limit(3).order(:name)
+    @projects = Project.active.where("name ILIKE ?", like_keyword[0]).limit(3).order(:name)
 
     render layout: false
   end
