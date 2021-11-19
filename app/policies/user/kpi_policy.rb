@@ -3,6 +3,7 @@ class User::KpiPolicy < User::BaseUserPolicy
     employee = record.first
     return true if user.admin?
     return self_or_subordinate? if user.lead?
+    return true if user.project_team?(record.first)
     self?
   end
 

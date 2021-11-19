@@ -74,6 +74,12 @@ class User < ApplicationRecord
     all_subordinates_ids.include?(employee.id)
   end
 
+  def project_team?(employee)
+    projects = employee.schedules.pluck("project_id")
+    project = self.managed_projects.first
+    return true if projects.include?(project.id)
+  end
+
   def self.query(params, includes = nil)
     return [] if params.empty?
     EmployeeQuery.new(self.includes(:job, :role, :manager, :discipline), params).filter
