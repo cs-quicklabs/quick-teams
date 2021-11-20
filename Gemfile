@@ -9,7 +9,7 @@ gem "rails", "~> 7.0.0.alpha2"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use Puma as the app server
-gem "puma", "5.5.2"
+gem "puma", "5.5.1"
 gem "sass-rails", ">= 6"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
@@ -34,7 +34,7 @@ gem "valid_url"
 gem "image_processing", "~> 1.2"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", ">= 1.4.4", require: false
+gem "bootsnap", "1.9.1", require: false
 gem "devise", github: "heartcombo/devise", branch: "master"
 gem "devise_invitable", "~> 2.0.0"
 gem "rubocop", require: false
