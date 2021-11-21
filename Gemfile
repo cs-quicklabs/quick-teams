@@ -10,7 +10,6 @@ gem "rails", "~> 7.0.0.alpha2"
 gem "pg", "~> 1.1"
 # Use Puma as the app server
 gem "puma", "5.5.1"
-gem "sass-rails", ">= 6"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", "~> 0.1.0"
@@ -27,27 +26,34 @@ gem "stimulus-rails", ">= 0.4.0"
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0", :require => ["redis", "redis/connection/hiredis"]
 gem "hiredis"
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 gem "valid_url"
 # Use Active Storage variant
 gem "image_processing", "~> 1.2"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", "1.9.1", require: false
-gem "devise", github: "heartcombo/devise", branch: "main"
-gem "devise_invitable", "~> 2.0.0"
 gem "rubocop", require: false
 gem "acts_as_tenant"
 gem "hotwire-rails"
 gem "draper"
 gem "rails-patterns"
 gem "pagy"
-gem "devise-pwned_password"
 gem "aws-sdk-s3", "~> 1.87"
 gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
-gem "rack-mini-profiler", "~> 2.0"
 gem "newrelic_rpm"
+gem "wicked_pdf"
+gem "wkhtmltopdf-binary"
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "pg_search"
+gem "stimulus_reflex", "= 3.5.0.pre3"
+
+# devise gems
+gem "devise", github: "heartcombo/devise", branch: "main"
+gem "devise_invitable", "~> 2.0.0"
+gem "devise-pwned_password"
+
+# sidekiq gems, sinatra is used to build UI for /sidekiq
 gem "sidekiq"
 gem "sidekiq-scheduler"
 gem "sinatra", ">= 1.3.0", :require => nil
@@ -61,12 +67,9 @@ group :development do
   gem "rexml"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console", ">= 4.1.0"
-end
-
-group :development, :staging do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  # gem "rack-mini-profiler", "~> 2.0"
+  gem "rack-mini-profiler", "~> 2.0"
   gem "listen", "~> 3.3"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
@@ -85,10 +88,3 @@ group :test do
   gem "webdrivers"
 end
 
-gem "wicked_pdf"
-gem "wkhtmltopdf-binary"
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem "pg_search"
-
-gem "stimulus_reflex", "= 3.5.0.pre3"
