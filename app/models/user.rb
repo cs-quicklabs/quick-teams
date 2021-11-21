@@ -76,7 +76,7 @@ class User < ApplicationRecord
 
   def project_team?(employee)
     projects = self.managed_projects.map(&:id)
-    employees = Schedule.where("project_id IN (?)", projects).pluck(:id)
+    employees = Schedule.where("project_id IN (?)", projects).pluck(:user_id)
     return true if employees.include?(employee.id)
   end
 
