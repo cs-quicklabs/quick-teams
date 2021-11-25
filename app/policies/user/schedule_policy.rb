@@ -17,4 +17,9 @@ class User::SchedulePolicy < User::BaseUserPolicy
     return true if user.admin?
     false
   end
+
+  def index?
+    return true if user.on_project_team?(record.first)
+    false
+  end
 end
