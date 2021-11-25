@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
   def index?
     return true if user.admin?
     return true if user.lead? and user.subordinate?(record)
-    return true if user.project_team?(record)
+    return true if user.on_project_team?(record)
     user.id == record.id
   end
 

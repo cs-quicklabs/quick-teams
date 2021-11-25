@@ -60,7 +60,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     @employee = users(:super)
     sign_in @employee
     visit page_detail_url
-    assert_selector "h3", text: @employee.goals.first.title
+    assert_selector "h3", text: @goal.title
     #can comment on goal
     assert_selector "textarea#comment"
   end
@@ -71,7 +71,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     sign_in @admin
     @employee = users(:member)
     visit page_detail_url
-    assert_selector "h3", text: @employee.goals.first.title
+    assert_selector "h3", text: @goal.title
     #can comment on goal
     assert_selector "textarea#comment"
   end
@@ -128,7 +128,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     @employee = users(:lead)
     sign_in @employee
     visit page_detail_url
-    assert_selector "h3", text: @employee.goals.first.title
+    assert_selector "h3", text: @goal.title
     #can not comment on goal
     assert_no_selector "textarea#comment"
   end
@@ -138,8 +138,9 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     @lead = users(:lead)
     sign_in @lead
     @employee = @lead.subordinates.first
+    @goal = @employee.goals.where(permission: false).first
     visit page_detail_url
-    assert_selector "h3", text: @employee.goals.first.title
+    assert_selector "h3", text: @goal.title
     #can comment on goal
     assert_selector "textarea#comment"
   end

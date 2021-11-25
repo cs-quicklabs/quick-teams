@@ -3,7 +3,11 @@ class User::BaseUserPolicy < ApplicationPolicy
     employee = record.first
     return true if user.admin?
     return true if user.lead? and user.subordinate?(employee)
+<<<<<<< HEAD
     return true if user.project_team?(record.first)
+=======
+    return true if user.on_project_team?(record.first)
+>>>>>>> 77cf776d5408fdf48af3b36fe665d66da6e8ed59
     user.id == employee.id
   end
 

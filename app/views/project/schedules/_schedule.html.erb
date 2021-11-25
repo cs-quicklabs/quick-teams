@@ -6,7 +6,7 @@
         <div class="flex-shrink-0">
           <%= image_tag "male-placeholder-image.png", class: "w-12 h-12 rounded-full" %>
         </div>
-        <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-8 md:gap-4">
+        <div class="flex-1  px-4 md:grid md:grid-cols-8 md:gap-4">
           <% if current_user.admin? %>
             <a href="<%= employee_schedules_path(schedule.user) %>" class="block hover:underline col-span-3" target="_top">
               <div>
@@ -23,22 +23,26 @@
                 </p>
               </div>
             </a>
-          <% else %>
-            <div class="col-span-3">
-              <p class="text-sm font-medium text-gray-900 col-span-3 whitespace-nowrap w-full">
-                <span class=""><%= schedule.user.display_name %></span>
-                <% unless schedule.user.status.nil? %>
-                  <% if current_user.admin? %>
-                    <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= schedule.user.status.color %>-800 bg-<%= schedule.user.status.color %>-100 rounded-full">
-                      <%= schedule.user.status.name.titleize %>
-                    </span>
-                  <% end %>
+          <% elsif current_user.is_manager?(@project) %>
+            <a href="<%= employee_schedules_path(schedule.user) %>" class="block hover:underline col-span-3" target="_top">
+              <div class="col-span-3">
+                <p class="text-sm font-medium text-gray-900 col-span-3 whitespace-nowrap w-full">
+                  <span class=""><%= schedule.user.display_name %></span>
                 </p>
                 <p class="flex items-center mt-1 text-sm text-gray-500">
                   <span class="truncate"><%= schedule.user.display_position %></span>
                 </p>
               </div>
             </a>
+          <% else %>
+            <div class="col-span-3">
+              <p class="text-sm font-medium text-gray-900 col-span-3 whitespace-nowrap w-full">
+                <span class=""><%= schedule.user.display_name %></span>
+              </p>
+              <p class="flex items-center mt-1 text-sm text-gray-500">
+                <span class="truncate"><%= schedule.user.display_position %></span>
+              </p>
+            </div>
           <% end %>
           <div class="flex col-span-2">
             <div class="whitespace-nowrap">
