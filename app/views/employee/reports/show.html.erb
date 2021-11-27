@@ -1,0 +1,70 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex-1 min-w-0">
+      <h3 class="text-2xl font-bold leading-tight text-gray-900">
+        <%= highlight_hashtag(@report.title) %>
+      </h3>
+      <div class="flex mt-4 space-x-3">
+        <div class="flex-shrink-0">
+          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+        </div>
+        <div>
+          <div class="text-sm">
+            <a href="<%= employee_reports_path(@report.reportable) %>" class="font-medium text-gray-900 hover:underline"><%= @report.reportable.decorate.display_name %></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex mt-4 sm:mt-0 sm:ml-4">
+      <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+    </div>
+    <% if policy([@employee, @report]).edit? %>
+      <%= link_to "Edit", edit_employee_report_path(@report.reportable, @report), class: "btn-blue ml-3" %>
+    <% end %>
+  </div>
+  <% cache @report do %>
+    <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
+      <p><%= @report.body %></p>
+    </div>
+  <% end %>
+  <% if current_user.admin? %>
+    <% if @report.submitted? %>
+      <div class="p-4 rounded-md bg-green-50">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <!-- Heroicon name: solid/check-circle -->
+            <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex-1 ml-3 md:flex md:justify-between">
+            <p class="text-sm font-medium text-green-800">
+              This report has been submitted. 
+            </p>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <!-- This example requires Tailwind CSS v2.0+ -->
+      <div class="p-4 rounded-md bg-blue-50">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <!-- Heroicon name: solid/information-circle -->
+            <svg class="w-5 h-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex-1 ml-3 md:flex md:justify-between">
+            <p class="text-sm text-blue-700">
+              This report has not been submitted. 
+            </p>
+            <p class="mt-3 text-sm md:mt-0 md:ml-6">
+              <button type="button" data-reflex="click->ReportSubmit#submit" data-report-id="<%= @report.id %>" class="font-medium text-blue-700 cursor-pointer whitespace-nowrap hover:text-blue-600">Submit</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</main>

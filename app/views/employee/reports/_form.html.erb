@@ -1,0 +1,12 @@
+<%= tailwind_form_with(model: report, id: dom_id(report), url: employee_reports_path(@employee)) do |form| %>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: report, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: "Add New report", subtitle: "A report can be added for employee which might be useful in performace review later. report will be visible to employee after approval from Admin." %>
+    <%= form.text_field :title, "Title", autocomplete: "off" %>
+    <%= form.rich_text_area :body, "report" %>
+    <div class="flex justify-end">
+      <%= form.submit "Save Draft", :name => "draft", class: "btn-normal" %>
+      <%= form.submit "Add Report", class: "btn-blue" %>
+    </div>
+  </main>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_12_053219) do
+ActiveRecord::Schema.define(version: 2021_11_25_091250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 2021_10_12_053219) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "comments"
-    t.bigint "account_id", null: false
+    t.bigint "account_id", default: 1, null: false
     t.index ["account_id"], name: "index_kbs_on_account_id"
     t.index ["discipline_id"], name: "index_kbs_on_discipline_id"
     t.index ["job_id"], name: "index_kbs_on_job_id"
@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 2021_10_12_053219) do
     t.datetime "published_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "account_id", null: false
+    t.bigint "account_id", default: 1, null: false
     t.index ["account_id"], name: "index_nuggets_on_account_id"
     t.index ["skill_id"], name: "index_nuggets_on_skill_id"
     t.index ["user_id"], name: "index_nuggets_on_user_id"
@@ -198,8 +198,86 @@ ActiveRecord::Schema.define(version: 2021_10_12_053219) do
     t.bigint "user_id", null: false
     t.bigint "nugget_id", null: false
     t.boolean "read", default: false
-    t.datetime "created_at", default: "2021-09-18 06:04:09", null: false
-    t.datetime "updated_at", default: "2021-09-18 06:04:09", null: false
+    t.datetime "created_at", default: "2021-09-19 11:37:22", null: false
+    t.datetime "updated_at", default: "2021-09-19 11:37:23", null: false
+  end
+
+  create_table "pay_charges", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "subscription_id"
+    t.string "processor_id", null: false
+    t.integer "amount", null: false
+    t.string "currency"
+    t.integer "application_fee_amount"
+    t.integer "amount_refunded"
+    t.jsonb "metadata"
+    t.jsonb "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id", "processor_id"], name: "index_pay_charges_on_customer_id_and_processor_id", unique: true
+    t.index ["subscription_id"], name: "index_pay_charges_on_subscription_id"
+  end
+
+  create_table "pay_customers", force: :cascade do |t|
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "processor", null: false
+    t.string "processor_id"
+    t.boolean "default"
+    t.jsonb "data"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
+    t.index ["processor", "processor_id"], name: "index_pay_customers_on_processor_and_processor_id", unique: true
+  end
+
+  create_table "pay_merchants", force: :cascade do |t|
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "processor", null: false
+    t.string "processor_id"
+    t.boolean "default"
+    t.jsonb "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_type", "owner_id", "processor"], name: "index_pay_merchants_on_owner_type_and_owner_id_and_processor"
+  end
+
+  create_table "pay_payment_methods", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.string "processor_id", null: false
+    t.boolean "default"
+    t.string "type"
+    t.jsonb "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id", "processor_id"], name: "index_pay_payment_methods_on_customer_id_and_processor_id", unique: true
+  end
+
+  create_table "pay_subscriptions", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.string "name", null: false
+    t.string "processor_id", null: false
+    t.string "processor_plan", null: false
+    t.integer "quantity", default: 1, null: false
+    t.string "status", null: false
+    t.datetime "trial_ends_at"
+    t.datetime "ends_at"
+    t.decimal "application_fee_percent", precision: 8, scale: 2
+    t.jsonb "metadata"
+    t.jsonb "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id", "processor_id"], name: "index_pay_subscriptions_on_customer_id_and_processor_id", unique: true
+  end
+
+  create_table "pay_webhooks", force: :cascade do |t|
+    t.string "processor"
+    t.string "event_type"
+    t.jsonb "event"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "people_statuses", force: :cascade do |t|
@@ -273,6 +351,16 @@ ActiveRecord::Schema.define(version: 2021_10_12_053219) do
     t.bigint "skill_id", null: false
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.string "title"
+    t.string "reportable_type", null: false
+    t.bigint "reportable_id", null: false
+    t.boolean "submitted", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable"
+  end
+
   create_table "risks", force: :cascade do |t|
     t.text "body"
     t.boolean "status", default: true, null: false
@@ -300,7 +388,8 @@ ActiveRecord::Schema.define(version: 2021_10_12_053219) do
     t.date "starts_at"
     t.date "ends_at"
     t.integer "occupancy"
-    t.boolean "billable", default: true
+    t.boolean "billable"
+    t.integer "billed"
     t.index ["project_id"], name: "index_schedules_on_project_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
@@ -380,7 +469,7 @@ ActiveRecord::Schema.define(version: 2021_10_12_053219) do
   create_table "survey_surveys", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "account_id", default: 0
+    t.bigint "account_id", null: false
     t.integer "survey_for", default: 0
     t.integer "attempts_number", default: 0
     t.boolean "finished", default: false
@@ -390,6 +479,7 @@ ActiveRecord::Schema.define(version: 2021_10_12_053219) do
     t.integer "survey_type", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_survey_surveys_on_account_id"
     t.index ["actor_id"], name: "index_survey_surveys_on_actor_id"
   end
 
@@ -496,57 +586,48 @@ ActiveRecord::Schema.define(version: 2021_10_12_053219) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", name: "active_storage_attachments_blob_id_fkey"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", name: "active_storage_variant_records_blob_id_fkey"
   add_foreign_key "clients", "accounts"
-  add_foreign_key "clients", "accounts", name: "clients_account_id_fkey"
   add_foreign_key "comments", "goals"
   add_foreign_key "comments", "users"
   add_foreign_key "disciplines", "accounts"
-  add_foreign_key "disciplines", "accounts", name: "disciplines_account_id_fkey"
   add_foreign_key "documents", "users"
   add_foreign_key "events", "accounts"
   add_foreign_key "feedbacks", "users"
-  add_foreign_key "feedbacks", "users", name: "feedbacks_user_id_fkey"
   add_foreign_key "goals", "accounts"
   add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
-  add_foreign_key "jobs", "accounts", name: "jobs_account_id_fkey"
   add_foreign_key "kbs", "accounts"
   add_foreign_key "kbs", "disciplines"
   add_foreign_key "kbs", "jobs"
   add_foreign_key "kbs", "users"
   add_foreign_key "notes", "users"
-  add_foreign_key "notes", "users", name: "notes_user_id_fkey"
   add_foreign_key "nuggets", "accounts"
   add_foreign_key "nuggets", "skills"
   add_foreign_key "nuggets", "users"
+  add_foreign_key "nuggets_users", "nuggets", name: "nuggets_users_nugget_id_fkey"
+  add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
+  add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
+  add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
+  add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
   add_foreign_key "people_statuses", "accounts"
-  add_foreign_key "people_statuses", "accounts", name: "people_statuses_account_id_fkey"
   add_foreign_key "people_tags", "accounts"
-  add_foreign_key "people_tags", "accounts", name: "people_tags_account_id_fkey"
   add_foreign_key "project_statuses", "accounts"
-  add_foreign_key "project_statuses", "accounts", name: "project_statuses_account_id_fkey"
   add_foreign_key "project_tags", "accounts"
-  add_foreign_key "project_tags", "accounts", name: "project_tags_account_id_fkey"
   add_foreign_key "projects", "disciplines"
-  add_foreign_key "projects", "disciplines", name: "projects_discipline_id_fkey"
   add_foreign_key "projects", "project_statuses", column: "status_id"
   add_foreign_key "projects", "users", column: "manager_id"
-  add_foreign_key "projects", "users", column: "manager_id", name: "projects_manager_id_fkey"
   add_foreign_key "risks", "projects"
   add_foreign_key "risks", "users"
   add_foreign_key "roles", "accounts"
-  add_foreign_key "roles", "accounts", name: "roles_account_id_fkey"
   add_foreign_key "schedules", "projects"
-  add_foreign_key "schedules", "projects", name: "schedules_project_id_fkey"
   add_foreign_key "schedules", "users"
-  add_foreign_key "schedules", "users", name: "schedules_user_id_fkey"
   add_foreign_key "skills", "accounts"
-  add_foreign_key "skills", "accounts", name: "skills_account_id_fkey"
+  add_foreign_key "skills_users", "skills", name: "skills_users_skill_id_fkey"
+  add_foreign_key "skills_users", "users", name: "skills_users_user_id_fkey"
   add_foreign_key "survey_attempts", "users", column: "actor_id"
   add_foreign_key "survey_question_categories", "accounts"
+  add_foreign_key "survey_surveys", "accounts"
   add_foreign_key "survey_surveys", "users", column: "actor_id"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "accounts"
@@ -558,12 +639,8 @@ ActiveRecord::Schema.define(version: 2021_10_12_053219) do
   add_foreign_key "todos", "users"
   add_foreign_key "todos", "users", column: "owner_id"
   add_foreign_key "users", "disciplines"
-  add_foreign_key "users", "disciplines", name: "users_discipline_id_fkey"
   add_foreign_key "users", "jobs"
-  add_foreign_key "users", "jobs", name: "users_job_id_fkey"
   add_foreign_key "users", "people_statuses", column: "status_id"
   add_foreign_key "users", "roles"
-  add_foreign_key "users", "roles", name: "users_role_id_fkey"
   add_foreign_key "users", "users", column: "manager_id"
-  add_foreign_key "users", "users", column: "manager_id", name: "users_manager_id_fkey"
 end

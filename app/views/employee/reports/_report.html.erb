@@ -1,0 +1,27 @@
+<tr id="<%= dom_id report %>">
+  <td class="table-cell">
+    <p><%= report.title %></p>
+  </td>
+  <td class="table-cell">
+    <p><%= report.body %></p>
+  </td>
+  <td class="table-cell">
+    <% if report.submitted? %>
+      <span class="intdne-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+        submitted
+      </span>
+    <% end %>
+  </td>
+  <td class="table-cell whitwapace-nowrap">
+    <span class="font-medium text-gray-500"><%= display_created_at(report) %></span>
+  </td>
+  <td class="table-cell whitwapace-nowrap">
+    <%= link_to "Show", employee_report_path(@employee, report), class: "btn-intdne-edit pl-2" %>
+    <% if policy([@employee, report]).edit? %>
+      <%= edit_button(edit_employee_report_path(@employee, report)) %>
+    <% end %>
+    <% if policy([@employee, report]).destroy? %>
+      <%= delete_button(employee_report_path(@employee, report)) %>
+    <% end %>
+  </td>
+</tr>

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :milestones, module: "project"
     resources :todos, module: "project"
     resources :skills, module: "project"
+      resources :reports, module: "project"
     resources :documents, only: [:index, :show, :create, :destroy, :edit, :update], module: "project"
     resources :surveys, module: "project", only: [:index, :show, :destroy]
     resources :kpis, module: "project", only: [:index, :show, :destroy] do
@@ -51,8 +52,10 @@ Rails.application.routes.draw do
     resources :skills, module: "employee"
     resources :nuggets, module: "employee"
     resources :documents, module: "employee"
+     resources :reports, module: "employee"
     resources :surveys, module: "employee", only: [:index, :show, :destroy]
     resources :kpis, module: "employee", only: [:index, :show, :destroy] do
+   
       get "stats", to: "kpis#stats", as: "stats"
     end
     get "/team", to: "employee/team#index"
