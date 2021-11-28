@@ -129,6 +129,7 @@ Rails.application.routes.draw do
     get "/nuggets", to: "report/nuggets#index", as: "nuggets_reports"
     get "/kbs", to: "report/kbs#index", as: "kbs_reports"
     get "/kpis", to: "report/kpis#index", as: "kpis_reports"
+    get "/reports", to: "report/reports#index", as: "report_reports"
   end
 
   get "/reports", to: "reports#index", as: "reports"
