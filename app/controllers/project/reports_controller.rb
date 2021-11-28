@@ -1,5 +1,5 @@
 class Project::ReportsController < Project::BaseController
-  before_action :set_report, only: %i[show destroy edit]
+  before_action :set_report, only: %i[show destroy edit update]
 
   def index
     authorize [@project, Report]
@@ -14,13 +14,7 @@ class Project::ReportsController < Project::BaseController
 
   def create
     authorize [@project, Report]
-
-    if params[:draft]
-         @report = DraftProjectReport.call(@project, report_params).result
-    else
-
-    @report = AddProjectReport.call(@project, report_params).result
-    end
+    @report = AddProjectReport.call(@project, report_params, params, current_user).result
     respond_to do |format|
       if @report.persisted?
         format.turbo_stream {
@@ -29,6 +23,17 @@ class Project::ReportsController < Project::BaseController
         }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Report.new, partial: "project/reports/form", locals: { report: @report }) }
+      end
+    end
+  end
+
+  def update
+    authorize [@project, @report]
+       @update = UpdateReport.call(@report, report_params, params).result
+    respond_to do |format|
+      if @update.persisted?
+        format.html { redirect_to project_report_path(@report.reportable, @report), notice: "report was successfully updated." }
+    
       end
     end
   end

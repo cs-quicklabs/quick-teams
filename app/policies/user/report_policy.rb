@@ -3,20 +3,21 @@ class User::ReportPolicy < User::BaseUserPolicy
     edit?
   end
   def index?
-true
+  show?
+  end
+  def create?
+  show?
   end
 
   def destroy?
     report = record.last
-
-    return true if user.admin?
-    return report.user == user if (user.lead? and report_for_subordinate?)
+    return true if user.admin? or !report.submitted?
     false
   end
 
   def edit?
     report = record.last
-   !report.submitted?
+    return true if user.admin? or !report.submitted?
   end
 
   def comment?

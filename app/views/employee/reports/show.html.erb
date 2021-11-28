@@ -1,9 +1,10 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
+<% @report = @report.decorate %>
 <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
     <div class="flex-1 min-w-0">
       <h3 class="text-2xl font-bold leading-tight text-gray-900">
-        <%= highlight_hashtag(@report.title) %>
+        <%= @report.display_title %>
       </h3>
       <div class="flex mt-4 space-x-3">
         <div class="flex-shrink-0">
@@ -28,9 +29,9 @@
       <p><%= @report.body %></p>
     </div>
   <% end %>
-  <% if current_user.admin? %>
+  <% if policy([@employee, @report]).edit? %>
     <% if @report.submitted? %>
-      <div class="p-4 rounded-md bg-green-50">
+      <div class="p-4 rounded-md bg-<%= @report.display_status %>-100">
         <div class="flex">
           <div class="flex-shrink-0">
             <!-- Heroicon name: solid/check-circle -->
@@ -47,7 +48,7 @@
       </div>
     <% else %>
       <!-- This example requires Tailwind CSS v2.0+ -->
-      <div class="p-4 rounded-md bg-blue-50">
+      <div class="p-4 rounded-md bg-<%= @report.display_status %>-100">
         <div class="flex">
           <div class="flex-shrink-0">
             <!-- Heroicon name: solid/information-circle -->

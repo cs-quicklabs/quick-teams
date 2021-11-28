@@ -5,8 +5,8 @@
     <%= form.text_field :title, "Title", autocomplete: "off" %>
     <%= form.rich_text_area :body, "report" %>
     <div class="flex justify-end">
-      <%= form.submit "Save Draft", :name => "draft", class: "btn-normal" %>
-      <%= form.submit "Add Report", class: "btn-blue" %>
+      <%= form.submit "Save As Draft", :name => "draft", class: "btn-normal" %>
+      <%= form.submit "Submit Report", class: "btn-blue" %>
     </div>
   </main>
 <% end %>

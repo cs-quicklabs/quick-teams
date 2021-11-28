@@ -11,13 +11,7 @@ class Employee::ReportsController < Employee::BaseController
 
   def create
     authorize [@employee, Report]
-    if params[:draft]
-         @report = DraftEmployeeReport.call(@employee, report_params).result
-    else
-
-    @report = AddEmployeeReport.call(@employee, report_params).result
-    end
-
+    @report = AddEmployeeReport.call(@employee, report_params, params, current_user).result
     respond_to do |format|
       if @report.persisted?
         format.turbo_stream {
@@ -52,16 +46,9 @@ class Employee::ReportsController < Employee::BaseController
 
   def update
     authorize [@employee, @report]
-
-     if params[:draft]
-        @report.update(report_params)
-    else
-
-   @report.update(report_params, submitted: true)
-    end
-
+      @update = UpdateReport.call(@report, report_params, params).result
     respond_to do |format|
-      if @report.update(report_params)
+      if @update.persisted?
         format.html { redirect_to employee_report_path(@report.reportable, @report), notice: "report was successfully updated." }
       else
         format.html { redirect_to edit_employee_report_path(@report), alert: "Failed to update. Please try again." }

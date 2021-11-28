@@ -1,33 +1,34 @@
 class Project::ReportPolicy < Project::BaseProjectPolicy
   def update?
-    project = record.first
-    user.admin? and not project.archived?
+    edit?
   end
 
   def show?
-    project = record.first
-    user.admin? or user.is_manager?(project)
+    create?
+  end
+
+  def index?
+  create?
   end
 
   def edit?
     project = record.first
     report = record.last
     return false if project.archived?
-     !report.submitted?
+     return true if user.admin? or !report.submitted?
   end
 
   def destroy?
     project = record.first
     report = record.last
     return false if project.archived?
-    return true if user.admin?
-    user.is_manager?(project) and report.user == user
+    return true if user.admin? or !report.submitted?
   end
 
   def create?
     project = record.first
     return false if project.archived?
-    user.admin?
+   return true if user.admin? or user.is_manager?(project)
   end
 
   def show_add_report_form?

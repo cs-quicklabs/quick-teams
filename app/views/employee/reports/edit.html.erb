@@ -8,11 +8,11 @@
         <%= form.rich_text_area :body, "Description" %>
         <div class="flex justify-between">
           <div class="">
-            <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+            <%= link_to "Cnacel",employee_reports_path(@employee), class: "btn-normal" %>
           </div>
           <div class="">
-            <%= form.submit "Save Draft", :name => "draft", class: "btn-normal" %>
-            <%= form.submit "Edit Report", class: "btn-blue" %>
+            <%= form.submit "Save As Draft", :name => "draft", class: "btn-normal" %>
+            <%= form.submit "Submit Report", class: "btn-blue"%>
           </div>
         </div>
       </main>
