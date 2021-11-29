@@ -1,5 +1,5 @@
 class Employee::TodosController < Employee::BaseController
-  before_action :set_todo, only: %i[destroy]
+  before_action :set_todo, only: %i[destroy edit update]
 
   def index
     authorize [@employee, Todo]
@@ -25,6 +25,22 @@ class Employee::TodosController < Employee::BaseController
       end
     end
   end
+  def edit
+   authorize [@employee, @todo]
+end
+
+def update
+   authorize [@employee, @todo]
+
+    respond_to do |format|
+      if @todo.update(todo_params)
+        format.html { redirect_to employee_todos_path(@employee), notice: "todo was successfully updated." }
+      else
+        format.html { redirect_to edit_employee_todo_path(@employee, @todo), alert: "Failed to update. Please try again." }
+      end
+    end
+
+end
 
   def destroy
     authorize [@employee, @todo]

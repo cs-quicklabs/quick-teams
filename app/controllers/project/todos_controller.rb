@@ -1,5 +1,5 @@
 class Project::TodosController < Project::BaseController
-  before_action :set_todo, only: %i[destroy]
+  before_action :set_todo, only: %i[destroy edit update]
 
   def index
     authorize [@project, Todo]
@@ -8,7 +8,22 @@ class Project::TodosController < Project::BaseController
     @pagy, @todos = pagy_nil_safe(params, @project.todos.includes({ user: [:role, :job] }).order(created_at: :desc), items: LIMIT)
     render_partial("project/todos/todo", collection: @todos) if stale?(@todos + [@project])
   end
+def edit
+   authorize [@project, @todo]
+end
 
+def update
+   authorize [@project, @todo]
+
+    respond_to do |format|
+      if @todo.update(todo_params)
+        format.html { redirect_to project_todos_path(@project), notice: "todo was successfully updated." }
+      else
+        format.html { redirect_to edit_project_todo_path(@project, @todo), alert: "Failed to update. Please try again." }
+      end
+    end
+
+end
   def create
     authorize [@project, Todo]
 

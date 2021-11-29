@@ -16,7 +16,10 @@
   <td class="table-cell whitespace-nowrap">
     <%= display_date(todo.deadline) %>
   </td>
-  <td class="table-cell">
+  <td class="table-cell whitespace-nowrap">
+    <% if policy([todo.owner, todo]).edit? %>
+      <%= edit_button(edit_employee_todo_path(todo.owner, todo)) %>
+    <% end %>
     <% if policy([todo.owner, todo]).destroy? %>
       <%= delete_button(employee_todo_path(todo.user, todo)) %>
     <% end %>

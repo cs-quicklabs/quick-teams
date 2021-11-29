@@ -19,6 +19,11 @@
     <%= display_created_at(todo) %>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <%= delete_button(project_todo_path(todo.project, todo)) %>
+    <% if policy([@project, todo]).edit? %>
+      <%= edit_button(edit_project_todo_path(@project, todo)) %>
+    <% end %>
+    <% if policy([@project, todo]).destroy? %>
+      <%= delete_button(project_todo_path(todo.project, todo)) %>
+    <% end %>
   </td>
 </tr>
