@@ -17,6 +17,9 @@ class User::TodoPolicy < User::BaseUserPolicy
   def index?
     create?
   end
+  def show?
+    create?
+  end
 
   def destroy?
     employee = record.first

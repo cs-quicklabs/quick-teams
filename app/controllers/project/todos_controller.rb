@@ -1,5 +1,5 @@
 class Project::TodosController < Project::BaseController
-  before_action :set_todo, only: %i[destroy edit update]
+  before_action :set_todo, only: %i[destroy edit update show]
 
   def index
     authorize [@project, Todo]
@@ -11,7 +11,9 @@ class Project::TodosController < Project::BaseController
 def edit
    authorize [@project, @todo]
 end
-
+ def show
+   authorize [@project, @todo]
+end
 def update
    authorize [@project, @todo]
 
@@ -56,6 +58,6 @@ end
   end
 
   def todo_params
-    params.require(:todo).permit(:owner_id, :discipline_id, :title, :deadline, :completed)
+    params.require(:todo).permit(:owner_id, :discipline_id, :title, :deadline, :completed, :body)
   end
 end

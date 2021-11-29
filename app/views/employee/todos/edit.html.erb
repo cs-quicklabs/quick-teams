@@ -2,7 +2,8 @@
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: @todo, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Edit todo for #{@employee.decorate.display_name}", subtitle: "Todo are short term goals" %>
-    <%= form.text_area :title, "Todo", autocomplete: "off" %>
+    <%= form.text_area :title, "Title", autocomplete: "off" %>
+    <%= form.text_area :body, "Description" %>
     <div>
       <label for="date" class="block text-sm font-medium text-gray-700">
         Due Date
