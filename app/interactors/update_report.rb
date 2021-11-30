@@ -6,8 +6,9 @@ class UpdateReport < Patterns::Service
   end
 
   def call
-    begin
+   begin
       update_report
+       
     rescue
       report
     end

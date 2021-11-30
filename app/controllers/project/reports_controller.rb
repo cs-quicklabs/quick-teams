@@ -29,14 +29,15 @@ class Project::ReportsController < Project::BaseController
 
   def update
     authorize [@project, @report]
-       @update = UpdateReport.call(@report, report_params, params).result
+       @report = UpdateReport.call(@report, report_params, params).result
     respond_to do |format|
-      if @update.persisted?
+      if @report.errors.empty?
         format.html { redirect_to project_report_path(@report.reportable, @report), notice: "report was successfully updated." }
-    
+      else
+        format.html { redirect_to edit_employee_report_path(@report), alert: "Failed to update. Please try again." }
+      end
       end
     end
-  end
 
   def destroy
     authorize [@project, @report]

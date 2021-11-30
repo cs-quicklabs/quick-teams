@@ -7,10 +7,9 @@ class AddEmployeeReport < Patterns::Service
   end
 
   def call
-   
+   begin
       add_report
       add_event
-       begin
     rescue
       report
     end

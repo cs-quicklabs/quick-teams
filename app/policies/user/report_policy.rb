@@ -28,7 +28,11 @@ class User::ReportPolicy < User::BaseUserPolicy
   end
 
   def show?
+       employee = record.first
+
+    return false unless employee.active?
     return true if user.admin?
+    return true if user.lead? and user.subordinate?(employee)
     self?
   end
 
