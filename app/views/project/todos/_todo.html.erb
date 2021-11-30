@@ -13,7 +13,7 @@
     </a>
   </td>
   <td class="w-full table-cell">
-    <a href="<%= employee_todo_path(@project, todo) %>" class="block hover:underline" target="_top">
+    <a href="<%= project_todo_path(@project, todo) %>" class="block hover:underline" target="_top">
       <%= highlight_hashtag(auto_link_urls_in_text(todo.title)) %>
     </a>
   </td>

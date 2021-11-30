@@ -11,7 +11,7 @@
         </div>
         <div>
           <div class="text-sm">
-            <a href="<%= project_todos_path(@todo.todoable) %>" class="font-medium text-gray-900 hover:underline"><%= @todo.todoable.decorate.display_name %></a>
+            <a href="<%= project_todos_path(@todo.owner, @todo) %>" class="font-medium text-gray-900 hover:underline"><%= @todo.owner.decorate.display_name %></a>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
       <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
     </div>
     <% if policy([@project, @todo]).edit? %>
-      <%= link_to "Edit", edit_project_todo_path(@todo.todoable, @todo), class: "btn-blue ml-3" %>
+      <%= link_to "Edit", edit_project_todo_path(@todo.owner, @todo), class: "btn-blue ml-3" %>
     <% end %>
   </div>
   <% cache @todo do %>
