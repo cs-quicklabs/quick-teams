@@ -527,7 +527,6 @@ ActiveRecord::Schema.define(version: 2021_11_25_091250) do
     t.bigint "project_id"
     t.bigint "owner_id", null: false
     t.bigint "account_id", null: false
-    t.text "body"
     t.index ["account_id"], name: "index_todos_on_account_id"
     t.index ["owner_id"], name: "index_todos_on_owner_id"
     t.index ["project_id"], name: "index_todos_on_project_id"
