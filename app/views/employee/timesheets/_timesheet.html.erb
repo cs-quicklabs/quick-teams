@@ -18,6 +18,9 @@
     <%= timesheet.hours %>
   </td>
   <td class="table-cell">
-    <%= delete_button(employee_timesheet_path(@employee, timesheet)) %>
+    <% if policy([@employee, timesheet]).update? %>
+      <%= edit_button(edit_employee_timesheet_path(@employee, timesheet)) %>
+      <%= delete_button(employee_timesheet_path(@employee, timesheet)) %>
+    <% end %>
   </td>
 </tr>
