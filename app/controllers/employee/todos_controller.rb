@@ -25,15 +25,17 @@ class Employee::TodosController < Employee::BaseController
       end
     end
   end
-  def edit
-   authorize [@employee, @todo]
-end
- def show
-   authorize [@employee, @todo]
-end
 
-def update
-   authorize [@employee, @todo]
+  def edit
+    authorize [@employee, @todo]
+  end
+
+  def show
+    authorize [@employee, @todo]
+  end
+
+  def update
+    authorize [@employee, @todo]
 
     respond_to do |format|
       if @todo.update(todo_params)
@@ -42,8 +44,7 @@ def update
         format.html { redirect_to edit_employee_todo_path(@employee, @todo), alert: "Failed to update. Please try again." }
       end
     end
-
-end
+  end
 
   def destroy
     authorize [@employee, @todo]

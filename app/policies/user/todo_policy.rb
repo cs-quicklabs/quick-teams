@@ -7,16 +7,19 @@ class User::TodoPolicy < User::BaseUserPolicy
     self?
   end
 
- def edit?
+  def edit?
     report = record.last
     return true if user.admin? or !report.submitted?
   end
-   def update?
+
+  def update?
     edit?
   end
+
   def index?
     create?
   end
+
   def show?
     create?
   end
