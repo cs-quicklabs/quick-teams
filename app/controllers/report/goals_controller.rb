@@ -12,8 +12,11 @@ class Report::GoalsController < Report::BaseController
   def open
     authorize :report, :index?
 
-    @employees = User.active.joins(:goals)
-      .where.not(goals: { status: :progress }).uniq
+    date_range = Date.parse(params[:from_date])..Date.parse(params[:to_date])
+    @employees_with_goals = User.for_current_account.active.joins(:goals)
+      .where(goals: { status: :progress, deadline: date_range }).uniq
+
+    @employees = User.for_current_account.active.where.not(id: @employees_with_goals.pluck(:id)).order(:first_name)
   end
 
   private
