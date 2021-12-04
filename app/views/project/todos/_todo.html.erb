@@ -13,7 +13,7 @@
     </a>
   </td>
   <td class="w-full table-cell">
-    <a href="<%= project_todo_path(@project, todo) %>" class="block hover:underline" target="_top">
+    <a href="<%= project_todo_path(todo.project, todo) %>" class="block hover:underline" target="_top">
       <%= highlight_hashtag(auto_link_urls_in_text(todo.title)) %>
     </a>
   </td>
@@ -21,10 +21,10 @@
     <%= display_created_at(todo) %>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <% if policy([@project, todo]).edit? %>
-      <%= edit_button(edit_project_todo_path(@project, todo)) %>
+    <% if policy([todo.project, todo]).edit? %>
+      <%= edit_button(edit_project_todo_path(todo.project, todo)) %>
     <% end %>
-    <% if policy([@project, todo]).destroy? %>
+    <% if policy([todo.project, todo]).destroy? %>
       <%= delete_button(project_todo_path(todo.project, todo)) %>
     <% end %>
   </td>

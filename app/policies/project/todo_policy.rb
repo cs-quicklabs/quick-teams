@@ -16,8 +16,8 @@ class Project::TodoPolicy < Project::BaseProjectPolicy
 
   def edit?
     project = record.first
-    report = record.last
+    todo = record.last
     return false if project.archived?
-     return true if user.admin? or !report.submitted?
+     return true if user.admin? 
   end
 end

@@ -8,8 +8,12 @@ class User::TodoPolicy < User::BaseUserPolicy
   end
 
  def edit?
-    report = record.last
-    return true if user.admin? or !report.submitted?
+     employee = record.first
+    todo = record.last
+    return false unless employee.active?
+    return true if user.admin?
+    return true if todo.user_id == user.id
+    false
   end
    def update?
     edit?
