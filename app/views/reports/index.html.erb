@@ -39,11 +39,6 @@
                 Last Quarter's Goals Status Report
               </span>
             </a>
-            <a href="<%= open_goals_reports_path(from_date: Date.today - 180.days, to_date: Date.today, type: "User") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                No Open Goals
-              </span>
-            </a>
             <a href="<%= goals_reports_path(status: 0, to_date: Date.today, created_by: current_user.id) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
               <span class="truncate">
                 Pending goals created by me
@@ -173,6 +168,13 @@
             <a href="<%= kpis_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
               <span class="truncate">
                 Employees KPIs Report
+              </span>
+            </a>
+          </div>
+          <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
+            <a href="<%= open_goals_reports_path(from_date: Date.today - 180.days, to_date: Date.today, type: "User") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+              <span class="truncate">
+                Employees with no open goals
               </span>
             </a>
           </div>
