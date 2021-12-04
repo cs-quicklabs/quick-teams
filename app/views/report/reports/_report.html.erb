@@ -1,0 +1,18 @@
+<tr id="<%= dom_id report %>">
+  <% report = report.decorate %>
+  <td class=" w-full  whitespace-nowrap table-cell">
+    <% if report.reportable_type == "User" %>
+      <%= link_to  report.display_title, employee_report_path(report.reportable, report), class:"truncate hover:text-gray-600 hover:underline"  %>
+    <% else %>
+      <%= link_to report.display_title, project_report_path(report.reportable, report), class:"truncate hover:text-gray-600 hover:underline" %>
+    <% end %>
+  </td>
+  <td class="table-cell whitespace-nowrap ">
+    <span class="intdne-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= report.display_status %>-100 text-green-800">
+      <%= report.submitted ? "Submitted" : "Draft" %>
+    </span>
+  </td>
+  <td class="table-cell">
+    <span class="text-gray-900 text-left  whitespace-nowrap">  <%= display_created_at(report) %> </span>
+  </td>
+</tr>

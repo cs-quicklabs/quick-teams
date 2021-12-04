@@ -1,0 +1,22 @@
+<tr id="<%= dom_id report %>">
+  <% report = report.decorate %>
+  <td class="w-full table-cell">
+    <%= link_to report.display_title, project_report_path(@project, report), class: "btn-intdne-edit pl-2 hover:underline" %>
+  </td>
+  <td class="table-cell">
+    <span class="intdne-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= report.display_status %>-100 text-green-800">
+      <%= report.submitted ? "Submitted" : "Draft" %>
+    </span>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <span class="font-medium text-gray-500"><%= display_created_at(report) %></span>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <% if policy([@project, report]).edit? %>
+      <%= edit_button(edit_project_report_path(@project, report)) %>
+    <% end %>
+    <% if policy([@project, report]).destroy? %>
+      <%= delete_button(project_report_path(@project, report)) %>
+    <% end %>
+  </td>
+</tr>

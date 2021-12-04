@@ -1,0 +1,36 @@
+one:
+  title: Some Random Report
+  reportable_type: User
+  reportable: regular
+  submitted: true
+
+
+two:
+  title: Some Random Report second
+  reportable_type: User
+  reportable: regular
+  submitted: false
+
+three:
+  title: Some Random Report third
+  reportable_type: User
+  reportable: member
+  submitted: true
+
+four:
+  title: Some Random Report fourth
+  reportable_type: Project
+  reportable: one
+  submitted: true
+
+five:
+  title: Some Random Report fifth
+  reportable_type: Project
+  reportable: one
+  submitted: false
+
+six:
+  title: Some Random Report sixth
+  reportable_type: Project
+  reportable: managed
+  submitted: true
