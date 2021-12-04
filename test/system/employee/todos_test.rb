@@ -24,8 +24,15 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
+  test "can see todo detail page" do
+    visit page_url
+    todo = @employee.todos.first
+    find("tr", id: dom_id(todo)).click_link(todo.title)
+    assert_selector "h3", text: todo.title
+    take_screenshot
+  end
 
-  test "can redirect to employee detail page on project click" do
+  test "can redirect to detail page  on todo click" do
     visit page_url
     todo = @employee.todos.first
     within "tr##{dom_id(todo)}" do
@@ -33,10 +40,17 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     end
     assert_selector "a", text: "#{todo.project.name}"
   end
-
+ test "can redirect to project detail page on todo click" do
+    visit page_url
+    todo = @employee.todos.first
+   find("tr", id: dom_id(todo)).click_link(todo.project.name)
+    assert_selector "h1", text: "#{todo.project.name}"
+    take_screenshot
+  end
   test "can add new todo" do
     visit page_url
     fill_in "todo_title", with: "Some Random Todo Title"
+     fill_in "todo_body", with: "Some Random Todo Body"
     fill_in "todo_deadline", with: Time.now
     click_on "Add Todo"
     assert_selector "tbody#todos", text: "Some Random Todo Title"
