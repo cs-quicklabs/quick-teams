@@ -172,7 +172,7 @@
             </a>
           </div>
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= open_goals_reports_path(from_date: Date.today - 180.days, to_date: Date.today, type: "User") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
+            <a href="<%= open_goals_reports_path(from_date: Date.today, to_date: Date.today + 90.days, type: "User") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
               <span class="truncate">
                 Employees with no open goals
               </span>

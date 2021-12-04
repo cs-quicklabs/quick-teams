@@ -12,16 +12,16 @@
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   Deadline within Start Date
                 </label>
-                <%= form.date_field :from_date, class: "form-text-field mt-1", value: params["from_date"].blank? ? (Date.today - 45.days).to_s(:db) : params["from_date"] %>
+                <%= form.date_field :from_date, class: "form-text-field mt-1", value: params["from_date"].blank? ? (Date.today).to_s(:db) : params["from_date"] %>
               </div>
               <div>
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   Deadline within End Date
                 </label>
-                <%= form.date_field :to_date, class: "form-text-field mt-1", value: params["to_date"].blank? ? (Date.today).to_s(:db) : params["to_date"] %>
+                <%= form.date_field :to_date, class: "form-text-field mt-1", value: params["to_date"].blank? ? (Date.today + 90.days).to_s(:db) : params["to_date"] %>
               </div>
               <div class="flex justify-end mt-6">
-                <%= link_to "Reset", open_goals_reports_path(from_date: Date.today - 180.days, to_date: Date.today, type: "User"), class: "btn-normal" %>
+                <%= link_to "Reset", open_goals_reports_path(from_date: Date.today, to_date: Date.today + 90.days, type: "User"), class: "btn-normal" %>
                 <%= form.submit "Search", class: "btn-blue" %>
               </div>
             </main>
