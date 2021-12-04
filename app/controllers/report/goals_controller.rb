@@ -9,6 +9,13 @@ class Report::GoalsController < Report::BaseController
     render_partial("report/goals/goal", collection: @goals.empty? ? @goals : @goals.includes(:goalable).decorate, cached: false)
   end
 
+  def open
+    authorize :report, :index?
+
+    @employees = User.active.joins(:goals)
+      .where.not(goals: { status: :progress }).uniq
+  end
+
   private
 
   def goal_filter_params

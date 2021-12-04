@@ -1,6 +1,7 @@
 {
     "editor.defaultFormatter": "mbessey.vscode-rufo",
     "[ruby]": { // or [erb] / [gemfile]
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "jnbt.vscode-rufo"
   }
 }
