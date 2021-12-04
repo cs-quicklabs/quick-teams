@@ -16,7 +16,9 @@ class Report::GoalsController < Report::BaseController
     @employees_with_goals = User.for_current_account.active.joins(:goals)
       .where(goals: { status: :progress, deadline: date_range }).uniq
 
-    @employees = User.for_current_account.active.where.not(id: @employees_with_goals.pluck(:id)).order(:first_name)
+    employees = User.for_current_account.active.where.not(id: @employees_with_goals.pluck(:id)).order(:first_name)
+    @pagy, @employees = pagy_nil_safe(params, employees, items: LIMIT)
+    render_partial("report/goals/employee", collection: @employees, cached: false)
   end
 
   private
