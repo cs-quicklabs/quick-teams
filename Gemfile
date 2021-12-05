@@ -8,6 +8,7 @@ gem "rails", "~> 7.0.0.alpha2"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+
 # Use Puma as the app server
 gem "puma", "5.5.1"
 
@@ -27,6 +28,7 @@ gem "stimulus-rails", ">= 0.4.0"
 gem "redis", ">= 4.0", :require => ["redis", "redis/connection/hiredis"]
 gem "hiredis"
 gem "valid_url"
+
 # Use Active Storage variant
 gem "image_processing", "~> 1.2"
 
@@ -57,6 +59,12 @@ gem "devise-pwned_password"
 gem "sidekiq"
 gem "sidekiq-scheduler"
 gem "sinatra", ">= 1.3.0", :require => nil
+
+# pay gem to enable stripe payments
+gem 'pay', '~> 3.0'
+
+# To use Stripe, also include:
+gem 'stripe', '>= 2.8', '< 6.0'
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

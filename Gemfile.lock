@@ -210,6 +210,8 @@ GEM
     parallel (1.21.0)
     parser (3.0.2.0)
       ast (~> 2.4.1)
+    pay (3.0.24)
+      rails (>= 6.0.0)
     pg (1.2.3)
     pg_search (2.3.5)
       activerecord (>= 5.2)
@@ -326,6 +328,7 @@ GEM
       rack
       rails (>= 5.2)
       redis
+    stripe (5.41.0)
     thor (1.1.0)
     thread-local (1.1.0)
     thread_safe (0.3.6)
@@ -391,6 +394,7 @@ DEPENDENCIES
   mimemagic!
   newrelic_rpm
   pagy
+  pay (~> 3.0)
   pg (~> 1.1)
   pg_search
   puma (= 5.5.1)
@@ -407,6 +411,7 @@ DEPENDENCIES
   spring
   stimulus-rails (>= 0.4.0)
   stimulus_reflex (= 3.5.0.pre3)
+  stripe (>= 2.8, < 6.0)
   turbo-rails (>= 0.7.11)
   tzinfo-data
   valid_url
