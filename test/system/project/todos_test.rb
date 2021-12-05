@@ -25,9 +25,9 @@ class ProjectTodosTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
-   test "can see todo detail page" do
+  test "can see todo detail page" do
     visit page_url
-    todo= @project.todos.first
+    todo = @project.todos.first
     find("tr", id: dom_id(todo)).click_link(todo.title)
     assert_selector "h3", text: todo.title
     take_screenshot
@@ -46,7 +46,7 @@ class ProjectTodosTest < ApplicationSystemTestCase
     name = @project.participants.first.decorate.display_name
     select name, from: "todo_owner_id"
     fill_in "todo_title", with: "Some Random Todo Title"
-     fill_in "todo_body", with: "Some Random Todo Body"
+    fill_in "todo_body", with: "Some Random Todo Body"
     fill_in "todo_deadline", with: Time.now
     click_on "Add Todo"
     assert_selector "tbody#todos", text: "Some Random Todo Title"

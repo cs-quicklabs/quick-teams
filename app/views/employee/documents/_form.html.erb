@@ -3,16 +3,16 @@
     <%= render "shared/form_messages", resource: document, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Document", subtitle: "A document can be link to resume, blogs or content you have written." %>
     <div>
-      <label for="filename" class="block text-sm font-medium text-gray-700">
+      <label for="filename" class="block text-sm font-medium text-gray-700" >
         Filename
       </label>
-      <%= form.text_field :filename, class: "form-text-field mt-1" %>
+      <%= form.text_field :filename, class: "form-text-field mt-1" , autocomplete: "off" %>
     </div>
     <div>
       <label for="link" class="block text-sm font-medium text-gray-700">
         Link
       </label>
-      <%= form.text_field :link, class: "form-text-field mt-1" %>
+      <%= form.text_field :link, class: "form-text-field mt-1", autocomplete: "off" %>
     </div>
     <div>
       <label for="comments" class="block text-sm font-medium text-gray-700">
