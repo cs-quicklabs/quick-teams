@@ -71,6 +71,34 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     take_screenshot
     assert_selector "div#error_explanation", text: "Title can't be blank"
   end
+  test "can edit a todo" do
+    visit page_url
+    todo = @employee.todos.first
+    assert_text todo.title
+    find("tr", id: dom_id(todo)).click_link("Edit")
+    take_screenshot
+    within "##{dom_id(todo)}" do
+      fill_in "todo_title", with: "todo Edited"
+      click_on "Edit Todo"
+      take_screenshot
+      assert_no_text "Edit Todo"
+    end
+    assert_selector "p.notice", text: "todo was successfully updated."
+    assert_selector "tr##{dom_id(todo)}", text: "todo Edited"
+  end
+
+  test "can not edit todo with invalid params" do
+    visit page_url
+    todo = @employee.todos.first
+    assert_text todo.title
+    find("tr", id: dom_id(todo)).click_link("Edit")
+    within "##{dom_id(todo)}" do
+      fill_in "todo_title", with: ""
+      click_on "Edit Todo"
+      take_screenshot
+    end
+    assert_selector "p.alert", text: "Failed to update. Please try again."
+  end
 
   test "can delete a todo" do
     visit page_url

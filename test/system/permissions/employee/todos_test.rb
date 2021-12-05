@@ -55,8 +55,10 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     #can not see delete button for his not created todos
     @employee.todos.each do |todo|
       if todo.user == @lead
+        assert_selector "tr##{dom_id(todo)}", text: "Edit"
         assert_selector "tr##{dom_id(todo)}", text: "Delete"
       else
+        assert_no_selector "tr##{dom_id(todo)}", text: "Edit"
         assert_no_selector "tr##{dom_id(todo)}", text: "Delete"
       end
     end
@@ -86,8 +88,10 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     #can not see delete button for his not created todos
     @employee.todos.each do |todo|
       if todo.user == @employee
+        assert_selector "tr##{dom_id(todo)}", text: "Edit"
         assert_selector "tr##{dom_id(todo)}", text: "Delete"
       else
+        assert_no_selector "tr##{dom_id(todo)}", text: "Edit"
         assert_no_selector "tr##{dom_id(todo)}", text: "Delete"
       end
     end
@@ -117,8 +121,10 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     #can not see delete button for his not created todos
     @employee.todos.each do |todo|
       if todo.user == @employee
+        assert_selector "tr##{dom_id(todo)}", text: "Edit"
         assert_selector "tr##{dom_id(todo)}", text: "Delete"
       else
+        assert_no_selector "tr##{dom_id(todo)}", text: "Edit"
         assert_no_selector "tr##{dom_id(todo)}", text: "Delete"
       end
     end
@@ -137,8 +143,10 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     #can not see delete button for his not created todos
     @employee.todos.each do |todo|
       if todo.user == @employee
+        assert_selector "tr##{dom_id(todo)}", text: "Edit"
         assert_selector "tr##{dom_id(todo)}", text: "Delete"
       else
+        assert_no_selector "tr##{dom_id(todo)}", text: "Edit"
         assert_no_selector "tr##{dom_id(todo)}", text: "Delete"
       end
     end
