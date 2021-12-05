@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
+  get "checkout", to: "checkout#show"
+  get "billing", to: "billing#show"
+
   namespace :account do
     resources :roles, except: [:new, :show]
     resources :disciplines, except: [:new, :show]
@@ -113,7 +116,7 @@ Rails.application.routes.draw do
     get "/risks", to: "report/risks#index", as: "projects_risks_reports"
 
     get "/goals", to: "report/goals#index", as: "goals_reports"
-      get "/goals/open", to: "report/goals#open", as: "open_goals_reports"
+    get "/goals/open", to: "report/goals#open", as: "open_goals_reports"
     get "/schedules/available", to: "report/schedules#available", as: "available_schedules_reports"
     get "/schedules/overburdened", to: "report/schedules#overburdened", as: "overburdened_schedules_reports"
     get "/schedules/shared", to: "report/schedules#shared", as: "shared_schedules_reports"
