@@ -9,6 +9,18 @@ class Report::GoalsController < Report::BaseController
     render_partial("report/goals/goal", collection: @goals.empty? ? @goals : @goals.includes(:goalable).decorate, cached: false)
   end
 
+  def open
+    authorize :report, :index?
+
+    date_range = Date.parse(params[:from_date])..Date.parse(params[:to_date])
+    @employees_with_goals = User.for_current_account.active.joins(:goals)
+      .where(goals: { status: :progress, deadline: date_range }).uniq
+
+    employees = User.for_current_account.active.includes(:role, :job, :discipline, :status, :manager).where.not(id: @employees_with_goals.pluck(:id)).order(:first_name)
+    @pagy, @employees = pagy_nil_safe(params, employees, items: LIMIT)
+    render_partial("report/goals/employee", collection: @employees, cached: false)
+  end
+
   private
 
   def goal_filter_params
