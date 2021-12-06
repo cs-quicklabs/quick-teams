@@ -20,56 +20,73 @@
         </div>
       </div>
     </div>
+    <div class="flex mt-4 sm:mt-0 sm:ml-4">
+      <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+      <% if policy([@employee, @report]).edit? %>
+        <%= link_to "Edit", edit_employee_report_path(@report.reportable, @report), class: "btn-blue ml-3" %>
+      <% end %>
+    </div>
   </div>
-  <div class="flex mt-4 sm:mt-0 sm:ml-4">
-    <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
-  </div>
+  <% cache @report do %>
+    <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
+      <p><%= @report.body %></p>
+    </div>
+  <% end %>
   <% if policy([@employee, @report]).edit? %>
-    <%= link_to "Edit", edit_employee_report_path(@report.reportable, @report), class: "btn-blue ml-3" %>
-  <% end %>
-</div>
-<% cache @report do %>
-  <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
-    <p><%= @report.body %></p>
-  </div>
-<% end %>
-<% if policy([@employee, @report]).edit? %>
-  <% if @report.submitted? %>
-    <div class="p-4 rounded-md bg-<%= @report.display_status %>-100">
-      <div class="flex">
-        <div class="flex-shrink-0">
-          <!-- Heroicon name: solid/check-circle -->
-          <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <div class="flex-1 ml-3 md:flex md:justify-between">
-          <p class="text-sm font-medium text-green-800">
-            This report has been submitted. 
-          </p>
+    <% if @report.submitted? %>
+      <div class="p-4 rounded-md bg-<%= @report.display_status %>-100">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <!-- Heroicon name: solid/check-circle -->
+            <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex-1 ml-3 md:flex md:justify-between">
+            <p class="text-sm font-medium text-green-800">
+              This report has been submitted. 
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  <% else %>
-    <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="p-4 rounded-md bg-<%= @report.display_status %>-100">
-      <div class="flex">
-        <div class="flex-shrink-0">
-          <!-- Heroicon name: solid/information-circle -->
-          <svg class="w-5 h-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <div class="flex-1 ml-3 md:flex md:justify-between">
-          <p class="text-sm text-blue-700">
-            This report has not been submitted. 
-          </p>
-          <p class="mt-3 text-sm md:mt-0 md:ml-6">
-            <button type="button" data-reflex="click->ReportSubmit#submit" data-report-id="<%= @report.id %>" class="font-medium text-blue-700 cursor-pointer whitespace-nowrap hover:text-blue-600">Submit</button>
-          </p>
+    <% else %>
+      <!-- This example requires Tailwind CSS v2.0+ -->
+      <div class="p-4 rounded-md bg-<%= @report.display_status %>-100">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <!-- Heroicon name: solid/information-circle -->
+            <svg class="w-5 h-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="flex-1 ml-3 md:flex md:justify-between">
+            <p class="text-sm text-blue-700">
+              This report has not been submitted. 
+            </p>
+            <p class="mt-3 text-sm md:mt-0 md:ml-6">
+              <button type="button" data-reflex="click->ReportSubmit#submit" data-report-id="<%= @report.id %>" class="font-medium text-blue-700 cursor-pointer whitespace-nowrap hover:text-blue-600">Submit</button>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
+  <!-- Comments-->
+  <section aria-labelledby="notes-title">
+    <div class="pb-24 bg-white sm:rounded-lg overflow">
+      <div class="divide-y divide-gray-200">
+        <div class="px-4 py-5 sm:px-6">
+          <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments</h2>
+        </div>
+        <div class="px-4 py-6 sm:px-6">
+          <ul class="space-y-4" id="comments">
+            <%= render partial: "shared/comments/comment", collection: @report.comments.includes(:user), as: :comment, cached: true %>
+          </ul>
+        </div>
+      </div>
+      <% if policy([@employee, @report]).comment? %>
+        <%= render partial: "shared/comments/report", locals: { report: @report, comment: @comment } %>
+      <% end %>
+    </div>
+  </section>
 </main>

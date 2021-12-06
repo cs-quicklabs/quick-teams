@@ -2,11 +2,13 @@ class User::ReportPolicy < User::BaseUserPolicy
   def update?
     edit?
   end
+
   def index?
-  show?
+    show?
   end
+
   def create?
-  show?
+    show?
   end
 
   def destroy?
@@ -21,14 +23,13 @@ class User::ReportPolicy < User::BaseUserPolicy
   end
 
   def comment?
-    employee = record.first
     return true if user.admin?
     return true if user.lead? and user.subordinate?(employee)
     false
   end
 
   def show?
-       employee = record.first
+    employee = record.first
 
     return false unless employee.active?
     return true if user.admin?

@@ -8,14 +8,14 @@ class Project::ReportPolicy < Project::BaseProjectPolicy
   end
 
   def index?
-  create?
+    create?
   end
 
   def edit?
     project = record.first
     report = record.last
     return false if project.archived?
-     return true if user.admin? or !report.submitted?
+    return true if user.admin? or !report.submitted?
   end
 
   def destroy?
@@ -28,11 +28,13 @@ class Project::ReportPolicy < Project::BaseProjectPolicy
   def create?
     project = record.first
     return false if project.archived?
-   return true if user.admin? or user.is_manager?(project)
+    return true if user.admin? or user.is_manager?(project)
   end
 
-  def show_add_report_form?
+  def comment?
     project = record.first
-    !project.archived
+    milestone = record.last
+    return true if user.admin?
+    return true if user.is_manager?(project)
   end
 end

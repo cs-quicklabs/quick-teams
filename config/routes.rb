@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     resources :milestones, module: "project"
     resources :todos, module: "project"
     resources :skills, module: "project"
-      resources :reports, module: "project"
+    resources :reports, module: "project"
     resources :documents, only: [:index, :show, :create, :destroy, :edit, :update], module: "project"
     resources :surveys, module: "project", only: [:index, :show, :destroy]
     resources :kpis, module: "project", only: [:index, :show, :destroy] do
@@ -52,10 +52,9 @@ Rails.application.routes.draw do
     resources :skills, module: "employee"
     resources :nuggets, module: "employee"
     resources :documents, module: "employee"
-     resources :reports, module: "employee"
+    resources :reports, module: "employee"
     resources :surveys, module: "employee", only: [:index, :show, :destroy]
     resources :kpis, module: "employee", only: [:index, :show, :destroy] do
-   
       get "stats", to: "kpis#stats", as: "stats"
     end
     get "/team", to: "employee/team#index"
@@ -65,6 +64,7 @@ Rails.application.routes.draw do
   end
   resources :user
   resources :comments
+  resources :report_comments
   resources :nuggets
   resources :kbs
   resources :kpis
@@ -116,7 +116,7 @@ Rails.application.routes.draw do
     get "/risks", to: "report/risks#index", as: "projects_risks_reports"
 
     get "/goals", to: "report/goals#index", as: "goals_reports"
-      get "/goals/open", to: "report/goals#open", as: "open_goals_reports"
+    get "/goals/open", to: "report/goals#open", as: "open_goals_reports"
     get "/schedules/available", to: "report/schedules#available", as: "available_schedules_reports"
     get "/schedules/overburdened", to: "report/schedules#overburdened", as: "overburdened_schedules_reports"
     get "/schedules/shared", to: "report/schedules#shared", as: "shared_schedules_reports"

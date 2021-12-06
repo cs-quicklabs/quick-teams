@@ -71,4 +71,22 @@
       </div>
     <% end %>
   <% end %>
+  <!-- Comments-->
+  <section aria-labelledby="notes-title">
+    <div class="pb-24 bg-white sm:rounded-lg overflow">
+      <div class="divide-y divide-gray-200">
+        <div class="px-4 py-5 sm:px-6">
+          <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments</h2>
+        </div>
+        <div class="px-4 py-6 sm:px-6">
+          <ul class="space-y-4" id="comments">
+            <%= render partial: "shared/comments/comment", collection: @report.comments.includes(:user), as: :comment, cached: true %>
+          </ul>
+        </div>
+      </div>
+      <% if policy([@employee, @report]).comment? %>
+        <%= render partial: "shared/comments/add", locals: { report: @report, comment: @comment } %>
+      <% end %>
+    </div>
+  </section>
 </main>
