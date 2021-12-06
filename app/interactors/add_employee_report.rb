@@ -7,9 +7,10 @@ class AddEmployeeReport < Patterns::Service
   end
 
   def call
-   begin
+      begin
       add_report
       add_event
+   
     rescue
       report
     end
@@ -25,6 +26,7 @@ class AddEmployeeReport < Patterns::Service
       else
     report.submitted = true
     end
+    report.user_id=actor.id
     report.save!
   end
   

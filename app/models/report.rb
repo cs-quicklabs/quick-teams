@@ -1,6 +1,7 @@
 class Report < ApplicationRecord
   belongs_to :reportable, polymorphic: true
   has_rich_text :body
+   belongs_to :user
   validates_presence_of :title, :body
   scope :submitted, -> { where(submitted: true) }
    def self.query(params, includes = nil, order)

@@ -25,6 +25,7 @@ class AddProjectReport < Patterns::Service
       else
     report.submitted = true
     end
+    report.user_id=actor.id
     report.save!
   end
   

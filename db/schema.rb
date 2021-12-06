@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_091250) do
+ActiveRecord::Schema.define(version: 2021_11_29_141322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -355,10 +355,12 @@ ActiveRecord::Schema.define(version: 2021_11_25_091250) do
     t.string "title"
     t.string "reportable_type", null: false
     t.bigint "reportable_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "submitted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "risks", force: :cascade do |t|
@@ -527,6 +529,7 @@ ActiveRecord::Schema.define(version: 2021_11_25_091250) do
     t.bigint "project_id"
     t.bigint "owner_id", null: false
     t.bigint "account_id", null: false
+    t.text "body"
     t.index ["account_id"], name: "index_todos_on_account_id"
     t.index ["owner_id"], name: "index_todos_on_owner_id"
     t.index ["project_id"], name: "index_todos_on_project_id"
@@ -617,6 +620,7 @@ ActiveRecord::Schema.define(version: 2021_11_25_091250) do
   add_foreign_key "projects", "disciplines"
   add_foreign_key "projects", "project_statuses", column: "status_id"
   add_foreign_key "projects", "users", column: "manager_id"
+  add_foreign_key "reports", "users"
   add_foreign_key "risks", "projects"
   add_foreign_key "risks", "users"
   add_foreign_key "roles", "accounts"
