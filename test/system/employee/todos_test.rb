@@ -58,6 +58,8 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     assert_selector "div#error_explanation", text: "Title can't be blank"
   end
 
+  
+
   test "can delete a todo" do
     visit page_url
     todo = @employee.todos.first
