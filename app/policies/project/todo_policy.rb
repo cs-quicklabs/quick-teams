@@ -22,6 +22,7 @@ class Project::TodoPolicy < Project::BaseProjectPolicy
     todo = record.last
     return false if project.archived?
     return true if user.admin? or user.is_manager?(project)
+    todo.completed?
   end
 
   def destroy?
