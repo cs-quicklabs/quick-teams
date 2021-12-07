@@ -80,7 +80,7 @@ class ProjectTodosTest < ApplicationSystemTestCase
       take_screenshot
       assert_no_text "Edit Todo"
     end
-    assert_selector "p.notice", text: "todo was successfully updated."
+    assert_selector "p.notice", text: "Todo was successfully updated."
     assert_selector "tr##{dom_id(todo)}", text: "todo Edited"
   end
 

@@ -71,6 +71,7 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     take_screenshot
     assert_selector "div#error_explanation", text: "Title can't be blank"
   end
+
   test "can edit a todo" do
     visit page_url
     todo = @employee.todos.first
@@ -83,7 +84,7 @@ class EmployeeTodosTest < ApplicationSystemTestCase
       take_screenshot
       assert_no_text "Edit Todo"
     end
-    assert_selector "p.notice", text: "todo was successfully updated."
+    assert_selector "p.notice", text: "Todo was successfully updated."
     assert_selector "tr##{dom_id(todo)}", text: "todo Edited"
   end
 
