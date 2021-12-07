@@ -22,7 +22,7 @@ class Project::TodosController < Project::BaseController
 
     respond_to do |format|
       if @todo.update(todo_params)
-        format.html { redirect_to project_todos_path(@project), notice: "todo was successfully updated." }
+        format.html { redirect_to project_todos_path(@project), notice: "Rodo was successfully updated." }
       else
         format.html { redirect_to edit_project_todo_path(@project, @todo), alert: "Failed to update. Please try again." }
       end

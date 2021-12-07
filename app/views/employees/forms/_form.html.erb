@@ -2,9 +2,9 @@
   <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: employee, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Edit Employee Details", subtitle: "Please update detail of existing employee." %>
-    <%= form.text_field :first_name, "First Name", autocomplete:"off" %>
-    <%= form.text_field :last_name, "Last Name" , autocomplete:"off" %>
-    <%= form.text_field :email, "Email", autocomplete:"off"  %>
+    <%= form.text_field :first_name, "First Name", autocomplete: "off" %>
+    <%= form.text_field :last_name, "Last Name", autocomplete: "off" %>
+    <%= form.text_field :email, "Email", autocomplete: "off" %>
     <div>
       <label for="ends" class="block mt-4 text-sm font-medium text-gray-700">
         Select Discipline

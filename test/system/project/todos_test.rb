@@ -81,7 +81,7 @@ class ProjectTodosTest < ApplicationSystemTestCase
       assert_no_text "Edit Todo"
     end
     assert_selector "p.notice", text: "todo was successfully updated."
-assert_selector "tr##{dom_id(todo)}", text: "todo Edited"
+    assert_selector "tr##{dom_id(todo)}", text: "todo Edited"
   end
 
   test "can not edit todo with invalid params" do

@@ -39,7 +39,7 @@ class Employee::TodosController < Employee::BaseController
 
     respond_to do |format|
       if @todo.update(todo_params)
-        format.html { redirect_to employee_todos_path(@employee), notice: "todo was successfully updated." }
+        format.html { redirect_to employee_todos_path(@employee), notice: "Todo was successfully updated." }
       else
         format.html { redirect_to edit_employee_todo_path(@employee, @todo), alert: "Failed to update. Please try again." }
       end

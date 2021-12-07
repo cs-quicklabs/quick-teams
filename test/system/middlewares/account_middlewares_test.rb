@@ -11,7 +11,7 @@ class AccountMiddlewaresTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Projects"
   end
 
-  test "cannot find the account redirects to main page" do    
+  test "cannot find the account redirects to main page" do
     visit projects_url(script_name: "/123456789")
     assert_equal current_path, "/#{@account.id}/home"
   end
