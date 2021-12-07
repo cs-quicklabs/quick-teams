@@ -36,7 +36,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
     assert_selector "tbody#reports", text: "Some Random report Title"
   end
 
-test "can draft new report" do
+  test "can draft new report" do
     visit page_url
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
@@ -45,7 +45,7 @@ test "can draft new report" do
     assert_selector "tbody#reports", text: "Some Random report Title"
   end
 
-    test "can not draft report with empty details" do
+  test "can not draft report with empty details" do
     visit page_url
     click_on "Save As Draft"
     assert_selector "div#error_explanation", text: "Title can't be blank"
@@ -86,7 +86,7 @@ test "can draft new report" do
 
   test "can edit report if not submitted" do
     visit page_url
-    report = @project.reports.where(submitted:false).first
+    report = @project.reports.where(submitted: false).first
     find("tr", id: dom_id(report)).click_link("Edit")
     title = "Some Random Report Title Edited"
     fill_in "Title", with: ""
@@ -99,27 +99,38 @@ test "can draft new report" do
     assert_selector "div.trix-content", text: title
     take_screenshot
   end
+
   test "can not edit report if submitted" do
-  sign_out(@employee)
-   @employee = users(:manager)
+    sign_out(@employee)
+    @employee = users(:manager)
     @project = projects(:managed)
     sign_in @employee
     visit page_url
-    report = @project.reports.where(submitted:true).first
+    report = @project.reports.where(submitted: true).first
     within "tr##{dom_id(report)}" do
-      assert_no_text 'Edit'
-      assert_no_text 'Delete'
+      assert_no_text "Edit"
+      assert_no_text "Delete"
     end
     take_screenshot
   end
 
   test "can not edit report with invalid params" do
     visit page_url
-    report = @project.reports.first
+    report = @project.reports.where(submitted: false).first
     find("tr", id: dom_id(report)).click_link("Edit")
     fill_in "Title", with: nil
     click_on "Submit Report"
     assert_selector "p.alert", text: "Failed to update. Please try again."
+    take_screenshot
+  end
+
+  test "can comment on report" do
+    visit page_url
+    report = @project.reports.first
+    find("tr", id: dom_id(report)).click_link(report.title)
+    fill_in "comment", with: "This is a comment"
+    click_on "Comment"
+    assert_selector "ul#comments", text: "This is a comment"
     take_screenshot
   end
 end

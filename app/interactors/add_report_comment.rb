@@ -20,8 +20,8 @@ class AddReportComment < Patterns::Service
   private
 
   def add_comment
-    comment.user_id = actor.id
     comment.commentable = report
+    comment.status = 1
     comment.save!
   end
 

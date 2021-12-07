@@ -1,7 +1,7 @@
 <tr id="<%= dom_id report %>">
   <% report = report.decorate %>
   <td class="w-full table-cell">
-    <%= link_to report.display_title, employee_report_path(@employee, report), class: "btn-intdne-edit pl-2 hover:underline" %>
+    <%= link_to report.display_title, employee_report_path(report.reportable, report), class: "btn-intdne-edit pl-2 hover:underline" %>
   </td>
   <td class="table-cell">
     <span class="intdne-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= report.display_status %>-100 text-green-800">
@@ -12,11 +12,11 @@
     <span class="font-medium text-gray-500"><%= display_created_at(report) %></span>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <% if policy([@employee, report]).edit? %>
-      <%= edit_button(edit_employee_report_path(@employee, report)) %>
+    <% if policy([report.reportable, report]).edit? %>
+      <%= edit_button(edit_employee_report_path(report.reportable, report)) %>
     <% end %>
-    <% if policy([@employee, report]).destroy? %>
-      <%= delete_button(employee_report_path(@employee, report)) %>
+    <% if policy([report.reportable, report]).destroy? %>
+      <%= delete_button(employee_report_path(report.reportable, report)) %>
     <% end %>
   </td>
 </tr>

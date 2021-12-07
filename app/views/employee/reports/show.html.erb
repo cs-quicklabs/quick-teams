@@ -22,7 +22,7 @@
     </div>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
-      <% if policy([@employee, @report]).edit? %>
+      <% if policy([@report.reportable, @report]).edit? %>
         <%= link_to "Edit", edit_employee_report_path(@report.reportable, @report), class: "btn-blue ml-3" %>
       <% end %>
     </div>
@@ -32,7 +32,7 @@
       <p><%= @report.body %></p>
     </div>
   <% end %>
-  <% if policy([@employee, @report]).edit? %>
+  <% if policy([@report.reportable, @report]).edit? %>
     <% if @report.submitted? %>
       <div class="p-4 rounded-md bg-<%= @report.display_status %>-100">
         <div class="flex">
@@ -84,7 +84,7 @@
           </ul>
         </div>
       </div>
-      <% if policy([@employee, @report]).comment? %>
+      <% if policy([@report.reportable, @report]).comment? %>
         <%= render partial: "shared/comments/report", locals: { report: @report, comment: @comment } %>
       <% end %>
     </div>

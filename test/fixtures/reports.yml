@@ -3,6 +3,7 @@ one:
   reportable_type: User
   reportable: regular
   submitted: true
+  user: regular
 
 
 two:
@@ -10,27 +11,63 @@ two:
   reportable_type: User
   reportable: regular
   submitted: false
+  user: regular
 
 three:
   title: Some Random Report third
   reportable_type: User
   reportable: member
   submitted: true
+  user: regular
 
 four:
   title: Some Random Report fourth
   reportable_type: Project
   reportable: one
   submitted: true
+  user: regular
 
 five:
   title: Some Random Report fifth
   reportable_type: Project
   reportable: one
   submitted: false
+  user: regular
 
 six:
   title: Some Random Report sixth
   reportable_type: Project
   reportable: managed
   submitted: true
+  user: regular
+
+
+eight:
+  title: Some Random Report eight
+  user: admin
+  reportable_type: User
+  reportable: lead
+  submitted: false
+
+
+nine:
+  title: Some Random Report nine
+  user: admin
+  reportable_type: User
+  reportable: member
+  submitted: false
+
+ten:
+  title: Some Random Goal ten
+  user: admin
+  reportable_type: User
+  reportable: super
+
+
+eleven:
+  title: Some Random Report eleven
+  user: admin
+  reportable_type: User
+  reportable: subordinate
+  submitted: false
+

@@ -4,12 +4,17 @@ class EmployeeReportsTest < ApplicationSystemTestCase
   setup do
     @employee = users(:regular)
     @account = @employee.account
+    @report = @employee.reports.where(submitted: false).first
     ActsAsTenant.current_tenant = @account
     sign_in @employee
   end
 
   def page_url
     employee_reports_url(script_name: "/#{@account.id}", employee_id: @employee.id)
+  end
+
+  def page_detail_url
+    employee_report_url(script_name: "/#{@account.id}", employee_id: @employee.id, id: @report.id)
   end
 
   test "admin can see employee reports" do
@@ -39,6 +44,27 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     @employee.reports.each do |report|
       assert_selector "tr##{dom_id(report)}", text: "Delete"
     end
+  end
+  test "admin can see own report detail " do
+    sign_out @employee
+    @employee = users(:super)
+    sign_in @employee
+    visit page_detail_url
+    assert_selector "h3", text: @report.title
+    #can comment on report
+    assert_selector "textarea#comment"
+  end
+
+  test "admin can see employee report details" do
+    sign_out @employee
+    @admin = users(:super)
+    sign_in @admin
+    @employee = users(:member)
+    @report = @employee.reports.where(submitted: false).first
+    visit page_detail_url
+    assert_selector "h3", text: @report.title
+    #can comment on report
+    assert_selector "textarea#comment"
   end
 
   test "lead can see subordinate reports" do
@@ -73,55 +99,81 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     assert_selector "tbody#reports"
   end
 
-  test "manager can not see someone elses reports" do
+  test "lead can see own report details" do
     sign_out @employee
-    @manager = users(:manager)
-    sign_in @manager
-    @employee = users(:admin)
-    visit page_url
-    assert_selector "h1", text: @manager.decorate.display_name
-    assert_no_selector "form#new_report"
-    assert_no_selector "tbody#reports"
-  end
-
-  test "manager can see his own reports" do
-    sign_out @employee
-    @employee = users(:manager)
+    @employee = users(:lead)
     sign_in @employee
-    visit page_url
-    assert_selector "div#employee-tabs", text: "Reports"
-    assert_selector "form#new_report"
-    assert_selector "tbody#reports"
-
-    #can see delete button for his created reports
-    #can not see delete button for his not created reports
-    @employee.reports.each do |report|
-      if report.user == @employee
-        assert_selector "tr##{dom_id(report)}", text: "Delete"
-      else
-        assert_no_selector "tr##{dom_id(report)}", text: "Delete"
-      end
-    end
+    @report = @employee.reports.where(submitted: false).first
+    visit page_detail_url
+    assert_selector "h3", text: @report.title
+    #can not comment on report
+    assert_selector "textarea#comment"
   end
 
-  test "member can see own reports" do
+  test "lead can see subordinate report details" do
+    sign_out @employee
+    @lead = users(:lead)
+    sign_in @lead
+    @employee = @lead.subordinates.first
+    @report = @employee.reports.where(submitted: false).first
+    visit page_detail_url
+    assert_selector "h3", text: @report.title
+    #can comment on report
+    assert_selector "textarea#comment"
+  end
+
+  test "lead can not see someone elses report detail" do
+    sign_out @employee
+    @lead = users(:lead)
+    sign_in @lead
+    @employee = users(:admin)
+    visit page_detail_url
+    assert_selector "h1", text: @lead.decorate.display_name
+  end
+
+  test "member can see his own reports" do
     sign_out @employee
     @employee = users(:member)
     sign_in @employee
     visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Reports"
+    # can not create a report
     assert_selector "form#new_report"
-    assert_selector "tbody#reports"
+    # can see report detail button
+    # can not see edit delete button
+    @employee.reports.each do |report|
+      assert_no_selector "li##{dom_id(report)}", text: "Edit"
+      assert_no_selector "li##{dom_id(report)}", text: "Delete"
+    end
   end
 
-  test "member can not see someone elsees report" do
+  test "member can see his own report details" do
+    sign_out @employee
+    @employee = users(:member)
+    sign_in @employee
+    @report = @employee.reports.where(submitted: false).first
+    visit page_detail_url
+    assert_selector "h3", text: @report.title
+    #can comment on report
+    assert_selector "textarea#comment"
+  end
+
+  test "member can not see someone elses reports" do
     sign_out @employee
     @member = users(:member)
     sign_in @member
     @employee = users(:admin)
     visit page_url
     assert_selector "h1", text: @member.decorate.display_name
-    assert_no_selector "form#new_report"
-    assert_no_selector "tbody#reports"
+  end
+
+  test "member can not see someone elses report details" do
+    sign_out @employee
+    @member = users(:member)
+    sign_in @member
+    @employee = users(:admin)
+    visit page_detail_url
+    assert_selector "h1", text: @member.decorate.display_name
   end
 end

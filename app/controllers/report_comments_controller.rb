@@ -20,12 +20,12 @@ class ReportCommentsController < BaseController
   private
 
   def comment_params
-    params.require(:comment).permit(:title, :user_id, :commentable_id, :status)
+    params.require(:comment).permit(:title, :user_id, :commentable_id)
   end
 
   private
 
   def set_report
-    @report ||= Report.find(params["commentable_id"])
+    @report ||= Report.find(comment_params["commentable_id"])
   end
 end
