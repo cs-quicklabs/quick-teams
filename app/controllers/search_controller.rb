@@ -1,5 +1,5 @@
 class SearchController < BaseController
- def people_projects
+  def people_projects
     authorize :search
 
     like_keyword = "%#{params[:q]}%".split(/\s+/)
