@@ -29,7 +29,7 @@ gem "hiredis"
 gem "valid_url"
 # Use Active Storage variant
 gem "image_processing", "~> 1.2"
-gem 'shutup', '~> 0.1.1'
+gem "shutup", "~> 0.1.1"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", "1.9.1", require: false

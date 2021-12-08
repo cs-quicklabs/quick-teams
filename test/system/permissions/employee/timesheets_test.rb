@@ -39,7 +39,7 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Timesheets"
     assert_selector "form#new_timesheet"
     @employee.timesheets.each do |timesheet|
-       assert_selector "div##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
       assert_selector "div##{dom_id(timesheet)}", text: "Delete"
     end
   end
@@ -51,7 +51,7 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#employee-tabs", text: "Timesheets"
     @employee.timesheets.each do |timesheet|
-       assert_selector "div##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
       assert_selector "div##{dom_id(timesheet)}", text: "Delete"
     end
   end
@@ -63,7 +63,7 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     visit subordinate_page_url
     assert_selector "div#employee-tabs", text: "Timesheets"
     @employee.timesheets.each do |timesheet|
-       assert_selector "div##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
       assert_no_selector "div##{dom_id(timesheet)}", text: "Delete"
     end
   end
@@ -85,7 +85,7 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#employee-tabs", text: "Timesheets"
     @employee.timesheets.each do |timesheet|
-       assert_selector "div##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
       assert_no_selector "div##{dom_id(timesheet)}", text: "Delete"
     end
   end

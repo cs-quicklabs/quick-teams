@@ -27,20 +27,23 @@ class Employee::TimesheetsController < Employee::BaseController
       end
     end
   end
+
   def edit
     authorize [@employee, @timesheet]
   end
- def update
+
+  def update
     authorize [@employee, @timesheet]
 
     respond_to do |format|
       if @timesheet.update(timesheet_params)
-         format.html { redirect_to employee_timesheets_path(@employee), notice: "Timesheet was successfully updated." }
+        format.html { redirect_to employee_timesheets_path(@employee), notice: "Timesheet was successfully updated." }
       else
         format.html { redirect_to edit_employee_timesheet_path(@employee), alert: "Failed to update. Please try again." }
+      end
     end
   end
-  end
+
   def destroy
     authorize [@employee, @timesheet]
 

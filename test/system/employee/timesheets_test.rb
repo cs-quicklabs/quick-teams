@@ -53,7 +53,7 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     click_on "Add Timesheet"
     assert_selector "tbody#timesheets", text: "Worked on some random project"
   end
-test "can not add timesheet with empty params" do
+  test "can not add timesheet with empty params" do
     visit page_url
     click_on "Add Timesheet"
     take_screenshot
@@ -70,9 +70,9 @@ test "can not add timesheet with empty params" do
       assert_no_selector "tbody#timesheets", text: timesheet.description
     end
   end
-    test "can not edit todo with invalid params" do
+  test "can not edit todo with invalid params" do
     visit page_url
-   timesheet = @employee.timesheets.last_30_days.order(date: :desc).first
+    timesheet = @employee.timesheets.last_30_days.order(date: :desc).first
     assert_text timesheet.description
     find("tr", id: dom_id(timesheet)).click_link("Edit")
     within "##{dom_id(timesheet)}" do
@@ -84,13 +84,13 @@ test "can not add timesheet with empty params" do
   end
 
   test "can edit timesheet" do
-     visit page_url
+    visit page_url
     timesheet = @employee.timesheets.last_30_days.order(date: :desc).first
     assert_text timesheet.description
     find("tr", id: dom_id(timesheet)).click_link("Edit")
-    description= "spent on agile process 1"
+    description = "spent on agile process 1"
     fill_in "timesheet_description", with: description
-     select @project.name, from: "timesheet_project_id"
+    select @project.name, from: "timesheet_project_id"
     take_screenshot
     click_on "Edit Timesheet"
     assert_selector "p.notice", text: "Timesheet was successfully updated."

@@ -8,8 +8,9 @@ class Project::ReportsController < Project::BaseController
     @pagy, @reports = pagy_nil_safe(params, @project.reports.order(created_at: :desc), items: LIMIT)
     render_partial("project/reports/report", collection: @reports) if stale?(@reports + [@project])
   end
+
   def edit
-   authorize [@project, @report]
+    authorize [@project, @report]
   end
 
   def create
@@ -29,15 +30,15 @@ class Project::ReportsController < Project::BaseController
 
   def update
     authorize [@project, @report]
-       @report = UpdateReport.call(@report, report_params, params).result
+    @report = UpdateReport.call(@report, report_params, params).result
     respond_to do |format|
       if @report.errors.empty?
         format.html { redirect_to project_report_path(@report.reportable, @report), notice: "report was successfully updated." }
       else
         format.html { redirect_to edit_employee_report_path(@report), alert: "Failed to update. Please try again." }
       end
-      end
     end
+  end
 
   def destroy
     authorize [@project, @report]

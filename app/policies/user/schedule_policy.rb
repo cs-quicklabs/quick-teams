@@ -19,7 +19,7 @@ class User::SchedulePolicy < User::BaseUserPolicy
   end
 
   def index?
-     employee = record.first
+    employee = record.first
     return false unless employee.active?
     return true if user.admin?
     return true if user.on_project_team?(employee)

@@ -31,9 +31,11 @@ class ReportQuery
     def project_id(param)
       where(reportable_id: param)
     end
-def user_id(param)
+
+    def user_id(param)
       where(reportable_id: param)
     end
+
     def published(param)
       where(submitted: param)
     end

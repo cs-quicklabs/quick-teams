@@ -12,8 +12,9 @@ class User::TimesheetPolicy < User::BaseUserPolicy
   def create?
     true
   end
+
   def edit?
-     timesheet = record.last
+    timesheet = record.last
     user.admin? or timesheet.user == user or user.is_manager
   end
 

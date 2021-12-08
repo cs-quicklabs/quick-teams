@@ -1,35 +1,34 @@
 class AddEmployeeReport < Patterns::Service
   def initialize(employee, params, param, actor)
-   @employee = employee
+    @employee = employee
     @report = @employee.reports.new params
-     @param= param
-     @actor = actor
+    @param = param
+    @actor = actor
   end
 
   def call
-      begin
+    begin
       add_report
       add_event
-   
     rescue
       report
     end
 
     report
   end
- 
+
   private
 
   def add_report
-      if param[:draft]
-         report.submitted = false
-      else
-    report.submitted = true
+    if param[:draft]
+      report.submitted = false
+    else
+      report.submitted = true
     end
-    report.user_id=actor.id
+    report.user_id = actor.id
     report.save!
   end
-  
+
   def add_event
     employee.events.create(user: actor, action: "report", action_for_context: "added new report in employee", trackable: report)
   end

@@ -13,10 +13,9 @@ class Employee::ReportsController < Employee::BaseController
     authorize [@employee, Report]
 
     @report = AddEmployeeReport.call(@employee, report_params, params, current_user).result
-           
+
     respond_to do |format|
       if @report.persisted?
-
         format.turbo_stream {
           render turbo_stream: turbo_stream.prepend(:reports, partial: "employee/reports/report", locals: { report: @report }) +
                                turbo_stream.replace(Report.new, partial: "employee/reports/form", locals: { report: Report.new })
@@ -49,7 +48,7 @@ class Employee::ReportsController < Employee::BaseController
 
   def update
     authorize [@employee, @report]
-      @report = UpdateReport.call(@report, report_params, params).result
+    @report = UpdateReport.call(@report, report_params, params).result
     respond_to do |format|
       if @report.errors.empty?
         format.html { redirect_to employee_report_path(@report.reportable, @report), notice: "report was successfully updated." }

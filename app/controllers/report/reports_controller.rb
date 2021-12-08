@@ -1,5 +1,5 @@
 class Report::ReportsController < Report::BaseController
-   def index
+  def index
     authorize :report
     reports = Report.query(reports_filter_params, nil, created_at: :desc)
 
