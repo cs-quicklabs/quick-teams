@@ -3,8 +3,8 @@ one:
   project: one
   title: Some Random Todo
   deadline: 2021-03-31
-  completed: true
-  owner: regular
+  completed: false
+  owner: active
   account: crownstack
 
 two:
@@ -21,7 +21,7 @@ three:
   project: archived
   title: Some Random Third Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: regular
   account: crownstack
 
@@ -30,7 +30,7 @@ four:
   project: one
   title: Some Random Fourth Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: regular
   account: crownstack
 
@@ -39,16 +39,16 @@ five:
   project: managed
   title: Some Random five Todo
   deadline: 2021-03-31
-  completed: true
-  owner: regular
+  completed: false
+  owner: manager
   account: crownstack
 
 six:
-  user: actor
+  user: manager
   project: managed
   title: Some Random six Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: regular
   account: crownstack
 
@@ -57,7 +57,7 @@ seven:
   project: managed
   title: Some Random seven Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: member
   account: crownstack
 
@@ -66,7 +66,7 @@ eight:
   project: managed
   title: Some Random eight Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: member
   account: crownstack
 
@@ -75,7 +75,7 @@ nine:
   project: managed
   title: Some Random nine Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: subordinate
   account: crownstack
 
@@ -84,7 +84,7 @@ ten:
   project: managed
   title: Some Random ten Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: subordinate
   account: crownstack
 
@@ -93,7 +93,7 @@ eleven:
   project: managed
   title: Some Random eleven Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: lead
   account: crownstack
 
@@ -102,7 +102,7 @@ tweleve:
   project: managed
   title: Some Random tweleve Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: lead
   account: crownstack
 
@@ -111,7 +111,7 @@ thirteen:
   project: managed
   title: Some Random thirteen Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: manager
   account: crownstack
 
@@ -120,6 +120,6 @@ fourteen:
   project: managed
   title: Some Random fourteen Todo
   deadline: 2021-03-31
-  completed: true
+  completed: false
   owner: manager
   account: crownstack

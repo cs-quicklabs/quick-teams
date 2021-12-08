@@ -2,9 +2,9 @@
   <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-4 lg:pb-16">
     <%= render "shared/form_messages", resource: @employee, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Employee", subtitle: "Please add detail of new employee." %>
-    <%= form.text_field :first_name, "First Name", autocomplete:"off"  %>
-    <%= form.text_field :last_name, "Last Name", autocomplete:"off"  %>
-    <%= form.text_field :email, "Email", autocomplete:"off"  %>
+    <%= form.text_field :first_name, "First Name", autocomplete: "off" %>
+    <%= form.text_field :last_name, "Last Name", autocomplete: "off" %>
+    <%= form.text_field :email, "Email", autocomplete: "off" %>
     <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, { :prompt => "Select Discipline" }, :selected => @employee.discipline_id, :class => "form-text-field mt-1") %>
     <%= form.collection_select(:job_id, Job.order(:name), :id, :name, { :prompt => "Select Job" }, :selected => @employee.job_id, :class => "form-text-field mt-1") %>
     <%= form.collection_select(:role_id, Role.order(:name), :id, :name, { :prompt => "Select Role" }, :selected => @employee.role_id, :class => "form-text-field mt-1") %>

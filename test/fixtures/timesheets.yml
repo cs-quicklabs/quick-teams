@@ -113,7 +113,7 @@ twelve:
   user: one
   project: one
   hours: 10
-  date: 2021-01-10
+  date: <%= 15.day.ago.to_s(:db) %>
   description: spent on agile process again 12
   billed: false
   billable: true
@@ -133,7 +133,7 @@ fourteen:
   user: regular
   project: managed
   hours: 10
-  date: 2021-01-10
+  date:  <%= 15.day.ago.to_s(:db) %>
   description: spent on agile process again 12
   billed: false
   billable: true

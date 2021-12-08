@@ -1,6 +1,6 @@
-<tr>
+<tr id="<%= dom_id timesheet %>">
   <td class="table-cell whitespace-nowrap">
-    <a href="<%= employee_timesheets_path(timesheet.user) %>" class="block hover:underline">
+    <a href="<%= project_timesheets_path(timesheet.user) %>" class="block hover:underline">
       <%= timesheet.user.decorate.display_name %>
     </a>
   </td>
@@ -12,5 +12,11 @@
   </td>
   <td class="table-cell whitespace-nowrap">
     <%= timesheet.hours %>
+  </td>
+  <td class="table-cell">
+    <% if policy([@project, timesheet]).edit? %>
+      <%= edit_button(edit_project_timesheet_path(@project, timesheet)) %>
+      <%= delete_button(project_timesheet_path(@project, timesheet)) %>
+    <% end %>
   </td>
 </tr>
