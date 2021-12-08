@@ -9,10 +9,7 @@ class User::TodoPolicy < User::BaseUserPolicy
 
   def edit?
     todo = record.last
-    return true if user.admin?
-    return user.subordinate?(record.first) if user.lead?
-    todo.completed?
-    false
+    create? && !todo.completed?
   end
 
   def update?
@@ -29,5 +26,10 @@ class User::TodoPolicy < User::BaseUserPolicy
 
   def destroy?
     edit?
+  end
+
+  def todo_completed?
+    todo = record.last
+    todo.completed?
   end
 end
