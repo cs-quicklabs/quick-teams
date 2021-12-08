@@ -24,6 +24,7 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
+
   test "can see todo detail page" do
     visit page_url
     todo = @employee.todos.first
@@ -32,14 +33,6 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     take_screenshot
   end
 
-  test "can redirect to detail page  on todo click" do
-    visit page_url
-    todo = @employee.todos.first
-    within "tr##{dom_id(todo)}" do
-      click_on "#{todo.project.name}"
-    end
-    assert_selector "a", text: "#{todo.project.name}"
-  end
   test "can redirect to project detail page on todo click" do
     visit page_url
     todo = @employee.todos.first
@@ -47,6 +40,7 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     assert_selector "h1", text: "#{todo.project.name}"
     take_screenshot
   end
+
   test "can add new todo" do
     visit page_url
     fill_in "todo_title", with: "Some Random Todo Title"
@@ -74,7 +68,7 @@ class EmployeeTodosTest < ApplicationSystemTestCase
 
   test "can edit a todo" do
     visit page_url
-    todo = @employee.todos.first
+    todo = @employee.todos.where(completed: 0).first
     assert_text todo.title
     find("tr", id: dom_id(todo)).click_link("Edit")
     take_screenshot
@@ -90,7 +84,7 @@ class EmployeeTodosTest < ApplicationSystemTestCase
 
   test "can not edit todo with invalid params" do
     visit page_url
-    todo = @employee.todos.first
+    todo = @employee.todos.where(completed: 0).first
     assert_text todo.title
     find("tr", id: dom_id(todo)).click_link("Edit")
     within "##{dom_id(todo)}" do
@@ -103,7 +97,7 @@ class EmployeeTodosTest < ApplicationSystemTestCase
 
   test "can delete a todo" do
     visit page_url
-    todo = @employee.todos.first
+    todo = @employee.todos.where(completed: 0).first
     display_name = todo.project.name
     assert_text display_name
     page.accept_confirm do

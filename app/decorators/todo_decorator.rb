@@ -10,4 +10,12 @@ class TodoDecorator < Draper::Decorator
   def display_body
     "#{body.upcase_first}"
   end
+
+  def display_status
+    if self.completed?
+      "green"
+    else
+      "blue"
+    end
+  end
 end
