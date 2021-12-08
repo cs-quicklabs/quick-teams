@@ -21,12 +21,12 @@ class CommentsController < BaseController
   private
 
   def comment_params
-    params.require(:comment).permit(:title, :user_id, :goal_id, :status)
+    params.require(:comment).permit(:title, :user_id, :commentable_id, :status)
   end
 
   private
 
   def set_goal
-    @goal ||= Goal.find(comment_params["goal_id"])
+    @goal ||= Goal.find(comment_params["commentable_id"])
   end
 end

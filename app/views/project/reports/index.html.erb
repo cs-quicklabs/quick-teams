@@ -1,0 +1,57 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "project/title", project: @project %>
+  <main class="pb-8">
+    <div class="">
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1 lg:grid-cols-3">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 lg:col-span-2" id="report-list">
+          <section aria-labelledby="participants_section">
+            <div class="overflow-hidden bg-white">
+              <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+                <table class="table">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="w-full table-head">
+                        Report
+                      </th>
+                      <th scope="col" class="table-head">
+                        Status
+                      </th>
+                      <th scope="col" class="table-head">
+                        Created At
+                      </th>
+                      <th scope="col" class="table-head">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body" id="reports" data-infinite-scroll-target="entries">
+                    <%= render partial: "project/reports/report", collection: @reports, cached: true %>
+                  </tbody>
+                </table>
+                <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+                  <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <% if policy([@project, Report]).create? %>
+          <!-- Right column -->
+          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+            <section aria-labelledby="add-participant-section">
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <%= render "project/reports/form", report: @report %>
+                </div>
+              </div>
+            </section>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </main>
+  <div class="pt-4 pl-16 pr-16">
+  </div>
+</main>

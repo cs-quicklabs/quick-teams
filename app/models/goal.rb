@@ -6,7 +6,7 @@ class Goal < ApplicationRecord
   belongs_to :user
   belongs_to :goalable, polymorphic: true
   has_rich_text :body
-  has_many :comments, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
 
   has_many :taggings, as: :taggable
   has_many :tags, through: :taggings
