@@ -6,16 +6,20 @@ class User::TimesheetPolicy < User::BaseUserPolicy
   end
 
   def update?
-    user.admin?
+    edit?
   end
 
   def create?
     true
   end
+  def edit?
+     timesheet = record.last
+    user.admin? or timesheet.user == user or user.is_manager
+  end
 
   def destroy?
     timesheet = record.last
-    user.admin? or timesheet.user == user
+    user.admin? or timesheet.user == user or user.is_manager
   end
 
   def show_add_timesheet_form?

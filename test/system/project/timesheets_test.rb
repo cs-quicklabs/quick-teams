@@ -39,4 +39,33 @@ class ProjectTimesheetsTest < ApplicationSystemTestCase
       take_screenshot
     end
   end
+
+  test "can not edit todo with invalid params" do
+    visit page_url
+   timesheet = @project.timesheets.last_30_days.order(date: :desc).first
+    assert_text timesheet.description
+    find("tr", id: dom_id(timesheet)).click_link("Edit")
+    within "##{dom_id(timesheet)}" do
+      fill_in "timesheet_description", with: ""
+      click_on "Edit Timesheet"
+      take_screenshot
+    end
+    assert_selector "p.alert", text: "Failed to update. Please try again."
+  end
+
+  test "can edit timesheet" do
+     visit page_url
+    timesheet = @project.timesheets.last_30_days.order(date: :desc).first
+    assert_text timesheet.description
+    find("tr", id: dom_id(timesheet)).click_link("Edit")
+    description= "spent on agile process 1"
+     select @project.name, from: "timesheet_project_id"
+    fill_in "timesheet_description", with: description
+    take_screenshot
+    click_on "Edit Timesheet"
+    assert_selector "p.notice", text: "Timesheet was successfully updated."
+
+    assert_selector "tr##{dom_id(timesheet)}", text: description
+    take_screenshot
+  end
 end
