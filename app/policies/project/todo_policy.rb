@@ -18,10 +18,8 @@ class Project::TodoPolicy < Project::BaseProjectPolicy
   end
 
   def edit?
-    project = record.first
     todo = record.last
-    return false if project.archived?
-    return true if user.admin? or user.is_manager?(project)
+    create? && !todo.completed?
   end
 
   def destroy?
