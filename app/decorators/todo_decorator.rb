@@ -12,10 +12,6 @@ class TodoDecorator < Draper::Decorator
   end
 
   def display_status
-    if self.completed?
-      "green"
-    else
-      "blue"
-    end
+    self.completed? ? "green" : "blue"
   end
 end
