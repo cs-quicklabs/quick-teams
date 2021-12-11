@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_051259) do
+ActiveRecord::Schema.define(version: 2021_12_11_131428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -356,10 +356,12 @@ ActiveRecord::Schema.define(version: 2021_12_11_051259) do
     t.string "title"
     t.string "reportable_type", null: false
     t.bigint "reportable_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "submitted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "risks", force: :cascade do |t|
@@ -591,7 +593,6 @@ ActiveRecord::Schema.define(version: 2021_12_11_051259) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", name: "active_storage_variant_records_blob_id_fkey"
   add_foreign_key "clients", "accounts"
   add_foreign_key "clients", "accounts", name: "clients_account_id_fkey"
-  add_foreign_key "comments", "goals", column: "commentable_id"
   add_foreign_key "comments", "users"
   add_foreign_key "disciplines", "accounts"
   add_foreign_key "disciplines", "accounts", name: "disciplines_account_id_fkey"
@@ -629,6 +630,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_051259) do
   add_foreign_key "projects", "project_statuses", column: "status_id"
   add_foreign_key "projects", "users", column: "manager_id"
   add_foreign_key "projects", "users", column: "manager_id", name: "projects_manager_id_fkey"
+  add_foreign_key "reports", "users"
   add_foreign_key "risks", "projects"
   add_foreign_key "risks", "users"
   add_foreign_key "roles", "accounts"
