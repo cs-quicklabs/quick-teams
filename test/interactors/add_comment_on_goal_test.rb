@@ -1,6 +1,6 @@
 require "test_helper"
 
-class AddCommentTest < ActiveSupport::TestCase
+class AddCommentonGoalTest < ActiveSupport::TestCase
   setup do
     ActsAsTenant.current_tenant = accounts(:crownstack)
     @user = users(:regular)
@@ -11,7 +11,7 @@ class AddCommentTest < ActiveSupport::TestCase
   end
 
   test "can comment on goal" do
-    comment = AddComment.call(@params, @goal, @method, @actor).result
+    comment = AddCommentOnGoal.call(@params, @goal, @method, @actor).result
     assert comment
     assert_equal comment.user_id, @actor.id
     goal = @user.goals.first

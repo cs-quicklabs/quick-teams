@@ -4,7 +4,7 @@ class CommentsController < BaseController
   def create
     authorize [@goal.goalable, @goal], :comment?
 
-    @comment = AddComment.call(comment_params, @goal, params[:commit], current_user).result
+    @comment = AddCommentOnGoal.call(comment_params, @goal, params[:commit], current_user).result
     respond_to do |format|
       if @comment.persisted?
         format.turbo_stream {
