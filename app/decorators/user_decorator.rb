@@ -66,11 +66,11 @@ class UserDecorator < Draper::Decorator
   end
 
   def display_deactivated_on
-    "#{deactivated_on.to_s(:long)}"
+    "#{deactivated_on.to_formatted_s(:long)}"
   end
 
   def display_occupied_till
     busy_untill = schedules.map(&:ends_at).max
-    "Occupied untill #{busy_untill.to_s(:long)}"
+    "Occupied untill #{busy_untill.to_formatted_s(:long)}"
   end
 end

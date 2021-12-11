@@ -9,7 +9,7 @@
       <label for="date" class="block text-sm font-medium text-gray-700">
         Due Date
       </label>
-      <%= form.date_field :deadline, class: "form-text-field mt-1", value: Date.today.to_s(:db) %>
+      <%= form.date_field :deadline, class: "form-text-field mt-1", value: Date.today.to_formatted_s(:db) %>
     </div>
     <div class="flex justify-end">
       <%= form.submit "Add Todo", class: "btn-blue" %>

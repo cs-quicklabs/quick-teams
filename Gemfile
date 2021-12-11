@@ -16,10 +16,10 @@ gem "pg", "~> 1.1"
 gem "puma", "5.5.1"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", "~> 0.1.0"
+gem "jsbundling-rails", "~> 0.2.2"
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
-gem "cssbundling-rails", ">= 0.1.0"
+gem "cssbundling-rails", ">= 0.2.7"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails", ">= 0.9.0"

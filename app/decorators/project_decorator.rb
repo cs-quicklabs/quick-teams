@@ -14,7 +14,7 @@ class ProjectDecorator < Draper::Decorator
   end
 
   def display_archived_on
-    "#{project.archived_on.to_s(:long)}"
+    "#{project.archived_on.to_formatted_s(:long)}"
   end
 
   def display_additional_participants

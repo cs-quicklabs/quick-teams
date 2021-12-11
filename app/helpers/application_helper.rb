@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def display_date(date)
-    date.to_date.to_s(:long)
+    date.to_date.to_formatted_s(:long)
   end
 
   def goal_path(goal)
