@@ -19,7 +19,9 @@ class Project::TodoPolicy < Project::BaseProjectPolicy
 
   def edit?
     todo = record.last
-    create? && !todo.completed?
+    return false if todo.completed?
+    return true if user.admin?
+    todo.owner == user
   end
 
   def destroy?
