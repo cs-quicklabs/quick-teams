@@ -66,3 +66,17 @@ eleven:
   reportable: subordinate
   submitted: false
   user: regular
+
+tweleve:
+  title: Some Random Report tweleve  
+  reportable_type: Project
+  reportable: unarchived
+  submitted: false
+  user: regular
+
+thirteen:
+  title: Some Random Report thirteen  
+  reportable_type: User
+  reportable: regular
+  submitted: false
+  user: regular

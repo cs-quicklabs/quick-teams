@@ -10,6 +10,7 @@ class ArchiveProject < Patterns::Service
       clear_todos
       discard_milestones
       archive
+      submit_pending_reports
       add_event
     rescue
       project
@@ -42,6 +43,10 @@ class ArchiveProject < Patterns::Service
       goal.comments << Comment.new(params)
       goal.update_attribute("status", "discarded")
     end
+  end
+
+  def submit_pending_reports
+    project.reports.update_all(submitted: true)
   end
 
   def add_event

@@ -12,6 +12,7 @@ class DeactivateUser < Patterns::Service
       clear_schedules
       discard_goals
       clear_todos
+      submit_pending_reports
       deactivate
       add_event
     rescue
@@ -59,6 +60,10 @@ class DeactivateUser < Patterns::Service
 
   def clear_todos
     user.todos.pending.delete_all
+  end
+
+  def submit_pending_reports
+    user.reports.update_all(submitted: true)
   end
 
   def add_event
