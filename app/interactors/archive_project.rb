@@ -38,7 +38,7 @@ class ArchiveProject < Patterns::Service
 
   def discard_milestones
     project.milestones.where(status: :progress).each do |goal|
-      params = { user_id: actor.id, goal_id: goal.id, title: "Discarding as project has been archived.", status: "stale" }
+      params = { user_id: actor.id, commentable_id: goal.id, title: "Discarding as project has been archived.", status: "stale" }
       goal.comments << Comment.new(params)
       goal.update_attribute("status", "discarded")
     end

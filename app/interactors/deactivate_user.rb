@@ -51,7 +51,7 @@ class DeactivateUser < Patterns::Service
 
   def discard_goals
     user.goals.pending.each do |goal|
-      params = { user_id: actor.id, goal_id: goal.id, title: "Discarding as employee has been deactivated.", status: "stale" }
+      params = { user_id: actor.id, commentable_id: goal.id, title: "Discarding as employee has been deactivated.", status: "stale" }
       goal.comments << Comment.new(params)
       goal.update_attribute("status", "discarded")
     end
