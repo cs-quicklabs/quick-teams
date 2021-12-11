@@ -115,7 +115,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
-    cable_ready (5.0.0.pre4)
+    cable_ready (5.0.0.pre8)
       rails (>= 5.2)
       thread-local (>= 1.1.0)
     capybara (3.36.0)
@@ -294,7 +294,6 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
-    shutup (0.1.2)
     sidekiq (6.3.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -312,10 +311,17 @@ GEM
       rack-protection (= 2.1.0)
       tilt (~> 2.0)
     spring (4.0.0)
+    sprockets (4.0.2)
+      concurrent-ruby (~> 1.0)
+      rack (> 1, < 3)
+    sprockets-rails (3.4.2)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
+      sprockets (>= 3.0.0)
     stimulus-rails (0.7.3)
       rails (>= 6.0.0)
-    stimulus_reflex (3.5.0.pre3)
-      cable_ready (= 5.0.0.pre4)
+    stimulus_reflex (3.5.0.pre8)
+      cable_ready (= 5.0.0.pre8)
       nokogiri
       rack
       rails (>= 5.2)
@@ -395,14 +401,14 @@ DEPENDENCIES
   rexml
   rubocop
   selenium-webdriver
-  shutup (~> 0.1.1)
   sidekiq
   sidekiq-scheduler
   sinatra (>= 1.3.0)
   spring
-  stimulus-rails (>= 0.4.0)
-  stimulus_reflex (= 3.5.0.pre3)
-  turbo-rails (>= 0.7.11)
+  sprockets-rails (>= 3.4.1)
+  stimulus-rails (>= 0.7.3)
+  stimulus_reflex (= 3.5.0.pre8)
+  turbo-rails (>= 0.9.0)
   tzinfo-data
   valid_url
   web-console (>= 4.1.0)

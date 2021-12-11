@@ -6,8 +6,12 @@ ruby "3.0.2"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.0.0.rc1"
 
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails", ">= 3.4.1"
+
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+
 # Use Puma as the app server
 gem "puma", "5.5.1"
 
@@ -18,18 +22,18 @@ gem "jsbundling-rails", "~> 0.1.0"
 gem "cssbundling-rails", ">= 0.1.0"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails", ">= 0.7.11"
+gem "turbo-rails", ">= 0.9.0"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails", ">= 0.4.0"
+gem "stimulus-rails", ">= 0.7.3"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", ">= 4.0", :require => ["redis", "redis/connection/hiredis"]
 gem "hiredis"
 gem "valid_url"
+
 # Use Active Storage variant
 gem "image_processing", "~> 1.2"
-gem "shutup", "~> 0.1.1"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", "1.9.1", require: false
@@ -47,7 +51,7 @@ gem "wkhtmltopdf-binary"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "pg_search"
-gem "stimulus_reflex", "= 3.5.0.pre3"
+gem "stimulus_reflex", "= 3.5.0.pre8"
 
 # devise gems
 gem "devise", github: "heartcombo/devise", branch: "main"
