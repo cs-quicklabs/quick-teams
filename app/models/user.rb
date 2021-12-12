@@ -75,11 +75,10 @@ class User < ApplicationRecord
     all_subordinates_ids.include?(employee.id)
   end
 
-  def on_project_team?(employee)
+  def member_in_managed_project?(employee)
     projects = self.managed_projects.map(&:id)
     employees = Schedule.where("project_id IN (?)", projects).pluck(:user_id)
-    return true if employees.include?(employee.id)
-    false
+    employees.include?(employee.id)
   end
 
   def self.query(params, includes = nil)
@@ -92,7 +91,7 @@ class User < ApplicationRecord
   end
 
   def has_managed_projects?
-    managed_projects.count
+    managed_projects.count > 0
   end
 
   def is_manager?(project)

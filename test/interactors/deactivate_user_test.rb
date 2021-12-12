@@ -52,4 +52,10 @@ class DeactivateUserTest < ActiveSupport::TestCase
     user = DeactivateUser.call(@user, @actor).result
     assert user.goals.pending.count == 0
   end
+
+  test "can submit pending reports" do
+    assert @user.reports.pending.count != 0
+    user = DeactivateUser.call(@user, @actor).result
+    assert user.reports.pending.count == 0
+  end
 end

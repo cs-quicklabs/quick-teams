@@ -6,6 +6,8 @@ class Report < ApplicationRecord
 
   validates_presence_of :title, :body
   scope :submitted, -> { where(submitted: true) }
+  scope :pending, -> { where(submitted: false) }
+
   def self.query(params, includes = nil, order)
     return [] if params.empty?
     ReportQuery.new(self.includes(includes), params, order).filter

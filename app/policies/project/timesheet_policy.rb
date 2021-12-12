@@ -1,12 +1,12 @@
 class Project::TimesheetPolicy < Project::BaseProjectPolicy
   def edit?
+    project = record.first
     timesheet = record.last
     user.admin? or timesheet.user == user or user.is_manager?(project)
   end
 
   def destroy?
-    timesheet = record.last
-    user.admin? or timesheet.user == user or user.is_manager?(project)
+    edit?
   end
 
   def update?

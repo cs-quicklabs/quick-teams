@@ -47,7 +47,6 @@ class ProjectDocumentsTest < ApplicationSystemTestCase
     click_on "Add Document"
     assert_selector "div#error_explanation", text: "Filename can't be blank"
     assert_selector "div#error_explanation", text: "Link can't be blank"
-    assert_selector "div#error_explanation", text: "Link is an invalid URL"
 
     take_screenshot
   end
