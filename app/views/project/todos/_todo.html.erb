@@ -6,7 +6,7 @@
     <%= check_box_tag "completed", nil, todo.completed, data: { reflex: "click->TodoReflex#toggle_project_todo", id: todo.id }, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
   </td>
   <td class="table-cell ">
-    <a href="<%= employee_todos_url(owner, script_name: "/#{owner.account.id}") %>" class="block hover:underline" target="_top">
+    <a href="<%= employee_todos_path(owner, script_name: "/#{owner.account.id}") %>" class="block hover:underline" target="_top">
       <div>
         <p class="font-medium text-gray-900 whitespace-nowrap">
           <span class=""><%= owner.decorate.display_name %></span>
@@ -15,7 +15,7 @@
     </a>
   </td>
   <td class="w-full table-cell">
-    <a href="<%= project_todo_url(project, todo, script_name: "/#{owner.account.id}") %>" class="block hover:underline" target="_top">
+    <a href="<%= project_todo_path(project, todo, script_name: "/#{owner.account.id}") %>" class="block hover:underline" target="_top">
       <%= highlight_hashtag(auto_link_urls_in_text(todo.title)) %>
     </a>
   </td>
@@ -24,10 +24,10 @@
   </td>
   <td class="table-cell whitespace-nowrap">
     <% if policy([project, todo]).edit? %>
-      <%= edit_button(edit_project_todo_url(project, todo, script_name: "/#{owner.account.id}")) %>
+      <%= edit_button(edit_project_todo_path(project, todo, script_name: "/#{owner.account.id}")) %>
     <% end %>
     <% if policy([project, todo]).destroy? %>
-      <%= delete_button(project_todo_url(project, todo, script_name: "/#{owner.account.id}")) %>
+      <%= delete_button(project_todo_path(project, todo, script_name: "/#{owner.account.id}")) %>
     <% end %>
   </td>
 </tr>
