@@ -11,7 +11,7 @@
         </div>
         <div>
           <div class="text-sm">
-            <a href="<%= project_todos_path(@todo.owner) %>" class="font-medium text-gray-900 hover:underline"><%= @todo.owner.decorate.display_name %></a>
+            <a href="<%= project_todos_path(@todo.project) %>" class="font-medium text-gray-900 hover:underline"><%= @todo.project.decorate.display_name %></a>
           </div>
           <div class="mt-1 space-x-2 text-sm">
             <span class="font-medium text-gray-500"> Created by <%= @todo.user.decorate.display_name %>
