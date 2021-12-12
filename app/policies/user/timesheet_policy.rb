@@ -15,12 +15,14 @@ class User::TimesheetPolicy < User::BaseUserPolicy
 
   def edit?
     timesheet = record.last
-    user.admin? or timesheet.user == user or user.is_manager
+    employee = record.first
+    return true if user.admin?
+    return true if timesheet.user == user
+    false
   end
 
   def destroy?
-    timesheet = record.last
-    user.admin? or timesheet.user == user or user.is_manager
+    edit?
   end
 
   def show_add_timesheet_form?
