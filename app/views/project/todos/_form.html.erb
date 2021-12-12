@@ -4,7 +4,7 @@
     <%= render "shared/form_header", title: "Add New Todo", subtitle: "Add details of todo for project" %>
     <%= form.collection_select(:owner_id, UserDecorator.decorate_collection(@project.participants), :id, :display_name_position, { :prompt => "Select Owner" }, :selected => todo.user_id, :class => "form-text-field mt-4") %>
     <%= form.text_area :title, "Todo", autocomplete: "off" %>
-    <%= form.text_area :body, "Description(optional)" %>
+    <%= form.text_area :body, "Description(optional)", class: "form-text-field h-24" %>
     <div>
       <label for="date" class="block text-sm font-medium text-gray-700">
         Due Date
