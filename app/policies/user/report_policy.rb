@@ -27,9 +27,8 @@ class User::ReportPolicy < User::BaseUserPolicy
     report = record.second
     return true if user.admin?
     return true if user.lead? and user.subordinate?(employee)
-    return report.user == user
-    return report.reportable == user
-    self?
+    return true if report.user == user
+    return true if report.reportable == user
     false
   end
 

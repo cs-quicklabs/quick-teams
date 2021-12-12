@@ -3,7 +3,7 @@
     <%= render "shared/form_messages", resource: todo, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Todo", subtitle: "Todo are short term goals" %>
     <%= form.text_area :title, "Title", autocomplete: "off" %>
-    <%= form.text_area :body, "Description(optional)" %>
+    <%= form.text_area :body, "Description(optional)", class: "form-text-field h-24" %>
     <div>
       <label for="date" class="block text-sm font-medium text-gray-700">
         Due Date

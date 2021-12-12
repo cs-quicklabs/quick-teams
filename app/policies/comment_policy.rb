@@ -1,13 +1,8 @@
 class CommentPolicy < ApplicationPolicy
   def create?
     return true if user.admin?
-    return subordinate? if user.lead?
+    return true if report.user == user
+    return true if report.reportable == user
     false
-  end
-
-  private
-
-  def subordinate?
-    user.subordinate?(commentable.user)
   end
 end

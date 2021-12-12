@@ -39,4 +39,10 @@ class ArchiveProjectTest < ActiveSupport::TestCase
     project = ArchiveProject.call(@project, @actor).result
     assert project.milestones.where(status: :progress).count == 0
   end
+
+  test "can submit pending reports" do
+    assert @project.reports.pending.count != 0
+    project = ArchiveProject.call(@project, @actor).result
+    assert project.reports.pending.count == 0
+  end
 end

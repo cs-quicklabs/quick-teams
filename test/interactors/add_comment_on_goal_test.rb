@@ -6,7 +6,7 @@ class AddCommentonGoalTest < ActiveSupport::TestCase
     @user = users(:regular)
     @goal = @user.goals.first
     @actor = users(:actor)
-    @params = { user_id: @actor.id, goal_id: @goal.id, title: "this is a new goal", status: "stale" }
+    @params = { user_id: @actor.id, commentable_id: @goal.id, title: "this is a new goal", status: "stale" }
     @method = "and mark Missed"
   end
 
