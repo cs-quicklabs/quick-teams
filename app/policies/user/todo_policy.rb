@@ -24,7 +24,9 @@ class User::TodoPolicy < User::BaseUserPolicy
   end
 
   def show?
-    create?
+    return true if user.admin?
+    return self_or_subordinate? if user.lead?
+    self?
   end
 
   def destroy?
