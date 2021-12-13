@@ -19,7 +19,9 @@ class User::GoalPolicy < User::BaseUserPolicy
   end
 
   def show?
+    employee = record.first
     return true if user.admin?
+    return true if user.member_in_managed_project?(employee)
     return (goal_for_subordinate? or self?) if user.lead?
     self?
   end
@@ -47,6 +49,7 @@ class User::GoalPolicy < User::BaseUserPolicy
     employee = record.first
     return true if goal_permission?
     return true if user.admin?
+    return true if user.member_in_managed_project?(employee)
     return true if user.lead? and user.subordinate?(employee)
     false
   end

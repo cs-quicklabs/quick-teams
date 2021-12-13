@@ -24,7 +24,9 @@ class User::FeedbackPolicy < User::BaseUserPolicy
   end
 
   def show?
+    employee = record.first
     return true if user.admin?
+    return true if user.member_in_managed_project?(employee)
     return (feedback_for_subordinate? or self?) if user.lead?
     self?
   end

@@ -3,6 +3,7 @@ class User::TodoPolicy < User::BaseUserPolicy
     employee = record.first
     return false unless employee.active?
     return true if user.admin?
+    return true if user.member_in_managed_project?(employee)
     return self_or_subordinate? if user.lead?
     self?
   end

@@ -37,6 +37,7 @@ class User::ReportPolicy < User::BaseUserPolicy
 
     return false unless employee.active?
     return true if user.admin?
+    return true if user.member_in_managed_project?(employee)
     return true if user.lead? and user.subordinate?(employee)
     self?
   end
