@@ -23,7 +23,7 @@
       <%= edit_button(edit_employee_todo_path(todo.owner, todo)) %>
     <% end %>
     <% if policy([todo.owner, todo]).destroy? %>
-      <%= delete_button(employee_todo_path(todo.user, todo)) %>
+      <%= delete_button(employee_todo_path(todo.owner, todo)) %>
     <% end %>
   </td>
 </tr>
