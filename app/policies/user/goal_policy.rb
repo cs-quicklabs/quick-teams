@@ -1,68 +1,35 @@
 class User::GoalPolicy < User::BaseUserPolicy
-  def update?
-    edit?
-  end
-
   def create?
-    employee = record.first
-
-    return false unless employee.active?
-    return true if user.admin?
-    return true if user.lead? and user.subordinate?(employee)
-    false
-  end
-
-  def edit?
-    return true if user.admin?
-    return user.subordinate?(record.first) if user.lead?
-    false
+    is_active? and (is_admin? or is_project_manager? or is_team_lead?)
   end
 
   def show?
-    employee = record.first
-    return true if user.admin?
-    return true if user.member_in_managed_project?(employee)
-    return (goal_for_subordinate? or self?) if user.lead?
-    self?
-  end
-
-  def update?
-    goal = record.last
-    edit? && goal.progress?
-  end
-
-  def destroy?
-    editable?
+    is_admin? or _is_project_manager? or _is_team_lead? or self?
   end
 
   def edit?
-    editable?
-  end
-
-  def editable?
-    return true if user.admin?
-    return goal_for_subordinate? if user.lead?
-    false
+    (is_admin? or _is_project_manager? or _is_team_lead?) and record.last.progress?
   end
 
   def comment?
-    employee = record.first
-    return true if goal_permission?
-    return true if user.admin?
-    return true if user.member_in_managed_project?(employee)
-    return true if user.lead? and user.subordinate?(employee)
-    false
+    return false unless is_active? and record.last.progress?
+    is_admin? or _is_project_manager? or _is_team_lead? or (self? and record.last.permission?)
   end
 
   private
 
+  def _is_team_lead?
+    receiver = record.last.goalable
+    user.subordinate?(receiver) and user.lead?
+  end
+
+  def _is_project_manager?
+    receiver = record.last.goalable
+    user.project_participant?(receiver) and user.project_manager?
+  end
+
   def goal_for_subordinate?
     goal = record.last
     user.subordinate?(goal.goalable)
-  end
-
-  def goal_permission?
-    goal = record.last
-    goal.permission?
   end
 end

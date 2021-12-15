@@ -1,20 +1,11 @@
 class User::SchedulePolicy < User::BaseUserPolicy
-  def update?
-    create?
-  end
-
-  def destroy?
-    create?
+  def create?
+    # user shoud be active and
+    # only admin can change schedule for other users
+    is_active? and is_admin?
   end
 
   def edit?
     create?
-  end
-
-  def create?
-    employee = record.first
-    return false unless employee.active?
-    return true if user.admin?
-    false
   end
 end

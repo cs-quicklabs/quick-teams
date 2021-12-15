@@ -1,6 +1,6 @@
 class ProjectsPolicy < Struct.new(:user, :projects)
   def index?
-    user.admin? or user.has_managed_projects?
+    user.admin? or user.project_manager?
   end
 
   def update?
