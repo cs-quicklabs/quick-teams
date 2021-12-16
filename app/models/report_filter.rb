@@ -5,6 +5,7 @@ class ReportFilter
     project_id
     user_id
     submitted
+    reportable_type
   ].freeze
 
   attr_accessor(*KEYS)

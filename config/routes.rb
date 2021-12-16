@@ -68,6 +68,8 @@ Rails.application.routes.draw do
   resources :nuggets
   resources :kbs
   resources :kpis
+  resources :templates
+  resources :templates_assignees
   resources :surveys do
     resources :questions, module: "survey"
     resources :assignees, module: "survey", as: "assignees"

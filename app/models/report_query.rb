@@ -32,11 +32,15 @@ class ReportQuery
       where(reportable_id: param)
     end
 
+    def reportable_type(param)
+      where(reportable_type: param)
+    end
+
     def user_id(param)
       where(reportable_id: param)
     end
 
-    def published(param)
+    def submitted(param)
       where(submitted: param)
     end
   end

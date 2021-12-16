@@ -17,7 +17,7 @@ class Project < ApplicationRecord
   has_many :todos
   has_many :risks
   has_many :attempts, as: :participant
-
+  has_many :templates_assignees, as: :assignable
   has_many :lists, through: :todos, source: :user
   has_and_belongs_to_many :project_tags
   has_and_belongs_to_many :skills

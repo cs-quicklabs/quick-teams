@@ -5,6 +5,8 @@ class Project::ReportsController < Project::BaseController
     authorize [@project, Report]
 
     @report = Report.new
+    @templates = Template.all
+    @assigns = @project.templates_assignees.includes(:template)
     @pagy, @reports = pagy_nil_safe(params, @project.reports.order(created_at: :desc), items: LIMIT)
     render_partial("project/reports/report", collection: @reports) if stale?(@reports + [@project])
   end

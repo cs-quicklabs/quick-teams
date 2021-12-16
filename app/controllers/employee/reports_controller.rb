@@ -5,8 +5,22 @@ class Employee::ReportsController < Employee::BaseController
     authorize [@employee, Report]
 
     @report = Report.new
+    @templates = Template.all
+    @assigns = @employee.templates_assignees.includes(:template)
     @pagy, @reports = pagy_nil_safe(params, employee_reports, items: LIMIT)
     render_partial("employee/reports/report", collection: @reports) if stale?(@reports + [@employee])
+  end
+
+  def new
+    authorize [@employee, Report]
+    @report = Report.new
+    if params[:template_id]
+      @template = Template.find(params[:template_id])
+      @clone = @report.clone(@template, @employee, current_user)
+      respond_to do |format|
+        format.html { redirect_to edit_employee_report_path(@employee, @report) }
+      end
+    end
   end
 
   def create

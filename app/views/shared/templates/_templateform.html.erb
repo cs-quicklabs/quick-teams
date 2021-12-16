@@ -1,0 +1,24 @@
+ <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+  <% if policy(:template).add? %>
+    <%= tailwind_form_with(url: templates_assignees_path(), method: "post") do |f| %>
+      <%= f.collection_select(:template_id, templates.decorate, :id, :display_title, { :prompt => "Select Assignee" }, :class => "form-text-field mt-1") %>
+      <div class="flex justify-end  mt-1 w-full">
+        <button type="submit" class="mt-4  inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Assign Template
+        </button>
+        <%= f.hidden_field :assignable_id, value:  resource.id  %>
+        <%= f.hidden_field :assignable_type, value:  resource.class.name  %>
+      </div>
+    <%end %>
+  <%end %>
+  <ul class="divide-y divide-gray-200" id="assignees">
+    <%= render "shared/templates/template",  resource: resource, templates: @assigns %>
+  </ul>
+  <div class="flex mt-4 sm:mt-0 sm:ml-4">
+    <%if resource.class.name=="User"%>
+      <%= link_to "Add Custom Report Template", new_employee_report_path(resource), class: "btn-blue" %>
+    <% else %>
+      <%= link_to "Add Custom Report Template", new_project_report_path(resource), class: "btn-blue" %>
+    <%end%>
+  </div>
+</main>

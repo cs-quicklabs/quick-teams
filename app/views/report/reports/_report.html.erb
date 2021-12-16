@@ -8,6 +8,9 @@
     <% end %>
   </td>
   <td class="table-cell whitespace-nowrap ">
+    <%= link_to report.user.display_name, employee_reports_path(report.user), class: "truncate hover:text-gray-600 hover:underline" %>
+  </td>
+  <td class="table-cell whitespace-nowrap ">
     <span class="intdne-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= report.display_status %>-100 text-green-800">
       <%= report.submitted ? "Submitted" : "Draft" %>
     </span>

@@ -1,0 +1,27 @@
+<% assignable=assign.assignable.decorate %>
+<li class="py-4 flex" id = "<%= dom_id(assign) %>">
+  <div class="ml-3">
+    <%if assign.assignable_type == "User" %>
+      <div class="flex items-center">
+        <div class="flex-shrink-0 w-10 h-10">
+          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+        </div>
+        <div class="ml-4">
+          <a href="<%= employee_team_path(assignable) %>" class=" hover:text-gray-600 hover:underline">
+            <div class="text-sm font-medium text-gray-900"><%= assignable.display_name %></div>
+            <div class="text-sm font text-gray-900"> <%= assignable.email %></div>
+          </a>
+        </div>
+      </div>
+    <% else %>
+      <div class="flex items-center  font-medium pt-1">
+        <a href="<%= project_schedules_path(assignable) %>" class="truncate hover:text-gray-600 hover:underline">
+          <span >
+            <%= assignable.display_name %>
+            <span class="font-normal text-gray-500"><%= assignable.display_discipline %></span>
+          </span>
+        </a>
+      </div>
+    <%end%>
+  </div>
+</li>
