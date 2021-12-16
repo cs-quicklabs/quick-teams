@@ -70,7 +70,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
 
   test "can delete a report" do
     visit page_url
-    report = @project.reports.first
+    report = @project.reports.where(submitted: false).first
     page.accept_confirm do
       find("tr", id: dom_id(report)).click_link("Delete")
     end

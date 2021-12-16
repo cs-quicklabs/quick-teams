@@ -1,15 +1,11 @@
 class Project::KpiPolicy < Project::BaseProjectPolicy
-  def index?
-    true
-  end
-
   def stats?
-    true
+    index?
   end
 
   def record?
     project = record.first
     return false if project.kpi.nil?
-    user.admin? || user.is_manager?(project)
+    (is_admin? or is_project_manager?) and is_active?
   end
 end

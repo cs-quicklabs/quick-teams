@@ -80,7 +80,7 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_url
     assert_selector "div#project-tabs", text: "Feedbacks"
-    assert_no_selector "form#new_feedback"
+    assert_selector "form#new_feedback"
     feedbacks = @project.feedbacks
 
     feedbacks.each do |feedback|
