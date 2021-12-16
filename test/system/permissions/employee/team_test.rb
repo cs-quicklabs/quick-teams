@@ -76,7 +76,7 @@ class EmployeeTeamTest < ApplicationSystemTestCase
 
   test "project manager can not see team of other employee" do
     sign_out @employee
-    @manager = users(:lead)
+    @manager = users(:manager)
     sign_in @manager
     @employee = users(:admin)
     visit page_url
