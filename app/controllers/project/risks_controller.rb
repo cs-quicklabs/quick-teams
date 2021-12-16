@@ -5,7 +5,7 @@ class Project::RisksController < Project::BaseController
     authorize [@project, :risk]
 
     @risk = Risk.new
-    @pagy, @risks = pagy_nil_safe(params, @project.risks.includes(:user).order(:status), items: LIMIT)
+    @pagy, @risks = pagy_nil_safe(params, @project.risks.includes(:user).order(status: :desc), items: LIMIT)
     render_partial("project/risks/risk", collection: @risks, cached: true) if stale?(@risks + [@project])
   end
 

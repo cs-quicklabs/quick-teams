@@ -1,33 +1,52 @@
 class User::BaseUserPolicy < ApplicationPolicy
   def index?
-    employee = record.first
-    return true if user.admin?
-    return true if user.lead? and user.subordinate?(employee)
-    return true if user.member_in_managed_project?(employee)
-    user.id == employee.id
+    is_admin? or is_project_manager? or is_team_lead? or self?
   end
 
   def create?
-    employee = record.first
-    return false unless employee.active?
-    return true if user.admin?
-    return subordinate? if user.lead?
-    false
+    return false unless is_active?
+    is_admin? or is_project_manager? or is_team_lead? or self?
+  end
+
+  def edit?
+    is_active?
+  end
+
+  def update?
+    edit?
+  end
+
+  def destroy?
+    edit?
   end
 
   private
+
+  def is_active?
+    record.first.active?
+  end
+
+  def is_project_manager?
+    user.project_manager? and user.project_participant?(record.first)
+  end
+
+  def is_admin?
+    user.admin?
+  end
+
+  def is_team_lead?
+    user.lead? and user.subordinate?(record.first)
+  end
 
   def self_or_subordinate?
     self? or subordinate?
   end
 
   def self?
-    employee = record.first
-    user.id == employee.id
+    user.id == record.first.id
   end
 
   def subordinate?
-    employee = record.first
-    user.subordinate?(employee)
+    user.subordinate?(record.first)
   end
 end

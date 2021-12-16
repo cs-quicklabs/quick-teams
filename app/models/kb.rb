@@ -8,7 +8,8 @@ class Kb < ApplicationRecord
   belongs_to :user
   belongs_to :job, optional: true
   belongs_to :discipline, optional: true
-  validates :link, :url => true
+  validates :document, presence: true
+  validates :link, :url => true, presence: true
 
   def self.query(params, includes = nil, order)
     return [] if params.empty?

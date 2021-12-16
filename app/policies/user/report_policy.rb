@@ -1,44 +1,17 @@
 class User::ReportPolicy < User::BaseUserPolicy
-  def update?
-    edit?
-  end
-
-  def index?
-    show?
-  end
-
-  def create?
-    show?
-  end
-
-  def destroy?
-    report = record.last
-    return true if user.admin? or !report.submitted?
-    false
-  end
-
   def edit?
-    report = record.last
-    return true if user.admin? or !report.submitted?
+    is_active? and (is_admin? or not record.last.submitted?)
   end
 
   def comment?
-    employee = record.first
-    report = record.second
-    return true if user.admin?
-    return true if user.lead? and user.subordinate?(employee)
-    return true if report.user == user
-    return true if report.reportable == user
+    report = record.last
+    return true if is_admin? or is_project_manager? or is_team_lead?
+    return true if (report.user == user) or (report.reportable == user)
     false
   end
 
   def show?
-    employee = record.first
-
-    return false unless employee.active?
-    return true if user.admin?
-    return true if user.lead? and user.subordinate?(employee)
-    self?
+    index?
   end
 
   private

@@ -1,13 +1,8 @@
 <%= form_with(model: @timesheet, id: dom_id(@timesheet), url: project_timesheet_path(@project, @timesheet)) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: @timesheet, message: local_assigns[:message] %>
-    <%= render "shared/form_header", title: "Add New Timesheet", subtitle: "Please fill in the details of your new timsheet." %>
-    <div>
-      <label for="date" class="block text-sm font-medium text-gray-700">
-        Select Project
-      </label>
-      <%= form.collection_select(:project_id, @projects, :id, :name, { :selected => @timesheet.project }, :class => "form-text-field mt-1") %>
-    </div>
+    <%= render "shared/form_header", title: "Edit Timesheet for project #{@timesheet.project.name}", subtitle: "Please update details of timesheet" %>
+    <%= form.hidden_field :project_id, value: @timesheet.project.id %>
     <div>
       <label for="date" class="block text-sm font-medium text-gray-700">
         Date
@@ -27,6 +22,7 @@
       <%= form.text_field :hours, class: "form-text-field mt-1", placeholder: "Time spent in hours", autocomplete: "off" %>
     </div>
     <div class="flex justify-end mt-6">
+      <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
       <%= form.submit "Edit Timesheet", class: "btn-blue" %>
     </div>
   </main><% end %>

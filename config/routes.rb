@@ -148,4 +148,5 @@ Rails.application.routes.draw do
 
   get "account/details", to: "account/account#index", as: "detail"
   patch "account/:id", to: "account/account#update", as: "update_account"
+  delete "/", to: redirect("/users/sign_in", status: 303)
 end

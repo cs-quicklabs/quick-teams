@@ -59,7 +59,6 @@ class ProjectTimesheetsTest < ApplicationSystemTestCase
     assert_text timesheet.description
     find("tr", id: dom_id(timesheet)).click_link("Edit")
     description = "spent on agile process 1"
-    select @project.name, from: "timesheet_project_id"
     fill_in "timesheet_description", with: description
     take_screenshot
     click_on "Edit Timesheet"

@@ -76,13 +76,13 @@ class ProjectTodosTest < ApplicationSystemTestCase
     find("tr", id: dom_id(todo)).click_link("Edit")
     take_screenshot
     within "##{dom_id(todo)}" do
-      fill_in "todo_title", with: "todo Edited"
+      fill_in "todo_title", with: "Todo Edited"
       click_on "Edit Todo"
       take_screenshot
       assert_no_text "Edit Todo"
     end
     assert_selector "p.notice", text: "Todo was successfully updated."
-    assert_selector "tr##{dom_id(todo)}", text: "todo Edited"
+    assert_selector "tr##{dom_id(todo)}", text: "Todo Edited"
   end
 
   test "can not edit todo with invalid params" do

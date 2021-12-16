@@ -1,7 +1,9 @@
 <tr id="<%= dom_id todo %>">
   <% todo = todo.decorate %>
   <td class="w-full table-cell">
-    <p><%= highlight_hashtag(auto_link_urls_in_text(todo.title)) %></p>
+    <a href="<%= employee_todo_url(todo.owner, todo, script_name: "/#{todo.owner.account.id}") %>" class="block hover:underline">
+      <p><%= highlight_hashtag(auto_link_urls_in_text(todo.title.upcase_first)) %></p>
+    </a>
   </td>
   <td class="table-cell  whitespace-nowrap">
     <% if current_user.admin? && !todo.project.nil? %>

@@ -206,4 +206,86 @@ class EmployeeTodosTest < ApplicationSystemTestCase
     visit page_detail_url
     assert_selector "h1", text: @member.decorate.display_name
   end
+
+  test "project manager can see own todo details" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    visit page_detail_url
+    assert_selector "h3", text: @todo.title
+  end
+
+  test "project manager can see project participant todo details" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:regular)
+    visit page_detail_url
+    assert_selector "h3", text: @todo.title
+  end
+
+  test "project manager can not see someone elses todo detail" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:admin)
+    visit page_detail_url
+    assert_selector "h1", text: @manager.decorate.display_name
+  end
+
+  test "project manager can see project participant todos" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:regular)
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Todos"
+    assert_selector "form#new_todo"
+    assert_selector "tbody#todos"
+
+    #can see delete button for his created todos
+    #can not see delete button for his not created todos
+    @employee.todos.each do |todo|
+      if todo.user == @manager && !todo.completed?
+        assert_selector "tr##{dom_id(todo)}", text: "Edit"
+        assert_selector "tr##{dom_id(todo)}", text: "Delete"
+      else
+        assert_no_selector "tr##{dom_id(todo)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(todo)}", text: "Delete"
+      end
+    end
+  end
+
+  test "project manager can not see someone elses todos" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @manager.decorate.display_name
+    assert_no_selector "form#new_todo"
+    assert_no_selector "tbody#todos"
+  end
+
+  test "project manager can see his own todos" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Todos"
+    assert_selector "form#new_todo"
+    assert_selector "tbody#todos"
+
+    #can see delete button for his created todos
+    #can not see delete button for his not created todos
+    @employee.todos.each do |todo|
+      if todo.user == @employee && !todo.completed?
+        assert_selector "tr##{dom_id(todo)}", text: "Edit"
+        assert_selector "tr##{dom_id(todo)}", text: "Delete"
+      else
+        assert_no_selector "tr##{dom_id(todo)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(todo)}", text: "Delete"
+      end
+    end
+  end
 end
