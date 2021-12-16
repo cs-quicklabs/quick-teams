@@ -25,9 +25,9 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#employee-tabs", text: "Timesheets"
     assert_selector "div#stats"
-    @employee.timesheets.each do |timesheet|
-      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
-      assert_selector "div##{dom_id(timesheet)}", text: "Delete"
+    @employee.timesheets.last_30_days.each do |timesheet|
+      assert_selector "tr##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "tr##{dom_id(timesheet)}", text: "Delete"
     end
   end
 
@@ -38,9 +38,9 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#employee-tabs", text: "Timesheets"
     assert_selector "form#new_timesheet"
-    @employee.timesheets.each do |timesheet|
-      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
-      assert_selector "div##{dom_id(timesheet)}", text: "Delete"
+    @employee.timesheets.last_30_days.each do |timesheet|
+      assert_selector "tr##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "tr##{dom_id(timesheet)}", text: "Delete"
     end
   end
 
@@ -50,9 +50,9 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_url
     assert_selector "div#employee-tabs", text: "Timesheets"
-    @employee.timesheets.each do |timesheet|
-      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
-      assert_selector "div##{dom_id(timesheet)}", text: "Delete"
+    @employee.timesheets.last_30_days.each do |timesheet|
+      assert_selector "tr##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "tr##{dom_id(timesheet)}", text: "Delete"
     end
   end
 
@@ -62,9 +62,9 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     sign_in @employee
     visit subordinate_page_url
     assert_selector "div#employee-tabs", text: "Timesheets"
-    @employee.timesheets.each do |timesheet|
-      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
-      assert_no_selector "div##{dom_id(timesheet)}", text: "Delete"
+    @employee.timesheets.last_30_days.each do |timesheet|
+      assert_selector "tr##{dom_id(timesheet)}", text: "Edit"
+      assert_no_selector "tr##{dom_id(timesheet)}", text: "Delete"
     end
   end
 
@@ -84,9 +84,9 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_url
     assert_selector "div#employee-tabs", text: "Timesheets"
-    @employee.timesheets.each do |timesheet|
-      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
-      assert_no_selector "div##{dom_id(timesheet)}", text: "Delete"
+    @employee.timesheets.last_30_days.each do |timesheet|
+      assert_selector "tr##{dom_id(timesheet)}", text: "Edit"
+      assert_no_selector "tr##{dom_id(timesheet)}", text: "Delete"
     end
   end
 
@@ -97,6 +97,41 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     @employee = users(:admin)
     visit page_url
     assert_selector "h1", text: @member.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Timesheets"
+  end
+
+  test "project manager can see his timesheets" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Timesheets"
+    @employee.timesheets.last_30_days.each do |timesheet|
+      assert_selector "tr##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "tr##{dom_id(timesheet)}", text: "Delete"
+    end
+  end
+
+  test "project manager can see his project particiapants timesheet" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:regular)
+    visit employee_timesheets_url(script_name: "/#{@account.id}", employee_id: @employee.id)
+    assert_selector "div#employee-tabs", text: "Timesheets"
+    @employee.timesheets.last_30_days.each do |timesheet|
+      assert_selector "tr##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "tr##{dom_id(timesheet)}", text: "Delete"
+    end
+  end
+
+  test "project manager can not see someone elseses timesheet" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @manager.decorate.display_name
     assert_selector "div#employee-tabs", text: "Timesheets"
   end
 end
