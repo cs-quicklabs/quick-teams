@@ -14,7 +14,7 @@ class ReportDecorator < Draper::Decorator
     if self.submitted?
       "green"
     else
-      "blue"
+      "yellow"
     end
   end
 end

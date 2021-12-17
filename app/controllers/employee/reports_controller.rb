@@ -29,13 +29,10 @@ class Employee::ReportsController < Employee::BaseController
     @report = AddEmployeeReport.call(@employee, report_params, params, current_user).result
 
     respond_to do |format|
-      if @report.persisted?
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend(:reports, partial: "employee/reports/report", locals: { report: @report }) +
-                               turbo_stream.replace(Report.new, partial: "employee/reports/form", locals: { report: Report.new })
-        }
+      if @report.errors.empty?
+        format.html { redirect_to employee_report_path(@employee, @report), notice: "Report was successfully created." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Report.new, partial: "employee/reports/form", locals: { report: @report }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Report.new, partial: "employee/reports/form", locals: { report: @report, title: "Create New Employee", subtitle: "Please fill in the details of you new Employee." }) }
       end
     end
   end

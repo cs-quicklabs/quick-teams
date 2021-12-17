@@ -5,10 +5,14 @@ class Project::ReportsController < Project::BaseController
     authorize [@project, Report]
 
     @report = Report.new
-    @templates = Template.all
-    @assigns = @project.templates_assignees.includes(:template)
+
     @pagy, @reports = pagy_nil_safe(params, @project.reports.order(created_at: :desc), items: LIMIT)
     render_partial("project/reports/report", collection: @reports) if stale?(@reports + [@project])
+  end
+
+  def new
+    authorize [@project, Report]
+    @report = Report.new
   end
 
   def edit
@@ -19,13 +23,10 @@ class Project::ReportsController < Project::BaseController
     authorize [@project, Report]
     @report = AddProjectReport.call(@project, report_params, params, current_user).result
     respond_to do |format|
-      if @report.persisted?
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.prepend(:reports, partial: "project/reports/report", locals: { report: @report }) +
-                               turbo_stream.replace(Report.new, partial: "project/reports/form", locals: { report: Report.new })
-        }
+      if @report.errors.empty?
+        format.html { redirect_to project_report_path(@project, @report), notice: "Report was successfully created." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Report.new, partial: "project/reports/form", locals: { report: @report }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Report.new, partial: "project/reports/form", locals: { report: @report, title: "Create New Project", subtitle: "Please fill in the details of you new Project." }) }
       end
     end
   end

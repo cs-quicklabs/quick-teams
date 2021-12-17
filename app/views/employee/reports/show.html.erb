@@ -34,7 +34,7 @@
   <% end %>
   <% if policy([@report.reportable, @report]).edit? %>
     <% if @report.submitted? %>
-      <div class="p-4 rounded-md bg-<%= @report.display_status %>-100">
+      <div class="p-4 rounded-md bg-green-50">
         <div class="flex">
           <div class="flex-shrink-0">
             <!-- Heroicon name: solid/check-circle -->
@@ -51,7 +51,7 @@
       </div>
     <% else %>
       <!-- This example requires Tailwind CSS v2.0+ -->
-      <div class="p-4 rounded-md bg-<%= @report.display_status %>-100">
+      <div class="p-4 rounded-md bg-blue-50">
         <div class="flex">
           <div class="flex-shrink-0">
             <!-- Heroicon name: solid/information-circle -->

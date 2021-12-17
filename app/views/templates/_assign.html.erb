@@ -1,16 +1,21 @@
 <% assignable=assign.assignable.decorate %>
-<li class="py-4 flex" id = "<%= dom_id(assign) %>">
+<li class="py-4 " id = "<%= dom_id(assign) %>">
   <div class="ml-3">
     <%if assign.assignable_type == "User" %>
-      <div class="flex items-center">
-        <div class="flex-shrink-0 w-10 h-10">
-          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center ">
+          <div class="flex-shrink-0 w-10 h-10">
+            <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+          </div>
+          <div class="ml-4">
+            <a href="<%= employee_team_path(assignable) %>" class=" hover:text-gray-600 hover:underline">
+              <div class="text-sm font-medium text-gray-900"><%= assignable.display_name %></div>
+              <div class="text-sm font text-gray-900"> <%= assignable.email %></div>
+            </a>
+          </div>
         </div>
-        <div class="ml-4">
-          <a href="<%= employee_team_path(assignable) %>" class=" hover:text-gray-600 hover:underline">
-            <div class="text-sm font-medium text-gray-900"><%= assignable.display_name %></div>
-            <div class="text-sm font text-gray-900"> <%= assignable.email %></div>
-          </a>
+        <div class="flex justify-end">
+          <%= delete_button(templates_assignee_path(assign.id)) %>
         </div>
       </div>
     <% else %>
