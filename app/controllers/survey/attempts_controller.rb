@@ -4,6 +4,7 @@ class Survey::AttemptsController < Survey::BaseController
   before_action :set_attempt, only: [:destroy, :update]
   before_action :set_attempt_with_survey, only: [:preview, :show]
   before_action :set_participant, only: [:preview]
+  before_action :attempt_for_questions, only: [:survey_questions]
 
   def index
     authorize [:survey, :attempt]
@@ -34,17 +35,17 @@ class Survey::AttemptsController < Survey::BaseController
   end
 
   def show
-    authorize [:survey, :attempt]
+    authorize [@attempt]
   end
 
   def survey_questions
-    authorize [:survey, :attempt], :show?
-    @attempt = Survey::Attempt.find(params[:attempt_id])
+    authorize [@attempt], :show?
+
     @questions = @attempt.survey.questions.includes(:options, :question_category).order_by_category
   end
 
   def preview
-    authorize [:survey, :attempt]
+    authorize [@attempt]
   end
 
   def destroy
@@ -101,15 +102,19 @@ class Survey::AttemptsController < Survey::BaseController
   end
 
   def set_attempt
-    @attempt = Survey::Attempt.find(params[:id])
+    @attempt ||= Survey::Attempt.find(params[:id])
   end
 
   def set_attempt_with_survey
-    @attempt = Survey::Attempt.includes(:actor, :participant, :answers, survey: [:questions]).find(params[:id])
+    @attempt ||= Survey::Attempt.includes(:actor, :participant, :answers, survey: [:questions]).find(params[:id])
   end
 
   def set_participant
     @klass = @attempt.survey.survey_for.resolve_class
-    @participant = @klass.find(@attempt.participant_id)
+    @participant ||= @klass.find(@attempt.participant_id)
+  end
+
+  def attempt_for_questions
+    @attempt ||= Survey::Attempt.find(params[:attempt_id])
   end
 end
