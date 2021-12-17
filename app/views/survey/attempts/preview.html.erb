@@ -66,13 +66,15 @@
           <span class="align-text-bottom  ">
             <% unless @attempt.comment.blank? %>
               <h4 class="align-text-bottom font-medium text-sm">Comment: </h4>
-              <h4 class=" align-text-bottom text-gray-500  text-sm"><%= @attempt.comment %></h4>
+              <h4 class=" align-text-bottom text-gray-500  text-sm"><%= @attempt.comment.upcase_first %></h4>
             <% end %>
           </span>
         </div>
         <div class=" sm:col-span-4 px-6 flex justify-end  overflow-y-auto py-6">
           <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
-          <%= link_to "Download PDF", survey_report_pdf_path(@survey, @attempt, format: :pdf), target: "_blank", class: "btn-blue" %>
+          <% if policy([:survey, :report]).download? %>
+            <%= link_to "Download PDF", survey_report_pdf_path(@survey, @attempt, format: :pdf), target: "_blank", class: "btn-blue" %>
+          <% end %>
         </div>
       <% end %>
     </div>
