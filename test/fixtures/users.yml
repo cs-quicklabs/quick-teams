@@ -330,4 +330,21 @@ subordinate:
   status: deployed
   people_tags: star
 
+leadmanager:
+  first_name: Aashish
+  last_name: Dhawan (LeadManager)
+  active: true
+  email: leadmanager@crownstack.com
+  account: crownstack
+  job: ios
+  role: senior
+  discipline: engineering
+  manager: admin
+  permission: lead
+  status: deployed
+  people_tags: star
+  confirmed_at: 2021-03-18
+  sign_in_count: 1  
+
+
 

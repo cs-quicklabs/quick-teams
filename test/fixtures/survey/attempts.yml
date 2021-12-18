@@ -9,3 +9,21 @@ project:
   actor: regular
   survey: project
   participant_type: Project
+
+one:
+  participant: managed
+  actor: manager
+  survey: project
+  participant_type: Project
+
+two:
+  participant: one
+  actor: manager
+  survey: project
+  participant_type: Project
+
+three:
+  participant: managed
+  actor: admin
+  survey: project
+  participant_type: Project
