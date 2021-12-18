@@ -1,0 +1,10 @@
+one:
+  template: one
+  assignable_type: User
+  assignable: regular
+
+two:
+  template: one
+  assignable_type: User
+  assignable: regular
+

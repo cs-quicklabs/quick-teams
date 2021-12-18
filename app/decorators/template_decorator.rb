@@ -1,4 +1,4 @@
-class ReportDecorator < Draper::Decorator
+class TemplateDecorator < Draper::Decorator
   delegate_all
   decorates_association :user
 
@@ -8,13 +8,5 @@ class ReportDecorator < Draper::Decorator
 
   def display_body
     "#{body.titleize}"
-  end
-
-  def display_status
-    if self.submitted?
-      "green"
-    else
-      "yellow"
-    end
   end
 end

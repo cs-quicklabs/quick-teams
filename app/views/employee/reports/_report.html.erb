@@ -4,7 +4,7 @@
     <%= link_to report.display_title, employee_report_path(report.reportable, report), class: "btn-intdne-edit pl-2 hover:underline" %>
   </td>
   <td class="table-cell">
-    <span class="intdne-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= report.display_status %>-100 text-green-800">
+    <span class="intdne-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= report.display_status %>-100 text-<%= report.display_status %>-800">
       <%= report.submitted ? "Submitted" : "Draft" %>
     </span>
   </td>

@@ -27,12 +27,14 @@ class User < ApplicationRecord
   has_many :reports, as: :reportable
   has_many :documents, as: :documenter
   has_many :goals, as: :goalable
+  has_many :templates_assignees, as: :assignable
   has_many :events, as: :eventable
   #has_many :attempts, class_name: "Survey::Attempt", foreign_key: "participant_id", as: :participant
   has_many :attempts, as: :participant
   has_many :surveys, class_name: "Survey::Survey", foreign_key: "actor__id"
   has_many :attempt, class_name: "Survey::Attempt", foreign_key: "actor__id"
   has_many :notes
+  has_many :templates
   has_many :timesheets
   has_many :kbs
   has_many :managed_projects, class_name: "Project", foreign_key: "manager_id"

@@ -8,6 +8,14 @@ class Report < ApplicationRecord
   scope :submitted, -> { where(submitted: true) }
   scope :pending, -> { where(submitted: false) }
 
+  def clone(template, employee, actor)
+    self.title = template.title + " Report"
+    self.body = template.body
+    self.reportable = employee
+    self.user = actor
+    self.save!
+  end
+
   def self.query(params, includes = nil, order)
     return [] if params.empty?
     ReportQuery.new(self.includes(includes), params, order).filter

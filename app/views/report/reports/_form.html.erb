@@ -14,17 +14,12 @@
                 </label>
                 <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
-              <div>
-                <label for="prjects" class="block text-sm font-medium text-gray-700">
-                  Projects
-                </label>
-                <%= form.collection_select(:project_id, Project.all.decorate, :id, :display_name, { :prompt => "Select Project", :selected => (params["project_id"] if !params["project_id"].blank?) }, :class => "form-text-field mt-1") %>
-              </div>
+              <%=  form.hidden_field :reportable_type, :value => "User" %>
               <div>
                 <label for="status" class="block text-sm font-medium text-gray-700">
                   Status
                 </label>
-                <%= form.select(:published, [["Any", ""], ["Submitted", "true"], ["Draft", "false"]], { :selected => (params["published"] if !params["published"].blank?) }, :class => "form-text-field mt-1") %>
+                <%= form.select(:submitted, [["Any", ""], ["Submitted", "true"], ["Draft", "false"]], { :selected => (params["submitted"] if !params["submitted"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
               <div class="flex justify-end mt-6">
                 <%= link_to "Reset", report_reports_path, class: "btn-normal" %>

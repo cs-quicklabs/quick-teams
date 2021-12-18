@@ -1,0 +1,51 @@
+<section aria-labelledby="add-participant-section" id="add-assignee">
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%if resource.class.name=="User"%>
+      <% if policy(:template).add? %>
+        <%= tailwind_form_with(url: templates_assignees_path(), method: "post") do |f| %>
+          <%= render "shared/form_messages", resource: assign, message: local_assigns[:message] %>
+          <%= render "shared/form_header", title: "Add Report", subtitle: "A report can be added by employee which might be useful in performace review later" %>
+          <label for="users" class="block text-sm font-medium text-gray-700 py-4 mb-1">
+            Choose template to assign to
+          </label>
+          <%= f.collection_select(:template_id, templates.decorate, :id, :display_title, { :prompt => "Select Assignee" }, :class => "form-text-field mt-1") %>
+          <div class="flex justify-end  mt-1 w-full ">
+            <button type="submit" class="mt-4 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Assign Report
+            </button>
+            <%= f.hidden_field :assignable_id, value:  resource.id  %>
+            <%= f.hidden_field :assignable_type, value:  resource.class.name  %>
+          </div>
+        <%end %>
+      <%end %>
+    </section>
+    <div id="assignees">
+      <% if @assigns.size > 0 %>
+        <div class="mt-1 text-sm text-gray-900 border-t  border-gray-200 py-2">
+          <p class="mt-1 text-sm text-gray-500 py-4 text-center">Please find the list of templates below</p>
+          <ul class="divide-y divide-gray-200 bg-white " id="assignees">
+            <%= render partial: "shared/templates/template",  collection: @assigns, as: :assign, cached: false %>
+          </ul>
+        </div>
+      <%else%>
+        <p class="text-center  text-sm text-gray-500">No templates assigned to this employee</p>
+      <%end%>
+    </div>
+    <div class="border-t  border-gray-200">
+      <p class="mt-1 text-sm text-gray-500 py-2 text-center">
+        Please click on button below to create custom report.
+      </p>
+      <div class="justify-center flex ">
+        <%= link_to "Add Custom Report", new_employee_report_path(resource), class: "btn-blue  items-center mt-4" %>
+      </div>
+    <% else %>
+      <%= render "shared/form_header", title: "Add New Report", subtitle: "A report can be added by employee which might be useful in performace review later" %>
+      <p class="mt-1 text-sm text-gray-500 py-4 text-center">
+        Please click on button below to create custom report.
+      </p>
+      <div class="justify-center flex mt-8 mr-4">
+        <%= link_to "Add Custom Report", new_project_report_path(resource), class: "btn-blue" %>
+      </div>
+    </div>
+  <%end%>
+</main>

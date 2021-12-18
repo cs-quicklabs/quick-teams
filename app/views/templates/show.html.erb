@@ -1,0 +1,30 @@
+<div class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16 bg-white" id="template">
+  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 sm:border-b sm:border-gray-200" id="milestone-detail">
+    <%= render partial: "shared/templates/title", locals: { template: @template } %>
+    <div class="flex mt-4 sm:mt-0 sm:ml-4">
+      <% if policy([@template]).edit? %>
+        <div class="flex justify-end items-center space-x-2">
+          <%= styled_edit_button(edit_template_path(@template), "btn-blue") %>
+          <%= styled_delete_button(template_path(@template), "btn-red") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="mt-1 text-sm text-gray-900 sm:px-6 lg:px-8">
+    <p><%= @template.body %></p>
+  </div>
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  <div class="bg-white border-t  border-gray-300 overflow-hidden">
+    <% if @assigns.size > 0 %>
+      <div class="mt-1 text-sm text-gray-900 sm:px-6 lg:px-8">
+        <p class="text-sm font-medium text-gray-900 pt-4">Please find the list of assignees below</p>
+      </div>
+      <ul role="list" class="divide-y divide-gray-300 py-4 sm:px-6 lg:px-8 ">
+        <%= render partial: "assign", collection: @assigns, as: :assign, cached: true %>
+      </ul>
+    <% else %>
+      <div class="mt-1 text-sm text-gray-900 sm:px-6 lg:px-8">
+        <p class="text-sm  text-gray-900 pt-4">No assignees assigned to the template</p>
+      </div>
+    <%end %>
+  </div>

@@ -1,4 +1,4 @@
-# one:
-#   record: name_of_fixture (ClassOfFixture)
-#   name: content
-#   body: <p>In a <i>million</i> stars!</p>
+ one:
+   record: one(Template)
+   name: body
+   body: <div>This is some report</div>

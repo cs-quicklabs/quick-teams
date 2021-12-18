@@ -18,7 +18,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
     take_screenshot
     assert_selector "h1", text: "#{@project.name}"
     assert_selector "div#project-tabs", text: "Reports"
-    assert_text "Add New report"
+    assert_text "Add New Report"
   end
 
   test "can not visit index if not logged in" do
@@ -29,24 +29,29 @@ class ProjectReportsTest < ApplicationSystemTestCase
 
   test "can add new report" do
     visit page_url
+    click_on "Add Custom Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
     click_on "Submit Report"
     take_screenshot
-    assert_selector "tbody#reports", text: "Some Random report Title"
+    assert_selector "h3", text: "Some Random report Title"
+    assert_selector "div", text: "Some Random report Title"
   end
 
   test "can draft new report" do
     visit page_url
+    click_on "Add Custom Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
     click_on "Save As Draft"
     take_screenshot
-    assert_selector "tbody#reports", text: "Some Random report Title"
+    assert_selector "h3", text: "Some Random report Title"
+    assert_selector "div", text: "Some Random report Title"
   end
 
   test "can not draft report with empty details" do
     visit page_url
+    click_on "Add Custom Report"
     click_on "Save As Draft"
     assert_selector "div#error_explanation", text: "Title can't be blank"
     take_screenshot
@@ -54,6 +59,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
 
   test "can not add report with empty details" do
     visit page_url
+    click_on "Add Custom Report"
     click_on "Submit Report"
     assert_selector "div#error_explanation", text: "Title can't be blank"
     assert_selector "div#error_explanation", text: "Body can't be blank"
@@ -78,10 +84,10 @@ class ProjectReportsTest < ApplicationSystemTestCase
     take_screenshot
   end
 
-  test "can not show add report when user is deactivated" do
-    inactive_project = users(:inactive)
+  test "can not show add report when user is archived" do
+    inactive_project = projects(:archived)
     visit project_reports_url(script_name: "/#{@account.id}", project_id: inactive_project.id)
-    assert_no_text "Add New report"
+    assert_no_text "Add New Report"
   end
 
   test "can edit report if not submitted" do
