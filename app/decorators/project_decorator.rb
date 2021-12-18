@@ -5,6 +5,10 @@ class ProjectDecorator < Draper::Decorator
     name.upcase_first
   end
 
+  def full_display_name
+    display_name
+  end
+
   def display_discipline
     "in #{project.discipline.name}"
   end
