@@ -6,6 +6,7 @@ class Employee::ReportsController < Employee::BaseController
 
     @report = Report.new
     @templates = Template.all
+    @assign = TemplatesAssignee.new
     @assigns = @employee.templates_assignees.includes(:template)
     @pagy, @reports = pagy_nil_safe(params, employee_reports, items: LIMIT)
     render_partial("employee/reports/report", collection: @reports) if stale?(@reports + [@employee])
@@ -64,7 +65,7 @@ class Employee::ReportsController < Employee::BaseController
       if @report.errors.empty?
         format.html { redirect_to employee_report_path(@report.reportable, @report), notice: "report was successfully updated." }
       else
-        format.html { redirect_to edit_employee_report_path(@report), alert: "Failed to update. Please try again." }
+        format.html { redirect_to edit_employee_report_path(@report.reportable, @report), alert: "Failed to update. Please try again." }
       end
     end
   end

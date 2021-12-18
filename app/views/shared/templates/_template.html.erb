@@ -1,10 +1,6 @@
-<% templates.each do |assigns| %>
-  <%  templates.map(&:template).flatten.each do |template| %>
-    <li class="flex  " id="<%= dom_id(assigns) %>">
-      <div class="w-full ml-3">
-        <%= link_to template.decorate.display_title, new_employee_report_path(resource, template_id: template.id),  class: "hover:underline text-sm font-medium text-gray-500" %>
-      </div>
-      <%= delete_button(templates_assignee_path(assigns.id)) %>
-    <% end %>
-  </li>
-<% end %>
+<li class="flex  py-2" id="<%= dom_id(assign) %>">
+  <div class="w-full ml-3">
+    <%= link_to assign.template.decorate.display_title, new_employee_report_path(assign.assignable, template_id: assign.template.id),  class: "hover:underline text-sm font-medium text-gray-500" %>
+  </div>
+  <%= delete_button(templates_assignee_path(assign.id)) %>
+</li>

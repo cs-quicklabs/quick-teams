@@ -6,13 +6,13 @@ class TemplatesAssigneesController < BaseController
   def create
     authorize :template
 
-    @assignee = TemplatesAssignee.create(assignee_params)
+    @assign = TemplatesAssignee.create(assignee_params)
     @assigns = @resource.templates_assignees.includes(:template)
     respond_to do |format|
-      if @assignee.persisted?
+      if @assign.persisted?
         format.turbo_stream {
-          render turbo_stream: turbo_stream.append(:assignees, partial: "shared/templates/template", locals: { templates: @assigns, resource: @resource }) +
-                               turbo_stream.replace("add-assignee", partial: "shared/templates/templateform", locals: { templates: Template.all, resource: @resource, message: "Assignee was added successfully." })
+          render turbo_stream: turbo_stream.append(:assignees, partial: "shared/templates/template", locals: { assign: @assign }) +
+                               turbo_stream.replace("add-assignee", partial: "shared/templates/templateform", locals: { templates: Template.all, resource: @resource, assign: TemplatesAssignee.new, message: "Assignee was added successfully." })
         }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace("add-assignee", partial: "shared/templates/templateform", locals: { templates: @templates, resource: @resource, message: "Unable to add assignee. Plese try again later" }) }

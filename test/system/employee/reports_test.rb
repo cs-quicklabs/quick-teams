@@ -19,7 +19,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     take_screenshot
     assert_selector "h1", text: "#{@employee.first_name} #{@employee.last_name}"
     assert_selector "div#employee-tabs", text: "Reports"
-    assert_text "Add New report"
+    assert_text "Add Report"
   end
 
   test "can not visit index if not logged in" do
@@ -30,24 +30,39 @@ class EmployeeReportsTest < ApplicationSystemTestCase
 
   test "can add new report" do
     visit page_url
+    click_on "Add Custom Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
     click_on "Submit Report"
     take_screenshot
-    assert_selector "tbody#reports", text: "Some Random report Title"
+    assert_selector "h3", text: "Some Random report Title"
+    assert_selector "div", text: "This is some report"
+  end
+
+  test "can add new template report if assigned" do
+    visit page_url
+    @assign = @employee.templates_assignees.first
+    find("li", id: dom_id(@assign)).click_link(@assign.template.title)
+    click_on "Submit Report"
+    take_screenshot
+    assert_selector "h3", text: @assign.template.title + " Report"
+    assert_selector "div", text: "This is some report"
   end
 
   test "can draft new report" do
     visit page_url
+    click_on "Add Custom Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
     click_on "Save As Draft"
     take_screenshot
-    assert_selector "tbody#reports", text: "Some Random report Title"
+    assert_selector "h3", text: "Some Random report Title"
+    assert_selector "div", text: "This is some report"
   end
 
   test "can not draft report with empty details" do
     visit page_url
+    click_on "Add Custom Report"
     click_on "Save As Draft"
     assert_selector "div#error_explanation", text: "Title can't be blank"
     take_screenshot
@@ -55,6 +70,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
 
   test "can not add report with empty details" do
     visit page_url
+    click_on "Add Custom Report"
     click_on "Submit Report"
     assert_selector "div#error_explanation", text: "Title can't be blank"
     assert_selector "div#error_explanation", text: "Body can't be blank"
@@ -115,8 +131,10 @@ class EmployeeReportsTest < ApplicationSystemTestCase
 
   test "can not edit report with invalid params" do
     visit page_url
-    report = @employee.reports.first
+    report = @employee.reports.where(submitted: false).first
+
     find("tr", id: dom_id(report)).click_link("Edit")
+
     fill_in "Title", with: nil
     click_on "Submit Report"
     assert_selector "p.alert", text: "Failed to update. Please try again."
