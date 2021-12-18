@@ -14,7 +14,7 @@
                 </label>
                 <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
-              <%=  form.hidden_field :reportable_type, :value => "User" %>
+              <%= form.hidden_field :reportable_type, :value => "User" %>
               <div>
                 <label for="status" class="block text-sm font-medium text-gray-700">
                   Status

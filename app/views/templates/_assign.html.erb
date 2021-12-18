@@ -1,7 +1,7 @@
-<% assignable=assign.assignable.decorate %>
+<% assignable = assign.assignable.decorate %>
 <li class="py-4 " id = "<%= dom_id(assign) %>">
   <div class="ml-3">
-    <%if assign.assignable_type == "User" %>
+    <% if assign.assignable_type == "User" %>
       <div class="flex items-center justify-between">
         <div class="flex items-center ">
           <div class="flex-shrink-0 w-10 h-10">
@@ -27,6 +27,6 @@
           </span>
         </a>
       </div>
-    <%end%>
+    <% end %>
   </div>
 </li>
