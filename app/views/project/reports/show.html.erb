@@ -15,7 +15,7 @@
             <a href="<%= project_reports_path(@report.reportable) %>" class="font-medium text-gray-900 hover:underline"><%= @report.reportable.decorate.display_name %></a>
           </div>
           <div class="mt-1 space-x-2 text-sm">
-            <span class="font-medium text-gray-500"> Created On <%= display_created_at(@report) %> By <%= @report.user.display_name%></span>
+            <span class="font-medium text-gray-500"> Created On <%= display_created_at(@report) %> By <%= @report.user.display_name %></span>
           </div>
         </div>
       </div>

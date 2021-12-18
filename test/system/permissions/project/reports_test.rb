@@ -27,14 +27,13 @@ class ProjectReportsTest < ApplicationSystemTestCase
     assert_selector "div#report-list"
     assert_selector "div#new_report"
   end
+
   test "admin can see project report details" do
     sign_out @employee
     @employee = users(:super)
     sign_in @employee
     visit page_detail_url
     assert_selector "div#report-detail"
-    #can see edit
-    assert_selector "a", text: "Edit"
     #can comment
     assert_selector "div#comment"
   end

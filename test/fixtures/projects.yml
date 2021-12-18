@@ -35,3 +35,10 @@ managed:
   account: crownstack
   manager: manager
   discipline: engineering
+
+leadmanaged:
+  name: Markarian
+  archived: false
+  account: crownstack
+  manager: leadmanager
+  discipline: engineering

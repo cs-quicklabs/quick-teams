@@ -29,6 +29,7 @@ class Survey::AssigneesController < Survey::BaseController
 
   def destroy
     authorize [:survey, :assignee]
+
     klass = @survey.survey_for.resolve_class
     @assignee = klass.find(params[:id])
     @assignee.update(kpi_id: nil)

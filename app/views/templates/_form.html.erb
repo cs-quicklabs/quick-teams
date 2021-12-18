@@ -5,7 +5,7 @@
         <%= render "shared/form_messages", resource: template, message: local_assigns[:message] %>
         <%= render "shared/form_header", title: title, subtitle: "A Template is a byte sized lesson assigned to a skill. A template is sent to a person who has subscribed to a skill on daily basis helping them to form leaning habbit. template needs to be reviewed and approved by admin before it is published to people." %>
         <%= form.text_field :title, "Title", autocomplete: "off" %>
-        <%= form.hidden_field :user_id, value:  current_user.id  %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
         <%= form.rich_text_area :body, "Byte Sized Lesson", class: "form-text-field" %>
         <div class="flex justify-end">
           <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>

@@ -7,27 +7,43 @@ class Survey::AttemptPolicy < Survey::BaseSurveyPolicy
     true
   end
 
-  def edit?
-    true
-  end
-
   def create?
     true
   end
 
+  def edit?
+    attempt = record.first
+    user.admin? or (attempt.actor == user and not attempt.submitted?)
+  end
+
   def show?
-    true
+    attempt = record.first
+    attempt.participant_type == "Project" ? show_project_survey_attempt? : show_employee_survey_attempt?
   end
 
   def update?
-    true
+    edit?
   end
 
   def preview?
-    true
+    show?
   end
 
   def destroy?
-    true
+    edit?
+  end
+
+  private
+
+  def show_project_survey_attempt?
+    attempt = record.first
+    project = attempt.participant
+    user.admin? or user.is_manager?(project)
+  end
+
+  def show_employee_survey_attempt?
+    attempt = record.first
+    employee = attempt.participant
+    user.admin? or user.subordinate?(employee) or user.project_participant?(employee) or attempt.actor == user
   end
 end

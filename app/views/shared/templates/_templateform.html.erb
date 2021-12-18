@@ -1,6 +1,6 @@
 <section aria-labelledby="add-participant-section" id="add-assignee">
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
-    <%if resource.class.name=="User"%>
+    <% if resource.class.name == "User" %>
       <% if policy(:template).add? %>
         <%= tailwind_form_with(url: templates_assignees_path(), method: "post", id:"new_report") do |f| %>
           <%= render "shared/form_messages", resource: assign, message: local_assigns[:message] %>
@@ -13,11 +13,11 @@
             <button type="submit" class="mt-4 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Assign Template
             </button>
-            <%= f.hidden_field :assignable_id, value:  resource.id  %>
-            <%= f.hidden_field :assignable_type, value:  resource.class.name  %>
+            <%= f.hidden_field :assignable_id, value: resource.id %>
+            <%= f.hidden_field :assignable_type, value: resource.class.name %>
           </div>
-        <%end %>
-      <%end %>
+        <% end %>
+      <% end %>
     </section>
     <% if @assigns.size > 0 %>
       <div class="mt-1 text-sm text-gray-900 border-t  border-gray-200 py-2">
