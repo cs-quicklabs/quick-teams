@@ -4,7 +4,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
       @template.content_tag :div do
         label(name, title, class: "block text-sm font-medium text-gray-700") +
         (@template.content_tag :div, class: "mt-1" do
-          super(name, options.reverse_merge(class: "form-text-field"))
+          super(name, options.reverse_merge(class: "form-text-field h-24"))
         end)
       end
     end
@@ -22,7 +22,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def text_area(method, title, opts = {})
-    default_opts = { class: "form-text-field" }
+    default_opts = { class: "form-text-field h-24" }
     merged_opts = default_opts.merge(opts)
     @template.content_tag :div do
       label(method, title, class: "block text-sm font-medium text-gray-700") +
