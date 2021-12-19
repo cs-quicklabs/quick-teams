@@ -7,4 +7,8 @@ class Project::ReportPolicy < Project::BaseProjectPolicy
   def comment?
     create?
   end
+
+  def destroy?
+    user.admin?
+  end
 end

@@ -16,6 +16,9 @@
                         Report
                       </th>
                       <th scope="col" class="table-head">
+                        Created By
+                      </th>
+                      <th scope="col" class="table-head">
                         Status
                       </th>
                       <th scope="col" class="table-head">
@@ -41,9 +44,12 @@
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
             <section aria-labelledby="add-participant-section">
-              <div class="overflow-hidden bg-white">
-                <div class="px-4">
-                  <%= render "project/reports/form", report: @report %>
+              <div class="overflow-hidden bg-white pb-2">
+                <p class="text-sm text-gray-500 mt-4 text-center p-2">
+                  A report can be anything about the project, for example, milestones updates or anything you want to share with your team.
+                </p>
+                <div class="justify-center flex ">
+                  <%= link_to "Submit New Report", new_project_report_path(@project), class: "btn-blue items-center mt-2 p-2" %>
                 </div>
               </div>
             </section>

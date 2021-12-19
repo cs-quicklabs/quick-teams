@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_131428) do
+ActiveRecord::Schema.define(version: 2021_12_14_105200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -502,6 +502,26 @@ ActiveRecord::Schema.define(version: 2021_12_11_131428) do
     t.index ["account_id"], name: "index_tags_on_account_id"
   end
 
+  create_table "templates", force: :cascade do |t|
+    t.text "title"
+    t.bigint "user_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_templates_on_account_id"
+    t.index ["user_id"], name: "index_templates_on_user_id"
+  end
+
+  create_table "templates_assignees", force: :cascade do |t|
+    t.bigint "template_id", null: false
+    t.string "assignable_type", null: false
+    t.bigint "assignable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assignable_type", "assignable_id"], name: "index_templates_assignees_on_assignable"
+    t.index ["template_id"], name: "index_templates_assignees_on_template_id"
+  end
+
   create_table "timesheets", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.bigint "project_id", null: false
@@ -646,6 +666,9 @@ ActiveRecord::Schema.define(version: 2021_12_11_131428) do
   add_foreign_key "survey_surveys", "users", column: "actor_id"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "accounts"
+  add_foreign_key "templates", "accounts"
+  add_foreign_key "templates", "users"
+  add_foreign_key "templates_assignees", "templates"
   add_foreign_key "timesheets", "accounts"
   add_foreign_key "timesheets", "projects"
   add_foreign_key "timesheets", "users"
