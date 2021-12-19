@@ -12,8 +12,12 @@
           <p class="text-sm text-gray-500">
             <a href="<%= employee_timeline_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
             submitted a new report 
-            titled
-            <a href="<%= employee_report_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title.upcase_first) %></a>
+            <% if event.trackable.nil? %>
+              which does not exists anymore 
+            <% else %>
+              titled
+              <a href="<%= employee_feedback_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title) %></a>
+            <% end %>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">
