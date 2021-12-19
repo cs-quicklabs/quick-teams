@@ -3,10 +3,6 @@ class Employee::ReportsController < Employee::BaseController
 
   def index
     authorize [@employee, Report]
-
-    @report = Report.new
-    @templates = Template.all
-    @assign = TemplatesAssignee.new
     @assigns = @employee.templates_assignees.includes(:template)
     @pagy, @reports = pagy_nil_safe(params, employee_reports, items: LIMIT)
     render_partial("employee/reports/report", collection: @reports) if stale?(@reports + [@employee])
@@ -15,23 +11,15 @@ class Employee::ReportsController < Employee::BaseController
   def new
     authorize [@employee, Report]
     @report = Report.new
-    if params[:template_id]
-      @template = Template.find(params[:template_id])
-      @clone = @report.clone(@template, @employee, current_user)
-      respond_to do |format|
-        format.html { redirect_to edit_employee_report_path(@employee, @report) }
-      end
-    end
   end
 
   def create
     authorize [@employee, Report]
 
     @report = AddEmployeeReport.call(@employee, report_params, params, current_user).result
-
     respond_to do |format|
       if @report.errors.empty?
-        format.html { redirect_to employee_report_path(@employee, @report), notice: "Report was successfully created." }
+        format.html { redirect_to employee_reports_path(@employee), notice: "Report was successfully created." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Report.new, partial: "employee/reports/form", locals: { report: @report, title: "Create New Employee", subtitle: "Please fill in the details of you new Employee." }) }
       end
@@ -63,7 +51,7 @@ class Employee::ReportsController < Employee::BaseController
     @report = UpdateReport.call(@report, report_params, params).result
     respond_to do |format|
       if @report.errors.empty?
-        format.html { redirect_to employee_report_path(@report.reportable, @report), notice: "report was successfully updated." }
+        format.html { redirect_to employee_reports_path(@employee), notice: "report was successfully updated." }
       else
         format.html { redirect_to edit_employee_report_path(@report.reportable, @report), alert: "Failed to update. Please try again." }
       end

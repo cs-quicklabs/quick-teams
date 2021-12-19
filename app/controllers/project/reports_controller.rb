@@ -3,9 +3,6 @@ class Project::ReportsController < Project::BaseController
 
   def index
     authorize [@project, Report]
-
-    @report = Report.new
-
     @pagy, @reports = pagy_nil_safe(params, @project.reports.order(created_at: :desc), items: LIMIT)
     render_partial("project/reports/report", collection: @reports) if stale?(@reports + [@project])
   end
@@ -24,7 +21,7 @@ class Project::ReportsController < Project::BaseController
     @report = AddProjectReport.call(@project, report_params, params, current_user).result
     respond_to do |format|
       if @report.errors.empty?
-        format.html { redirect_to project_report_path(@project, @report), notice: "Report was successfully created." }
+        format.html { redirect_to project_reports_path(@project), notice: "Report was successfully created." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Report.new, partial: "project/reports/form", locals: { report: @report, title: "Create New Project", subtitle: "Please fill in the details of you new Project." }) }
       end
@@ -36,7 +33,7 @@ class Project::ReportsController < Project::BaseController
     @report = UpdateReport.call(@report, report_params, params).result
     respond_to do |format|
       if @report.errors.empty?
-        format.html { redirect_to project_report_path(@report.reportable, @report), notice: "report was successfully updated." }
+        format.html { redirect_to project_reports_path(@project), notice: "Report was successfully updated." }
       else
         format.html { redirect_to edit_employee_report_path(@report), alert: "Failed to update. Please try again." }
       end

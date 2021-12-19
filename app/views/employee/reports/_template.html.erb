@@ -1,6 +1,5 @@
-<li class="flex  py-2" id="<%= dom_id(assign) %>">
+<li class="flex px-2 py-2" id="<%= dom_id(assign) %>">
   <div class="w-full ml-3">
     <%= link_to assign.template.decorate.display_title, new_employee_report_path(assign.assignable, template_id: assign.template.id), class: "hover:underline text-sm font-medium text-gray-500" %>
   </div>
-  <%= delete_button(templates_assignee_path(assign.id)) %>
 </li>
