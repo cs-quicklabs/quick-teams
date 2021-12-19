@@ -1,8 +1,8 @@
 class AddEmployeeReport < Patterns::Service
-  def initialize(employee, params, param, actor)
+  def initialize(employee, params, submitted, actor)
     @employee = employee
     @report = @employee.reports.new params
-    @param = param
+    @submitted = submitted
     @actor = actor
   end
 
@@ -20,18 +20,14 @@ class AddEmployeeReport < Patterns::Service
   private
 
   def add_report
-    if param[:draft]
-      report.submitted = false
-    else
-      report.submitted = true
-    end
+    report.submitted = submitted
     report.user_id = actor.id
     report.save!
   end
 
   def add_event
-    employee.events.create(user: actor, action: "report", action_for_context: "added new report in employee", trackable: report)
+    employee.events.create(user: actor, action: "report", action_for_context: "added new report in employee", trackable: report) if submitted
   end
 
-  attr_reader :employee, :report, :param, :actor
+  attr_reader :employee, :report, :submitted, :actor
 end

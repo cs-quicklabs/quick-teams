@@ -9,7 +9,7 @@ class ReportCommentsController < BaseController
       if @comment.persisted?
         format.turbo_stream {
           render turbo_stream: turbo_stream.append(:comments, partial: "shared/comments/comment", locals: { comment: @comment }) +
-                               turbo_stream.replace("add", partial: "shared/comments/report", locals: { report: @report, comment: Comment.new })
+                               turbo_stream.replace("comment", partial: "shared/comments/report", locals: { report: @report, comment: Comment.new })
         }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(:add, partial: "shared/comments/report", locals: { report: @report, comment: @comment }) }
