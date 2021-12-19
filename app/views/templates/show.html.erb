@@ -1,4 +1,4 @@
-<div class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16 bg-white" id="template">
+<div class="max-w-4xl px-4 pt-10 pb-12 mx-auto lg:pb-16 bg-white" id="template">
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
     <%= render partial: "title", locals: { template: @template } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
@@ -11,16 +11,19 @@
       <% end %>
     </div>
   </div>
-  <div class="mt-1 text-sm text-gray-900 sm:px-6 lg:px-8">
+  <div class="mt-4 text-sm text-gray-900 sm:px-6 lg:px-8">
     <p><%= @template.body %></p>
   </div>
-  <div class="bg-white border-t  border-gray-200 overflow-hidden">
-    <% if @assigns.size > 0 %>
+  <div class="text-sm text-gray-900 sm:px-6 lg:px-8 border-t border-gray-200 mt-10">
+    <%= render partial: "assignees/form", locals: { template_assignee: @template_assignee } %>
+  </div>
+  <div class="bg-white overflow-hidden">
+    <% if @template_assignees.size > 0 %>
       <div class="mt-1 text-sm sm:px-6 lg:px-8">
         <p class="text-sm pt-4">This report has been assigned to following employees</p>
       </div>
-      <ul role="list" class="divide-y divide-gray-300 py-4 sm:px-6 lg:px-8 ">
-        <%= render partial: "assign", collection: @assigns, as: :assign, cached: true %>
+      <ul role="list" class="divide-y divide-gray-300  sm:px-6 lg:px-8 " id="assignees">
+        <%= render partial: "assignee", collection: @template_assignees, as: :template_assignee, cached: true %>
       </ul>
     <% else %>
       <div class="mt-1 text-sm sm:px-6 lg:px-8">
@@ -28,3 +31,4 @@
       </div>
     <% end %>
   </div>
+</div>

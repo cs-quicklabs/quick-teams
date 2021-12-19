@@ -11,13 +11,13 @@ class TemplatesController < BaseController
 
   def new
     authorize :template
-    @template = Template.new
   end
 
   def show
     authorize @template
-    @assigns = @template.templates_assignees
-    fresh_when @template
+    @template_assignees = @template.templates_assignees
+    @template_assignee = TemplatesAssignee.new
+    @template_assignee.template_id = @template.id
   end
 
   def update
