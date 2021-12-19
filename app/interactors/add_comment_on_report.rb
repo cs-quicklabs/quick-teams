@@ -2,7 +2,7 @@ class AddCommentOnReport < Patterns::Service
   def initialize(params, report, method, actor)
     @comment = Comment.new(params)
     @report = report
-    @employee = report.reportable
+    @employee = report.user
     @method = method
     @actor = actor
   end
@@ -26,9 +26,8 @@ class AddCommentOnReport < Patterns::Service
   end
 
   def send_email
-    return unless report.reportable_type == "User" and deliver_email?
-
-    CommentsMailer.with(actor: actor, employee: employee, report: report).commented_email if deliver_email?
+    return unless report.reportable_type == "User"
+    CommentsMailer.with(actor: actor, employee: employee, report: report).commented_email.deliver_later if deliver_email?
   end
 
   def deliver_email?
