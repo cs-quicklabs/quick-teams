@@ -23,7 +23,7 @@
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
     </div>
-    <% if policy([@report.reportable, @report]).edit? %>
+    <% if policy([@project, @report]).edit? %>
       <%= link_to "Edit", edit_project_report_path(@report.reportable, @report), class: "btn-blue ml-3" %>
     <% end %>
   </div>
@@ -82,7 +82,7 @@
           </ul>
         </div>
       </div>
-      <% if policy([@report.reportable, @report]).comment? %>
+      <% if policy([@project, @report]).comment? %>
         <%= render partial: "shared/comments/report", locals: { report: @report, comment: @comment } %>
       <% end %>
     </div>
