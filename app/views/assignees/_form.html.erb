@@ -1,0 +1,9 @@
+<div id= "add-assignee">
+  <%= tailwind_form_with(url: template_assignees_path(template_id: template_assignee.template_id), method: "post", id:"new_report") do |f| %>
+    <div class="flex items-center w-full mt-10">
+      <%= f.collection_select(:assignable_id, User.for_current_account.active.includes(:job,:role, :discipline).order(:first_name).decorate, :id, :full_display_name, { :prompt => "Select employee to assign this report" }, :class => "form-text-field") %>
+      <button type="submit" class="btn-normal ml-2"> Assign </button>
+      <%= f.hidden_field :assignable_type, value: "User" %>
+    </div>
+  <% end %>
+</div>
