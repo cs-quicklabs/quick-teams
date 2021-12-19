@@ -18,7 +18,7 @@ class Project::ReportsController < Project::BaseController
 
   def create
     authorize [@project, Report]
-    @report = AddProjectReport.call(@project, report_params, params, current_user).result
+    @report = AddProjectReport.call(@project, report_params, params[:draft].nil?, current_user).result
     respond_to do |format|
       if @report.errors.empty?
         format.html { redirect_to project_reports_path(@project), notice: "Report was successfully created." }
@@ -30,7 +30,7 @@ class Project::ReportsController < Project::BaseController
 
   def update
     authorize [@project, @report]
-    @report = UpdateReport.call(@report, report_params, params).result
+    @report = UpdateReport.call(@report, report_params, params[:draft].nil?).result
     respond_to do |format|
       if @report.errors.empty?
         format.html { redirect_to project_reports_path(@project), notice: "Report was successfully updated." }

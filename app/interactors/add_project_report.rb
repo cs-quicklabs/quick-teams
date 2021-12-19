@@ -1,19 +1,15 @@
 class AddProjectReport < Patterns::Service
-  def initialize(project, params, param, actor)
+  def initialize(project, params, submitted, actor)
     @project = project
     @report = @project.reports.new params
-    @param = param
+    @submitted = submitted
     @actor = actor
   end
 
   def call
     begin
-      if param[:draft]
-        add_report
-      else
-        add_report
-        add_event
-      end
+      add_report
+      add_event
     rescue
       report
     end
@@ -24,18 +20,14 @@ class AddProjectReport < Patterns::Service
   private
 
   def add_report
-    if param[:draft]
-      report.submitted = false
-    else
-      report.submitted = true
-    end
+    report.submitted = submitted
     report.user_id = actor.id
     report.save!
   end
 
   def add_event
-    project.events.create(user: actor, action: "report", action_for_context: "added new report in project", trackable: report)
+    project.events.create(user: actor, action: "report", action_for_context: "added new report in project", trackable: report) if submitted
   end
 
-  attr_reader :project, :report, :param, :actor
+  attr_reader :project, :report, :submitted, :actor
 end
