@@ -24,7 +24,7 @@ class Employee::ReportsController < Employee::BaseController
   def create
     authorize [@employee, Report]
 
-    @report = AddEmployeeReport.call(@employee, report_params, params, current_user).result
+    @report = AddEmployeeReport.call(@employee, report_params, params[:draft].nil?, current_user).result
     respond_to do |format|
       if @report.errors.empty?
         format.html { redirect_to employee_reports_path(@employee), notice: "Report was successfully created." }
@@ -56,7 +56,7 @@ class Employee::ReportsController < Employee::BaseController
 
   def update
     authorize [@employee, @report]
-    @report = UpdateReport.call(@report, report_params, params).result
+    @report = UpdateReport.call(@report, report_params, params[:draft].nil?).result
     respond_to do |format|
       if @report.errors.empty?
         format.html { redirect_to employee_reports_path(@employee), notice: "report was successfully updated." }
