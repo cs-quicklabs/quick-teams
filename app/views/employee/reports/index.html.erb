@@ -40,26 +40,32 @@
         <% if policy([@employee, Report]).create? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
-            <% if (current_user.admin? or current_user == @employee) and @assigns.count > 0 %>
+            <% if (current_user.admin? or current_user == @employee) and @assigns.size > 0 %>
               <section aria-labelledby="add-participant-section">
                 <div class="overflow-hidden bg-white">
                   <div class="px-4">
                     <div class="p-5 border-b border-gray-200">
                       <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Submit a report
+                        Submit a New Report
                       </h3>
-                      <p class="mt-2 max-w-4xl text-sm text-gray-500">Following reports are available for you to submit </p>
+                      <p class="mt-2 max-w-4xl text-sm text-gray-500">Following reports are available for you to submit. Please click on options below to create a new report. </p>
                     </div>
-                    <ul class="divide-y divide-gray-200">
+                    <ul class="divide-y divide-gray-200 border-b border-gray-200">
                       <%= render partial: "template",  collection: @assigns, as: :assign, cached: false %>
                     </ul>
                   </div>
                 </div>
               </section>
             <% end %>
-            <p class="text-sm text-gray-500 mt-4 text-center p-2">
-              Please click on the button below to Submit a new report. It can be about progress, goals or anything  you want to share with your team.
-            </p>
+            <% if @assigns.size > 0 %>
+              <p class="text-sm text-gray-500 mt-4 text-center p-2">
+                Or if you want to submit a custom report which in not listed above, Please click on the button below to create a new custom report.
+              </p>
+            <% else %>
+              <p class="text-sm text-gray-500 mt-4 text-center p-2">
+                Please click on the button below to Submit a new report. It can be about progress, goals or anything  you want to share with your team.
+              </p>
+            <% end %>
             <div class="justify-center flex ">
               <%= link_to "Submit New Report", new_employee_report_path(@employee), class: "btn-blue items-center " %>
             </div>

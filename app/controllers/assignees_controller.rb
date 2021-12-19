@@ -22,14 +22,17 @@ class AssigneesController < BaseController
     authorize @template
     @template_assignee.destroy
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@template_assignee) }
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.remove(@template_assignee) +
+                             turbo_stream.replace("add-assignee", partial: "form", locals: { template_assignee: TemplatesAssignee.new(template_id: @template.id), message: "Assignee was added successfully." })
+      }
     end
   end
 
   private
 
   def assignee_params
-    params.permit(:template_id, :assignable_id, :assignable_type)
+    params.require("assignable").permit(:assignable_id, :assignable_type, :template_id)
   end
 
   private
