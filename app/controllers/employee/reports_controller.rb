@@ -4,6 +4,7 @@ class Employee::ReportsController < Employee::BaseController
   def index
     authorize [@employee, Report]
     @assigns = @employee.templates_assignees.includes(:template)
+    employee_reports = @employee.reports.order(created_at: :desc)
     @pagy, @reports = pagy_nil_safe(params, employee_reports, items: LIMIT)
     render_partial("employee/reports/report", collection: @reports) if stale?(@reports + [@employee])
   end
@@ -73,26 +74,6 @@ class Employee::ReportsController < Employee::BaseController
 
   def report_params
     params.require(:report).permit(:title, :body)
-  end
-
-  def employee_reports
-    reports = []
-    if current_user.admin?
-      reports = all_reports
-    elsif current_user.lead?
-      reports = self? ? submitted_reports : all_reports
-    else
-      reports = submitted_reports
-    end
-    reports
-  end
-
-  def all_reports
-    @employee.reports.order(created_at: :desc)
-  end
-
-  def submitted_reports
-    @employee.reports.submitted.order(created_at: :desc)
   end
 
   def self?

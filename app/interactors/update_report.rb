@@ -3,11 +3,18 @@ class UpdateReport < Patterns::Service
     @report = report
     @param = param
     @params = params
+    @reportable = @report.reportable
+    @actor = @report.user
   end
 
   def call
     begin
-      update_report
+      if param[:draft]
+        update_report
+      else
+        update_report
+        add_event
+      end
     rescue
       report
     end
@@ -26,5 +33,9 @@ class UpdateReport < Patterns::Service
     end
   end
 
-  attr_reader :report, :param, :params
+  def add_event
+    reportable.events.create(user: actor, action: "report", action_for_context: "added new report in project", trackable: report)
+  end
+
+  attr_reader :report, :param, :params, :actor, :reportable
 end

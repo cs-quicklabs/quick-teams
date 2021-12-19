@@ -8,8 +8,12 @@ class AddProjectReport < Patterns::Service
 
   def call
     begin
-      add_report
-      add_event
+      if param[:draft]
+        add_report
+      else
+        add_report
+        add_event
+      end
     rescue
       report
     end

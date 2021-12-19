@@ -10,16 +10,19 @@
       <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
         <div>
           <p class="text-sm text-gray-500">
-            <a href="<%= employee_timeline_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
-            added a new report 
-            <% if event.trackable.nil? %>
-              which does not exists anymore 
-            <% else %>
+            <% if event.eventable_type == "User" %>
+              <a href="<%= employee_timeline_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
+              submitted a new report 
               titled
-              <a href="<%= employee_report_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title) %></a>
+              <a href="<%= employee_report_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title.upcase_first) %></a>
+            <% else %>
+              <a href="<%= employee_timeline_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
+              submitted a new report 
+              titled
+              <a href="<%= project_report_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title.upcase_first) %></a>
+              for
+              <a href="<%= project_timeline_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
             <% end %>
-            for
-            <a href="<%= employee_reports_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">
