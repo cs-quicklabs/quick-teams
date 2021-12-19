@@ -11,6 +11,13 @@ class Employee::ReportsController < Employee::BaseController
   def new
     authorize [@employee, Report]
     @report = Report.new
+    if params[:template_id]
+      @template = Template.find(params[:template_id])
+      @report.clone(@template, @employee, current_user)
+      respond_to do |format|
+        format.html { redirect_to edit_employee_report_path(@employee, @report) }
+      end
+    end
   end
 
   def create

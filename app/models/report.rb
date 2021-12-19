@@ -9,7 +9,7 @@ class Report < ApplicationRecord
   scope :pending, -> { where(submitted: false) }
 
   def clone(template, employee, actor)
-    self.title = template.title + " Report"
+    self.title = template.title
     self.body = template.body
     self.reportable = employee
     self.user = actor
