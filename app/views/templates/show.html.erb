@@ -18,17 +18,11 @@
     <%= render partial: "assignees/form", locals: { template_assignee: @template_assignee } %>
   </div>
   <div class="bg-white overflow-hidden">
-    <% if @template_assignees.size > 0 %>
-      <div class="mt-1 text-sm sm:px-6 lg:px-8">
-        <p class="text-sm pt-4">This report has been assigned to following employees</p>
-      </div>
-      <ul role="list" class="divide-y divide-gray-300  sm:px-6 lg:px-8 " id="assignees">
-        <%= render partial: "assignee", collection: @template_assignees, as: :template_assignee, cached: true %>
-      </ul>
-    <% else %>
-      <div class="mt-1 text-sm sm:px-6 lg:px-8">
-        <p class="text-sm  text-gray-900 pt-4">This reports has not been assigned to anyone yet.</p>
-      </div>
-    <% end %>
+    <div class="mt-6 text-sm sm:px-6 lg:px-8">
+      <p class="text-sm pt-4">This report has been assigned to following team members:</p>
+    </div>
+    <ul role="list" class="divide-y divide-gray-300  sm:px-6 lg:px-8 " id="assignees">
+      <%= render partial: "assignee", collection: @template_assignees, as: :template_assignee, cached: true %>
+    </ul>
   </div>
 </div>

@@ -4,7 +4,7 @@
   <% potential_assignees = User.for_current_account.active.includes(:job, :role, :discipline).where.not(id: exixting_assignees).order(:first_name).decorate %>
   <%= tailwind_form_with(url: template_assignees_path(template_id: template_id), method: "post", id:"new_report") do |f| %>
     <div class="flex items-center w-full mt-10">
-      <%= f.collection_select("assignable[assignable_id]", potential_assignees, :id, :full_display_name, { :prompt => "Select employee to assign this report" }, :class => "form-text-field") %>
+      <%= f.collection_select("assignable[assignable_id]", potential_assignees, :id, :full_display_name, { :prompt => "Select team member to assign this report to" }, :class => "form-text-field") %>
       <button type="submit" class="btn-normal ml-2"> Assign </button>
       <%= f.hidden_field :assignable_type, value: "User", name: "assignable[assignable_type]" %>
       <%= f.hidden_field :template_id, value: template_id, name: "assignable[template_id]" %>

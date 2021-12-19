@@ -11,6 +11,7 @@ class TemplatesController < BaseController
 
   def new
     authorize :template
+    @template = Template.new
   end
 
   def show
