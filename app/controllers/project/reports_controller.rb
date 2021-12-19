@@ -23,7 +23,7 @@ class Project::ReportsController < Project::BaseController
       if @report.errors.empty?
         format.html { redirect_to project_reports_path(@project), notice: "Report was successfully created." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Report.new, partial: "project/reports/form", locals: { report: @report, title: "Create New Project", subtitle: "Please fill in the details of you new Project." }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Report.new, partial: "project/reports/form", locals: { report: @report, title: "Create New Report", subtitle: "Please fill in the details of you new Report." }) }
       end
     end
   end
