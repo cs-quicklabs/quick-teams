@@ -12,7 +12,11 @@
           </div>
           <div class="">
             <%= form.submit "Update Draft", :name => "draft", class: "btn-normal" %>
-            <%= form.submit "Submit Report", class: "btn-blue" %>
+            <%= form.submit "Submit Report", class: "btn-blue", data: {
+                                 controller: "confirmation",
+                                 "confirmation-message-value": "Are you sure you want to delete this?",
+                                 action: "confirmation#confirm",
+                               }%>
           </div>
         </div>
       </main>
