@@ -11,25 +11,25 @@
         <div>
           <p class="text-sm text-gray-500">
             <% if event.eventable_type == "User" %>
-              <a href="<%= employee_timeline_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
+              <a href="<%= employee_reports_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
               submitted a new report 
               <% if event.trackable.nil? %>
                 which does not exists anymore 
               <% else %>
                 titled
-                <a href="<%= employee_feedback_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title) %></a>
+                <a href="<%= employee_report_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title.upcase_first) %></a>
               <% end %>
             <% else %>
-              <a href="<%= employee_timeline_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
+              <a href="<%= employee_reports_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
               submitted a new report 
               <% if event.trackable.nil? %>
                 which does not exists anymore 
               <% else %>
                 titled
-                <a href="<%= employee_feedback_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title) %></a>
+                <a href="<%= project_report_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title.upcase_first) %></a>
               <% end %>
               for
-              <a href="<%= project_timeline_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
+              <a href="<%= project_reports_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
             <% end %>
           </p>
         </div>
