@@ -1,5 +1,5 @@
 class Employee::BaseController < BaseController
-  before_action :set_employee, only: %i[index show edit update create destroy new]
+  before_action :set_employee, only: %i[index show edit update create destroy]
   before_action :set_statuses, only: %i[index]
   before_action :set_tags, only: %i[index]
   after_action :verify_authorized

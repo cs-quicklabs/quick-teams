@@ -29,21 +29,19 @@
               </th>
               <th scope="col" class="table-head">
                 Created by
-                <th scope="col" class="table-head">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody class="table-body" id="templates" data-infinite-scroll-target="entries">
-              <%= render partial: "template", collection: @templates, as: :template, cached: true %>
-            </tbody>
-          </table>
-          <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-            <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
-          </div>
-        <% else %>
-          <%= render partial: "shared/no_result_found", cached: true %>
-        <% end %>
-      </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="table-body" id="templates" data-infinite-scroll-target="entries">
+            <%= render partial: "template", collection: @templates, as: :template, cached: true %>
+          </tbody>
+        </table>
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+        </div>
+      <% else %>
+        <%= render partial: "shared/no_result_found", cached: true %>
+      <% end %>
     </div>
   </div>
+</div>

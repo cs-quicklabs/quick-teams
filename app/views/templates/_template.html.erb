@@ -12,12 +12,4 @@
       <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= template.user.decorate.display_name %> </span>
     </a>
   </td>
-  <% if policy(template).edit? %>
-    <td class="table-cell">
-      <div class="flex justify-end items-center space-x-2">
-        <%= edit_button(edit_template_path(template)) %>
-        <%= delete_button(template_path(template)) %>
-      </div>
-    </td>
-  <% end %>
 </tr>

@@ -36,7 +36,7 @@ class TemplatesController < BaseController
     @template = Template.create(template_params)
     respond_to do |format|
       if @template.errors.empty?
-        format.turbo_stream { redirect_to templates_path, notice: "Template was added successfully." }
+        format.turbo_stream { redirect_to template_path(@template), notice: "Template was added successfully." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Template.new, partial: "templates/form", locals: { template: @template, title: "Add New Template" }) }
       end
