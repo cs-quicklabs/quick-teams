@@ -6,6 +6,7 @@ class User::TimesheetPolicy < User::BaseUserPolicy
   def edit?
     # user shoud be active and
     # admin, project manager or creator of timesheet can edit
+    timesheet = record.last
     is_active? and (is_admin? or is_project_manager? or (timesheet.user == user))
   end
 
