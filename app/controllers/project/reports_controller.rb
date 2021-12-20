@@ -52,7 +52,8 @@ class Project::ReportsController < Project::BaseController
 
   def show
     authorize [@project, @report]
-    fresh_when @report
+
+    fresh_when [@report] + @report.comments
   end
 
   private

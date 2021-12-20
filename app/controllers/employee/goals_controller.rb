@@ -40,7 +40,7 @@ class Employee::GoalsController < Employee::BaseController
     authorize [@employee, @goal]
 
     @comment = Comment.new
-    fresh_when @goal
+    fresh_when [@goal] + @goal.comments
   end
 
   def edit
