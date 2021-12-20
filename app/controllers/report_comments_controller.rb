@@ -4,7 +4,7 @@ class ReportCommentsController < BaseController
   def create
     authorize [@report.reportable, @report], :comment?
 
-    @comment = AddCommentOnReport.call(comment_params, @report, params[:commit], current_user).result
+    @comment = AddCommentOnReport.call(comment_params, @report, current_user).result
     respond_to do |format|
       if @comment.persisted?
         format.turbo_stream {

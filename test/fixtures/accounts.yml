@@ -1,5 +1,6 @@
 crownstack:
   name: Crownstack technologies
+  email_enabled: TRUE
 
 infosys:
   name: Infosys technologies

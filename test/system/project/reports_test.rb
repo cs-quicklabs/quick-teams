@@ -18,7 +18,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
     take_screenshot
     assert_selector "h1", text: "#{@project.name}"
     assert_selector "div#project-tabs", text: "Reports"
-    assert_text "Add New Report"
+    assert_text "Submit a New Report"
   end
 
   test "can not visit index if not logged in" do
@@ -29,29 +29,31 @@ class ProjectReportsTest < ApplicationSystemTestCase
 
   test "can add new report" do
     visit page_url
-    click_on "Add Custom Report"
+    click_on "Submit New Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
-    click_on "Submit Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     take_screenshot
-    assert_selector "h3", text: "Some Random report Title"
-    assert_selector "div", text: "Some Random report Title"
+    assert_selector "p.notice", text: "Report was successfully created."
+    assert_text "Some Random report Title"
   end
 
   test "can draft new report" do
     visit page_url
-    click_on "Add Custom Report"
+    click_on "Submit New Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
     click_on "Save As Draft"
     take_screenshot
-    assert_selector "h3", text: "Some Random report Title"
-    assert_selector "div", text: "Some Random report Title"
+    assert_selector "p.notice", text: "Report was successfully created."
+    assert_text "Some Random report Title"
   end
 
   test "can not draft report with empty details" do
     visit page_url
-    click_on "Add Custom Report"
+    click_on "Submit New Report"
     click_on "Save As Draft"
     assert_selector "div#error_explanation", text: "Title can't be blank"
     take_screenshot
@@ -59,8 +61,10 @@ class ProjectReportsTest < ApplicationSystemTestCase
 
   test "can not add report with empty details" do
     visit page_url
-    click_on "Add Custom Report"
-    click_on "Submit Report"
+    click_on "Submit New Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     assert_selector "div#error_explanation", text: "Title can't be blank"
     assert_selector "div#error_explanation", text: "Body can't be blank"
     take_screenshot
@@ -99,10 +103,11 @@ class ProjectReportsTest < ApplicationSystemTestCase
     fill_in "Title", with: title
     fill_in_rich_text_area dom_id(report), with: title
     take_screenshot
-    click_on "Submit Report"
-    assert_selector "p.notice", text: "report was successfully updated."
-    assert_selector "h3", text: title
-    assert_selector "div.trix-content", text: title
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
+    assert_selector "p.notice", text: "Report was successfully updated."
+    assert_selector "tr##{dom_id(report)}", text: "Some Random Report Title Edited"
     take_screenshot
   end
 
@@ -125,7 +130,9 @@ class ProjectReportsTest < ApplicationSystemTestCase
     report = @project.reports.where(submitted: false).first
     find("tr", id: dom_id(report)).click_link("Edit")
     fill_in "Title", with: nil
-    click_on "Submit Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     assert_selector "p.alert", text: "Failed to update. Please try again."
     take_screenshot
   end

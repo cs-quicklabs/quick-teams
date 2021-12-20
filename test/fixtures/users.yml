@@ -3,6 +3,7 @@ regular:
   last_name: Dhawan
   active: true
   email: aashishdhawan@crownstack.com
+  email_enabled: TRUE
   account: crownstack
   job: ios
   role: senior

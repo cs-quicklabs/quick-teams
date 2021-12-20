@@ -1,9 +1,8 @@
 class AddCommentOnReport < Patterns::Service
-  def initialize(params, report, method, actor)
+  def initialize(params, report, actor)
     @comment = Comment.new(params)
     @report = report
-    @employee = report.user
-    @method = method
+    @employee = @report.reportable
     @actor = actor
   end
 
