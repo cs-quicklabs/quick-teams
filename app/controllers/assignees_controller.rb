@@ -6,6 +6,7 @@ class AssigneesController < BaseController
     authorize :template
 
     @template_assignee = TemplatesAssignee.create(assignee_params)
+    @template_assignee.assignable.touch
     respond_to do |format|
       if @template_assignee.persisted?
         format.turbo_stream {
