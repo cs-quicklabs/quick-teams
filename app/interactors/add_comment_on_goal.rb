@@ -23,6 +23,7 @@ class AddCommentOnGoal < Patterns::Service
   def add_comment
     comment.commentable = goal
     comment.save!
+    comment.commentable.touch
   end
 
   def update_goal

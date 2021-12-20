@@ -23,6 +23,7 @@ class AddCommentOnReport < Patterns::Service
     comment.commentable = report
     comment.status = 1
     comment.save!
+    comment.commentable.touch
   end
 
   def send_email

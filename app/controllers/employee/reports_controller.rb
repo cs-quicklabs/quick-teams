@@ -46,6 +46,7 @@ class Employee::ReportsController < Employee::BaseController
 
   def show
     authorize [@employee, @report]
+    fresh_when @report
   end
 
   def edit

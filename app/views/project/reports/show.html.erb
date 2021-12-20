@@ -81,7 +81,7 @@
         </div>
         <div class="px-4 py-6 sm:px-6">
           <ul class="space-y-4" id="comments">
-            <%= render partial: "shared/comments/comment", collection: @report.comments.includes(:user), as: :comment, cached: true %>
+            <%= render partial: "shared/comments/comment", collection: @report.comments.includes(:user).order(created_at: :asc), as: :comment, cached: true %>
           </ul>
         </div>
       </div>
