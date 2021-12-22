@@ -39,7 +39,7 @@
         </div>
         <% if policy([@employee, Report]).create? %>
           <!-- Right column -->
-          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200" id="new_report">
             <% if (current_user.admin? or current_user == @employee) and @assigns.size > 0 %>
               <section aria-labelledby="add-participant-section">
                 <div class="overflow-hidden bg-white">

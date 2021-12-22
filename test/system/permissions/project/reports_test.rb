@@ -25,7 +25,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#project-tabs", text: "Reports"
     assert_selector "div#report-list"
-    assert_selector "div#new_report"
+    assert_selector "#new_report"
   end
 
   test "admin can see project report details" do
@@ -77,7 +77,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#project-tabs", text: "Reports"
     assert_selector "div#report-list"
-    assert_selector "div#new_report"
+    assert_selector "#new_report"
   end
 
   test "manager can see project report details" do

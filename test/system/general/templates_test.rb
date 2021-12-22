@@ -1,27 +1,27 @@
 require "application_system_test_case"
 
-class SurveysTest < ApplicationSystemTestCase
+class TemplatesTest < ApplicationSystemTestCase
   setup do
     @user = users(:regular)
     @account = @user.account
     ActsAsTenant.current_tenant = @account
-    @survey = survey_surveys(:user)
+    @template = templates(:one)
     sign_in @user
   end
 
   def page_url
-    surveys_url(script_name: "/#{@account.id}")
+    templates_url(script_name: "/#{@account.id}")
   end
 
-  def surveys_page_url
-    survey_questions_url(script_name: "/#{@account.id}", survey_id: @survey.id)
+  def detail_page_url
+    template_url(script_name: "/#{@account.id}", id: @template.id)
   end
 
   test "can show index if logged in" do
     visit page_url
     take_screenshot
-    assert_selector "h1", text: "Select Survey"
-    assert_text "New Survey"
+    assert_selector "h1", text: "Report Templates"
+    assert_text "New Template"
   end
 
   test "can not show index if not logged in" do
@@ -30,96 +30,79 @@ class SurveysTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Sign in to your account"
   end
 
-  test "can show survey detail page" do
+  test "can show template detail page" do
     visit page_url
-    find(id: dom_id(@survey)).click
-    within "#survey-header" do
-      assert_text "Attempt"
-      assert_text "Clone"
-    end
-    take_screenshot
-  end
-
-  test "can create a new survey" do
-    visit page_url
-    click_on "New Survey"
-    fill_in "Name", with: "Survey Campaign"
-    fill_in "Description", with: "This is a sample Survey Description"
-    select "KPIs", from: "survey_survey_survey_type"
-    select "All Employees", from: "survey_survey_survey_for"
-    click_on "Add Survey"
-    take_screenshot
-    assert_selector "p.notice", text: "Survey was created successfully."
-  end
-
-  test "can not create with empty Name Discription survey_type survey_for" do
-    visit page_url
-    click_on "New Survey"
-    assert_selector "h1", text: "Add New Survey"
-    click_on "Add Survey"
-    take_screenshot
-    assert_selector "h1", text: "Add New Survey"
-  end
-  test "admin can assign template to employee" do
-    sign_out @employee
-    sign_in users(:super)
-    @employee = users(:member)
-    @template = templates(:one)
-    visit page_url
-    select templates(:one).title, from: "template_id"
-    click_on "Assign Template"
+    find(id: dom_id(@template)).click
     assert_text @template.title
+    take_screenshot
+  end
+
+  test "can create a new template" do
+    visit page_url
+    click_on "New Template"
+    fill_in "template_title", with: "Template Sample"
+    fill_in_rich_text_area "new_template", with: "This is a sample template body"
+    click_on "Save Template"
+    take_screenshot
+    assert_selector "p.notice", text: "Template was added successfully."
+  end
+
+  test "can not create with empty Name " do
+    visit page_url
+    click_on "New Template"
+    assert_selector "h1", text: "Add New template"
+    click_on "Save Template"
+    take_screenshot
+    assert_selector "h1", text: "Add New Template"
+  end
+  
+  test "admin can assign template to employee" do
+    visit detail_page_url
+    @user=users(:super).decorate
+    select @user.display_name_position, from: "assignable[assignable_id]"
+    click_on "Assign"
+    assert_text @user.display_name
     #can see delete button for employee reports
-    @employee.templates_assignees.includes(:template).each do |assign|
-      assert_selector "li##{dom_id(assign)}", text: assign.template.title
+    @template.templates_assignees.each do |assign|
+      assert_selector "li##{dom_id(assign)}", text: assign.assignable.decorate.display_name
       assert_selector "li##{dom_id(assign)}", text: "Delete"
     end
   end
-  test "can edit a survey" do
-    visit page_url
-    find(id: dom_id(@survey)).click
-    within "#survey-header" do
+
+  test "can edit a template" do
+    visit detail_page_url
+    within "#template-header" do
       click_on "Edit"
     end
-    assert_selector "h1", text: "Edit Survey"
-    fill_in "Name", with: "Survey Campaigning"
-    click_on "Edit Survey"
-    assert_selector "p.notice", text: "Survey was updated successfully."
+    assert_selector "h1", text: "Edit Template"
+    fill_in "template_title", with: "Report Template Sample"
+    fill_in_rich_text_area dom_id(@template), with: "This is template body"
+    click_on "Save Template"
+    assert_selector "p.notice", text: "Template was updated successfully."
   end
 
-  test "can not edit a survey with invalid name" do
-    visit page_url
-    find(id: dom_id(@survey)).click
-    within "#survey-header" do
+  test "can not edit a template with invalid name" do
+    visit detail_page_url
+    within "#template-header" do
       click_on "Edit"
-    end
-    assert_selector "h1", text: "Edit Survey"
-    fill_in "Name", with: ""
-    click_on "Edit Survey"
+     end
+    assert_selector "h1", text: "Edit Template"
+    fill_in "template_title", with: ""
+    click_on "Save Template"
+    assert_selector "h1", text: "Edit Template"
     take_screenshot
   end
 
-  test "can clone a survey" do
-    visit page_url
-    find(id: dom_id(@survey)).click
-    within "#survey-header" do
-      page.accept_confirm do
-        click_on "Clone"
-      end
-    end
-    take_screenshot
-    assert_selector "p.notice", text: "Survey was cloned successfully."
-  end
 
-  test "can delete survey" do
-    visit page_url
-    find(id: dom_id(@survey)).click
-    within "#survey-header" do
+  test "can delete template" do
+  @template = templates(:two)
+    visit detail_page_url
+    within "#template-header" do
       page.accept_confirm do
         click_on "Delete"
       end
     end
     take_screenshot
-    assert_selector "p.notice", text: "Survey was removed successfully."
+    assert_selector "p.notice", text: "Template was removed successfully."
   end
 end
