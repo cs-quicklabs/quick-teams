@@ -6,7 +6,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
     @account = @employee.account
     ActsAsTenant.current_tenant = @account
     @project = projects(:managed)
-    @report = @project.reports.first
+    @report = @project.reports.where(submitted:false).first
     sign_in @employee
   end
 
@@ -36,6 +36,11 @@ class ProjectReportsTest < ApplicationSystemTestCase
     assert_selector "div#report-detail"
     #can comment
     assert_selector "div#comment"
+    if @report.user==@employee
+      assert_text "Submit"
+   else
+     assert_no_text "Submit"
+   end
   end
 
   test "lead can not see project reports" do
@@ -88,6 +93,11 @@ class ProjectReportsTest < ApplicationSystemTestCase
     assert_selector "div#report-detail"
     # can comment on report
     assert_selector "div#comment"
+    if @report.user==@employee
+       assert_text "Submit"
+    else
+      assert_no_text "Submit"
+    end
   end
 
   test "manager can not see project reports of other projects" do

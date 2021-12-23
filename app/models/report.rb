@@ -4,7 +4,7 @@ class Report < ApplicationRecord
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
-  validates_presence_of :title, :body
+  validates_presence_of :title  
   scope :submitted, -> { where(submitted: true) }
   scope :pending, -> { where(submitted: false) }
 

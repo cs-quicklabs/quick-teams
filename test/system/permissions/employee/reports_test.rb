@@ -35,6 +35,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
   test "admin can see his own reports" do
     sign_out @employee
     sign_in users(:super)
+    
     visit page_url
     assert_selector "div#employee-tabs", text: "Reports"
     assert_selector "#new_report"
@@ -45,14 +46,17 @@ class EmployeeReportsTest < ApplicationSystemTestCase
       assert_selector "tr##{dom_id(report)}", text: "Delete"
     end
   end
+
   test "admin can see own report detail " do
     sign_out @employee
     @employee = users(:super)
     sign_in @employee
+    @report = @employee.reports.where(submitted: false).first
     visit page_detail_url
     assert_selector "h3", text: @report.title
     #can comment on report
     assert_selector "textarea#comment"
+    assert_text "Submit"
   end
 
   test "admin can see employee report details" do
@@ -65,6 +69,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     assert_selector "h3", text: @report.title
     #can comment on report
     assert_selector "textarea#comment"
+    assert_no_text "Submit"
   end
 
   test "lead can see subordinate reports" do
@@ -106,6 +111,9 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     @report = @employee.reports.where(submitted: false).first
     visit page_detail_url
     assert_selector "h3", text: @report.title
+     #can comment on report
+     assert_selector "textarea#comment"
+     assert_text "Submit"
   end
 
   test "lead can see subordinate report details" do
@@ -118,6 +126,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     assert_selector "h3", text: @report.title
     #can comment on report
     assert_selector "textarea#comment"
+    assert_no_text "Submit"
   end
 
   test "lead can not see someone elses report detail" do
@@ -153,6 +162,9 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     @report = @employee.reports.where(submitted: false).first
     visit page_detail_url
     assert_selector "h3", text: @report.title
+     #can comment on report
+     assert_selector "textarea#comment"
+     assert_text "Submit"
   end
 
   test "member can not see someone elses reports" do

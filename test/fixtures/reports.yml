@@ -80,3 +80,10 @@ thirteen:
   reportable: regular
   submitted: false
   user: regular
+
+fourteen:
+  title: Some Random Report foruteen
+  reportable_type: Project
+  reportable: managed
+  submitted: false
+  user: manager

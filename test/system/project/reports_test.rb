@@ -125,6 +125,19 @@ class ProjectReportsTest < ApplicationSystemTestCase
     take_screenshot
   end
 
+  test "can submit report" do
+    visit page_url
+    report = @project.reports.where(submitted: false).first
+    find("tr", id: dom_id(report)).click_link(report.title)
+    within "#report-footer" do
+       click_on "Submit"
+       sleep(0.5)
+    end
+    assert_text "This report has been submitted"
+    take_screenshot
+  end
+
+
   test "can not edit report with invalid params" do
     visit page_url
     report = @project.reports.where(submitted: false).first
