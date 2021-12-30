@@ -18,6 +18,8 @@ class Survey::SurveyDecorator < Draper::Decorator
       "green"
     elsif self.project?
       "gray"
+    elsif self.adhoc?
+      "blue"
     end
   end
 
