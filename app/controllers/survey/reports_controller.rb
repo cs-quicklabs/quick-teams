@@ -9,9 +9,10 @@ class Survey::ReportsController < Survey::BaseController
       format.pdf do
         render pdf: "#{@attempt.participant.decorate.display_name}_#{@attempt.survey.name}",
                page_size: "A4",
-               template: "survey/pdf/pdf.html.erb",
-               layout: "pdf.html",
+               template: "survey/pdf/pdf",
+               layout: "pdf",
                lowquality: true,
+               formats: [:html],
                zoom: 1,
                dpi: 75
       end
