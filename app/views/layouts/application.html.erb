@@ -10,7 +10,6 @@
       <meta name="current-account", content="<%= Current.account.id %>">
     <% end %>
     <meta name="turbo-cache-control" content="no-cache">
-    <%= javascript_include_tag "application", 'data-turbolinks-track': "reload" %>
     <% if content_for?(:head) %>
       <main>
         <%= yield(:head) %>
