@@ -3,7 +3,7 @@ class Template < ApplicationRecord
 
   belongs_to :user
   has_rich_text :body
-  has_many :templates_assignees
+  has_many :templates_assignees, dependent: :destroy
 
   validates_presence_of :title
 end
