@@ -34,9 +34,6 @@ class ProjectTimesheetsTest < ApplicationSystemTestCase
       click_on "Last Month"
       assert_selector "p", text: "Last Month's Performance"
       take_screenshot
-      click_on "Since Start"
-      assert_selector "p", text: "Performance Since Beginning"
-      take_screenshot
     end
   end
 
