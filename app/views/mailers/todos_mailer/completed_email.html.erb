@@ -1,3 +1,3 @@
 <p>Dear <%= @actor.decorate.display_name %>!</p>
 <p> A TODO for <%= @employee.decorate.display_name %> has been marked as complete. Please click link below to see more details:</p>
-<p><%= link_to "Show TODOs", employee_todos_url(@employee, script_name: "/#{@employee.account.id}") %></p>
+<p><%= link_to "Show TODO", employee_todo_url(@employee, @todo, script_name: "/#{@employee.account.id}") %></p>

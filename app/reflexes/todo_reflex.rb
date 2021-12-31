@@ -2,7 +2,7 @@ class TodoReflex < ApplicationReflex
   def toggle_project_todo
     todo = Todo.find(element.dataset[:id])
     todo.update(completed: !todo.completed)
-    TodosMailer.with(actor: todo.user, employee: todo.owner).completed_email.deliver_later if deliver_email?(todo)
+    TodosMailer.with(actor: todo.user, employee: todo.owner, todo: todo).completed_email.deliver_later if deliver_email?(todo)
     todo.save!
     morph "#{dom_id(todo)}", render(partial: "project/todos/todo", locals: { todo: todo })
   end
@@ -10,14 +10,14 @@ class TodoReflex < ApplicationReflex
   def toggle_todo
     todo = Todo.find(element.dataset[:id])
     todo.update(completed: !todo.completed)
-    TodosMailer.with(actor: todo.user, employee: todo.owner).completed_email.deliver_later if deliver_email?(todo)
+    TodosMailer.with(actor: todo.user, employee: todo.owner, todo: todo).completed_email.deliver_later if deliver_email?(todo)
     todo.save!
   end
 
   def toggle_employee_todo
     todo = Todo.find(element.dataset[:id])
     todo.update(completed: !todo.completed)
-    TodosMailer.with(actor: todo.user, employee: todo.owner).completed_email.deliver_later if deliver_email?(todo)
+    TodosMailer.with(actor: todo.user, employee: todo.owner, todo: todo).completed_email.deliver_later if deliver_email?(todo)
     todo.save!
     morph "#{dom_id(todo)}", render(partial: "employee/todos/todo", locals: { todo: todo })
   end
