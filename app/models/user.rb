@@ -18,33 +18,31 @@ class User < ApplicationRecord
   belongs_to :discipline
   belongs_to :role
   belongs_to :job
-
   belongs_to :kpi, class_name: "Survey::Survey", optional: true
-  has_many :schedules
+  belongs_to :status, class_name: "PeopleStatus", optional: true
+
+  has_many :schedules, dependent: :destroy
   has_many :projects, through: :schedules
   has_many :subordinates, class_name: "User", foreign_key: "manager_id"
-  has_many :feedbacks, as: :critiquable
-  has_many :reports, as: :reportable
-  has_many :documents, as: :documenter
-  has_many :goals, as: :goalable
-  has_many :templates_assignees, as: :assignable
-  has_many :events, as: :eventable
-  #has_many :attempts, class_name: "Survey::Attempt", foreign_key: "participant_id", as: :participant
-  has_many :attempts, as: :participant
-  has_many :surveys, class_name: "Survey::Survey", foreign_key: "actor__id"
-  has_many :attempt, class_name: "Survey::Attempt", foreign_key: "actor__id"
-  has_many :notes
+  has_many :feedbacks, as: :critiquable, dependent: :destroy
+  has_many :reports, as: :reportable, dependent: :destroy
+  has_many :documents, as: :documenter, dependent: :destroy
+  has_many :goals, as: :goalable, dependent: :destroy
+  has_many :templates_assignees, as: :assignable, dependent: :destroy
+  has_many :events, as: :eventable, dependent: :destroy
+  has_many :attempts, as: :participant, dependent: :destroy, class_name: "Survey::Attempt"
+  has_many :surveys, class_name: "Survey::Survey", foreign_key: "actor_id"
+  has_many :attempt, class_name: "Survey::Attempt", foreign_key: "actor_id", dependent: :destroy
+  has_many :notes, dependent: :destroy
   has_many :templates
-  has_many :timesheets
+  has_many :timesheets, dependent: :destroy
   has_many :kbs
   has_many :managed_projects, class_name: "Project", foreign_key: "manager_id"
-  has_many :todos, class_name: "Todo", foreign_key: "owner_id"
-  has_many :created_todos, class_name: "Todo", foreign_key: "user_id"
+  has_many :todos, class_name: "Todo", foreign_key: "owner_id", dependent: :destroy
+  has_many :created_todos, class_name: "Todo", foreign_key: "user_id", dependent: :destroy
 
-  # has_many :todos, as: :todoable
-  belongs_to :status, class_name: "PeopleStatus", optional: true
-  has_and_belongs_to_many :people_tags
-  has_and_belongs_to_many :skills
+  has_and_belongs_to_many :people_tags, dependent: :destroy
+  has_and_belongs_to_many :skills, dependent: :destroy
   has_and_belongs_to_many :nuggets
 
   validates :email, uniqueness: true

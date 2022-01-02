@@ -22,4 +22,8 @@ class TeamPolicy < Struct.new(:user, :team)
   def edit?
     user.admin?
   end
+
+  def destroy?
+    user.admin?
+  end
 end
