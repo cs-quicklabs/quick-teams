@@ -4,8 +4,12 @@ class DestroyProject < Patterns::Service
   end
 
   def call
-    project.destroy
-    false
+    begin
+      project.destroy
+    rescue
+      return false
+    end
+    true
   end
 
   private
