@@ -114,6 +114,14 @@ class ProjectsTest < ApplicationSystemTestCase
     assert_selector "p.notice", text: "Project has been restored."
   end
 
+  test "can see project archives  can destroy a project" do
+    visit archived_projects_url(script_name: "/#{@account.id}")
+    page.accept_confirm do
+      page.first(:link, "Delete").click
+    end
+    assert_selector "p.notice", text: "Project has been deleted."
+  end
+
   test "can see project archives and restore project" do
     visit archived_projects_url(script_name: "/#{@account.id}")
     page.first(:link, "Restore").click
