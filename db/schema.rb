@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_105200) do
+ActiveRecord::Schema.define(version: 2022_01_04_133318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -304,6 +304,15 @@ ActiveRecord::Schema.define(version: 2021_12_14_105200) do
     t.bigint "people_tag_id", null: false
   end
 
+  create_table "preferences", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_preferences_on_account_id"
+  end
+
   create_table "project_statuses", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
@@ -559,8 +568,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_105200) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: 6
-    t.datetime "remember_created_at", precision: 6
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "account_id", null: false
@@ -571,26 +580,26 @@ ActiveRecord::Schema.define(version: 2021_12_14_105200) do
     t.integer "job_id", null: false
     t.bigint "manager_id"
     t.boolean "active", default: true, null: false
-    t.datetime "deactivated_on", precision: 6
+    t.datetime "deactivated_on"
     t.bigint "status_id"
     t.integer "permission", default: 0, null: false
     t.string "invitation_token"
-    t.datetime "invitation_created_at", precision: 6
-    t.datetime "invitation_sent_at", precision: 6
-    t.datetime "invitation_accepted_at", precision: 6
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
     t.integer "invitation_limit"
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: 6
-    t.datetime "last_sign_in_at", precision: 6
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.boolean "billable", default: true, null: false
     t.string "confirmation_token"
-    t.datetime "confirmed_at", precision: 6
-    t.datetime "confirmation_sent_at", precision: 6
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.boolean "email_enabled", default: true
     t.integer "kpi_id"
@@ -641,6 +650,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_105200) do
   add_foreign_key "people_statuses", "accounts", name: "people_statuses_account_id_fkey"
   add_foreign_key "people_tags", "accounts"
   add_foreign_key "people_tags", "accounts", name: "people_tags_account_id_fkey"
+  add_foreign_key "preferences", "accounts"
   add_foreign_key "project_statuses", "accounts"
   add_foreign_key "project_statuses", "accounts", name: "project_statuses_account_id_fkey"
   add_foreign_key "project_tags", "accounts"

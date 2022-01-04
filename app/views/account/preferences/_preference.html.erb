@@ -1,0 +1,4 @@
+  <%= tailwind_form_with model: preference, url: account_preference_path(preference), format: :turbo_stream, method: :put do |form| %>
+  <%= form.hidden_field :key, value: preference.key %>
+  <%= form.select :value, ["1", "2"], {}, onchange: "this.form.requestSubmit()" %>
+<% end %>

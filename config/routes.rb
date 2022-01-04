@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :project_statuses, except: [:new, :show]
     resources :clients, except: [:new, :show]
     resources :tags, only: [:destroy, :index]
-    resources :preferences, only: [:index]
+    resources :preferences, only: [:index, :update]
     resources :question_categories, except: [:new, :show]
   end
 
