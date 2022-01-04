@@ -3,6 +3,8 @@ class CreatePreferences < ActiveRecord::Migration[7.0]
     create_table :preferences do |t|
       t.string :key
       t.string :value
+      t.string :title
+      t.string :message
       t.references :account, foreign_key: true, null: false
 
       t.timestamps
