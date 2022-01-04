@@ -13,7 +13,7 @@ class Account::PreferencesController < Account::BaseController
     respond_to do |format|
       if @preference.update(preferences_params)
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update(@preference, partial: "account/preferences/preference", locals: { preference: @preference })
+          render turbo_stream: turbo_stream.replace(@preference, partial: "account/preferences/preference", locals: { preference: @preference })
         end
       else
         format.html { render :edit, status: :unprocessable_entity }
