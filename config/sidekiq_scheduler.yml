@@ -18,18 +18,18 @@ reset_unread_tech_nugget:
 
 delete_timesheets_after_x_days:
   cron: '0 0 * * *'
-  class: DeleteTimesheets
+  class: DeleteTimesheetsJob
   queue: default
   description: 'This job deletes old timesheets as per preferences. This runs daily at midnight'
 
 delete_deactivated_users_after_x_days:
   cron: '0 0 * * *'
-  class: DeleteDeactivatedUsers
+  class: DeleteDeactivatedUsersJob
   queue: default
   description: 'This job deletes deactivated users as per preferences. This runs daily at midnight'
 
 delete_archived_projects_after_x_days:
   cron: '0 0 * * *'
-  class: DeleteArchivedProjects
+  class: DeleteArchivedProjectsJob
   queue: default
   description: 'This job archived projects users as per preferences. This runs daily at midnight'
