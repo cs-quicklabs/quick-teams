@@ -5,11 +5,6 @@ class Survey::Stats::SurveyParticipantStats < Survey::Stats::SurveyStats
     @show_own_attempts = show_own_attempts
   end
 
-  def stats_for(question)
-    answers = Survey::Answer.where(attempt_id: all_attempts.ids, question: question)
-    stats_for_answers(answers)
-  end
-
   def all_attempts
     @show_own_attempts ? attempts_by_self : attempts_by_others
   end

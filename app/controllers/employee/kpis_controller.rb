@@ -17,7 +17,7 @@ class Employee::KpisController < Employee::BaseController
     @kpi = @employee.kpi
     @show_own_attempts = false
     unless @kpi.nil?
-      @stats = Survey::Stats::SurveyParticipantStats.new(@kpi, @employee, @show_own_attempts)
+      @stats = Survey::Stats::EmployeeKpiStats.new(@kpi, @employee, @show_own_attempts)
     end
 
     render "shared/surveys/stats"

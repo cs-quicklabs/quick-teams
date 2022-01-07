@@ -12,7 +12,7 @@ class EmployeeKpiReflex < ApplicationReflex
     kpi = employee.kpi
     show_own_attempts = true
     unless kpi.nil?
-      stats = Survey::Stats::SurveyParticipantStats.new(kpi, employee, show_own_attempts)
+      stats = Survey::Stats::EmployeeKpiStats.new(kpi, employee, show_own_attempts)
     end
 
     morph "#stats", render(partial: "shared/surveys/kpi_stats", locals: { employee: employee, kpi: kpi, stats: stats, show_own_attempts: show_own_attempts })
@@ -23,7 +23,7 @@ class EmployeeKpiReflex < ApplicationReflex
     kpi = employee.kpi
     show_own_attempts = false
     unless kpi.nil?
-      stats = Survey::Stats::SurveyParticipantStats.new(kpi, employee, show_own_attempts)
+      stats = Survey::Stats::EmployeeKpiStats.new(kpi, employee, show_own_attempts)
     end
 
     morph "#stats", render(partial: "shared/surveys/kpi_stats", locals: { employee: employee, kpi: kpi, stats: stats, show_own_attempts: show_own_attempts })
