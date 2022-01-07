@@ -1,7 +1,7 @@
 class DestroyUser < Patterns::Service
   def initialize(user)
     @user = user
-    @transferred_to = User.find(1)
+    @transferred_to = User.where(account: user.account, permission: :admin).first
   end
 
   def call
