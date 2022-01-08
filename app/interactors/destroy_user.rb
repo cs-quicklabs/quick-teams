@@ -1,7 +1,7 @@
 class DestroyUser < Patterns::Service
   def initialize(user)
     @user = user
-    @transferred_to = User.where(account: user.account, permission: :admin).first
+    @transferred_to = Preference.transfer_data_to_admin(user.account)
   end
 
   def call

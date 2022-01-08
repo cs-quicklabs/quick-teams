@@ -9,6 +9,6 @@
   </div>
   <%= tailwind_form_with model: preference, url: account_preference_path(preference), format: :turbo_stream, method: :put do |form| %>
     <%= form.hidden_field :key, value: preference.key %>
-    <%= form.select :value, Preference.options_for(preference.key), {}, onchange: "this.form.requestSubmit()", :class => "form-text-field mt-1" %>
+    <%= form.select :value, preference.options_for(preference.key), {}, onchange: "this.form.requestSubmit()", :class => "form-text-field mt-1" %>
   <% end %>
 </div>
