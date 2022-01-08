@@ -5,5 +5,6 @@ class ProjectTag < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_to_tenant :name
 
-  before_destroy { |tag| tag.projects.each { |project| project.touch } }
+  before_destroy { |tag| tag.projects.touch_all }
+  after_create { |tag| tag.account.projects.touch_all }
 end
