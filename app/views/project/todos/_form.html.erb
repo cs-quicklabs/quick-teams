@@ -3,12 +3,13 @@
     <%= render "shared/form_messages", resource: todo, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Todo", subtitle: "Add details of todo for project" %>
     <%= form.collection_select(:owner_id, UserDecorator.decorate_collection(@project.participants), :id, :display_name_position, { :prompt => "Select Owner" }, :selected => todo.user_id, :class => "form-text-field mt-4") %>
-    <%= form.text_area :title, "Todo", autocomplete: "off" %>
+    <%= form.text_field :title, "Todo", autocomplete: "off" %>
+    <%= form.text_area :body, "Description(optional)", class: "form-text-field h-24" %>
     <div>
       <label for="date" class="block text-sm font-medium text-gray-700">
         Due Date
       </label>
-      <%= form.date_field :deadline, class: "form-text-field mt-1", value: Date.today.to_s(:db) %>
+      <%= form.date_field :deadline, class: "form-text-field mt-1", value: Date.today.to_formatted_s(:db) %>
     </div>
     <div class="flex justify-end">
       <%= form.submit "Add Todo", class: "btn-blue" %>

@@ -1,4 +1,4 @@
-class AddComment < Patterns::Service
+class AddCommentOnGoal < Patterns::Service
   def initialize(params, goal, method, actor)
     @comment = Comment.new(params)
     @goal = goal
@@ -21,6 +21,7 @@ class AddComment < Patterns::Service
   private
 
   def add_comment
+    comment.commentable = goal
     comment.save!
   end
 

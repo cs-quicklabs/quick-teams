@@ -38,7 +38,7 @@ class Project::MilestonesController < Project::BaseController
     authorize [@project, @milestone]
 
     @comment = Comment.new
-    fresh_when @milestone
+    fresh_when [@milestone] + @milestone.comments
   end
 
   def edit

@@ -1,6 +1,6 @@
 class Employee::TimesheetsController < Employee::BaseController
-  before_action :set_timesheet, only: %i[destroy]
-  before_action :set_projects, only: %i[create index]
+  before_action :set_timesheet, only: %i[destroy edit update]
+  before_action :set_projects, only: %i[create index edit]
 
   def index
     authorize [@employee, Timesheet]
@@ -24,6 +24,22 @@ class Employee::TimesheetsController < Employee::BaseController
         }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Timesheet.new, partial: "employee/timesheets/form", locals: { timesheet: @timesheet, projects: @projects }) }
+      end
+    end
+  end
+
+  def edit
+    authorize [@employee, @timesheet]
+  end
+
+  def update
+    authorize [@employee, @timesheet]
+
+    respond_to do |format|
+      if @timesheet.update(timesheet_params)
+        format.html { redirect_to employee_timesheets_path(@employee), notice: "Timesheet was successfully updated." }
+      else
+        format.html { redirect_to edit_employee_timesheet_path(@employee), alert: "Failed to update. Please try again." }
       end
     end
   end

@@ -2,7 +2,7 @@
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: people_status, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "People Status", subtitle: "You can define custom status which can be applied to your team. Examples include On Bench, Deployed" %>
-    <%= form.text_field :name, "Add New Status" %>
+    <%= form.text_field :name, "Add New Status", autocomplete: "off" %>
     <div class="flex">
       <label for="people_status_color" class="text-sm">Appearance</label>
       <div class="flex items-center ml-2 text-sm ">

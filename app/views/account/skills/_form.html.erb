@@ -2,7 +2,7 @@
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: skill, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Skills", subtitle: "You can define skills which can be assigned to your team. Like RxJava, Typecript, Figma. " %>
-    <%= form.text_field :name, "Add New Skill" %>
+    <%= form.text_field :name, "Add New Skill", autocomplete: "off" %>
     <div class="flex justify-end">
       <%= form.submit "Save", class: "btn-blue" %>
     </div>

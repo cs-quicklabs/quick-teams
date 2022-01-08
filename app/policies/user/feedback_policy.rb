@@ -1,19 +1,16 @@
 class User::FeedbackPolicy < User::BaseUserPolicy
-  def update?
-    edit?
-  end
-
   def destroy?
     feedback = record.last
-    return false if feedback.published?
-    return true if user.admin?
-    return feedback.user == user if (user.lead? and feedback_for_subordinate?)
+    return false unless is_active? and not feedback.published?
+    return true if is_admin?
+    return feedback.user == user if _is_team_lead? or _is_project_manager?
     false
   end
 
   def edit?
     feedback = record.last
-    (user.admin? or feedback_for_subordinate?) and !feedback.published?
+    return false unless is_active? and not feedback.published?
+    is_admin? or _is_team_lead? or _is_project_manager?
   end
 
   def comment?
@@ -23,16 +20,24 @@ class User::FeedbackPolicy < User::BaseUserPolicy
     false
   end
 
+  def create?
+    is_active? and (is_admin? or is_project_manager? or is_team_lead?)
+  end
+
   def show?
-    return true if user.admin?
-    return (feedback_for_subordinate? or self?) if user.lead?
-    self?
+    employee = record.first
+    is_admin? or _is_team_lead? or _is_project_manager? or self?
   end
 
   private
 
-  def feedback_for_subordinate?
-    feedback = record.last
-    user.subordinate?(feedback.critiquable)
+  def _is_team_lead?
+    receiver = record.last.critiquable
+    user.subordinate?(receiver) and user.lead?
+  end
+
+  def _is_project_manager?
+    receiver = record.last.critiquable
+    user.project_participant?(receiver) and user.project_manager?
   end
 end

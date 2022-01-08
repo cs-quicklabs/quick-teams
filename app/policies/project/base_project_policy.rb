@@ -1,26 +1,39 @@
 class Project::BaseProjectPolicy < ApplicationPolicy
   def index?
-    project = record.first
-    user.admin? or user.is_manager?(project)
-  end
-
-  def update?
-    user.admin?
+    is_admin? or is_project_manager?
   end
 
   def create?
-    user.admin?
-  end
-
-  def destroy?
-    user.admin?
+    is_active? and index?
   end
 
   def edit?
-    user.admin?
+    is_active? and index?
+  end
+
+  def update?
+    edit?
+  end
+
+  def destroy?
+    edit?
   end
 
   def show?
+    index?
+  end
+
+  private
+
+  def is_admin?
     user.admin?
+  end
+
+  def is_active?
+    !record.first.archived?
+  end
+
+  def is_project_manager?
+    user.is_manager?(record.first)
   end
 end

@@ -1,21 +1,16 @@
 class Survey::ReportPolicy < Survey::BaseSurveyPolicy
-  def checklist?
-    true
-  end
 
-  def score?
-    true
-  end
-
+  # this should not be a problem as we are controlling who can see attempts in attempts policy
+  # so if they can not see if they can not submit it
   def submit?
     true
   end
 
   def download?
-    true
+    user.admin?
   end
 
   def pdf?
-    true
+    user.admin?
   end
 end

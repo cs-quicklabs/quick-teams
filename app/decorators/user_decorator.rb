@@ -7,6 +7,10 @@ class UserDecorator < Draper::Decorator
     "#{first_name} #{last_name}".titleize
   end
 
+  def full_display_name
+    display_name_position
+  end
+
   def display_name_position
     "#{first_name} #{last_name}".titleize + " (" + display_role_title + " " + display_job_title + ")".titleize
   end
@@ -66,11 +70,11 @@ class UserDecorator < Draper::Decorator
   end
 
   def display_deactivated_on
-    "#{deactivated_on.to_s(:long)}"
+    "#{deactivated_on.to_formatted_s(:long)}"
   end
 
   def display_occupied_till
     busy_untill = schedules.map(&:ends_at).max
-    "Occupied untill #{busy_untill.to_s(:long)}"
+    "Occupied untill #{busy_untill.to_formatted_s(:long)}"
   end
 end

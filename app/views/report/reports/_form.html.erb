@@ -1,0 +1,34 @@
+<div class="flex flex-col pt-5 pb-4 border-r border-gray-200">
+  <div class="flex flex-col flex-1 w-64 h-0 overflow-y-auto">
+    <div class="relative inline-block px-3 text-left">
+      <nav class="px-3">
+        <div>
+          <h3 class="text-xs font-semibold tracking-wider text-gray-500 uppercase" id="teams-headline">
+            Filter reports
+          </h3>
+          <%= form_with url: report_reports_path, method: :get do |form| %>
+            <main class="max-w-lg pt-6 pb-12 mx-auto space-y-4 lg:pb-16">
+              <div>
+                <label for="users" class="block text-sm font-medium text-gray-700">
+                  Users
+                </label>
+                <%= form.collection_select(:user_id, User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Employee", :selected => (params["user_id"] if !params["user_id"].blank?) }, :class => "form-text-field mt-1") %>
+              </div>
+              <%= form.hidden_field :reportable_type, :value => "User" %>
+              <div>
+                <label for="status" class="block text-sm font-medium text-gray-700">
+                  Status
+                </label>
+                <%= form.select(:submitted, [["Any", ""], ["Submitted", "true"], ["Draft", "false"]], { :selected => (params["submitted"] if !params["submitted"].blank?) }, :class => "form-text-field mt-1") %>
+              </div>
+              <div class="flex justify-end mt-6">
+                <%= link_to "Reset", report_reports_path, class: "btn-normal" %>
+                <%= form.submit "Search", class: "btn-blue" %>
+              </div>
+            </main>
+          <% end %>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

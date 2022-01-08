@@ -25,7 +25,7 @@ class AddEmployeeTodo < Patterns::Service
   end
 
   def send_email
-    TodosMailer.with(actor: actor, employee: employee).added_email.deliver_later if deliver_email?
+    TodosMailer.with(actor: actor, employee: employee, todo: todo).added_email.deliver_later if deliver_email?
   end
 
   def deliver_email?

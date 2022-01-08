@@ -1,28 +1,28 @@
 class Project < ApplicationRecord
   acts_as_tenant :account
 
-  has_many :schedules
-  has_many :participants, through: :schedules, source: :user
-
   belongs_to :manager, class_name: "User", optional: true
   belongs_to :kpi, class_name: "Survey::Survey", optional: true
-
-  has_many :notes, as: :notable
-  has_many :feedbacks, as: :critiquable
-  has_many :documents, as: :documenter
-  has_many :events, as: :eventable
-  has_many :milestones, as: :goalable, class_name: "Goal"
-  has_many :timesheets
-  has_many :todos
-  has_many :risks
-  has_many :attempts, as: :participant
-
-  has_many :lists, through: :todos, source: :user
-  has_and_belongs_to_many :project_tags
-  has_and_belongs_to_many :skills
-
   belongs_to :discipline
   belongs_to :status, class_name: "ProjectStatus", optional: true
+
+  has_many :schedules, dependent: :destroy
+  has_many :notes, as: :notable, dependent: :destroy
+  has_many :feedbacks, as: :critiquable, dependent: :destroy
+  has_many :reports, as: :reportable, dependent: :destroy
+  has_many :documents, as: :documenter, dependent: :destroy
+  has_many :events, as: :eventable, dependent: :destroy
+  has_many :milestones, as: :goalable, class_name: "Goal", dependent: :destroy
+  has_many :timesheets, dependent: :destroy
+  has_many :todos, dependent: :destroy
+  has_many :risks, dependent: :destroy
+  has_many :attempts, as: :participant, class_name: "Survey::Attempt", dependent: :destroy
+  has_many :templates_assignees, as: :assignable, dependent: :destroy
+  has_many :lists, through: :todos, source: :user
+  has_many :participants, through: :schedules, source: :user
+  has_and_belongs_to_many :project_tags, dependent: :destroy
+  has_and_belongs_to_many :skills, dependent: :destroy
+
   validates_presence_of :name
 
   scope :archived, -> { where(archived: true) }

@@ -1,21 +1,13 @@
 class User::TimesheetPolicy < User::BaseUserPolicy
   def create?
-    employee = record.first
-    return false unless employee.active?
-    self?
+    is_active? and self?
   end
 
-  def update?
-    user.admin?
-  end
-
-  def create?
-    true
-  end
-
-  def destroy?
+  def edit?
+    # user shoud be active and
+    # admin, project manager or creator of timesheet can edit
     timesheet = record.last
-    user.admin? or timesheet.user == user
+    is_active? and (is_admin? or is_project_manager? or (timesheet.user == user))
   end
 
   def show_add_timesheet_form?

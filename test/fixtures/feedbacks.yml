@@ -65,3 +65,21 @@ eleven:
   critiquable_type: User
   critiquable: lead
   published: true
+
+tweleve:
+  title: Some Random Feedback
+  user: admin
+  critiquable_type: User
+  critiquable: manager
+
+tweleve:
+  title: Some Random Feedback
+  user: admin
+  critiquable_type: User
+  critiquable: regular
+
+thirteen:
+  title: Some Random Feedback
+  user: admin
+  critiquable_type: User
+  critiquable: manager

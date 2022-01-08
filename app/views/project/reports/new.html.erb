@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "report", target: "_top" do %>
+  <%= render partial: "form", locals: { report: @report, title: "Add New Report" } %>
+<% end %>

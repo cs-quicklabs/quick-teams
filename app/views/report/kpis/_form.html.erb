@@ -19,13 +19,13 @@
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   From Date
                 </label>
-                <%= form.date_field :from_date, class: "form-text-field mt-1", value: params["from_date"].blank? ? (Date.today - 6.days).to_s(:db) : params["from_date"] %>
+                <%= form.date_field :from_date, class: "form-text-field mt-1", value: params["from_date"].blank? ? (Date.today - 6.days).to_formatted_s(:db) : params["from_date"] %>
               </div>
               <div>
                 <label for="date" class="block text-sm font-medium text-gray-700">
                   To Date
                 </label>
-                <%= form.date_field :to_date, class: "form-text-field mt-1", value: params["to_date"].blank? ? Date.today.to_s(:db) : params["to_date"] %>
+                <%= form.date_field :to_date, class: "form-text-field mt-1", value: params["to_date"].blank? ? Date.today.to_formatted_s(:db) : params["to_date"] %>
               </div>
               <div class="flex justify-end mt-6">
                 <%= link_to "Reset", kpis_reports_path, class: "btn-normal" %>

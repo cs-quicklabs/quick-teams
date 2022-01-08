@@ -1,11 +1,7 @@
 class User::NuggetPolicy < User::BaseUserPolicy
-  def index?
-    true
-  end
-
   def show?
     employee = record.first
-    nugget = record.second
-    employee.published_nuggets.include?(nugget)
+    # show only if nugget has been published for this user
+    employee.published_nuggets.include?(record.last)
   end
 end

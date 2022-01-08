@@ -1,25 +1,7 @@
 class User::DocumentPolicy < User::BaseUserPolicy
-  def destroy?
-    edit?
-  end
-
   def edit?
-    employee = record.first
-    document = record.last
-    return false unless employee.active?
-    return true if user.admin?
-    document.user.id == user.id
-  end
-
-  def update?
-    edit?
-  end
-
-  def create?
-    employee = record.first
-    return false unless employee.active?
-    return true if user.admin?
-    return (subordinate? or self?) if user.lead?
-    self?
+    # user should be active and
+    # user should be admin or creator of document
+    is_active? and (is_admin? or (record.last.user.id == user.id))
   end
 end

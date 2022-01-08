@@ -75,6 +75,18 @@ class EmployeesController < BaseController
     @employees = User.for_current_account.inactive.includes(:role, :discipline, :job).order(deactivated_on: :desc)
   end
 
+  def destroy
+    authorize :team
+
+    respond_to do |format|
+      if DestroyUser.call(@employee).result
+        format.turbo_stream { redirect_to deactivated_users_path, status: 303, notice: "User has been deleted." }
+      else
+        format.turbo_stream { redirect_to deactivated_users_path, status: 303, alert: "Failed to delete user." }
+      end
+    end
+  end
+
   private
 
   def set_employee

@@ -5,5 +5,6 @@ class PeopleTag < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_to_tenant :name
 
-  before_destroy { |tag| tag.users.each { |user| user.touch } }
+  before_destroy { |tag| tag.users.touch_all }
+  after_create { |tag| tag.account.users.touch_all }
 end

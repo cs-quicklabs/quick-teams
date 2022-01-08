@@ -8,6 +8,6 @@ class ScheduleDecorator < Draper::Decorator
   end
 
   def display_occupied_till
-    "till #{ends_at.to_s(:long)}"
+    "till #{ends_at.to_formatted_s(:long)}"
   end
 end

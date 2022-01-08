@@ -7,8 +7,8 @@
         Add New Client
       </label>
       <div class="flex w-full mt-1 mb-8">
-        <%= form.text_field :name, placeholder: "Full Name", class: "form-text-field" %>
-        <%= form.text_field :email, placeholder: "Email", class: "ml-3 form-text-field" %>
+        <%= form.text_field :name, placeholder: "Full Name", class: "form-text-field", autocomplete: "off" %>
+        <%= form.text_field :email, placeholder: "Email", class: "ml-3 form-text-field", autocomplete: "off" %>
         <%= form.submit "Save", class: "btn-blue ml-3 justify-end" %>
       </div>
     </div>

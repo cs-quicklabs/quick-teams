@@ -1,0 +1,15 @@
+<tr id="<%= dom_id template %>">
+  <td class=" w-full table-cell">
+    <a href="<%= template_path(template) %>", class="truncate hover:text-gray-600 hover:underline">
+      <span class="text-gray-900 block whitespace-normal "><%= template.title.upcase_first %></span>
+    </a>
+  </td>
+  <td class="table-cell">
+    <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= display_created_at(template) %> </span>
+  </td>
+  <td class="table-cell line-clamp-1  ">
+    <a href=<%= templates_path(user_id: template.user.id) %> class="block hover:underline " target="_top">
+      <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= template.user.decorate.display_name %> </span>
+    </a>
+  </td>
+</tr>

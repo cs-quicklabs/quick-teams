@@ -54,10 +54,12 @@ class ProjectsController < BaseController
   def destroy
     authorize :projects
 
-    @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
-      format.json { head :no_content }
+      if DestroyProject.call(@project).result
+        format.turbo_stream { redirect_to archived_projects_path, status: 303, notice: "Project has been deleted." }
+      else
+        format.turbo_stream { redirect_to archived_projects_path, status: 303, alert: "Failed to delete project." }
+      end
     end
   end
 

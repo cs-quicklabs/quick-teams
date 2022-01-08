@@ -12,7 +12,7 @@
       <label for="date" class="block text-sm font-medium text-gray-700">
         Date
       </label>
-      <%= form.date_field :date, class: "form-text-field mt-1", value: Date.today.to_s(:db) %>
+      <%= form.date_field :date, class: "form-text-field mt-1", value: Date.today.to_formatted_s(:db) %>
     </div>
     <div>
       <label for="hours" class="block text-sm font-medium text-gray-700">

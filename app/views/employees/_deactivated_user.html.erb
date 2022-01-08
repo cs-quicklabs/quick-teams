@@ -1,5 +1,5 @@
 <% employee = employee.decorate %>
-<li>
+<li id = <%= dom_id(employee) %>>
   <div class="flex items-center px-4 py-4 border-b border-gray-200 sm:px-6">
     <div class="flex-1 min-w-0 sm:flex sm:items-center sm:justify-between">
       <div>
@@ -26,7 +26,8 @@
       </div>
     </div>
     <div class="flex justify-end">
-      <%= link_to "Activate", activate_user_path(employee), class: "btn-inline-edit" %>
+      <%= link_to "Activate", activate_user_path(employee), class: "btn-inline-edit mr-2" %>
+      <%= delete_button(employee_path(employee)) %>
     </div>
   </div>
 </li>

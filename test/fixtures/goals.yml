@@ -106,3 +106,13 @@ twelve:
   account: crownstack
   status: progress
   permission: true
+
+thirteen:
+  title: Some Random Goal twelve
+  user: admin
+  goalable_type: User
+  goalable: manager
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+  permission: false

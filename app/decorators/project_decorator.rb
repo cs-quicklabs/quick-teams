@@ -5,6 +5,10 @@ class ProjectDecorator < Draper::Decorator
     name.upcase_first
   end
 
+  def full_display_name
+    display_name
+  end
+
   def display_discipline
     "in #{project.discipline.name}"
   end
@@ -14,7 +18,7 @@ class ProjectDecorator < Draper::Decorator
   end
 
   def display_archived_on
-    "#{project.archived_on.to_s(:long)}"
+    "#{project.archived_on.to_formatted_s(:long)}"
   end
 
   def display_additional_participants

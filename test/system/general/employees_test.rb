@@ -143,6 +143,14 @@ class EmployeesTest < ApplicationSystemTestCase
     assert_selector "p.notice", text: "User has been activated."
   end
 
+  test "can see deactivated users and delete it" do
+    visit deactivated_users_url(script_name: "/#{@account.id}")
+    page.accept_confirm do
+      page.first(:link, "Delete").click
+    end
+    assert_selector "p.notice", text: "User has been deleted."
+  end
+
   test "can paginate" do
     visit page_url
     within "nav.pagination" do

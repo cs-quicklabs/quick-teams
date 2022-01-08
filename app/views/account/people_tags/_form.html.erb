@@ -2,7 +2,7 @@
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: people_tag, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "People Tags", subtitle: "You can define custom tags which can be applied to your team members. Examples include star performer, pending performance review." %>
-    <%= form.text_field :name, "Add New Tag" %>
+    <%= form.text_field :name, "Add New Tag", autocomplete: "off" %>
     <div class="flex">
       <label for="people_tag_color" class="text-sm">Appearance</label>
       <div class="flex items-center ml-2 text-sm ">

@@ -203,4 +203,84 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     visit page_detail_url
     assert_selector "h1", text: @member.decorate.display_name
   end
+
+  test "project manager can see own goals" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Goals"
+    # can not create a goal for himself
+    assert_no_selector "form#new_goal"
+    # can not edit, delete goal for himself
+    @employee.goals.each do |goal|
+      assert_selector "li##{dom_id(goal)}", text: "Show"
+      assert_no_selector "li##{dom_id(goal)}", text: "Edit"
+      assert_no_selector "li##{dom_id(goal)}", text: "Delete"
+    end
+  end
+
+  test "project manager can see project participant goals" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:regular)
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Goals"
+    # can create a goal for subordinate
+    assert_selector "form#new_goal"
+    # can edit goals for subordinates
+    # can delete goals create by him
+    @employee.goals.each do |goal|
+      assert_selector "li##{dom_id(goal)}", text: "Show"
+      assert_selector "li##{dom_id(goal)}", text: "Edit"
+      if goal.user == @lead
+        assert_selector "li##{dom_id(goal)}", text: "Delete"
+      end
+    end
+  end
+
+  test "project manager can not see someone elses goals" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @manager.decorate.display_name
+  end
+
+  test "project manager can see own goal details" do
+    sign_out @employee
+    @employee = users(:manager)
+    sign_in @employee
+    @goal = @employee.goals.where(permission: false).first
+    visit page_detail_url
+    assert_selector "h3", text: @goal.title
+    #can not comment on goal
+    assert_no_selector "textarea#comment"
+  end
+
+  test "project manager can see project participant goal details" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:regular)
+    @goal = @employee.goals.where(permission: false).first
+    visit page_detail_url
+    assert_selector "h3", text: @goal.title
+    #can comment on goal
+    assert_selector "textarea#comment"
+  end
+
+  test "project manager can not see someone elses goal detail" do
+    sign_out @employee
+    @manager = users(:manager)
+    sign_in @manager
+    @employee = users(:admin)
+    @goal = @employee.goals.where(permission: false).first
+    visit page_detail_url
+    assert_selector "h1", text: @manager.decorate.display_name
+  end
 end

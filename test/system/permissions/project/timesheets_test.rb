@@ -47,6 +47,10 @@ class ProjectTimesheetsTest < ApplicationSystemTestCase
     assert_selector "div#project-tabs", text: "Timesheets"
     assert_selector "div#timesheet-stats"
     assert_selector "div#timesheet-list"
+    @employee.timesheets.each do |timesheet|
+      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
+      assert_no_selector "div##{dom_id(timesheet)}", text: "Delete"
+    end
   end
 
   test "manager can not see project timesheets of other projects" do

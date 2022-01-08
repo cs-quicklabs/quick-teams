@@ -50,7 +50,7 @@ class UpdateSchedule < Patterns::Service
   end
 
   def context
-    "with #{schedule.occupancy}% occupancy till #{schedule.ends_at.to_date.to_s(:long)}"
+    "with #{schedule.occupancy}% occupancy till #{schedule.ends_at.to_date.to_formatted_s(:long)}"
   end
 
   attr_reader :project, :actor, :schedule, :employee, :params

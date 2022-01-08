@@ -1,0 +1,93 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "employee/title", employee: @employee %>
+  <main class="pb-8">
+    <div class="">
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1 lg:grid-cols-3">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2" id="report-list">
+          <section aria-labelledby="participants_section">
+            <div class="overflow-hidden bg-white">
+              <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+                <table class="table table-auto">
+                  <thead class="bg-gray-50 ">
+                    <tr>
+                      <th scope="col" class="w-full table-head">
+                        Report
+                      </th>
+                      <th scope="col" class="table-head">
+                        Status
+                      </th>
+                      <th scope="col" class="table-head">
+                        Created At
+                      </th>
+                      <th scope="col" class="table-head">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body" id="reports" data-infinite-scroll-target="entries">
+                    <%= render partial: "employee/reports/report", collection: @reports, cached: true %>
+                  </tbody>
+                </table>
+                <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+                  <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <% if policy([@employee, Report]).create? and (current_user == @employee) and @assigns.size > 0 %>
+            <section aria-labelledby="add-participant-section">
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <div class="p-5 border-b border-gray-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                      Submit a New Report
+                    </h3>
+                    <p class="mt-2 max-w-4xl text-sm text-gray-500">Following reports are available for you to submit. Please click on options below to create a new report. </p>
+                  </div>
+                  <ul class="divide-y divide-gray-200 border-b border-gray-200">
+                    <%= render partial: "template",  collection: @assigns, as: :assign, cached: false %>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          <% end %>
+          <% if policy([@employee, Report]).create? and (current_user == @employee) %>
+            <% if @assigns.size > 0 %>
+              <p class="text-sm text-gray-500 mt-4 text-center p-2">
+                Or if you want to submit a custom report which in not listed above, Please click on the button below to create a new custom report.
+              </p>
+            <% else %>
+              <p class="text-sm text-gray-500 mt-4 text-center p-2">
+                Please click on the button below to Submit a new report. It can be about progress, goals or anything  you want to share with your team.
+              </p>
+            <% end %>
+            <div class="justify-center flex ">
+              <%= link_to "Submit New Report", new_employee_report_path(@employee), class: "btn-blue items-center " %>
+            </div>
+          <% end %>
+          <% if policy([@employee, Report]).create? and (current_user != @employee) %>
+            <section aria-labelledby="add-participant-section">
+              <div class="overflow-hidden bg-white">
+                <div class="px-4">
+                  <div class="p-5 border-b border-gray-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                      Reports
+                    </h3>
+                    <p class="mt-2 max-w-4xl text-sm text-gray-500">Following reports are assigned to employee. </p>
+                  </div>
+                  <ul class="divide-y divide-gray-200 border-b border-gray-200">
+                    <%= render partial: "template",  collection: @assigns, as: :assign, cached: false %>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          <% end %>
+        </div>
+      </div>
+    </main>
+  </main>

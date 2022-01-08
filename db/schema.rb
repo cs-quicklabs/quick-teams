@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_142004) do
+ActiveRecord::Schema.define(version: 2022_01_07_044858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,11 +73,12 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
   create_table "comments", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id", null: false
-    t.bigint "goal_id", null: false
+    t.bigint "commentable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0, null: false
-    t.index ["goal_id"], name: "index_comments_on_goal_id"
+    t.string "commentable_type"
+    t.index ["commentable_id"], name: "index_comments_on_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -225,7 +226,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
     t.string "processor_id"
     t.boolean "default"
     t.jsonb "data"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: 6
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
@@ -262,8 +263,8 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
     t.string "processor_plan", null: false
     t.integer "quantity", default: 1, null: false
     t.string "status", null: false
-    t.datetime "trial_ends_at"
-    t.datetime "ends_at"
+    t.datetime "trial_ends_at", precision: 6
+    t.datetime "ends_at", precision: 6
     t.decimal "application_fee_percent", precision: 8, scale: 2
     t.jsonb "metadata"
     t.jsonb "data"
@@ -301,6 +302,17 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
   create_table "people_tags_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "people_tag_id", null: false
+  end
+
+  create_table "preferences", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.string "title"
+    t.string "message"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_preferences_on_account_id"
   end
 
   create_table "project_statuses", force: :cascade do |t|
@@ -355,10 +367,12 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
     t.string "title"
     t.string "reportable_type", null: false
     t.bigint "reportable_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "submitted", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "risks", force: :cascade do |t|
@@ -499,6 +513,26 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
     t.index ["account_id"], name: "index_tags_on_account_id"
   end
 
+  create_table "templates", force: :cascade do |t|
+    t.text "title"
+    t.bigint "user_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_templates_on_account_id"
+    t.index ["user_id"], name: "index_templates_on_user_id"
+  end
+
+  create_table "templates_assignees", force: :cascade do |t|
+    t.bigint "template_id", null: false
+    t.string "assignable_type", null: false
+    t.bigint "assignable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assignable_type", "assignable_id"], name: "index_templates_assignees_on_assignable"
+    t.index ["template_id"], name: "index_templates_assignees_on_template_id"
+  end
+
   create_table "timesheets", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.bigint "project_id", null: false
@@ -590,7 +624,6 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", name: "active_storage_variant_records_blob_id_fkey"
   add_foreign_key "clients", "accounts"
   add_foreign_key "clients", "accounts", name: "clients_account_id_fkey"
-  add_foreign_key "comments", "goals"
   add_foreign_key "comments", "users"
   add_foreign_key "disciplines", "accounts"
   add_foreign_key "disciplines", "accounts", name: "disciplines_account_id_fkey"
@@ -619,6 +652,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
   add_foreign_key "people_statuses", "accounts", name: "people_statuses_account_id_fkey"
   add_foreign_key "people_tags", "accounts"
   add_foreign_key "people_tags", "accounts", name: "people_tags_account_id_fkey"
+  add_foreign_key "preferences", "accounts"
   add_foreign_key "project_statuses", "accounts"
   add_foreign_key "project_statuses", "accounts", name: "project_statuses_account_id_fkey"
   add_foreign_key "project_tags", "accounts"
@@ -628,6 +662,7 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
   add_foreign_key "projects", "project_statuses", column: "status_id"
   add_foreign_key "projects", "users", column: "manager_id"
   add_foreign_key "projects", "users", column: "manager_id", name: "projects_manager_id_fkey"
+  add_foreign_key "reports", "users"
   add_foreign_key "risks", "projects"
   add_foreign_key "risks", "users"
   add_foreign_key "roles", "accounts"
@@ -643,6 +678,9 @@ ActiveRecord::Schema.define(version: 2021_12_04_142004) do
   add_foreign_key "survey_surveys", "users", column: "actor_id"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "accounts"
+  add_foreign_key "templates", "accounts"
+  add_foreign_key "templates", "users"
+  add_foreign_key "templates_assignees", "templates"
   add_foreign_key "timesheets", "accounts"
   add_foreign_key "timesheets", "projects"
   add_foreign_key "timesheets", "users"

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :project_statuses, except: [:new, :show]
     resources :clients, except: [:new, :show]
     resources :tags, only: [:destroy, :index]
-    resources :preferences, only: [:index]
+    resources :preferences, only: [:index, :update]
     resources :question_categories, except: [:new, :show]
   end
 
@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :milestones, module: "project"
     resources :todos, module: "project"
     resources :skills, module: "project"
+    resources :reports, module: "project"
     resources :documents, only: [:index, :show, :create, :destroy, :edit, :update], module: "project"
     resources :surveys, module: "project", only: [:index, :show, :destroy]
     resources :kpis, module: "project", only: [:index, :show, :destroy] do
@@ -54,6 +55,7 @@ Rails.application.routes.draw do
     resources :skills, module: "employee"
     resources :nuggets, module: "employee"
     resources :documents, module: "employee"
+    resources :reports, module: "employee"
     resources :surveys, module: "employee", only: [:index, :show, :destroy]
     resources :kpis, module: "employee", only: [:index, :show, :destroy] do
       get "stats", to: "kpis#stats", as: "stats"
@@ -65,9 +67,13 @@ Rails.application.routes.draw do
   end
   resources :user
   resources :comments
+  resources :report_comments
   resources :nuggets
   resources :kbs
   resources :kpis
+  resources :templates do
+    resources :assignees
+  end
   resources :surveys do
     resources :questions, module: "survey"
     resources :assignees, module: "survey", as: "assignees"
@@ -130,6 +136,7 @@ Rails.application.routes.draw do
     get "/nuggets", to: "report/nuggets#index", as: "nuggets_reports"
     get "/kbs", to: "report/kbs#index", as: "kbs_reports"
     get "/kpis", to: "report/kpis#index", as: "kpis_reports"
+    get "/reports", to: "report/reports#index", as: "report_reports"
   end
 
   get "/reports", to: "reports#index", as: "reports"
@@ -145,4 +152,5 @@ Rails.application.routes.draw do
 
   get "account/details", to: "account/account#index", as: "detail"
   patch "account/:id", to: "account/account#update", as: "update_account"
+  delete "/", to: redirect("/users/sign_in", status: 303)
 end

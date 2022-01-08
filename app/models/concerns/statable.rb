@@ -22,9 +22,9 @@ module Statable
     start_date = date_range(time_span).first
     end_date = date_range(time_span).last
     if time_span === "week"
-      title_message = "Last Week's Performance (#{start_date.to_s(:long)} to #{end_date.to_s(:long)})"
+      title_message = "Last Week's Performance (#{start_date.to_formatted_s(:long)} to #{end_date.to_formatted_s(:long)})"
     elsif time_span === "month"
-      title_message = "Last Month's Performance (#{start_date.to_s(:long)} to #{end_date.to_s(:long)})"
+      title_message = "Last Month's Performance (#{start_date.to_formatted_s(:long)} to #{end_date.to_formatted_s(:long)})"
     elsif time_span === "beginning"
       title_message = "Performance Since Beginning"
     end

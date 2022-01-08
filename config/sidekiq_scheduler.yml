@@ -15,3 +15,21 @@ reset_unread_tech_nugget:
   class: WeeklyNuggetResetMailerJob
   queue: default
   description: 'This job resets unread tech nuggets older than 7 days every Monday 10:00 AM'
+
+delete_timesheets_after_x_days:
+  cron: '0 0 * * *'
+  class: DeleteTimesheetsJob
+  queue: default
+  description: 'This job deletes old timesheets as per preferences. This runs daily at midnight'
+
+delete_deactivated_users_after_x_days:
+  cron: '0 0 * * *'
+  class: DeleteDeactivatedUsersJob
+  queue: default
+  description: 'This job deletes deactivated users as per preferences. This runs daily at midnight'
+
+delete_archived_projects_after_x_days:
+  cron: '0 0 * * *'
+  class: DeleteArchivedProjectsJob
+  queue: default
+  description: 'This job deletes archived projects as per preferences. This runs daily at midnight'

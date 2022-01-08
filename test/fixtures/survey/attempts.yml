@@ -9,3 +9,75 @@ project:
   actor: regular
   survey: project
   participant_type: Project
+
+one:
+  participant: managed
+  actor: manager
+  survey: project
+  participant_type: Project
+
+two:
+  participant: one
+  actor: manager
+  survey: project
+  participant_type: Project
+
+three:
+  participant: managed
+  actor: admin
+  survey: project
+  participant_type: Project
+
+four:
+  participant: member
+  actor: member
+  survey: user
+  participant_type: User
+
+five:
+  participant: regular
+  actor: admin
+  survey: user
+  participant_type: User
+
+six:
+  participant: member
+  actor: admin
+  survey: user
+  participant_type: User
+
+seven:
+  participant: member
+  actor: owner
+  survey: user
+  participant_type: User
+
+eight:
+  participant: member
+  actor: lead
+  survey: user
+  participant_type: User
+
+nine:
+  participant: subordinate
+  actor: admin
+  survey: user
+  participant_type: User
+
+ten:
+  participant: subordinate
+  actor: manager
+  survey: user
+  participant_type: User
+
+eleven:
+  participant: admin
+  actor: owner
+  survey: user
+  participant_type: User
+
+tweleve:
+  participant: regular
+  actor: regular
+  survey: user
+  participant_type: User

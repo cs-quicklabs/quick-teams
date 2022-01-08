@@ -1,10 +1,15 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.2"
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 7.0.0.alpha2"
+# Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
+gem "rails", "7.0.0"
+
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails", "3.4.2"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
@@ -13,42 +18,42 @@ gem "pg", "~> 1.1"
 gem "puma", "5.5.1"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", "~> 0.1.0"
+gem "jsbundling-rails", "1.0.0"
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
-gem "cssbundling-rails", ">= 0.1.0"
+gem "cssbundling-rails", "1.0.0"
 
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails", ">= 0.7.11"
+# Hotwire's SPA-like page accelerator [https://github.com/hotwired/turbo-rails]
+gem "turbo-rails", "1.0.0"
 
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails", ">= 0.4.0"
+# Hotwire's modest JavaScript framework [https://github.com/hotwired/stimulus-rails]
+gem "stimulus-rails", "1.0.0"
+
+# Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
+gem "stimulus_reflex", "= 3.5.0.pre8"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", ">= 4.0", :require => ["redis", "redis/connection/hiredis"]
 gem "hiredis"
+gem "redis", ">= 4.0", require: ["redis", "redis/connection/hiredis"]
 gem "valid_url"
 
 # Use Active Storage variant
 gem "image_processing", "~> 1.2"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", "1.9.1", require: false
-gem "rubocop", require: false
 gem "acts_as_tenant"
-gem "hotwire-rails"
-gem "draper"
-gem "rails-patterns"
-gem "pagy"
 gem "aws-sdk-s3", "~> 1.87"
+gem "bootsnap", "1.9.1", require: false
+gem "draper"
 gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
 gem "newrelic_rpm"
+gem "pagy"
+gem "rails-patterns"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "pg_search"
-gem "stimulus_reflex", "= 3.5.0.pre3"
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # devise gems
 gem "devise", github: "heartcombo/devise", branch: "main"
@@ -58,7 +63,7 @@ gem "devise-pwned_password"
 # sidekiq gems, sinatra is used to build UI for /sidekiq
 gem "sidekiq"
 gem "sidekiq-scheduler"
-gem "sinatra", ">= 1.3.0", :require => nil
+gem "sinatra", ">= 1.3.0", require: nil
 
 # pay gem to enable stripe payments
 gem 'pay', '~> 3.0'
@@ -68,19 +73,19 @@ gem 'stripe', '>= 2.8', '< 6.0'
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "letter_opener"
+  gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "launchy"
+  gem "letter_opener"
   gem "letter_opener_web"
   gem "rexml"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console", ">= 4.1.0"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem "rack-mini-profiler", "~> 2.0"
   gem "listen", "~> 3.3"
+  gem "rack-mini-profiler", "~> 2.0"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "spring"  
+  gem "spring"
 end
 
 group :test do
@@ -90,4 +95,3 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
 end
-

@@ -1,0 +1,47 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Templates
+      </h1>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @templates.count.to_s + " Templates)" %></p>
+    </div>
+    <% if current_user.admin? || current_user.lead? %>
+      <div class="flex mt-4 sm:mt-0 sm:ml-4">
+        <%= link_to "New Template", new_template_path, class: "btn-blue" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+      <% if @templates.size > 0 %>
+        <table class="table">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class=" w-full table-head">
+                Template
+              </th>
+              <th scope="col" class="table-head">
+                Created At
+              </th>
+              <th scope="col" class="table-head">
+                Created by
+              </th>
+            </tr>
+          </thead>
+          <tbody class="table-body" id="templates" data-infinite-scroll-target="entries">
+            <%= render partial: "template", collection: @templates, as: :template, cached: true %>
+          </tbody>
+        </table>
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+        </div>
+      <% else %>
+        <%= render partial: "shared/no_result_found", cached: true %>
+      <% end %>
+    </div>
+  </div>
+</div>

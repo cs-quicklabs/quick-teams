@@ -10,6 +10,7 @@ class ArchiveProject < Patterns::Service
       clear_todos
       discard_milestones
       archive
+      submit_pending_reports
       add_event
     rescue
       project
@@ -38,10 +39,14 @@ class ArchiveProject < Patterns::Service
 
   def discard_milestones
     project.milestones.where(status: :progress).each do |goal|
-      params = { user_id: actor.id, goal_id: goal.id, title: "Discarding as project has been archived.", status: "stale" }
+      params = { user_id: actor.id, commentable_id: goal.id, title: "Discarding as project has been archived.", status: "stale" }
       goal.comments << Comment.new(params)
       goal.update_attribute("status", "discarded")
     end
+  end
+
+  def submit_pending_reports
+    project.reports.update_all(submitted: true)
   end
 
   def add_event

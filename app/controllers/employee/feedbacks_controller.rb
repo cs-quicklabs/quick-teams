@@ -72,7 +72,7 @@ class Employee::FeedbacksController < Employee::BaseController
     feedbacks = []
     if current_user.admin?
       feedbacks = all_feedbacks
-    elsif current_user.lead?
+    elsif current_user.lead? or current_user.project_participant?(@employee)
       feedbacks = self? ? published_feedbacks : all_feedbacks
     else
       feedbacks = published_feedbacks
