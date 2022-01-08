@@ -32,4 +32,4 @@ delete_archived_projects_after_x_days:
   cron: '0 0 * * *'
   class: DeleteArchivedProjectsJob
   queue: default
-  description: 'This job archived projects users as per preferences. This runs daily at midnight'
+  description: 'This job deletes archived projects as per preferences. This runs daily at midnight'
