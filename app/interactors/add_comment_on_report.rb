@@ -21,7 +21,6 @@ class AddCommentOnReport < Patterns::Service
 
   def add_comment
     comment.commentable = report
-    comment.status = 1
     comment.save!
   end
 
