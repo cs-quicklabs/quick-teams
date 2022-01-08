@@ -55,7 +55,7 @@ class ProjectsController < BaseController
     authorize :projects
 
     respond_to do |format|
-      if DestroyProject.call(@project)
+      if DestroyProject.call(@project).result
         format.turbo_stream { redirect_to archived_projects_path, status: 303, notice: "Project has been deleted." }
       else
         format.turbo_stream { redirect_to archived_projects_path, status: 303, alert: "Failed to delete project." }

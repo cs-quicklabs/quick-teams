@@ -79,7 +79,7 @@ class EmployeesController < BaseController
     authorize :team
 
     respond_to do |format|
-      if DestroyUser.call(@employee)
+      if DestroyUser.call(@employee).result
         format.turbo_stream { redirect_to deactivated_users_path, status: 303, notice: "User has been deleted." }
       else
         format.turbo_stream { redirect_to deactivated_users_path, status: 303, alert: "Failed to delete user." }

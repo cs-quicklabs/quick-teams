@@ -30,9 +30,9 @@ class User < ApplicationRecord
   has_many :goals, as: :goalable, dependent: :destroy
   has_many :templates_assignees, as: :assignable, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
-  has_many :attempts, as: :participant, dependent: :destroy, class_name: "Survey::Attempt"
-  has_many :surveys, class_name: "Survey::Survey", foreign_key: "actor_id"
-  has_many :attempt, class_name: "Survey::Attempt", foreign_key: "actor_id", dependent: :destroy
+  has_many :attempts, as: :participant, dependent: :destroy, class_name: "Survey::Attempt" #survey attempts as participant
+  has_many :attempt, class_name: "Survey::Attempt", foreign_key: "actor_id"  # surveys attempts as actor
+  has_many :surveys, class_name: "Survey::Survey", foreign_key: "actor_id" # survey created by user
   has_many :notes, dependent: :destroy
   has_many :templates
   has_many :timesheets, dependent: :destroy
