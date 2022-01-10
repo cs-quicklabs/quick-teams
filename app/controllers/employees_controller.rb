@@ -94,7 +94,7 @@ class EmployeesController < BaseController
   end
 
   def employee_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :discipline_id, :job_id, :manager_id, :billable)
+    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :discipline_id, :job_id, :manager_id, :billable, :permission)
   end
 
   def build_form
