@@ -66,11 +66,16 @@ class User < ApplicationRecord
   def subordinate?(employee)
     # level 1 subordinates
     all_subordinates_ids = self.subordinates.ids
-
     # early return on level one
     return true if all_subordinates_ids.include?(employee.id)
 
     # level 2 subordinates
+    all_subordinates_ids << User.where("manager_id in (?)", all_subordinates_ids).ids
+    all_subordinates_ids = all_subordinates_ids.flatten.uniq
+    # early return on level two
+    return true if all_subordinates_ids.include?(employee.id)
+
+    # level 3 subordinates
     all_subordinates_ids << User.where("manager_id in (?)", all_subordinates_ids).ids
     all_subordinates_ids = all_subordinates_ids.flatten.uniq
     all_subordinates_ids.include?(employee.id)
