@@ -29,9 +29,9 @@ class UpdateSchedule < Patterns::Service
   end
 
   def update_billable_resources
-    if project.billable
-      project.reset_billable_resources
-    else
+    project.reset_billable_resources
+
+    unless project.billable
       schedule.billable = false
     end
   end
