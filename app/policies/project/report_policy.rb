@@ -8,7 +8,7 @@ class Project::ReportPolicy < Project::BaseProjectPolicy
     create?
   end
 
-  def destroy?    
+  def destroy?
     edit? or is_admin?
   end
 end
