@@ -1,4 +1,4 @@
-  <main class="pb-10 mx-auto max-w-7xl lg:py-12 lg:px-8">
+    <main class="pb-10 mx-auto max-w-7xl lg:py-12 lg:px-8">
   <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
     <%= render "shared/archive_menu" %>
     <main class="max-w-xl px-4 pb-12 lg:col-span-8">
@@ -6,10 +6,19 @@
         <div class="pb-4 ml-4">
           <%= render "shared/form_header", title: "Archived Projects", subtitle: @projects.load.size > 0 ? "Following projects have been archived." : "No record found." %>
         </div>
-        <ul>
-          <%= render partial: "projects/archived_project", collection: @projects, as: :project, cached: true %>
-        </ul>
+        <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
+          <div>
+            <table class="table">
+              <thead class="bg-gray-50">
+              </thead>
+              <tbody class="table-body" id="employees" data-infinite-scroll-target="entries">
+                <%= render partial: "projects/archived_project", collection: @projects, as: :project, cached: true %>
+              </tbody>
+            </table>
+            <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+              <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+            </div>
+          </div>
+        </main>
       </div>
     </main>
-  </div>
-</main>

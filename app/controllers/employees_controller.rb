@@ -72,7 +72,8 @@ class EmployeesController < BaseController
   def deactivated
     authorize :team, :index?
 
-    @employees = User.for_current_account.inactive.includes(:role, :discipline, :job).order(deactivated_on: :desc)
+    @pagy, @employees = pagy_nil_safe(params, User.for_current_account.inactive.includes(:role, :discipline, :job).order(deactivated_on: :desc), items: LIMIT)
+    render_partial("employees/deactivated_user", collection: @employees, cached: true) if stale?(@employees)
   end
 
   def destroy
