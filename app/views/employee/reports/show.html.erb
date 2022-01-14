@@ -87,7 +87,7 @@
         </div>
       </div>
       <% if policy([@report.reportable, @report]).comment? %>
-        <%= render partial: "shared/comments/report", locals: { report: @report, comment: @comment } %>
+        <%= render partial: "shared/comments/add", locals: { commentable: @report, comment: @comment } %>
       <% end %>
     </div>
   </section>

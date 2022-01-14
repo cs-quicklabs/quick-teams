@@ -28,7 +28,7 @@
         </div>
       </div>
       <% if policy([@project, @milestone]).comment? %>
-        <%= render partial: "shared/comments/add", locals: { goal: @milestone, comment: @comment } %>
+        <%= render partial: "shared/comments/add", locals: { commentable: @milestone, comment: @comment } %>
       <% end %>
     </div>
   </section>
