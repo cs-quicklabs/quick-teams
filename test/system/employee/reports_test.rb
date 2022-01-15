@@ -19,7 +19,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     take_screenshot
     assert_selector "h1", text: "#{@employee.first_name} #{@employee.last_name}"
     assert_selector "div#employee-tabs", text: "Reports"
-    assert_text "Add Report"
+    assert_text "Submit New Report"
   end
 
   test "can not visit index if not logged in" do
@@ -30,39 +30,43 @@ class EmployeeReportsTest < ApplicationSystemTestCase
 
   test "can add new report" do
     visit page_url
-    click_on "Add Custom Report"
+    click_on "Submit New Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
-    click_on "Submit Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     take_screenshot
-    assert_selector "h3", text: "Some Random report Title"
-    assert_selector "div", text: "This is some report"
+    assert_selector "p.notice", text: "Report was successfully created."
+    assert_selector "tr", text: "Some Random report Title"
   end
 
   test "can add new template report if assigned" do
     visit page_url
     @assign = @employee.templates_assignees.first
     find("li", id: dom_id(@assign)).click_link(@assign.template.title)
-    click_on "Submit Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     take_screenshot
-    assert_selector "h3", text: @assign.template.title + " Report"
-    assert_selector "div", text: "This is some report"
+    assert_selector "p.notice", text: "Report was successfully updated."
+    assert_selector "tr", text: @assign.template.title + " Report"
   end
 
   test "can draft new report" do
     visit page_url
-    click_on "Add Custom Report"
+    click_on "Submit New Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
     click_on "Save As Draft"
     take_screenshot
-    assert_selector "h3", text: "Some Random report Title"
-    assert_selector "div", text: "This is some report"
+    assert_selector "p.notice", text: "Report was successfully created."
+    assert_selector "tr", text: "Some Random report Title"
   end
 
   test "can not draft report with empty details" do
     visit page_url
-    click_on "Add Custom Report"
+    click_on "Submit New Report"
     click_on "Save As Draft"
     assert_selector "div#error_explanation", text: "Title can't be blank"
     take_screenshot
@@ -70,8 +74,10 @@ class EmployeeReportsTest < ApplicationSystemTestCase
 
   test "can not add report with empty details" do
     visit page_url
-    click_on "Add Custom Report"
-    click_on "Submit Report"
+    click_on "Submit New Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     assert_selector "div#error_explanation", text: "Title can't be blank"
     assert_selector "div#error_explanation", text: "Body can't be blank"
     take_screenshot
@@ -98,7 +104,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
   test "can not show add report when user is deactivated" do
     inactive_employee = users(:inactive)
     visit employee_reports_url(script_name: "/#{@account.id}", employee_id: inactive_employee.id)
-    assert_no_text "Add New Report"
+    assert_no_text "Submit New Report"
   end
 
   test "can edit report if not submitted" do
@@ -110,10 +116,11 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     fill_in "Title", with: title
     fill_in_rich_text_area dom_id(report), with: title
     take_screenshot
-    click_on "Submit Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     assert_selector "p.notice", text: "report was successfully updated."
-    assert_selector "h3", text: title
-    assert_selector "div.trix-content", text: title
+    assert_selector "tr", text: title
     take_screenshot
   end
   test "can not edit report if submitted" do
@@ -136,21 +143,25 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     find("tr", id: dom_id(report)).click_link("Edit")
 
     fill_in "Title", with: nil
-    click_on "Submit Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     assert_selector "p.alert", text: "Failed to update. Please try again."
     take_screenshot
   end
 
   test "can comment on report" do
-    visit page_url
-    report = @employee.reports.first
-    find("tr", id: dom_id(report)).click_link(report.title)
+    @user = users(:lead)
+    report = @user.reports.first
+    visit employee_report_url(script_name: "/#{@account.id}", employee_id: @employee.id, id: report.id)
     fill_in "comment", with: "This is a comment"
     assert_emails 1 do
       click_on "Comment"
       sleep(0.5)
     end
     assert_selector "ul#comments", text: "This is a comment"
+    assert_text "Edit"
+    assert_text "Delete"
     take_screenshot
   end
 end

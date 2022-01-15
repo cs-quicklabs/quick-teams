@@ -236,6 +236,7 @@ lead:
   people_tags: star
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   confirmed_at: 2021-03-18
+  email_enabled: True
 
 member:
   first_name: Aashish

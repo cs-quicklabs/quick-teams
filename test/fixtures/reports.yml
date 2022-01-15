@@ -45,14 +45,14 @@ eight:
   reportable_type: User
   reportable: lead
   submitted: false
-  user: regular
+  user: lead
 
 nine:
   title: Some Random Report nine  
   reportable_type: User
   reportable: member
   submitted: false
-  user: regular
+  user: member
 
 ten:
   title: Some Random Goal ten  

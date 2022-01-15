@@ -23,7 +23,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     @employee = users(:member)
     visit page_url
     assert_selector "div#employee-tabs", text: "Reports"
-    assert_selector "form#new_report"
+    assert_selector "div#new_report"
     assert_selector "tbody#reports"
 
     #can see delete button for employee reports
@@ -32,28 +32,12 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     end
   end
 
-  test "admin can assign template to employee" do
-    sign_out @employee
-    sign_in users(:super)
-    @employee = users(:member)
-    @template = templates(:one)
-    visit page_url
-    select templates(:one).title, from: "template_id"
-    click_on "Assign Template"
-    assert_text @template.title
-    #can see delete button for employee reports
-    @employee.templates_assignees.includes(:template).each do |assign|
-      assert_selector "li##{dom_id(assign)}", text: assign.template.title
-      assert_selector "li##{dom_id(assign)}", text: "Delete"
-    end
-  end
-
   test "admin can see his own reports" do
     sign_out @employee
     sign_in users(:super)
     visit page_url
     assert_selector "div#employee-tabs", text: "Reports"
-    assert_selector "form#new_report"
+    assert_selector "div#new_report"
     assert_selector "tbody#reports"
 
     #can see delete button for his reports
@@ -90,7 +74,6 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     @employee = @lead.subordinates.first
     visit page_url
     assert_selector "div#employee-tabs", text: "Reports"
-    assert_selector "form#new_report"
     assert_selector "tbody#reports"
   end
 
@@ -101,7 +84,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     @employee = users(:super)
     visit page_url
     assert_selector "h1", text: @lead.decorate.display_name
-    assert_no_selector "form#new_report"
+    assert_no_selector "div#new_report"
     assert_no_selector "tbody#reports"
   end
 
@@ -111,7 +94,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_url
     assert_selector "div#employee-tabs", text: "Reports"
-    assert_selector "form#new_report"
+    assert_selector "div#new_report"
     assert_selector "tbody#reports"
   end
 
@@ -155,7 +138,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Reports"
     # can not create a report
-    assert_selector "form#new_report"
+    assert_selector "div#new_report"
     # can see report detail button
     # can not see edit delete button
     @employee.reports.each do |report|
