@@ -12,7 +12,7 @@
               <thead class="bg-gray-50">
               </thead>
               <tbody class="table-body" id="employees" data-infinite-scroll-target="entries">
-                <%= render partial: "deactivated_user", collection: @employees, as: :employee, cached: true %>
+                <%= render partial: "employees/deactivated_user", collection: @employees, as: :deactivated_user, cached: true %>
               </tbody>
             </table>
             <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">

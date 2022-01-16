@@ -5,8 +5,6 @@ class Employee::BaseController < BaseController
   after_action :verify_authorized
   include Pagy::Backend
 
-  LIMIT = 20
-
   private
 
   def set_employee

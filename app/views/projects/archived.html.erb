@@ -11,7 +11,7 @@
             <table class="table">
               <thead class="bg-gray-50">
               </thead>
-              <tbody class="table-body" id="employees" data-infinite-scroll-target="entries">
+              <tbody class="table-body" id="projects" data-infinite-scroll-target="entries">
                 <%= render partial: "projects/archived_project", collection: @projects, as: :project, cached: true %>
               </tbody>
             </table>

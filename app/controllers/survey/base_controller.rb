@@ -3,8 +3,6 @@ class Survey::BaseController < BaseController
   include Pagy::Backend
   helper_method :resolve_redirect_path
 
-  LIMIT = 10
-
   private
 
   def resolve_redirect_path(attempt)
