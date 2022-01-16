@@ -5,7 +5,7 @@
         <%= render "shared/form_messages", resource: template, message: local_assigns[:message] %>
         <%= render "shared/form_header", title: title, subtitle: "A report template is a blueprint of how report should be submmited and what are the contents of it." %>
         <%= form.text_field :title, "Title", autocomplete: "off" %>
-        <%= form.hidden_field :user_id, value: current_user.id%>
+        <%= form.hidden_field :user_id, value: current_user.id %>
         <%= form.rich_text_area :body, "Contents of Report", class: "form-text-field" %>
         <div class="flex justify-end">
           <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>

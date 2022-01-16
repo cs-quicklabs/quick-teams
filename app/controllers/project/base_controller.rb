@@ -5,8 +5,6 @@ class Project::BaseController < BaseController
   after_action :verify_authorized
   include Pagy::Backend
 
-  LIMIT = 20
-
   def set_project
     @project ||= Project.find(params["project_id"])
   end
