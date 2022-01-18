@@ -6,9 +6,20 @@
         <div class="pb-4 ml-4">
           <%= render "shared/form_header", title: "Deactivated Users", subtitle: @employees.load.size > 0 ? "Following users have been deactivated." : "No record found." %>
         </div>
-        <ul>
-          <%= render partial: "employees/deactivated_user", collection: @employees, as: :employee, cached: true %>
-        </ul>
+        <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
+          <div>
+            <table class="table">
+              <thead class="bg-gray-50">
+              </thead>
+              <tbody class="table-body" id="employees" data-infinite-scroll-target="entries">
+                <%= render partial: "employees/deactivated_user", collection: @employees, as: :deactivated_user, cached: true %>
+              </tbody>
+            </table>
+            <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+              <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
