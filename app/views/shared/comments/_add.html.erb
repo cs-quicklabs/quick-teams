@@ -6,7 +6,7 @@
           <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
         </div>
         <div class="flex-1 min-w-0">
-          <%= form_with model: comment, url: comments_path, method: :post do |form| %>
+          <%= form_with model: comment, url: goal_comments_path, method: :post do |form| %>
             <%= form.hidden_field :user_id, :value => current_user.id %>
             <%= form.hidden_field :commentable_id, :value => goal.id %>
             <div>
