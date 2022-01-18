@@ -5,7 +5,7 @@ class User::ReportPolicy < User::BaseUserPolicy
   end
 
   def comment?
-    report = record.first
+    report = record.last
     is_admin? or is_project_manager? or is_team_lead? or report.user == user
   end
 

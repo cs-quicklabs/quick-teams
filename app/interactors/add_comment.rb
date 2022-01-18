@@ -7,6 +7,7 @@ class AddComment < Patterns::Service
       @goal = commentable
     else
       @employee = commentable.reportable
+      @report = commentable
     end
     @method = method
     @actor = actor
@@ -55,6 +56,8 @@ class AddComment < Patterns::Service
       elsif method == "and mark Discarded"
         GoalsMailer.with(actor: actor, employee: employee, goal: goal).discarded_email.deliver_later
       end
+    else
+      CommentsMailer.with(actor: actor, employee: employee, report: report).commented_email.deliver_later if deliver_email?
     end
   end
 
@@ -62,5 +65,5 @@ class AddComment < Patterns::Service
     (actor != employee) and employee.email_enabled and employee.account.email_enabled
   end
 
-  attr_reader :goal, :comment, :method, :actor, :employee
+  attr_reader :goal, :comment, :method, :actor, :employee, :report
 end
