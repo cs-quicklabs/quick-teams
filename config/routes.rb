@@ -63,8 +63,9 @@ Rails.application.routes.draw do
     post "/surveys/:survey_id/assessment", to: "employee/surveys#quick_assessment"
   end
   resources :user
-  resources :comments
-  resources :report_comments
+  resources :comments, only: [:edit, :destroy, :update]
+  resources :report_comments, only: [:create, :update]
+  resources :goal_comments, only: [:create, :update]
   resources :nuggets
   resources :kbs
   resources :kpis

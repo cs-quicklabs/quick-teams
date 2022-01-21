@@ -120,6 +120,8 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     end
 
     assert_selector "ul#comments", text: "This is a comment"
+    assert_text "Edit"
+    assert_text "Delete"
     take_screenshot
   end
 
