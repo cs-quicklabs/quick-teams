@@ -12,7 +12,7 @@ class CommentsController < BaseController
       if @comment.update(comment_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: "shared/comments/comment", locals: { comment: @comment }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "shared/comments/comment", locals: { comment: @comment }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, template: "comments/edit", locals: { comment: @comment }) }
       end
     end
   end

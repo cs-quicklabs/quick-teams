@@ -7,6 +7,7 @@
         </div>
         <div class="flex-1 min-w-0">
           <%= form_with model: comment, url: goal_comments_path, method: :post do |form| %>
+            <%= render "shared/form_messages", resource: comment, message: local_assigns[:message] %>
             <%= form.hidden_field :user_id, :value => current_user.id %>
             <%= form.hidden_field :commentable_id, :value => goal.id %>
             <div>
