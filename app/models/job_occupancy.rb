@@ -11,7 +11,7 @@ class JobOccupancy
   end
 
   def self.occupancy_for_account(account)
-    users = User.active.where(account: account)
+    users = User.active.where(account: account, billable: true)
     occupancy_for_users(users)
   end
 
