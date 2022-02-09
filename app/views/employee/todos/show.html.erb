@@ -29,7 +29,7 @@
   </div>
   <% cache @todo do %>
     <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
-      <p><%= @todo.body %></p>
+      <p class="whitespace-pre-wrap"><%= @todo.body %></p>
     </div>
   <% end %>
   <% if @todo.completed? %>
