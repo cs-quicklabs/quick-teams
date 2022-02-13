@@ -164,7 +164,6 @@ class EmployeesTest < ApplicationSystemTestCase
     visit page_url
     find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
     assert_selector "h1", text: @employees.first.decorate.display_name
-
     take_screenshot
     click_on "Status"
     click_on PeopleStatus.first.name
@@ -176,7 +175,6 @@ class EmployeesTest < ApplicationSystemTestCase
     visit page_url
     find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
     assert_selector "h1", text: @employees.first.decorate.display_name
-
     take_screenshot
     find("div", id: "employee-status").click_button("remove")
     assert_no_selector "span", text: @employees.first.status.name
@@ -198,7 +196,6 @@ class EmployeesTest < ApplicationSystemTestCase
     visit page_url
     find("tr", id: dom_id(@employees.first)).click_link(@employees.first.decorate.display_name)
     assert_selector "h1", text: @employees.first.decorate.display_name
-
     take_screenshot
     find("div", id: "employee-tags").click_button("remove")
     assert_no_selector "span", text: @employees.first.people_tags.first.name

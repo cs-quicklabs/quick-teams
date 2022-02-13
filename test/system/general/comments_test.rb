@@ -30,7 +30,6 @@ class HomeTest < ApplicationSystemTestCase
       fill_in "comment", with: "This is an edited comment"
       click_on "Comment"
     end
-
     assert_selector "p", text: "This is an edited comment"
   end
 
@@ -61,7 +60,6 @@ class HomeTest < ApplicationSystemTestCase
       fill_in "comment", with: "This is an edited comment"
       click_on "Comment"
     end
-
     assert_selector "p", text: "This is an edited comment"
   end
 
