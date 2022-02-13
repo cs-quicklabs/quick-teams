@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   end
 
   get "checkout", to: "checkout#show"
-  get "billing", to: "billing#show"
 
   namespace :account do
     resources :roles, except: [:new, :show]
@@ -151,6 +150,8 @@ Rails.application.routes.draw do
   end
 
   get "account/details", to: "account/account#index", as: "detail"
+  get "account/billing", to: "account/billing#index", as: "billing"
+
   patch "account/:id", to: "account/account#update", as: "update_account"
   delete "/", to: redirect("/users/sign_in", status: 303)
 end
