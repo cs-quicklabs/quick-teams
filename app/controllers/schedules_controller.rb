@@ -11,8 +11,9 @@ class SchedulesController < BaseController
     if params[:job]
       employees = employees.where(job: params[:job])
     else
-      employees = employees
+      employees = employees.where(billable: true)
     end
+    
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
 

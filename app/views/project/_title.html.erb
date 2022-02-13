@@ -85,9 +85,9 @@
     </div>
     <% if current_user.admin? %>
       <% if project.manager.nil? %>
-        <p class="px-6 -mt-2 text-sm font-medium text-gray-500 truncate"><%= project.description %> No Project manager has been assigned to this project yet. This is a <%= project.billable? ? "billable" : "Non billable"%> project.</p>
+        <p class="px-6 -mt-2 text-sm font-medium text-gray-500 truncate"><%= project.description %> No Project manager has been assigned to this project yet. This is a <%= project.billable? ? "billable" : "Non billable" %> project.</p>
       <% else %>
-        <p class="px-6 -mt-2 text-sm font-medium text-gray-500 truncate"><%= project.description %> This is a <%= project.billable? ? "billable" : "Non billable"%> project and is managed by <%= project.manager.decorate.display_name%>.</p>
+        <p class="px-6 -mt-2 text-sm font-medium text-gray-500 truncate"><%= project.description %> This is a <%= project.billable? ? "billable" : "Non billable" %> project and is managed by <%= project.manager.decorate.display_name %>.</p>
       <% end %>
     <% end %>
     <%= render "project/tabs" %>

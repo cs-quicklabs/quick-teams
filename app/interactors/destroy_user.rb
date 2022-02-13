@@ -74,6 +74,7 @@ class DestroyUser < Patterns::Service
 
   def delete_events
     Event.where(user_id: user.id).destroy_all
+    Event.where(trackable_id: user.id).destroy_all
   end
 
   attr_reader :user, :transferred_to
