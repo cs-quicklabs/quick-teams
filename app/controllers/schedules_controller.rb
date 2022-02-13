@@ -13,7 +13,7 @@ class SchedulesController < BaseController
     else
       employees = employees.where(billable: true)
     end
-    
+
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
 
