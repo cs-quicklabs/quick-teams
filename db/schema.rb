@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "processor_id"
     t.boolean "default"
     t.jsonb "data"
-    t.datetime "deleted_at", precision: 6
+    t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
@@ -263,8 +263,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "processor_plan", null: false
     t.integer "quantity", default: 1, null: false
     t.string "status", null: false
-    t.datetime "trial_ends_at", precision: 6
-    t.datetime "ends_at", precision: 6
+    t.datetime "trial_ends_at"
+    t.datetime "ends_at"
     t.decimal "application_fee_percent", precision: 8, scale: 2
     t.jsonb "metadata"
     t.jsonb "data"
@@ -625,12 +625,16 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   add_foreign_key "clients", "accounts"
   add_foreign_key "clients", "accounts", name: "clients_account_id_fkey"
   add_foreign_key "comments", "users"
+  add_foreign_key "disciplines", "accounts"
+  add_foreign_key "disciplines", "accounts", name: "disciplines_account_id_fkey"
   add_foreign_key "documents", "users"
   add_foreign_key "events", "accounts"
   add_foreign_key "feedbacks", "users"
   add_foreign_key "feedbacks", "users", name: "feedbacks_user_id_fkey"
   add_foreign_key "goals", "accounts"
   add_foreign_key "goals", "users"
+  add_foreign_key "jobs", "accounts"
+  add_foreign_key "jobs", "accounts", name: "jobs_account_id_fkey"
   add_foreign_key "kbs", "accounts"
   add_foreign_key "kbs", "disciplines"
   add_foreign_key "kbs", "jobs"
@@ -661,6 +665,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   add_foreign_key "reports", "users"
   add_foreign_key "risks", "projects"
   add_foreign_key "risks", "users"
+  add_foreign_key "roles", "accounts"
+  add_foreign_key "roles", "accounts", name: "roles_account_id_fkey"
   add_foreign_key "schedules", "projects"
   add_foreign_key "schedules", "projects", name: "schedules_project_id_fkey"
   add_foreign_key "schedules", "users"
