@@ -5,7 +5,8 @@ class Employee::TodosController < Employee::BaseController
     authorize [@employee, Todo]
 
     @todo = Todo.new
-    @pagy, @todos = pagy_nil_safe(params, @employee.todos.includes(:project, :user, :owner).order(completed: :asc).order(deadline: :asc), items: LIMIT)
+    todos = @employee.todos.finished.includes(:project, :user, :owner).order(updated_at: :desc) + @employee.todos.pending.includes(:project, :user, :owner).order(deadline: :asc)
+    @pagy, @todos = pagy_nil_safe(params, todos, items: LIMIT)
     render_partial("employee/todos/todo", collection: @todos) if stale?(@todos + [@employee])
   end
 
