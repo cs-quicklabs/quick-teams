@@ -121,6 +121,7 @@ Rails.application.routes.draw do
     get "/goals", to: "report/goals#index", as: "goals_reports"
     get "/goals/open", to: "report/goals#open", as: "open_goals_reports"
     get "/schedules/available", to: "report/schedules#available", as: "available_schedules_reports"
+    get "/schedules/no_schedule", to: "report/schedules#no_schedule", as: "no_schedule_reports"
     get "/schedules/overburdened", to: "report/schedules#overburdened", as: "overburdened_schedules_reports"
     get "/schedules/shared", to: "report/schedules#shared", as: "shared_schedules_reports"
     get "/schedules/next", to: "report/schedules#available_next_month", as: "available_next_month_schedules_reports"
