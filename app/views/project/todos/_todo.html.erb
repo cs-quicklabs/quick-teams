@@ -25,9 +25,11 @@
   <td class="table-cell whitespace-nowrap">
     <% if policy([project, todo]).edit? %>
       <%= edit_button(edit_project_todo_path(project, todo, script_name: "/#{owner.account.id}")) %>
-    <% end %>
-    <% if policy([project, todo]).destroy? %>
       <%= delete_button(project_todo_path(project, todo, script_name: "/#{owner.account.id}")) %>
+    <% else %>
+      <p class="text-sm font-medium text-green-600">
+        completed on <%= display_date(todo.updated_at) %>
+      </p>
     <% end %>
   </td>
 </tr>
