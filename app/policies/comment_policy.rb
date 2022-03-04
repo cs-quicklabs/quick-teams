@@ -1,8 +1,13 @@
 class CommentPolicy < ApplicationPolicy
-  def create?
-    return true if user.admin?
-    return true if report.user == user
-    return true if report.reportable == user
-    false
+  def edit?
+    record.user == user
+  end
+
+  def update?
+    edit?
+  end
+
+  def destroy?
+    edit?
   end
 end
