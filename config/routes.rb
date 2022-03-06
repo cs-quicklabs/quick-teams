@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   require "sidekiq/web"
   require "sidekiq-scheduler/web"
 
-  mount Sidekiq::Web => "/sidekiq"
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => "/sidekiq"
+  end
+
   mount ActionCable.server => "/cable"
 
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
