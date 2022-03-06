@@ -1,0 +1,24 @@
+<li>
+  <div class="relative pb-6">
+    <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+    <div class="relative flex space-x-3">
+      <div>
+        <span class="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full ring-2 ring-white">
+          <%= image_tag "male-placeholder-image.png", class: "w-7 h-7 rounded-full" %>
+        </span>
+      </div>
+      <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+        <div>
+          <p class="text-sm text-gray-500">
+            <a href="<%= employee_timeline_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
+            added new employee
+            <a href="<%= employee_timeline_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
+          </p>
+        </div>
+        <div class="text-sm text-right text-gray-500 whitespace-nowrap">
+          <%= display_created_at(event) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

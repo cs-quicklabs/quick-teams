@@ -7,7 +7,7 @@
       <label for="starts" class="block text-sm font-medium text-gray-700">
         Starts At
       </label>
-      <%= form.date_field :starts_at, class: "form-text-field mt-1" %>
+      <%= form.date_field :starts_at, class: "form-text-field mt-1", value: Date.today.to_formatted_s(:db)%>
     </div>
     <div>
       <label for="ends" class="block text-sm font-medium text-gray-700">
@@ -25,7 +25,7 @@
       <label for="billable" class="block text-sm font-medium text-gray-700">
         Billable
       </label>
-      <%= form.select :billable, Schedule::SCHEDULE_OPTIONS, {}, class: "form-text-field mt-1" %>
+      <%= form.select :billable, Schedule::SCHEDULE_OPTIONS,{ :selected => @project.billable }, class: "form-text-field mt-1" %>
     </div>
     <div class="flex justify-end mt-6">
       <%= form.submit "Add Participant", class: "btn-blue" %>

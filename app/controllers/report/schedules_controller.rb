@@ -8,6 +8,15 @@ class Report::SchedulesController < Report::BaseController
     fresh_when @employees
   end
 
+  def no_schedule
+    authorize :report, :index?
+
+    @employees = User.for_current_account.active.billable.includes({ schedules: :project }, :role, :discipline, :job).order(:job_id).decorate
+    @employees = @employees.select { |e| e.overall_occupancy == 0 }
+
+    fresh_when @employees
+  end
+
   def overburdened
     authorize :report, :index?
     @employees = User.for_current_account.active.billable.includes({ schedules: :project }, :role, :discipline, :job).order(:first_name).decorate
