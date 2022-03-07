@@ -10,15 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_07_044858) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_03_07_053836) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "email_enabled", default: true
   end
 
@@ -27,8 +26,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.text "body"
     t.string "record_type", null: false
     t.bigint "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -37,7 +36,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -50,7 +49,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -64,8 +63,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "name", null: false
     t.string "email", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_clients_on_account_id"
     t.index ["email"], name: "index_clients_on_email"
   end
@@ -74,8 +73,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "title"
     t.bigint "user_id", null: false
     t.bigint "commentable_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
     t.string "commentable_type"
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
@@ -85,8 +84,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   create_table "disciplines", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_disciplines_on_account_id"
   end
 
@@ -97,8 +96,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "comments"
     t.string "documenter_type", null: false
     t.bigint "documenter_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["documenter_type", "documenter_id"], name: "index_documents_on_documenter"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
@@ -108,8 +107,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "action"
     t.integer "eventable_id"
     t.string "eventable_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "action_for_context"
     t.integer "trackable_id"
     t.string "trackable_type"
@@ -120,8 +119,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   create_table "feedbacks", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "critiquable_type", null: false
     t.bigint "critiquable_id", null: false
     t.boolean "published", default: false
@@ -134,8 +133,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.bigint "user_id", null: false
     t.string "goalable_type", null: false
     t.bigint "goalable_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.date "deadline"
     t.integer "status", default: 0, null: false
     t.bigint "account_id", null: false
@@ -148,8 +147,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   create_table "jobs", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_jobs_on_account_id"
   end
 
@@ -160,8 +159,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.bigint "discipline_id"
     t.bigint "job_id"
     t.string "tag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "comments"
     t.bigint "account_id", null: false
     t.index ["account_id"], name: "index_kbs_on_account_id"
@@ -174,8 +173,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.text "body"
     t.string "notable_type"
     t.bigint "notable_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
     t.index ["user_id"], name: "index_notes_on_user_id"
@@ -186,9 +185,9 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
     t.boolean "published", default: false
-    t.datetime "published_on"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "published_on", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "account_id", null: false
     t.index ["account_id"], name: "index_nuggets_on_account_id"
     t.index ["skill_id"], name: "index_nuggets_on_skill_id"
@@ -199,8 +198,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.bigint "user_id", null: false
     t.bigint "nugget_id", null: false
     t.boolean "read", default: false
-    t.datetime "created_at", default: "2021-09-18 06:04:09", null: false
-    t.datetime "updated_at", default: "2021-09-18 06:04:09", null: false
+    t.datetime "created_at", precision: nil, default: "2021-09-18 06:04:09", null: false
+    t.datetime "updated_at", precision: nil, default: "2021-09-18 06:04:09", null: false
   end
 
   create_table "pay_charges", force: :cascade do |t|
@@ -213,8 +212,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.integer "amount_refunded"
     t.jsonb "metadata"
     t.jsonb "data"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_charges_on_customer_id_and_processor_id", unique: true
     t.index ["subscription_id"], name: "index_pay_charges_on_subscription_id"
   end
@@ -226,9 +225,9 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "processor_id"
     t.boolean "default"
     t.jsonb "data"
-    t.datetime "deleted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
     t.index ["processor", "processor_id"], name: "index_pay_customers_on_processor_and_processor_id", unique: true
   end
@@ -240,8 +239,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "processor_id"
     t.boolean "default"
     t.jsonb "data"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["owner_type", "owner_id", "processor"], name: "index_pay_merchants_on_owner_type_and_owner_id_and_processor"
   end
 
@@ -251,8 +250,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.boolean "default"
     t.string "type"
     t.jsonb "data"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_payment_methods_on_customer_id_and_processor_id", unique: true
   end
 
@@ -263,13 +262,13 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "processor_plan", null: false
     t.integer "quantity", default: 1, null: false
     t.string "status", null: false
-    t.datetime "trial_ends_at"
-    t.datetime "ends_at"
+    t.datetime "trial_ends_at", precision: nil
+    t.datetime "ends_at", precision: nil
     t.decimal "application_fee_percent", precision: 8, scale: 2
     t.jsonb "metadata"
     t.jsonb "data"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_subscriptions_on_customer_id_and_processor_id", unique: true
   end
 
@@ -277,15 +276,15 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "processor"
     t.string "event_type"
     t.jsonb "event"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "people_statuses", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
     t.index ["account_id"], name: "index_people_statuses_on_account_id"
   end
@@ -293,8 +292,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   create_table "people_tags", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
     t.index ["account_id"], name: "index_people_tags_on_account_id"
   end
@@ -310,16 +309,16 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "title"
     t.string "message"
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_preferences_on_account_id"
   end
 
   create_table "project_statuses", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
     t.index ["account_id"], name: "index_project_statuses_on_account_id"
   end
@@ -327,8 +326,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   create_table "project_tags", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
     t.index ["account_id"], name: "index_project_tags_on_account_id"
   end
@@ -340,14 +339,14 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "account_id"
     t.bigint "manager_id"
     t.bigint "discipline_id"
     t.string "description"
     t.boolean "archived", default: false
-    t.datetime "archived_on"
+    t.datetime "archived_on", precision: nil
     t.bigint "status_id"
     t.boolean "billable", default: true
     t.decimal "billable_resources", precision: 4, scale: 2
@@ -369,8 +368,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.bigint "reportable_id", null: false
     t.bigint "user_id", null: false
     t.boolean "submitted", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
@@ -380,8 +379,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.boolean "status", default: true, null: false
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_risks_on_project_id"
     t.index ["user_id"], name: "index_risks_on_user_id"
   end
@@ -389,16 +388,16 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_roles_on_account_id"
   end
 
   create_table "schedules", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.date "starts_at"
     t.date "ends_at"
     t.integer "occupancy"
@@ -410,8 +409,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   create_table "skills", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_skills_on_account_id"
   end
 
@@ -420,14 +419,26 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.bigint "skill_id", null: false
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "plan_id"
+    t.string "customer_id"
+    t.bigint "user_id", null: false
+    t.string "status"
+    t.datetime "current_period_start"
+    t.datetime "current_period_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "survey_answers", force: :cascade do |t|
     t.integer "attempt_id"
     t.integer "question_id"
     t.integer "option_id"
     t.integer "score", default: 0
     t.boolean "correct"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "survey_attempts", force: :cascade do |t|
@@ -438,8 +449,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.boolean "winner"
     t.string "comment"
     t.integer "score"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "participant_type", null: false
     t.index ["actor_id"], name: "index_survey_attempts_on_actor_id"
     t.index ["participant_id"], name: "index_survey_attempts_on_participant_id"
@@ -450,22 +461,22 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.integer "weight", default: 0
     t.string "text"
     t.boolean "correct"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "survey_participant", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "survey_question_categories", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_survey_question_categories_on_account_id"
   end
 
@@ -474,8 +485,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "text"
     t.string "description"
     t.string "explanation"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "question_category_id"
   end
 
@@ -490,8 +501,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.integer "winning_score", default: 0
     t.bigint "actor_id", null: false
     t.integer "survey_type", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["actor_id"], name: "index_survey_surveys_on_actor_id"
   end
 
@@ -499,8 +510,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.bigint "tag_id", null: false
     t.string "taggable_type", null: false
     t.bigint "taggable_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
     t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable"
   end
@@ -508,8 +519,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_tags_on_account_id"
   end
 
@@ -517,8 +528,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.text "title"
     t.bigint "user_id", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_templates_on_account_id"
     t.index ["user_id"], name: "index_templates_on_user_id"
   end
@@ -527,8 +538,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.bigint "template_id", null: false
     t.string "assignable_type", null: false
     t.bigint "assignable_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["assignable_type", "assignable_id"], name: "index_templates_assignees_on_assignable"
     t.index ["template_id"], name: "index_templates_assignees_on_template_id"
   end
@@ -542,8 +553,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "description", null: false
     t.boolean "billed", default: false, null: false
     t.boolean "billable", default: true, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_timesheets_on_account_id"
     t.index ["project_id"], name: "index_timesheets_on_project_id"
     t.index ["user_id"], name: "index_timesheets_on_user_id"
@@ -553,8 +564,8 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "title"
     t.date "deadline"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "completed", default: false
     t.bigint "project_id"
     t.bigint "owner_id", null: false
@@ -570,10 +581,10 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "account_id", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
@@ -582,29 +593,30 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
     t.integer "job_id", null: false
     t.bigint "manager_id"
     t.boolean "active", default: true, null: false
-    t.datetime "deactivated_on"
+    t.datetime "deactivated_on", precision: nil
     t.bigint "status_id"
     t.integer "permission", default: 0, null: false
     t.string "invitation_token"
-    t.datetime "invitation_created_at"
-    t.datetime "invitation_sent_at"
-    t.datetime "invitation_accepted_at"
+    t.datetime "invitation_created_at", precision: nil
+    t.datetime "invitation_sent_at", precision: nil
+    t.datetime "invitation_accepted_at", precision: nil
     t.integer "invitation_limit"
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.boolean "billable", default: true, null: false
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.boolean "email_enabled", default: true
     t.integer "kpi_id"
+    t.string "stripe_id"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["discipline_id"], name: "index_users_on_discipline_id"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -673,6 +685,7 @@ ActiveRecord::Schema.define(version: 2022_01_07_044858) do
   add_foreign_key "schedules", "users", name: "schedules_user_id_fkey"
   add_foreign_key "skills", "accounts"
   add_foreign_key "skills", "accounts", name: "skills_account_id_fkey"
+  add_foreign_key "subscriptions", "users"
   add_foreign_key "survey_attempts", "users", column: "actor_id"
   add_foreign_key "survey_question_categories", "accounts"
   add_foreign_key "survey_surveys", "users", column: "actor_id"
