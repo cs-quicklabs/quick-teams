@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    redirect_to(request.referrer || landing_path)
+    redirect_to (request.referer || root_path), allow_other_host: true
   end
 
   def signed_in_root_path(resource)
