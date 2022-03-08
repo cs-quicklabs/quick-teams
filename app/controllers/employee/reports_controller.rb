@@ -58,7 +58,7 @@ class Employee::ReportsController < Employee::BaseController
     @report = UpdateReport.call(@report, report_params, params[:draft].nil?).result
     respond_to do |format|
       if @report.errors.empty?
-        format.html { redirect_to employee_reports_path(@employee), notice: "report was successfully updated." }
+        format.html { redirect_to employee_reports_path(@employee), notice: "Report was successfully updated." }
       else
         format.html { redirect_to edit_employee_report_path(@report.reportable, @report), alert: "Failed to update. Please try again." }
       end
