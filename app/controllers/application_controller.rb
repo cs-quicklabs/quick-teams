@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActsAsTenant::Errors::NoTenantSet, with: :user_not_authorized
 
   before_action :set_redirect_path, unless: :user_signed_in?
+  before_action :set_stripe_key
 
   def set_redirect_path
     @redirect_path = request.path
@@ -115,5 +116,11 @@ class ApplicationController < ActionController::Base
                        pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
       }
     end
+  end
+
+  private
+
+  def set_stripe_key
+    Stripe.api_key = Rails.application.credentials.stripe[:secret_key]
   end
 end
