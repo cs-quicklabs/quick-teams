@@ -159,4 +159,10 @@ Rails.application.routes.draw do
 
   patch "account/:id", to: "account/account#update", as: "update_account"
   delete "/", to: redirect("/users/sign_in", status: 303)
+
+  namespace :purchase do
+    resources :checkouts
+  end
+
+  resources :subscriptions
 end
