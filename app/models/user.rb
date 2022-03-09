@@ -124,4 +124,8 @@ class User < ApplicationRecord
   def filled_surveys
     Survey::Attempt.includes(:survey, :actor, :participant).where(actor_id: id, survey_id: surveys.ids, participant_type: "User")
   end
+
+  def subscribed?
+    subscriptions.where(status: "active").any?
+  end
 end
