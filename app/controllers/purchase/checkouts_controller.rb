@@ -1,6 +1,5 @@
 class Purchase::CheckoutsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_stripe_key
 
   def create
     price = params[:price_id]
@@ -9,7 +8,7 @@ class Purchase::CheckoutsController < ApplicationController
       customer: current_user.stripe_id,
       client_reference_id: current_user.id,
       success_url: root_url + "success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: root_url,
+      cancel_url: home_url(script_name: current_user.account.id),
       payment_method_types: ["card"],
       mode: "subscription",
       customer_email: current_user.email,
@@ -25,11 +24,5 @@ class Purchase::CheckoutsController < ApplicationController
   def success
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @customer = Stripe::Customer.retrieve(session.customer)
-  end
-
-  private
-
-  def set_stripe_key
-    Stripe.api_key = Rails.application.credentials.dig(:stripe, :secret_key)
   end
 end

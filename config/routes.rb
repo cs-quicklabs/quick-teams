@@ -165,4 +165,5 @@ Rails.application.routes.draw do
   end
 
   resources :subscriptions
+  get "success", to: "purchase/checkouts#success", as: "success"
 end
