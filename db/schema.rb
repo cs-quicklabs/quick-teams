@@ -202,84 +202,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_07_053836) do
     t.datetime "updated_at", precision: nil, default: "2021-09-18 06:04:09", null: false
   end
 
-  create_table "pay_charges", force: :cascade do |t|
-    t.bigint "customer_id", null: false
-    t.bigint "subscription_id"
-    t.string "processor_id", null: false
-    t.integer "amount", null: false
-    t.string "currency"
-    t.integer "application_fee_amount"
-    t.integer "amount_refunded"
-    t.jsonb "metadata"
-    t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id", "processor_id"], name: "index_pay_charges_on_customer_id_and_processor_id", unique: true
-    t.index ["subscription_id"], name: "index_pay_charges_on_subscription_id"
-  end
-
-  create_table "pay_customers", force: :cascade do |t|
-    t.string "owner_type"
-    t.bigint "owner_id"
-    t.string "processor", null: false
-    t.string "processor_id"
-    t.boolean "default"
-    t.jsonb "data"
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
-    t.index ["processor", "processor_id"], name: "index_pay_customers_on_processor_and_processor_id", unique: true
-  end
-
-  create_table "pay_merchants", force: :cascade do |t|
-    t.string "owner_type"
-    t.bigint "owner_id"
-    t.string "processor", null: false
-    t.string "processor_id"
-    t.boolean "default"
-    t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["owner_type", "owner_id", "processor"], name: "index_pay_merchants_on_owner_type_and_owner_id_and_processor"
-  end
-
-  create_table "pay_payment_methods", force: :cascade do |t|
-    t.bigint "customer_id", null: false
-    t.string "processor_id", null: false
-    t.boolean "default"
-    t.string "type"
-    t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id", "processor_id"], name: "index_pay_payment_methods_on_customer_id_and_processor_id", unique: true
-  end
-
-  create_table "pay_subscriptions", force: :cascade do |t|
-    t.bigint "customer_id", null: false
-    t.string "name", null: false
-    t.string "processor_id", null: false
-    t.string "processor_plan", null: false
-    t.integer "quantity", default: 1, null: false
-    t.string "status", null: false
-    t.datetime "trial_ends_at", precision: nil
-    t.datetime "ends_at", precision: nil
-    t.decimal "application_fee_percent", precision: 8, scale: 2
-    t.jsonb "metadata"
-    t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id", "processor_id"], name: "index_pay_subscriptions_on_customer_id_and_processor_id", unique: true
-  end
-
-  create_table "pay_webhooks", force: :cascade do |t|
-    t.string "processor"
-    t.string "event_type"
-    t.jsonb "event"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "people_statuses", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "account_id", null: false
@@ -424,6 +346,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_07_053836) do
     t.string "customer_id"
     t.bigint "user_id", null: false
     t.string "status"
+    t.string "interval"
+    t.string "subscription_id"
     t.datetime "current_period_start"
     t.datetime "current_period_end"
     t.datetime "created_at", null: false

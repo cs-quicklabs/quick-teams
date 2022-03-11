@@ -165,5 +165,6 @@ Rails.application.routes.draw do
   end
 
   resources :subscriptions
+  resources :webhooks, only: :create
   get "success", to: "purchase/checkouts#success", as: "success"
 end
