@@ -5,7 +5,6 @@ class Purchase::CheckoutsController < ApplicationController
     price = params[:price_id]
 
     session = Stripe::Checkout::Session.create(
-      customer: current_user.stripe_id,
       client_reference_id: current_user.id,
       success_url: root_url + "success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: home_url(script_name: current_user.account.id),

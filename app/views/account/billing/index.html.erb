@@ -14,7 +14,7 @@
         <% elsif user_signed_in? && current_user.subscribed? %>
           <div class="bg-yellow-100 p-6 rounded-lg text-center text-yellow-900 col-span-2">
             <p>You are already subscribed.</p>
-            <%= button_to "Manage your subscription", billings_path, data: { turbo: false }, class: "underline" %>
+            <%= button_to "Manage your subscription", billing_portal_path, data: { turbo: false }, class: "underline" %>
           </div>
         <% else %>
           <%= link_to "Subscribe for $9/mo", new_user_session_path, class:"px-3 py-4 bg-teal-600 hover:bg-teal-700 block no-underline w-full text-center rounded font-bold text-white shadow-sm cursor-pointer" %>
