@@ -1,0 +1,13 @@
+<main class="pb-10 mx-auto max-w-7xl lg:py-12 lg:px-8">
+  <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+    <%= render "shared/account_menu" %>
+    <main class="max-w-xl px-4 pb-12 lg:col-span-6">
+      <div id="ticket_statuses_form">
+        <%= render "form", ticket_status: @ticket_status %>
+      </div>
+      <div id="ticket_statuses">
+        <%= render @ticket_statuses %>
+      </div>
+    </main>
+  </div>
+</main>

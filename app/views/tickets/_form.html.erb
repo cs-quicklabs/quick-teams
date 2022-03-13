@@ -1,0 +1,30 @@
+<%= tailwind_form_with(model: ticket, id: dom_id(ticket), url: tickets_path) do |form| %>
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
+    <%= render "shared/form_messages", resource: ticket, message: local_assigns[:message] %>
+    <%= render "shared/form_header", title: local_assigns[:title], subtitle: local_assigns[:subtitle] %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.hidden_field :account_id, value: current_user.account.id %>
+    <%= form.hidden_field :ticket_status_id, value: TicketStatus.where(account:current_user.account).first.id %>
+    <div data-controller="select" data-select-param-value="discipline_id" data-select-url-value= "tickets/labels">
+      <div>
+        <label for="discipline" class="block  text-sm font-medium text-gray-700">
+          Select Discipline
+        </label>
+        <%= form.collection_select("discipline_id",Discipline.order(:name), :id, :name, { :prompt => "Select Department" }, :class => "form-text-field", 
+      data: { action: "change->select#change" })%>
+      </div>
+      <div>
+        <label for="label" class="block mt-4 text-sm font-medium text-gray-700">
+          Select Label
+        </label>
+        <%= form.collection_select("ticket_label_id",TicketLabel.all, :id, :name, { :prompt => "Select labels" }, :class => "form-text-field",
+      data: { select_target: "select" }) %>
+      </div>
+    </div>
+    <%= form.text_field :title, "Title", autocomplete: "off" %>
+    <%= form.text_area :description, "Description", class: "form-text-field h-24" %>
+    <div class="flex justify-end">
+      <%= form.submit "Add ticket", class: "btn-blue" %>
+    </div>
+  </main>
+<% end %>

@@ -20,6 +20,9 @@
       <% if policy(:reports).index? %>
         <a href=<%= reports_path %> class= "<%= current_page?(reports_path) ? "nav-selected" : "nav-unselected" %>">Reports</a>
       <% end %>
+      <% if policy(:ticket).index? %>
+        <a href=<%= tickets_path %> class= "<%= current_page?(tickets_path) ? "nav-selected" : "nav-unselected" %>"> Tickets </a>
+      <%end%>
       <%= render "shared/navbar/dropdown" %>
     </div>
   </div>
