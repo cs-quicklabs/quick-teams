@@ -1,0 +1,53 @@
+<div id="comment">
+  <div class="px-4 py-6 bg-gray-50 sm:px-6">
+    <div class="flex space-x-3">
+      <div class="flex-shrink-0">
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+      </div>
+      <div class="flex-1 min-w-0">
+        <%= form_with model: comment, url: ticket_comment_path, method: :post do |form| %>
+          <%= form.hidden_field :"comment[user_id]", :value => current_user.id %>
+          <%= form.hidden_field :"comment[commentable_id]", :value => ticket.id %>
+          <div>
+            <textarea id="comment" name="comment[title]" rows="3" class="form-text-field" placeholder="Add a comment"></textarea>
+          </div>
+          <div data-controller="dropdown"  class="flex items-center justify-between mt-3">
+            <div class="flex">
+              <label for="comment" class="text-sm">Nature Of comment</label>
+              <div class="flex items-center ml-2 text-sm ">
+                <input type="radio" name="comment[status]" value="progress" class="w-4 h-4 text-green-600 border-gray-300 cursor-pointer focus:ring-green-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+                <span id="pricing-plans-0-label" class="ml-1 font-medium text-gray-900">Progress</span>
+              </div>
+              <div class="flex items-center ml-4 text-sm">
+                <input checked type="radio" name="comment[status]" value="stale" class="w-4 h-4 text-yellow-600 border-gray-300 cursor-pointer focus:ring-yellow-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+                <span id="pricing-plans-0-label" class="ml-1 font-medium text-gray-900">Stale</span>
+              </div>
+              <div class="flex items-center ml-4 text-sm">
+                <input type="radio" name="comment[status]" value="regress" class="w-4 h-4 text-red-600 border-gray-300 cursor-pointer focus:ring-red-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+                <span id="pricing-plans-0-label" class="ml-1 font-medium text-gray-900">Regress</span>
+              </div>
+            </div>
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <span class="relative z-0 inline-flex rounded-md shadow-sm">
+              <%= form.submit "Comment", class: "cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" %>
+              <span class="relative block -ml-px">
+                <button data-action="click->dropdown#toggle click@window->dropdown#hide"  type="button"  value="Submit" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
+                  <span class="sr-only">Open options</span>
+                  <!-- Heroicon name: solid/chevron-down -->
+                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                <div data-dropdown-target="menu" class="absolute right-0 z-10 w-56 mt-2 -mr-1 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="option-menu-button" tabindex="-1">
+                  <div class="py-1" role="none">
+                    <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                    <%= form.submit "and mark Completed", class: " cursor-pointer bg-white block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-50" %>
+                  </div>
+                </div>
+              </span>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>

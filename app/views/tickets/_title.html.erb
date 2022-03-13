@@ -1,6 +1,6 @@
 <div class="flex-1 min-w-0" id="title">
   <h3 class="text-2xl font-bold leading-tight text-gray-900">
-    <%=  ticket.title.titleize %>
+    <%=  ticket.display_title %>
   </h3>
   <div class="flex mt-4 space-x-2">
     <div class="flex-shrink-0">
@@ -10,8 +10,8 @@
       <div class="text-sm">
         <a href="<%= tickets_path %>" class="font-medium text-gray-900 hover:underline"><%= ticket.user.decorate.display_name %></a>
         <% if policy([Ticket]).show? %>
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= ticket.ticket_status.color %>-100 text-<%= ticket.ticket_status.color %>-800">
-            <%= ticket.ticket_status.name %>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= ticket.display_status_color %>-100 text-<%= ticket.display_status_color %>-800">
+            <%= ticket.display_status %>
           </span>
         <% end %>
       </div>

@@ -46,6 +46,12 @@ class TicketPolicy < ApplicationPolicy
     edit?
   end
 
+  def comment?
+    ticket = record.first
+    @user.admin? || @user.account_id == ticket.account_id
+    ticket.ticket_label.user == @user
+  end
+
   def new?
     true
   end

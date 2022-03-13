@@ -6,4 +6,5 @@ class Ticket < ApplicationRecord
   validates_presence_of :title, :description
   belongs_to :account
   acts_as_tenant :account
+  has_many :comments, as: :commentable, dependent: :destroy
 end

@@ -1,5 +1,5 @@
 class TicketsController < BaseController
-  before_action :set_ticket, only: %i[ update destroy edit show ]
+  before_action :set_ticket, only: %i[ update destroy edit show comment ]
 
   def index
     authorize :ticket
@@ -63,6 +63,22 @@ class TicketsController < BaseController
     end
   end
 
+  def comment
+    authorize [@ticket]
+
+    @comment = AddCommentOnTicket.call(comment_params, @ticket, params[:commit], current_user).result
+    respond_to do |format|
+      if @comment.persisted?
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.append(:comments, partial: "shared/comments/comment", locals: { comment: @comment }) +
+                               turbo_stream.replace("comment", partial: "shared/comments/ticket", locals: { ticket: @ticket, comment: Comment.new })
+        }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(:add, partial: "shared/comments/ticket", locals: { ticket: @ticket, comment: @comment }) }
+      end
+    end
+  end
+
   private
 
   def set_ticket
@@ -71,5 +87,9 @@ class TicketsController < BaseController
 
   def ticket_params
     params.require(:ticket).permit(:ticket_label_id, :title, :description, :user_id, :account_id, :discipline_id, :ticket_status_id)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:title, :user_id, :commentable_id, :status)
   end
 end
