@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resources :tags, only: [:destroy, :index]
     resources :preferences, only: [:index, :update]
     resources :question_categories, except: [:new, :show]
+    resources :ticket_statuses, except: [:new, :show]
+    resources :ticket_labels, except: [:new, :show]
   end
 
   resources :projects do
@@ -61,6 +63,12 @@ Rails.application.routes.draw do
     get "/timeline", to: "employee/timeline#index", as: "timeline"
     get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
     post "/surveys/:survey_id/assessment", to: "employee/surveys#quick_assessment"
+  end
+  post "/ticket/comment/:id", to: "tickets#comment", as: "ticket_comment"
+  resources :tickets do
+    collection do
+      get :labels
+    end
   end
   resources :user
   resources :comments
