@@ -20,7 +20,7 @@
     </a>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <%= display_created_at(todo) %>
+    <%= display_date(todo.deadline) %>
   </td>
   <td class="table-cell whitespace-nowrap">
     <% if policy([project, todo]).edit? %>

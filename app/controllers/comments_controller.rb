@@ -1,5 +1,5 @@
 class CommentsController < BaseController
-  before_action :set_goal, only: :create
+  before_action :set_comment, only: %i[ update destroy edit ]
 
   def edit
     authorize @comment
@@ -12,7 +12,7 @@ class CommentsController < BaseController
       if @comment.update(comment_params)
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: "shared/comments/comment", locals: { comment: @comment }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "shared/comments/comment", locals: { comment: @comment }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, template: "comments/edit", locals: { comment: @comment }) }
       end
     end
   end
@@ -31,9 +31,7 @@ class CommentsController < BaseController
     params.require(:comment).permit(:title, :user_id, :commentable_id, :status)
   end
 
-  private
-
-  def set_goal
-    @goal ||= Goal.find(comment_params["commentable_id"])
+  def set_comment
+    @comment ||= Comment.find(params["id"])
   end
 end

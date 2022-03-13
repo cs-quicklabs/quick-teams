@@ -1,13 +1,13 @@
 class CommentPolicy < ApplicationPolicy
   def edit?
-    return true if record.user == user
+    record.user == user
   end
 
   def update?
-    return true if record.user == user
+    edit?
   end
 
   def destroy?
-    return true if record.user == user
+    edit?
   end
 end

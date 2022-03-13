@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.0.2"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
-gem "rails", "7.0.0"
+gem "rails", "7.0.2"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", "3.4.2"
@@ -15,7 +15,7 @@ gem "sprockets-rails", "3.4.2"
 gem "pg", "1.2.3"
 
 # Use Puma as the app server [https://github.com/puma/puma]
-gem "puma", "5.5.1"
+gem "puma", "5.6.2"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", "1.0.0"
@@ -38,7 +38,7 @@ gem "redis", ">= 4.0", require: ["redis", "redis/connection/hiredis"]
 gem "valid_url"
 
 # Use Active Storage variant
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.12"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"
