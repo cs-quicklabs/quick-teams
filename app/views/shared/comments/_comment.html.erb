@@ -16,6 +16,12 @@
       <div class="mt-2 space-x-2 text-sm">
         <span class="font-medium text-gray-500"><%= display_created_at(comment) %></span>
       </div>
+      <% if policy(comment).edit? %>
+        <div class="flex justify-end items-center space-x-2">
+          <%= edit_button(edit_comment_path(comment)) %>
+          <%= delete_button(comment_path(comment)) %>
+        </div>
+      <% end %>
     </div>
   </div>
 </li>
