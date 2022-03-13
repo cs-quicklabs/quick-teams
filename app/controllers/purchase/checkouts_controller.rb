@@ -12,9 +12,6 @@ class Purchase::CheckoutsController < ApplicationController
       cancel_url: home_url(script_name: current_user.account.id),
       payment_method_types: ["card"],
       mode: "subscription",
-      subscription_data: {
-        trial_period_days: 14,
-      },
       line_items: [{
         quantity: 1,
         price: price,
