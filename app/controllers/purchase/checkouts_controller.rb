@@ -2,15 +2,19 @@ class Purchase::CheckoutsController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    current_user.set_payment_processor :stripe
+
     price = params[:price_id]
 
-    session = Stripe::Checkout::Session.create(
+    session = current_user.payment_processor.checkout(
       client_reference_id: current_user.id,
       success_url: root_url + "success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: home_url(script_name: current_user.account.id),
       payment_method_types: ["card"],
       mode: "subscription",
-      customer_email: current_user.email,
+      subscription_data: {
+        trial_period_days: 14,
+      },
       line_items: [{
         quantity: 1,
         price: price,

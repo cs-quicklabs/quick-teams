@@ -164,8 +164,6 @@ Rails.application.routes.draw do
     resources :checkouts
   end
 
-  resources :subscriptions
-  resources :webhooks, only: :create
   get "success", to: "purchase/checkouts#success", as: "success"
   post "billings", to: "purchase/billings#create", as: "billing_portal"
 end

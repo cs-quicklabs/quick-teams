@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  pay_customer
+
   # Include default devise modules. Others available are:
   #  :lockable, :timeoutable, and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
@@ -123,9 +125,5 @@ class User < ApplicationRecord
 
   def filled_surveys
     Survey::Attempt.includes(:survey, :actor, :participant).where(actor_id: id, survey_id: surveys.ids, participant_type: "User")
-  end
-
-  def subscribed?
-    subscriptions.where(status: "active").any?
   end
 end

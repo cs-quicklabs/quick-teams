@@ -3,7 +3,7 @@
     <%= render "shared/account_menu" %>
     <main class="max-w-xl px-4 pb-12 lg:col-span-6">
       <div class="grid grid-cols-2 gap-6">
-        <% if user_signed_in? && !current_user.subscribed? %>
+        <% if user_signed_in? &&  !current_user.payment_processor.on_trial_or_subscribed? %>
           <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
             <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly)%>" />
             <input type="submit" value="Subscribe for $9/mo" class="px-3 py-4 bg-teal-600 hover:bg-teal-700 block no-underline w-full text-center rounded font-bold text-white shadow-sm cursor-pointer" />
@@ -11,7 +11,7 @@
           <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
             <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :yearly)%>" />
           <% end %>
-        <% elsif user_signed_in? && current_user.subscribed? %>
+        <% elsif user_signed_in? && current_user.payment_processor.subscribed? %>
           <div class="bg-yellow-100 p-6 rounded-lg text-center text-yellow-900 col-span-2">
             <p>You are already subscribed.</p>
             <%= button_to "Manage your subscription", billing_portal_path, data: { turbo: false }, class: "underline" %>
