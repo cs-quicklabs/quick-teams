@@ -4,8 +4,6 @@ class ReportCommentPolicy < ApplicationPolicy
     return true if user.admin?
     return subordinate? if user.lead?
     return report.user == user
-    return report.reportable == user
-    self?
   end
 
   private

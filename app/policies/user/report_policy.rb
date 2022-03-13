@@ -6,7 +6,9 @@ class User::ReportPolicy < User::BaseUserPolicy
 
   def comment?
     report = record.last
-    is_admin? or is_project_manager? or is_team_lead? or report.user == user
+    is_admin?
+    return subordinate? if user.lead?
+    return report.reportable == user
   end
 
   def show?
@@ -15,5 +17,12 @@ class User::ReportPolicy < User::BaseUserPolicy
 
   def destroy?
     edit? or is_admin?
+  end
+
+  private
+
+  def subordinate?
+    employee = record.first
+    user.subordinate?(employee)
   end
 end

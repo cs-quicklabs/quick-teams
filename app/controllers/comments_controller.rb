@@ -1,20 +1,27 @@
 class CommentsController < BaseController
   before_action :set_goal, only: :create
 
-  def create
-    authorize [@goal.goalable, @goal], :comment?
+  def edit
+    authorize @comment
+  end
 
-    @comment = AddCommentOnGoal.call(comment_params, @goal, params[:commit], current_user).result
+  def update
+    authorize @comment
+
     respond_to do |format|
-      if @comment.persisted?
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.append(:comments, partial: "shared/comments/comment", locals: { comment: @comment }) +
-                               turbo_stream.replace("add", partial: "shared/comments/add", locals: { goal: @goal, comment: Comment.new }) +
-                               turbo_stream.replace("title", partial: "shared/goals/title", locals: { goal: @goal })
-        }
+      if @comment.update(comment_params)
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: "shared/comments/comment", locals: { comment: @comment }) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(:add, partial: "shared/comments/add", locals: { goal: @goal, comment: @comment }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@schedule, partial: "shared/comments/comment", locals: { comment: @comment }) }
       end
+    end
+  end
+
+  def destroy
+    authorize @comment
+    @comment.destroy
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@comment) }
     end
   end
 
