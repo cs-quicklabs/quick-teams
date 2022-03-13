@@ -5,12 +5,28 @@
       <%= render "shared/form_header", title: "Billing", subtitle: "Manage your subscriptions, billing and invoices" %>
       <div class="grid grid-cols-6 gap-6">
         <% if current_user.payment_processor.on_trial_or_subscribed? %>
-          <div class="col-4">
-            <p class="text-sm text-gray-500 mt-6">
-              You have an active subscription to our monthly plan for $99/month.
-            </p>
-            <%= button_to "Manage Subscription", billing_portal_path, data: { turbo: false }, class: "btn-blue mt-2 ml-0" %>
-          </div>
+          <% if current_user.payment_processor.subscription.cancelled? %>
+            <div class="col-4">
+              <p class="text-sm text-gray-500 mt-6">
+                You have an active subscription which is scheduled for cancellation. You will be billed $99/month until the end of your subscription.
+              </p>
+              <%= button_to "Manage Subscription", billing_portal_path, data: { turbo: false }, class: "btn-blue mt-2 ml-0" %>
+            </div>
+          <% elsif current_user.payment_processor.subscription.on_trial? %>
+            <div class="col-4">
+              <p class="text-sm text-gray-500 mt-6">
+                You are in 14 days trail period currently. Your trail will end on <%= current_user.payment_processor.subscription.trial_ends_at.to_date.to_formatted_s(:long)%>. After that you will be charged $99/month if you continue your subscription.
+              </p>
+              <%= button_to "Manage Subscription", billing_portal_path, data: { turbo: false }, class: "btn-blue mt-2 ml-0" %>
+            </div>
+          <% elsif current_user.payment_processor.subscription.active? %>
+            <div class="col-4">
+              <p class="text-sm text-gray-500 mt-6">
+                You have an active subscription to our monthly plan for $99/month.
+              </p>
+              <%= button_to "Manage Subscription", billing_portal_path, data: { turbo: false }, class: "btn-blue mt-2 ml-0" %>
+            </div>
+          <% end %>
         <% else %>
           <div class="col-4">
             <p class="text-sm text-gray-500 mt-6">
