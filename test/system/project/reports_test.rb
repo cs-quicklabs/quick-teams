@@ -137,6 +137,8 @@ class ProjectReportsTest < ApplicationSystemTestCase
     fill_in "comment", with: "This is a comment"
     click_on "Comment"
     assert_selector "ul#comments", text: "This is a comment"
+    assert_text "Edit"
+    assert_text "Delete"
     take_screenshot
   end
 end

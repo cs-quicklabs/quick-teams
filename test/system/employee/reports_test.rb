@@ -151,6 +151,8 @@ class EmployeeReportsTest < ApplicationSystemTestCase
       sleep(0.5)
     end
     assert_selector "ul#comments", text: "This is a comment"
+    assert_text "Edit"
+    assert_text "Delete"
     take_screenshot
   end
 end
