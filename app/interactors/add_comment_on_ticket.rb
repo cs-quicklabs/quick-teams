@@ -10,6 +10,7 @@ class AddCommentOnTicket < Patterns::Service
   def call
     begin
       add_comment
+      update_ticket
       send_email
     rescue
       comment
@@ -22,6 +23,12 @@ class AddCommentOnTicket < Patterns::Service
   def add_comment
     comment.commentable = ticket
     comment.save!
+  end
+
+  def update_ticket
+    if method == "and mark Closed"
+      ticket.update_attribute("ticketstatus", true)
+    end
   end
 
   def send_email

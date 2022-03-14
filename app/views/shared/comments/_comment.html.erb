@@ -24,12 +24,6 @@
           </div>
         <% end %>
       </div>
-      <% if policy(comment).edit? %>
-        <div class="flex justify-end items-center space-x-2">
-          <%= edit_button(edit_comment_path(comment)) %>
-          <%= delete_button(comment_path(comment)) %>
-        </div>
-      <% end %>
     </div>
   </li>
 <% end %>

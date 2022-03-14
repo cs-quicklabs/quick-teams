@@ -6,7 +6,12 @@ class TicketPolicy < ApplicationPolicy
     end
 
     def resolve
-      scope.all
+      if user.admin?
+        scope.all
+      else
+        label_ids = TicketLabel.where(user: @user).pluck(:id)
+        Ticket.includes(:ticket_label, :ticket_status, :user, :discipline).where("ticket_label_id IN (?)", label_ids)
+      end
     end
 
     private
@@ -14,16 +19,22 @@ class TicketPolicy < ApplicationPolicy
     attr_reader :user, :scope
   end
 
+  def open?
+    TicketLabel.all.pluck(:user_id).include?(@user.id)
+  end
+
   def create?
     true
   end
 
   def change_status?
-    return true if user.admin?
+    ticket = record.first
+    return true if ticket.ticket_label.user_id == @user.id
   end
 
   def edit?
-    return true if user.admin?
+    ticket = record.first
+    return true if ticket.user_id == @user.id
   end
 
   def index?
@@ -31,15 +42,15 @@ class TicketPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    index?
   end
 
   def labels?
-    true
+    create?
   end
 
   def destroy?
-    true
+    edit?
   end
 
   def update?
@@ -48,11 +59,11 @@ class TicketPolicy < ApplicationPolicy
 
   def comment?
     ticket = record.first
-    @user.admin? || @user.account_id == ticket.account_id
-    ticket.ticket_label.user == @user
+    @user.admin?
+    return true if ticket.ticket_label.user == @user
+    return true if ticket.user_id == @user.id
   end
 
   def new?
-    true
   end
 end

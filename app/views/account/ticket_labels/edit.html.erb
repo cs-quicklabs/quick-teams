@@ -5,28 +5,30 @@
         <p class="mt-2 text-sm text-red-600"><%= message %></p>
       <% end %>
     <% end %>
-    <li class="flex w-full py-4 border-b border-gray-200">
-      <div class="w-full">
-        <label for="name" class="block  text-sm font-medium text-gray-700">
-          Label
-        </label>
-        <%= form.text_field :name, class: "form-text-field", autocomplete: "off" %><br>
-        <div>
+    <div class="flex  pt-2 pb-4 border-b border-gray-200">
+      <div class="flex w-full ml-3">
+        <div class="w-full">
+          <label for="name" class="block  text-sm font-medium text-gray-700">
+            Label
+          </label>
+          <%= form.text_field :name, class: "form-text-field", autocomplete: "off" %><br>
+        </div>
+        <div class="w-full ml-4">
           <label for="discipline" class="block  text-sm font-medium text-gray-700">
             Select Discipline
           </label>
           <%= form.collection_select("discipline_id",Discipline.order(:name), :id, :name, { :prompt => "Select Department" }, :class => "form-text-field") %>
         </div>
-        <div>
-          <label for="assignee" class="block mt-4 text-sm font-medium text-gray-700">
+        <div class="w-full ml-4">
+          <label for="assignee" class="block text-sm font-medium text-gray-700">
             Assign To
           </label>
-          <%= form.collection_select("user_id",User.all_users.decorate, :id, :name, { :prompt => "Select Assignee" }, :class => "form-text-field") %>
+          <%= form.collection_select("user_id",User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Assignee" }, :class => "form-text-field") %>
         </div>
-        <div>
+        <div class=" ml-4">
           <%= form.submit "Save", class: "btn-blue  mt-4" %>
         </div>
       </div>
-    </li>
+    </div>
   <% end %>
 <% end %>

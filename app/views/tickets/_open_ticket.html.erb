@@ -6,6 +6,9 @@
     </a>
   </td>
   <td class="table-cell">
+    <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= ticket.user.decorate.display_name_position %> </span>
+  </td>
+  <td class="table-cell">
     <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= ticket.discipline.name.titleize %> </span>
   </td>
   <td class="table-cell">
@@ -15,7 +18,13 @@
     <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= display_created_at(ticket) %> </span>
   </td>
   <td class="table-cell">
-    <span class="text-<%= ticket.ticket_status.color %>-900 text-left  whitespace-nowrap ">   <%= ticket.ticket_status.name %> </span>
+    <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= display_date(ticket.updated_at) %> </span>
   </td>
+  <td class="table-cell">
+    <span class="text-<%= ticket.display_status_color %>-900 text-left  whitespace-nowrap ">   <%= ticket.display_status %> </span>
+  </td>
+</td>
+<td class="table-cell">
+  <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= ticket.ticket_label.user.decorate.display_name %> </span>
 </td>
 </tr>

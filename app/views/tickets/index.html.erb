@@ -9,9 +9,11 @@
           <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @tickets.count.to_s + " Tickets)" %></p>
         </div>
       </div>
-      <div class="flex mt-4 sm:mt-0">
-        <%= render partial: "tabs",  locals: {tickets: @tickets} %>
-      </div>
+      <% if policy([:ticket]).open? %>
+        <div class="flex mt-4 sm:mt-0">
+          <%= render partial: "tabs",  locals: {tickets: @tickets} %>
+        </div>
+      <% end %>
     </div>
   </div>
   <!-- Main 3 column grid -->
@@ -20,35 +22,37 @@
     <div class="grid grid-cols-1 gap-4 lg:col-span-2">
       <section aria-labelledby="participants_section">
         <div class="overflow-hidden bg-white">
-          <div class="w-full overflow-hidden" data-controller="infinite-scroll">
-            <table class="table">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th scope="col" class="w-full table-head">
-                    Title
-                  </th>
-                  <th scope="col" class="px-6 table-head">
-                    Department
-                  </th>
-                  <th scope="col" class="table-head">
-                    Label
-                  </th>
-                  <th scope="col" class="table-head">
-                    Created On
-                  </th>
-                  <th scope="col" class="table-head">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="table-body" id="tickets" data-infinite-scroll-target="entries">
-                <%= render partial: "ticket", collection: @tickets, as: :ticket, cached: true %>
-              </tbody>
-            </table>
-            <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-              <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+          <% if @tickets.size > 0 %>
+            <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+              <table class="table">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="w-full table-head">
+                      Title
+                    </th>
+                    <th scope="col" class="px-6 table-head">
+                      Department
+                    </th>
+                    <th scope="col" class="table-head">
+                      Label
+                    </th>
+                    <th scope="col" class="table-head">
+                      Created On
+                    </th>
+                    <th scope="col" class="table-head">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="table-body" id="tickets" data-infinite-scroll-target="entries">
+                  <%= render partial: "ticket", collection: @tickets, as: :ticket, cached: true %>
+                </tbody>
+              </table>
+              <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </section>
     </div>

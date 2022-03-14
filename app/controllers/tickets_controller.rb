@@ -1,10 +1,10 @@
 class TicketsController < BaseController
-  before_action :set_ticket, only: %i[ update destroy edit show comment ]
+  before_action :set_ticket, only: %i[ update destroy edit show comment change_status ]
 
   def index
     authorize :ticket
     @ticket = Ticket.new
-    tickets = Ticket.all
+    tickets = current_user.tickets.includes(:ticket_label, :ticket_status, :user, :discipline)
     @pagy, @tickets = pagy_nil_safe(params, tickets, items: 20)
     render_partial("tickets/ticket", collection: @tickets, cached: true) if stale?(@tickets)
   end
@@ -16,6 +16,18 @@ class TicketsController < BaseController
 
   def show
     authorize @ticket
+  end
+
+  def change_status
+    authorize @ticket
+  end
+
+  def open
+    authorize :ticket
+
+    tickets = policy_scope(Ticket)
+    @pagy, @tickets = pagy_nil_safe(params, tickets, items: 20)
+    render_partial("tickets/ticket", collection: @tickets, cached: true) if stale?(@tickets)
   end
 
   def update
@@ -82,7 +94,7 @@ class TicketsController < BaseController
   private
 
   def set_ticket
-    @ticket ||= Ticket.find(params["id"])
+    @ticket ||= Ticket.includes(:ticket_label, :user).find(params["id"])
   end
 
   def ticket_params
