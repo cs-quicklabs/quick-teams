@@ -20,7 +20,7 @@
             <% end %>
             <% if policy(:ticket).index? %>
               <a href=<%= tickets_path %>  class= "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role= "menuitem"> Tickets </a>
-            <%end%>
+            <% end %>
             <a><%= link_to "Surveys & KPIs", surveys_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
             <a><%= link_to "Report Templates", templates_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
           </div>

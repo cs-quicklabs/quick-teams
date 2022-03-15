@@ -11,7 +11,7 @@
       </div>
       <% if policy([:ticket]).open? %>
         <div class="flex mt-4 sm:mt-0">
-          <%= render partial: "tabs",  locals: {tickets: @tickets} %>
+          <%= render partial: "tabs", locals: { tickets: @tickets } %>
         </div>
       <% end %>
     </div>

@@ -1,4 +1,4 @@
-<% @ticket= @ticket.decorate%>
+<% @ticket = @ticket.decorate %>
 <div class="max-w-4xl px-4 pt-10 pb-12 mx-auto lg:pb-16 bg-white" id="ticket">
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
     <%= render partial: "title", locals: { ticket: @ticket } %>
@@ -12,7 +12,7 @@
         <% if policy([@ticket]).change_status? %>
           <div data-controller="dropdown" >
             <span class="relative z-0 inline-flex rounded-md shadow-sm">
-              <%= confirm_button(ticket_path(@ticket), @ticket.ticket_status.name,  "Are you sure you want to update status",  "cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium text-#{@ticket.ticket_status.color}-700 bg-#{@ticket.ticket_status.color}-100 border border-#{@ticket.ticket_status.color}-300 rounded-l-md hover:bg-#{@ticket.ticket_status.color}-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-#{@ticket.ticket_status.color}-500 focus:border-#{@ticket.ticket_status.color}-500" ) %>
+              <%= confirm_button(ticket_path(@ticket), @ticket.ticket_status.name, "Are you sure you want to update status", "cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium text-#{@ticket.ticket_status.color}-700 bg-#{@ticket.ticket_status.color}-100 border border-#{@ticket.ticket_status.color}-300 rounded-l-md hover:bg-#{@ticket.ticket_status.color}-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-#{@ticket.ticket_status.color}-500 focus:border-#{@ticket.ticket_status.color}-500") %>
               <span class="relative block -ml-px">
                 <button data-action="click->dropdown#toggle click@window->dropdown#hide"  type="button"  value="Submit" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-<%= @ticket.ticket_status.color %>-500 bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300 rounded-r-md hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-<%= @ticket.ticket_status.color %>-500" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
                   <span class="sr-only">Open options</span>
@@ -23,7 +23,7 @@
                 </button>
                 <div data-dropdown-target="menu" class="absolute right-0 z-10 w-56 mt-2 -mr-1 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="option-menu-button" tabindex="-1">
                   <div class="py-1" role="none">
-                    <% TicketStatus.all.where(account:current_user.account).each_with_index do |status, index| %>
+                    <% TicketStatus.all.where(account: current_user.account).each_with_index do |status, index| %>
                       <li  data-reflex="click->TicketStatus#change" data-ticket-id="<%= @ticket.id %>" data-status-id="<%= status.id %>" class= "cursor-pointer bg-white block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-50" ><%= status.name %> </li>
                     <% end %>
                   </div>

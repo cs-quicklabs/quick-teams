@@ -11,21 +11,21 @@
             <%= form.hidden_field :"user_id", :value => current_user.id %>
             <%= form.hidden_field :"commentable_id", :value => @comment.commentable.id %>
             <div>
-              <textarea id="comment" name="comment[title]" rows="3" class="form-text-field" placeholder="Add a comment"><%=@comment.title%></textarea>
+              <textarea id="comment" name="comment[title]" rows="3" class="form-text-field" placeholder="Add a comment"><%= @comment.title %></textarea>
             </div>
             <div class="flex items-center justify-between mt-4">
               <div class="flex">
                 <label for="comment" class="text-sm">Nature Of comment</label>
                 <div class="flex items-center ml-2 text-sm ">
-                  <input type="radio" <%= @comment.status=="progress"? "checked": "" %> name="comment[status]" value="progress" class="w-4 h-4 text-green-600 border-gray-300 cursor-pointer focus:ring-green-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+                  <input type="radio" <%= @comment.status == "progress" ? "checked" : "" %> name="comment[status]" value="progress" class="w-4 h-4 text-green-600 border-gray-300 cursor-pointer focus:ring-green-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
                   <span id="pricing-plans-0-label" class="ml-1 font-medium text-gray-900">Progress</span>
                 </div>
                 <div class="flex items-center ml-4 text-sm">
-                  <input <%= @comment.status=="stale"? "checked": "" %> type="radio" name="comment[status]" value="stale" class="w-4 h-4 text-yellow-600 border-gray-300 cursor-pointer focus:ring-yellow-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+                  <input <%= @comment.status == "stale" ? "checked" : "" %> type="radio" name="comment[status]" value="stale" class="w-4 h-4 text-yellow-600 border-gray-300 cursor-pointer focus:ring-yellow-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
                   <span id="pricing-plans-0-label" class="ml-1 font-medium text-gray-900">Stale</span>
                 </div>
                 <div class="flex items-center ml-4 text-sm">
-                  <input type="radio" <%= @comment.status=="regress"? "checked": "" %> name="comment[status]" value="regress" class="w-4 h-4 text-red-600 border-gray-300 cursor-pointer focus:ring-red-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+                  <input type="radio" <%= @comment.status == "regress" ? "checked" : "" %> name="comment[status]" value="regress" class="w-4 h-4 text-red-600 border-gray-300 cursor-pointer focus:ring-red-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
                   <span id="pricing-plans-0-label" class="ml-1 font-medium text-gray-900">Regress</span>
                 </div>
               </div>
@@ -39,4 +39,4 @@
       </div>
     </div>
   </div>
-<%end%>
+<% end %>
