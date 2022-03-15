@@ -5,7 +5,7 @@
     <%= form.text_field :name, "Add New label", autocomplete: "off" %>
     <div>
       <label for="discipline" class="block  text-sm font-medium text-gray-700">
-        Select Discipline
+        Select Department
       </label>
       <%= form.collection_select("discipline_id",Discipline.order(:name), :id, :name, { :prompt => "Select Department" }, :class => "form-text-field") %>
     </div>

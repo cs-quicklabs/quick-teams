@@ -65,6 +65,7 @@ Rails.application.routes.draw do
     post "/surveys/:survey_id/assessment", to: "employee/surveys#quick_assessment"
   end
   post "/ticket/comment/:id", to: "tickets#comment", as: "ticket_comment"
+  get "/ticket/open", to: "tickets#open", as: "ticket_open"
   resources :tickets do
     collection do
       get :labels
