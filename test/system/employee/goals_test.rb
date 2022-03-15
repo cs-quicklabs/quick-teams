@@ -118,7 +118,6 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
       click_on "Comment"
       sleep(0.5)
     end
-
     assert_selector "ul#comments", text: "This is a comment"
     assert_text "Edit"
     assert_text "Delete"
