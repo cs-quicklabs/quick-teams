@@ -7,13 +7,13 @@
       <label for="discipline" class="block  text-sm font-medium text-gray-700">
         Select Discipline
       </label>
-      <%= form.collection_select("discipline_id",Discipline.order(:name), :id, :name, { :prompt => "Select Department" }, :class => "form-text-field") %>
+      <%= form.collection_select("discipline_id", Discipline.order(:name), :id, :name, { :prompt => "Select Department" }, :class => "form-text-field") %>
     </div>
     <div>
       <label for="assignee" class="block  text-sm font-medium text-gray-700">
         Assign To
       </label>
-      <%= form.collection_select("user_id",User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Assignee" }, :class => "form-text-field") %>
+      <%= form.collection_select("user_id", User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Assignee" }, :class => "form-text-field") %>
     </div>
     <div class="flex justify-end">
       <%= form.submit "Save", class: "btn-blue" %>
