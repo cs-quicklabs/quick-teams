@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { get } from "@rails/request.js" 
 
 
 export default class extends Controller {
@@ -12,16 +13,7 @@ export default class extends Controller {
     let params = new URLSearchParams()
     params.append(this.paramValue, event.target.selectedOptions[0].value)
     params.append("target", this.selectTarget.id)
-    const target = `${this.selectTarget.id}`
-    const headers = { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'text/vnd.turbo-stream.html', responseKind: 'turbo-stream' }
-    fetch(`${this.urlValue}?${params}`, { headers })
-      .then((response) => response.text())
-      .then((response) => {
-        this.selectTarget.innerHTML = response;
-      })
-
-      .catch((error) => {
-        console.log('error:', error);
-      });
+    get (`${this.urlValue}?${params}`,{
+      responseKind: "turbo-stream"})
   }
 }

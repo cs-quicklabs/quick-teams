@@ -59,9 +59,7 @@ class TicketsController < BaseController
     @target = params[:target]
     @labels = TicketLabel.where(discipline_id: params[:discipline_id])
     respond_to do |format|
-      format.turbo_stream {
-        render turbo_stream: turbo_stream.update("",partial: "tickets/labels",locals: { labels: @labels})
-      }
+      format.turbo_stream
     end
   end
 
