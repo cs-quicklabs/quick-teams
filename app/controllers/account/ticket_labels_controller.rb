@@ -21,10 +21,10 @@ class Account::TicketLabelsController < Account::BaseController
       if @ticket_label.save
         format.turbo_stream {
           render turbo_stream: turbo_stream.prepend(:ticket_labels, partial: "account/ticket_labels/ticket_label", locals: { ticket_label: @ticket_label }) +
-                               turbo_stream.replace(TicketLabel.new, partial: "account/ticket_labels/form", locals: { ticket_label: TicketLabel.new, message: "ticket label was created successfully." })
+                               turbo_stream.replace(TicketLabel.new, partial: "account/ticket_labels/form", locals: { ticket_label: TicketLabel.new, message: "Ticket label was created successfully." })
         }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Ticketlabel.new, partial: "account/ticket_labels/form", locals: { ticket_label: @ticket_label }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(TicketLabel.new, partial: "account/ticket_labels/form", locals: { ticket_label: @ticket_label }) }
       end
     end
   end

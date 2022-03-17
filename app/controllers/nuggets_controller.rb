@@ -35,7 +35,7 @@ class NuggetsController < BaseController
     @nugget = AddNugget.call(current_user, nugget_params).result
     respond_to do |format|
       if @nugget.errors.empty?
-        format.turbo_stream { redirect_to nuggets_path, notice: "Nugget was added successfully." }
+        format.turbo_stream { redirect_to nuggets_path, notice: "Nugget was created successfully." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Nugget.new, partial: "nuggets/form", locals: { nugget: @nugget, title: "Add New Nugget" }) }
       end

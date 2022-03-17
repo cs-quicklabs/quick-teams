@@ -1,7 +1,7 @@
   <%= tailwind_form_with(model: ticket_status, id: dom_id(ticket_status), url: account_ticket_statuses_path) do |form| %>
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: ticket_status, message: local_assigns[:message] %>
-    <%= render "shared/form_header", title: "Ticket Status", subtitle: "You can define custom status which can be applied to your team. Examples include On Bench, Deployed" %>
+    <%= render "shared/form_header", title: "Ticket Statuses", subtitle: "You can define custom status which can be applied to your team. Examples include On Bench, Deployed" %>
     <%= form.text_field :name, "Add New Status", autocomplete: "off" %>
     <div class="flex">
       <label for="ticket_status_color" class="text-sm">Appearance</label>

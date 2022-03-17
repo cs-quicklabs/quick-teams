@@ -25,7 +25,7 @@ class TicketLabelsTest < ApplicationSystemTestCase
 
   test "can add a new ticket label" do
     visit page_url
-    name = "#{disciplines(:two).name}"
+    name = "#{disciplines(:one).name}"
     assignee = "#{users(:actor).name}"
     fill_in "Add New label", with: "Initiated"
     select name, from: "ticket_label_discipline_id"
@@ -45,7 +45,7 @@ class TicketLabelsTest < ApplicationSystemTestCase
 
   test "can visit edit page" do
     visit edit_account_ticket_label_url(ticket_labels(:one), script_name: "/#{@account.id}")
-    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/li")
+    page.assert_selector(:xpath, "/html/body/main/turbo-frame/form/div")
   end
 
   test "can delete a ticket label" do
@@ -70,29 +70,17 @@ class TicketLabelsTest < ApplicationSystemTestCase
     assert_selector "li", text: "Edited Name"
   end
 
-  test "can not edit ticket label with existing name" do
-    visit page_url
-    ticket_label = ticket_labels(:one)
-    two = ticket_labelss(:two)
-    assert_selector "li", text: ticket_label.name
-    find("li", text: ticket_label.name).click_on("Edit")
-    within "turbo-frame#ticket_label_#{ticket_label.id}" do
-      fill_in "ticket_label_name", with: two.name
-      click_on "Save"
-      take_screenshot
-      assert_text "Name has already been taken"
-    end
-  end
+
 
   test "should have nav bar" do
     visit page_url
     assert_selector "#menubar", count: 1
   end
 
-  test "should have left menu with Question Categories selected" do
+  test "should have left menu with Ticket Labels selected" do
     visit page_url
     within "#menu" do
-      assert_selector ".selected", text: "Question Categories"
+      assert_selector ".selected", text: "Ticket Labels"
     end
   end
 end

@@ -1,17 +1,17 @@
 one:
-  name: Label HR
+  name: Label Hr
   account: crownstack
   discipline: hr
   user: actor
 
 two:
-  name: Label Dev
+  name: Label one
   account: crownstack
-  discipline: dev
+  discipline: engineering
   user: abram
 
 three:
-  name: Label Design
+  name: Label eng
   account: crownstack
-  discipline: design
+  discipline: engineering
   user: active

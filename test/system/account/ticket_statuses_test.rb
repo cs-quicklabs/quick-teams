@@ -25,7 +25,7 @@ class TicketStatusesTest < ApplicationSystemTestCase
 
   test "can add a new ticket status" do
     visit page_url
-    fill_in "Add New Status", with: "Initiated"
+    fill_in "Add New Status", with: "dispatched"
     click_on "Save"
     take_screenshot
     assert_text "Ticket status was created successfully"
@@ -54,7 +54,7 @@ class TicketStatusesTest < ApplicationSystemTestCase
 
   test "can delete a ticket status" do
     visit page_url
-    ticket_status = ticket_statuses(:one)
+    ticket_status = ticket_statuses(:two)
     assert_selector "li", text: ticket_status.name
     page.accept_confirm do
       find("li", text: ticket_status.name).click_on("Delete")

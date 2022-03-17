@@ -21,7 +21,7 @@ class Account::TicketStatusesController < Account::BaseController
       if @ticket_status.save
         format.turbo_stream {
           render turbo_stream: turbo_stream.prepend(:ticket_statuses, partial: "account/ticket_statuses/ticket_status", locals: { ticket_status: @ticket_status }) +
-                               turbo_stream.replace(TicketStatus.new, partial: "account/ticket_statuses/form", locals: { ticket_status: TicketStatus.new, message: "Ticket Status was created successfully." })
+                               turbo_stream.replace(TicketStatus.new, partial: "account/ticket_statuses/form", locals: { ticket_status: TicketStatus.new, message: "Ticket status was created successfully." })
         }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(TicketStatus.new, partial: "account/ticket_statuses/form", locals: { ticket_status: @ticket_status }) }
