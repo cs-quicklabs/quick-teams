@@ -126,4 +126,8 @@ class User < ApplicationRecord
   def filled_surveys
     Survey::Attempt.includes(:survey, :actor, :participant).where(actor_id: id, survey_id: surveys.ids, participant_type: "User")
   end
+
+  def is_owner?
+    self.id == account.owner_id
+  end
 end

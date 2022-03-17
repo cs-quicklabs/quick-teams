@@ -3,7 +3,7 @@ class Account::PreferencesController < Account::BaseController
   before_action :set_preference, only: [:update]
 
   def index
-    authorize :account
+    authorize :account, :preferences?
     @preferences = Preference.all
   end
 

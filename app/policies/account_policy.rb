@@ -18,4 +18,16 @@ class AccountPolicy < Struct.new(:user, :account)
   def update?
     user.admin?
   end
+
+  def account?
+    user.is_owner?
+  end
+
+  def preferences?
+    user.is_owner?
+  end
+
+  def billings?
+    user.is_owner?
+  end
 end
