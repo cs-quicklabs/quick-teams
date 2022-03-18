@@ -33,8 +33,7 @@ class TicketPolicy < ApplicationPolicy
   end
 
   def edit?
-    ticket = record.first
-    return true if ticket.user_id == @user.id
+    return true if record.first.user_id == @user.id
   end
 
   def index?
@@ -42,7 +41,7 @@ class TicketPolicy < ApplicationPolicy
   end
 
   def show?
-    index?
+    comment?
   end
 
   def labels?

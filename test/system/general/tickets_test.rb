@@ -5,7 +5,7 @@ class TicketsTest < ApplicationSystemTestCase
     @user = users(:regular)
     @account = @user.account
     ActsAsTenant.current_tenant = @account
-    @ticket = tickets(:one)
+    @ticket = @user.tickets.first
     sign_in @user
   end
 
@@ -32,7 +32,7 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can show ticket detail page" do
     visit page_url
-    find(id: dom_id(@ticket)).click
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
     within "#ticket-header" do
       assert_text "Edit"
       assert_text "Delete"
@@ -42,52 +42,55 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can create a new ticket" do
     visit page_url
-    skill=skills(:ruby).name
-    click_on "New Ticket"
+    discipline=disciplines(:engineering)
+    label=discipline.ticket_labels.first.name
+    select discipline.name, from: "ticket_discipline_id"
+    select label, from: "ticket_ticket_label_id"
     fill_in "ticket_title", with: "ticket"
-    fill_in_rich_text_area "new_ticket", with: "This is some ticket"
-    click_on "Save Ticket"
+    fill_in "ticket_description", with: "This is some ticket"
+    click_on "Add Ticket"
     take_screenshot
     assert_selector "p.notice", text: "Ticket was created successfully."
   end
 
-  test "can not create with empty Name Discription ticket_type ticket_for" do
+  test "can not create with empty Name Description discipline and label " do
     visit page_url
-    click_on "New Ticket"
     assert_selector "h1", text: "Add New Ticket"
-    click_on "Save Ticket"
+    click_on "Add Ticket"
     take_screenshot
     assert_selector "h1", text: "Add New Ticket"
   end
 
   test "can edit a ticket" do
     visit page_url
-    find(id: dom_id(@ticket)).click
+    label=@ticket.discipline.ticket_labels.first.name
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
     within "#ticket-header" do
       click_on "Edit"
     end
     assert_selector "h1", text: "Edit Ticket"
+    select label, from: "ticket_ticket_label_id"
     fill_in "ticket_title", with: "ticket"
-    fill_in_rich_text_area dom_id(@ticket), with: "This is some ticket"
-    click_on "Save Ticket"
+    fill_in "ticket_description", with: "This is some ticket"
+    click_on "Save"
     assert_selector "p.notice", text: "Ticket was updated successfully."
   end
 
   test "can not edit a ticket with invalid name" do
     visit page_url
-    find(id: dom_id(@ticket)).click
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
     within "#ticket-header" do
       click_on "Edit"
     end
     assert_selector "h1", text: "Edit Ticket"
     fill_in "ticket_title", with: ""
-    click_on "Save Ticket"
+    click_on "Save"
     take_screenshot
   end
 
   test "can delete ticket" do
     visit page_url
-    find(id: dom_id(@ticket)).click
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
     within "#ticket-header" do
       page.accept_confirm do
         click_on "Delete"

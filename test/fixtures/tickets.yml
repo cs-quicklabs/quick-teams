@@ -3,6 +3,15 @@ one:
   description: Ticket Descripion
   account: crownstack
   discipline: hr
+  user: regular
+  ticket_status: one
+  ticket_label: one
+
+two:
+  title: Ticket
+  description: Ticket Descripion
+  account: crownstack
+  discipline: hr
   user: member
   ticket_status: one
   ticket_label: one

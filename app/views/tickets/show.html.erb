@@ -1,6 +1,6 @@
 <% @ticket = @ticket.decorate %>
 <div class="max-w-4xl px-4 pt-10 pb-12 mx-auto lg:pb-16 bg-white" id="ticket">
-  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="ticket-header">
     <%= render partial: "title", locals: { ticket: @ticket } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <div class="flex justify-end items-center space-x-2">
@@ -36,11 +36,11 @@
     </div>
   </div>
   <div class="mt-4 text-sm text-gray-900 sm:px-6 lg:px-8">
-    <p><%= @ticket.description %></p>
+    <p><%= @ticket.display_body %></p>
   </div>
   <div class="bg-white overflow-hidden">
     <div class="mt-6 text-sm sm:px-6 lg:px-8">
-      <p class="text-sm pt-4">This report has been assigned to <b><%= @ticket.ticket_label.user.decorate.display_name %></b></p>
+      <p class="text-sm pt-4">This ticket has been assigned to <b><%= @ticket.ticket_label.user.decorate.display_name %></b></p>
     </div>
   </div>
   <!-- Comments-->

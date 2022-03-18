@@ -1,7 +1,7 @@
 <%= tailwind_form_with(model: @ticket, id: dom_id(@ticket), url: ticket_path(@ticket)) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: @ticket, message: local_assigns[:message] %>
-    <%= render "shared/form_header", title: "Edit ticket", subtitle: "" %>
+    <%= render "shared/form_header", title: "Edit Ticket", subtitle: "" %>
     <div>
       <label for="discipline" class="block  text-sm font-medium text-gray-700">
         Select Discipline
