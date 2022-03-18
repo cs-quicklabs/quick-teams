@@ -7,7 +7,7 @@ class Purchase::CheckoutsController < ApplicationController
     session = current_user.payment_processor.checkout(
       client_reference_id: current_user.id,
       success_url: root_url + "success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: home_url(script_name: "/#{current_user.account.id}"),
+      cancel_url: billing_url(script_name: "/#{current_user.account.id}"),
       payment_method_types: ["card"],
       mode: "subscription",
       line_items: [{
