@@ -10,7 +10,7 @@
               <p class="text-sm text-gray-500 mt-6">
                 You are in 14 days trail period currently. Your trail will end on <%= current_user.payment_processor.subscription.trial_ends_at.to_date.to_formatted_s(:long)%>. After that you will be charged $49/month if you continue your subscription and in case you cancel, no amount will be charged.
               </p>
-              <%= button_to "Manage Subscription", billing_portal_path, data: { turbo: false }, class: "btn-blue mt-2 ml-0" %>
+              <%= button_to "Manage Subscription", purchase_checkouts_path, data: { turbo: false }, class: "btn-blue mt-2 ml-0" %>
             </div>
           <% elsif current_user.payment_processor.subscription.on_grace_period? %>
             <div class="col-4">
