@@ -21,6 +21,7 @@ class SignUp < Patterns::Service
       create_account
       seed_database
       create_user
+      update_account_with_owner
       seed_preferences
     end
   end
@@ -44,8 +45,15 @@ class SignUp < Patterns::Service
       user.role = Role.first
       user.discipline = Discipline.first
       user.job = Job.first
-      user.permission = 2 #admin
+      user.permission = 2 #owner
       user.save!
+    end
+
+    def update_account_with_owner
+      ActsAsTenant.with_tenant(account) do
+        account.owner_id = user.id
+        account.save!
+      end
     end
 
     def seed_preferences
