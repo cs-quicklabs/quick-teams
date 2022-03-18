@@ -1,0 +1,9 @@
+<div class="col-4">
+  <p class="text-sm text-gray-500 mt-4">
+    You have not selected any payment plan. To continue using the product you need to subscribe to a plan.
+  </p>
+  <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
+    <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly)%>" />
+    <input type="submit" value="Subscribe for $49/month" class="btn-blue mt-2 ml-0" />
+  <% end %>
+</div>

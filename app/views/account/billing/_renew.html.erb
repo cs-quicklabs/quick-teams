@@ -1,0 +1,6 @@
+<div class="col-4">
+  <p class="text-sm text-gray-500 mt-6">
+    You have an active subscription to our monthly plan for $49/month which is going to end on <%= current_user.payment_processor.subscription.ends_at.to_date.to_formatted_s(:long)%>. After that your account will be deactivated. You can reactivate your account by clicking the button below.
+  </p>
+  <%= button_to "Renew Subscription", billing_portal_path, data: { turbo: false }, class: "btn-blue mt-2 ml-0" %>
+</div>

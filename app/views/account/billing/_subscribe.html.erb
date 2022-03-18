@@ -1,0 +1,12 @@
+<div class="col-4">
+  <p class="text-sm text-gray-500 mt-4">
+    You are in trial phase of 14 days which is going to end on <%= current_user.payment_processor.subscription.ends_at.to_date.to_formatted_s(:long)%>. 
+  </p>
+  <p class="text-sm text-gray-500 mt-4">
+    To continue using product please subscribe to a plan.
+  </p>
+  <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
+    <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly)%>" />
+    <input type="submit" value="Subscribe for $49/month" class="btn-blue mt-2 ml-0" />
+  <% end %>
+</div>
