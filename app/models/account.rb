@@ -20,4 +20,7 @@ class Account < ApplicationRecord
   has_many :clients, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :preferences, dependent: :destroy
+  has_many :tickets, dependent: :destroy
+  has_many :ticket_labels, dependent: :destroy
+  has_many :ticket_statuses, dependent: :destroy
 end

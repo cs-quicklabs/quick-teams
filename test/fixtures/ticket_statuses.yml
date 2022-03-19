@@ -1,0 +1,14 @@
+one:
+  name: Initiated
+  account: crownstack
+  color: gray
+
+two:
+  name: In Process
+  account: crownstack
+  color: gray
+
+three:
+  name: Closed
+  account: crownstack
+  color: gray

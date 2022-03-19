@@ -6,6 +6,9 @@
   <div class="hidden sm:block sm:ml-6">
     <div class="flex space-x-4">
       <a href=<%= employee_schedules_path(current_user) %> class= "<%= current_page?(employee_schedules_path(current_user)) ? "nav-selected" : "nav-unselected" %>"><%= current_user.first_name %></a>
+      <% if policy(:ticket).index? %>
+        <a href=<%= tickets_path %> class= "<%= current_page?(tickets_path) ? "nav-selected" : "nav-unselected" %>"> Tickets </a>
+      <% end %>
       <% if current_user.project_manager? %>
         <a href=<%= projects_path %> class= "<%= current_page?(projects_path) ? "nav-selected" : "nav-unselected" %>">Projects</a>
       <% end %>

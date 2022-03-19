@@ -5,7 +5,8 @@ class Project::ReportPolicy < Project::BaseProjectPolicy
   end
 
   def comment?
-    create?
+    report = record.last
+    is_admin? or is_project_manager?
   end
 
   def destroy?

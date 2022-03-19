@@ -16,4 +16,11 @@ class User::ReportPolicy < User::BaseUserPolicy
   def destroy?
     edit? or is_admin?
   end
+
+  private
+
+  def subordinate?
+    employee = record.first
+    user.subordinate?(employee)
+  end
 end

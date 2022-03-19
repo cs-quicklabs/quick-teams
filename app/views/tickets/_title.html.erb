@@ -1,0 +1,23 @@
+<div class="flex-1 min-w-0" id="title">
+  <h3 class="text-2xl font-bold leading-tight text-gray-900">
+    <%= ticket.display_title %>
+  </h3>
+  <div class="flex mt-4 space-x-2">
+    <div class="flex-shrink-0">
+      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+    </div>
+    <div>
+      <div class="text-sm">
+      <span class="font-medium text-gray-500">  <%= ticket.user.decorate.display_name %></span>
+        <% if policy([ticket]).show? %>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= ticket.display_status_color %>-100 text-<%= ticket.display_status_color %>-800">
+            <%= ticket.display_status %>
+          </span>
+        <% end %>
+      </div>
+      <div class="mt-1 space-x-2 text-sm">
+        <span class="font-medium text-gray-500">Created By <%= ticket.user.decorate.display_name %> for the  <%= ticket.discipline.name %> in the <%= ticket.ticket_label.name %> on <%= display_created_at(ticket) %> </span>
+      </div>
+    </div>
+  </div>
+</div>
