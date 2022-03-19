@@ -15,7 +15,7 @@ class TicketsController < BaseController
   end
 
   def show
-    authorize @ticket
+    authorize [@ticket]
   end
 
   def change_status
@@ -35,7 +35,7 @@ class TicketsController < BaseController
 
     respond_to do |format|
       if @ticket.update(ticket_params)
-        format.turbo_stream { redirect_to ticket_path(@ticket), notice: "ticket was updated successfully." }
+        format.turbo_stream { redirect_to ticket_path(@ticket), notice: "Ticket was updated successfully." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@ticket, partial: "tickets/form", locals: { ticket: @ticket, title: "Edit ticket" }) }
       end
@@ -47,7 +47,7 @@ class TicketsController < BaseController
     @ticket = Ticket.create(ticket_params)
     respond_to do |format|
       if @ticket.errors.empty?
-        format.turbo_stream { redirect_to ticket_path(@ticket), notice: "Ticket was added successfully." }
+        format.turbo_stream { redirect_to ticket_path(@ticket), notice: "Ticket was created successfully." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Ticket.new, partial: "tickets/form", locals: { ticket: @ticket, title: "Add New Ticket" }) }
       end
@@ -68,15 +68,15 @@ class TicketsController < BaseController
   end
 
   def destroy
-    authorize @ticket
+    authorize [@ticket]
     @ticket.destroy
     respond_to do |format|
-      format.turbo_stream { redirect_to tickets_path, status: 303, notice: "ticket was removed successfully." }
+      format.turbo_stream { redirect_to tickets_path, status: 303, notice: "Ticket was removed successfully." }
     end
   end
 
   def comment
-    authorize [@ticket]
+    authorize [@ticket]     
 
     @comment = AddCommentOnTicket.call(comment_params, @ticket, params[:commit], current_user).result
     respond_to do |format|
@@ -94,7 +94,7 @@ class TicketsController < BaseController
   private
 
   def set_ticket
-    @ticket ||= Ticket.includes(:ticket_label, :user).find(params["id"])
+    @ticket ||= Ticket.find_by(id: params["id"])
   end
 
   def ticket_params

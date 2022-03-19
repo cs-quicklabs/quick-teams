@@ -8,8 +8,8 @@
     </div>
     <div>
       <div class="text-sm">
-        <a href="<%= tickets_path %>" class="font-medium text-gray-900 hover:underline"><%= ticket.user.decorate.display_name %></a>
-        <% if policy([Ticket]).show? %>
+      <span class="font-medium text-gray-500">  <%= ticket.user.decorate.display_name %></span>
+        <% if policy([ticket]).show? %>
           <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= ticket.display_status_color %>-100 text-<%= ticket.display_status_color %>-800">
             <%= ticket.display_status %>
           </span>

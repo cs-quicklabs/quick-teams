@@ -1,6 +1,6 @@
   <% @nugget = @nugget.decorate %>
 <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16" id="nugget">
-  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="milestone-detail">
+  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="nugget-header">
     <%= render partial: "shared/nuggets/title", locals: { nugget: @nugget } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <% if policy([@nugget]).edit? %>

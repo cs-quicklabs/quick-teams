@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_101406) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_03_13_101406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -188,9 +187,9 @@ ActiveRecord::Schema.define(version: 2022_03_13_101406) do
     t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
     t.boolean "published", default: false
-    t.datetime "published_on"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "published_on", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "account_id", default: 1, null: false
     t.index ["account_id"], name: "index_nuggets_on_account_id"
     t.index ["skill_id"], name: "index_nuggets_on_skill_id"
@@ -201,8 +200,8 @@ ActiveRecord::Schema.define(version: 2022_03_13_101406) do
     t.bigint "user_id", null: false
     t.bigint "nugget_id", null: false
     t.boolean "read", default: false
-    t.datetime "created_at", default: "2021-09-19 11:37:22", null: false
-    t.datetime "updated_at", default: "2021-09-19 11:37:23", null: false
+    t.datetime "created_at", precision: nil, default: "2021-09-19 11:37:22", null: false
+    t.datetime "updated_at", precision: nil, default: "2021-09-19 11:37:23", null: false
   end
 
   create_table "pay_charges", force: :cascade do |t|
@@ -228,9 +227,9 @@ ActiveRecord::Schema.define(version: 2022_03_13_101406) do
     t.string "processor_id"
     t.boolean "default"
     t.jsonb "data"
-    t.datetime "deleted_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
     t.index ["processor", "processor_id"], name: "index_pay_customers_on_processor_and_processor_id", unique: true
   end
@@ -493,8 +492,8 @@ ActiveRecord::Schema.define(version: 2022_03_13_101406) do
     t.integer "winning_score", default: 0
     t.bigint "actor_id", null: false
     t.integer "survey_type", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_survey_surveys_on_account_id"
     t.index ["actor_id"], name: "index_survey_surveys_on_actor_id"
   end
@@ -542,8 +541,8 @@ ActiveRecord::Schema.define(version: 2022_03_13_101406) do
     t.string "name"
     t.bigint "account_id", null: false
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_ticket_labels_on_account_id"
     t.index ["discipline_id"], name: "index_ticket_labels_on_discipline_id"
     t.index ["user_id"], name: "index_ticket_labels_on_user_id"
@@ -552,8 +551,8 @@ ActiveRecord::Schema.define(version: 2022_03_13_101406) do
   create_table "ticket_statuses", force: :cascade do |t|
     t.string "name"
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
     t.index ["account_id"], name: "index_ticket_statuses_on_account_id"
   end
@@ -566,8 +565,8 @@ ActiveRecord::Schema.define(version: 2022_03_13_101406) do
     t.bigint "user_id", null: false
     t.bigint "ticket_status_id", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "ticketstatus", default: false, null: false
     t.index ["account_id"], name: "index_tickets_on_account_id"
     t.index ["discipline_id"], name: "index_tickets_on_discipline_id"
@@ -718,7 +717,6 @@ ActiveRecord::Schema.define(version: 2022_03_13_101406) do
   add_foreign_key "ticket_statuses", "accounts"
   add_foreign_key "tickets", "accounts"
   add_foreign_key "tickets", "disciplines"
-  add_foreign_key "tickets", "ticket_labels"
   add_foreign_key "tickets", "ticket_statuses"
   add_foreign_key "tickets", "users"
   add_foreign_key "timesheets", "accounts"
