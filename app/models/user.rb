@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  pay_customer
+
   # Include default devise modules. Others available are:
   #  :lockable, :timeoutable, and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
@@ -43,6 +45,7 @@ class User < ApplicationRecord
   has_many :todos, class_name: "Todo", foreign_key: "owner_id", dependent: :destroy
   has_many :created_todos, class_name: "Todo", foreign_key: "user_id", dependent: :destroy
   has_many :comments, class_name: "Comment", foreign_key: "user_id", dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   has_and_belongs_to_many :people_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy
@@ -124,5 +127,9 @@ class User < ApplicationRecord
 
   def filled_surveys
     Survey::Attempt.includes(:survey, :actor, :participant).where(actor_id: id, survey_id: surveys.ids, participant_type: "User")
+  end
+
+  def is_owner?
+    self.id == account.owner_id
   end
 end

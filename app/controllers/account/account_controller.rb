@@ -2,7 +2,7 @@ class Account::AccountController < Account::BaseController
   before_action :set_account
 
   def index
-    authorize :account
+    authorize :account, :account?
   end
 
   def update

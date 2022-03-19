@@ -32,7 +32,7 @@
                 <div class="border-t border-gray-100">
                   <div>
                     <% if current_user.admin? %>
-                      <a><%= link_to "Account", detail_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
+                      <a><%= link_to "Account", current_user.is_owner? ? detail_path : account_disciplines_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
                       <a><%= link_to "Archive", archived_projects_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
                     <% end %>
                     <a><%= link_to "Settings", profile_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
