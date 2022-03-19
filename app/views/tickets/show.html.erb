@@ -9,6 +9,7 @@
           <%= styled_edit_button(edit_ticket_path(@ticket), "btn-blue") %>
           <%= styled_delete_button(ticket_path(@ticket), "btn-red") %>
         <% end %>
+            <% if @ticket.ticket_status.present? %>
         <% if policy([@ticket]).change_status? %>
           <div data-controller="dropdown" >
             <span class="relative z-0 inline-flex rounded-md shadow-sm">
@@ -32,6 +33,7 @@
             </span>
           </div>
         <% end %>
+             <% end %>
       </div>
     </div>
   </div>
@@ -39,9 +41,11 @@
     <p><%= @ticket.display_body %></p>
   </div>
   <div class="bg-white overflow-hidden">
+    <% if @ticket.ticket_label.present? %>
     <div class="mt-6 text-sm sm:px-6 lg:px-8">
       <p class="text-sm pt-4">This ticket has been assigned to <b><%= @ticket.ticket_label.user.decorate.display_name %></b></p>
     </div>
+    <% end %>
   </div>
   <!-- Comments-->
   <section aria-labelledby="notes-title">
