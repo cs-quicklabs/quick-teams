@@ -65,6 +65,11 @@ gem "sidekiq"
 gem "sidekiq-scheduler"
 gem "sinatra", ">= 1.3.0", require: nil
 
+gem "pay", "3.0.24"
+
+# To use Stripe, also include:
+gem "stripe", ">= 2.8", "< 6.0"
+
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]

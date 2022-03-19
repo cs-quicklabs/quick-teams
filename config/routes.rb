@@ -2,12 +2,17 @@ Rails.application.routes.draw do
   require "sidekiq/web"
   require "sidekiq-scheduler/web"
 
-  mount Sidekiq::Web => "/sidekiq"
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => "/sidekiq"
+  end
+
   mount ActionCable.server => "/cable"
 
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+
+  get "checkout", to: "checkout#show"
 
   namespace :account do
     resources :roles, except: [:new, :show]
@@ -150,6 +155,15 @@ Rails.application.routes.draw do
   end
 
   get "account/details", to: "account/account#index", as: "detail"
+  get "account/billing", to: "account/billing#index", as: "billing"
+
   patch "account/:id", to: "account/account#update", as: "update_account"
   delete "/", to: redirect("/users/sign_in", status: 303)
+
+  namespace :purchase do
+    resources :checkouts
+  end
+
+  get "success", to: "purchase/checkouts#success", as: "success"
+  post "billings", to: "purchase/billings#create", as: "billing_portal"
 end

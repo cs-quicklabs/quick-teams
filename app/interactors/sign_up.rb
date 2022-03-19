@@ -7,6 +7,7 @@ class SignUp < Patterns::Service
   def call
     begin
       register
+      set_stripe_subscription_trial
     rescue
       user
     end
@@ -20,6 +21,7 @@ class SignUp < Patterns::Service
       create_account
       seed_database
       create_user
+      update_account_with_owner
       seed_preferences
     end
   end
@@ -43,8 +45,15 @@ class SignUp < Patterns::Service
       user.role = Role.first
       user.discipline = Discipline.first
       user.job = Job.first
-      user.permission = 2 #admin
+      user.permission = 2 #owner
       user.save!
+    end
+
+    def update_account_with_owner
+      ActsAsTenant.with_tenant(account) do
+        account.owner_id = user.id
+        account.save!
+      end
     end
 
     def seed_preferences
@@ -55,6 +64,12 @@ class SignUp < Patterns::Service
         Preference.new(key: "consider_overall_kpi_score", value: "true", title: "Consider overall KPI score when KPIs are changed", message: "When KPIs are changed for an employee, do you wish to consider previous KPIs in overall score or just the new KPIs score should be considered while calculating final score").save
         Preference.new(key: "transfer_data_to_admin", value: User.where(account: account, permission: :admin).first.id, title: "Transfer data to admin on user delete", message: "When a user is deleted, you might want to keep some of the data like nuggets, Knowledge Base or Report Templates. Whom do you wish to assign this data when the user is deleted").save
       end
+    end
+
+    def set_stripe_subscription_trial
+      time = 14.days.from_now
+      user.set_payment_processor :fake_processor, allow_fake: true
+      user.payment_processor.subscribe(trial_ends_at: time, ends_at: time)
     end
   end
 
