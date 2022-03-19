@@ -76,7 +76,7 @@ class TicketsController < BaseController
   end
 
   def comment
-    authorize [@ticket]     
+    authorize [@ticket]
 
     @comment = AddCommentOnTicket.call(comment_params, @ticket, params[:commit], current_user).result
     respond_to do |format|

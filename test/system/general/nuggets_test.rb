@@ -42,7 +42,7 @@ class NuggetsTest < ApplicationSystemTestCase
 
   test "can create a new nugget" do
     visit page_url
-    skill=skills(:ruby).name
+    skill = skills(:ruby).name
     click_on "New Nugget"
     fill_in "nugget_title", with: "Nugget"
     select skill, from: "nugget_skill_id"

@@ -70,8 +70,6 @@ class TicketLabelsTest < ApplicationSystemTestCase
     assert_selector "li", text: "Edited Name"
   end
 
-
-
   test "should have nav bar" do
     visit page_url
     assert_selector "#menubar", count: 1

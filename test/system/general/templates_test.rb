@@ -42,7 +42,7 @@ class TemplatesTest < ApplicationSystemTestCase
 
   test "can create a new template" do
     visit page_url
-    skill=skills(:ruby).name
+    skill = skills(:ruby).name
     click_on "New Template"
     fill_in "template_title", with: "template"
     fill_in_rich_text_area "new_template", with: "This is some template"

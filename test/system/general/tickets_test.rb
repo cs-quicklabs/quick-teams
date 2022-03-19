@@ -42,8 +42,8 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can create a new ticket" do
     visit page_url
-    discipline=disciplines(:engineering)
-    label=discipline.ticket_labels.first.name
+    discipline = disciplines(:engineering)
+    label = discipline.ticket_labels.first.name
     select discipline.name, from: "ticket_discipline_id"
     select label, from: "ticket_ticket_label_id"
     fill_in "ticket_title", with: "ticket"
@@ -63,7 +63,7 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can edit a ticket" do
     visit page_url
-    label=@ticket.discipline.ticket_labels.first.name
+    label = @ticket.discipline.ticket_labels.first.name
     find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
     within "#ticket-header" do
       click_on "Edit"
