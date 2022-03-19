@@ -560,10 +560,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_17_050037) do
   create_table "tickets", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.bigint "ticket_label_id", null: false
+    t.bigint "ticket_label_id"
     t.bigint "discipline_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "ticket_status_id", null: false
+    t.bigint "ticket_status_id"
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -717,6 +717,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_17_050037) do
   add_foreign_key "ticket_statuses", "accounts"
   add_foreign_key "tickets", "accounts"
   add_foreign_key "tickets", "disciplines"
+  add_foreign_key "tickets", "ticket_labels"
   add_foreign_key "tickets", "ticket_statuses"
   add_foreign_key "tickets", "users"
   add_foreign_key "timesheets", "accounts"
