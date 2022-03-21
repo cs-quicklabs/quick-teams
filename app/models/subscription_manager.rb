@@ -27,16 +27,30 @@ class SubscriptionManager
       end
     end
 
-    # user has a stripe processor and subscription which was cancelled
-    if payment_processor.subscription.cancelled?
+    # user has a stripe processor and subscription which was cancelled but is still under grace period
+    if payment_processor.subscription.cancelled? and payment_processor.subscription.ends_at > Time.zone.now
       template = "renew"
       return template
     end
 
+    # user has an active stripe subscription
     if payment_processor.subscription.active?
       template = "manage"
       return template
     end
+
+    # user has a stripe processor and subscription which was cancelled and grace period is over
+    if payment_processor.subscription.cancelled? and payment_processor.subscription.ends_at < Time.zone.now
+      template = "expired"
+      return template
+    end
+
+    # user has an expired trial subscription
+    if payment_processor.processor == "fake_processor" and !payment_processor.subscription.nil? and (payment_processor.subscription.trial_ends_at < Time.zone.now)
+      template = "expired"
+      return template
+    end
+
     template
   end
 end
