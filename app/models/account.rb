@@ -23,4 +23,5 @@ has_many :users, dependent: :destroy
   has_many :tickets, dependent: :destroy
   has_many :ticket_labels, dependent: :destroy
   has_many :ticket_statuses, dependent: :destroy
+  belongs_to :owner, class_name: "User", optional: true
 end
