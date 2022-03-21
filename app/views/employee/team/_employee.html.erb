@@ -14,6 +14,14 @@
             </p>
           </div>
         </a>
+           <div class="flex items-center space-x-2">
+      <div class="flex flex-shrink-0 -space-x-1">
+        <% employee.display_team_members_count.times do %>
+          <%= image_tag "male-placeholder-image.png", class: "w-6 h-6 rounded-full max-w-none ring-2 ring-white" %>
+        <% end %>
+      </div>
+      <span class="flex-shrink-0 text-xs font-medium leading-5"><%= employee.display_additional_team_members %></span>
+    </div>
       </div>
     </div>
   </div>
