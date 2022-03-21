@@ -13,8 +13,8 @@ class TemplatesTest < ApplicationSystemTestCase
     templates_url(script_name: "/#{@account.id}")
   end
 
-  def templates_page_url
-    templates_url(script_name: "/#{@account.id}", template_id: @template.id)
+  def template_detail_page_url
+    template_url(script_name: "/#{@account.id}", template_id: @template.id)
   end
 
   test "can show index if logged in" do
@@ -58,6 +58,22 @@ class TemplatesTest < ApplicationSystemTestCase
     click_on "Save Template"
     take_screenshot
     assert_selector "h1", text: "Add New Template"
+  end
+
+  test "admin can assign template to employee" do
+    @employee = users(:lead)
+    @template = templates(:one)
+    visit page_url
+    find(id: dom_id(@template)).click
+    take_screenshot
+    select @employee.decorate.display_name_position, from: "assignable[assignable_id]"
+    click_on "Assign"
+    assert_text @employee.decorate.display_name
+    #can see delete button for employee reports
+    @template.templates_assignees.each do |assign|
+      assert_selector "li##{dom_id(assign)}", text: assign.assignable.decorate.display_name
+      assert_selector "li##{dom_id(assign)}", text: "Delete"
+    end
   end
 
   test "can edit a template" do

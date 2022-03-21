@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class AccountTest < ApplicationSystemTestCase
+class AccountsTest < ApplicationSystemTestCase
   setup do
     @user = users(:regular)
     @account = @user.account
@@ -14,7 +14,11 @@ class AccountTest < ApplicationSystemTestCase
   test "can visit page if logged in" do
     visit page_url
     take_screenshot
-    assert_selector "h1", text: "Account Settings"
+    if @user.is_owner?
+      assert_selector "h1", text: "Account Settings"
+    else
+    assert_selector "h1", text: "Disciplines"
+    end
   end
 
   test "can not visit page if not logged in" do
@@ -25,7 +29,7 @@ class AccountTest < ApplicationSystemTestCase
 
   test "can update account name" do
     visit page_url
-    fill_in "Company Name", with: "Awesome Company"
+    fill_in "account_name", with: "Awesome Company"
     click_on "Save"
     take_screenshot
     assert_text "Account was updated successfully"
@@ -33,7 +37,7 @@ class AccountTest < ApplicationSystemTestCase
 
   test "can not update account with empty name" do
     visit page_url
-    fill_in "Company Name", with: ""
+    fill_in "account_name", with: ""
     click_on "Save"
     take_screenshot
     assert_text "Name can't be blank"

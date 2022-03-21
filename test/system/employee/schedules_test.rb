@@ -61,7 +61,6 @@ class EmployeeScheduleTest < ApplicationSystemTestCase
     take_screenshot
     assert_selector "div#error_explanation", text: "Project must exist"
     assert_selector "div#error_explanation", text: "Project can't be blank"
-    assert_selector "div#error_explanation", text: "Starts at can't be blank"
     assert_selector "div#error_explanation", text: "Ends at can't be blank"
     assert_selector "div#error_explanation", text: "Occupancy can't be blank"
     assert_selector "div#error_explanation", text: "Occupancy is not a number"

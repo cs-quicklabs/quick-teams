@@ -4,9 +4,9 @@ class AttemptsTest < ApplicationSystemTestCase
   setup do
     @employee = users(:regular)
     @account = @employee.account
-    @survey = survey_surveys(:user)
-    @attempt = survey_attempts(:user)
     ActsAsTenant.current_tenant = @account
+    @attempt = @employee.attempts.first
+    @survey = @attempt.survey
     sign_in @employee
   end
 

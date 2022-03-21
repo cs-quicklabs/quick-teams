@@ -32,11 +32,11 @@ four:
 
 five:
   documenter_type: User
-  documenter: super
+  documenter: regular
   filename: Resume
   link: www.google.com
   comments: this is a comment
-  user: super
+  user: regular
 
 six:
   documenter_type: User
@@ -56,11 +56,11 @@ seven:
 
 eight:
   documenter_type: User
-  documenter: admin
+  documenter: regular
   filename: Resume
   link: www.google.com
   comments: this is a comment
-  user: super
+  user: regular
 
 nine:
   documenter_type: Project

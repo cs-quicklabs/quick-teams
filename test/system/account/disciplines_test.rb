@@ -54,7 +54,7 @@ class DisciplinesTest < ApplicationSystemTestCase
 
   test "can delete a discipline" do
     visit page_url
-    discipline = disciplines(:hr)
+    discipline = disciplines(:two)
 
     assert_selector "li", text: discipline.name
     page.accept_confirm do
