@@ -7,4 +7,7 @@ class Purchase::BillingsController < ApplicationController
     @portal = current_user.payment_processor.billing_portal(return_url: billing_url(script_name: "/#{current_user.account.id}"))
     redirect_to @portal.url, allow_other_host: true
   end
+
+  def exired
+  end
 end

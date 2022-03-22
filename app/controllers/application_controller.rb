@@ -82,6 +82,13 @@ class ApplicationController < ActionController::Base
   end
 
   def landing_path
+    expired_subscription = SubscriptionManager.new(current_user.account.owner).template == "expired"
+    if expired_subscription
+      current_user.account.expired = true
+      current_user.account.save!
+      return expired_path(script_name: script_name)
+    end
+
     if current_user.admin?
       home_path(script_name: script_name)
     elsif current_user.lead?

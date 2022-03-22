@@ -17,7 +17,7 @@ class AccountsTest < ApplicationSystemTestCase
     if @user.is_owner?
       assert_selector "h1", text: "Account Settings"
     else
-    assert_selector "h1", text: "Disciplines"
+      assert_selector "h1", text: "Disciplines"
     end
   end
 

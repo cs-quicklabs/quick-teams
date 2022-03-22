@@ -34,7 +34,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
     page.accept_confirm do
-    click_on "Submit Report"
+      click_on "Submit Report"
     end
     take_screenshot
     assert_selector "tr", text: "Some Random report Title"
@@ -45,7 +45,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     @assign = @employee.templates_assignees.first
     find("li", id: dom_id(@assign)).click_link(@assign.template.title)
     page.accept_confirm do
-    click_on "Submit Report"
+      click_on "Submit Report"
     end
     take_screenshot
     assert_selector "tr", text: @assign.template.title
@@ -73,7 +73,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     visit page_url
     click_on "Submit New Report"
     page.accept_confirm do
-    click_on "Submit Report"
+      click_on "Submit Report"
     end
     assert_selector "div#error_explanation", text: "Title can't be blank"
     assert_selector "div#error_explanation", text: "Body can't be blank"
@@ -114,7 +114,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     fill_in_rich_text_area dom_id(report), with: title
     take_screenshot
     page.accept_confirm do
-    click_on "Submit Report"
+      click_on "Submit Report"
     end
     assert_selector "p.notice", text: "Report was successfully updated."
     assert_selector "tr", text: title
@@ -140,7 +140,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
 
     fill_in "Title", with: nil
     page.accept_confirm do
-    click_on "Submit Report"
+      click_on "Submit Report"
     end
     assert_selector "p.alert", text: "Failed to update. Please try again."
     take_screenshot
