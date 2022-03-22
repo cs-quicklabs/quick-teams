@@ -10,6 +10,9 @@ class AccountMiddleware
       if account = Account.find_by(id: account_id)
         Current.account = account
         ActsAsTenant.current_tenant = account
+        if account.expired? and request_path != "expired"
+          return [302, { "Location" => "/#{account.id}/expired" }, []]
+        end
       else
         return [302, { "Location" => "/" }, []]
       end
