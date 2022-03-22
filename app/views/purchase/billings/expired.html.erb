@@ -34,16 +34,20 @@
         <div class="text-center">
           <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Subscription Expired</h3>
           <div class="mt-2">
-            <p class="text-sm text-gray-500">Please subscribe to a plan to continue using the product. </p>
+            <p class="text-sm text-gray-500">This account has been suspended as there is no active subscription present. </p>
           </div>
         </div>
       </div>
-      <div class="mt-4 flex justify-center">
-        <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
-          <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly) %>" />
-          <input type="submit" value="Subscribe for $49/month" class="btn-blue" />
-        <% end %>
-      </div>
+      <% if current_user.account.owner == current_user %>
+        <div class="mt-4 flex justify-center">
+          <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
+            <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly) %>" />
+            <input type="submit" value="Subscribe for $49/month" class="btn-blue" />
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-sm text-gray-500">Please contact your account owner to resolve this issue. </p>
+      <% end %>
     </div>
   </div>
 </div>
