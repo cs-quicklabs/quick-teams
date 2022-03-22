@@ -47,7 +47,7 @@ class TicketsController < BaseController
     @ticket = Ticket.create(ticket_params)
     respond_to do |format|
       if @ticket.errors.empty?
-        format.turbo_stream { redirect_to ticket_path(@ticket), notice: "Ticket was created successfully." }
+        format.turbo_stream { redirect_to tickets_path, notice: "Ticket was created successfully." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(Ticket.new, partial: "tickets/form", locals: { ticket: @ticket, title: "Add New Ticket" }) }
       end

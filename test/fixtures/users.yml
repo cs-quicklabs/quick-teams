@@ -16,7 +16,7 @@ regular:
   nuggets: one, four, five
   skills: ruby, python
   kpi: userkpi
-
+  
 actor:
   first_name: Rachita
   last_name: Agnihotri

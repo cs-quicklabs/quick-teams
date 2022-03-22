@@ -51,7 +51,6 @@ class ProjectSchedulesTest < ApplicationSystemTestCase
     click_on "Add Participant"
     assert_selector "div#error_explanation", text: "User must exist"
     assert_selector "div#error_explanation", text: "User can't be blank"
-    assert_selector "div#error_explanation", text: "Starts at can't be blank"
     assert_selector "div#error_explanation", text: "Ends at can't be blank"
     assert_selector "div#error_explanation", text: "Occupancy can't be blank"
     assert_selector "div#error_explanation", text: "Occupancy is not a number"

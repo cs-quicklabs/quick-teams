@@ -16,7 +16,12 @@
         <% end %>
       </div>
       <div class="mt-1 space-x-2 text-sm">
-        <span class="font-medium text-gray-500">Created By <%= ticket.user.decorate.display_name %> for the  <%= ticket.discipline.name %> in the <%= ticket.ticket_label.name %> on <%= display_created_at(ticket) %> </span>
+        <span class="font-medium text-gray-500">Created By <%= ticket.user.decorate.display_name %>
+         for the  <%= ticket.discipline.name %>
+          <% if ticket.ticket_label.present? %>
+          in the <%= ticket.ticket_label.name %> 
+          <% end %>
+          on <%= display_created_at(ticket) %> </span>
       </div>
     </div>
   </div>

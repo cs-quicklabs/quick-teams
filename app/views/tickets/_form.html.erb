@@ -4,7 +4,6 @@
     <%= render "shared/form_header", title: local_assigns[:title], subtitle: local_assigns[:subtitle] %>
     <%= form.hidden_field :user_id, value: current_user.id %>
     <%= form.hidden_field :account_id, value: current_user.account.id %>
-    <%= form.hidden_field :ticket_status_id, value: TicketStatus.where(account: current_user.account).first.id %>
     <div data-controller="select" data-select-param-value="discipline_id" data-select-url-value= "tickets/labels">
       <div>
         <label for="discipline" class="block  text-sm font-medium text-gray-700">

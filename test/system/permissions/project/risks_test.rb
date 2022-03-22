@@ -54,6 +54,7 @@ class ProjectRisksTest < ApplicationSystemTestCase
     risk = @project.risks.first
     assert_selector "tr##{dom_id(risk)}", text: "Mitigate"
     assert_selector "tr##{dom_id(risk)}", text: "Delete"
+    take_screenshot
   end
 
   test "manger can not see risks other than his project risks" do
