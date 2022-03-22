@@ -46,7 +46,6 @@ class User < ApplicationRecord
   has_many :created_todos, class_name: "Todo", foreign_key: "user_id", dependent: :destroy
   has_many :comments, class_name: "Comment", foreign_key: "user_id", dependent: :destroy
 
-
   has_and_belongs_to_many :people_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy
   has_and_belongs_to_many :nuggets

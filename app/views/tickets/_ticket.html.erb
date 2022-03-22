@@ -11,7 +11,7 @@
 
   <td class="table-cell">
   <% if ticket.ticket_label.present? %>
-    <span class="text-gray-900 text-left  whitespace-nowrap ">  <%=  ticket.ticket_label.name.titleize  %> </span>
+    <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= ticket.ticket_label.name.titleize %> </span>
       <% end %>
   </td>
 
@@ -22,7 +22,7 @@
   <td class="table-cell">
     <% if ticket.ticket_status.present? %>
     <span class="text-<%= ticket.ticket_status.color %>-900 text-left  whitespace-nowrap ">   <%= ticket.ticket_status.name %> </span>
-   <% end  %>
+   <% end %>
   </td>
 
 </td>
