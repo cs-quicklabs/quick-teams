@@ -37,7 +37,7 @@ class User < ApplicationRecord
   has_many :surveys, class_name: "Survey::Survey", foreign_key: "actor_id" # survey created by user
   has_many :notes, dependent: :destroy
   has_many :templates
-  has_many :timesheets, dependent: :destroy
+  has_many :timesheets, dependent: :delete_all
   has_many :kbs
   has_many :tickets
   has_many :ticket_labels
