@@ -16,5 +16,6 @@ class Employee::TeamController < Employee::BaseController
      end
     end
     fresh_when @subordinates + [@employee]
+    render_partial("employee/team/manager", collection: @manager) if stale?(@manager)
   end
 end
