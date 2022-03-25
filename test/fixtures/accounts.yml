@@ -10,4 +10,5 @@ infosys:
 fixed:
   name: fixed
   expired: false
+  owner: admin
   id: 1

@@ -4,3 +4,10 @@ regular:
   processor: stripe 
   processor_id: cus_LLMBBkp57S7Zqz
   default: true
+
+one: 
+  owner_type: User
+  owner: admin
+  processor: stripe 
+  processor_id: cus_LLMBBkp57S7Zqe
+  default: true
