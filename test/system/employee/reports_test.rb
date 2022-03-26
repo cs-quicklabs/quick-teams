@@ -147,8 +147,10 @@ class EmployeeReportsTest < ApplicationSystemTestCase
   end
 
   test "can comment on report" do
-    visit page_url
-    report = @employee.reports.first
+    member = users(:member)
+
+    visit employee_reports_url(script_name: "/#{@account.id}", employee_id: member.id)
+    report = member.reports.first
     find("tr", id: dom_id(report)).click_link(report.title)
     fill_in "comment", with: "This is a comment"
     assert_emails 1 do
