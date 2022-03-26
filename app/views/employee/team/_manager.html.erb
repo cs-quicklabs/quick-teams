@@ -8,14 +8,23 @@
             <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
           </div>
           <div class="flex-1 min-w-0 px-4 md:grid md:gap-4">
-            <a href="<%= employee_team_path(manager) %>" class="block hover:underline" target="_top">
+            <% if current_user.admin? %>
+              <a href="<%= employee_team_path(manager) %>" class="block hover:underline" target="_top">
+                <div>
+                  <p class="text-sm font-medium text-gray-900 truncate"><%= manager.display_name %></p>
+                  <p class="flex items-center mt-1 text-sm text-gray-500">
+                    <span class="truncate"><%= manager.display_position %></span>
+                  </p>
+                </div>
+              </a>
+            <% else %>
               <div>
                 <p class="text-sm font-medium text-gray-900 truncate"><%= manager.display_name %></p>
                 <p class="flex items-center mt-1 text-sm text-gray-500">
                   <span class="truncate"><%= manager.display_position %></span>
                 </p>
               </div>
-            </a>
+            <% end %>
           </div>
         </div>
       </div>
