@@ -1,6 +1,6 @@
 <main class="relative z-0 flex-1  focus:outline-none">
   <%= render "employee/title", employee: @employee %>
-    <main class="pb-8">
+  <main class="pb-8">
     <div class="px-4 sm:px-6">
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
@@ -9,33 +9,35 @@
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
               <div class="p-4", id="project-participants">
-        <div class="flex flex-wrap">
-          <p class="pb-2 mt-1 text-sm font-medium text-gray-900"><%= "Team Members (" + @subordinates.load.size.to_s + ")" %></p>
-        </div>
-        <ul class="divide-y divide-gray-200 border-b">
-          <%= render partial: "employee/team/employee", collection: @subordinates, as: :employee, cached: true %>
-        </ul>
-      </div>
+                <div class="flex flex-wrap">
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900"><%= "Team Members (" + @subordinates.load.size.to_s + ")" %></p>
+                </div>
+                <ul class="divide-y divide-gray-200 border-b">
+                  <%= render partial: "employee/team/employee", collection: @subordinates, as: :employee, cached: true %>
+                </ul>
+              </div>
             </div>
           </section>
         </div>
-          <!-- Right column -->
-          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
-            <section aria-labelledby="add-participant-section">
-              <div class="overflow-hidden bg-white">
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+          <section aria-labelledby="add-participant-section">
+            <div class="overflow-hidden bg-white">
+              <% if @managers.count > 0 %>
                 <div class="px-4">
-                 <div class="p-4", id="project-participants">
-                 <div class="flex flex-wrap">
-          <p class="pb-2 mt-1 text-sm font-medium text-gray-900"><%= "Managers (" + @manager.size.to_s + ")" %></p>
-        </div>
-                 <ul class="divide-y divide-gray-200 border-b">
-                  <%= render partial: "employee/team/manager", locals: { manager: @manager } %>
-                  </ul>
+                  <div class="p-4", id="project-participants">
+                    <div class="flex flex-wrap">
+                      <p class="pb-2 mt-1 text-sm font-medium text-gray-900"><%= "Team Leaders" %></p>
+                    </div>
+                    <ul class="divide-y divide-gray-200 border-b">
+                      <%= render partial: "employee/team/manager", locals: { managers: @managers } %>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              </div>
-            </section>
-          </div>
+              <% end %>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   </main>

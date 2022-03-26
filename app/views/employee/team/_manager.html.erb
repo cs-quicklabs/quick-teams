@@ -1,30 +1,24 @@
- <% manager.each do |manager| %>
- <% manager = manager.decorate %>
-<li>
-   <div>
-  <div class="flex items-center px-2 py-2 sm:px-6">
-    <div class="flex items-center flex-1 min-w-0">
-      <div class="flex-shrink-0">
-        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
-      </div>
-      <div class="flex-1 min-w-0 px-4 md:grid md:gap-4">
-        <a href="<%= employee_team_path(manager) %>" class="block hover:underline" target="_top">
-          <div>
-            <p class="text-sm font-medium text-gray-900 truncate"><%= manager.display_name %></p>
-            <p class="flex items-center mt-1 text-sm text-gray-500">
-              <span class="truncate"><%= manager.display_position %></span>
-            </p>
+ <% managers.each do |manager| %>
+  <% manager = manager.decorate %>
+  <li>
+    <div>
+      <div class="flex items-center px-2 py-2 sm:px-6">
+        <div class="flex items-center flex-1 min-w-0">
+          <div class="flex-shrink-0">
+            <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
           </div>
-        </a>
- 
+          <div class="flex-1 min-w-0 px-4 md:grid md:gap-4">
+            <a href="<%= employee_team_path(manager) %>" class="block hover:underline" target="_top">
+              <div>
+                <p class="text-sm font-medium text-gray-900 truncate"><%= manager.display_name %></p>
+                <p class="flex items-center mt-1 text-sm text-gray-500">
+                  <span class="truncate"><%= manager.display_position %></span>
+                </p>
+              </div>
+            </a>
+          </div>
         </div>
-                 <div class="flex items-center space-x-2">
-         <a href="<%= new_survey_attempt_path(@employee.kpi, participant_id: @employee.id) %>" class="block hover:underline" target="_top">
-         Review
-         </a>
-    </div>
       </div>
     </div>
-  </div>
-</li>
+  </li>
 <% end %>
