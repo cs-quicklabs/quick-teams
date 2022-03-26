@@ -85,6 +85,23 @@ class User < ApplicationRecord
     all_subordinates_ids.include?(employee.id)
   end
 
+  def managers
+    managers = []
+
+    level_one_manger = self.manager
+    unless level_one_manger.nil?
+      managers << level_one_manger
+      level_two_manager = level_one_manger.manager
+      unless level_two_manager.nil?
+        managers << level_two_manager
+        level_three_manager = level_two_manager.manager
+        managers << level_three_manager unless level_three_manager.nil?
+      end
+    end
+
+    managers
+  end
+
   def project_participant?(employee)
     projects = self.managed_projects.map(&:id)
     @employees ||= Schedule.where("project_id IN (?)", projects).pluck(:user_id)
