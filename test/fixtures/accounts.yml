@@ -1,9 +1,14 @@
 crownstack:
   name: Crownstack technologies
+  owner: regular
+  expired: false
 
 infosys:
   name: Infosys technologies
+  expired: false
 
 fixed:
   name: fixed
+  expired: false
+  owner: admin
   id: 1

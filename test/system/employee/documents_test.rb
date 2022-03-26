@@ -2,9 +2,9 @@ require "application_system_test_case"
 
 class EmployeeDocumentsTest < ApplicationSystemTestCase
   setup do
-    @employee = users(:lead)
+    @employee = users(:regular)
     @account = @employee.account
-    @document = @employee.documents.where(user: @employee).first
+    @document = @employee.documents.first
     ActsAsTenant.current_tenant = @account
     sign_in @employee
   end

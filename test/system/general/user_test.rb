@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class UserTest < ApplicationSystemTestCase
+class UsersTest < ApplicationSystemTestCase
   setup do
     @user = users(:regular)
     @account = @user.account

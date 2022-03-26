@@ -3,20 +3,16 @@
   <li class="border-b border-gray-200 py-2">
     <div class="flex items-center px-2 py-2 sm:px-6">
       <div class="flex items-center flex-1 min-w-0">
-        <div class="flex-1 min-w-0 md:grid md:grid-cols-4 md:gap-4">
+        <div class="flex-1 min-w-0 md:grid md:grid-cols-5 md:gap-4">
+      <div class="whitespace-nowrap text-sm text-gray-900 flex col-span-2 ">
           <% if current_user.admin? %>
             <a href="<%= project_schedules_path(schedule.project) %>" class="block hover:underline" target="_top">
-              <div class="flex">
-                <div class="whitespace-nowrap">
-                  <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.project.name %></p>
-                </div>
-              </div>
+                  <p class="text-sm font-medium text-gray-900"><%= schedule.project.name %></p>
             </a>
           <% else %>
-            <div>
-              <p class="text-sm font-medium text-gray-900 truncate"><%= schedule.project.name %></p>
-            </div>
+              <p class="text-sm font-medium text-gray-900"><%= schedule.project.name %></p>
           <% end %>
+          </div>
           <div class="flex">
             <div class="whitespace-nowrap">
               <div class="text-sm text-gray-900"><%= schedule.display_occupancy %></div>

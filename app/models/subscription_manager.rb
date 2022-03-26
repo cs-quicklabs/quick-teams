@@ -19,12 +19,17 @@ class SubscriptionManager
     # may be user tried to purchase a subscription but did not complete the payment
     if payment_processor.processor == "stripe" and payment_processor.subscription.nil?
       fake_customer = Pay::Customer.where(owner_type: "User", owner_id: user.id, processor: "fake_processor").first
-      fake_subscription = Pay::Subscription.where(name: "default", customer_id: fake_customer.id)
-      # he still has a fake subscription trial active
-      if fake_subscription and fake_subscription.trial_ends_at > Time.zone.now
-        template = "trial"
-        return template
+      if fake_customer
+        fake_subscription = Pay::Subscription.where(name: "default", customer_id: fake_customer.id)
+        # he still has a fake subscription trial active
+        if fake_subscription and fake_subscription.trial_ends_at > Time.zone.now
+          template = "trial"
+          return template
+        end
       end
+
+      template = "subscribe"
+      return template
     end
 
     # user has a stripe processor and subscription which was cancelled but is still under grace period

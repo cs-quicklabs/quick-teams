@@ -1,6 +1,5 @@
 class Account < ApplicationRecord
   validates_presence_of :name
-
   has_many :todos, dependent: :destroy
   has_many :timesheets, dependent: :destroy
   has_many :templates, dependent: :destroy
@@ -24,5 +23,5 @@ class Account < ApplicationRecord
   has_many :ticket_labels, dependent: :destroy
   has_many :ticket_statuses, dependent: :destroy
 
-  belongs_to :owner, class_name: "User", foreign_key: "owner_id"
+  belongs_to :owner, class_name: "User", foreign_key: "owner_id", optional: true
 end

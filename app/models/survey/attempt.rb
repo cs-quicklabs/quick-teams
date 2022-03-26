@@ -5,7 +5,7 @@ class Survey::Attempt < ActiveRecord::Base
   belongs_to :survey
   belongs_to :actor, class_name: "User", foreign_key: "actor_id"
   belongs_to :participant, polymorphic: true
-  has_many :answers, :dependent => :destroy
+  has_many :answers, :dependent => :delete_all
   accepts_nested_attributes_for :answers,
     :reject_if => ->(q) { q[:question_id].blank? || q[:option_id].blank? }
 

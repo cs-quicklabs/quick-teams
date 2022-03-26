@@ -2,10 +2,20 @@
 
 one:
   key: MyString
-  value: MyString
+  value: 365
   account: crownstack
 
 two:
   key: MyString
-  value: MyString
+  value: 365
+  account: crownstack
+
+three:
+  key: transfer_data_to_admin
+  value: 365
+  account: crownstack
+  
+four:
+  key: consider_overall_kpi_score
+  value: true 
   account: crownstack

@@ -31,7 +31,7 @@ class ProjectSkillsTest < ApplicationSystemTestCase
     visit page_url
     fill_in "search-skills", with: "Ruby"
     sleep(0.5)
-    find("#add-skill").click
+    first("#add-skill").click
     assert_selector "#project-skills", text: "Ruby"
     find("#remove-skill").click
     assert_no_selector "#project-skills", text: "Ruby"

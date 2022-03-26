@@ -29,6 +29,7 @@ class TicketPolicy < ApplicationPolicy
 
   def change_status?
     ticket = record.first
+    return true if user.admin?
     return true if ticket.ticket_label.user_id == @user.id
   end
 
@@ -59,8 +60,8 @@ class TicketPolicy < ApplicationPolicy
   def comment?
     ticket = record.first
     @user.admin?
-    return true if ticket.ticket_label.user == @user
     return true if ticket.user_id == @user.id
+    return true if ticket.ticket_label.user @user.id
   end
 
   def new?

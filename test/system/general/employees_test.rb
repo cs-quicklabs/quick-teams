@@ -145,8 +145,11 @@ class EmployeesTest < ApplicationSystemTestCase
 
   test "can see deactivated users and delete it" do
     visit deactivated_users_url(script_name: "/#{@account.id}")
-    page.accept_confirm do
-      page.first(:link, "Delete").click
+    inactive_user = User.where(account: @account).inactive.first
+    within "#user_#{inactive_user.id}" do
+      page.accept_confirm do
+        click_on "Delete"
+      end
     end
     assert_selector "p.notice", text: "User has been deleted."
   end

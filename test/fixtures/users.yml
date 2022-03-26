@@ -16,7 +16,7 @@ regular:
   nuggets: one, four, five
   skills: ruby, python
   kpi: userkpi
-
+  
 actor:
   first_name: Rachita
   last_name: Agnihotri
@@ -303,7 +303,7 @@ super:
 
 unconfirmed:
   first_name: Aashish
-  last_name: Dhawan (Member)
+  last_name: C. Dhawan (Member)
   active: true
   email: unconfirmed@crownstack.com
   account: crownstack

@@ -19,7 +19,7 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     take_screenshot
     assert_selector "h1", text: "#{@employee.first_name} #{@employee.last_name}"
     assert_selector "div#employee-tabs", text: "Reports"
-    assert_text "Add Report"
+    assert_text "Reports"
   end
 
   test "can not visit index if not logged in" do
@@ -30,39 +30,40 @@ class EmployeeReportsTest < ApplicationSystemTestCase
 
   test "can add new report" do
     visit page_url
-    click_on "Add Custom Report"
+    click_on "Submit New Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
-    click_on "Submit Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     take_screenshot
-    assert_selector "h3", text: "Some Random report Title"
-    assert_selector "div", text: "This is some report"
+    assert_selector "tr", text: "Some Random report Title"
   end
 
   test "can add new template report if assigned" do
     visit page_url
     @assign = @employee.templates_assignees.first
     find("li", id: dom_id(@assign)).click_link(@assign.template.title)
-    click_on "Submit Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     take_screenshot
-    assert_selector "h3", text: @assign.template.title + " Report"
-    assert_selector "div", text: "This is some report"
+    assert_selector "tr", text: @assign.template.title
   end
 
   test "can draft new report" do
     visit page_url
-    click_on "Add Custom Report"
+    click_on "Submit New Report"
     fill_in "Title", with: "Some Random report Title"
     fill_in_rich_text_area "new_report", with: "This is some report"
     click_on "Save As Draft"
     take_screenshot
-    assert_selector "h3", text: "Some Random report Title"
-    assert_selector "div", text: "This is some report"
+    assert_selector "tr", text: "Some Random report Title"
   end
 
   test "can not draft report with empty details" do
     visit page_url
-    click_on "Add Custom Report"
+    click_on "Submit New Report"
     click_on "Save As Draft"
     assert_selector "div#error_explanation", text: "Title can't be blank"
     take_screenshot
@@ -70,8 +71,10 @@ class EmployeeReportsTest < ApplicationSystemTestCase
 
   test "can not add report with empty details" do
     visit page_url
-    click_on "Add Custom Report"
-    click_on "Submit Report"
+    click_on "Submit New Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     assert_selector "div#error_explanation", text: "Title can't be blank"
     assert_selector "div#error_explanation", text: "Body can't be blank"
     take_screenshot
@@ -110,10 +113,11 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     fill_in "Title", with: title
     fill_in_rich_text_area dom_id(report), with: title
     take_screenshot
-    click_on "Submit Report"
-    assert_selector "p.notice", text: "report was successfully updated."
-    assert_selector "h3", text: title
-    assert_selector "div.trix-content", text: title
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
+    assert_selector "p.notice", text: "Report was successfully updated."
+    assert_selector "tr", text: title
     take_screenshot
   end
   test "can not edit report if submitted" do
@@ -132,18 +136,21 @@ class EmployeeReportsTest < ApplicationSystemTestCase
   test "can not edit report with invalid params" do
     visit page_url
     report = @employee.reports.where(submitted: false).first
-
     find("tr", id: dom_id(report)).click_link("Edit")
 
     fill_in "Title", with: nil
-    click_on "Submit Report"
+    page.accept_confirm do
+      click_on "Submit Report"
+    end
     assert_selector "p.alert", text: "Failed to update. Please try again."
     take_screenshot
   end
 
   test "can comment on report" do
-    visit page_url
-    report = @employee.reports.first
+    member = users(:member)
+
+    visit employee_reports_url(script_name: "/#{@account.id}", employee_id: member.id)
+    report = member.reports.first
     find("tr", id: dom_id(report)).click_link(report.title)
     fill_in "comment", with: "This is a comment"
     assert_emails 1 do

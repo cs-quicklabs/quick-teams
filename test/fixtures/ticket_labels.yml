@@ -5,13 +5,13 @@ one:
   user: actor
 
 two:
-  name: Label one
+  name: Label One
   account: crownstack
   discipline: engineering
   user: abram
 
 three:
-  name: Label eng
+  name: Label Eng
   account: crownstack
   discipline: engineering
   user: active

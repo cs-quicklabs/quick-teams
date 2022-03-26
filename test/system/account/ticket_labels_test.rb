@@ -27,7 +27,7 @@ class TicketLabelsTest < ApplicationSystemTestCase
     visit page_url
     name = "#{disciplines(:one).name}"
     assignee = "#{users(:actor).name}"
-    fill_in "Add New label", with: "Initiated"
+    fill_in "ticket_label_name", with: "Initiated"
     select name, from: "ticket_label_discipline_id"
     select assignee, from: "ticket_label_user_id"
     click_on "Save"
@@ -50,7 +50,7 @@ class TicketLabelsTest < ApplicationSystemTestCase
 
   test "can delete a ticket label" do
     visit page_url
-    ticket_label = ticket_labels(:one)
+    ticket_label = ticket_labels(:two)
     assert_selector "li", text: ticket_label.name
     page.accept_confirm do
       find("li", text: ticket_label.name).click_on("Delete")

@@ -16,7 +16,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     employee_surveys_url(script_name: "/#{@account.id}", employee_id: @employee.subordinates.first.id)
   end
 
-  test "admin can see surveys" do
+  test "admin can see employee surveys" do
     sign_out @employee
     @employee = users(:super)
     sign_in @employee
@@ -27,7 +27,7 @@ class EmployeeSurveysTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Surveys"
   end
 
-  test "lead can see his surveyss" do
+  test "lead can see his surveys " do
     sign_out @employee
     @employee = users(:lead)
     sign_in @employee
