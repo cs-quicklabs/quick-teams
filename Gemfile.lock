@@ -283,6 +283,8 @@ GEM
     regexp_parser (2.2.1)
     request_store (1.5.1)
       rack (>= 1.4)
+    requestjs-rails (0.0.9)
+      rails (>= 6.0.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -403,6 +405,7 @@ DEPENDENCIES
   rails (= 7.0.2)
   rails-patterns
   redis (>= 4.0)
+  requestjs-rails
   rexml
   selenium-webdriver
   sidekiq
