@@ -99,7 +99,10 @@ class User < ApplicationRecord
       end
     end
 
-    managers
+    if managers.include?(self)
+      managers = managers - [self]
+    end
+    managers.uniq
   end
 
   def project_participant?(employee)
