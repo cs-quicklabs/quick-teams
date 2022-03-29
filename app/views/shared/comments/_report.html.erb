@@ -1,4 +1,4 @@
-<div id="comment">
+<div id="report">
   <div class="px-4 py-6 bg-gray-50 sm:px-6">
     <div class="flex space-x-3">
       <div class="flex-shrink-0">
@@ -7,8 +7,8 @@
       <div class="flex-1 min-w-0">
         <%= form_with model: comment, url: report_comments_path, method: :post do |form| %>
           <%= render "shared/form_messages", resource: comment, message: local_assigns[:message] %>
-          <%= form.hidden_field :"comment[user_id]", :value => current_user.id %>
-          <%= form.hidden_field :"comment[commentable_id]", :value => report.id %>
+          <%= form.hidden_field :"user_id", :value => current_user.id %>
+          <%= form.hidden_field :"commentable_id", :value => report.id %>
           <div>
             <textarea id="comment" name="comment[title]" rows="3" class="form-text-field" placeholder="Add a comment"></textarea>
           </div>

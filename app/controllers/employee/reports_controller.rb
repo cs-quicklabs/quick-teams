@@ -46,6 +46,7 @@ class Employee::ReportsController < Employee::BaseController
 
   def show
     authorize [@employee, @report]
+    @comment = Comment.new
     fresh_when [@report] + @report.comments
   end
 

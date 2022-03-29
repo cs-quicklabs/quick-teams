@@ -52,7 +52,7 @@ class Project::ReportsController < Project::BaseController
 
   def show
     authorize [@project, @report]
-
+    @comment = Comment.new
     fresh_when [@report] + @report.comments
   end
 
