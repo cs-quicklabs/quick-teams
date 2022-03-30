@@ -1,8 +1,8 @@
 <%= turbo_frame_tag dom_id(comment) do %>
-  <li>
+  <li class="mt-6">
     <div class="flex w-full space-x-3">
       <div class="flex-shrink-0">
-        <%= image_tag "male-placeholder-image.png", class: "w-12 h-12 rounded-full" %>
+        <%= image_tag "male-placeholder-image.png", class: "w-8 h-8 rounded-full" %>
       </div>
       <div class="w-full">
         <div class="w-full text-sm">
@@ -11,18 +11,18 @@
             <%= comment.status.to_s %>
           </span>
         </div>
-        <div class="mt-1 text-sm text-gray-700">
+        <div class="text-sm text-gray-700">
           <p class="whitespace-pre-wrap"><%= auto_link_urls_in_text(comment.title.upcase_first) %></p>
         </div>
-        <div class="mt-2 space-x-2 text-sm">
-          <span class="font-medium text-gray-500"><%= display_created_at(comment) %></span>
+        <div class="space-x-2 flex">
+          <span class="text-gray-500 text-sm"><%= display_created_at(comment) %></span>
+          <% if policy(comment).edit? %>
+            <div class="flex justify-end items-center space-x-2">
+              <%= edit_button(edit_comment_path(comment)) %>
+              <%= delete_button(comment_path(comment)) %>
+            </div>
+          <% end %>
         </div>
-        <% if policy(comment).edit? %>
-          <div class="flex justify-end items-center space-x-2">
-            <%= edit_button(edit_comment_path(comment)) %>
-            <%= delete_button(comment_path(comment)) %>
-          </div>
-        <% end %>
       </div>
     </div>
   </li>
