@@ -7,4 +7,7 @@ class Ticket < ApplicationRecord
   belongs_to :account
   acts_as_tenant :account
   has_many :comments, as: :commentable, dependent: :destroy
+
+  scope :progress, -> { where(ticketstatus: :false) }
+  scope :completed, -> { where(ticketstatus: :true) }
 end
