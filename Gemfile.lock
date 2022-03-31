@@ -222,6 +222,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.3-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.3-x86_64-linux)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (5.10.1)
       activesupport
@@ -232,7 +234,7 @@ GEM
       activerecord (>= 5.2)
       activesupport (>= 5.2)
     public_suffix (4.0.6)
-    puma (5.6.2)
+    puma (5.6.4)
       nio4r (~> 2.0)
     pwned (2.0.2)
     raabro (1.4.0)
@@ -283,8 +285,6 @@ GEM
     regexp_parser (2.2.1)
     request_store (1.5.1)
       rack (>= 1.4)
-    requestjs-rails (0.0.9)
-      rails (>= 6.0.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -375,6 +375,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   acts_as_tenant
@@ -400,12 +401,11 @@ DEPENDENCIES
   pay (= 3.0.24)
   pg (= 1.2.3)
   pg_search
-  puma (= 5.6.2)
+  puma (= 5.6.4)
   rack-mini-profiler (~> 2.0)
   rails (= 7.0.2)
   rails-patterns
   redis (>= 4.0)
-  requestjs-rails
   rexml
   selenium-webdriver
   sidekiq
