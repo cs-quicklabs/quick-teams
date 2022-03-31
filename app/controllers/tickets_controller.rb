@@ -87,7 +87,7 @@ class TicketsController < BaseController
           render turbo_stream: turbo_stream.append(:comments, partial: "shared/comments/comment", locals: { comment: @comment }) +
                                turbo_stream.replace("comment", partial: "shared/comments/ticket", locals: { ticket: @ticket, comment: Comment.new }) +
                                turbo_stream.replace("title", partial: "tickets/title", locals: { ticket: @ticket })
-                              }
+        }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(:add, partial: "shared/comments/ticket", locals: { ticket: @ticket, comment: @comment }) }
       end
