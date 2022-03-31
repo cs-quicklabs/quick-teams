@@ -9,11 +9,24 @@ export default class extends Controller {
     param: String
   }
 
+
   change(event) {
     let params = new URLSearchParams()
     params.append(this.paramValue, event.target.selectedOptions[0].value)
     params.append("target", this.selectTarget.id)
     get (`${this.urlValue}?${params}`,{
       responseKind: "turbo-stream"})
+      .then(response => response.text)
+      .then(response => {
+        this.selectTarget.innerHTML = response
+        const hasOptions = this.selectTarget.children[0].innerHTML.length
+        if (hasOptions>1) {
+          $('#display').show();
+        }
+        else
+        {
+          $('#display').hide();
+        }
+      })
   }
 }

@@ -4,7 +4,7 @@ class TicketsController < BaseController
   def index
     authorize :ticket
     @ticket = Ticket.new
-    tickets = current_user.tickets.includes(:ticket_label, :ticket_status, :user, :discipline)
+    tickets = current_user.tickets.includes(:ticket_label, :ticket_status, :user, :discipline).order(created_at: :desc)
     @pagy, @tickets = pagy_nil_safe(params, tickets, items: 20)
     render_partial("tickets/ticket", collection: @tickets, cached: true) if stale?(@tickets)
   end
@@ -39,7 +39,7 @@ class TicketsController < BaseController
       if @ticket.update(ticket_params)
         format.turbo_stream { redirect_to ticket_path(@ticket), notice: "Ticket was updated successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@ticket, partial: "tickets/form", locals: { ticket: @ticket, title: "Edit ticket" }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@ticket, partial: "tickets/form", locals: { ticket: @ticket, title: "Edit Ticket" }) }
       end
     end
   end

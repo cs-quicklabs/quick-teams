@@ -43,9 +43,14 @@ class TicketsTest < ApplicationSystemTestCase
   test "can create a new ticket" do
     visit page_url
     discipline = disciplines(:engineering)
-    label = discipline.ticket_labels.first.name
     select discipline.name, from: "ticket_discipline_id"
-    select label, from: "ticket_ticket_label_id"
+    sleep(10)
+    take_screenshot
+    binding.irb
+    if(discipline.ticket_labels.count > 0)
+      label = discipline.ticket_labels.first.name
+      select label, from: "ticket_ticket_label_id"
+    end
     fill_in "ticket_title", with: "ticket"
     fill_in "ticket_description", with: "This is some ticket"
     click_on "Add Ticket"
@@ -59,17 +64,22 @@ class TicketsTest < ApplicationSystemTestCase
     click_on "Add Ticket"
     take_screenshot
     assert_selector "h1", text: "Add New Ticket"
+    assert_selector "div#error_explanation", text: "Discipline must exist"
+    assert_selector "div#error_explanation", text: "Title can't be blank"
+    assert_selector "div#error_explanation", text: "Description can't be blank"
   end
 
   test "can edit a ticket" do
     visit page_url
-    label = @ticket.discipline.ticket_labels.first.name
     find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
     within "#ticket-header" do
       click_on "Edit"
     end
     assert_selector "h1", text: "Edit Ticket"
-    select label, from: "ticket_ticket_label_id"
+    if(@ticket.ticket_label.present?)
+      label = @ticket.discipline.ticket_labels.first.name
+      select label, from: "ticket_ticket_label_id"
+    end
     fill_in "ticket_title", with: "ticket"
     fill_in "ticket_description", with: "This is some ticket"
     click_on "Save"
@@ -85,6 +95,8 @@ class TicketsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Edit Ticket"
     fill_in "ticket_title", with: ""
     click_on "Save"
+    assert_selector "h1", text: "Edit Ticket"
+    assert_selector "div#error_explanation", text: "Title can't be blank"
     take_screenshot
   end
 

@@ -7,10 +7,10 @@ class TicketPolicy < ApplicationPolicy
 
     def resolve
       if user.admin?
-        scope.all
+        scope.all.order(created_at: :desc)
       else
         label_ids = TicketLabel.where(user: @user).pluck(:id)
-        Ticket.includes(:ticket_label, :ticket_status, :user, :discipline).where("ticket_label_id IN (?)", label_ids)
+        Ticket.includes(:ticket_label, :ticket_status, :user, :discipline).where("ticket_label_id IN (?)", label_ids).order(created_at: :desc)
       end
     end
 
