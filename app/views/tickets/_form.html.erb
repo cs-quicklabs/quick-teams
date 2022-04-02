@@ -1,31 +1,37 @@
 <%= tailwind_form_with(model: ticket, id: dom_id(ticket), url: tickets_path) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
-   <%= render "shared/form_header", title: local_assigns[:title], subtitle: local_assigns[:subtitle] %>   
-      <% @labels = TicketLabel.all %>
-      <% if @labels.count > 0 %>
-    <%= render "shared/form_messages", resource: ticket, message: local_assigns[:message] %>
-    <%= form.hidden_field :user_id, value: current_user.id %>
-    <%= form.hidden_field :account_id, value: current_user.account.id %>
-    <%= form.text_area :description, "Description", class: "form-text-field h-24" %>
-    <div data-controller="select" data-select-param-value="discipline_id" data-select-url-value= "tickets/labels">
-      <div>
-        <label for="label" class="block mt-4 text-sm font-medium text-gray-700">
-          Select Label
-        </label>
-        <%= form.collection_select("ticket_label_id", @labels, :id, :name, { :prompt => "Select labels" }, :class => "form-text-field mt-1",
+    <%= render "shared/form_header", title: local_assigns[:title], subtitle: local_assigns[:subtitle] %>
+    <% labels = TicketLabel.all.load %>
+    <% if labels.size > 0 %>
+      <%= render "shared/form_messages", resource: ticket, message: local_assigns[:message] %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.hidden_field :account_id, value: current_user.account.id %>
+      <%= form.text_area :description, "Description", class: "form-text-field h-24" %>
+      <div data-controller="select" data-select-param-value="discipline_id" data-select-url-value= "tickets/labels">
+        <div>
+          <label for="label" class="block mt-4 text-sm font-medium text-gray-700">
+            Select Label
+          </label>
+          <%= form.collection_select("ticket_label_id", labels, :id, :name, { :prompt => "Select labels" }, :class => "form-text-field mt-1",
                                                                                                            data: { select_target: "select" }) %>
+        </div>
       </div>
-    </div>
-    <div class="flex justify-end">
-      <%= form.submit "Add Ticket", class: "btn-blue" %>
-    </div>
+      <div class="flex justify-end">
+        <%= form.submit "Add Ticket", class: "btn-blue" %>
+      </div>
     <% else %>
-     <div>
-      <p class="mt-2 text-xs text-gray-500" id="question-description">Please add Ticket Label to create ticket
-      New Ticket Labels can be added from 
-        <a  href="<%= account_ticket_labels_path %>" class="text-indigo-700 hover:underline">Account > Ticket Labels. </a>
-       Tickets are assigned on the basis of Ticket labels.</p>
-     </div>
-     <% end %>
-  </main>
+      <% if current_user.admin? %>
+        <div>
+          <p class="mt-2 text-xs text-gray-500" id="label-description">Please add new ticket labels from
+            <a  href="<%= account_ticket_labels_path %>" class="text-indigo-700 hover:underline">Account > Ticket Labels.</a>
+            These are required to create a new Ticket</p>
+        </div>
+      <% else %>
+        <div>
+          <p class="mt-2 text-xs text-gray-500" id="question-description">It appears the admin has not set up ticket labels. Please contact the admin. The account needs to have ticket labels before a ticket can be raised.</p>
+        </p>
+      </div>
+    <% end %>
+  <% end %>
+</main>
 <% end %>
