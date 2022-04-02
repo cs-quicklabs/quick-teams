@@ -2,20 +2,13 @@
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: @ticket, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Edit Ticket", subtitle: "" %>
-    <div>
-      <label for="discipline" class="block  text-sm font-medium text-gray-700">
-        Select Discipline
-      </label>
-      <%= form.collection_select("discipline_id", Discipline.order(:name), :id, :name, { :prompt => "Select Department" }, { :class => "form-text-field bg-gray-100", :disabled => "disabled" }) %>
-    </div>
-    <div>
+        <div  >
       <label for="label" class="block mt-4 text-sm font-medium text-gray-700">
         Select Label
       </label>
-      <%= form.collection_select("ticket_label_id", TicketLabel.where(discipline_id: @ticket.discipline), :id, :name, { :prompt => "Select labels" }, { :class => "form-text-field" }) %>
+      <%= form.collection_select("ticket_label_id", TicketLabel.all, :id, :name, { :prompt => "Select labels" }, { :class => "form-text-field" }) %>
     </div>
   </div>
-  <%= form.text_field :title, "Title", autocomplete: "off" %>
   <%= form.text_area :description, "Description", class: "form-text-field h-24" %>
   <div class="flex justify-end">
     <%= form.submit "Save", class: "btn-blue" %>

@@ -7,10 +7,10 @@ class TicketPolicy < ApplicationPolicy
 
     def resolve
       if user.admin?
-        scope.all
+        scope.all.order(created_at: :desc)
       else
         label_ids = TicketLabel.where(user: @user).pluck(:id)
-        Ticket.includes(:ticket_label, :ticket_status, :user, :discipline).where("ticket_label_id IN (?)", label_ids)
+        Ticket.includes(:ticket_label, :ticket_status, :user).where("ticket_label_id IN (?)", label_ids).order(created_at: :desc)
       end
     end
 
@@ -20,7 +20,7 @@ class TicketPolicy < ApplicationPolicy
   end
 
   def open?
-    TicketLabel.all.pluck(:user_id).include?(@user.id)
+    TicketLabel.all.pluck(:user_id).include?(@user.id) or user.admin?
   end
 
   def create?
@@ -30,6 +30,11 @@ class TicketPolicy < ApplicationPolicy
   def change_status?
     ticket = record.first
     return true if (user.admin? or ticket.ticket_label.user_id == @user.id) and !ticket.ticketstatus?
+  end
+
+  def show_status?
+    ticket = record.first
+    return true if ticket.user_id == @user.id and !user.admin? and !ticket.ticketstatus? and ticket.ticket_status.present?
   end
 
   def edit?

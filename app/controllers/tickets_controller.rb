@@ -4,7 +4,7 @@ class TicketsController < BaseController
   def index
     authorize :ticket
     @ticket = Ticket.new
-    tickets = current_user.tickets.includes(:ticket_label, :ticket_status, :user, :discipline)
+    tickets = current_user.tickets.includes(:ticket_label, :ticket_status, :user).order(created_at: :desc)
     @pagy, @tickets = pagy_nil_safe(params, tickets, items: 20)
     render_partial("tickets/ticket", collection: @tickets, cached: true) if stale?(@tickets)
   end
@@ -16,6 +16,8 @@ class TicketsController < BaseController
 
   def show
     authorize [@ticket]
+    @statuses = TicketStatus.all - [@ticket.ticket_status]
+    @status_count = (@statuses.pluck(:id) - [@ticket.ticket_status_id]).count
     @comment = Comment.new
     fresh_when [@ticket] + @ticket.comments
   end
@@ -39,19 +41,19 @@ class TicketsController < BaseController
       if @ticket.update(ticket_params)
         format.turbo_stream { redirect_to ticket_path(@ticket), notice: "Ticket was updated successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@ticket, partial: "tickets/form", locals: { ticket: @ticket, title: "Edit ticket" }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@ticket, partial: "tickets/form", locals: { ticket: @ticket, title: "Edit Ticket" }) }
       end
     end
   end
 
   def create
     authorize :ticket
-    @ticket = Ticket.create(ticket_params)
+    @ticket = AddTicket.call(ticket_params, current_user).result
     respond_to do |format|
       if @ticket.errors.empty?
         format.turbo_stream { redirect_to tickets_path, notice: "Ticket was created successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Ticket.new, partial: "tickets/form", locals: { ticket: @ticket, title: "Add New Ticket" }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Ticket.new, partial: "tickets/form", locals: { ticket: @ticket, title: "Add New Ticket", subtitle: "You can raise a ticket if you need anything to get your work done. The types of tickets are defined by admin" }) }
       end
     end
   end
@@ -101,7 +103,7 @@ class TicketsController < BaseController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:ticket_label_id, :title, :description, :user_id, :account_id, :discipline_id, :ticket_status_id)
+    params.require(:ticket).permit(:ticket_label_id, :title, :description, :user_id, :account_id)
   end
 
   def comment_params

@@ -18,9 +18,6 @@ application.register("modal", ModalController)
 import NavSearchController from "./nav_search_controller"
 application.register("nav-search", NavSearchController)
 
-import SelectController from "./select_controller"
-application.register("select", SelectController)
-
 
 import ConfirmationController from "./confirmation_controller"
 import StimulusReflex from 'stimulus_reflex'
