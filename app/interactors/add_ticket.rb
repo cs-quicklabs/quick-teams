@@ -18,7 +18,6 @@ class AddTicket < Patterns::Service
     private
   
     def add_ticket
-      ticket.discipline_id = params[:label_id]
       ticket.save!
     end
   

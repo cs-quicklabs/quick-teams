@@ -4,7 +4,7 @@ class TicketsController < BaseController
   def index
     authorize :ticket
     @ticket = Ticket.new
-    tickets = current_user.tickets.includes(:ticket_label, :ticket_status, :user, :discipline).order(created_at: :desc)
+    tickets = current_user.tickets.includes(:ticket_label, :ticket_status, :user).order(created_at: :desc)
     @pagy, @tickets = pagy_nil_safe(params, tickets, items: 20)
     render_partial("tickets/ticket", collection: @tickets, cached: true) if stale?(@tickets)
   end
@@ -16,6 +16,8 @@ class TicketsController < BaseController
 
   def show
     authorize [@ticket]
+    @statuses = TicketStatus.all-[@ticket.ticket_status]
+    @status_count = (@statuses.pluck(:id)-[@ticket.ticket_status_id]).count
     @comment = Comment.new
     fresh_when [@ticket] + @ticket.comments
   end

@@ -1,28 +1,21 @@
 <% ticket = ticket.decorate %>
 <tr id="<%= dom_id ticket %>">
-  <td class=" w-full table-cell">
+    <td class=" w-full table-cell">
     <a href="<%= ticket_path(ticket) %>", class="truncate hover:text-gray-600 hover:underline">
-      <span class="text-gray-900 block whitespace-normal "><%= ticket.title.upcase_first %></span>
+      <span class="text-gray-900 block whitespace-normal "><%= ticket.description.upcase_first %></span>
     </a>
-  </td>
-  <td class="table-cell">
-    <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= ticket.discipline.name.titleize %> </span>
-  </td>
-
-  <td class="table-cell">
-  <% if ticket.ticket_label.present? %>
+    <td class="table-cell">
+  <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= ticket.ticket_label.user.decorate.display_name_position %> </span>
+</td>
+    <td class=" table-cell">
     <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= ticket.ticket_label.name.titleize %> </span>
-      <% end %>
-  </td>
-
+  
   <td class="table-cell">
     <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= display_created_at(ticket) %> </span>
   </td>
 
   <td class="table-cell">
-    <% if ticket.ticket_status.present? %>
-    <span class="text-<%= ticket.ticket_status.color %>-900 text-left  whitespace-nowrap ">   <%= ticket.ticket_status.name %> </span>
-   <% end %>
+    <span class="text-<%= ticket.display_status_color %>-900 text-left  whitespace-nowrap ">   <%= ticket.display_status %> </span>
   </td>
 
 </td>

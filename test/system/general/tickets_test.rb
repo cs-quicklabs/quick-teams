@@ -40,34 +40,30 @@ class TicketsTest < ApplicationSystemTestCase
     take_screenshot
   end
 
-  test "can create a new ticket" do
+  test "can create a new ticket if label exist" do
     visit page_url
-    discipline = disciplines(:engineering)
-    select discipline.name, from: "ticket_discipline_id"
-    sleep(10)
-    take_screenshot
-    binding.irb
-    if(discipline.ticket_labels.count > 0)
-      label = discipline.ticket_labels.first.name
-      select label, from: "ticket_ticket_label_id"
-    end
-    fill_in "ticket_title", with: "ticket"
+    if TicketLabel.all.count>0
+    label = TicketLabel.where(account: @account).first.name
+    select label, from: "ticket_ticket_label_id"
     fill_in "ticket_description", with: "This is some ticket"
     click_on "Add Ticket"
     take_screenshot
     assert_selector "p.notice", text: "Ticket was created successfully."
+    else
+      assert_text "Please add Ticket Label"
+    end
   end
 
-  test "can not create with empty Name Description discipline and label " do
+  test "can not create with empty Description and label " do
     visit page_url
     assert_selector "h1", text: "Add New Ticket"
     click_on "Add Ticket"
     take_screenshot
     assert_selector "h1", text: "Add New Ticket"
-    assert_selector "div#error_explanation", text: "Discipline must exist"
-    assert_selector "div#error_explanation", text: "Title can't be blank"
+    assert_selector "div#error_explanation", text: "Ticket label must exist"
     assert_selector "div#error_explanation", text: "Description can't be blank"
   end
+
 
   test "can edit a ticket" do
     visit page_url
@@ -76,27 +72,22 @@ class TicketsTest < ApplicationSystemTestCase
       click_on "Edit"
     end
     assert_selector "h1", text: "Edit Ticket"
-    if(@ticket.ticket_label.present?)
-      label = @ticket.discipline.ticket_labels.first.name
-      select label, from: "ticket_ticket_label_id"
-    end
-    fill_in "ticket_title", with: "ticket"
     fill_in "ticket_description", with: "This is some ticket"
     click_on "Save"
     assert_selector "p.notice", text: "Ticket was updated successfully."
   end
 
-  test "can not edit a ticket with invalid name" do
+  test "can not edit a ticket with invalid description" do
     visit page_url
     find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
     within "#ticket-header" do
       click_on "Edit"
     end
     assert_selector "h1", text: "Edit Ticket"
-    fill_in "ticket_title", with: ""
+    fill_in "ticket_description", with: ""
     click_on "Save"
     assert_selector "h1", text: "Edit Ticket"
-    assert_selector "div#error_explanation", text: "Title can't be blank"
+    assert_selector "div#error_explanation", text: "Description can't be blank"
     take_screenshot
   end
 

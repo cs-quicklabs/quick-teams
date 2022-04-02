@@ -27,12 +27,12 @@
               <table class="table">
                 <thead class="bg-gray-50">
                   <tr>
-                    <th scope="col" class="w-full table-head">
-                      Title
+                   <th scope="col" class="table-head">
+                      Description
                     </th>
-                    <th scope="col" class="px-6 table-head">
-                      Department
-                    </th>
+                       <th scope="col" class="table-head">
+                  Assigned To
+                </th>
                     <th scope="col" class="table-head">
                       Label
                     </th>
@@ -60,7 +60,6 @@
       <!-- Right column -->
       <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200 ">
         <section aria-labelledby="add-participant-section">
-          <h2 class="sr-only" id="section-2-title">Add New Ticket</h2>
           <div class="overflow-hidden bg-white">
             <div class="px-4">
               <%= render partial: "form", locals: { ticket: @ticket, title: "Add New Ticket", subtitle: "You can raise a ticket if you need anything to get your work done. The types of tickets are defined by admin." } %>
