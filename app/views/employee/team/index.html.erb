@@ -1,16 +1,44 @@
 <main class="relative z-0 flex-1  focus:outline-none">
   <%= render "employee/title", employee: @employee %>
-  <div class="px-4 sm:px-6">
-    <div class="bg-white">
-      <div class="p-4">
-        <div class="flex flex-wrap">
-          <p class="pb-2 mt-1 text-sm font-medium text-gray-900"><%= "Team Members (" + @subordinates.load.size.to_s + ")" %></p>
+  <main class="pb-8">
+    <div class="px-4 sm:px-6">
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2 ">
+          <section aria-labelledby="participants_section">
+            <div class="overflow-hidden bg-white">
+              <div class="p-4", id="project-participants">
+                <div class="flex flex-wrap">
+                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900"><%= "Team Members (" + @subordinates.load.size.to_s + ")" %></p>
+                </div>
+                <ul class="divide-y divide-gray-200 border-b">
+                  <%= render partial: "employee/team/employee", collection: @subordinates, as: :employee, cached: true %>
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
-        <ul class="divide-y divide-gray-200">
-          <%= render partial: "employee/team/employee", collection: @subordinates, as: :employee, cached: true %>
-        </ul>
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200 h-full">
+          <section aria-labelledby="add-participant-section">
+            <div class="overflow-hidden bg-white">
+              <% if @managers.count > 0 %>
+                <div class="px-4">
+                  <div class="p-4", id="project-participants">
+                    <div class="flex flex-wrap">
+                      <p class="pb-2 mt-1 text-sm font-medium text-gray-900"><%= "Team Leaders" %></p>
+                    </div>
+                    <ul class="divide-y divide-gray-200 border-b">
+                      <%= render partial: "employee/team/manager", locals: { managers: @managers } %>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </main>
 </main>

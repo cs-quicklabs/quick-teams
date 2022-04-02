@@ -80,9 +80,13 @@
                     </h3>
                     <p class="mt-2 max-w-4xl text-sm text-gray-500">Following reports are assigned to employee. </p>
                   </div>
-                  <ul class="divide-y divide-gray-200 border-b border-gray-200">
-                    <%= render partial: "template", collection: @assigns, as: :assign, cached: false %>
-                  </ul>
+                  <% if @assigns.size > 0 %>
+                    <ul class="divide-y divide-gray-200 border-b border-gray-200">
+                      <%= render partial: "template", collection: @assigns, as: :assign, cached: false %>
+                    </ul>
+                  <% else %>
+                    <p class="mt-2 max-w-4xl text-sm text-gray-500">No report found. Please contact admin if you need to assign something to this user. </p>
+                  <% end %>
                 </div>
               </div>
             </section>

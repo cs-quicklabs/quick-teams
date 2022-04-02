@@ -32,22 +32,6 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     end
   end
 
-  test "admin can assign template to employee" do
-    sign_out @employee
-    sign_in users(:super)
-    @employee = users(:member)
-    @template = templates(:one)
-    visit page_url
-    select @employee.decorate.display_name_position, from: "assignable[assignable_id]"
-    click_on "Assign"
-    assert_text @employee.decorate.display_name
-    #can see delete button for employee reports
-    @template.templates_assignees.includes(:user).each do |assign|
-      assert_selector "li##{dom_id(assign)}", text: assign.decorate.display_name
-      assert_selector "li##{dom_id(assign)}", text: "Delete"
-    end
-  end
-
   test "admin can see his own reports" do
     sign_out @employee
     sign_in users(:super)

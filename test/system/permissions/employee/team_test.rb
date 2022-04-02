@@ -48,30 +48,30 @@ class EmployeeTeamTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Team"
   end
 
-  test "member can not see team " do
+  test "member can  see team " do
     sign_out @employee
     @employee = users(:member)
     sign_in @employee
     visit page_url
-    assert_no_selector "div#employee-tabs", text: "Team"
+    assert_selector "div#employee-tabs", text: "Team"
   end
 
-  test "project manager can not see his team if he is not lead" do
+  test "project manager can see his team if he is not lead" do
     sign_out @employee
     @employee = users(:manager)
     sign_in @employee
     visit page_url
-    assert_no_selector "div#employee-tabs", text: "Team"
+    assert_selector "div#employee-tabs", text: "Team"
   end
 
-  test "project manager can not see his project participant team" do
+  test "project manager can see his project participant team" do
     sign_out @employee
     @manager = users(:manager)
     sign_in @manager
     @employee = users(:regular)
     visit page_url
     assert_selector "h1", text: @employee.decorate.display_name
-    assert_no_selector "div#employee-tabs", text: "Team"
+    assert_selector "div#employee-tabs", text: "Team"
   end
 
   test "project manager can not see team of other employee" do
@@ -80,7 +80,7 @@ class EmployeeTeamTest < ApplicationSystemTestCase
     sign_in @manager
     @employee = users(:admin)
     visit page_url
+    # manager is redirected to his own profile
     assert_selector "h1", text: @manager.decorate.display_name
-    assert_no_selector "div#employee-tabs", text: "Team"
   end
 end

@@ -39,12 +39,10 @@ class EmployeesController < BaseController
 
     employee = @form.submit(employee_params, params[:invite])
     respond_to do |format|
-      if !employee
-        format.html { redirect_to new_employee_path(@user), alert: "Failed to create user. Please try again." }
-        format.json { render json: @form.errors, status: :unprocessable_entity }
-      else
+      if employee.persisted?
         format.html { redirect_to employee_team_path(employee), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { redirect_to new_employee_path(@user), alert: "Failed to create user. Please try again." }
       end
     end
   end

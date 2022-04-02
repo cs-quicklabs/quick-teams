@@ -13,10 +13,6 @@ class TemplatesTest < ApplicationSystemTestCase
     templates_url(script_name: "/#{@account.id}")
   end
 
-  def template_detail_page_url
-    template_url(script_name: "/#{@account.id}", template_id: @template.id)
-  end
-
   test "can show index if logged in" do
     visit page_url
     take_screenshot
