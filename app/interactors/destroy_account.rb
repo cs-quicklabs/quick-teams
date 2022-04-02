@@ -7,6 +7,9 @@ class DestroyAccount < Patterns::Service
     begin
       accounts.each do |account|
         ActsAsTenant.current_tenant = account
+        account.owner = nil
+        account.save!
+        delete_projects(account)
         delete_users(account)
         account.destroy
       end
@@ -17,6 +20,10 @@ class DestroyAccount < Patterns::Service
   end
 
   private
+
+  def delete_projects(account)
+    account.projects.destroy_all
+  end
 
   def delete_users(account)
     User.where(account_id: account.id).destroy_all
