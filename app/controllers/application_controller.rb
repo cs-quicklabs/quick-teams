@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
 
   etag {
     if Rails.env == "production" or Rails.env == "staging"
-      heroku_version
+      deployment_version
     else
       current_user.permission
     end
@@ -46,8 +46,8 @@ class ApplicationController < ActionController::Base
     current_user.permission
   end
 
-  def heroku_version
-    ENV["HEROKU_RELEASE_VERSION"] if Rails.env == "production" or Rails.env == "staging"
+  def deployment_version
+    ENV["LATEST_GITHUB_COMMIT"] if Rails.env == "production" or Rails.env == "staging"
   end
 
   def after_sign_in_path_for(resource)
