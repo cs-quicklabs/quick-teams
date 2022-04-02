@@ -1,6 +1,9 @@
 <div class="col-4">
   <p class="text-sm text-gray-500 mt-4">
-    You have not selected any payment plan. To continue using the product you need to subscribe to a plan.
+    You are in trial phase of 14 days which is going to end on <%= @ends_at.nil? ? "soon": @ends_at.to_date.to_formatted_s(:long) %>. 
+  </p>
+  <p class="text-sm text-gray-500 mt-4">
+    To continue using product please subscribe to a plan.
   </p>
   <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
     <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly) %>" />
