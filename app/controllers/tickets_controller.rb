@@ -53,7 +53,7 @@ class TicketsController < BaseController
       if @ticket.errors.empty?
         format.turbo_stream { redirect_to tickets_path, notice: "Ticket was created successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Ticket.new, partial: "tickets/form", locals: { ticket: @ticket, title: "Add New Ticket" }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Ticket.new, partial: "tickets/form", locals: { ticket: @ticket, title: "Add New Ticket", subtitle: "You can raise a ticket if you need anything to get your work done. The types of tickets are defined by admin" }) }
       end
     end
   end

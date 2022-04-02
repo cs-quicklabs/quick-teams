@@ -1,8 +1,9 @@
 <%= tailwind_form_with(model: ticket, id: dom_id(ticket), url: tickets_path) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
-      <%= render "shared/form_header", title: local_assigns[:title], subtitle: local_assigns[:subtitle] %>
+   <%= render "shared/form_header", title: local_assigns[:title], subtitle: local_assigns[:subtitle] %>   
       <% @labels = TicketLabel.all %>
       <% if @labels.count>0 %>
+
     <%= render "shared/form_messages", resource: ticket, message: local_assigns[:message] %>
     <%= form.hidden_field :user_id, value: current_user.id %>
     <%= form.hidden_field :account_id, value: current_user.account.id %>
