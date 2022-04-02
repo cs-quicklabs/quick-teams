@@ -1,19 +1,19 @@
   <%= tailwind_form_with(model: ticket_label, id: dom_id(ticket_label), url: account_ticket_labels_path) do |form| %>
   <div class="space-y-6">
     <%= render "shared/form_messages", resource: ticket_label, message: local_assigns[:message] %>
-    <%= render "shared/form_header", title: "Ticket Labels", subtitle: "You can define custom label which can be applied to your team. Examples include On Bench, Deployed" %>
+    <%= render "shared/form_header", title: "Ticket Labels", subtitle: "You can define custom label which can be applied a ticket. A label can belong to a department and a person can be assigned who handles all those tickets marked with selected label." %>
     <%= form.text_field :name, "Add New label", autocomplete: "off" %>
     <div>
       <label for="discipline" class="block  text-sm font-medium text-gray-700">
-        Select Department
+        Select Discipline
       </label>
-      <%= form.collection_select("discipline_id", Discipline.order(:name), :id, :name, { :prompt => "Select Department" }, :class => "form-text-field") %>
+      <%= form.collection_select("discipline_id", Discipline.order(:name), :id, :name, { :prompt => "Select Discipline" }, :class => "form-text-field mt-1") %>
     </div>
     <div>
       <label for="assignee" class="block  text-sm font-medium text-gray-700">
         Assign To
       </label>
-      <%= form.collection_select("user_id", User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Assignee" }, :class => "form-text-field") %>
+      <%= form.collection_select("user_id", User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Assignee" }, :class => "form-text-field mt-1") %>
     </div>
     <div class="flex justify-end">
       <%= form.submit "Save", class: "btn-blue" %>

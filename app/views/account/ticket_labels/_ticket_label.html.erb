@@ -2,8 +2,8 @@
   <li class="flex py-4 border-b border-gray-200">
     <div class="flex items-center w-full ml-3">
       <p class="w-full ml-2 text-sm font-medium text-gray-900"><%= ticket_label.name.titleize %></p>
-      <p class="w-full ml-2 text-sm font-medium text-gray-900"><%= ticket_label.discipline.name.titleize %></p>
-      <p class="w-full ml-2 text-sm font-medium text-gray-900"><%= ticket_label.user.decorate.display_name.titleize %></p>
+      <p class="w-full ml-2 text-sm text-gray-900"><%= ticket_label.discipline.name.titleize %></p>
+      <p class="w-full ml-2 text-sm text-gray-900"><%= ticket_label.user.decorate.display_name.titleize %></p>
       <div class="flex justify-end space-x-2">
         <%= edit_button(edit_account_ticket_label_path(ticket_label)) %>
         <%= delete_button(account_ticket_label_path(ticket_label)) %>
