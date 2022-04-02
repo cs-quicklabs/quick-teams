@@ -20,7 +20,7 @@ class SubscriptionManager
     if payment_processor.processor == "stripe" and payment_processor.subscription.nil?
       fake_customer = Pay::Customer.where(owner_type: "User", owner_id: user.id, processor: "fake_processor").first
       if fake_customer
-        fake_subscription = Pay::Subscription.where(name: "default", customer_id: fake_customer.id)
+        fake_subscription = Pay::Subscription.where(name: "default", customer_id: fake_customer.id).last
         # he still has a fake subscription trial active
         if fake_subscription and fake_subscription.trial_ends_at > Time.zone.now
           template = "trial"
@@ -57,5 +57,15 @@ class SubscriptionManager
     end
 
     template
+  end
+
+  def trial_ends_at
+    ends_at = nil
+    fake_customer = Pay::Customer.where(owner_type: "User", owner_id: user.id, processor: "fake_processor").first
+    if fake_customer
+      fake_subscription = Pay::Subscription.where(name: "default", customer_id: fake_customer.id).last
+      ends_at = fake_subscription.trial_ends_at
+    end
+    ends_at
   end
 end
