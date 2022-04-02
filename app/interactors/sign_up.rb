@@ -33,7 +33,7 @@ class SignUp < Patterns::Service
   def seed_database
     now = Time.now
     ActsAsTenant.with_tenant(account) do
-      Discipline.create!([{ name: "Management" }, { name: "Design" }, { name: "HR" }, { name: "Development" }])
+      Discipline.create!([{ name: "Management" }, { name: "Design" }, { name: "HR" }, { name: "Development" }, { name: "Admin" }])
       Job.create!([{ name: "Admin" }, { name: "UI/UX Designer" }, { name: "Android Developer" }, { name: "Web Developer" }, { name: "HR Executive" }])
       Role.create!([{ name: "Super" }, { name: "Senior" }, { name: "Junior" }])
     end
