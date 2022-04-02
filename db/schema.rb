@@ -559,7 +559,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_092603) do
   create_table "tickets", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.bigint "ticket_label_id"
+    t.bigint "ticket_label_id", null: false
     t.bigint "user_id", null: false
     t.bigint "ticket_status_id", null: false
     t.bigint "account_id", null: false
