@@ -42,13 +42,13 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can create a new ticket if label exist" do
     visit page_url
-    if TicketLabel.all.count>0
-    label = TicketLabel.where(account: @account).first.name
-    select label, from: "ticket_ticket_label_id"
-    fill_in "ticket_description", with: "This is some ticket"
-    click_on "Add Ticket"
-    take_screenshot
-    assert_selector "p.notice", text: "Ticket was created successfully."
+    if TicketLabel.all.count > 0
+      label = TicketLabel.where(account: @account).first.name
+      select label, from: "ticket_ticket_label_id"
+      fill_in "ticket_description", with: "This is some ticket"
+      click_on "Add Ticket"
+      take_screenshot
+      assert_selector "p.notice", text: "Ticket was created successfully."
     else
       assert_text "Please add Ticket Label"
     end
@@ -63,7 +63,6 @@ class TicketsTest < ApplicationSystemTestCase
     assert_selector "div#error_explanation", text: "Ticket label must exist"
     assert_selector "div#error_explanation", text: "Description can't be blank"
   end
-
 
   test "can edit a ticket" do
     visit page_url

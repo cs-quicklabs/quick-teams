@@ -4,6 +4,12 @@ class Account::BillingController < Account::BaseController
   def index
     authorize :account, :billings?
 
-    @template = SubscriptionManager.new(current_user).template
+    subscription_manager = SubscriptionManager.new(current_user)
+    @template = subscription_manager.template
+
+    if @template == "trial"
+      @ends_at = subscription_manager.trial_ends_at
+    end
+    @template
   end
 end

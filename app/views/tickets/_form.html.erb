@@ -2,8 +2,7 @@
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
    <%= render "shared/form_header", title: local_assigns[:title], subtitle: local_assigns[:subtitle] %>   
       <% @labels = TicketLabel.all %>
-      <% if @labels.count>0 %>
-
+      <% if @labels.count > 0 %>
     <%= render "shared/form_messages", resource: ticket, message: local_assigns[:message] %>
     <%= form.hidden_field :user_id, value: current_user.id %>
     <%= form.hidden_field :account_id, value: current_user.account.id %>
@@ -14,13 +13,13 @@
           Select Label
         </label>
         <%= form.collection_select("ticket_label_id", @labels, :id, :name, { :prompt => "Select labels" }, :class => "form-text-field mt-1",
-                                                                                                                   data: { select_target: "select" }) %>
+                                                                                                           data: { select_target: "select" }) %>
       </div>
     </div>
     <div class="flex justify-end">
       <%= form.submit "Add Ticket", class: "btn-blue" %>
     </div>
-    <% else%>
+    <% else %>
      <div>
       <p class="mt-2 text-xs text-gray-500" id="question-description">Please add Ticket Label to create ticket
       New Ticket Labels can be added from 

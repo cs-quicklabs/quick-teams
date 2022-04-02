@@ -16,8 +16,8 @@ class TicketsController < BaseController
 
   def show
     authorize [@ticket]
-    @statuses = TicketStatus.all-[@ticket.ticket_status]
-    @status_count = (@statuses.pluck(:id)-[@ticket.ticket_status_id]).count
+    @statuses = TicketStatus.all - [@ticket.ticket_status]
+    @status_count = (@statuses.pluck(:id) - [@ticket.ticket_status_id]).count
     @comment = Comment.new
     fresh_when [@ticket] + @ticket.comments
   end
@@ -48,7 +48,7 @@ class TicketsController < BaseController
 
   def create
     authorize :ticket
-    @ticket = AddTicket.call(ticket_params,current_user).result
+    @ticket = AddTicket.call(ticket_params, current_user).result
     respond_to do |format|
       if @ticket.errors.empty?
         format.turbo_stream { redirect_to tickets_path, notice: "Ticket was created successfully." }
