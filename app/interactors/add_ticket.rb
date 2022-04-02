@@ -6,6 +6,7 @@ class AddTicket < Patterns::Service
   end
 
   def call
+  
     begin
       add_ticket
       send_email
@@ -22,12 +23,12 @@ class AddTicket < Patterns::Service
   end
 
   def send_email
-    TicketsMailer.with(actor: actor, employee: ticket.owner, ticket: ticket).added_email.deliver_later if deliver_email?
+    TicketsMailer.with(ticket: ticket).deliver_email.deliver_later if deliver_email?
   end
 
   def deliver_email?
     actor != ticket.ticket_label and ticket.ticket_label.user.email_enabled and
-    ticket.ticket_label.user.account.email_enabled and ticket.ticket_label.userowner.sign_in_count > 0
+    ticket.ticket_label.user.account.email_enabled and ticket.ticket_label.user.sign_in_count > 0
   end
 
   attr_reader :project, :ticket, :actor, :params
