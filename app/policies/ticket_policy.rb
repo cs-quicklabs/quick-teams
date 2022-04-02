@@ -63,8 +63,8 @@ class TicketPolicy < ApplicationPolicy
 
   def comment?
     ticket = record.first
-    @user.admin?
-    return true if ticket.user_id == @user.id or ticket.ticket_label.user @user.id
+     return true if @user.admin?
+    return true if ticket.user_id == @user.id or ticket.ticket_label.user == @user
   end
 
   def new?

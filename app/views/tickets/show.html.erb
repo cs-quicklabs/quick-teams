@@ -19,10 +19,12 @@
             <%= confirm_button(ticket_path(@ticket), @ticket.ticket_status.name, "Are you sure you want to update status", "cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-l-md text-#{@ticket.ticket_status.color}-700 bg-#{@ticket.ticket_status.color}-100 border border-#{@ticket.ticket_status.color}-300  hover:bg-#{@ticket.ticket_status.color}-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-#{@ticket.ticket_status.color}-500 focus:border-#{@ticket.ticket_status.color}-500") %>
                            <span class="relative block -ml-px">
                 <button data-action="click->dropdown#toggle click@window->dropdown#hide"  type="button"  value="Submit" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-<%= @ticket.ticket_status.color %>-500 rounded-r-md bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300  hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-<%= @ticket.ticket_status.color %>-500" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
+                   </span>
               <% else %>
                 <%= confirm_button(ticket_path(@ticket), "Update Status ", "Are you sure you want to update status", "cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-l-md text-gray-700 bg-gray-100 border border-gray-300  hover:bg-gray-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-gray-500 focus:border-gray-500") %>
-                              <span class="relative block -ml-px">
+                      <span class="relative block -ml-px">
                 <button data-action="click->dropdown#toggle click@window->dropdown#hide"  type="button"  value="Submit" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 rounded-r-md bg-gray-100 border border-gray-300  hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
+               </span>
                <% end %>
             <% if @status_count > 0 %>
                   <span class="sr-only">Open options</span>
@@ -36,12 +38,12 @@
                     <% @statuses.each do |status| %>
                       <li  data-reflex="click->TicketStatus#change" data-ticket-id="<%= @ticket.id %>" data-status-id="<%= status.id %>" class= "cursor-pointer bg-white block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-50" ><%= status.name %> </li>
                     <% end %>
-                 <% end %>  
-                    <% end %>
+          
                   </div>
                 </div>
-              </span>
-            </span>
+                </span>
+                   <% end %>  
+                    <% end %>
           </div> 
       </div>
     </div>
