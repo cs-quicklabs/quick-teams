@@ -6,7 +6,6 @@ class AddTicket < Patterns::Service
   end
 
   def call
-  
     begin
       add_ticket
       send_email
