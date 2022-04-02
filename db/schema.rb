@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_22_031640) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_02_062940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -562,7 +562,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_22_031640) do
     t.string "title"
     t.string "description"
     t.bigint "ticket_label_id"
-    t.bigint "discipline_id", null: false
     t.bigint "user_id", null: false
     t.bigint "ticket_status_id"
     t.bigint "account_id", null: false
@@ -570,7 +569,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_22_031640) do
     t.datetime "updated_at", null: false
     t.boolean "ticketstatus", default: false, null: false
     t.index ["account_id"], name: "index_tickets_on_account_id"
-    t.index ["discipline_id"], name: "index_tickets_on_discipline_id"
     t.index ["ticket_label_id"], name: "index_tickets_on_ticket_label_id"
     t.index ["ticket_status_id"], name: "index_tickets_on_ticket_status_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
@@ -717,7 +715,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_22_031640) do
   add_foreign_key "ticket_labels", "users"
   add_foreign_key "ticket_statuses", "accounts"
   add_foreign_key "tickets", "accounts"
-  add_foreign_key "tickets", "disciplines"
   add_foreign_key "tickets", "ticket_labels"
   add_foreign_key "tickets", "ticket_statuses"
   add_foreign_key "tickets", "users"

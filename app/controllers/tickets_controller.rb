@@ -46,7 +46,7 @@ class TicketsController < BaseController
 
   def create
     authorize :ticket
-    @ticket = Ticket.create(ticket_params)
+    @ticket = AddTicket.call(ticket_params,current_user).result
     respond_to do |format|
       if @ticket.errors.empty?
         format.turbo_stream { redirect_to tickets_path, notice: "Ticket was created successfully." }
@@ -101,7 +101,7 @@ class TicketsController < BaseController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:ticket_label_id, :title, :description, :user_id, :account_id, :discipline_id, :ticket_status_id)
+    params.require(:ticket).permit(:ticket_label_id, :title, :description, :user_id, :account_id)
   end
 
   def comment_params
