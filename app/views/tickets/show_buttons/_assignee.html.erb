@@ -13,7 +13,7 @@
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </button>
-            <% elsif  (ticket.ticket_status.present? &&  status_count = 0) %>
+            <% elsif  (ticket.ticket_status.present? &&  status_count == 0) %>
                 <span class=" relative  items-center px-4 py-2 text-sm font-medium rounded-md text-<%= @ticket.ticket_status.color %>-700 bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300  hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-#<%= @ticket.ticket_status.color %>-500" >
                      <%= @ticket.ticket_status.name.upcase_first %>
                 </span>

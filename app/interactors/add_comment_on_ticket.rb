@@ -2,16 +2,23 @@ class AddCommentOnTicket < Patterns::Service
   def initialize(params, ticket, method, actor)
     @comment = Comment.new(params)
     @ticket = ticket
-    @employee = ticket.user
+  
     @method = method
     @actor = actor
+    if (actor==ticket.user)
+      @employee = ticket.ticket_label.user
+    else
+      @employee = ticket.user
+    end
   end
 
-  def call
+  def call    
+  
     begin
       add_comment
       update_ticket
       send_email
+
     rescue
       comment
     end
@@ -32,8 +39,7 @@ class AddCommentOnTicket < Patterns::Service
   end
 
   def send_email
-    return unless ticket.ticketable_type == "User"
-    CommentsMailer.with(actor: actor, employee: employee, ticket: ticket).commented_email.deliver_later if deliver_email?
+    CommentsMailer.with(actor: actor, employee: employee, ticket: ticket).commented_ticket.deliver_later if deliver_email?
   end
 
   def deliver_email?

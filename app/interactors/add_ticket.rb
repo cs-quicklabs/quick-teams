@@ -3,12 +3,13 @@ class AddTicket < Patterns::Service
     @ticket = Ticket.new params
     @actor = actor
     @params = params
+   @label = ticket.ticket_label
   end
 
   def call
     begin
       add_ticket
-      send_email
+    send_email
     rescue
       ticket
     end
@@ -19,16 +20,17 @@ class AddTicket < Patterns::Service
 
   def add_ticket
     ticket.save!
+    @assignee =  TicketLabel.find(@label.id).user
   end
 
   def send_email
-    TicketsMailer.with(ticket: ticket).deliver_email.deliver_later if deliver_email?
+    TicketsMailer.with(ticket: ticket, assignee: @assignee, actor: actor).deliver_email.deliver_later if deliver_email?
   end
 
   def deliver_email?
-    actor != ticket.ticket_label and ticket.ticket_label.user.email_enabled and
+    actor != @assignee and ticket.ticket_label.user.email_enabled and
     ticket.ticket_label.user.account.email_enabled and ticket.ticket_label.user.sign_in_count > 0
   end
 
-  attr_reader :project, :ticket, :actor, :params
+  attr_reader  :ticket, :actor, :params
 end
