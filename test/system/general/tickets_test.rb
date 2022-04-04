@@ -34,17 +34,19 @@ class TicketsTest < ApplicationSystemTestCase
   test "can show ticket detail page" do
     visit page_url
     find("tr", id: dom_id(@ticket)).click_link(@ticket.description)
+    if(@ticket.user==@user)
     within "#ticket-header" do
       assert_text "Edit"
       assert_text "Delete"
     end
+  end
     take_screenshot
   end
 
   test "can create a new ticket if label exist" do
     visit page_url
     if TicketLabel.all.count > 0
-      label = TicketLabel.where(account: @account).first.name
+      label = TicketLabel.all.first.name
       select label, from: "ticket_ticket_label_id"
       fill_in "ticket_description", with: "This is some ticket"
       assert_emails 1 do
@@ -128,9 +130,9 @@ class TicketsTest < ApplicationSystemTestCase
     find("tr", id: dom_id(ticket)).click_link(ticket.description)
     fill_in "comment", with: "This is completed"
     click_on "option-menu-button"
-    click_on "and mark Completed"
+    click_on "and mark Closed"
     assert_selector "ul#comments", text: "This is completed"
-    assert_selector "p", text: "This ticket was marked as complete."
+    assert_selector "p", text: "This ticket was marked as closed"
     take_screenshot
   end
 
