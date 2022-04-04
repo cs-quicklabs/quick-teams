@@ -21,8 +21,16 @@ class TicketsTest < ApplicationSystemTestCase
   test "can show index if logged in" do
     visit page_url
     take_screenshot
+    if(@user.admin? or @ticket.ticket_label.user==@user)
     assert_selector "h1", text: "Tickets"
+    assert_text "Open Tickets"
     assert_selector "form#new_ticket"
+    else
+      assert_selector "h1", text: "Tickets"
+      assert_no_text "Open Tickets"
+      assert_selector "form#new_ticket"
+    end
+
   end
 
   test "can not show index if not logged in" do
@@ -34,12 +42,29 @@ class TicketsTest < ApplicationSystemTestCase
   test "can show ticket detail page" do
     visit page_url
     find("tr", id: dom_id(@ticket)).click_link(@ticket.description)
-    if(@ticket.user==@user)
     within "#ticket-header" do
+    if(@ticket.user==@user)
       assert_text "Edit"
       assert_text "Delete"
+    else
+      assert_text "Update Status"
     end
   end
+    take_screenshot
+  end
+
+  test "admin or assignee can change ticket status" do
+    visit page_url
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.description)
+    status=ticket_statuses(:three)
+    within "#ticket-header" do
+    if(@user.admin? or @ticket.ticket_label.user==@user)
+      assert_text "Update Status"
+      click_on "option-menu-button1"
+      find("li", id:dom_id(status)).click
+    end
+  end
+  assert_text status.name
     take_screenshot
   end
 
