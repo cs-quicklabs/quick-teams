@@ -4,7 +4,7 @@ class Account::TagsController < Account::BaseController
   def index
     authorize :account
 
-    @tags = Tag.all.order(created_at: :desc)
+    @tags = Tag.all.order(:name).order(created_at: :desc)
   end
 
   def destroy

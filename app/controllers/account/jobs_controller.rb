@@ -3,7 +3,7 @@ class Account::JobsController < Account::BaseController
 
   def index
     authorize :account
-    @jobs = Job.all.order(created_at: :desc)
+    @jobs = Job.all.order(:name).order(created_at: :desc)
     @job = Job.new
   end
 

@@ -4,7 +4,7 @@ class Account::RolesController < Account::BaseController
   def index
     authorize :account
 
-    @roles = Role.all.order(created_at: :desc)
+    @roles = Role.all.order(:name).order(created_at: :desc)
     @role = Role.new
   end
 
