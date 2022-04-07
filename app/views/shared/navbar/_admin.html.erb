@@ -1,7 +1,6 @@
 <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
   <div class="flex items-center flex-shrink-0">
-    <img class="block w-auto h-8 lg:hidden" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
-    <img class="hidden w-auto h-8 lg:block" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow">
+    <%= image_tag "logo.svg" %>
   </div>
   <div class="hidden sm:block sm:ml-6">
     <div class="flex space-x-2">
@@ -20,7 +19,6 @@
       <% if policy(:reports).index? %>
         <a href=<%= reports_path %> class= "<%= current_page?(reports_path) ? "nav-selected" : "nav-unselected" %>">Reports</a>
       <% end %>
-     
       <%= render "shared/navbar/dropdown" %>
     </div>
   </div>
