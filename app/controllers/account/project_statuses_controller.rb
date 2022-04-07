@@ -4,7 +4,7 @@ class Account::ProjectStatusesController < Account::BaseController
   def index
     authorize :account
 
-    @project_statuses = ProjectStatus.all.order(created_at: :desc)
+    @project_statuses = ProjectStatus.all.order(:name).order(created_at: :desc)
     @project_status = ProjectStatus.new
   end
 

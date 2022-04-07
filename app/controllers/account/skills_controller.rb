@@ -4,7 +4,7 @@ class Account::SkillsController < Account::BaseController
   def index
     authorize :account
 
-    @skills = Skill.all.order("lower(name) ASC")
+    @skills = Skill.all.order(:name).order("lower(name) ASC")
     @skill = Skill.new
   end
 

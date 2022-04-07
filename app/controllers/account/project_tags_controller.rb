@@ -4,7 +4,7 @@ class Account::ProjectTagsController < Account::BaseController
   def index
     authorize :account
 
-    @project_tags = ProjectTag.all.order(created_at: :desc)
+    @project_tags = ProjectTag.all.order(:name).order(created_at: :desc)
     @project_tag = ProjectTag.new
   end
 

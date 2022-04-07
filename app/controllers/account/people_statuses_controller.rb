@@ -4,7 +4,7 @@ class Account::PeopleStatusesController < Account::BaseController
   def index
     authorize :account
 
-    @people_statuses = PeopleStatus.all.order(created_at: :desc)
+    @people_statuses = PeopleStatus.all.order(:name).order(created_at: :desc)
     @people_status = PeopleStatus.new
   end
 

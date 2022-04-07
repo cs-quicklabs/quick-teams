@@ -4,7 +4,7 @@ class Account::TicketLabelsController < Account::BaseController
   def index
     authorize :account
 
-    @ticket_labels = TicketLabel.all.includes(:user, :discipline).order(created_at: :desc)
+    @ticket_labels = TicketLabel.all.includes(:user, :discipline).order(:name).order(created_at: :desc)
     @ticket_label = TicketLabel.new
   end
 

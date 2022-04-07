@@ -4,7 +4,7 @@ class Account::PeopleTagsController < Account::BaseController
   def index
     authorize :account
 
-    @people_tags = PeopleTag.all.order(created_at: :desc)
+    @people_tags = PeopleTag.all.order(:name).order(created_at: :desc)
     @people_tag = PeopleTag.new
   end
 

@@ -4,7 +4,7 @@ class Account::DisciplinesController < Account::BaseController
   def index
     authorize :account
 
-    @disciplines = Discipline.all.order(created_at: :desc)
+    @disciplines = Discipline.all.order(:name).order(created_at: :desc)
     @discipline = Discipline.new
   end
 

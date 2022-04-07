@@ -4,7 +4,7 @@ class Account::TicketStatusesController < Account::BaseController
   def index
     authorize :account
 
-    @ticket_statuses = TicketStatus.all.order(created_at: :desc)
+    @ticket_statuses = TicketStatus.all.order(:name).order(created_at: :desc)
     @ticket_status = TicketStatus.new
   end
 
