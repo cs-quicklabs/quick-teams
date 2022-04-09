@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class TicketsTest < ApplicationSystemTestCase
+  include ActionMailer::TestHelper
   setup do
     @user = users(:regular)
     @account = @user.account
@@ -13,15 +14,22 @@ class TicketsTest < ApplicationSystemTestCase
     tickets_url(script_name: "/#{@account.id}")
   end
 
-  def tickets_page_url
-    tickets_url(script_name: "/#{@account.id}", ticket_id: @ticket.id)
+  def ticket_detail_page_url
+    ticket_url(script_name: "/#{@account.id}", id: @ticket.id)
   end
 
   test "can show index if logged in" do
     visit page_url
     take_screenshot
-    assert_selector "h1", text: "Tickets"
-    assert_selector "form#new_ticket"
+    if (@user.admin? or @ticket.ticket_label.user == @user)
+      assert_selector "h1", text: "Tickets"
+      assert_text "Open Tickets"
+      assert_selector "form#new_ticket"
+    else
+      assert_selector "h1", text: "Tickets"
+      assert_no_text "Open Tickets"
+      assert_selector "form#new_ticket"
+    end
   end
 
   test "can not show index if not logged in" do
@@ -32,21 +40,43 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can show ticket detail page" do
     visit page_url
-    find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.description)
     within "#ticket-header" do
-      assert_text "Edit"
-      assert_text "Delete"
+      if (@ticket.user == @user)
+        assert_text "Edit"
+        assert_text "Delete"
+      else
+        assert_text "Update Status"
+      end
     end
+    take_screenshot
+  end
+
+  test "admin or assignee can change ticket status" do
+    visit page_url
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.description)
+    status = ticket_statuses(:three)
+    within "#ticket-header" do
+      if (@user.admin? or @ticket.ticket_label.user == @user)
+        assert_text "Update Status"
+        click_on "option-menu-button1"
+        find("li", id: dom_id(status)).click
+      end
+    end
+    assert_text status.name
     take_screenshot
   end
 
   test "can create a new ticket if label exist" do
     visit page_url
     if TicketLabel.all.count > 0
-      label = TicketLabel.where(account: @account).first.name
+      label = TicketLabel.all.first.name
       select label, from: "ticket_ticket_label_id"
       fill_in "ticket_description", with: "This is some ticket"
-      click_on "Add Ticket"
+      assert_emails 1 do
+        click_on "Add Ticket"
+        sleep(0.5)
+      end
       take_screenshot
       assert_selector "p.notice", text: "Ticket was created successfully."
     else
@@ -66,7 +96,7 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can edit a ticket" do
     visit page_url
-    find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.description)
     within "#ticket-header" do
       click_on "Edit"
     end
@@ -78,7 +108,7 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can not edit a ticket with invalid description" do
     visit page_url
-    find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.description)
     within "#ticket-header" do
       click_on "Edit"
     end
@@ -92,7 +122,7 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can delete ticket" do
     visit page_url
-    find("tr", id: dom_id(@ticket)).click_link(@ticket.title)
+    find("tr", id: dom_id(@ticket)).click_link(@ticket.description)
     within "#ticket-header" do
       page.accept_confirm do
         click_on "Delete"
@@ -100,5 +130,33 @@ class TicketsTest < ApplicationSystemTestCase
     end
     take_screenshot
     assert_selector "p.notice", text: "Ticket was removed successfully."
+  end
+
+  test "can comment on ticket" do
+    sign_out @user
+    @employee = @ticket.ticket_label.user
+    sign_in @employee
+    visit ticket_detail_page_url
+    fill_in "comment", with: "This is a comment"
+    assert_emails 1 do
+      click_on "Comment"
+      sleep(0.5)
+    end
+    assert_selector "ul#comments", text: "This is a comment"
+    assert_text "Edit"
+    assert_text "Delete"
+    take_screenshot
+  end
+
+  test "can complete ticket" do
+    visit page_url
+    ticket = @user.tickets.first
+    find("tr", id: dom_id(ticket)).click_link(ticket.description)
+    fill_in "comment", with: "This is completed"
+    click_on "option-menu-button"
+    click_on "and mark Closed"
+    assert_selector "ul#comments", text: "This is completed"
+    assert_selector "p", text: "This ticket was marked as closed"
+    take_screenshot
   end
 end

@@ -29,12 +29,7 @@ class TicketPolicy < ApplicationPolicy
 
   def change_status?
     ticket = record.first
-    return true if (user.admin? or ticket.ticket_label.user_id == @user.id) and !ticket.ticketstatus?
-  end
-
-  def show_status?
-    ticket = record.first
-    return true if ticket.user_id == @user.id and !user.admin? and !ticket.ticketstatus? and ticket.ticket_status.present?
+    return true if (user.admin? or ticket.ticket_label.user_id == @user.id) and !ticket.ticketstatus? and TicketStatus.all.count > 1
   end
 
   def edit?

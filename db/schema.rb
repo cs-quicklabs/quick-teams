@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_02_092603) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_04_135940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -561,7 +561,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_092603) do
     t.string "description"
     t.bigint "ticket_label_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "ticket_status_id", null: false
+    t.integer "ticket_status_id"
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
