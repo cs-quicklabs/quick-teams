@@ -32,7 +32,6 @@ class TicketPolicy < ApplicationPolicy
     return true if (user.admin? or ticket.ticket_label.user_id == @user.id) and !ticket.ticketstatus? and TicketStatus.all.count > 1
   end
 
-
   def edit?
     return true if record.first.user_id == @user.id and !record.first.ticketstatus?
   end

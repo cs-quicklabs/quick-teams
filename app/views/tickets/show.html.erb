@@ -4,7 +4,7 @@
     <%= render partial: "title", locals: { ticket: @ticket } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
    <% if policy([@ticket]).change_status? %>
-    <%= render partial: "tickets/show_buttons/assignee", locals: { ticket: @ticket , status_count: @status_count} %>
+    <%= render partial: "tickets/show_buttons/assignee", locals: { ticket: @ticket, status_count: @status_count } %>
    <% else %>
     <%= render partial: "tickets/show_buttons/user", locals: { ticket: @ticket } %>
    <% end %>

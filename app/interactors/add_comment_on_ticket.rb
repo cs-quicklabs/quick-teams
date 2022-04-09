@@ -2,23 +2,21 @@ class AddCommentOnTicket < Patterns::Service
   def initialize(params, ticket, method, actor)
     @comment = Comment.new(params)
     @ticket = ticket
-  
+
     @method = method
     @actor = actor
-    if (actor==ticket.user)
+    if (actor == ticket.user)
       @employee = ticket.ticket_label.user
     else
       @employee = ticket.user
     end
   end
 
-  def call    
-  
+  def call
     begin
       add_comment
       update_ticket
       send_email
-
     rescue
       comment
     end

@@ -3,13 +3,13 @@ class AddTicket < Patterns::Service
     @ticket = Ticket.new params
     @actor = actor
     @params = params
-   @label = ticket.ticket_label
+    @label = ticket.ticket_label
   end
 
   def call
     begin
       add_ticket
-    send_email
+      send_email
     rescue
       ticket
     end
@@ -20,7 +20,7 @@ class AddTicket < Patterns::Service
 
   def add_ticket
     ticket.save!
-    @assignee =  TicketLabel.find(@label.id).user
+    @assignee = TicketLabel.find(@label.id).user
   end
 
   def send_email
@@ -32,5 +32,5 @@ class AddTicket < Patterns::Service
     ticket.ticket_label.user.account.email_enabled and ticket.ticket_label.user.sign_in_count > 0
   end
 
-  attr_reader  :ticket, :actor, :params
+  attr_reader :ticket, :actor, :params
 end

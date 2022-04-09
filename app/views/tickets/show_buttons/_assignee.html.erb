@@ -1,7 +1,7 @@
 <div class="flex justify-end items-center space-x-2">
     <div data-controller="dropdown" >
         <span class="relative z-0 inline-flex  shadow-sm">
-            <% if (ticket.ticket_status.present? &&  status_count > 0) %>
+            <% if (ticket.ticket_status.present? && status_count > 0) %>
                 <span class=" relative  items-center px-4 py-2 text-sm font-medium rounded-l-md text-<%= @ticket.ticket_status.color %>-700 bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300  hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-#<%= @ticket.ticket_status.color %>-500" >
                      <%= ticket.ticket_status.name.upcase_first %>
                 </span>
@@ -13,12 +13,12 @@
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </button>
-            <% elsif  (ticket.ticket_status.present? &&  status_count == 0) %>
+            <% elsif (ticket.ticket_status.present? && status_count == 0) %>
                 <span class=" relative  items-center px-4 py-2 text-sm font-medium rounded-md text-<%= @ticket.ticket_status.color %>-700 bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300  hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-#<%= @ticket.ticket_status.color %>-500" >
                      <%= @ticket.ticket_status.name.upcase_first %>
                 </span>
             <% else %>
-                <span class= "relative items-center px-4 py-2 text-sm font-medium rounded-l-md text-gray-700 bg-gray-100 border border-gray-300  hover:bg-gray-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-gray-500 focus:border-gray-500") %>
+                <span class= "relative items-center px-4 py-2 text-sm font-medium rounded-l-md text-gray-700 bg-gray-100 border border-gray-300  hover:bg-gray-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-gray-500 focus:border-gray-500")   %>
                     Update Status
                 </span>
                 <span class="relative block -ml-px">
@@ -33,7 +33,7 @@
             <div data-dropdown-target="menu" class="absolute right-0 z-10 w-56   origin-top-right bg-white  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none rounded-md" role="menu" aria-orientation="vertical" aria-labelledby="option-menu-button1" tabindex="-1">
                 <div class="py-1" role="none">
                     <% @statuses.each do |status| %>
-                      <li id=<%=dom_id(status)%> data-reflex="click->TicketStatus#change" data-ticket-id="<%= @ticket.id %>" data-status-id="<%= status.id %>" class= "cursor-pointer bg-white block w-full px-4 py-2 text-sm text-left text-<%= status.color %>-700 hover:bg-<%= status.color %>-50" ><%= status.name.upcase_first %> </li>
+                      <li id=<%= dom_id(status) %> data-reflex="click->TicketStatus#change" data-ticket-id="<%= @ticket.id %>" data-status-id="<%= status.id %>" class= "cursor-pointer bg-white block w-full px-4 py-2 text-sm text-left text-<%= status.color %>-700 hover:bg-<%= status.color %>-50" ><%= status.name.upcase_first %> </li>
                     <% end %>
                 </div>
             </div>
