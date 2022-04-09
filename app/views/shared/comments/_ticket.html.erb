@@ -30,8 +30,10 @@
             </div>
             <!-- This example requires Tailwind CSS v2.0+ -->
             <span class="relative z-0 inline-flex rounded-md shadow-sm">
-              <%= form.submit "Comment", class: "cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" %>
-              <% if policy([ticket]).edit? %>
+        <% if !policy([ticket]).edit? %>
+              <%= form.submit "Comment", class: "cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" %>
+             <% else %>
+               <%= form.submit "Comment", class: "cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" %>
                 <span class="relative block -ml-px">
                   <button data-action="click->dropdown#toggle click@window->dropdown#hide"  type="button"  value="Submit" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
                     <span class="sr-only">Open options</span>

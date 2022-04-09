@@ -3,61 +3,16 @@
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="ticket-header">
     <%= render partial: "title", locals: { ticket: @ticket } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <div class="flex justify-end items-center space-x-2">
-             <div data-controller="dropdown" >
-            <span class="relative z-0 inline-flex  shadow-sm">
-         <% if (policy([@ticket]).show_status?) %>
-              <span class="cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-<%= @ticket.ticket_status.color %>-700 bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300  hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-#<%= @ticket.ticket_status.color %>-500" >
-            <%= @ticket.ticket_status.name %>
-          </span>
-           <% end %>
-          <% if policy([@ticket]).change_status? %>
-         <% if @ticket.ticket_status.present? %>
-           <span class=" relative  items-center px-4 py-2 text-sm font-medium rounded-md text-<%= @ticket.ticket_status.color %>-700 bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300  hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-#<%= @ticket.ticket_status.color %>-500" >
-           <%= @ticket.ticket_status.name.upcase_first %>
-           </span>
-             <% if @status_count > 0 %>
-              <span class="relative block -ml-px">
-                
-               <button data-action="click->dropdown#toggle click@window->dropdown#hide"  type="button"  value="Submit" class="relative  items-center px-2 py-2 text-sm font-medium text-<%= @ticket.ticket_status.color %>-500 rounded-r-md bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300  hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-<%= @ticket.ticket_status.color %>-500" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
-              <span class="sr-only">Open options</span>
-                  <!-- Heroicon name: solid/chevron-down -->
-                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                  </svg>
-                </button>
-                <% end%>
-              <% else %>
-               <span class= "relative items-center px-4 py-2 text-sm font-medium rounded-l-md text-gray-700 bg-gray-100 border border-gray-300  hover:bg-gray-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-gray-500 focus:border-gray-500") %>
-                Update Status
-                </span>
-                   <span class="relative block -ml-px">
-                <button data-action="click->dropdown#toggle click@window->dropdown#hide"  type="button"  value="Submit" class="relative items-center px-2 py-2 text-sm font-medium text-gray-500 rounded-r-md bg-gray-100 border border-gray-300  hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500" id="option-menu-button" aria-expanded="true" aria-haspopup="true">
-                  <span class="sr-only">Open options</span>
-                  <!-- Heroicon name: solid/chevron-down -->
-                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                  </svg>
-                </button>
-                      <% end %>
-                <div data-dropdown-target="menu" class="absolute right-0 z-10 w-56   origin-top-right bg-white  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none rounded-md" role="menu" aria-orientation="vertical" aria-labelledby="option-menu-button" tabindex="-1">
-                  <div class="py-1" role="none">
-                    <% @statuses.each do |status| %>
-                      <li  data-reflex="click->TicketStatus#change" data-ticket-id="<%= @ticket.id %>" data-status-id="<%= status.id %>" class= "cursor-pointer bg-white block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-50" ><%= status.name %> </li>
-                    <% end %>
-                  </div>
-                </div>
-                </span>
-                   <% end %> 
-                    </span> 
-                    </span>
-          </div> 
-                   <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
-        <% if policy([@ticket]).edit? %>
-          <%= styled_edit_button(edit_ticket_path(@ticket), "btn-blue") %>
-          <%= styled_delete_button(ticket_path(@ticket), "btn-red") %>
-            <% end %>
-      </div>
+   <% if policy([@ticket]).change_status? %>
+    <%= render partial: "tickets/show_buttons/assignee", locals: { ticket: @ticket , status_count: @status_count} %>
+   <% else %>
+    <%= render partial: "tickets/show_buttons/user", locals: { ticket: @ticket } %>
+   <% end %>
+           <%= link_to "Back", "javascript:history.back()", class: "btn-normal ml-2" %>
+ <% if policy([@ticket]).edit? %>
+        <%= styled_edit_button(edit_ticket_path(@ticket), "btn-blue") %>
+        <%= styled_delete_button(ticket_path(@ticket), "btn-red") %>
+        <% end %>
     </div>
   </div>
   <div class="mt-4 text-sm text-gray-900 sm:px-6 lg:px-8">
