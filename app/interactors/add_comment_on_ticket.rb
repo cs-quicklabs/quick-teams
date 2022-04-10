@@ -31,7 +31,7 @@ class AddCommentOnTicket < Patterns::Service
   end
 
   def update_ticket
-    if method == "and mark Closed"
+    if method == "and mark closed"
       ticket.update_attribute("ticketstatus", true)
     end
   end
