@@ -5,7 +5,7 @@ class AddCommentOnTicket < Patterns::Service
 
     @method = method
     @actor = actor
-    if (actor == ticket.user)
+    if (actor == ticket.user or actor.admin?)
       @employee = ticket.ticket_label.user
     else
       @employee = ticket.user

@@ -29,11 +29,13 @@ class TicketPolicy < ApplicationPolicy
 
   def change_status?
     ticket = record.first
-    return true if (user.admin? or ticket.ticket_label.user_id == @user.id) and !ticket.ticketstatus? and TicketStatus.all.count > 1
+    return false if ticket.ticketstatus? and TicketStatus.all.count > 1
+    return true if user.admin? or ticket.ticket_label.user_id == @user.id
   end
 
   def edit?
-    return true if record.first.user_id == @user.id and !record.first.ticketstatus?
+    ticket = record.first
+    return true if ticket.user_id == @user.id and !ticket.ticketstatus?
   end
 
   def index?
@@ -44,9 +46,6 @@ class TicketPolicy < ApplicationPolicy
     true
   end
 
-  def labels?
-    create?
-  end
 
   def destroy?
     edit?
@@ -59,7 +58,8 @@ class TicketPolicy < ApplicationPolicy
   def comment?
     ticket = record.first
     return true if @user.admin?
-    return true if ticket.user_id == @user.id or ticket.ticket_label.user == @user
+    return true if ticket.user_id == @user.id 
+    return true if ticket.ticket_label.user == @user
   end
 
   def new?

@@ -133,9 +133,6 @@ class TicketsTest < ApplicationSystemTestCase
   end
 
   test "can comment on ticket" do
-    sign_out @user
-    @employee = @ticket.ticket_label.user
-    sign_in @employee
     visit ticket_detail_page_url
     fill_in "comment", with: "This is a comment"
     assert_emails 1 do
