@@ -151,7 +151,7 @@ class TicketsTest < ApplicationSystemTestCase
     find("tr", id: dom_id(ticket)).click_link(ticket.description)
     fill_in "comment", with: "This is completed"
     click_on "option-menu-button"
-    click_on "and mark Closed"
+    click_on "and mark closed"
     assert_selector "ul#comments", text: "This is completed"
     assert_selector "p", text: "This ticket was marked as closed"
     take_screenshot
