@@ -58,6 +58,6 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
-  config.assets.compile = false
+  config.assets.compile = true
   config.action_mailer.default_url_options = { host: "127.0.0.1" }
 end
