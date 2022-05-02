@@ -1,6 +1,7 @@
 <tr id="<%= dom_id report %>">
   <% report = report.decorate %>
   <td class=" w-full  whitespace-nowrap table-cell">
+
     <% if report.reportable_type == "User" %>
       <%= link_to report.display_title, employee_report_path(report.reportable, report), class: "truncate hover:text-gray-600 hover:underline" %>
     <% else %>

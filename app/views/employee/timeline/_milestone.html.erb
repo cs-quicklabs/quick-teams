@@ -16,10 +16,10 @@
               which does not exist anymore
             <% else %>
               titled
-              <a href="<%= project_milestone_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title) %></a>
+              <a href="<%= project_milestone_path(event.eventable, event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.title.upcase_first) %></a>
             <% end %>
             in 
-            <a href="<%= project_milestones_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name %></a>
+            <a href="<%= project_milestones_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

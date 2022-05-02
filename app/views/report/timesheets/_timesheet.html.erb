@@ -10,7 +10,7 @@
     </a>
   </td>
   <td class="w-full table-cell ">
-    <%= timesheet.description %>
+    <%= timesheet.description.upcase_first %>
   </td>
   <td class="table-cell  whitespace-nowrap">
     <%= display_date(timesheet.date) %>
@@ -19,9 +19,9 @@
     <%= timesheet.hours %>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <%= timesheet.billable %>
+    <%= timesheet.billable ? "Billable" : "Non-Billable" %>
   </td>
   <td class="table-cell  whitespace-nowrap">
-    <%= timesheet.billed %>
+    <%= timesheet.billed ? "Billable" : "Not-Billed" %>
   </td>
 </tr>

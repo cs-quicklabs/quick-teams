@@ -6,7 +6,7 @@
       </span>
       <a href="<%= project_schedules_path(project) %>" class="truncate hover:text-gray-600 hover:underline">
         <span>
-          <%= project.name %>
+          <%= project.name.titleize %>
           <span class="font-normal text-gray-500"><%= project.display_discipline %></span>
         </span>
       </a>
@@ -17,7 +17,7 @@
       <% project.project_tags.uniq.each do |tag| %>
         <a href="<%= projects_reports_path(tag: tag.id) %>" class="hover:underline">
           <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= tag.color %>-800 bg-<%= tag.color %>-100 rounded-full">
-            <%= tag.name %>
+            <%= tag.name.upcase_first %>
           </span>
         </a>
       <% end %>

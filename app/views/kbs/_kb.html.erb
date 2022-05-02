@@ -3,11 +3,11 @@
   <td class="table-cell">
     <div class="text-sm">
       <a href="<%= ensure_protocol(kb.link) %>" target="_blank"  class="font-medium text-gray-900 block hover:underline" target="_top">
-        <%= kb.document %>
+        <%= kb.document.upcase_first %>
       </a>
     </div>
     <div class="mt-1 text-sm text-gray-700">
-      <p class="line-clamp-3"><%= kb.comments %></p>
+      <p class="line-clamp-3"><%= kb.comments.upcase_first %></p>
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">

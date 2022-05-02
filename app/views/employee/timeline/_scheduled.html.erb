@@ -17,7 +17,7 @@
             </a>
             <%= event.action_for_context %>
             in
-            <a href="<%= project_schedules_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name %></a>
+            <a href="<%= project_schedules_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

@@ -8,7 +8,9 @@
   <td class="table-cell  whitespace-nowrap">
     <% if current_user.admin? && !todo.project.nil? %>
       <a href="<%= project_todos_path(todo.project) %>" class="block hover:underline">
-        <%= todo.project.name %>
+        <% if todo.project.name.present? %>
+       <%= todo.project.name.titleize %> 
+       <% end %>
       </a>
     <% end %>
   </td>
