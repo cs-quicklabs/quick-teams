@@ -2,16 +2,16 @@
   <td class="table-cell w-full">
     <% if attempt.submitted? %>
       <a class="hover:underline" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
-        <%= attempt.survey.name.upcase_first %>
+        <%= attempt.survey.name.titleize %>
       </a>
     <% else %>
       <% if attempt.participant == current_user %>
         <a class="hover:underline" href="<%= survey_attempt_path(attempt.survey, attempt) %>">
-          <%= attempt.survey.name %>
+          <%= attempt.survey.name.titleize %>
         </a>
       <% else %>
         <a class="hover:underline" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
-          <%= attempt.survey.name %>
+          <%= attempt.survey.name.titleize %>
         </a>
       <% end %>
     <% end %>

@@ -14,7 +14,7 @@
             freed  employee
             <a href="<%= employee_schedules_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
             from project
-            <a href="<%= project_schedules_path(event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.name %></a>
+            <a href="<%= project_schedules_path(event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.name.titleize %></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">

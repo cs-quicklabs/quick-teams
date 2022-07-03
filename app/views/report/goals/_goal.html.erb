@@ -2,7 +2,7 @@
   <% if goal.goalable_type == "User" %>
     <td class="w-full table-cell ">
       <a href="<%= employee_goal_path(goal.goalable, goal) %>" class="block hover:text-gray-900 hover:underline">
-        <%= highlight_hashtag(goal.title) %>
+        <%= highlight_hashtag(goal.title.upcase_first) %>
       </a>
     </td>
   <% else %>
@@ -38,7 +38,7 @@
   </td>
   <td class="table-cell  whitespace-nowrap">
     <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-<%= goal.decorate.color %>-100 text-<%= goal.decorate.color %>-800">
-      <%= goal.status %>
+      <%= goal.status.titleize %>
     </span>
   </td>
 </tr>

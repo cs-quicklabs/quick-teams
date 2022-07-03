@@ -47,16 +47,16 @@
         <!-- Somehow normal rails path are not working in stimulus reflex render so putting this hack -->
         <a class="w-full hover:underline" href="<%= "/" + Current.account.id.to_s + "/report/timesheets?" + "user_id=" + employee_stats.employee.id.to_s + "&project_id=" + contribution.project.id.to_s + "&from_date=" + employee_stats.from_date.to_s + "&to_date=" + employee_stats.to_date.to_s %>">
           <div class="w-full ml-3">
-            <p class="text-sm font-medium text-gray-500"><%= contribution.project.name %></p>
+            <p class="text-sm font-medium text-gray-500"><%= contribution.project.name.titleize %></p>
           </div>
         </a>
       <% else %>
         <div class="w-full ml-3">
-          <p class="text-sm font-medium text-gray-500"><%= contribution.project.name %></p>
+          <p class="text-sm font-medium text-gray-500"><%= contribution.project.name.titleize %></p>
         </div>
       <% end %>
       <div class="w-full ml-3">
-        <p class="text-sm font-medium text-right text-gray-500"><%= contribution.contribution %></p>
+        <p class="text-sm font-medium text-right text-gray-500"><%= contribution.contribution.titleize %></p>
       </div>
     </li>
   <% end %>

@@ -19,7 +19,7 @@
     <td class="w-2/3 table-cell ">
       <% skill_report.skills.each do |skill| %>
         <span class="mr-1 mb-2 inline-flex rounded text-left  py-0.5 pl-2.5 pr-1 text-sm font-medium bg-gray-100 text-gray-700">
-          <%= skill.name %>
+          <%= skill.name.titleize %>
         </span>
       <% end %>
     </td>

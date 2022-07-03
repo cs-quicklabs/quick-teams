@@ -1,7 +1,7 @@
 <%= turbo_frame_tag dom_id(job) do %>
   <li class="flex py-4 border-b border-gray-200">
     <div class="flex w-full ml-3">
-      <p class="w-full text-sm font-medium text-gray-900"><%= job.name %></p>
+      <p class="w-full text-sm font-medium text-gray-900"><%= job.name.titleize %></p>
       <div class="flex justify-end space-x-2">
         <%= edit_button(edit_account_job_path(job)) %>
         <%= delete_button(account_job_path(job)) %>

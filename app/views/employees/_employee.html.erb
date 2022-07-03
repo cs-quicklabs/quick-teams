@@ -40,7 +40,7 @@
     <% unless employee.status.nil? %>
       <a href="<%= employees_reports_path(status: employee.status.id) %>" class="hover:underline">
         <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= employee.status.color %>-800 bg-<%= employee.status.color %>-100 rounded-full">
-          <%= employee.status.name %>
+          <%= employee.status.name.titleize %>
         </span>
       </a>
     <% end %>

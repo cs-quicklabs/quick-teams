@@ -133,9 +133,6 @@ class TicketsTest < ApplicationSystemTestCase
   end
 
   test "can comment on ticket" do
-    sign_out @user
-    @employee = @ticket.ticket_label.user
-    sign_in @employee
     visit ticket_detail_page_url
     fill_in "comment", with: "This is a comment"
     assert_emails 1 do
@@ -154,7 +151,7 @@ class TicketsTest < ApplicationSystemTestCase
     find("tr", id: dom_id(ticket)).click_link(ticket.description)
     fill_in "comment", with: "This is completed"
     click_on "option-menu-button"
-    click_on "and mark Closed"
+    click_on "and mark closed"
     assert_selector "ul#comments", text: "This is completed"
     assert_selector "p", text: "This ticket was marked as closed"
     take_screenshot

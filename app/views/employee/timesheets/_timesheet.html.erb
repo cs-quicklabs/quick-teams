@@ -2,14 +2,14 @@
   <td class="table-cell whitespace-nowrap">
     <% if current_user.admin? %>
       <a href="<%= project_timesheets_path(timesheet.project) %>" class="block hover:underline">
-        <%= timesheet.project.name %>
+        <%= timesheet.project.name.titleize %>
       </a>
     <% else %>
-      <%= timesheet.project.name %>
+      <%= timesheet.project.name.titleize %>
     <% end %>
   </td>
   <td class="table-cell ">
-    <%= timesheet.description %>
+    <%= timesheet.description.upcase_first %>
   </td>
   <td class="table-cell whitespace-nowrap">
     <%= display_date(timesheet.date) %>

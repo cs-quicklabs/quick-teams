@@ -22,7 +22,7 @@
     <% if policy([@employee, document]).edit? %>
       <div class="flex justify-end space-x-2">
         <%= edit_button(edit_employee_document_path(@employee, document)) %>
-        <%= delete_button(employee_document_path(@employee, document.id)) %>
+        <%= delete_button(employee_document_path(@employee, document)) %>
       </div>
     <% end %>
   </td>

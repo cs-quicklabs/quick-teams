@@ -13,7 +13,7 @@
             <a href="<%= employee_team_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.display_name %></a>
             Added a risk
             for
-            <a href="<%= project_risks_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name %></a>
+            <a href="<%= project_risks_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.name.titleize %></a>
           </p>
         </div>
         <div class="text-sm text-right text-gray-500 whitespace-nowrap">
