@@ -28,8 +28,8 @@ class AddTicket < Patterns::Service
   end
 
   def deliver_email?
-    actor != @assignee and ticket.ticket_label.user.email_enabled and
-    ticket.ticket_label.user.account.email_enabled and ticket.ticket_label.user.sign_in_count > 0
+    @assignee.present? and actor != @assignee and @assignee.email_enabled and
+    @assignee.account.email_enabled and @assignee.sign_in_count > 0
   end
 
   attr_reader :ticket, :actor, :params
