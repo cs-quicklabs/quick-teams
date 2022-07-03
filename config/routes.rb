@@ -71,11 +71,7 @@ Rails.application.routes.draw do
   end
   post "/ticket/comment/:id", to: "tickets#comment", as: "ticket_comment"
   get "/ticket/open", to: "tickets#open", as: "ticket_open"
-  resources :tickets do
-    collection do
-      get :labels
-    end
-  end
+  resources :tickets 
   resources :user
   resources :comments, only: [:edit, :destroy, :update]
   resources :report_comments, only: [:create, :update]
