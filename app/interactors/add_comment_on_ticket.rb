@@ -5,7 +5,7 @@ class AddCommentOnTicket < Patterns::Service
 
     @method = method
     @actor = actor
-    if (actor == ticket.user)
+    if (actor == ticket.user or actor.admin?)
       @employee = ticket.ticket_label.user
     else
       @employee = ticket.user
@@ -31,7 +31,7 @@ class AddCommentOnTicket < Patterns::Service
   end
 
   def update_ticket
-    if method == "and mark Closed"
+    if method == "and mark closed"
       ticket.update_attribute("ticketstatus", true)
     end
   end

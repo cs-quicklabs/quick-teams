@@ -58,15 +58,6 @@ class TicketsController < BaseController
     end
   end
 
-  def labels
-    authorize Ticket
-    @target = params[:target]
-    @labels = TicketLabel.where(discipline_id: params[:discipline_id])
-    respond_to do |format|
-      format.turbo_stream
-    end
-  end
-
   def edit
     authorize [@ticket]
   end
