@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.2"
+ruby "3.1.2"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
 gem "rails", "7.0.3"
@@ -43,7 +43,7 @@ gem "image_processing", "~> 1.12"
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"
 gem "aws-sdk-s3", "~> 1.87"
-gem "bootsnap", "1.9.1", require: false
+gem "bootsnap", "1.12.0", require: false
 gem "draper"
 gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
 gem "newrelic_rpm"
