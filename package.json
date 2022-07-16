@@ -2,7 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "@hotwired/stimulus": "3.0.1",
+    "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo": "7.1.0",
     "@rails/actiontext": "6.1.4-1",
     "@rails/request.js": "0.0.6",
@@ -11,7 +11,6 @@
     "autoprefixer": "10.4.7",
     "esbuild": "0.14.49",
     "postcss": "8.4.14",
-    "stimulus": "https://github.com/stimulusreflex/stimulus/raw/master/stimulus-v3.0.0.tgz",
     "stimulus_reflex": "3.5.0-pre8",
     "tailwindcss": "3.1.6",
     "trix": "1.3.1"
