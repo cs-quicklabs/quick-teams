@@ -15,7 +15,6 @@ class AddCommentOnTicketTest < ActiveSupport::TestCase
     assert comment
     assert_equal comment.user_id, @actor.id
     ticket = @user.tickets.first
-    binding.irb
     assert_equal ticket.ticketstatus, true
   end
 end
