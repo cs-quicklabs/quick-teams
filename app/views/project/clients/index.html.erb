@@ -1,0 +1,39 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "project/title", project: @project %>
+  <main class="pb-8">
+    <div class="px-4 sm:px-6">
+      <!-- Main 3 column grid -->
+      <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+          <section aria-labelledby="client_section">
+            <div class="overflow-hidden bg-white" >
+              <div class="p-4", id="project-clients">
+                <div class="flex flex-wrap">
+                  <p class="mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Clients (" + @clients.load.size.to_s + ")" %></p>
+                </div>
+                <ul class="space-y-6" id="clients" data-infinite-scroll-target="entries">
+                  <%= render partial: "client", collection: @clients, as: :client, cached: true %>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+        <% if policy([@project, Client]).create? %>
+          <!-- Right column -->
+          <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
+            <section aria-labelledby="add-client-section">
+              <div class="bg-white">
+                <div class="px-4">
+                  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-8 z-10">
+                    <%= render partial: "form", locals: { client: @client }, cached: false %>
+                  </main>
+                </div>
+              </div>
+            </section>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </main>
+</main>

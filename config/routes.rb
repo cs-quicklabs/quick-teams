@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :kpis, module: "project", only: [:index, :show, :destroy] do
       get "stats", to: "kpis#stats", as: "stats"
     end
+    resources :clients, module: "project"
 
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
