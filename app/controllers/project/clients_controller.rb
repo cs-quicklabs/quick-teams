@@ -1,12 +1,14 @@
 class Project::ClientsController < Project::BaseController
   def index
     authorize [@project, Client]
+
     @client = Client.new
     @clients = @project.clients
   end
 
   def create
     authorize [@project, Client]
+
     @project.clients << Client.find(params[:client][:client_id])
     project_client = @project.clients.find(params[:client][:client_id])
     client = Client.new
@@ -24,6 +26,7 @@ class Project::ClientsController < Project::BaseController
 
   def destroy
     authorize [@project, Client]
+
     client = @project.clients.find(params[:id])
     @project.clients.destroy(params[:id])
     respond_to do |format|

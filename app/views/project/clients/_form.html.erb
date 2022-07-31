@@ -1,6 +1,6 @@
 <%= form_with(model: client, id: dom_id(client), url: project_clients_path(@project)) do |form| %>
   <main class="max-w-lg px-4 pt-2 pb-12 mx-auto space-y-6 lg:pb-16">
-    <%= render "shared/form_header", title: "Add New Client", subtitle: "" %>
+    <%= render "shared/form_header", title: "Add New Client", subtitle: "A full list of clients can be found under Account settings" %>
     <%= form.collection_select(:client_id, Client.where.not(id: @project.clients).order(name: :asc), :id, :display_client_name, { :prompt => "Select Client" }, :class => "form-text-field mt-4") %>
     <div class="flex justify-end mt-6">
       <%= form.submit "Add Client", class: "btn-blue" %>

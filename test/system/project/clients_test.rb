@@ -19,13 +19,18 @@ class ProjectClientsTest < ApplicationSystemTestCase
     assert_text "Project Clients"
   end
 
+  test "can not visit project if not logged in" do
+    sign_out @employee
+
+    visit page_url
+    assert_selector "h1", text: "Sign in to your account"
+  end
+
   test "can add and remove clients to project" do
     visit page_url
     assert_text "Add New Client"
     client_name = clients(:mayank)
-    sleep(0.5)
     find(:select, id: "client_client_id").find(:xpath, "option[2]").select_option
-    sleep(0.5)
     take_screenshot
     click_on "Add Client"
     assert_selector "div#project-clients", text: client_name.name
@@ -38,12 +43,5 @@ class ProjectClientsTest < ApplicationSystemTestCase
       assert_no_text client_name.name
     end
     take_screenshot
-  end
-
-  test "can not visit project if not logged in" do
-    sign_out @employee
-
-    visit page_url
-    assert_selector "h1", text: "Sign in to your account"
   end
 end
