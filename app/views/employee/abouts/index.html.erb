@@ -1,0 +1,73 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "employee/title", employee: @employee %>
+  <div class="px-4 sm:px-6">
+    <!-- Main 2 column grid -->
+    <div class="grid items-start grid-cols-1 lg:grid-cols-3">
+      <!-- Left column -->
+      <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <div class="ml-8 mt-8 mb-8">
+          <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Applicant Information</h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
+          </div>
+          <dl class="divide-y divide-gray-200">
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <span class="w-64 ml-4 text-sm font-medium text-gray-500">Full name</span>
+                <span class="w-64 ml-4 flex-grow"><%= @employee.decorate.display_name %></span>
+                <span class="w-64 ml-4"></span>
+              </dd>
+            </div>
+            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <span class="w-64 ml-4 text-sm font-medium text-gray-500">Role</span>
+                <span class="w-64 ml-4 flex-grow"><%= @employee.decorate.display_position %></span>
+                <span class="w-64 ml-4"></span>
+              </dd>
+            </div>
+            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <span class="w-64 ml-4 text-sm font-medium text-gray-500">Email address</span>
+                <span class="w-64 ml-4 flex-grow "><%= @employee.email %></span>
+                <span class="w-64 ml-4"></span>
+              </dd>
+            </div>
+            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <span class="w-64 ml-4 text-sm font-medium text-gray-500">Experience</span>
+                <turbo-frame id="experience">
+                  <div class="grid grid-cols-2 gap-4 lg:col-span-2">
+                    <span class="w-64 ml-4 text-sm"><%= @employee.experience %></span>
+                    <span class="w-64 ml-4 text-lg flex-shrink-0 btn-inline-edit"><%= link_to "Edit", employee_edit_employee_path(@employee)%></span>
+                  </div>
+                </turbo-frame>
+              </dd>
+            </div>
+            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <span class="w-64 ml-4 text-sm font-medium text-gray-500">About</span>
+                <turbo-frame id="about">
+                  <div class="grid grid-cols-2 gap-4 lg:col-span-2">
+                    <span class="w-64 ml-4 text-sm"><%= @employee.about %></span>
+                    <span class="w-64 ml-4 text-lg flex-shrink-0 btn-inline-edit"><%= link_to "Edit", employee_edit_employee_path(@employee)%></span>
+                  </div>
+                </turbo-frame>
+              </dd>
+            </div>
+            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <span class="w-64 ml-4 text-sm font-medium text-gray-500">CV</span>
+                <turbo-frame id="cv">
+                  <div class="grid grid-cols-2 gap-4 lg:col-span-2">
+                    <span class="w-64 ml-4 text-sm"><%= @employee.cv %></span>
+                    <span class="w-64 ml-4 text-lg flex-shrink-0 btn-inline-edit"><%= link_to "Edit", employee_edit_employee_path(@employee)%></span>
+                  </div>
+                </turbo-frame>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
