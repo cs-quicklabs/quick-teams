@@ -1,5 +1,4 @@
 class Project::ClientsController < Project::BaseController
-
   def index
     authorize [@project, Client]
     @client = Client.new
@@ -28,9 +27,10 @@ class Project::ClientsController < Project::BaseController
     client = @project.clients.find(params[:id])
     @project.clients.destroy(params[:id])
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(client) +
-                               turbo_stream.replace(Client.new, partial: "project/clients/form", locals: { client: Client.new }) }
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.remove(client) +
+                             turbo_stream.replace(Client.new, partial: "project/clients/form", locals: { client: Client.new })
+      }
     end
   end
-
 end

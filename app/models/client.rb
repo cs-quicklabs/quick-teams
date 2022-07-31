@@ -6,5 +6,4 @@ class Client < ApplicationRecord
   def display_client_name
     "#{name}".titleize
   end
-
 end

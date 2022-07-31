@@ -46,5 +46,4 @@ class ProjectClientsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
-
 end
