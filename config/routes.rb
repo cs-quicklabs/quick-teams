@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :kpis, module: "project", only: [:index, :show, :destroy] do
       get "stats", to: "kpis#stats", as: "stats"
     end
+    resources :clients, module: "project"
 
     get "/timeline", to: "project/timeline#index", as: "timeline"
   end
@@ -71,7 +72,7 @@ Rails.application.routes.draw do
   end
   post "/ticket/comment/:id", to: "tickets#comment", as: "ticket_comment"
   get "/ticket/open", to: "tickets#open", as: "ticket_open"
-  resources :tickets 
+  resources :tickets
   resources :user
   resources :comments, only: [:edit, :destroy, :update]
   resources :report_comments, only: [:create, :update]

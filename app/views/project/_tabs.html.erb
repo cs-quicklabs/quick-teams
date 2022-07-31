@@ -49,6 +49,11 @@
         <a href="<%= project_reports_path %>" class="<%= current_page?(project_reports_path) ? "selected-tab" : "unselected-tab" %>">
           Reports
         </a>
+        <% if current_user.admin? %>
+          <a href="<%= project_clients_path %>" class="<%= current_page?(project_clients_path) ? "selected-tab" : "unselected-tab" %>">
+            Clients
+          </a>
+        <% end %>
       </nav>
     </div>
   </div>
