@@ -319,7 +319,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stimulus-rails (1.0.4)
+    stimulus-rails (1.1.0)
       railties (>= 6.0.0)
     stimulus_reflex (3.5.0.pre8)
       cable_ready (= 5.0.0.pre8)
@@ -410,7 +410,7 @@ DEPENDENCIES
   sinatra (>= 1.3.0)
   spring
   sprockets-rails (= 3.4.2)
-  stimulus-rails (= 1.0.4)
+  stimulus-rails (= 1.1.0)
   stimulus_reflex (= 3.5.0.pre8)
   stripe (>= 2.8, < 6.0)
   turbo-rails (= 1.1.1)
