@@ -1,21 +1,20 @@
-class Employee::AboutsController < Employee::BaseController
-  before_action :set_employee, only: [:index, :edit_employee, :update_employee_about]
+class Employee::AboutController < Employee::BaseController
+  before_action :set_employee, only: [:index, :edit, :update]
 
   def index
     authorize [@employee, :about]
   end
 
-  def edit_employee
+  def edit
     authorize [@employee, :about]
-    @fields = ["experience", "about", "cv"]
   end
 
-  def update_employee_about
+  def update
     authorize [@employee, :about]
     respond_to do |format|
       if params[:user].present?
         if @employee.update("#{params[:user].keys.first}": params[:user].values.first)
-          format.html { redirect_to employee_abouts_path }
+          format.html { redirect_to employee_about_index_path }
         end
       end
     end

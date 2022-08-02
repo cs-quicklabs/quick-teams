@@ -1,11 +1,13 @@
-class User::AboutPolicy < ApplicationPolicy
+class User::AboutPolicy < User::BaseUserPolicy
   def index?
-    user.admin?
+    is_admin? or is_project_manager? or is_team_lead? or self?
   end
-  def edit_employee?
-    user.admin?
+
+  def edit?
+    index?
   end
-  def update_employee_about?
-    user.admin?
+
+  def update?
+    index?
   end
 end
