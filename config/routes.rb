@@ -48,6 +48,9 @@ Rails.application.routes.draw do
     end
 
     get "/timeline", to: "project/timeline#index", as: "timeline"
+    resources :about, module: "project", only: [:index]
+    get "/edit", to: "project/about#edit", as: "edit"
+    patch "/update", to: "project/about#update", as: "update"
   end
 
   resources :employees do

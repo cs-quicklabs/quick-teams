@@ -1,0 +1,26 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "project/title", project: @project %>
+  <div class="px-4 sm:px-6">
+    <!-- Main 2 column grid -->
+    <div class="grid items-start grid-cols-1 lg:grid-cols-3">
+      <!-- Left column -->
+      <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <div class="ml-8 mt-8 mb-8">
+          <dl class="divide-y divide-gray-200">
+            <div class="py-6 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <span class="mr-4 ml-4 text-sm font-medium text-gray-500">About</span>
+                <%= turbo_frame_tag dom_id(@project) do %>
+                  <div class="grid grid-cols-2 gap-4 lg:col-span-2">
+                    <span class="w-64 ml-4 text-sm"><%= @project.about %></span>
+                    <span class="w-64 ml-4 text-sm text-right resize rounded-md flex-shrink-0 btn-inline-edit"><%= link_to "Edit", project_edit_path(@project) %></span>
+                  </div>
+                <% end %>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
