@@ -22,6 +22,7 @@ class Project < ApplicationRecord
   has_many :participants, through: :schedules, source: :user
   has_and_belongs_to_many :project_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy
+  has_and_belongs_to_many :clients, dependent: :destroy
 
   validates_presence_of :name
 

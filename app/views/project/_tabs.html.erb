@@ -49,9 +49,14 @@
         <a href="<%= project_reports_path %>" class="<%= current_page?(project_reports_path) ? "selected-tab" : "unselected-tab" %>">
           Reports
         </a>
+        <% if current_user.admin? %>
+          <a href="<%= project_clients_path %>" class="<%= current_page?(project_clients_path) ? "selected-tab" : "unselected-tab" %>">
+            Clients
+          </a>
+        <% end %>
         <% if policy([@project, :about]).index? %>
           <a href="<%= project_about_index_path %>" class="<%= current_page?(project_about_index_path) ? "selected-tab" : "unselected-tab" %>">
-          About
+            About
           </a>
         <% end %>
       </nav>

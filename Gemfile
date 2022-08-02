@@ -3,6 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+# ruby version app is using, [https://www.ruby-lang.org/en/downloads/]
 ruby "3.1.2"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
@@ -27,7 +28,7 @@ gem "cssbundling-rails", "1.1.1"
 gem "turbo-rails", "1.1.1"
 
 # Hotwire's modest JavaScript framework [https://github.com/hotwired/stimulus-rails]
-gem "stimulus-rails", "1.0.4"
+gem "stimulus-rails", "1.1.0"
 
 # Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
 gem "stimulus_reflex", "= 3.5.0.pre8"

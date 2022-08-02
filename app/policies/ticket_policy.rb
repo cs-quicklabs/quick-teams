@@ -46,7 +46,6 @@ class TicketPolicy < ApplicationPolicy
     true
   end
 
-
   def destroy?
     edit?
   end
@@ -58,7 +57,7 @@ class TicketPolicy < ApplicationPolicy
   def comment?
     ticket = record.first
     return true if @user.admin?
-    return true if ticket.user_id == @user.id 
+    return true if ticket.user_id == @user.id
     return true if ticket.ticket_label.user == @user
   end
 
