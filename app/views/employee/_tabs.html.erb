@@ -67,6 +67,11 @@
             Reports
           </a>
         <% end %>
+        <% if policy([employee, :about]).index? %>
+          <a href="<%= employee_about_index_path %>" class="<%= current_page?(employee_about_index_path) ? "selected-tab" : "unselected-tab" %>">
+            About
+          </a>
+        <% end %>
       </nav>
     </div>
   </div>

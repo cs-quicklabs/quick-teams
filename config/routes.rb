@@ -72,6 +72,9 @@ Rails.application.routes.draw do
     get "/timeline", to: "employee/timeline#index", as: "timeline"
     get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
     post "/surveys/:survey_id/assessment", to: "employee/surveys#quick_assessment"
+    resources :about, module: "employee", only: [:index]
+    get "edit", to: "employee/about#edit", as: "edit"
+    patch "update", to: "employee/about#update", as: "update"
   end
   post "/ticket/comment/:id", to: "tickets#comment", as: "ticket_comment"
   get "/ticket/open", to: "tickets#open", as: "ticket_open"
