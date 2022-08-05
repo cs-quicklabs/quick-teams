@@ -1,0 +1,20 @@
+<% frame_id = dom_id(@employee, "#{params["attribute"]}") %>
+<%= turbo_frame_tag frame_id do %>
+  <%= form_with(model: @employee, url: employee_update_path(@employee)) do |form| %>
+    <li class="flex">
+      <div class="w-full">
+        <% if params["attribute"] == "about" %>
+          <%= form.text_area :"#{params["attribute"]}", class: "form-text-field h-24", style: "" %>
+        <% else %>
+          <%= form.text_field :"#{params["attribute"]}", class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md", style: "" %>
+        <% end %>
+      </div>
+      <div class="ml-1">
+        <%= form.submit "Save", class: "btn-blue justify-end" %>
+      </div>
+      <div class="ml-1">
+        <%= link_to "Cancel", employee_about_index_path, class: "btn-normal" %>
+      </div>
+    </li>
+  <% end %>
+<% end %>

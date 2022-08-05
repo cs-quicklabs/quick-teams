@@ -1,0 +1,27 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <%= render "employee/title", employee: @employee %>
+  <div class="px-4 sm:px-6">
+    <!-- Main 2 column grid -->
+    <div class="grid items-start grid-cols-1 lg:grid-cols-3">
+      <!-- Left column -->
+      <div class="grid grid-cols-1 col-span-2 gap-2">
+        <div class="ml-4">
+          <dl class="divide-y divide-gray-200">
+            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+              <dt class="text-sm font-medium text-gray-500">Email Address</dt>
+              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <span class="flex-grow"><%= @employee.email %></span>
+              </dd>
+            </div>
+            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+              <%= render "inline_edit", model: @employee, attribute: :experience %>
+            </div>
+            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
+              <%= render "inline_edit", model: @employee, attribute: :about %>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
