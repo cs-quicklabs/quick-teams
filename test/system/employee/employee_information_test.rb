@@ -20,7 +20,7 @@ class EmployeeInformationTest < ApplicationSystemTestCase
   test "can edit the Employee Applicant Experience" do
     visit page_url
     find("turbo-frame", id: "experience_user_#{@employee.id}").click_link("Edit")
-    fill_in "user_experience", with: '7'
+    fill_in "user_experience", with: "7"
     click_on "Save"
     take_screenshot
     sleep(0.5)
@@ -29,7 +29,7 @@ class EmployeeInformationTest < ApplicationSystemTestCase
   test "can edit the Employee Applicant About" do
     visit page_url
     find("turbo-frame", id: "about_user_#{@employee.id}").click_link("Edit")
-    fill_in "user_about", with: 'This is test description about employee'
+    fill_in "user_about", with: "This is test description about employee"
     click_on "Save"
     take_screenshot
     sleep(0.5)
@@ -38,7 +38,7 @@ class EmployeeInformationTest < ApplicationSystemTestCase
   test "can edit the Employee Applicant CV" do
     visit page_url
     find("turbo-frame", id: "cv_user_#{@employee.id}").click_link("Edit")
-    fill_in "user_cv", with: 'www.google.com'
+    fill_in "user_cv", with: "www.google.com"
     click_on "Save"
     take_screenshot
     sleep(0.5)
