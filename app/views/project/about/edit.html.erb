@@ -1,13 +1,13 @@
 <%= turbo_frame_tag dom_id(@project) do %>
   <%= form_with(model: @project, id: dom_id(@project), url: project_update_path(@project)) do |form| %>
-    <li class="flex sm:grid ml-4 sm:py-5 sm:grid-cols-3">
-      <div class="grid grid-cols-2 lg:col-span-2">
-        <%= form.text_area :about, class: "form-text-field", style: "width: 200%; height:150%" %>
+    <li class="flex">
+      <div class="w-full">
+        <%= form.text_area :about, class: "form-text-field"%>
       </div>
-      <div class="ml-4">
-        <%= form.submit "Save", class: "btn-blue mb-5 justify-end" %>
+      <div class="ml-1">
+        <%= form.submit "Save", class: "btn-blue justify-end" %>
       </div>
-      <div class="ml-4">
+      <div class="ml-1">
         <%= link_to "Cancel", project_about_index_path, class: "btn-normal" %>
       </div>
     </li>
