@@ -18,7 +18,7 @@ class ProjectAboutTest < ApplicationSystemTestCase
     @employee = users(:super)
     sign_in @employee
     visit page_url
-    assert_text "About"
+    assert_text "Edit"
   end
 
   test "project manager can see and edit about the project" do
@@ -26,7 +26,7 @@ class ProjectAboutTest < ApplicationSystemTestCase
     @employee = users(:manager)
     sign_in @employee
     visit page_url
-    assert_text "About"
+    assert_text "Edit"
   end
 
   test "lead can not edit the project detail" do
