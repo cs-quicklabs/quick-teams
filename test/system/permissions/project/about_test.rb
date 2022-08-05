@@ -29,4 +29,22 @@ class ProjectAboutTest < ApplicationSystemTestCase
     assert_text "About"
   end
 
+  test "lead can not edit the project detail" do
+    sign_out @employee
+    @employee = users(:lead)
+    sign_in @employee
+    visit page_url
+    take_screenshot
+    assert_no_text "Edit"
+  end
+
+  test "memeber can not edit the projet detail" do
+    sign_out @employee
+    @employee = users(:member)
+    sign_in @employee
+    visit page_url
+    take_screenshot
+    assert_no_text "Edit"
+  end
+
 end
