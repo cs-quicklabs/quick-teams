@@ -1,10 +1,12 @@
 <% frame_id = dom_id(model, "#{attribute}") %>
-<dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-  <span class="w-48 text-sm font-medium text-gray-500"><%= "#{attribute}".titlecase %></span>
+<dt class="text-sm font-medium text-gray-500"><%= "#{attribute}".titlecase %></dt>
+<div class="col-span-2">
   <%= turbo_frame_tag frame_id do %>
-    <div class="grid grid-cols-2 gap-4 lg:col-span-2">
-      <span class="w-64 flex-grow"><%= @employee["#{attribute}"] %></span>
-      <span class="w-64 text-sm text-right flex-shrink-0 btn-inline-edit pr-4"><%= link_to "Edit", employee_edit_path(@employee, attribute: "#{attribute}") %></span>
-    </div>
-  <% end %>
-</dd>
+    <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <span class="flex-grow"><%= @employee["#{attribute}"].to_s.capitalize %></span>
+      <span class="ml-4 flex-shrink-0">
+        <%= edit_button(employee_edit_path(@employee, attribute: "#{attribute}")) %>
+      </span>
+    </dd>
+  </div>
+<% end %>
