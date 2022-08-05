@@ -10,14 +10,14 @@
             <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
               <dt class="text-sm font-medium text-gray-500">About</dt>
               <div class="col-span-2">
-                 <%= turbo_frame_tag dom_id(@project) do %>
+                <%= turbo_frame_tag dom_id(@project) do %>
                   <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <span class="flex-grow"><%= @project.about %></span>
+                    <span class="flex-grow"><%= @project.about.capitalize %></span>
                     <span class="ml-4 flex-shrink-0">
                       <%= edit_button(project_edit_path(@project)) %>
                     </span>
                   </dd>
-                 <% end %>
+                <% end %>
               </div>
             </div>
           </dl>
