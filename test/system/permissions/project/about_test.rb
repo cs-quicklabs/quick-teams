@@ -10,7 +10,7 @@ class ProjectAboutTest < ApplicationSystemTestCase
   end
 
   def page_url
-    project_about_url(script_name: "/#{@account.id}", project_id: @project.id)
+    project_about_index_url(script_name: "/#{@account.id}", project_id: @project.id)
   end
 
   test "admin can see and edit about the project" do
