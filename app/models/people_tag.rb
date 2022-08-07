@@ -6,5 +6,5 @@ class PeopleTag < ApplicationRecord
   validates_uniqueness_to_tenant :name
 
   before_destroy { |tag| tag.users.touch_all }
-  after_create { |tag| tag.account.users.touch_all }
+  after_create { |tag| User.where(account: tag.account).touch_all }
 end

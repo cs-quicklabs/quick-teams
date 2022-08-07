@@ -11,5 +11,5 @@ class PeopleStatus < ApplicationRecord
       status.user.touch
     end
   }
-  after_create { |status| status.account.users.touch_all }
+  after_create { |status| User.where(account: status.account).touch_all }
 end
