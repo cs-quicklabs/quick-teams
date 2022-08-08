@@ -56,19 +56,19 @@ class DisciplinesTest < ApplicationSystemTestCase
     visit page_url
     discipline = disciplines(:two)
 
-    assert_selector "li", text: discipline.name
+    assert_selector "li", text: discipline.name.titleize
     page.accept_confirm do
-      find("li", text: discipline.name).click_on("Delete")
+      find("li", text: discipline.name.titleize).click_on("Delete")
     end
-    assert_no_selector "li", text: discipline.name
+    assert_no_selector "li", text: discipline.name.titleize
   end
 
   test "can edit discipline" do
     visit page_url
     discipline = disciplines(:hr)
 
-    assert_selector "li", text: discipline.name
-    find("li", text: discipline.name).click_on("Edit")
+    assert_selector "li", text: discipline.name.titleize
+    find("li", text: discipline.name.titleize).click_on("Edit")
     within "turbo-frame#discipline_#{discipline.id}" do
       fill_in "discipline_name", with: "Edited Name"
       click_on "Save"
@@ -93,11 +93,11 @@ class DisciplinesTest < ApplicationSystemTestCase
     discipline = disciplines(:hr)
     engineering = disciplines(:engineering)
 
-    assert_selector "li", text: discipline.name
-    find("li", text: discipline.name).click_on("Edit")
+    assert_selector "li", text: discipline.name.titleize
+    find("li", text: discipline.name.titleize).click_on("Edit")
     within "turbo-frame#discipline_#{discipline.id}" do
       fill_in "discipline_name", with: ""
-      fill_in "discipline_name", with: engineering.name
+      fill_in "discipline_name", with: engineering.name.titleize
       click_on "Save"
       take_screenshot
       assert_text "Name has already been taken"
