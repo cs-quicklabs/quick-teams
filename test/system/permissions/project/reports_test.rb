@@ -35,7 +35,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
     visit page_detail_url
     assert_selector "div#report-detail"
     #can comment
-    assert_selector "div#comment"
+    assert_selector "textarea#comment"
   end
 
   test "lead can not see project reports" do
@@ -87,7 +87,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
     visit page_detail_url
     assert_selector "div#report-detail"
     # can comment on report
-    assert_selector "div#comment"
+    assert_selector "textarea#comment"
   end
 
   test "manager can not see project reports of other projects" do
