@@ -107,15 +107,17 @@ class JobsTest < ApplicationSystemTestCase
   test "can not delete a job which is being used" do
     visit page_url
     job = jobs(:ios)
+    job_name = job.name.titleize
 
-    assert_selector "li", text: job.name
+    assert_selector "li", text: job_name
     page.accept_confirm do
-      find("li", text: job.name).click_on("Delete")
+      find("li", text: job_name).click_on("Delete")
     end
+
     take_screenshot
     assert_text "Unable to Delete Record"
     click_on "Cancel"
     assert_no_text "Unable to Delete Record"
-    assert_selector "li", text: job.name
+    assert_selector "li", text: job_name
   end
 end
