@@ -81,3 +81,13 @@ tweleve:
   actor: regular
   survey: user
   participant_type: User
+
+kpi:
+  participant: member
+  actor: super
+  survey: userkpi
+  submitted: true
+  winner: 'nil'
+  comment: "Test Comment"
+  score: 60
+  participant_type: User
