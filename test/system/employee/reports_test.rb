@@ -146,16 +146,16 @@ class EmployeeReportsTest < ApplicationSystemTestCase
     take_screenshot
   end
 
-  test "can comment on report" do
+  test "can self comment on report" do
     member = users(:member)
 
     visit employee_reports_url(script_name: "/#{@account.id}", employee_id: member.id)
     report = member.reports.first
     find("tr", id: dom_id(report)).click_link(report.title)
     fill_in "comment", with: "This is a comment"
-    assert_emails 1 do
+    # no email need to be send when self commenting on report
+    assert_no_emails do
       click_on "Comment"
-      sleep(0.5)
     end
     assert_selector "ul#comments", text: "This is a comment"
     assert_text "Edit"
