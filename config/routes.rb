@@ -50,8 +50,8 @@ Rails.application.routes.draw do
 
     get "/timeline", to: "project/timeline#index", as: "timeline"
     resources :about, module: "project", only: [:index]
-    get "/edit", to: "project/about#edit", as: "edit"
-    patch "/update", to: "project/about#update", as: "update"
+    get "about/edit", to: "project/about#edit", as: "edit"
+    patch "about/update", to: "project/about#update", as: "update"
   end
 
   resources :employees do
@@ -73,8 +73,8 @@ Rails.application.routes.draw do
     get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
     post "/surveys/:survey_id/assessment", to: "employee/surveys#quick_assessment"
     resources :about, module: "employee", only: [:index]
-    get "edit", to: "employee/about#edit", as: "edit"
-    patch "update", to: "employee/about#update", as: "update"
+    get "about/edit", to: "employee/about#edit", as: "edit"
+    patch "about/update", to: "employee/about#update", as: "update"
   end
   post "/ticket/comment/:id", to: "tickets#comment", as: "ticket_comment"
   get "/ticket/open", to: "tickets#open", as: "ticket_open"
