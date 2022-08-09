@@ -40,7 +40,7 @@ class ProjectTimesheetsTest < ApplicationSystemTestCase
   test "can not edit todo with invalid params" do
     visit page_url
     timesheet = @project.timesheets.last_30_days.order(date: :desc).first
-    assert_text timesheet.description
+    assert_text timesheet.description.upcase_first
     find("tr", id: dom_id(timesheet)).click_link("Edit")
     within "##{dom_id(timesheet)}" do
       fill_in "timesheet_description", with: ""
@@ -53,9 +53,9 @@ class ProjectTimesheetsTest < ApplicationSystemTestCase
   test "can edit timesheet" do
     visit page_url
     timesheet = @project.timesheets.last_30_days.order(date: :desc).first
-    assert_text timesheet.description
+    assert_text timesheet.description.upcase_first
     find("tr", id: dom_id(timesheet)).click_link("Edit")
-    description = "spent on agile process 1"
+    description = "Spent on agile process 1"
     fill_in "timesheet_description", with: description
     take_screenshot
     click_on "Edit Timesheet"

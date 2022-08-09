@@ -50,27 +50,30 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     click_on "Add Timesheet"
     assert_selector "tbody#timesheets", text: "Worked on some random project"
   end
+
   test "can not add timesheet with empty params" do
     visit page_url
     click_on "Add Timesheet"
     take_screenshot
     assert_selector "div#error_explanation", text: "Description can't be blank"
   end
+
   test "can delete timesheet" do
     travel_to "2021-04-05".to_date do
       visit page_url
       timesheet = @employee.timesheets.last_30_days.order(date: :desc).first
-      assert_text timesheet.description
+      assert_text timesheet.description.upcase_first
       page.accept_confirm do
         find("tr", id: dom_id(timesheet)).click_link("Delete")
       end
-      assert_no_selector "tbody#timesheets", text: timesheet.description
+      assert_no_selector "tbody#timesheets", text: timesheet.description.upcase_first
     end
   end
+
   test "can not edit todo with invalid params" do
     visit page_url
     timesheet = @employee.timesheets.last_30_days.order(date: :desc).first
-    assert_text timesheet.description
+    assert_text timesheet.description.upcase_first
     find("tr", id: dom_id(timesheet)).click_link("Edit")
     within "##{dom_id(timesheet)}" do
       fill_in "timesheet_description", with: ""
@@ -83,9 +86,9 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
   test "can edit timesheet" do
     visit page_url
     timesheet = @employee.timesheets.last_30_days.order(date: :desc).first
-    assert_text timesheet.description
+    assert_text timesheet.description.upcase_first
     find("tr", id: dom_id(timesheet)).click_link("Edit")
-    description = "spent on agile process 1"
+    description = "Spent on agile process 1"
     fill_in "timesheet_description", with: description
     take_screenshot
     click_on "Edit Timesheet"
