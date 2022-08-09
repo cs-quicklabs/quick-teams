@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
     if current_user.admin?
       home_path(script_name: script_name)
     elsif current_user.lead?
-      employee_schedules_path(current_user, script_name: script_name)
+      employee_team_path(current_user, script_name: script_name)
     elsif current_user.member?
       employee_schedules_path(current_user, script_name: script_name)
     else
