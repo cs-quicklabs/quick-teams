@@ -46,5 +46,4 @@ class ProjectAboutTest < ApplicationSystemTestCase
     take_screenshot
     assert_no_text "Edit"
   end
-
 end

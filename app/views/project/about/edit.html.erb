@@ -2,7 +2,7 @@
   <%= form_with(model: @project, id: dom_id(@project), url: project_update_path(@project)) do |form| %>
     <li class="flex">
       <div class="w-full">
-        <%= form.text_area :about, class: "form-text-field h-48"%>
+        <%= form.text_area :about, class: "form-text-field h-48" %>
       </div>
       <div class="ml-1">
         <%= form.submit "Save", class: "btn-blue justify-end" %>

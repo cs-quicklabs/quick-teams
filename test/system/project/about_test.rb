@@ -22,7 +22,7 @@ class ProjectAboutTest < ApplicationSystemTestCase
   test "can edit the Project About" do
     visit page_url
     find("turbo-frame").click_link("Edit")
-    fill_in "project_about", with: 'This is test description about project'
+    fill_in "project_about", with: "This is test description about project"
     click_on "Save"
     sleep(0.5)
     assert_text "This is test description about project"
@@ -35,5 +35,4 @@ class ProjectAboutTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
-
 end
