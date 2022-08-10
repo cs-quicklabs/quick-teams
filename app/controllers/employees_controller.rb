@@ -38,6 +38,7 @@ class EmployeesController < BaseController
     authorize :team
 
     employee = @form.submit(employee_params, params[:invite])
+
     respond_to do |format|
       if employee.persisted?
         format.html { redirect_to employee_team_path(employee), notice: "User was successfully created." }

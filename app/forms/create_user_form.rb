@@ -23,7 +23,7 @@ class CreateUserForm
     if valid?
       CreateUser.call(params, actor, account, invite).result
     else
-      false
+      self
     end
   end
 
