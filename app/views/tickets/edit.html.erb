@@ -1,16 +1,17 @@
 <%= tailwind_form_with(model: @ticket, id: dom_id(@ticket), url: ticket_path(@ticket)) do |form| %>
   <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16">
     <%= render "shared/form_messages", resource: @ticket, message: local_assigns[:message] %>
-    <%= render "shared/form_header", title: "Edit Ticket", subtitle: "" %>
-    <div  >
+    <%= render "shared/form_header", title: "Edit Ticket", subtitle: "Please update details of ticket to edit" %>
+    <div>
+      <%= form.text_area :description, "Description", class: "form-text-field h-24" %>
       <label for="label" class="block mt-4 text-sm font-medium text-gray-700">
         Select Label
       </label>
       <%= form.collection_select("ticket_label_id", TicketLabel.all, :id, :name, { :prompt => "Select labels" }, { :class => "form-text-field" }) %>
     </div>
   </div>
-  <%= form.text_area :description, "Description", class: "form-text-field h-24" %>
   <div class="flex justify-end">
+    <%= link_to "Cancel", "javascript:history.back()", class: "btn-normal" %>
     <%= form.submit "Save", class: "btn-blue" %>
   </div>
 </main>

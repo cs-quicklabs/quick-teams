@@ -13,7 +13,7 @@ class SurveyParticipantStatsReflex < ApplicationReflex
     color = "bg-gray-100"
     message = "No answer to this question yet from your team."
     if total_responses > 0
-      message = "Average score is #{average_score.round(1)} in #{total_responses} response(s) received from your team."
+      message = "Average score is #{average_score.round(2)} in #{total_responses} response(s) received from your team."
     end
 
     if average_score >= 8
