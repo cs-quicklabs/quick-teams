@@ -1,6 +1,8 @@
 class Project::AboutController < Project::BaseController
   def index
     authorize [@project, :about]
+
+    fresh_when [@project]
   end
 
   def edit

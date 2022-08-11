@@ -1,24 +1,21 @@
 <% ticket = ticket.decorate %>
 <tr id="<%= dom_id ticket %>">
-    <td class=" w-full table-cell">
+  <td class=" w-full table-cell">
     <a href="<%= ticket_path(ticket) %>", class="truncate hover:text-gray-600 hover:underline">
       <span class="text-gray-900 block whitespace-normal line-clamp-3"><%= ticket.description.upcase_first %></span>
     </a>
     <td class="table-cell">
-  <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= ticket.ticket_label.user.decorate.display_name %> </span>
-</td>
+      <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= ticket.ticket_label.user.decorate.display_name %> </span>
+    </td>
     <td class=" table-cell">
-    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-900  whitespace-nowrap">  <%= ticket.ticket_label.name.titleize %> </span>
-  
-  <td class="table-cell">
-    <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= display_created_at(ticket) %> </span>
-  </td>
-
-  <td class="table-cell">
-       <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= ticket.display_status_color %>-100 text-<%= ticket.display_status_color %>-800  whitespace-nowrap">
-            <%= ticket.display_status %>
-          </span>
-  </td>
-
-</td>
-</tr>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-900  whitespace-nowrap">  <%= ticket.ticket_label.name.titleize %> </span>
+      <td class="table-cell">
+        <span class="text-gray-900 text-left  whitespace-nowrap ">  <%= display_created_at(ticket) %> </span>
+      </td>
+      <td class="table-cell">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= ticket.display_status_color %>-100 text-<%= ticket.display_status_color %>-800  whitespace-nowrap">
+          <%= ticket.display_status %>
+        </span>
+      </td>
+    </td>
+  </tr>

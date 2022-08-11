@@ -3,26 +3,26 @@
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="ticket-header">
     <%= render partial: "title", locals: { ticket: @ticket } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-   <% if policy([@ticket]).change_status? %>
-    <%= render partial: "tickets/show_buttons/assignee", locals: { ticket: @ticket, status_count: @status_count } %>
-   <% else %>
-    <%= render partial: "tickets/show_buttons/user", locals: { ticket: @ticket } %>
-   <% end %>
-           <%= link_to "Back", "javascript:history.back()", class: "btn-normal ml-2" %>
- <% if policy([@ticket]).edit? %>
+      <%= link_to "Back", "javascript:history.back()", class: "btn-normal mr-2" %>
+      <% if policy([@ticket]).change_status? %>
+        <%= render partial: "tickets/show_buttons/assignee", locals: { ticket: @ticket, status_count: @status_count } %>
+      <% else %>
+        <%= render partial: "tickets/show_buttons/user", locals: { ticket: @ticket } %>
+      <% end %>
+      <% if policy([@ticket]).edit? %>
         <%= styled_edit_button(edit_ticket_path(@ticket), "btn-blue") %>
         <%= styled_delete_button(ticket_path(@ticket), "btn-red") %>
-        <% end %>
+      <% end %>
     </div>
   </div>
   <div class="mt-4 text-sm text-gray-900 sm:px-6 lg:px-8">
     <p><%= @ticket.display_body %></p>
   </div>
-  <div class="bg-white overflow-hidden">
+  <div class="bg-yellow-50 border-l-4 border-yellow-400 p-2 overflow-hidden mt-4 ml-8">
     <% if @ticket.ticket_label.present? %>
-    <div class="mt-6 text-sm sm:px-6 lg:px-8">
-      <p class="text-sm pt-4">This ticket has been assigned to <b><%= @ticket.ticket_label.user.decorate.display_name %></b></p>
-    </div>
+      <div class="text-sm">
+        <p class="text-sm">This ticket has been assigned to <b><%= @ticket.ticket_label.user.decorate.display_name_position %>.</b> Please follow up for progress update.</p>
+      </div>
     <% end %>
   </div>
   <!-- Comments-->

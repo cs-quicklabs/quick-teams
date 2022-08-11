@@ -3,6 +3,7 @@ class Employee::AboutController < Employee::BaseController
 
   def index
     authorize [@employee, :about]
+    fresh_when [@employee]
   end
 
   def edit

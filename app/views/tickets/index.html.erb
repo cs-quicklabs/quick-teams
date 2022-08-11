@@ -27,12 +27,12 @@
               <table class="table">
                 <thead class="bg-gray-50">
                   <tr>
-                   <th scope="col" class="table-head">
+                    <th scope="col" class="table-head">
                       Description
                     </th>
-                       <th scope="col" class="table-head">
-                  Assigned To
-                </th>
+                    <th scope="col" class="table-head">
+                      Assigned To
+                    </th>
                     <th scope="col" class="table-head">
                       Label
                     </th>
@@ -62,7 +62,7 @@
         <section aria-labelledby="add-participant-section">
           <div class="overflow-hidden bg-white">
             <div class="px-4">
-              <%= render partial: "form", locals: { ticket: @ticket, title: "Add New Ticket", subtitle: "You can raise a ticket if you need anything to get your work done. The types of tickets are defined by admin." } %>
+              <%= render partial: "form", locals: { ticket: @ticket, title: "Add New Ticket", subtitle: "You can raise a ticket if you need anything to get your work done. The labels of tickets tell us about the nature of problem." } %>
             </div>
           </div>
         </section>

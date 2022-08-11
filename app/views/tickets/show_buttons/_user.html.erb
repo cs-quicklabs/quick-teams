@@ -1,10 +1,10 @@
-      <div class="flex justify-end items-center space-x-2">
-        <span class="relative z-0 inline-flex  shadow-sm">
-         <% if ticket.ticket_status.present? %>
-           <span class=" relative  items-center px-4 py-2 text-sm font-medium rounded-md text-<%= @ticket.ticket_status.color %>-700 bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300  hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-#<%= @ticket.ticket_status.color %>-500" >
-           <%= ticket.ticket_status.name.upcase_first %>
-           </span>
-          <% end %> 
-        </span>
-
-      </div>
+      
+<div class="flex justify-end items-center space-x-2">
+  <span class="relative z-0 inline-flex  shadow-sm">
+    <% if ticket.ticket_status.present? %>
+      <span class=" relative  items-center px-4 py-2 text-sm font-medium rounded-md text-<%= @ticket.ticket_status.color %>-700 bg-<%= @ticket.ticket_status.color %>-100 border border-<%= @ticket.ticket_status.color %>-300  hover:bg-<%= @ticket.ticket_status.color %>-50 focus:z-10 focus:outline-none  focus:ring-1 focus:ring-<%= @ticket.ticket_status.color %>-500 focus:border-#<%= @ticket.ticket_status.color %>-500" >
+        <%= ticket.ticket_status.name.upcase_first %>
+      </span>
+    <% end %>
+  </span>
+</div>
