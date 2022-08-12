@@ -30,6 +30,21 @@ class ProjectsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Sign in to your account"
   end
 
+  test "can test the sorting" do
+    visit page_url
+    assert_selector "h1", text: "Projects"
+    assert_text "New Project"
+    assert_text "Project"
+    click_link("Project")
+    within(:xpath, "/html/body/main/main/div[2]/div/table/tbody/tr[1]/td[1]/div/a/span") do
+      assert_text "Aws in Engineering"
+    end
+    click_link("Project")
+    within(:xpath, "/html/body/main/main/div[2]/div/table/tbody/tr[1]/td[1]/div/a/span") do
+      assert_text "Zoom in Engineering"
+    end
+  end
+
   test "can show project detail page" do
     visit page_url
     click_on "#{@project.name} in #{@project.discipline.name}"
