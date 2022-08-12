@@ -14,7 +14,7 @@
                     <p class=" mt-1 text-sm font-medium text-gray-900 truncate"><%= "KPIs Questions set (" + @kpi.questions.load.size.to_s + ")" %></p>
                   </div>
                   <ul class="divide-y divide-gray-200" id="questions">
-                    <%= render partial: "shared/surveys/question", collection: @kpi.questions.order_by_category, locals: { as: :question, participant: @employee }, cached: false %>
+                    <%= render partial: "shared/surveys/question", collection: @kpi.questions.order(:question_category_id), locals: { as: :question, participant: @employee }, cached: false %>
                   </ul>
                 </div>
               </div>

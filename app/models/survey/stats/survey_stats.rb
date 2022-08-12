@@ -9,7 +9,7 @@ class Survey::Stats::SurveyStats
     total_score = 0
     total_marks = 0
     all_attempts.each do |attempt|
-      score = attempt.correct_answers.reduce(0.0) { |sum, answer| sum + answer.score }
+      score = attempt.correct_answers.reduce(0.00) { |sum, answer| sum + answer.score }
       total_score += score
       total = (attempt.answers.count * 10)
       total_marks += total

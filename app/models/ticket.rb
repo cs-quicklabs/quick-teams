@@ -10,4 +10,12 @@ class Ticket < ApplicationRecord
 
   scope :progress, -> { where(ticketstatus: :false) }
   scope :completed, -> { where(ticketstatus: :true) }
+
+  def completed?
+    ticketstatus
+  end
+
+  def in_progress?
+    !completed?
+  end
 end
