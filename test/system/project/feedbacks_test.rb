@@ -17,7 +17,6 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: "#{@project.name}"
-    assert_text "Project Feedbacks"
     assert_text "Add New Feedback"
   end
 
@@ -33,7 +32,7 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     fill_in_rich_text_area "new_feedback", with: "This is some feedback"
     click_on "Add Feedback"
     take_screenshot
-    assert_selector "ul#feedbacks", text: "Some Random Feedback Title"
+    assert_selector "tbody#feedbacks", text: "Some Random Feedback Title"
   end
 
   test "can not add feedback with empty details" do
@@ -47,7 +46,7 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
   test "can see feedback detail page" do
     visit page_url
     feedback = @project.feedbacks.first
-    find("li", id: dom_id(feedback)).click_link("Show")
+    find("tr", id: dom_id(feedback)).click_link("Show")
     assert_selector "h3", text: feedback.title
     take_screenshot
   end
@@ -56,7 +55,7 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     visit page_url
     feedback = @project.feedbacks.first
     page.accept_confirm do
-      find("li", id: dom_id(feedback)).click_link("Delete")
+      find("tr", id: dom_id(feedback)).click_link("Delete")
     end
     assert_no_text feedback.title
     take_screenshot
