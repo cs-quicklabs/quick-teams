@@ -12,13 +12,13 @@
   </td>
   <td class="table-cell whitespace-nowrap">
     <p class="line-clamp-1 ">
-    <% if current_user.admin? %>
-      <a href="<%= employee_documents_path(kb.user) %>" class="block hover:underline" target="_top">
-        <%= kb.user.display_name %>
+      <% if current_user.admin? %>
+        <a href="<%= employee_documents_path(kb.user) %>" class="block hover:underline" target="_top">
+          <%= kb.user.display_name %>
         </a>
-        <% else %>
+      <% else %>
         <%= kb.user.display_name %>
-        <% end %>
+      <% end %>
     </p>
   </td>
   <td class="table-cell whitespace-nowrap align-middle">

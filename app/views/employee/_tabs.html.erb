@@ -42,7 +42,7 @@
             Skills
           </a>
         <% end %>
-         <% if policy([employee, Nugget]).index? %>
+        <% if policy([employee, Nugget]).index? %>
           <a href="<%= employee_nuggets_path %>" class="<%= current_page?(employee_nuggets_path) ? "selected-tab" : "unselected-tab" %>">
             Nuggets
           </a>
