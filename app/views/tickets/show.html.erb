@@ -17,7 +17,7 @@
   <div class="mt-4 text-sm text-gray-900 sm:px-6 lg:px-8">
     <p><%= @ticket.decorate.display_body %></p>
   </div>
-  <% if @ticket.in_progress? %>
+  <% if @ticket.in_progress? && @ticket.ticket_label.user != current_user %>
     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-2 overflow-hidden mt-4 ml-8">
       <% if @ticket.ticket_label.present? %>
         <div class="text-sm">
