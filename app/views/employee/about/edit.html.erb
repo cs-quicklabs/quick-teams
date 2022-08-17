@@ -4,7 +4,7 @@
     <li class="flex">
       <div class="w-full">
         <% if params["attribute"] == "about" %>
-          <%= form.text_area :"#{params["attribute"]}", class: "form-text-field h-24", style: "" %>
+          <%= form.text_area :"#{params["attribute"]}", class: "form-text-field h-24 whitespace-pre-wrap", style: "" %>
         <% else %>
           <%= form.text_field :"#{params["attribute"]}", class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md", style: "" %>
         <% end %>

@@ -3,7 +3,7 @@
 <div class="col-span-2">
   <%= turbo_frame_tag frame_id do %>
     <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-      <span class="flex-grow"><%= @employee["#{attribute}"].to_s.capitalize %></span>
+      <span class="flex-grow whitespace-pre-wrap"><%= @employee["#{attribute}"].to_s.upcase_first %></span>
       <% if policy([@employee, :about]).edit? %>
         <span class="ml-4 flex-shrink-0">
           <%= edit_button(employee_edit_path(@employee, attribute: "#{attribute}")) %>
