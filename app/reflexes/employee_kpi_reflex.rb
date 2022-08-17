@@ -28,4 +28,10 @@ class EmployeeKpiReflex < ApplicationReflex
 
     morph "#stats", render(partial: "shared/surveys/kpi_stats", locals: { employee: employee, kpi: kpi, stats: stats, show_own_attempts: show_own_attempts })
   end
+
+  def view_comment
+    attempt = Survey::Attempt.find(element.dataset[:comment])
+    morph "#modal", render(partial: "shared/comment", locals: { attempt: attempt, main_button_visible: true })
+  end
+
 end
