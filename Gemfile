@@ -67,7 +67,7 @@ gem "sidekiq-scheduler"
 gem "sinatra", ">= 1.3.0", require: nil
 
 # Payments 
-gem "pay", "~> 5.0"
+gem "pay", "5.0.1"
 gem "stripe", "~> 7.0"
 
 group :development do
