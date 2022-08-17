@@ -24,6 +24,7 @@ class Report::KpisController < Report::BaseController
       end
     end
   end
+
   private
 
   def attempt_filter_params

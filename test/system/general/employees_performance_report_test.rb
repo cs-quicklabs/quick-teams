@@ -1,6 +1,5 @@
 require "application_system_test_case"
 
-
 class EmployeesPerformanceReportTest < ApplicationSystemTestCase
   setup do
     @user = users(:super)
@@ -16,7 +15,7 @@ class EmployeesPerformanceReportTest < ApplicationSystemTestCase
   end
 
   def reports_page_url
-    kpis_reports_url(script_name: "/#{@account.id}", survey_type: @survey.id, participant_id: @kpis.participant.id, from_date: '2022-01-01', to_date: '2022-12-31')
+    kpis_reports_url(script_name: "/#{@account.id}", survey_type: @survey.id, participant_id: @kpis.participant.id, from_date: "2022-01-01", to_date: "2022-12-31")
   end
 
   test "can visit the employee kpi's reports page and download pdf" do
@@ -66,5 +65,4 @@ class EmployeesPerformanceReportTest < ApplicationSystemTestCase
     sign_in @user
     assert_no_text "Reports"
   end
-
 end

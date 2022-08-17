@@ -33,5 +33,4 @@ class EmployeeKpiReflex < ApplicationReflex
     attempt = Survey::Attempt.find(element.dataset[:comment])
     morph "#modal", render(partial: "shared/comment", locals: { attempt: attempt, main_button_visible: true })
   end
-
 end

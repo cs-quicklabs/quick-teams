@@ -6,5 +6,4 @@ class ReportPolicy < Struct.new(:user, :report)
   def employees_performance_pdf?
     user.admin?
   end
-
 end

@@ -21,5 +21,4 @@ class EmployeesPerformanceReporstTest < ApplicationSystemTestCase
     assert_text "Employees KPIs Report"
     take_screenshot
   end
-
 end
