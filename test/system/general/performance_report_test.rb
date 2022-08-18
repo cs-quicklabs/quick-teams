@@ -25,18 +25,18 @@ class EmployeesPerformanceReportTest < ApplicationSystemTestCase
     click_on "Download PDF"
   end
 
-  test "View comments box" do
+  test "can view comments box" do
     visit reports_page_url
     click_on "Search"
     assert_text "Download PDF"
     sleep(0.5)
-    click_on "View Comment"
-    assert_text "Comments:"
+    click_on "View"
+    assert_text "Comment:"
     click_on "Close"
     assert_text "Employee KPIs Report"
   end
 
-  test "Download PDF button can not see if the employee is not selected" do
+  test "can not see Download PDF button if the employee is not selected" do
     visit page_url
     assert_selector "h3", text: "EMPLOYEES"
     click_on "Employees KPIs Report"
@@ -45,24 +45,5 @@ class EmployeesPerformanceReportTest < ApplicationSystemTestCase
     assert_no_text "Download PDF"
   end
 
-  test "Project Manager can not see Reports Download PDF" do
-    sign_out @user
-    @user = users(:manager)
-    sign_in @user
-    assert_no_text "Reports"
-  end
-
-  test "Lead can not see Download PDF" do
-    sign_out @user
-    @user = users(:lead)
-    sign_in @user
-    assert_no_text "Reports"
-  end
-
-  test "Member can not see Download PDF" do
-    sign_out @user
-    @user = users(:member)
-    sign_in @user
-    assert_no_text "Reports"
-  end
+  
 end

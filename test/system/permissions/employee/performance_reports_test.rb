@@ -21,4 +21,25 @@ class EmployeesPerformanceReporstTest < ApplicationSystemTestCase
     assert_text "Employees KPIs Report"
     take_screenshot
   end
+
+  test "Project Manager can not see Reports Download PDF" do
+    sign_out @employee
+    @user = users(:manager)
+    sign_in @user
+    assert_no_text "Reports"
+  end
+
+  test "Lead can not see Download PDF" do
+    sign_out @employee
+    @user = users(:lead)
+    sign_in @user
+    assert_no_text "Reports"
+  end
+
+  test "Member can not see Download PDF" do
+    sign_out @employee
+    @user = users(:member)
+    sign_in @user
+    assert_no_text "Reports"
+  end
 end
