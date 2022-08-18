@@ -3,7 +3,7 @@ class ReportPolicy < Struct.new(:user, :report)
     user.admin?
   end
 
-  def employees_performance_pdf?
+  def performance_report?
     user.admin?
   end
 end
