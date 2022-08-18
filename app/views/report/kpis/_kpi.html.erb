@@ -37,4 +37,9 @@
   <td class="table-cell whitespace-nowrap">
     <%= display_date(kpi.created_at) %>
   </td>
+  <td class="table-cell whitespace-nowrap">
+  <% if kpi.comment.present? %>
+    <button data-reflex="click->EmployeeKpi#view_comment" data-comment=<%= "#{kpi.id}" %> class="btn-inline-edit underline mt-2 text-xs" >View</button>
+  </td>
+  <% end %>
 </tr>

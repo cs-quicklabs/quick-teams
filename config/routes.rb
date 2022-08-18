@@ -153,6 +153,7 @@ Rails.application.routes.draw do
     get "/kbs", to: "report/kbs#index", as: "kbs_reports"
     get "/kpis", to: "report/kpis#index", as: "kpis_reports"
     get "/reports", to: "report/reports#index", as: "report_reports"
+    get "/kpis/performance_report", to: "report/kpis#performance_report", as: "performance_report"
   end
 
   get "/reports", to: "reports#index", as: "reports"
