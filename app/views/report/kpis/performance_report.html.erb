@@ -1,0 +1,33 @@
+<div class="d-inline-block">
+  <h2  class="mt-1 w-full font-semibold "><%= @kpis.last.participant.decorate.display_name %></h2>
+</div>
+<p class="mt-1 w-full text-sm text-gray-500">This KPI report is from <%= params[:from_date].to_s %> to <%= params[:to_date].to_s %>. Names of the reviewers are hidden for anonymity.</p>
+<div class=" pb-12 d-flex justify-content-start">
+  <div>
+    <table class="table mt-2">
+      <thead>
+        <tr class="d-flex ">
+          <th scope="col-1 px-1" style="text-align: left">#</th>
+          <th class="col-2 px-1" style="text-align: left">Date</th>
+          <th scope="col-1 px-1" style="text-align: left">Score</th>
+          <th class="col-11 px-1" style="text-align: left">Comment</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% @kpis.each_with_index do |attempt, index| %>
+          <% actor = attempt.actor.decorate %>
+          <% participant = attempt.participant.decorate %>
+          <% survey = attempt.survey %>
+          <% attempt = attempt.decorate %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= display_date(attempt.created_at) %></td>
+            <td><%= attempt.display_score %></td>
+            <td colspan="1"><%= attempt.comment %></td>
+          </tr>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
