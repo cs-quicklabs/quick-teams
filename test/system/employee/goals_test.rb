@@ -59,7 +59,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can see goal detail page" do
     visit page_url
     goal = @employee.goals.first
-    find("tr", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     assert_selector "h3", text: goal.title
     take_screenshot
   end
@@ -70,6 +70,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     page.accept_confirm do
       find("tr", id: dom_id(goal)).click_link("Delete")
     end
+    visit page_url
     assert_no_text goal.title
     take_screenshot
   end
@@ -111,7 +112,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can comment on goal" do
     visit page_url
     goal = @employee.goals.first
-    find("tr", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     fill_in "comment", with: "This is a comment"
     assert_emails 1 do
       click_on "Comment"
@@ -126,7 +127,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can complete goal" do
     visit page_url
     goal = @employee.goals.first
-    find("tr", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     fill_in "comment", with: "This is completed"
     click_on "option-menu-button"
     click_on "and mark Completed"
@@ -138,7 +139,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can miss goal" do
     visit page_url
     goal = @employee.goals.first
-    find("tr", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     fill_in "comment", with: "This is missed"
     click_on "option-menu-button"
     click_on "and mark Missed"
@@ -150,7 +151,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can discard goal" do
     visit page_url
     goal = @employee.goals.first
-    find("tr", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     fill_in "comment", with: "This is discarded"
     click_on "option-menu-button"
     click_on "and mark Discarded"

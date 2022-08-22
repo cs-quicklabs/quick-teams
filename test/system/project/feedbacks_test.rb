@@ -57,6 +57,7 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     page.accept_confirm do
       find("tr", id: dom_id(feedback)).click_link("Delete")
     end
+    visit page_url
     assert_no_text feedback.title
     take_screenshot
   end

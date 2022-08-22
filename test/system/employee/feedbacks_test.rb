@@ -45,7 +45,7 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
   test "can see feedback detail page" do
     visit page_url
     feedback = @employee.feedbacks.first
-    find("tr", id: dom_id(feedback)).click_link("Show")
+    find("tr", id: dom_id(feedback)).click_link(feedback.title)
     assert_selector "h3", text: feedback.title
     take_screenshot
   end
@@ -56,7 +56,7 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     page.accept_confirm do
       find("tr", id: dom_id(feedback)).click_link("Delete")
     end
-    puts feedback.title
+    visit page_url
     assert_no_text feedback.title
     take_screenshot
   end

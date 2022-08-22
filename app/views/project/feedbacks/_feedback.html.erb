@@ -1,11 +1,13 @@
 <tr id=<%= dom_id(feedback) %>>
   <td class="table-cell ">
     <div class="text-sm">
-      <p><%= highlight_hashtag(feedback.title.upcase_first) %></p>
+      <%= link_to feedback.title.upcase_first, project_feedback_path(@project, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <a href="#" class="font-medium text-gray-900"><%= feedback.user.decorate.display_name %></a>
+    <a href="<%= employee_team_path(feedback.user) %>" class="block hover:underline" target="_top">
+      <%= feedback.user.decorate.display_name %>
+    </a>
   </td>
   <td class="table-cell whitespace-nowrap">
     <%= display_created_at(feedback) %>

@@ -1,7 +1,7 @@
 <tr id="<%= dom_id goal %>">
   <td class="table-cell ">
     <div class="text-sm">
-      <p><%= highlight_hashtag(goal.title.upcase_first) %></p>
+      <%= link_to goal.title.upcase_first, employee_goal_path(@employee, goal), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
   </td>
   <td class="text-sm text-center">
@@ -12,16 +12,19 @@
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <a href="#" class="font-medium text-gray-900"><%= goal.user.decorate.display_name %></a>
+    <a href="<%= employee_team_path(goal.user) %>" class="block hover:underline" target="_top">
+      <%= goal.user.decorate.display_name %>
+    </a>
   </td>
   <td class="table-cell whitespace-nowrap">
     <%= display_created_at(goal) %>
   </td>
   <td class="table-cell ">
-    <%= link_to "Show", employee_goal_path(@employee, goal), class: "btn-inline-edit" %>
-    <% if policy([@employee, goal]).edit? %>
-      <%= edit_button(edit_employee_goal_path(@employee, goal)) %>
-      <%= delete_button(employee_goal_path(@employee, goal)) %>
-    <% end %>
+    <div class="flex justify-end space-x-2">
+      <% if policy([@employee, goal]).edit? %>
+        <%= edit_button(edit_employee_goal_path(@employee, goal)) %>
+        <%= delete_button(employee_goal_path(@employee, goal)) %>
+      <% end %>
+    </div>
   </td>
 </tr>

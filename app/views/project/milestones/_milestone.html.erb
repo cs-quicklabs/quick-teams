@@ -1,10 +1,10 @@
 <tr id=<%= dom_id(milestone) %>>
   <td class="table-cell ">
     <div class="text-sm">
-      <p><%= highlight_hashtag(milestone.title) %></p>
+      <%= link_to milestone.title.upcase_first, project_milestone_path(@project, milestone), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
   </td>
-  <td class="text-sm text-center">
+  <td class="table-cell text-sm">
     <div class="mt-1 text-sm text-gray-700">
      <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium <%= goal_status_color(milestone) %>">
         <%= milestone.status.to_s %>
@@ -12,14 +12,15 @@
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <a href="#" class="font-medium text-gray-900"><%= milestone.user.decorate.display_name %></a>
+    <a href="<%= employee_team_path(milestone.user) %>" class="block hover:underline" target="_top">
+      <%= milestone.user.decorate.display_name %>
+    </a>
   </td>
   <td class="table-cell whitespace-nowrap">
     <%= display_created_at(milestone) %>
   </td>
-  <td class="table-cell ">
-    <div class="mt-2 space-x-2 text-sm"  id=<%= "buttons_" + dom_id(milestone) %>>
-      <%= link_to "Show", project_milestone_path(@project, milestone), class: "btn-inline-edit pl-2" %>
+  <td class="table-cell">
+    <div class="flex justify-end space-x-2" id=<%= "buttons_" + dom_id(milestone) %>>
       <% if policy([@project, milestone]).edit? %>
         <%= edit_button(edit_project_milestone_path(@project, milestone)) %>
       <% end %>

@@ -49,7 +49,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can see milestone detail page" do
     visit page_url
     milestone = @project.milestones.first
-    find("tr", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     assert_selector "h3", text: milestone.title
     take_screenshot
   end
@@ -60,6 +60,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     page.accept_confirm do
       find("tr", id: dom_id(milestone)).click_link("Delete")
     end
+    visit page_url
     assert_no_text milestone.title
     take_screenshot
   end
@@ -100,7 +101,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can comment on milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("tr", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     fill_in "comment", with: "This is a comment"
     click_on "Comment"
     assert_selector "ul#comments", text: "This is a comment"
@@ -112,7 +113,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can complete milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("tr", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     fill_in "comment", with: "This is completed"
     click_on "option-menu-button"
     click_on "and mark Completed"
@@ -124,7 +125,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can miss milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("tr", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     fill_in "comment", with: "This is missed"
     click_on "option-menu-button"
     click_on "and mark Missed"
@@ -136,7 +137,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can discard milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("tr", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     fill_in "comment", with: "This is discarded"
     click_on "option-menu-button"
     click_on "and mark Discarded"
