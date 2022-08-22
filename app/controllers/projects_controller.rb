@@ -5,7 +5,7 @@ class ProjectsController < BaseController
     authorize :projects
 
     if (params[:column].present? && params[:direction].present?)
-      @projects = Project.all.order("#{params[:column]} #{params[:direction]}")
+      @projects = Project.where(archived: false).order("#{params[:column]} #{params[:direction]}")
     else
       @projects = policy_scope(Project)
     end

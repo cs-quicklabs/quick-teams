@@ -28,7 +28,7 @@
                   Tags
                 </th>
                 <th class="table-head">
-                  <%= sort_link(column: "billable", label: "Billed_#{@projects.map(&:billable_resources).compact.inject(0, &:+)}") %>   <%= sort_indicator if params[:column] == "billable" %>
+                  <%= sort_link(column: "billable_resources", label: "Billed_#{@projects.map(&:billable_resources).compact.inject(0, &:+)}") %>   <%= sort_indicator if params[:column] == "billable" %>
                 </th>
               <% end %>
               <th class=" table-head ">
