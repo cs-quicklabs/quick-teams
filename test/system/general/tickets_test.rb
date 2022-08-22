@@ -78,7 +78,7 @@ class TicketsTest < ApplicationSystemTestCase
         sleep(0.5)
       end
       take_screenshot
-      assert_selector "p.notice", text: "Ticket was created successfully."
+      assert_selector "p", text: "Ticket was created successfully."
     else
       assert_text "Please add Ticket Label"
     end
