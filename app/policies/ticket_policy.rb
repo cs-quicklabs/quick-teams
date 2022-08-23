@@ -23,6 +23,10 @@ class TicketPolicy < ApplicationPolicy
     TicketLabel.all.pluck(:user_id).include?(@user.id) or user.admin?
   end
 
+  def closed?
+    TicketLabel.all.pluck(:user_id).include?(@user.id) or user.admin?
+  end
+
   def create?
     true
   end

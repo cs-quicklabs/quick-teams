@@ -5,8 +5,11 @@
         <a href="<%= ticket_open_path %>" class="<%= current_page?(ticket_open_path) ? "selected-tab" : "unselected-tab" %>">
           Open Tickets
         </a>
+        <a href="<%= ticket_closed_path %>" class="<%= current_page?(ticket_closed_path) ? "selected-tab" : "unselected-tab" %>">
+          Closed Tickets
+        </a>
         <a href="<%= tickets_path %>" class="<%= current_page?(tickets_path) ? "selected-tab" : "unselected-tab" %>">
-          Tickets
+          My Tickets
         </a>
       </nav>
     </div>

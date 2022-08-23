@@ -29,9 +29,17 @@ class TicketsController < BaseController
   def open
     authorize :ticket
 
-    tickets = policy_scope(Ticket)
+    tickets = policy_scope(Ticket).where(ticketstatus: false)
     @pagy, @tickets = pagy_nil_safe(params, tickets, items: 20)
-    render_partial("tickets/ticket", collection: @tickets, cached: true) if stale?(@tickets)
+    render_partial("tickets/open_ticket", collection: @tickets, cached: true) if stale?(@tickets)
+  end
+
+  def closed
+    authorize :ticket
+
+    tickets = policy_scope(Ticket).where(ticketstatus: true)
+    @pagy, @tickets = pagy_nil_safe(params, tickets, items: 20)
+    render_partial("tickets/closed_ticket", collection: @tickets, cached: true) if stale?(@tickets)
   end
 
   def update
