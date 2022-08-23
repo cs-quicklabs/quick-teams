@@ -70,7 +70,6 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     page.accept_confirm do
       find("tr", id: dom_id(goal)).click_link("Delete")
     end
-    visit page_url
     assert_no_text goal.title
     take_screenshot
   end

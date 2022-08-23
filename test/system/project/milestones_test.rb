@@ -60,7 +60,6 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     page.accept_confirm do
       find("tr", id: dom_id(milestone)).click_link("Delete")
     end
-    visit page_url
     assert_no_text milestone.title
     take_screenshot
   end
