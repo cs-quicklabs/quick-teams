@@ -33,6 +33,15 @@ class Report::SchedulesController < Report::BaseController
     fresh_when @employees
   end
 
+  def no_projects
+    authorize :report, :index?
+
+    @employees = User.for_current_account.active.billable.includes({ schedules: :project }, :role, :discipline, :job).order(:job_id).decorate
+    @employees = @employees.select { |e| e.schedules.empty? && e.billable }
+
+    fresh_when @employees
+  end
+
   def available_next_month
     authorize :report, :index?
     @employees = User.for_current_account.active.billable.includes({ schedules: :project }, :role, :discipline, :job).order(:job_id).decorate

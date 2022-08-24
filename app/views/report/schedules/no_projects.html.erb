@@ -1,0 +1,33 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Employees with no projects
+      </h1>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @employees.count.to_s + " employees)" %></p>
+    </div>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <% if @employees.size > 0 %>
+      <div class="w-full overflow-hidden">
+        <table class="table">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="table-head">
+                Name
+              </th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <%= render partial: "no_project", collection: @employees, as: :employee, cached: true %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <%= render partial: "shared/no_result_found", cached: true %>
+    <% end %>
+  </div>
+</div>
