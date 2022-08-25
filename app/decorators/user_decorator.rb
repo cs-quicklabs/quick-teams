@@ -47,6 +47,10 @@ class UserDecorator < Draper::Decorator
     overall_occupancy.to_s + "%"
   end
 
+  def display_occupancy
+    overall_occupancy.to_s
+  end
+
   def overall_occupancy
     overall_occupancy = 0
     schedules.each do |schedule|
