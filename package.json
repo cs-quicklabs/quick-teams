@@ -3,17 +3,17 @@
   "private": "true",
   "dependencies": {
     "@hotwired/stimulus": "3.1.0",
-    "@hotwired/turbo": "7.1.0",
+    "@hotwired/turbo": "7.2.0-beta.2",
     "@rails/actiontext": "6.1.4-1",
     "@rails/request.js": "0.0.6",
     "@tailwindcss/forms": "0.5.2",
     "@tailwindcss/line-clamp": "0.4.0",
-    "autoprefixer": "10.4.7",
-    "esbuild": "0.14.53",
-    "postcss": "8.4.14",
+    "autoprefixer": "10.4.8",
+    "esbuild": "0.15.5",
+    "postcss": "8.4.16",
     "stimulus": "https://github.com/stimulusreflex/stimulus/raw/master/stimulus-v3.0.0.tgz",
-    "stimulus_reflex": "3.5.0-pre8",
-    "tailwindcss": "3.1.7",
+    "stimulus_reflex": "3.5.0-pre9",
+    "tailwindcss": "3.1.8",
     "trix": "1.3.1"
   },
   "scripts": {
