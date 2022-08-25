@@ -12,7 +12,7 @@
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
     <% if @employees.size > 0 %>
-      <div class="w-full overflow-hidden">
+      <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <table class="table">
           <thead class="bg-gray-50">
             <tr>
@@ -21,10 +21,13 @@
               </th>
             </tr>
           </thead>
-          <tbody class="table-body">
+          <tbody class="table-body" data-infinite-scroll-target="entries">
             <%= render partial: "no_project", collection: @employees, as: :employee, cached: true %>
           </tbody>
         </table>
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+          <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+        </div>
       </div>
     <% else %>
       <%= render partial: "shared/no_result_found", cached: true %>

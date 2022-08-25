@@ -39,6 +39,8 @@ class Report::SchedulesController < Report::BaseController
     @employees = User.for_current_account.active.billable.includes({ schedules: :project }, :role, :discipline, :job).order(:job_id).decorate
     @employees = @employees.select { |e| e.schedules.empty? && e.billable }
 
+    @pagy, @employees = pagy_nil_safe(params, @employees, items: LIMIT)
+
     fresh_when @employees
   end
 
