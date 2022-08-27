@@ -5,7 +5,11 @@
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <%= feedback.published %>
+    <% if feedback.published %>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-green-100 text-green-800">
+        Published
+      </span>
+    <% end %>
   </td>
   <td class="table-cell whitespace-nowrap">
     <a href="<%= employee_team_path(feedback.user) %>" class="block hover:underline" target="_top">

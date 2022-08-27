@@ -1,7 +1,11 @@
 <tr id=<%= dom_id(feedback) %>>
   <td class="table-cell ">
     <div class="text-sm">
-      <%= link_to highlight_hashtag(feedback.title.upcase_first), project_feedback_path(@project, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
+      <% if policy([@project, feedback]).show? %>
+        <%= link_to highlight_hashtag(feedback.title.upcase_first), project_feedback_path(@project, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
+      <% else %>
+        <p class="line-clamp-2 font-medium text-gray-900 block "><%= highlight_hashtag(feedback.title.upcase_first) %></p>
+      <% end %>
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
@@ -14,9 +18,6 @@
   </td>
   <td class="table-cell ">
     <div class="flex justify-end space-x-2">
-      <% if policy([@project, feedback]).show? %>
-        <%= link_to "Show", project_feedback_path(@project, feedback), class: "btn-inline-edit" %>
-      <% end %>
       <% if policy([@project, feedback]).destroy? %>
         <%= delete_button(project_feedback_path(@project, feedback)) %>
       <% end %>
