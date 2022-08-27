@@ -44,6 +44,4 @@ class EmployeesPerformanceReportTest < ApplicationSystemTestCase
     click_on "Search"
     assert_no_text "Download PDF"
   end
-
-  
 end

@@ -6,7 +6,7 @@ class EmployeesNoProjectReportTest < ApplicationSystemTestCase
     @account = @user.account
     ActsAsTenant.current_tenant = @account
     @schedule = schedules(:nine)
-    
+
     sign_in @user
   end
 
@@ -20,5 +20,4 @@ class EmployeesNoProjectReportTest < ApplicationSystemTestCase
     assert_text @user.name
     assert_no_text @schedule.user.name
   end
-
 end
