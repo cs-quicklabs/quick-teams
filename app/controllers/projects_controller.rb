@@ -4,7 +4,11 @@ class ProjectsController < BaseController
   def index
     authorize :projects
 
-    @projects = policy_scope(Project)
+    if (params[:column].present? && params[:direction].present?)
+      @projects = Project.where(archived: false).order("#{params[:column]} #{params[:direction]}")
+    else
+      @projects = policy_scope(Project)
+    end
     fresh_when @projects
   end
 

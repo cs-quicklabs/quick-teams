@@ -42,3 +42,17 @@ leadmanaged:
   account: crownstack
   manager: leadmanager
   discipline: engineering
+
+asc:
+  name: Aws
+  archived: false
+  account: crownstack
+  manager: leadmanager
+  discipline: engineering
+
+desc:
+  name: Zoom
+  archived: false
+  account: crownstack
+  manager: leadmanager
+  discipline: engineering

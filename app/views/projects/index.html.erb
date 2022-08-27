@@ -21,27 +21,27 @@
           <thead>
             <tr class="border-gray-200 bg-gray-50 border-b">
               <th class=" table-head ">
-                <span class="lg:pl-2">Project</span>
+                <span class="lg:pl-2"><%= sort_link(column: "name", label: "Project") %> <%= sort_indicator if params[:column] == "name" %></span>
               </th>
               <% if current_user.admin? %>
                 <th class="table-head ">
                   Tags
                 </th>
                 <th class="table-head">
-                  Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+) %>
+                  <%= sort_link(column: "billable_resources", label: "Billed_#{@projects.map(&:billable_resources).compact.inject(0, &:+)}") %>   <%= sort_indicator if params[:column] == "billable" %>
                 </th>
               <% end %>
               <th class=" table-head ">
                 Participants
               </th>
               <th class="table-head ">
-                Lead
+                <%= sort_link(column: "manager_id", label: "Lead") %> <%= sort_indicator if params[:column] == "manager_id" %>
               </th>
               <th class="table-head ">
-                Created At
+                <%= sort_link(column: "created_at", label: "Created At") %> <%= sort_indicator if params[:column] == "created_at" %>
               </th>
               <th class="table-head ">
-                Status
+                <%= sort_link(column: "status_id", label: "Status") %> <%= sort_indicator if params[:column] == "status_id" %>
               </th>
             </tr>
           </thead>
