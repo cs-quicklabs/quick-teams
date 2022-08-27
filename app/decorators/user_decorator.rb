@@ -47,10 +47,6 @@ class UserDecorator < Draper::Decorator
     overall_occupancy.to_s + "%"
   end
 
-  def display_occupancy
-    overall_occupancy.to_s
-  end
-
   def overall_occupancy
     overall_occupancy = 0
     schedules.each do |schedule|
@@ -65,12 +61,12 @@ class UserDecorator < Draper::Decorator
 
   def display_additional_team_members
     total_subordinates = subordinates.size
-    return total_subordinates <= 4 ? "" : "+#{total_subordinates - 4}"
+    return total_subordinates <= 5 ? "" : "+#{total_subordinates - 5}"
   end
 
   def display_team_members_count
     total_subordinates = subordinates.size
-    [total_subordinates, 4].min
+    [total_subordinates, 5].min
   end
 
   def display_deactivated_on

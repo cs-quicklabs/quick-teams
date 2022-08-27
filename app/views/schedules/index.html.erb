@@ -1,3 +1,4 @@
+<% employees_count = @employees.load.size %>
 <div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <!-- Page title & actions -->
   <div class="px-4 py-4 border-b border-gray-200 sm:items-center sm:justify-between sm:px-6 lg:px-8">
@@ -5,6 +6,7 @@
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         Schedule
       </h1>
+      <p class="mt-1 ml-2 text-sm text-gray-500 w-full"> (Total: <%= @total_resources %>,  Billed: <%= @total_resources - @free_resources %>, Free: <%= @free_resources %>)</p>
       <% if params[:job] %>
         <%= turbo_frame_tag "occupancy", class: "w-full", src: "/#{current_user.account.id}/occupancy/#{params[:job]}", target: "_top", loading: :lazy do %>
           <p class="text-right w-full pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Calculating Occupancy...</p>
@@ -14,12 +16,6 @@
           <p class="text-right w-full pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Calculating Occupancy...</p>
         <% end %>
       <% end %>
-    </div>
-    <div>
-      <% free = (Float((@employees.size * 100) - @employees.map {|employee| employee.decorate.overall_occupancy}.inject(:+)) / 100)  if @employees.size > 0 %>
-      <p class="text-right px-8 text-sm text-gray-500 truncate">
-      Total: <%= @employees.size %>,  Free: <%= free.present? ? free : "0" %>
-      </p>
     </div>
   </div>
 </div>
@@ -52,7 +48,7 @@
         </div>
       </div>
     </div>
-    <% if @employees.size > 0 %>
+    <% if employees_count > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
         <table class="table">
           <thead class="bg-gray-50">
@@ -64,12 +60,12 @@
                 Projects
               </th>
               <th scope="col" class="table-head">
-                Occupancy
+                Occupancy Now
               </th>
             </tr>
           </thead>
           <tbody class="table-body" data-infinite-scroll-target="entries">
-            <%= render partial: "schedules/schedule", collection: @employees, as: :employee, cached: true %>
+            <%= render partial: "schedules/schedule", collection: @employees, as: :employee, cached: false %>
           </tbody>
         </table>
         <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
