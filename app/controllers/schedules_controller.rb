@@ -7,15 +7,12 @@ class SchedulesController < BaseController
   def index
     authorize :schedules
 
-    employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job, :status).order(:first_name)
-    if params[:job]
-      employees = employees.where(job: params[:job])
-    else
-      employees = employees.where(billable: true)
-    end
+    employees = employees_for_schedule
 
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
+    @free_resources = free_of_schedule(employees)
+    @total_resources = employees.count
 
     @pagy, @employees = pagy_nil_safe(params, employees, items: 20)
     if stale?(@employees)
@@ -27,6 +24,19 @@ class SchedulesController < BaseController
         }
       end
     end
+  end
+
+  def employees_for_schedule
+    employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job, :status).order(:first_name)
+    if params[:job]
+      employees = employees.where(job: params[:job])
+    else
+      employees = employees.where(billable: true)
+    end
+  end
+
+  def free_of_schedule(employees)
+    (Float((employees.count * 100) - employees.map { |employee| employee.decorate.overall_occupancy }.inject(:+)) / 100) if employees.count > 0
   end
 
   def update
