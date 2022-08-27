@@ -154,6 +154,7 @@ Rails.application.routes.draw do
     get "/kpis", to: "report/kpis#index", as: "kpis_reports"
     get "/reports", to: "report/reports#index", as: "report_reports"
     get "/kpis/performance_report", to: "report/kpis#performance_report", as: "performance_report"
+    get "/schedules/no_projects", to: "report/schedules#no_projects", as: "no_projects_schedules_reports"
   end
 
   get "/reports", to: "reports#index", as: "reports"
