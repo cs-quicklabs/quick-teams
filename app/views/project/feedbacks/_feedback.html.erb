@@ -1,7 +1,7 @@
 <tr id=<%= dom_id(feedback) %>>
   <td class="table-cell ">
     <div class="text-sm">
-      <%= link_to feedback.title.upcase_first, project_feedback_path(@project, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
+      <%= link_to highlight_hashtag(feedback.title.upcase_first), project_feedback_path(@project, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">

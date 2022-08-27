@@ -1,7 +1,7 @@
 <tr id="<%= dom_id goal %>">
   <td class="table-cell ">
     <div class="text-sm">
-      <%= link_to goal.title.upcase_first, employee_goal_path(@employee, goal), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
+      <%= link_to highlight_hashtag(goal.title.upcase_first), employee_goal_path(@employee, goal), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
   </td>
   <td class="text-sm text-center">

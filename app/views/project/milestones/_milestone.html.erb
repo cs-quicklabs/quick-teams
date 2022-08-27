@@ -1,12 +1,12 @@
 <tr id=<%= dom_id(milestone) %>>
   <td class="table-cell ">
     <div class="text-sm">
-      <%= link_to milestone.title.upcase_first, project_milestone_path(@project, milestone), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
+      <%= link_to highlight_hashtag(milestone.title.upcase_first), project_milestone_path(@project, milestone), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
   </td>
   <td class="table-cell text-sm">
     <div class="mt-1 text-sm text-gray-700">
-     <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium <%= goal_status_color(milestone) %>">
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium <%= goal_status_color(milestone) %>">
         <%= milestone.status.to_s %>
       </span>
     </div>
