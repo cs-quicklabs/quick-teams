@@ -7,9 +7,9 @@ class ProjectPolicy < ApplicationPolicy
 
     def resolve
       if user.admin?
-        scope.active.includes(:discipline, :participants, :manager, :status, :project_tags).order(:name)
+        scope.active.includes(:discipline, :participants, :manager, :status, :project_tags)
       elsif user.project_manager?
-        user.managed_projects.active.includes(:discipline, :participants, :manager, :status, :project_tags).order(:name)
+        user.managed_projects.active.includes(:discipline, :participants, :manager, :status, :project_tags)
       end
     end
 
