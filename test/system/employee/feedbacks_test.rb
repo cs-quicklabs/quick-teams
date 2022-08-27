@@ -16,7 +16,6 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: "#{@employee.first_name} #{@employee.last_name}"
-    assert_text "Employee Feedbacks"
     assert_text "Add New Feedback"
   end
 
@@ -32,7 +31,7 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     fill_in_rich_text_area "new_feedback", with: "This is some feedback"
     click_on "Add Feedback"
     take_screenshot
-    assert_selector "ul#feedbacks", text: "Some Random Feedback Title"
+    assert_selector "tbody#feedbacks", text: "Some Random Feedback Title"
   end
 
   test "can not add feedback with empty details" do
@@ -46,7 +45,7 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
   test "can see feedback detail page" do
     visit page_url
     feedback = @employee.feedbacks.first
-    find("li", id: dom_id(feedback)).click_link("Show")
+    find("tr", id: dom_id(feedback)).click_link(feedback.title)
     assert_selector "h3", text: feedback.title
     take_screenshot
   end
@@ -55,7 +54,7 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     visit page_url
     feedback = @employee.feedbacks.first
     page.accept_confirm do
-      find("li", id: dom_id(feedback)).click_link("Delete")
+      find("tr", id: dom_id(feedback)).click_link("Delete")
     end
     assert_no_text feedback.title
     take_screenshot
@@ -70,7 +69,7 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
   test "can edit feedback" do
     visit page_url
     feedback = @employee.feedbacks.first
-    find("li", id: dom_id(feedback)).click_link("Edit")
+    find("tr", id: dom_id(feedback)).click_link("Edit")
     title = "Some Random Goal Title Edited"
     fill_in "Title", with: ""
     fill_in "Title", with: title
@@ -86,7 +85,7 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
   test "can not edit feedback with invalid params" do
     visit page_url
     feedback = @employee.feedbacks.first
-    find("li", id: dom_id(feedback)).click_link("Edit")
+    find("tr", id: dom_id(feedback)).click_link("Edit")
     fill_in "Title", with: nil
     click_on "Edit Feedback"
     assert_selector "p.alert", text: "Failed to update. Please try again."

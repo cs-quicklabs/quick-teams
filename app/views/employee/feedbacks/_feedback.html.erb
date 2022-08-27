@@ -1,29 +1,28 @@
-<li id="<%= dom_id feedback %>">
-  <div class="flex space-x-3">
-    <div class="flex-shrink-0">
-      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+<tr id="<%= dom_id feedback %>">
+  <td class="table-cell ">
+    <div class="text-sm">
+      <%= link_to feedback.title.upcase_first, employee_feedback_path(@employee, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
-    <div>
-      <div class="text-sm">
-        <a href="#" class="font-medium text-gray-900"><%= feedback.user.decorate.display_name %></a>
-        <% if feedback.published? %>
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-            Published
-          </span>
-        <% end %>
-        <div class="mt-1 text-sm text-gray-700">
-          <p><%= highlight_hashtag(feedback.title.upcase_first) %></p>
-        </div>
-        <div class="mt-2 space-x-2 text-sm">
-          <span class="font-medium text-gray-500"><%= display_created_at(feedback) %></span>
-          <%= link_to "Show", employee_feedback_path(@employee, feedback), class: "btn-inline-edit pl-2" %>
-          <% if policy([@employee, feedback]).edit? %>
-            <%= edit_button(edit_employee_feedback_path(@employee, feedback)) %>
-          <% end %>
-          <% if policy([@employee, feedback]).destroy? %>
-            <%= delete_button(employee_feedback_path(@employee, feedback)) %>
-          <% end %>
-        </div>
-      </div>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <%= feedback.published %>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <a href="<%= employee_team_path(feedback.user) %>" class="block hover:underline" target="_top">
+      <%= feedback.user.decorate.display_name %>
+    </a>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <%= display_created_at(feedback) %>
+  </td>
+  <td class="table-cell ">
+    <div class="flex justify-end space-x-2">
+      <% if policy([@employee, feedback]).edit? %>
+        <%= edit_button(edit_employee_feedback_path(@employee, feedback)) %>
+      <% end %>
+      <% if policy([@employee, feedback]).destroy? %>
+        <%= delete_button(employee_feedback_path(@employee, feedback)) %>
+      <% end %>
     </div>
-  </li>
+  </td>
+</tr>

@@ -20,7 +20,6 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: "#{@employee.decorate.display_name}"
-    assert_text "Employee Goals"
     assert_text "Add New Goal"
   end
 
@@ -40,7 +39,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
       click_on "Add Goal"
       sleep(1)
     end
-    assert_selector "ul#goals", text: title
+    assert_selector "tbody#goals", text: title
     take_screenshot
     doc = Nokogiri::HTML::Document.parse(ActionMailer::Base.deliveries.last.body.to_s)
     link = doc.css("a").first.values.first
@@ -60,7 +59,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can see goal detail page" do
     visit page_url
     goal = @employee.goals.first
-    find("li", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     assert_selector "h3", text: goal.title
     take_screenshot
   end
@@ -69,7 +68,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     visit page_url
     goal = @employee.goals.first
     page.accept_confirm do
-      find("li", id: dom_id(goal)).click_link("Delete")
+      find("tr", id: dom_id(goal)).click_link("Delete")
     end
     assert_no_text goal.title
     take_screenshot
@@ -85,7 +84,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can edit goal" do
     visit page_url
     goal = @employee.goals.first
-    find("li", id: dom_id(goal)).click_link("Edit")
+    find("tr", id: dom_id(goal)).click_link("Edit")
     title = "Some Random Goal Title Edited"
     fill_in "", with: title
     fill_in "Title", with: title
@@ -102,7 +101,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can not edit goal with invalid params" do
     visit page_url
     goal = @employee.goals.first
-    find("li", id: dom_id(goal)).click_link("Edit")
+    find("tr", id: dom_id(goal)).click_link("Edit")
     fill_in "Title", with: nil
     click_on "Edit Goal"
     assert_selector "p.alert", text: "Failed to update. Please try again."
@@ -112,7 +111,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can comment on goal" do
     visit page_url
     goal = @employee.goals.first
-    find("li", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     fill_in "comment", with: "This is a comment"
     assert_emails 1 do
       click_on "Comment"
@@ -127,7 +126,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can complete goal" do
     visit page_url
     goal = @employee.goals.first
-    find("li", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     fill_in "comment", with: "This is completed"
     click_on "option-menu-button"
     click_on "and mark Completed"
@@ -139,7 +138,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can miss goal" do
     visit page_url
     goal = @employee.goals.first
-    find("li", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     fill_in "comment", with: "This is missed"
     click_on "option-menu-button"
     click_on "and mark Missed"
@@ -151,7 +150,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can discard goal" do
     visit page_url
     goal = @employee.goals.first
-    find("li", id: dom_id(goal)).click_link("Show")
+    find("tr", id: dom_id(goal)).click_link(goal.title)
     fill_in "comment", with: "This is discarded"
     click_on "option-menu-button"
     click_on "and mark Discarded"
