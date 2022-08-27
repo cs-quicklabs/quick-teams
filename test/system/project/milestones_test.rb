@@ -17,7 +17,6 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: "#{@project.name}"
-    assert_text "Project Milestones"
     assert_text "Add New Milestone"
   end
 
@@ -33,7 +32,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     fill_in "goal_deadline", with: Time.now
     fill_in_rich_text_area "new_goal", with: "This is some milestone"
     click_on "Add Milestone"
-    assert_selector "ul#milestones", text: "Some Random milestone Title"
+    assert_selector "tbody#milestones", text: "Some Random milestone Title"
     take_screenshot
   end
 
@@ -50,7 +49,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can see milestone detail page" do
     visit page_url
     milestone = @project.milestones.first
-    find("li", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     assert_selector "h3", text: milestone.title
     take_screenshot
   end
@@ -59,7 +58,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     visit page_url
     milestone = @project.milestones.first
     page.accept_confirm do
-      find("li", id: dom_id(milestone)).click_link("Delete")
+      find("tr", id: dom_id(milestone)).click_link("Delete")
     end
     assert_no_text milestone.title
     take_screenshot
@@ -75,7 +74,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can edit milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("li", id: dom_id(milestone)).click_link("Edit")
+    find("tr", id: dom_id(milestone)).click_link("Edit")
     title = "Some Random Milestone Title Edited"
     fill_in "Title", with: title
     fill_in "goal_deadline", with: Time.now
@@ -91,7 +90,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can not edit milestone with invalid params" do
     visit page_url
     milestone = @project.milestones.first
-    find("li", id: dom_id(milestone)).click_link("Edit")
+    find("tr", id: dom_id(milestone)).click_link("Edit")
     fill_in "Title", with: nil
     click_on "Edit Milestone"
     assert_selector "p.alert", text: "Failed to update. Please try again."
@@ -101,7 +100,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can comment on milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("li", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     fill_in "comment", with: "This is a comment"
     click_on "Comment"
     assert_selector "ul#comments", text: "This is a comment"
@@ -113,7 +112,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can complete milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("li", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     fill_in "comment", with: "This is completed"
     click_on "option-menu-button"
     click_on "and mark Completed"
@@ -125,7 +124,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can miss milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("li", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     fill_in "comment", with: "This is missed"
     click_on "option-menu-button"
     click_on "and mark Missed"
@@ -137,7 +136,7 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
   test "can discard milestone" do
     visit page_url
     milestone = @project.milestones.first
-    find("li", id: dom_id(milestone)).click_link("Show")
+    find("tr", id: dom_id(milestone)).click_link(milestone.title)
     fill_in "comment", with: "This is discarded"
     click_on "option-menu-button"
     click_on "and mark Discarded"

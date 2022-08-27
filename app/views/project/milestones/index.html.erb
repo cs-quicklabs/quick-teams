@@ -1,24 +1,40 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <%= render "project/title", project: @project %>
   <main class="pb-8">
-    <div class="px-4 sm:px-6">
+    <div>
       <!-- Main 3 column grid -->
-      <div class="grid items-start grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-2">
+      <div class="grid items-start grid-cols-1  lg:grid-cols-3">
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2" data-controller="infinite-scroll">
           <section aria-labelledby="participants_section">
-            <div class="overflow-hidden bg-white">
-              <div class="p-4">
-                <div class="flex flex-wrap">
-                  <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Milestones" %></p>
-                </div>
-                <ul class="space-y-6" id="milestones" data-infinite-scroll-target="entries">
+            <div class="w-full overflow-hidden">
+              <table class="table">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="w-full table-head">
+                      Milestone
+                    </th>
+                    <th scope="col" class="table-head">
+                      Status
+                    </th>
+                    <th scope="col" class="table-head">
+                      Added by
+                    </th>
+                    <th scope="col" class="table-head">
+                      ADDED ON
+                    </th>
+                    <th scope="col" class="table-head">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="table-body" id="milestones" data-infinite-scroll-target="entries">
                   <%= render partial: "project/milestones/milestone", collection: @milestones, as: :milestone, cached: true %>
-                </ul>
+                </tbody>
+              </table>
+              <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
               </div>
-            </div>
-            <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-              <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
             </div>
           </section>
         </div>

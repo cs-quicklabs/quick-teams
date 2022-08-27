@@ -1,24 +1,26 @@
-<li id=<%= dom_id(feedback) %>>
-  <div class="flex space-x-3">
-    <div class="flex-shrink-0">
-      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+<tr id=<%= dom_id(feedback) %>>
+  <td class="table-cell ">
+    <div class="text-sm">
+      <% if policy([@project, feedback]).show? %>
+        <%= link_to highlight_hashtag(feedback.title.upcase_first), project_feedback_path(@project, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
+      <% else %>
+        <p class="line-clamp-2 font-medium text-gray-900 block "><%= highlight_hashtag(feedback.title.upcase_first) %></p>
+      <% end %>
     </div>
-    <div>
-      <div class="text-sm">
-        <a href="#" class="font-medium text-gray-900"><%= feedback.user.decorate.display_name %></a>
-      </div>
-      <div class="mt-1 text-sm text-gray-700">
-        <p><%= highlight_hashtag(feedback.title) %></p>
-      </div>
-      <div class="mt-2 space-x-2 text-sm" id=<%= "buttons_" + dom_id(feedback) %>>
-        <span class="font-medium text-gray-500"><%= display_created_at(feedback) %></span>
-        <% if policy([@project, feedback]).show? %>
-          <%= link_to "Show", project_feedback_path(@project, feedback), class: "btn-inline-edit" %>
-        <% end %>
-        <% if policy([@project, feedback]).destroy? %>
-          <%= delete_button(project_feedback_path(@project, feedback)) %>
-        <% end %>
-      </div>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <a href="<%= employee_team_path(feedback.user) %>" class="block hover:underline" target="_top">
+      <%= feedback.user.decorate.display_name %>
+    </a>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <%= display_created_at(feedback) %>
+  </td>
+  <td class="table-cell ">
+    <div class="flex justify-end space-x-2">
+      <% if policy([@project, feedback]).destroy? %>
+        <%= delete_button(project_feedback_path(@project, feedback)) %>
+      <% end %>
     </div>
-  </div>
-</li>
+  </td>
+</tr>

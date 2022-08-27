@@ -174,5 +174,4 @@ class TicketsTest < ApplicationSystemTestCase
     assert_text "Closed"
     take_screenshot
   end
-
 end

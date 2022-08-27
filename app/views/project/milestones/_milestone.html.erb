@@ -1,28 +1,32 @@
-<li id=<%= dom_id(milestone) %>>
-  <div class="flex space-x-3">
-    <div class="flex-shrink-0">
-      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+<tr id=<%= dom_id(milestone) %>>
+  <td class="table-cell ">
+    <div class="text-sm">
+      <%= link_to highlight_hashtag(milestone.title.upcase_first), project_milestone_path(@project, milestone), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
-    <div>
-      <div class="text-sm">
-        <a href="#" class="font-medium text-gray-900"><%= milestone.user.decorate.display_name %></a>
-        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium <%= goal_status_color(milestone) %>">
-          <%= milestone.status.to_s %>
-        </span>
-      </div>
-      <div class="mt-1 text-sm text-gray-700">
-        <p><%= highlight_hashtag(milestone.title) %></p>
-      </div>
-      <div class="mt-2 space-x-2 text-sm"  id=<%= "buttons_" + dom_id(milestone) %>>
-        <span class="font-medium text-gray-500"><%= display_created_at(milestone) %></span>
-        <%= link_to "Show", project_milestone_path(@project, milestone), class: "btn-inline-edit pl-2" %>
-        <% if policy([@project, milestone]).edit? %>
-          <%= edit_button(edit_project_milestone_path(@project, milestone)) %>
-        <% end %>
-        <% if policy([@project, milestone]).destroy? %>
-          <%= delete_button(project_milestone_path(@project, milestone)) %>
-        <% end %>
-      </div>
+  </td>
+  <td class="table-cell text-sm">
+    <div class="mt-1 text-sm text-gray-700">
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium <%= goal_status_color(milestone) %>">
+        <%= milestone.status.to_s %>
+      </span>
     </div>
-  </div>
-</li>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <a href="<%= employee_team_path(milestone.user) %>" class="block hover:underline" target="_top">
+      <%= milestone.user.decorate.display_name %>
+    </a>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <%= display_created_at(milestone) %>
+  </td>
+  <td class="table-cell">
+    <div class="flex justify-end space-x-2" id=<%= "buttons_" + dom_id(milestone) %>>
+      <% if policy([@project, milestone]).edit? %>
+        <%= edit_button(edit_project_milestone_path(@project, milestone)) %>
+      <% end %>
+      <% if policy([@project, milestone]).destroy? %>
+        <%= delete_button(project_milestone_path(@project, milestone)) %>
+      <% end %>
+    </div>
+  </td>
+</tr>

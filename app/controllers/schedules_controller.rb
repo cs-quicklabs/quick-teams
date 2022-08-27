@@ -36,7 +36,11 @@ class SchedulesController < BaseController
   end
 
   def free_of_schedule(employees)
-    (Float((employees.count * 100) - employees.map { |employee| employee.decorate.overall_occupancy }.inject(:+)) / 100) if employees.count > 0
+    free_resources = 0.0
+    if employees.count > 0
+      free_resources = (Float((employees.count * 100) - employees.map { |employee| employee.decorate.overall_occupancy }.inject(:+)) / 100)
+    end
+    [free_resources, 0].max
   end
 
   def update
