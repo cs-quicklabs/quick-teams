@@ -41,8 +41,7 @@ class TicketPolicy < ApplicationPolicy
   def edit?
     ticket = record.first
     return false if ticket.completed?
-
-    return true if ticket.user_id == @user.id and !ticket.ticketstatus?
+    return true if (user.admin? or ticket.user_id == @user.id) and !ticket.ticketstatus?
   end
 
   def index?
