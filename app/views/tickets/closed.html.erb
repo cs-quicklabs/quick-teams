@@ -1,0 +1,65 @@
+<main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <main class="pb-8">
+    <div class= "border-b border-gray-200">
+      <div class="px-4 py-4  sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+          <h1 class="text-3xl font-bold leading-tight text-gray-900">
+            Tickets
+          </h1>
+          <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @tickets.count.to_s + " Tickets)" %></p>
+        </div>
+      </div>
+      <% if policy([:ticket]).closed? %>
+        <div class="flex mt-4 sm:mt-0">
+          <%= render partial: "tabs", locals: { tickets: @tickets } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <!-- Main 3 column grid -->
+  <section aria-labelledby="participants_section">
+    <div class="overflow-hidden bg-white">
+      <% if @tickets.size > 0 %>
+        <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+          <table class="table">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="w-full table-head">
+                  description
+                </th>
+                <th scope="col" class="table-head">
+                  created_by
+                </th>
+                <th scope="col" class="table-head">
+                  Label
+                </th>
+                <th scope="col" class="table-head">
+                  Created On
+                </th>
+                <th scope="col" class="table-head">
+                  Last Updated
+                </th>
+                <th scope="col" class="table-head">
+                  Status
+                </th>
+                <th scope="col" class="table-head">
+                  Assigned To
+                </th>
+              </tr>
+            </thead>
+            <tbody class="table-body" id="tickets" data-infinite-scroll-target="entries">
+              <%= render partial: "open_ticket", collection: @tickets, as: :ticket, cached: true %>
+            </tbody>
+          </table>
+          <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+            <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>
+</div>
+<div class="pt-4 pl-16 pr-16">
+</div>
+</main>

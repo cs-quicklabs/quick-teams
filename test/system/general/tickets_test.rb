@@ -24,10 +24,12 @@ class TicketsTest < ApplicationSystemTestCase
     if (@user.admin? or @ticket.ticket_label.user == @user)
       assert_selector "h1", text: "Tickets"
       assert_text "Open Tickets"
+      assert_text "Closed Tickets"
       assert_selector "form#new_ticket"
     else
       assert_selector "h1", text: "Tickets"
       assert_no_text "Open Tickets"
+      assert_no_text "Closed Tickets"
       assert_selector "form#new_ticket"
     end
   end
@@ -156,4 +158,21 @@ class TicketsTest < ApplicationSystemTestCase
     assert_selector "p", text: "This ticket was marked as closed"
     take_screenshot
   end
+
+  test "can see the open tickets" do
+    visit page_url
+    take_screenshot
+    click_on "Open Tickets"
+    assert_text "Open"
+    take_screenshot
+  end
+
+  test "can see the closed tickets" do
+    visit page_url
+    take_screenshot
+    click_on "Closed Tickets"
+    assert_text "Closed"
+    take_screenshot
+  end
+
 end

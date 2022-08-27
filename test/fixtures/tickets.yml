@@ -11,3 +11,11 @@ two:
   account: crownstack
   user: member
   ticket_label: one
+
+three:
+  title: Ticket
+  description: Ticket Descripion
+  account: crownstack
+  user: member
+  ticket_label: one
+  ticketstatus: true
