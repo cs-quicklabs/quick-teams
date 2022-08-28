@@ -149,7 +149,7 @@ class TicketsTest < ApplicationSystemTestCase
 
   test "can complete ticket" do
     visit page_url
-    ticket = @user.tickets.first
+    ticket = @user.tickets.progress.first
     find("tr", id: dom_id(ticket)).click_link(ticket.description)
     fill_in "comment", with: "This is completed"
     click_on "option-menu-button"

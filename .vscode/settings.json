@@ -3,5 +3,9 @@
     "[ruby]": { // or [erb] / [gemfile]
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "jnbt.vscode-rufo"
-  }
+  },
+  "[erb]": {
+    "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+  },
+  "vscode-erb-beautify.executePath": "/Users/adityatrehan/.rvm/gems/ruby-3.1.2/wrappers/htmlbeautifier"
 }

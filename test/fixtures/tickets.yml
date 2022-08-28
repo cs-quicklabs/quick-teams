@@ -1,5 +1,5 @@
 one:
-  title: Ticket
+  title: Open Ticket
   description: Ticket Descripion
   account: crownstack
   user: regular
@@ -13,8 +13,8 @@ two:
   ticket_label: one
 
 three:
-  title: Ticket
-  description: Ticket Descripion
+  title: Completed Ticket 
+  description: Completed Ticket Descripion
   account: crownstack
   user: member
   ticket_label: one

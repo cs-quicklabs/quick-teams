@@ -46,7 +46,7 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
   test "can see feedback detail page" do
     visit page_url
     feedback = @project.feedbacks.first
-    find("tr", id: dom_id(feedback)).click_link("Show")
+    find("tr", id: dom_id(feedback)).click
     assert_selector "h3", text: feedback.title
     take_screenshot
   end

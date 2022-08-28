@@ -166,6 +166,7 @@ GEM
     globalid (1.0.0)
       activesupport (>= 5.0)
     hiredis (0.6.3)
+    htmlbeautifier (1.4.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -290,6 +291,7 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    rufo (0.13.0)
     rufus-scheduler (3.8.2)
       fugit (~> 1.1, >= 1.1.6)
     selenium-webdriver (4.4.0)
@@ -386,6 +388,7 @@ DEPENDENCIES
   devise_invitable (~> 2.0.0)
   draper
   hiredis
+  htmlbeautifier
   image_processing (~> 1.12)
   jsbundling-rails (= 1.0.3)
   launchy
@@ -404,6 +407,7 @@ DEPENDENCIES
   rails-patterns
   redis (>= 4.0)
   rexml
+  rufo
   selenium-webdriver
   sidekiq
   sidekiq-scheduler
