@@ -6,7 +6,7 @@
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         Schedule
       </h1>
-      <p class="mt-1 ml-2 text-sm text-gray-500 w-full"> (Total Billable: <%= @total_resources %>,  Billed: <%= @total_resources - @free_resources %>, Free: <%= @free_resources %>)</p>
+      <p class="mt-1 ml-2 text-sm text-gray-500 w-full"> (Total Billable: <%= @total_resources %>,  Billed: <%= @total_resources - @free_resources %>, Free: <%= [@free_resources, 0].max %>)</p>
       <% if params[:job] %>
         <%= turbo_frame_tag "occupancy", class: "w-full", src: "/#{current_user.account.id}/occupancy/#{params[:job]}", target: "_top", loading: :lazy do %>
           <p class="text-right w-full pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Calculating Occupancy...</p>

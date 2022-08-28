@@ -24,7 +24,7 @@
                 Tags
               </th>
               <th class="table-head">
-                Billed_<%= @projects.map(&:billable_resources).compact.inject(0, &:+) %>
+                Billed (<%= @projects.map(&:billable_resources).compact.inject(0, &:+) %>)
               </th>
               <th class="table-head">
                 Lead
