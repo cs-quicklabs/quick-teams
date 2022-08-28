@@ -25,14 +25,12 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Feedbacks"
     assert_selector "form#new_feedback"
     @employee.feedbacks.each do |feedback|
-      if feedback.published?
-        assert_selector "li##{dom_id(feedback)}", text: "Show"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Edit"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Delete"
-      else
-        assert_selector "li##{dom_id(feedback)}", text: "Show"
-        assert_selector "li##{dom_id(feedback)}", text: "Edit"
-        assert_selector "li##{dom_id(feedback)}", text: "Delete"
+      if feedback.published?        
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Delete"
+      else        
+        assert_selector "tr##{dom_id(feedback)}", text: "Edit"
+        assert_selector "tr##{dom_id(feedback)}", text: "Delete"
       end
     end
   end
@@ -46,14 +44,12 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Feedbacks"
     assert_selector "form#new_feedback"
     @employee.feedbacks.each do |feedback|
-      if feedback.published?
-        assert_selector "li##{dom_id(feedback)}", text: "Show"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Edit"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Delete"
-      else
-        assert_selector "li##{dom_id(feedback)}", text: "Show"
-        assert_selector "li##{dom_id(feedback)}", text: "Edit"
-        assert_selector "li##{dom_id(feedback)}", text: "Delete"
+      if feedback.published?        
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Delete"
+      else        
+        assert_selector "tr##{dom_id(feedback)}", text: "Edit"
+        assert_selector "tr##{dom_id(feedback)}", text: "Delete"
       end
     end
   end
@@ -78,12 +74,11 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     assert_no_selector "form#new_feedback"
     # can not edit, delete feedback for himself
     @employee.feedbacks.each do |feedback|
-      if feedback.published?
-        assert_selector "li##{dom_id(feedback)}", text: "Show"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Edit"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Delete"
+      if feedback.published?        
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Delete"
       else
-        assert_no_selector "li##{dom_id(feedback)}"
+        assert_no_selector "tr##{dom_id(feedback)}"
       end
     end
   end
@@ -101,10 +96,10 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     # can edit feedbck for subordinates
     # can delete feedback create by him
     @employee.feedbacks.each do |feedback|
-      assert_selector "li##{dom_id(feedback)}", text: "Show"
-      assert_selector "li##{dom_id(feedback)}", text: "Edit"
+      
+      assert_selector "tr##{dom_id(feedback)}", text: "Edit"
       if feedback.user == @lead
-        assert_selector "li##{dom_id(feedback)}", text: "Delete"
+        assert_selector "tr##{dom_id(feedback)}", text: "Delete"
       end
     end
   end
@@ -158,12 +153,11 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     # can see feedback detail button
     # can not see edit buttons
     @employee.feedbacks.each do |feedback|
-      if feedback.published?
-        assert_selector "li##{dom_id(feedback)}", text: "Show"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Edit"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Delete"
+      if feedback.published?        
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Delete"
       else
-        assert_no_selector "li##{dom_id(feedback)}"
+        assert_no_selector "tr##{dom_id(feedback)}"
       end
     end
   end
@@ -207,12 +201,11 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     assert_no_selector "form#new_feedback"
     # can not edit, delete feedback for himself
     @employee.feedbacks.each do |feedback|
-      if feedback.published?
-        assert_selector "li##{dom_id(feedback)}", text: "Show"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Edit"
-        assert_no_selector "li##{dom_id(feedback)}", text: "Delete"
+      if feedback.published?        
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Delete"
       else
-        assert_no_selector "li##{dom_id(feedback)}"
+        assert_no_selector "tr##{dom_id(feedback)}"
       end
     end
   end
@@ -229,11 +222,10 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     assert_selector "form#new_feedback"
     # can edit feedbck for subordinates
     # can delete feedback create by him
-    @employee.feedbacks.each do |feedback|
-      assert_selector "li##{dom_id(feedback)}", text: "Show"
-      assert_selector "li##{dom_id(feedback)}", text: "Edit"
+    @employee.feedbacks.each do |feedback|      
+      assert_selector "tr##{dom_id(feedback)}", text: "Edit"
       if feedback.user == @manager
-        assert_selector "li##{dom_id(feedback)}", text: "Delete"
+        assert_selector "tr##{dom_id(feedback)}", text: "Delete"
       end
     end
   end
