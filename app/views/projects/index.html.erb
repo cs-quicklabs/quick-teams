@@ -22,6 +22,7 @@
             <tr class="border-gray-200 bg-gray-50 border-b">
               <th class=" table-head ">
                 <span class="lg:pl-2"><%= sort_link(column: "name", label: "Project") %> <%= sort_indicator if params[:column] == "name" %></span>
+                <span class="lg:pl-2"><%= sort_indicator if params[:column] == "name" %></span>
               </th>
               <% if current_user.admin? %>
                 <th class="table-head ">
