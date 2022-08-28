@@ -25,10 +25,9 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#project-tabs", text: "Milestones"
     assert_selector "form#new_goal"
-    @project.milestones.each do |milestone|
-      assert_selector "div#buttons_#{dom_id(milestone)}", text: "Show"
-      assert_selector "div#buttons_#{dom_id(milestone)}", text: "Edit"
-      assert_selector "div#buttons_#{dom_id(milestone)}", text: "Delete"
+    @project.milestones.each do |milestone|      
+      assert_selector "tr##{dom_id(milestone)}", text: "Edit"
+      assert_selector "tr##{dom_id(milestone)}", text: "Delete"
     end
   end
 
@@ -87,14 +86,12 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     assert_selector "form#new_goal"
     milestones = @project.milestones
     milestones.each do |milestone|
-      if milestone.user_id == @employee.id
-        assert_selector "div#buttons_#{dom_id(milestone)}", text: "Show"
-        assert_selector "div#buttons_#{dom_id(milestone)}", text: "Edit"
-        assert_selector "div#buttons_#{dom_id(milestone)}", text: "Delete"
-      else
-        assert_selector "div#buttons_#{dom_id(milestone)}", text: "Show"
-        assert_no_selector "div#buttons_#{dom_id(milestone)}", text: "Edit"
-        assert_no_selector "div#buttons_#{dom_id(milestone)}", text: "Delete"
+      if milestone.user_id == @employee.id        
+        assert_selector "tr##{dom_id(milestone)}", text: "Edit"
+        assert_selector "tr##{dom_id(milestone)}", text: "Delete"
+      else        
+        assert_no_selector "tr##{dom_id(milestone)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(milestone)}", text: "Delete"
       end
     end
   end

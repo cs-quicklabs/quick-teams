@@ -24,12 +24,10 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#project-tabs", text: "Feedbacks"
     assert_selector "form#new_feedback"
-    feedback = @project.feedbacks.first
-    assert_selector "div#buttons_#{dom_id(feedback)}", text: "Show"
-    assert_selector "div#buttons_#{dom_id(feedback)}", text: "Delete"
-    feedback = @project.feedbacks.last
-    assert_selector "div#buttons_#{dom_id(feedback)}", text: "Show"
-    assert_selector "div#buttons_#{dom_id(feedback)}", text: "Delete"
+    feedback = @project.feedbacks.first    
+    assert_selector "tr##{dom_id(feedback)}", text: "Delete"
+    feedback = @project.feedbacks.last    
+    assert_selector "tr##{dom_id(feedback)}", text: "Delete"
   end
 
   test "admin can see project feedback details" do
@@ -85,11 +83,9 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
 
     feedbacks.each do |feedback|
       if feedback.user_id == @employee.id
-        assert_selector "div#buttons_#{dom_id(feedback)}", text: "Show"
-        assert_selector "div#buttons_#{dom_id(feedback)}", text: "Delete" #can delete feedback added by him
-      else
-        assert_selector "div#buttons_#{dom_id(feedback)}", text: "Show"
-        assert_no_selector "div#buttons_#{dom_id(feedback)}", text: "Delete"
+        assert_selector "tr##{dom_id(feedback)}", text: "Delete" #can delete feedback added by him
+      else        
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Delete"
       end
     end
   end
