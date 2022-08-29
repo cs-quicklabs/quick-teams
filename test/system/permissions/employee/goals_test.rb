@@ -33,7 +33,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
     assert_selector "form#new_goal"
-    @employee.goals.each do |goal|      
+    @employee.goals.each do |goal|
       assert_selector "tr##{dom_id(goal)}", text: "Edit"
       assert_selector "tr##{dom_id(goal)}", text: "Delete"
     end
@@ -47,7 +47,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
     assert_selector "form#new_goal"
-    @employee.goals.each do |goal|      
+    @employee.goals.each do |goal|
       assert_selector "tr##{dom_id(goal)}", text: "Edit"
       assert_selector "tr##{dom_id(goal)}", text: "Delete"
     end
@@ -85,7 +85,6 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     assert_no_selector "form#new_goal"
     # can not edit, delete goal for himself
     @employee.goals.each do |goal|
-      
       assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
       assert_no_selector "tr##{dom_id(goal)}", text: "Delete"
     end
@@ -104,7 +103,6 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     # can edit goals for subordinates
     # can delete goals create by him
     @employee.goals.each do |goal|
-      
       assert_selector "tr##{dom_id(goal)}", text: "Edit"
       if goal.user == @lead
         assert_selector "tr##{dom_id(goal)}", text: "Delete"
@@ -163,7 +161,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     assert_no_selector "form#new_goal"
     # can see goal detail button
     # can not see edit delete button
-    @employee.goals.each do |goal|      
+    @employee.goals.each do |goal|
       assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
       assert_no_selector "tr##{dom_id(goal)}", text: "Delete"
     end
@@ -211,7 +209,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     # can not create a goal for himself
     assert_no_selector "form#new_goal"
     # can not edit, delete goal for himself
-    @employee.goals.each do |goal|      
+    @employee.goals.each do |goal|
       assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
       assert_no_selector "tr##{dom_id(goal)}", text: "Delete"
     end

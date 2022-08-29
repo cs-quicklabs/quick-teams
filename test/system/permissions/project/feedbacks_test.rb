@@ -24,9 +24,9 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#project-tabs", text: "Feedbacks"
     assert_selector "form#new_feedback"
-    feedback = @project.feedbacks.first    
+    feedback = @project.feedbacks.first
     assert_selector "tr##{dom_id(feedback)}", text: "Delete"
-    feedback = @project.feedbacks.last    
+    feedback = @project.feedbacks.last
     assert_selector "tr##{dom_id(feedback)}", text: "Delete"
   end
 
@@ -84,7 +84,7 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     feedbacks.each do |feedback|
       if feedback.user_id == @employee.id
         assert_selector "tr##{dom_id(feedback)}", text: "Delete" #can delete feedback added by him
-      else        
+      else
         assert_no_selector "tr##{dom_id(feedback)}", text: "Delete"
       end
     end
