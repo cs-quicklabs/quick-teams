@@ -11,7 +11,7 @@ class SchedulesController < BaseController
 
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
-    @free_resources = free_of_schedule(employees)
+    @free_resources = free_of_schedule(employees).round(2)
     @total_resources = employees.count
 
     @pagy, @employees = pagy_nil_safe(params, employees, items: 20)
