@@ -12,8 +12,6 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
-  get "checkout", to: "checkout#show"
-
   namespace :account do
     resources :roles, except: [:new, :show]
     resources :disciplines, except: [:new, :show]
@@ -76,6 +74,7 @@ Rails.application.routes.draw do
     get "about/edit", to: "employee/about#edit", as: "edit"
     patch "about/update", to: "employee/about#update", as: "update"
   end
+
   post "/ticket/comment/:id", to: "tickets#comment", as: "ticket_comment"
   get "/ticket/open", to: "tickets#open", as: "ticket_open"
   get "/ticket/closed", to: "tickets#closed", as: "ticket_closed"
@@ -90,6 +89,7 @@ Rails.application.routes.draw do
   resources :templates do
     resources :assignees
   end
+
   resources :surveys do
     resources :questions, module: "survey"
     resources :assignees, module: "survey", as: "assignees"
@@ -115,11 +115,13 @@ Rails.application.routes.draw do
   get "/occupancy/:id", to: "schedules#occupancy", as: "schedules_occupancy"
   get "/occupancy", to: "schedules#occupancy", as: "account_occupancy"
 
+  # search routes
   get "search/people-projects", to: "search#people_projects"
   get "/search/employee/skills", to: "search#employee_skills"
   get "/search/project/skills", to: "search#project_skills"
   get "/search/documents", to: "search#documents"
   get "/search/surveys", to: "search#surveys"
+
   get :goals, controller: :home
   get :events, controller: :home
 
@@ -179,8 +181,8 @@ Rails.application.routes.draw do
     resources :checkouts
   end
 
+  # purchase routes
   get "success", to: "purchase/checkouts#success", as: "success"
   get "expired", to: "purchase/billings#expired", as: "expired"
-
   post "billings", to: "purchase/billings#create", as: "billing_portal"
 end
