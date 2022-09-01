@@ -10,7 +10,7 @@ class AccountMiddleware
       if account = Account.find_by(id: account_id)
         Current.account = account
         ActsAsTenant.current_tenant = account
-        if account.expired? and request_path != "expired"
+        if account.expired? and request_path != "expired" and not env["REQUEST_PATH"].include?("sign_out")
           return [302, { "Location" => "/#{account.id}/expired" }, []]
         end
       else
