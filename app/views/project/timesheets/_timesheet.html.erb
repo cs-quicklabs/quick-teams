@@ -1,6 +1,6 @@
 <tr id="<%= dom_id timesheet %>">
   <td class="table-cell whitespace-nowrap">
-    <a href="<%= project_timesheets_path(timesheet.user) %>" class="block hover:underline">
+    <a href="<%= employee_timesheets_path(timesheet.user) %>" class="block hover:underline">
       <%= timesheet.user.decorate.display_name %>
     </a>
   </td>
@@ -15,8 +15,10 @@
   </td>
   <td class="table-cell">
     <% if policy([@project, timesheet]).edit? %>
-      <%= edit_button(edit_project_timesheet_path(@project, timesheet)) %>
-      <%= delete_button(project_timesheet_path(@project, timesheet)) %>
+      <div class="flex justify-end space-x-2">
+        <%= edit_button(edit_project_timesheet_path(@project, timesheet)) %>
+        <%= delete_button(project_timesheet_path(@project, timesheet)) %>
+      </div>
     <% end %>
   </td>
 </tr>
