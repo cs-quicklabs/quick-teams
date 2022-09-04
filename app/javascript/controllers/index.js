@@ -25,6 +25,10 @@ import consumer from '../channels/consumer'
 import controller from '../controllers/application_controller'
 import CableReady from 'cable_ready'
 application.register("confirmation", ConfirmationController)
+
+import StripeSdkController from "./stripe_sdk_controller.js"
+application.register("stripe-sdk", StripeSdkController)
+
 StimulusReflex.initialize(application, { controller, isolate: true })
 CableReady.initialize({ consumer })
 application.consumer = consumer
