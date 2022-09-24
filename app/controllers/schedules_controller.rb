@@ -29,7 +29,9 @@ class SchedulesController < BaseController
   def employees_for_schedule
     employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job, :status).order(:first_name)
     if params[:job]
-      employees = employees.where(job: params[:job])
+      employees = employees.where(job: params[:job]).where(billable: true)
+    elsif params[:role]
+      employees = employees.where(role: params[:role]).where(billable: true)
     else
       employees = employees.where(billable: true)
     end
@@ -88,12 +90,23 @@ class SchedulesController < BaseController
   def occupancy
     authorize :schedules
 
-    if params[:id]
-      job = Job.find(params[:id])
-      @occupancy = JobOccupancy.occupancy_for_job(job)
-    else
-      @occupancy = JobOccupancy.occupancy_for_account(current_user.account)
-    end
+    @occupancy = Occupancy.occupancy_for_account(current_user.account)
+    render "shared/occupancy"
+  end
+
+  def jobs_occupancy
+    authorize :schedules
+
+    job = Job.find(params[:id])
+    @occupancy = JobOccupancy.occupancy_for_job(job)
+    render "shared/occupancy"
+  end
+
+  def roles_occupancy
+    authorize :schedules
+
+    role = Role.find(params[:id])
+    @occupancy = RoleOccupancy.occupancy_for_role(role)
     render "shared/occupancy"
   end
 

@@ -30,4 +30,12 @@ class SchedulesPolicy < Struct.new(:user, :schedules)
   def occupancy?
     user.admin?
   end
+
+  def jobs_occupancy?
+    user.admin?
+  end
+
+  def roles_occupancy?
+    user.admin?
+  end
 end

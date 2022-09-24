@@ -112,7 +112,8 @@ Rails.application.routes.draw do
   get "/home", to: "home#index", as: "home"
 
   get "/schedule", to: "schedules#index", as: "schedules"
-  get "/occupancy/:id", to: "schedules#occupancy", as: "schedules_occupancy"
+  get "/occupancy/jobs/:id", to: "schedules#jobs_occupancy", as: "jobs_occupancy"
+  get "/occupancy/roles/:id", to: "schedules#roles_occupancy", as: "roles_occupancy"
   get "/occupancy", to: "schedules#occupancy", as: "account_occupancy"
 
   # search routes
