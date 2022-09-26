@@ -22,15 +22,15 @@
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.1.0.tgz#20215251e5afe6e0a3787285181ba1bfc9097df0"
   integrity sha512-iDMHUhiEJ1xFeicyHcZQQgBzhtk5mPR0QZO3L6wtqzMsJEk2TKECuCQTGKjm+KJTHVY0dKq1dOOAWvODjpd2Mg==
 
-"@hotwired/turbo-rails@7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.2.0.tgz#2081ed4e626fac9fd61ba5a4d1eeb53e6ea93b03"
-  integrity sha512-RxJJGINeLa2lyI078LLSbqZDI7RarxTDMVlgKnsLvtFEn8Pa7ySEcDUxHp5YiLXGbLacAIH/dcfD0JfCWe5Dqw==
+"@hotwired/turbo-rails@7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.1.0.tgz#63df3f0e11aea7c451983266c80ad8896f310952"
+  integrity sha512-eB/PTZQYl7dPm51AfBwm0sBpohJ7eir/JmuOfwJG297lEEA8sFcvpxVON/87Ne97OyAOcORZtLpX0KB+t9afyw==
   dependencies:
-    "@hotwired/turbo" "^7.2.0"
-    "@rails/actioncable" "^7.0"
+    "@hotwired/turbo" "^7.1.0"
+    "@rails/actioncable" "^6.0.0"
 
-"@hotwired/turbo@^7.2.0":
+"@hotwired/turbo@^7.1.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.2.0.tgz#4ff90d80fda17e69b04a12bbf0a42f09953504f6"
   integrity sha512-CYr6N9NfqsjhmZx1xVQ8zYcDo4hTm7sTUpJydbNgMRyG+YfF/9ADIQQ2TtcBdkl2zi/12a3OTWX0UMzNZnAK9w==
@@ -61,10 +61,10 @@
   resolved "https://registry.npmjs.org/@rails/actioncable/-/actioncable-6.1.4.tgz"
   integrity sha512-0LmSKJTuo2dL6BQ+9xxLnS9lbkyfz2mBGeBnQ2J7o9Bn0l0q+ZC6VuoZMZZXPvABI4QT7Nfknv5WhfKYL+boew==
 
-"@rails/actioncable@^7.0":
-  version "7.0.4"
-  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.0.4.tgz#70a3ca56809f7aaabb80af2f9c01ae51e1a8ed41"
-  integrity sha512-tz4oM+Zn9CYsvtyicsa/AwzKZKL+ITHWkhiu7x+xF77clh2b4Rm+s6xnOgY/sGDWoFWZmtKsE95hxBPkgQQNnQ==
+"@rails/actioncable@^6.0.0":
+  version "6.1.7"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.1.7.tgz#8b4506925d3f7146a70941e4db7ce9dda99f99ae"
+  integrity sha512-F6S74NGpxhbbDRFsQFGYqefRfZPgYvePNtz9hHKYOqLturrsqrDoG+UcrxEGHsvqDUorMYfx4Wl3K8smmk/u2g==
 
 "@rails/actiontext@6.1.4-1":
   version "6.1.4-1"
