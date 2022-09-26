@@ -32,7 +32,6 @@ gem "stimulus-rails", "1.1.0"
 
 # Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
 gem "stimulus_reflex", "= 3.5.0.pre8"
-gem "rack", git: "https://github.com/rack/rack.git", ref: "8be612a"
 
 # Use Redis adapter to run Action Cable in production
 gem "hiredis"
