@@ -18,13 +18,13 @@ application.register("modal", ModalController)
 import NavSearchController from "./nav_search_controller"
 application.register("nav-search", NavSearchController)
 
-
 import ConfirmationController from "./confirmation_controller"
+application.register("confirmation", ConfirmationController)
+
 import StimulusReflex from 'stimulus_reflex'
 import consumer from '../channels/consumer'
 import controller from '../controllers/application_controller'
 import CableReady from 'cable_ready'
-application.register("confirmation", ConfirmationController)
 
 StimulusReflex.initialize(application, { controller, isolate: true })
 CableReady.initialize({ consumer })
