@@ -37,6 +37,8 @@ Rails.application.configure do
   config.active_storage.service = :local
   Rails.application.config.active_storage.variant_processor = :mini_magick
 
+  config.action_view.preload_links_header = false
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
