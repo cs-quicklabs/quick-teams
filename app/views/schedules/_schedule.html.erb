@@ -2,9 +2,14 @@
 <tr id="<%= dom_id(employee) %>">
   <td class="table-cell whitespace-nowrap">
     <div class="flex items-center">
-      <div class="flex-shrink-0 w-10 h-10">
-        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
-      </div>
+      <span class="relative inline-block">
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full", title: employee.billable? ? "Billable" : "Non Billable" %>
+        <% if employee.billable? %>
+          <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
+        <% else %>
+          <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+        <% end %>
+      </span>
       <div class="ml-4">
         <a href="<%= employee_schedules_path(employee) %>" class="truncate hover:text-gray-600 hover:underline">
           <div class="text-sm font-medium text-gray-900">

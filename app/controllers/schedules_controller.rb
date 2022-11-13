@@ -11,8 +11,11 @@ class SchedulesController < BaseController
 
     @jobs = Job.all.order(:name)
     @roles = Role.all.order(:name)
-    @free_resources = free_of_schedule(employees).round(2)
+
     @total_resources = employees.count
+    @billable = employees.where(billable: true).count
+    @free_resources = free_of_schedule(employees.where(billable: true)).round(2)
+    @billed = (@billable - @free_resources).round(2)
 
     @pagy, @employees = pagy_nil_safe(params, employees, items: 20)
     if stale?(@employees)
@@ -29,12 +32,13 @@ class SchedulesController < BaseController
   def employees_for_schedule
     employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job, :status).order(:first_name)
     if params[:job]
-      employees = employees.where(job: params[:job]).where(billable: true)
+      employees = employees.where(job: params[:job])
     elsif params[:role]
-      employees = employees.where(role: params[:role]).where(billable: true)
+      employees = employees.where(role: params[:role])
     else
-      employees = employees.where(billable: true)
+      employees = employees
     end
+    employees
   end
 
   def free_of_schedule(employees)
