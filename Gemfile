@@ -35,7 +35,7 @@ gem "stimulus_reflex", "= 3.5.0.pre8"
 
 # Use Redis adapter to run Action Cable in production
 gem "hiredis"
-gem "redis", ">= 4.0"
+gem "redis", "4.8.0"
 gem "valid_url"
 
 # Use Active Storage variant
@@ -62,8 +62,8 @@ gem "devise_invitable", "~> 2.0.0"
 gem "devise-pwned_password"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
-gem "sidekiq"
-gem "sidekiq-scheduler"
+gem "sidekiq", "6.5.8"
+gem "sidekiq-scheduler", "4.0.2"
 gem "sinatra", ">= 1.3.0", require: nil
 
 # Payments
