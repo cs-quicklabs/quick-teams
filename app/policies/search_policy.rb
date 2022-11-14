@@ -18,4 +18,12 @@ class SearchPolicy < Struct.new(:user, :search)
   def surveys?
     user.admin?
   end
+
+  def deactivated?
+    user.admin?
+  end
+
+  def archived?
+    user.admin?
+  end
 end

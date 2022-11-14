@@ -118,6 +118,8 @@ Rails.application.routes.draw do
 
   # search routes
   get "search/people-projects", to: "search#people_projects"
+  get "search/deactivated", to: "search#deactivated"
+  get "search/archived", to: "search#archived"
   get "/search/employee/skills", to: "search#employee_skills"
   get "/search/project/skills", to: "search#project_skills"
   get "/search/documents", to: "search#documents"

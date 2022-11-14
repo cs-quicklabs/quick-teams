@@ -51,4 +51,21 @@ class SearchController < BaseController
       .limit(10).order(:name)
     render layout: false
   end
+
+  def deactivated
+    authorize :search
+
+    like_keyword = "%#{params[:q]}%".split(/\s+/)
+    @employees = User.for_current_account.inactive.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
+      .or(User.for_current_account.inactive.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
+      .limit(4).order(:first_name)
+    render layout: false
+  end
+
+  def archived
+    authorize :search
+    like_keyword = "%#{params[:q]}%".split(/\s+/)
+    @projects = Project.archived.where("name iLIKE ANY ( array[?] )", like_keyword).limit(4).order(:name)
+    render layout: false
+  end
 end
