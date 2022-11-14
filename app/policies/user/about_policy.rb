@@ -4,10 +4,10 @@ class User::AboutPolicy < User::BaseUserPolicy
   end
 
   def edit?
-    self? or is_admin?
+    self? or is_admin? && is_active?
   end
 
   def update?
-    self? or is_admin?
+    edit?
   end
 end

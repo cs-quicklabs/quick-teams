@@ -13,7 +13,7 @@
                   <p class="pb-2 mt-1 text-sm font-medium text-gray-900 truncate"><%= "Employee Schedules (" + @schedules.load.size.to_s + ")" %></p>
                 </div>
                 <ul class="divide-y divide-gray-200" id="schedules">
-                  <%= render partial: "employee/schedules/schedule", collection: @schedules, cached: true %>
+                  <%= render partial: "employee/schedules/schedule", collection: @schedules, cached: false %>
                 </ul>
               </div>
             </div>

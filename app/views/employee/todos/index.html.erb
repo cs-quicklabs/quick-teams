@@ -30,7 +30,7 @@
                     </tr>
                   </thead>
                   <tbody class="table-body" id="todos" data-infinite-scroll-target="entries">
-                    <%= render partial: "employee/todos/todo", collection: @todos, cached: true %>
+                    <%= render partial: "employee/todos/todo", collection: @todos, cached: false %>
                   </tbody>
                 </table>
                 <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">

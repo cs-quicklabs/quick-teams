@@ -29,7 +29,7 @@
                   </tr>
                 </thead>
                 <tbody class="table-body" id="goals" data-infinite-scroll-target="entries">
-                  <%= render partial: "goal", collection: @goals, cached: true %>
+                  <%= render partial: "goal", collection: @goals, cached: false %>
                 </tbody>
               </table>
               <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
