@@ -1,5 +1,5 @@
 class User::SurveyPolicy < User::BaseUserPolicy
-  def delete?
+  def destroy?
     is_active?
   end
 end
