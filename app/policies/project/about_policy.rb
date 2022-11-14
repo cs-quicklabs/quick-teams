@@ -4,10 +4,10 @@ class Project::AboutPolicy < Project::BaseProjectPolicy
   end
 
   def edit?
-    index?
+    index? && is_active?
   end
 
   def update?
-    index?
+    edit?
   end
 end

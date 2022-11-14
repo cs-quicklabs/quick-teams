@@ -18,7 +18,7 @@
     <%= timesheet.hours %>
   </td>
   <td class="table-cell">
-    <% if policy([@employee, timesheet]).update? %>
+    <% if policy([@employee, timesheet]).edit? %>
       <div class="flex justify-end space-x-2">
         <%= edit_button(edit_employee_timesheet_path(@employee, timesheet)) %>
         <%= delete_button(employee_timesheet_path(@employee, timesheet)) %>

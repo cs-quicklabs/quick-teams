@@ -14,7 +14,9 @@
                   <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     <span class="flex-grow whitespace-pre-wrap text-justify"><%= @project.about.to_s.upcase_first %></span>
                     <span class="ml-4 flex-shrink-0">
-                      <%= edit_button(project_edit_path(@project)) %>
+                      <% if policy([@project, :about]).edit? %>
+                        <%= edit_button(project_edit_path(@project)) %>
+                      <% end %>
                     </span>
                   </dd>
                 <% end %>
