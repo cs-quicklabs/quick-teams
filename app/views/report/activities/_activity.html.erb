@@ -1,0 +1,9 @@
+<tr>
+  <td class="table-cell  whitespace-nowrap">
+    <%= event.action_for_context %>
+    <a href="<%= event.account.id%>/<%=event.eventable.class.name%>/<%=event.eventable_id%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
+  </td>
+  <td class="table-cell  whitespace-nowrap">
+    <%= display_created_at(event) %>
+  </td>
+</tr>
