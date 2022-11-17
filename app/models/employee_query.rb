@@ -46,5 +46,13 @@ class EmployeeQuery
     def billable(param)
       where(billable: param)
     end
+
+    def role_id(param)
+      where(role_id: param)
+    end
+
+    def job_id(param)
+      where(job_id: param)
+    end
   end
 end

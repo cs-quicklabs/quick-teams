@@ -29,26 +29,21 @@
           </div>
         </div>
       <% else %>
-        <div class="w-full overflow-hidden" data-controller="infinite-scroll">
-          <!-- This example requires Tailwind CSS v2.0+ -->
-          <table class="table">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="table-head">
-                  Activity
-                </th>
-                <th scope="col" class="table-head">
-                  Date
-                </th>
-              </tr>
-            </thead>
-            <tbody class="table-body" data-infinite-scroll-target="entries">
-              <%= render partial: "activity", collection: @events, as: :event, cached: true %>
-            </tbody>
-          </table>
-          <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-            <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
-          </div>
+        <div class="w-full overflow-hidden py-6 px-8" data-controller="infinite-scroll">
+          <turbo-frame id="events">
+            <ul>
+              <% @events.each do |event| %>
+                <% if lookup_context.template_exists?(event.action, "home", true) %>
+                  <% cache event do %>
+                    <%= render partial: "home/"+event.action, locals: { event: event } %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </ul>
+            <% if @events.size == 0 %>
+              <p class="pr-4 mt-2 text-sm text-right text-gray-500">No record found.</p>
+            <% end %>
+          </turbo-frame>
         </div>
       <% end %>
     <% else %>

@@ -9,6 +9,8 @@ class EmployeeFilter
     tag
     permission
     billable
+    role_id
+    job_id
   ].freeze
 
   attr_accessor(*KEYS)
