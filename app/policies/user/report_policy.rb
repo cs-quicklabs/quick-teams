@@ -14,7 +14,7 @@ class User::ReportPolicy < User::BaseUserPolicy
   end
 
   def destroy?
-    edit? && is_admin?
+    edit? or is_admin?
   end
 
   private
