@@ -1,0 +1,53 @@
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
+  <!-- Page title & actions -->
+  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
+      <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        Activities
+      </h1>
+    </div>
+  </div>
+</div>
+<div class="flex w-full overflow-hidden bg-white">
+  <div class="flex w-full">
+    <%= render partial: "form" %>
+    <% if @events.size > 0 %>
+      <% if @events.size > 100 %>
+        <div class="w-full text-center sm:rounded-lg">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg font-medium leading-6 text-center text-gray-900">
+              Too many results
+            </h3>
+            <div class="mt-2 text-sm text-center text-gray-500">
+              <p>Current search query returned too many results. Please download CSV file to see all records.</p>
+            </div>
+            <div class="mt-5">
+              <button type="button" class="btn-blue">
+                Download CSV
+              </button>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="w-full overflow-hidden py-6 px-8" data-controller="infinite-scroll">
+          <turbo-frame id="events">
+            <ul>
+              <% @events.each do |event| %>
+                <% if lookup_context.template_exists?(event.action, "home", true) %>
+                  <% cache event do %>
+                    <%= render partial: "home/"+event.action, locals: { event: event } %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </ul>
+            <% if @events.size == 0 %>
+              <p class="pr-4 mt-2 text-sm text-right text-gray-500">No record found.</p>
+            <% end %>
+          </turbo-frame>
+        </div>
+      <% end %>
+    <% else %>
+      <%= render partial: "shared/no_result_found", cached: true %>
+    <% end %>
+  </div>
+</div>
