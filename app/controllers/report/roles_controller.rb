@@ -10,6 +10,6 @@ class Report::RolesController < Report::BaseController
   private
 
   def employee_filter_params
-    params.permit(*EmployeeFilter::KEYS)
+    params.except(:commit).permit(*EmployeeFilter::KEYS)
   end
 end

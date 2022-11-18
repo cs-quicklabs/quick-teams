@@ -15,8 +15,4 @@ class Report::ActivitiesController < Report::BaseController
       entries
     end
   end
-
-  def event_filter_params
-    params.permit(*EventFilter::KEYS)
-  end
 end
