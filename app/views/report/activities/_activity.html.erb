@@ -1,9 +1,7 @@
-<tr>
-  <td class="table-cell  whitespace-nowrap">
-    <%= event.action_for_context.upcase_first %>
-    <a href="<%= event.account.id%>/<%=event.eventable.class.name%>/<%=event.eventable_id%>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
-  </td>
-  <td class="table-cell  whitespace-nowrap">
-    <%= display_created_at(event) %>
-  </td>
-</tr>
+ <% @events.each do |event| %>
+  <% if lookup_context.template_exists?(event.action, "home", true) %>
+    <% cache event do %>
+      <%= render partial: "home/"+event.action, locals: { event: event } %>
+    <% end %>
+  <% end %>
+<% end %>
