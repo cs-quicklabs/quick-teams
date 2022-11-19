@@ -22,14 +22,13 @@
             <tr class="border-gray-200 bg-gray-50 border-b">
               <th class=" table-head ">
                 <span class="lg:pl-2"><%= sort_link(column: "name", label: "Project") %> <%= sort_indicator if params[:column] == "name" %></span>
-                <span class="lg:pl-2"><%= sort_indicator if params[:column] == "name" %></span>
               </th>
               <% if current_user.admin? %>
                 <th class="table-head ">
                   Tags
                 </th>
                 <th class="table-head">
-                  <%= sort_link(column: "billable_resources", label: "Billed (#{@projects.map(&:billable_resources).compact.inject(0, &:+)})") %>   <%= sort_indicator if params[:column] == "billable" %>
+                  <%= sort_link(column: "billable_resources", label: "Billed (#{@projects.map(&:billable_resources).compact.inject(0, &:+)})") %>   <%= sort_indicator if params[:column] == "billable_resources" %>
                 </th>
               <% end %>
               <th class=" table-head ">

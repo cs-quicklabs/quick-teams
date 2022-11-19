@@ -12,37 +12,18 @@
   <div class="flex w-full">
     <%= render partial: "form" %>
     <% if @events.size > 0 %>
-      <% if @events.size > 100 %>
-        <div class="w-full text-center sm:rounded-lg">
-          <div class="px-4 py-5 sm:p-6">
-            <h3 class="text-lg font-medium leading-6 text-center text-gray-900">
-              Too many results
-            </h3>
-            <div class="mt-2 text-sm text-center text-gray-500">
-              <p>Current search query returned too many results. Please download CSV file to see all records.</p>
-            </div>
-            <div class="mt-5">
-              <button type="button" class="btn-blue">
-                Download CSV
-              </button>
-            </div>
-          </div>
-        </div>
-      <% else %>
-        <div class="w-full overflow-hidden py-6 px-8" data-controller="infinite-scroll">
-          <turbo-frame id="events">
-            <ul data-infinite-scroll-target="entries" class="list-none">
-              <%= render partial: "activity", collection: @events, cached: true %>
-            </ul>
-            <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-              <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
-            </div>
-            <% if @events.size == 0 %>
-              <p class="pr-4 mt-2 text-sm text-right text-gray-500">No record found.</p>
+      <div id="events" class="w-full overflow-hidden py-6 px-8">
+        <ul data-infinite-scroll-target="entries" class="list-none">
+          <% @events.each do |event| %>
+            <% if lookup_context.template_exists?(event.action, "home", true) %>
+              <% cache event do %>
+                <%= render partial: "home/#{event.action}", locals: { event: event } %>
+              <% end %>
             <% end %>
-          </turbo-frame>
-        </div>
-      <% end %>
+          <% end %>
+        </ul>
+        <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing <%= 500.to_s %> recently created events only.</p>
+      </div>
     <% else %>
       <%= render partial: "shared/no_result_found", cached: true %>
     <% end %>

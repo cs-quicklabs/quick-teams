@@ -1,18 +1,6 @@
 class Report::ActivitiesController < Report::BaseController
   def index
     authorize :report
-    @event_entries = entries(Event.includes(:user, :trackable, :eventable).where(created_at: params[:from_date]...(params[:to_date].to_date + 1.day).to_s))
-    @pagy, @events = pagy_nil_safe(params, @event_entries, items: LIMIT)
-    render_partial("report/activities/activity", collection: @events, cached: false)
-  end
-
-  private
-
-  def entries(entries)
-    if params[:format] == "csv"
-      entries
-    else
-      entries
-    end
+    @events = Event.includes(:user, :trackable, :eventable).where(created_at: params[:from_date].to_date...(params[:to_date]).to_date).order(created_at: :desc).limit(500)
   end
 end
