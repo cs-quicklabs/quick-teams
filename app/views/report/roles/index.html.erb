@@ -13,6 +13,7 @@
     <%= render partial: "form" %>
     <% if @employees.size > 0 %>
       <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+        <%= render partial: "report/employees/stats", locals: { stats: @stats } %>
         <!-- This example requires Tailwind CSS v2.0+ -->
         <table class="table">
           <thead class="bg-gray-50 ">

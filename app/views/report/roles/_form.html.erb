@@ -21,6 +21,12 @@
                 <%= form.collection_select(:role_id, Role.order(:name), :id, :name, { :prompt => "Select Role" , :selected => (params["role_id"] if !params["role_id"].blank?)}, :class => "form-text-field mt-1") %>
               </div>
               <div>
+                <label for="ends" class="block mt-4 text-sm font-medium text-gray-700">
+                  Select Discipline
+                </label>
+                <%= form.collection_select(:discipline_id, Discipline.order(:name), :id, :name, { :prompt => "Select Discipline" , :selected => (params["discipline_id"] if !params["discipline_id"].blank?)}, :class => "form-text-field mt-1") %>
+              </div>
+              <div>
                 <div>
                   <label for="billed" class="block text-sm font-medium text-gray-700">
                     Billable

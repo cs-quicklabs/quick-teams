@@ -11,6 +11,7 @@ class EmployeeFilter
     billable
     role_id
     job_id
+    discipline_id
   ].freeze
 
   attr_accessor(*KEYS)

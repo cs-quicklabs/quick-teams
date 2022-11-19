@@ -54,5 +54,9 @@ class EmployeeQuery
     def job_id(param)
       where(job_id: param)
     end
+
+    def discipline_id(param)
+      where(discipline_id: param)
+    end
   end
 end
