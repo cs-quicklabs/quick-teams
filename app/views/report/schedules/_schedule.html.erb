@@ -2,9 +2,7 @@
 <tr id="<%= dom_id(employee) %>">
   <td class="table-cell whitespace-nowrap">
     <div class="flex items-center">
-      <div class="flex-shrink-0 w-10 h-10">
-        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
-      </div>
+      <%= render partial: "shared/avatar", locals: {employee: employee }%>
       <div class="ml-4">
         <a href="<%= employee_schedules_path(employee) %>" class="truncate hover:text-gray-600 hover:underline">
           <div class="text-sm font-medium text-gray-900">
@@ -56,5 +54,12 @@
     <span class="inline-flex px-2 text-xl font-semibold leading-5  <%= employee.overall_occupancy > 100 ? "text-red-500" : (employee.overall_occupancy < 60 ? "text-green-500" : "text-gray-900") %>">
       <%= employee.display_occupancy %>
     </span>
+  </td>
+  <td class="table-cell whitespace-nowrap">
+    <% unless employee.status.nil? %>
+      <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= employee.status.color %>-800 bg-<%= employee.status.color %>-100 rounded-full">
+        <%= employee.status.name.upcase_first %>
+      </span>
+    <% end %>
   </td>
 </tr>
