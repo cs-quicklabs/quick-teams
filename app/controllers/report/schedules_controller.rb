@@ -58,4 +58,21 @@ class Report::SchedulesController < Report::BaseController
 
     planned_till < Date.today + 30.days
   end
+
+  def roles
+    authorize :report, :index?
+
+    @employees = User.for_current_account.active.includes(:status).query(employee_filter_params)
+    @stats = EmployeesStats.new(@employees)
+
+    @pagy, @employees = pagy_nil_safe(params, @employees, items: LIMIT)
+
+    fresh_when @employees
+  end
+
+  private
+
+  def employee_filter_params
+    params.except(:commit).permit(*EmployeeFilter::KEYS)
+  end
 end
