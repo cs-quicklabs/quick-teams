@@ -67,8 +67,8 @@ gem "sidekiq-scheduler", "4.0.2"
 gem "sinatra", ">= 1.3.0", require: nil
 
 # Payments
-gem "pay", "5.0.3"
-gem "stripe", "~> 7.0"
+gem "pay", "~> 6.0"
+gem "stripe", "~> 8.0"
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
