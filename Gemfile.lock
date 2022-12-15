@@ -390,7 +390,7 @@ DEPENDENCIES
   mimemagic!
   newrelic_rpm
   pagy
-  pay (~> 6.0)
+  pay (= 6.1.0)
   pg (= 1.2.3)
   pg_search
   puma (= 6.0.0)
