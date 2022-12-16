@@ -74,7 +74,8 @@ class ProjectsController < BaseController
 
     projects = Project.archived.includes(:discipline).order(archived_on: :desc)
     @pagy, @projects = pagy_nil_safe(params, projects, items: LIMIT)
-    render_partial("projects/archived_project", collection: @projects, cached: true) if stale?(@projects)
+
+    render_partial_as("projects/archived_project", collection: @projects, as: :project, cached: true) if stale?(@projects)
   end
 
   def archive_project
