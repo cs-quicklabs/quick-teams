@@ -8,6 +8,11 @@ class SubscriptionManager
   def template
     payment_processor = user.payment_processor
 
+    #something went wrong with payment processor
+    if payment_processor.nil?
+      user.set_payment_processor :stripe
+    end
+
     # user signed up and is under trial period
     # he has not done anything yet with payments
     if payment_processor.on_generic_trial?
