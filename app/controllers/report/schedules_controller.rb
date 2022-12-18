@@ -67,7 +67,7 @@ class Report::SchedulesController < Report::BaseController
 
     @pagy, @employees = pagy_nil_safe(params, @employees, items: LIMIT)
 
-    fresh_when @employees
+    render_partial_as("report/schedules/schedule", collection: @employees, as: :employee, cached: false)
   end
 
   private
