@@ -5,4 +5,6 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
 
   validates_presence_of :title, :null => false
+
+  has_rich_text :body
 end

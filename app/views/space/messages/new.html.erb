@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "message", target: "_top" do %>
+  <%= render partial: "form", locals: { space_message: @space_message, space: @space, title: "Add New Message", subtitle: "Add new message into #{@space.title}" } %>
+<% end %>

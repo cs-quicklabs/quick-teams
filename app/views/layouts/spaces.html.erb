@@ -23,7 +23,7 @@
     <%= stylesheet_link_tag "slim", "data-turbo-track": "reload" %>
     <%= favicon_link_tag "favicon.png" %>
   </head>
-  <body>
+  <body class="bg-gray-50">
     <% if user_signed_in? %>
       <%= render "shared/navbar/navbar" %>
       <div id="modal"></div>

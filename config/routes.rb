@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     resources :ticket_statuses, except: [:new, :show]
     resources :ticket_labels, except: [:new, :show]
   end
+  resources :spaces do
+    resources :messages, module: "space"
+  end
+  resources :message_comments, only: [:create, :update, :destroy]
 
   resources :projects do
     resources :schedules, module: "project"

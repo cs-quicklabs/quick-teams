@@ -1,0 +1,27 @@
+<div id="add" >
+  <div class="px-4  sm:px-6">
+    <div class="flex space-x-3">
+            <div class="flex-shrink-0">
+          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+        </div>
+      <div class="flex-1 min-w-0">
+        <%= form_with(model: comment,  id: dom_id(comment), url: message_comments_path, method: :post) do |form| %>
+          <%= render "shared/form_messages", resource: comment, message: local_assigns[:message] %>
+          <%= form.hidden_field :commentable_id, :value => space_message.id %>
+                    <%= form.hidden_field :user_id, :value => current_user.id %>
+          <div>
+             <%= form.rich_text_area :body, class: "form-text-field" %>
+          </div>
+          <div  class="flex items-center justify-between mt-3">
+            <div class="flex">
+            </div>
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <span class="relative z-0 inline-flex rounded-md shadow-sm">
+              <%= form.submit "Submit", class: "cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500" %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

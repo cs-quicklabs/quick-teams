@@ -1,0 +1,31 @@
+ <main class="relative z-0 flex-1 overflow-x-scroll focus:outline-none">
+  <div class="px-8 py-6 border-x-2 border-gray-500 h-full ">
+  <div class="px-8 ">
+   <div class="flex justify-center py-1 border-gray-500 border-x-2 border-t-2 rounded full shadow-lg">
+ 
+    <a href="<%=space_messages_path(@space)%>">
+   <h1 class="text-2xl font-extrabold "><%=@space.title.titleize%></h1>
+   </a>
+   </div>
+     </div>
+     <div class="">
+    <div class="flex justify-between border-y-2 px-6 border-gray-500 py-6 ">
+      <div class=" flex ">
+        <%= link_to "New Message", new_space_message_path(@space.id), class: "btn-blue  " %>
+      </div>
+      <div class="flex">
+        <h1 class="text-3xl font-extrabold ">Messages</h1>
+      </div>
+      <div class="flex">
+        <select class="form-text-field w-40" name="sort" id="sort">
+          <option value="">Sort Messages By</option>
+        </select>
+      </div>
+    </div>
+    <div class="relative py-6 px-24" id="release_notes">
+      <ul role="list" class="divide-y divide-gray-200">
+        <%= render partial: "message", collection: @messages, as: :message, cached: true %>
+      </ul>
+    </div>
+    </div>
+  </main>

@@ -21,6 +21,9 @@ application.register("nav-search", NavSearchController)
 import ConfirmationController from "./confirmation_controller"
 application.register("confirmation", ConfirmationController)
 
+import StimulusSlimSelect from "./slim_select_controller"
+application.register('slimselect', StimulusSlimSelect)
+
 import StimulusReflex from 'stimulus_reflex'
 import consumer from '../channels/consumer'
 import controller from '../controllers/application_controller'
