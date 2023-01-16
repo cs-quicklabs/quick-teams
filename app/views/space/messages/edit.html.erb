@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "message_form", target: "_top" do %>
+  <%= render partial: "space/messages/form", locals: { space_message: @message, title: "Edit Thread", subtitle: "Please update Thread into existing space#{@message.space.title}", space: @space, url: space_message_path(@space, @message), method: "patch" } %>
+<% end %>

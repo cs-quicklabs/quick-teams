@@ -1,35 +1,80 @@
+</div>
 <!-- This example requires Tailwind CSS v2.0+ -->
-<main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
-  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+<main class="max-w-4xl px-4 pt-10 pb-12 mx-auto  lg:pb-16" >
+  <div class="px-4 py-4  sm:px-6 lg:px-8" id="message-header" data-scroll-top-target="message-header">
     <%= render partial: "shared/messages/title", locals: { message: @message } %>
-    <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
-      <% if policy([@space, @message]).edit? %>
-        <%= link_to "Edit", edit_employee_message_path(@message.messageable, @message), class: "btn-blue ml-3" %>
-      <% end %>
-    </div>
   </div>
   <% cache @message do %>
-    <div class="text-sm text-gray-700 sm:px-6 lg:px-8">
-      <p><%= @message.body %></p>
+    <div class="text-sm  sm:px-6 lg:px-8 py-6 border-b border-gray-200  text-gray-700"  >
+      <p class=""><%= @message.body %></p>
     </div>
   <% end %>
   <!-- Comments-->
   <section aria-labelledby="notes-title">
-    <div class="pb-24 bg-white sm:rounded-lg overflow">
-      <div class="divide-y divide-gray-200">
-        <div class="px-4 py-5 sm:px-6">
-          <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments</h2>
-        </div>
-        <div class="px-4 py-6 sm:px-6">
-          <ul class="space-y-4" id="comments">
-            <%= render partial: "shared/comments/body", collection: @message.comments.includes(:user).order(created_at: :asc), as: :comment, cached: true %>
+    <div class="bg-white sm:rounded-lg   ">
+      <div class="relative h-max " >
+        <% comments= @message.comments.includes(:user).order(created_at: :asc) %>
+        <% if comments.size < 10 %>
+          <div id="comments">
+            <ul role="list" class="relative z-0 divide-y divide-gray-200 "  >
+              <%= render partial: "message_comments/message_comment", collection: comments, as: :comment, cached: false %>
+            </ul>
+          </div>
+        <% else %>
+          <%display_comments = comments.last(10) %>
+          <div  data-controller="comments" >
+            <div class="relative py-6" id="load-comments">
+              <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="w-full border-t border-gray-300"></div>
+              </div>
+              <div class="relative flex justify-center">
+                <%= link_to "Show older Comments", "#", data: { action: "click->comments#toggleComments" } , class: "inline-flex items-center rounded-full border border-gray-300 bg-white px-4 py-1.5 text-sm font-medium leading-5 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"%>
+              </div>
+            </div>
+            <ul role="list" >
+              <%= render partial: "message_comments/hidden_comment", collection: comments-display_comments, as: :comment, cached: false %>
+            </ul>
+          </div>
+          <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
+            <%= render partial: "message_comments/message_comment", collection: display_comments, as: :comment, cached: false %>
           </ul>
-        </div>
+        <% end %>
       </div>
-      <% if policy([@space, @message]).comment? %>
-        <%= render partial: "shared/comments/new", locals: { space_message: @message, comment: @comment } %>
-      <% end %>
+      <div data-controller="toggle" class="px-6" id="comment-form">
+        <% if policy([@space, @message]).comment? %>
+          <div class="flex space-x-3 " data-action= "click->toggle#toggle" data-toggle-target="comment_form">
+            <div class="flex-shrink-0 mt-4">
+              <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full cursor-pointer", title: current_user.decorate.display_name %>
+            </div>
+            <button class="inline-edit text-gray-500 mt-4 " id="show-comment-form"  >
+              Add a comment
+            </button>
+          </div>
+          <div class="hidden " data-toggle-name="comment_form">
+            <%= render partial: "message_comments/new", locals: { space_message: @message, comment: @comment, url: message_comments_path, method: "post" } %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </section>
 </main>
+<div class="fixed bottom-0 left-0 w-full text-center px-6 py-4 ">
+  <div class="flex  justify-end">
+    <div class="flex flex-col space-y-2 justify-end">
+      <a  class=" items-center inset-0 bottom-2 cursor-pointer right-2 z-50 flex items-center justify-center w-8 h-8 text-white bg-gray-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+ data-controller="scroll-top"
+  data-scroll-top-target="#message-header" data-action ="click->scroll-top#scroll" id="scroll-top" >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      <a  class=" items-center pl-1 z-50 flex cursor-pointer w-8 h-8 text-white bg-gray-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+  data-controller="scroll-top"
+  data-scroll-top-target="#comment-form" data-action ="click->scroll-top#scroll" id="scroll-bottom">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z" clip-rule="evenodd" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

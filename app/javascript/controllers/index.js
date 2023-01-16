@@ -24,6 +24,18 @@ application.register("confirmation", ConfirmationController)
 import StimulusSlimSelect from "./slim_select_controller"
 application.register('slimselect', StimulusSlimSelect)
 
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)
+
+import CommentsController from "./comments_controller"
+application.register("comments", CommentsController)
+
+import ScrollTopController from "./scroll_top_controller"
+application.register("scroll-top", ScrollTopController)
+
+import SwapController from "./swap_controller"
+application.register("swap", SwapController)
+
 import StimulusReflex from 'stimulus_reflex'
 import consumer from '../channels/consumer'
 import controller from '../controllers/application_controller'

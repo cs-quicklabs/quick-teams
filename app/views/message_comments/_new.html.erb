@@ -1,0 +1,30 @@
+<div id="add" >
+  <div class="">
+    <div class="flex space-x-3">
+      <div class="flex-shrink-0 mt-4">
+        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full cursor-pointer", title: current_user.decorate.display_name %>
+      </div>
+      <div class="flex-1 min-w-0">
+        <%= form_with(model: comment,  id: dom_id(comment), url: url, method: method) do |form| %>
+          <div class="mt-4">
+            <%= render "shared/form_messages", resource: comment, message: local_assigns[:message] %>
+          </div>
+          <%= form.hidden_field :commentable_id, :value => space_message.id %>
+          <%= form.hidden_field :user_id, :value => current_user.id %>
+          <div class="py-2">
+            <%= form.rich_text_area :body, class: "form-text-field" %>
+          </div>
+          <div  class="flex items-center justify-between mt-3">
+            <div class="flex">
+            </div>
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <span class="relative z-0 inline-flex ">
+              <%=link_to "Cancel","#", class: "btn-normal", data: { action: "click->toggle#hide", toggle_target:"comment_form"}%>
+              <%= form.submit "Comment", class: "btn-blue" %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_04_112021) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_104231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -184,6 +184,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_112021) do
     t.bigint "space_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "published", default: false
     t.index ["account_id"], name: "index_messages_on_account_id"
     t.index ["space_id"], name: "index_messages_on_space_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
@@ -331,6 +332,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_112021) do
     t.bigint "people_tag_id", null: false
   end
 
+  create_table "pinned_spaces", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "space_id", null: false
+    t.index ["space_id"], name: "index_pinned_spaces_on_space_id"
+    t.index ["user_id"], name: "index_pinned_spaces_on_user_id"
+  end
+
   create_table "preferences", force: :cascade do |t|
     t.string "key"
     t.string "value"
@@ -456,8 +464,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_112021) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "description"
+    t.boolean "pin", default: false
+    t.boolean "archive", default: false
+    t.datetime "archive_at"
     t.index ["account_id"], name: "index_spaces_on_account_id"
     t.index ["user_id"], name: "index_spaces_on_user_id"
+  end
+
+  create_table "spaces_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "space_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "survey_answers", force: :cascade do |t|
@@ -729,6 +747,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_112021) do
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
   add_foreign_key "people_statuses", "accounts"
   add_foreign_key "people_tags", "accounts"
+  add_foreign_key "pinned_spaces", "spaces"
+  add_foreign_key "pinned_spaces", "users"
   add_foreign_key "preferences", "accounts"
   add_foreign_key "project_statuses", "accounts"
   add_foreign_key "project_tags", "accounts"

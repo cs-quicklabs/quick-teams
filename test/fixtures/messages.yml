@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: This is published
+  user: regular
+  space: eight
+  published: true
+  account: crownstack
+
+two:
+  title: This is a message
+  user: regular
+  space: eight
+  published: false
+  account: crownstack  
