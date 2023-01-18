@@ -20,7 +20,7 @@
       </div>
     <% end %>
     <% if @spaces.size>0 %>
-      <div>
+      <div id="created-spaces">
         <h1 class="text-lg font-medium leading-6 text-gray-900 pb-6">Created by you</h1>
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           <%= render partial: "space", collection: @spaces, as: :space, cached: false %>
@@ -28,7 +28,7 @@
       </div>
     <% end %>
     <% if @shared_spaces.size>0 %>
-      <div>
+      <div id="shared-spaces">
         <h1 class="text-lg font-medium leading-6 text-gray-900 pb-6">Shared with you  </h1>
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           <%= render partial: "space", collection: @shared_spaces, as: :space, cached: false %>
@@ -36,7 +36,7 @@
       </div>
     <% end %>
     <% if @archive_spaces.size>0 %>
-      <div>
+      <div id="archived-spaces">
         <h1 class="text-lg font-medium pb-6 ">Archived spaces</h1>
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           <%= render partial: "space", collection: @archive_spaces, as: :space, cached: false %>

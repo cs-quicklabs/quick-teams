@@ -4,7 +4,7 @@ class SpacePolicy < ApplicationPolicy
   end
 
   def edit?
-    record.user == user && user.admin? && !record.archive
+    record.user == user && !record.archive
   end
 
   def update?
@@ -20,7 +20,7 @@ class SpacePolicy < ApplicationPolicy
   end
 
   def unarchive?
-    record.user == user && user.admin? && record.archive
+    record.user == user && record.archive
   end
 
   def pin?

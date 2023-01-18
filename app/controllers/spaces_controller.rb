@@ -6,7 +6,7 @@ class SpacesController < BaseController
     authorize :spaces
     @spaces_page = true
     @pin_spaces = current_user.pinned.order(created_at: :desc)
-    @spaces = Space.where(archive: false, pin: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
+    @spaces = Space.where(archive: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
     @shared_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
     @archive_spaces = Space.where(archive: true, pin: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
     render_partial("spaces/space", collection: @spaces, cached: true) if stale?(@spaces)

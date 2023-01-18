@@ -1,15 +1,42 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: This is published
+  title: This is a space
+  space: one
   user: regular
-  space: eight
-  published: true
   account: crownstack
 
 two:
-  title: This is a message
-  user: regular
-  space: eight
+  title: This is a archived space
+  space: six
+  user: lead
+  account: crownstack
+
+three:
+  title: This is a seven space
+  space: seven
+  user: lead
   published: false
   account: crownstack  
+
+four:
+  title: This is a seven space
+  space: seven
+  user: lead
+  published: true
+  account: crownstack 
+
+five:
+  title: This is a eight space
+  space: eight
+  user: lead
+  published: false
+  account: crownstack  
+
+six:
+  title: This is a eight space
+  space: eight
+  user: lead
+  published: true
+  account: crownstack   
+

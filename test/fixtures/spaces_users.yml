@@ -5,3 +5,8 @@ one:
 two:
   space: seven
   user: regular
+
+three:
+  space: eight
+  user: lead  
+

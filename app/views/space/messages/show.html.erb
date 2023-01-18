@@ -15,8 +15,8 @@
       <div class="relative h-max " >
         <% comments= @message.comments.includes(:user).order(created_at: :asc) %>
         <% if comments.size < 10 %>
-          <div id="comments">
-            <ul role="list" class="relative z-0 divide-y divide-gray-200 "  >
+          <div >
+            <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
               <%= render partial: "message_comments/message_comment", collection: comments, as: :comment, cached: false %>
             </ul>
           </div>
