@@ -1,6 +1,6 @@
 class Space::MessagePolicy < ApplicationPolicy
   def index?
-    true
+    (record.first.users.include?(user) || record.first.user == user)
   end
 
   def new?
@@ -12,11 +12,11 @@ class Space::MessagePolicy < ApplicationPolicy
   end
 
   def show?
-    record.last.published? || record.first.user == user
+    record.last.published? || record.first.user == user || record.first.users.include?(user)
   end
 
   def comment?
-    record.first.users.include?(user) && !record.first.archive && record.last.published?
+    (record.first.users.include?(user) || record.first.user == user) && !record.first.archive && record.last.published?
   end
 
   def edit?
@@ -36,6 +36,6 @@ class Space::MessagePolicy < ApplicationPolicy
   end
 
   def edit_comment?
-    record.first.user == user && !record.first.archive?
+    !record.first.archive?
   end
 end

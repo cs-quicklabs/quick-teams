@@ -18,12 +18,12 @@ class MessageCommentsController < BaseController
   end
 
   def edit
-    authorize [@message.space, @message], :edit_comment?
+    authorize @comment, :edit?
     @space_message = @message
   end
 
   def update
-    authorize [@message.space, @message], :edit_comment?
+    authorize @comment, :edit?
     @comment.title = comment_params[:body]
     respond_to do |format|
       if @comment.update(comment_params)
