@@ -39,3 +39,11 @@ en:
       date_before: "must be before %{date}"
       date_before_or_equal_to: "must be before or equal to %{date}"
       date_equal_to: "must be equal to %{date}"
+
+en:
+  activerecord:
+    attributes:
+      comment:
+        title:
+          one: Comment
+

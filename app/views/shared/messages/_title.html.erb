@@ -1,0 +1,52 @@
+<div class="flex   flex-col space-y-1">
+  <div class="flex justify-between " >
+    <div>
+      <%= link_to "Back", "javascript:history.back()", class: "btn-normal flex-none" %>
+    </div>
+    <div>
+      <h3 class="text-2xl font-bold leading-tight text-align-center px-16 ">
+        <%= highlight_hashtag(message.title.upcase_first) %>
+      </h3>
+    </div>
+    <div  x-on:click.outside="open = false" class="relative  " x-data="{ open: false }">
+      <% if policy([@space, @message]).edit?  || policy([@space, @message]).destroy? %>
+        <div>
+          <button @click="open = !open" id="message-menu" class=" flex-auto mt-1 ml-4 border border-gray-400 text-sm rounded-full hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100" id="user-menu" aria-haspopup="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+              <path fill-rule="evenodd" d="M4.5 12a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+        <div x-show="open"    x-transition.opacity class="absolute right-0 w-48 mt-2 origin-top-right rounded-md shadow-lg">
+          <div class="absolute right-0 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg w-60 ring-1 ring-black ring-opacity-5 z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+            <div>
+              <% if policy([@space, @message]).edit? %>
+                <a href=<%= edit_space_message_path(@space, @message) %> class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"  role= "menuitem">Edit</a>
+              <% end %>
+              <% if policy([@space, @message]).destroy? %>
+                <%= styled_delete_button(space_message_path(@space, @message), "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <% if @space.archive? %>
+      <span class="inline-flex items-center rounded bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800">Archived</span>
+    <% end %>
+  </div>
+  <div class="flex space-x-3 flex-row  justify-center">
+    <div class="flex-shrink-0">
+      <%= image_tag "male-placeholder-image.png", class: "w-7 h-7 rounded-full flex-auto" %>
+    </div>
+    <div class="text-sm mt-1">
+      <a href="<%= employee_path(message.user) %>" class=" flex-none font-medium text-gray-900 hover:underline"><%= message.user.decorate.display_name %></a>
+    </div>
+    <div class=" text-sm mt-1 text-gray-500">
+      —— on <%= display_created_at(message) %> </span>
+  </div>
+</div>
+</div>
+</div>
