@@ -9,6 +9,7 @@ class SpacesController < BaseController
     @my_spaces = Space.where(archive: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
     @shared_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
     @archived_spaces = Space.where(archive: true, user_id: current_user.id).includes(:users).order(created_at: :desc)
+    @total_spaces = @my_spaces.count + @shared_spaces.count + @archived_spaces.count + @pinned_spaces.count
     render_partial("spaces/space", collection: @my_spaces, cached: true) if stale?(@my_spaces)
   end
 
