@@ -1,5 +1,6 @@
 class Space::MessagesController < Space::BaseController
   before_action :set_message, only: %i[ show edit update destroy ]
+  before_action :set_space
 
   def index
     authorize [@space, :message]
