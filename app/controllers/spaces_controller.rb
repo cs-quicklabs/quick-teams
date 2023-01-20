@@ -4,6 +4,7 @@ class SpacesController < BaseController
 
   def index
     authorize :spaces
+    @all_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
     @pinned_spaces = current_user.pinned.order(created_at: :desc)
     @my_spaces = Space.where(archive: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
     @shared_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
@@ -70,7 +71,7 @@ class SpacesController < BaseController
 
   def archive
     authorize @space
-    @space.update(archive: true, pin: false, archive_at: Time.now)
+    @space.update(archive: true, archive_at: Time.now)
     redirect_to space_messages_path(@space), notice: "Space was archived successfully."
   end
 

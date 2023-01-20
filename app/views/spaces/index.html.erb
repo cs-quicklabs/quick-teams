@@ -10,10 +10,10 @@
       <%= link_to "Add New Space", new_space_path, class: "btn-blue  " %>
     </div>
   </div>
-  <div class="relative py-6 px-6 grid  gap-16" id="release_notes">
+  <div class="relative px-6 grid  gap-10 pb-16" id="release_notes">
     <% if @pinned_spaces.load.size > 0 %>
       <div>
-        <h1 class="text-lg font-medium leading-6 text-gray-900 pb-6">Pinned spaces</h1>
+        <h1 class="font-bold leading-6 text-gray-900 pb-4 uppercase">Pinned spaces</h1>
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           <%= render partial: "space", collection: @pinned_spaces, as: :space, cached: false %>
         </ul>
@@ -21,7 +21,7 @@
     <% end %>
     <% if @my_spaces.load.size > 0 %>
       <div id="created-spaces">
-        <h1 class="text-lg font-medium leading-6 text-gray-900 pb-6">Created by you</h1>
+        <h1 class="font-bold leading-6 text-gray-900 pb-4 uppercase">Created by you</h1>
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           <%= render partial: "space", collection: @my_spaces, as: :space, cached: false %>
         </ul>
@@ -29,7 +29,7 @@
     <% end %>
     <% if @shared_spaces.load.size > 0 %>
       <div id="shared-spaces">
-        <h1 class="text-lg font-medium leading-6 text-gray-900 pb-6">Shared with you  </h1>
+        <h1 class="font-bold leading-6 text-gray-900 pb-4 uppercase">Shared with you  </h1>
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           <%= render partial: "space", collection: @shared_spaces, as: :space, cached: false %>
         </ul>
@@ -37,7 +37,7 @@
     <% end %>
     <% if @archived_spaces.load.size > 0 %>
       <div id="archived-spaces">
-        <h1 class="text-lg font-medium pb-6 ">Archived spaces</h1>
+        <h1 class="font-bold leading-6 text-gray-900 pb-4 uppercase">Archived spaces</h1>
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           <%= render partial: "space", collection: @archived_spaces, as: :space, cached: false %>
         </ul>
