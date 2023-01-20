@@ -1,4 +1,5 @@
 class UserController < BaseController
+  include ActiveStorage::SetCurrent
   before_action :set_user
   before_action :build_form, only: [:update_password, :password]
 
@@ -27,12 +28,22 @@ class UserController < BaseController
 
   def update_avatar
     authorize @user
-    @user.update(avatar: params[:user][:avatar])
     respond_to do |format|
-      if @user.errors.any?
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/avatar", locals: { user: @user }) }
+      if @user.avatar.attach(params[:user][:avatar])
+        format.html { redirect_to profile_path, notice: "Avatar was updated successfully" }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/avatar", locals: { message: "Avatar was updated successfully", user: @user }) }
+        format.html { redirect_to profile_path, alert: "Invalid file added" }
+      end
+    end
+  end
+
+  def destroy_avatar
+    authorize @user
+    respond_to do |format|
+      if @user.avatar.purge
+        format.html { redirect_to profile_path, notice: "Avatar was deleted successfully" }
+      else
+        format.html { redirect_to profile_path, alert: "Avatar was not deleted" }
       end
     end
   end

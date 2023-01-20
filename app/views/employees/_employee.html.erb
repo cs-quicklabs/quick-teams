@@ -3,7 +3,7 @@
   <td class="table-cell whitespace-nowrap">
     <div class="flex items-center">
       <div class="flex-shrink-0 w-10 h-10">
-        <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+        <%= display_medium_avatar(employee) %>
       </div>
       <a href="<%= employee_team_path(employee) %>" class="truncate hover:text-gray-600 hover:underline">
         <div class="ml-4">
@@ -29,8 +29,8 @@
   <td class="table-cell">
     <div class="flex items-center space-x-2">
       <div class="flex flex-shrink-0 -space-x-1">
-        <% employee.display_team_members_count.times do %>
-          <%= image_tag "male-placeholder-image.png", class: "w-6 h-6 rounded-full max-w-none ring-2 ring-white" %>
+        <% employee.display_team_members.each do |team_member| %>
+            <%= display_xsmall_avatar(team_member) %>
         <% end %>
       </div>
       <span class="flex-shrink-0 text-xs font-medium leading-5"><%= employee.display_additional_team_members %></span>

@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(client) do %>
   <li class="flex py-4 border-b border-gray-200">
-    <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+    <%=  display_image(client) %>
     <div class="flex w-full ml-3">
       <div class="w-full">
         <p class="w-full text-sm font-medium text-gray-900"><%= client.name.titleize %></p>

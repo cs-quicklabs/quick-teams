@@ -49,6 +49,42 @@ module ApplicationHelper
     end
   end
 
+  def display_xsmall_avatar(resource)
+    if resource.avatar.attached?
+      image_tag resource.avatar, class: "rounded-full w-6 h-6 object-cover"
+    else
+      image = content_tag(:span, (resource.first_name[0, 1] + resource.last_name[0, 1]).upcase, class: "text-xs font-medium text-white leading-none")
+      content_tag(:span, image.html_safe, class: "inline-flex  w-6 h-6 items-center justify-center rounded-full bg-gray-500")
+    end
+  end
+
+  def display_small_avatar(resource)
+    if resource.avatar.attached?
+      image_tag resource.avatar, class: "rounded-full w-8 h-8 object-cover"
+    else
+      image = content_tag(:span, (resource.first_name[0, 1] + resource.last_name[0, 1]).upcase, class: "text-sm font-semibold text-white leading-none")
+      content_tag(:span, image.html_safe, class: "inline-flex  w-8 h-8 items-center justify-center rounded-full bg-gray-500")
+    end
+  end
+
+  def display_medium_avatar(resource)
+    if resource.avatar.attached?
+      image_tag resource.avatar, class: "rounded-full w-10 h-10 object-cover"
+    else
+      image = content_tag(:span, (resource.first_name[0, 1] + resource.last_name[0, 1]).upcase, class: "text-lg font-bold text-white leading-none")
+      content_tag(:span, image.html_safe, class: "inline-flex  w-10 h-10 items-center justify-center rounded-full bg-gray-500")
+    end
+  end
+
+  def display_large_avatar(resource)
+    if resource.avatar.attached?
+      image_tag resource.avatar, class: "rounded-full w-40 h-40 object-cover"
+    else
+      image = content_tag(:span, (resource.first_name[0, 1] + resource.last_name[0, 1]).upcase, class: "text-2xl font-bold text-white leading-none")
+      content_tag(:span, image.html_safe, class: "inline-flex  w-40 h-40 items-center justify-center rounded-full bg-gray-500")
+    end
+  end
+
   def delete_button(path)
     out = link_to "Delete", path, class: "btn-inline-delete", data: {
                                     controller: "confirmation",

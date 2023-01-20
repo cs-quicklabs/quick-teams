@@ -1,5 +1,5 @@
-<span class="relative inline-block">
-  <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full", title: employee.billable? ? "Billable" : "Non Billable" %>
+<span class="relative inline-block" role="img" title="<%= employee.billable? ? "Billable" : "Non Billable" %>">
+  <%= display_medium_avatar(employee) %>
   <% if employee.billable? %>
     <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
   <% else %>

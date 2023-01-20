@@ -134,6 +134,7 @@ Rails.application.routes.draw do
     patch "/password", to: "user#update_password", as: "edit_password"
     get "/preferences", to: "user#preferences", as: "user_preferences"
     patch "/avatar", to: "user#update_avatar", as: "avatar"
+    delete "/avatar", to: "user#destroy_avatar", as: "destroy_avatar"
   end
 
   # if you change something in reports path please check stats path are not broken in project/employee timsheets, as they are hardcoded.
