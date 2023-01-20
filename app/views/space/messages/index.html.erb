@@ -12,7 +12,7 @@
           <div class="flex justify-end">
             <div  x-on:click.outside="open = false" class="relative  " x-data="{ open: false }">
               <div>
-                <button @click="open = !open" id="space-menu" class=" flex-end mt-1 ml-4 border border-gray-600 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
+                <button @click="open = !open" id="space-menu" class=" flex-end mt-1 ml-4 border border-gray-600 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-600 focus:ring-white" id="user-menu" aria-haspopup="true">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
                     <path fill-rule="evenodd" d="M4.5 12a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
                   </svg>
@@ -49,9 +49,12 @@
           <% end %>
         </div>
         <div class="flex justify-center">
-          <p class="font-normal text-sm line-clamp-2 mt-2 text-gray-500"> <%= highlight_hashtag(@space.description.upcase_first) %></p>
+          <p class="font-normal text-sm line-clamp-2 text-gray-500"> <%= highlight_hashtag(@space.description.upcase_first) %></p>
         </div>
-        <div class="flex justify-between py-6 ">
+        <div class="flex justify-center mt-2">
+          <p class="font-normal text-sm line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
+        </div>
+        <div class="flex justify-center py-4">
           <div class="flex   ">
             <% users = @space.users.decorate %>
             <% users.limit(10).each_with_index do |user, index| %>

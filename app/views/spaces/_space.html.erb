@@ -5,7 +5,7 @@
         <h1 id="message-heading" class="font-medium text-gray-900 line-clamp-2 group-hover:underline"><%= highlight_hashtag(space.title.upcase_first) %></h1>
         <p class="font-normal text-sm text-gray-500 line-clamp-2 mt-2"> <%= highlight_hashtag(space.description.upcase_first) %></p>
       </div>
-      <div class="flex -space-x-1 overflow-hidden  px-6 pb-6 -mt-4">
+      <div class="flex -space-x-1 overflow-hidden  px-6 pb-6">
         <% users = space.users.decorate %>
         <% users.limit(5).each_with_index do |user, index| %>
           <span role="img" class="inline-flex h-8 w-8 relative cursor-pointer "  title="<%= user.display_name %>" >
