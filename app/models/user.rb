@@ -52,6 +52,21 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
+  has_one_attached :avatar
+  validate :avatar_content_type
+  validate :avatar_size
+
+  def avatar_size
+    if avatar.attached? && avatar.blob.byte_size > 5.megabytes
+      errors.add(:avatar, "size should not be more than 5MB")
+    end
+  end
+
+  def avatar_content_type
+    if avatar.attached? && !avatar.content_type.in?(%w(image/jpeg image/png))
+      errors.add(:avatar, "must be a JPEG or PNG")
+    end
+  end
 
   def name
     "#{first_name} #{last_name}".titleize

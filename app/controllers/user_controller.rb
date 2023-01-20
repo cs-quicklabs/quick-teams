@@ -25,6 +25,18 @@ class UserController < BaseController
     end
   end
 
+  def update_avatar
+    authorize @user
+    @user.update(avatar: params[:user][:avatar])
+    respond_to do |format|
+      if @user.errors.any?
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/avatar", locals: { user: @user }) }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@user, partial: "user/forms/avatar", locals: { message: "Avatar was updated successfully", user: @user }) }
+      end
+    end
+  end
+
   def preferences
     authorize @user
   end
@@ -44,7 +56,7 @@ class UserController < BaseController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :manager_id, :job_id, :discipline_id)
+    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :manager_id, :job_id, :discipline_id, :avatar)
   end
 
   def change_password_params
