@@ -1,5 +1,5 @@
 class Space::BaseController < BaseController
-  before_action :set_space, only: %i[ index show edit update destroy create new ]
+  before_action :set_space, only: %i[ show edit update destroy ]
   after_action :verify_authorized
   include Pagy::Backend
 

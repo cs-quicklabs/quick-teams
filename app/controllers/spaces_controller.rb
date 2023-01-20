@@ -5,11 +5,11 @@ class SpacesController < BaseController
   def index
     authorize :spaces
     @spaces_page = true
-    @pin_spaces = current_user.pinned.order(created_at: :desc)
-    @spaces = Space.where(archive: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
+    @pinned_spaces = current_user.pinned.order(created_at: :desc)
+    @my_spaces = Space.where(archive: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
     @shared_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
-    @archive_spaces = Space.where(archive: true, user_id: current_user.id).includes(:users).order(created_at: :desc)
-    render_partial("spaces/space", collection: @spaces, cached: true) if stale?(@spaces)
+    @archived_spaces = Space.where(archive: true, user_id: current_user.id).includes(:users).order(created_at: :desc)
+    render_partial("spaces/space", collection: @my_spaces, cached: true) if stale?(@my_spaces)
   end
 
   def new
