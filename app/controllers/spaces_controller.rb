@@ -4,7 +4,6 @@ class SpacesController < BaseController
 
   def index
     authorize :spaces
-    @spaces_page = true
     @pinned_spaces = current_user.pinned.order(created_at: :desc)
     @my_spaces = Space.where(archive: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
     @shared_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
