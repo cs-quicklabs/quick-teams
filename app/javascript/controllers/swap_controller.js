@@ -8,7 +8,6 @@ export default class extends Controller {
   }
 
   mouseenter() {
-    console.log("mouseenter")
     this.textTarget.innerHTML =
       `<span class="inline-flex items-center ml-2 px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">${"Continue To Edit"}
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 ml-1">
