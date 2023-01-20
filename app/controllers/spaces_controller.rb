@@ -9,7 +9,7 @@ class SpacesController < BaseController
     @my_spaces = @all_spaces.where(user: current_user, archive: false)
     @shared_spaces = @all_spaces.where.not(user: current_user)
     @archived_spaces = @all_spaces.where(archive: true)
-    render_partial("spaces/space", collection: @my_spaces, cached: true) if stale?(@my_spaces)
+    render_partial("spaces/space", collection: @all_spaces, cached: true) if stale?(@all_spaces)
   end
 
   def new
