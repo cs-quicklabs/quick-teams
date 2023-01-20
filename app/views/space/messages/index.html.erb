@@ -72,7 +72,7 @@
               </div>
               <div class="">
                 <% if @messages.size > 0 %>
-                  <select class="form-text-field w-56 inline-flex" name="direction" id="sort" onchange="window.location.href = '<%= space_messages_path(@space) %>?direction=' + this.value;">
+                  <select class="form-text-field w-56 inline-flex ml-4" name="direction" id="sort" onchange="window.location.href = '<%= space_messages_path(@space) %>?direction=' + this.value;">
                     <%= options_for_select([["Sort Messages By Newest", "DESC"], ["Sort Messages By Oldest", "ASC"]], prompt: "DESC", :selected => (params["direction"] if !params["direction"].blank?)) %>
                   </select>
                 <% end %>
