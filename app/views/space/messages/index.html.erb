@@ -5,8 +5,8 @@
         <div class="flex" >
           <div class="w-16"></div>
           <div class="flex flex-1 justify-center ">
-            <a href="<%=spaces_path%>">
-              <h1 id="message-heading" class="font-bold line-clamp-1 text-2xl font-bold leading-tight text-align-center  px-16"><%=highlight_hashtag(@space.title.upcase_first)%></h1>
+            <a href="<%= spaces_path %>">
+              <h1 id="message-heading" class="font-bold line-clamp-1 text-2xl font-bold leading-tight text-align-center  px-16"><%= highlight_hashtag(@space.title.upcase_first) %></h1>
             </a>
           </div>
           <div class="flex justify-end">
@@ -33,9 +33,9 @@
                       <%= styled_delete_button(space_path(@space), "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
                     <% end %>
                     <% if policy(@space).archive? %>
-                      <%=confirm_button(space_archive_path(@space),"Archive","Are you sure you want to archive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100")%>
+                      <%= confirm_button(space_archive_path(@space), "Archive", "Are you sure you want to archive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
                     <% else %>
-                      <%=confirm_button(space_unarchive_path(@space),"Unarchive", "Are you sure you want to unarchive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100")%>
+                      <%= confirm_button(space_unarchive_path(@space), "Unarchive", "Are you sure you want to unarchive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
                     <% end %>
                   </div>
                 </div>
@@ -49,28 +49,28 @@
           <% end %>
         </div>
         <div class="flex justify-center">
-          <p class="font-normal text-sm line-clamp-2 mt-2 text-gray-500"> <%=highlight_hashtag(@space.description.upcase_first)%></p>
+          <p class="font-normal text-sm line-clamp-2 mt-2 text-gray-500"> <%= highlight_hashtag(@space.description.upcase_first) %></p>
         </div>
         <div class="flex justify-between py-6 ">
           <div class="flex   ">
-            <%users=@space.users.decorate%>
-            <%users.limit(10).each_with_index do |user, index|%>
+            <% users = @space.users.decorate %>
+            <% users.limit(10).each_with_index do |user, index| %>
               <div>
                 <span role="img" class="inline-flex h-8 w-8 relative cursor-pointer "  title="<%= user.display_name %>" >
-                  <%= image_tag "male-placeholder-image.png" , class: "w-8 h-8 rounded-full ring-2 ring-white relative  inline-block" %>
+                  <%= image_tag "male-placeholder-image.png", class: "w-8 h-8 rounded-full ring-2 ring-white relative  inline-block" %>
                   <span>
                   </div>
-                <%end%>
-                <%if users.size>10%>
-                  <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold"  > + <%= users.size-10 %>  </span>
-                <% elsif users.size==0%>
+                <% end %>
+                <% if users.size > 10 %>
+                  <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold"  > + <%= users.size - 10 %>  </span>
+                <% elsif users.size == 0 %>
                   <span class="inline-flex h-6 w-6 whitespace-nowrap z-0 text-sm text-gray-400">No person added  </span>
                 <% end %>
               </div>
               <div class="">
-                <% if @messages.size>0%>
-                  <select class="form-text-field w-56 inline-flex" name="direction" id="sort" onchange="window.location.href = '<%=space_messages_path(@space)%>?direction=' + this.value;">
-                    <%= options_for_select([["Sort Messages By Newest", "DESC"], ["Sort Messages By Oldest","ASC"]], prompt: "DESC",  :selected => (params["direction"] if !params["direction"].blank?)) %>
+                <% if @messages.size > 0 %>
+                  <select class="form-text-field w-56 inline-flex" name="direction" id="sort" onchange="window.location.href = '<%= space_messages_path(@space) %>?direction=' + this.value;">
+                    <%= options_for_select([["Sort Messages By Newest", "DESC"], ["Sort Messages By Oldest", "ASC"]], prompt: "DESC", :selected => (params["direction"] if !params["direction"].blank?)) %>
                   </select>
                 <% end %>
                 <% if policy([@space, Message]).new? %>
@@ -81,7 +81,7 @@
           </div>
         </div>
         <div class="relative " id="threads">
-          <% if @messages.size>0%>
+          <% if @messages.size > 0 %>
             <ul role="list" class="">
               <%= render partial: "message", collection: @messages, as: :message, cached: false %>
             </ul>

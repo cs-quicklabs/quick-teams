@@ -3,7 +3,7 @@
     <div class=" w-full  flex justify-between">
       <div class="flex space-x-3 ">
         <div class="flex-shrink-0">
-          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full cursor-pointer",  title: current_user.decorate.display_name%>
+          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full cursor-pointer", title: current_user.decorate.display_name %>
         </div>
         <div class="w-full text-sm flex-wrap ">
           <div class="flex space-x-3">
@@ -13,13 +13,13 @@
             </div>
           </div>
           <div class="text-sm text-gray-700 ">
-            <p class="whitespace-pre-wrap"><%=comment.body%></p>
+            <p class="whitespace-pre-wrap"><%= comment.body %></p>
           </div>
         </div>
       </div>
       <div  x-on:click.outside="open = false" class=" relative" x-data="{ open: false }">
         <div class=" ">
-         <% if (policy(comment).edit? && policy([comment.commentable.space, comment.commentable]).edit_comment?)  || policy(comment).destroy? %>
+         <% if (policy(comment).edit? && policy([comment.commentable.space, comment.commentable]).edit_comment?) || policy(comment).destroy? %>
           <button @click="open = !open" id="comment-menu" class="flex-auto mt-1 ml-4  text-sm rounded-full hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="user-menu" aria-haspopup="true">
             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z" />
