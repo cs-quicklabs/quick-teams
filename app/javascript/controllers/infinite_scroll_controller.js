@@ -39,14 +39,14 @@ export default class extends Controller {
                 'Accept': 'application/json',
             },
         })
-        .then(response => response.json())
-        .then(data => {
-            this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
-            this.paginationTarget.innerHTML = data.pagination
+            .then(response => response.json())
+            .then(data => {
+                this.entriesTarget.insertAdjacentHTML('beforeend', data.entries)
+                this.paginationTarget.innerHTML = data.pagination
 
-        })
-        .catch((error) => {
-            console.log('error:', error);
-        });       
+            })
+            .catch((error) => {
+                console.log('error:', error);
+            });
     }
 }

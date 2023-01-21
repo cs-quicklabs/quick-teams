@@ -1,39 +1,38 @@
 <% if policy([message.space, message]).show? %>
-
-<%= turbo_frame_tag dom_id(message) do %>
-  <li class=" py-4 border-b border-gray-200 ">
-    <% if policy([message.space, message]).show?  && message.published? %>
-      <a href="<%=space_message_path(message.space, message )%>" class=" focus:outline-none">
-      <% elsif(policy([message.space, message]).show? && !message.published?) %>
-        <a href="<%=edit_space_message_path(message.space, message )%>" class=" focus:outline-none">
-        <% end %>
-        <% if !message.published? %>
-          <div class="flex flex-col " data-controller="swap" data-action="mouseenter->swap#mouseenter mouseleave->swap#mouseleave">
-          <% else %>
-            <div class="flex flex-col ">
-            <% end %>
-            <div class="flex justify-between">
-              <div class="hover:underline inline-flex space-x-2">
-                <h3 class="text-base font-medium line-clamp-1 flex-auto"  >
-                  <%=highlight_hashtag(message.title.upcase_first)%>
-                </h3>
-                <span class="whitespace-nowrap text-gray-500  text-sm font-normal  flex-none" style="line-height: 0rem; margin-top: 0.75rem;">
-                  — By <%=message.user.decorate.display_name%> on <%=display_date(message.created_at)%>
-                </span>
+  <%= turbo_frame_tag dom_id(message) do %>
+    <li class=" py-4 border-b border-gray-200 ">
+      <% if policy([message.space, message]).show? && message.published? %>
+        <a href="<%= space_message_path(message.space, message) %>" class=" focus:outline-none">
+        <% elsif (policy([message.space, message]).show? && !message.published?) %>
+          <a href="<%= edit_space_message_path(message.space, message) %>" class=" focus:outline-none">
+          <% end %>
+          <% if !message.published? %>
+            <div class="flex flex-col " data-controller="swap" data-action="mouseenter->swap#mouseenter mouseleave->swap#mouseleave">
+            <% else %>
+              <div class="flex flex-col ">
+              <% end %>
+              <div class="flex justify-between">
+                <div class="hover:underline inline-flex space-x-2">
+                  <h3 class="text-base font-medium line-clamp-1 flex-auto"  >
+                    <%= highlight_hashtag(message.title.upcase_first) %>
+                  </h3>
+                  <span class="whitespace-nowrap text-gray-500  text-sm font-normal  flex-none" style="line-height: 0rem; margin-top: 0.75rem;">
+                    — By <%= message.user.decorate.display_name %> on <%= display_date(message.created_at) %>
+                  </span>
+                </div>
+                <div class=""  data-swap-target="text" >
+                  <% if !message.published? %>
+                    <span class="inline-flex items-center ml-2 px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800"> Draft</span>
+                  <% end %>
+                </div>
               </div>
-              <div class=""  data-swap-target="text" >
-                <% if !message.published? %>
-                  <span class="inline-flex items-center ml-2 px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800"> Draft</span>
-                <% end %>
-              </div>
+              <span class="  ">
+                <div class="text-gray-500 line-clamp-2 text-sm" >
+                  <%= message.body %>
+                </div>
+              </span>
             </div>
-            <span class="  ">
-              <div class="text-gray-500 line-clamp-2 text-sm" >
-                <%=message.body%>
-              </div>
-            </span>
-          </div>
-        </a>
-      </li>
-    <% end %>
+          </a>
+        </li>
+      <% end %>
     <% end %>

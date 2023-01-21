@@ -21,6 +21,7 @@ class AddSpace < Patterns::Service
 
   def space_users
     space.users << User.where("id IN (?)", users)
+    space.users << actor
   end
 
   attr_reader :space, :actor, :users

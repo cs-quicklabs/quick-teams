@@ -4,12 +4,12 @@ class SpacesController < BaseController
 
   def index
     authorize :spaces
-    @spaces_page = true
-    @pin_spaces = current_user.pinned.order(created_at: :desc)
-    @spaces = Space.where(archive: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
-    @shared_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
-    @archive_spaces = Space.where(archive: true, pin: false, user_id: current_user.id).includes(:users).order(created_at: :desc)
-    render_partial("spaces/space", collection: @spaces, cached: true) if stale?(@spaces)
+    @all_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
+    @pinned_spaces = current_user.pinned.order(created_at: :desc)
+    @my_spaces = @all_spaces.where(user: current_user, archive: false)
+    @shared_spaces = @all_spaces.where.not(user: current_user)
+    @archived_spaces = @all_spaces.where(archive: true)
+    render_partial("spaces/space", collection: @all_spaces, cached: true) if stale?(@all_spaces)
   end
 
   def new
@@ -71,7 +71,7 @@ class SpacesController < BaseController
 
   def archive
     authorize @space
-    @space.update(archive: true, pin: false, archive_at: Time.now)
+    @space.update(archive: true, archive_at: Time.now)
     redirect_to space_messages_path(@space), notice: "Space was archived successfully."
   end
 

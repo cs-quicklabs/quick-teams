@@ -30,8 +30,8 @@ application.register("toggle", ToggleController)
 import CommentsController from "./comments_controller"
 application.register("comments", CommentsController)
 
-import ScrollTopController from "./scroll_top_controller"
-application.register("scroll-top", ScrollTopController)
+import ScrollToController from "./scroll_to_controller"
+application.register("scroll-to", ScrollToController)
 
 import SwapController from "./swap_controller"
 application.register("swap", SwapController)
