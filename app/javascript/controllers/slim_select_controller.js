@@ -1,10 +1,10 @@
 import { Controller } from '@hotwired/stimulus';
-import SlimSelect from 'slim-select';
+//import SlimSelect from 'slim-select';
 
 export default class extends Controller {
-    static values = {
-        options: Object
-    };
+  static values = {
+    options: Object
+  };
 
   connect() {
     this.slimselect = new SlimSelect({
@@ -19,7 +19,7 @@ export default class extends Controller {
     this.slimselect.destroy();
   }
 
-    disconnect() {
-        this.slimselect.destroy();
-    }
+  disconnect() {
+    this.slimselect.destroy();
+  }
 }
