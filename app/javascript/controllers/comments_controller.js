@@ -13,7 +13,6 @@ export default class extends Controller {
                 comments.classList.remove("hidden")
 
             } else {
-                console.log("hidden")
                 comments.classList.add("hidden")
             }
 
