@@ -9,14 +9,13 @@ export default class extends Controller {
 
   connect() {
     this.slimselect = new SlimSelect({
-      select: '#placeholder',
-  settings: {
-    placeholderText: 'Select People',
-  },
+      select: this.element,
+      settings: {
+        placeholderText: 'Select People',
+      },
       ...this.optionsValue
     });
   }
-
   disconnect() {
     this.slimselect.destroy();
   }
