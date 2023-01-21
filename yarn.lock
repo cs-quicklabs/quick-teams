@@ -171,10 +171,10 @@
   resolved "https://registry.npmjs.org/@rails/actioncable/-/actioncable-7.0.4.tgz"
   integrity sha512-tz4oM+Zn9CYsvtyicsa/AwzKZKL+ITHWkhiu7x+xF77clh2b4Rm+s6xnOgY/sGDWoFWZmtKsE95hxBPkgQQNnQ==
 
-"@rails/actiontext@7.0.4":
-  version "7.0.4"
-  resolved "https://registry.npmjs.org/@rails/actiontext/-/actiontext-7.0.4.tgz"
-  integrity sha512-vyXZ4cNkudpfSfFWuyo1SSKBQXTK2H02xjd5vLHIBqJOKaqcZ7aFWe6n8NoQrTpAt+ULYtjkH0xMhJ5holswsQ==
+"@rails/actiontext@7.0.4-1":
+  version "7.0.4-1"
+  resolved "https://registry.yarnpkg.com/@rails/actiontext/-/actiontext-7.0.4-1.tgz#f753c4fbcc92359537fc00e8ab70907464b6bb01"
+  integrity sha512-MoHoMX7m+aYB/1q0386a6OF/ErIiIbzK1LTaJ8ki5yxF46nDPFhjmqCjSnkVl5HYLjYHUDd1yWHwPSiMMxKUjQ==
   dependencies:
     "@rails/activestorage" ">= 7.0.0-alpha1"
 
@@ -185,34 +185,10 @@
   dependencies:
     spark-md5 "^3.0.1"
 
-"@rails/request.js@0.0.6":
-  version "0.0.6"
-  resolved "https://registry.npmjs.org/@rails/request.js/-/request.js-0.0.6.tgz"
-  integrity sha512-dfFWaQXitYJ4kxrgGJNhDNXX54/v10YgoJqBMVe6lhqs6a4N9WD7goZJEvwin82TtK8MqUNhwfyisgKwM6dMdg==
-
-"@stimulus/core@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@stimulus/core/-/core-1.1.1.tgz"
-  integrity sha512-PVJv7IpuQx0MVPCBblXc6O2zbCmU8dlxXNH4bC9KK6LsvGaE+PCXXrXQfXUwAsse1/CmRu/iQG7Ov58himjiGg==
-  dependencies:
-    "@stimulus/mutation-observers" "^1.1.1"
-
-"@stimulus/multimap@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@stimulus/multimap/-/multimap-1.1.1.tgz"
-  integrity sha512-26R1fI3a8uUj0WlMmta4qcfIQGlagegdP4PTz6lz852q/dXlG6r+uPS/bx+H8GtfyS+OOXVr3SkZ0Zg0iRqRfQ==
-
-"@stimulus/mutation-observers@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@stimulus/mutation-observers/-/mutation-observers-1.1.1.tgz"
-  integrity sha512-/zCnnw1KJlWO2mrx0yxYaRFZWMGnDMdOgSnI4hxDLxdWVuL2HMROU8FpHWVBLjKY3T9A+lGkcrmPGDHF3pfS9w==
-  dependencies:
-    "@stimulus/multimap" "^1.1.1"
-
-"@stimulus/webpack-helpers@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@stimulus/webpack-helpers/-/webpack-helpers-1.1.1.tgz"
-  integrity sha512-XOkqSw53N9072FLHvpLM25PIwy+ndkSSbnTtjKuyzsv8K5yfkFB2rv68jU1pzqYa9FZLcvZWP4yazC0V38dx9A==
+"@rails/request.js@0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@rails/request.js/-/request.js-0.0.8.tgz#5e2e8da15013b1af7f04d759e4e9d1cff981865c"
+  integrity sha512-ysHYZDl+XjBwFVXz7EI7XW+ZWiTFY8t7TrC/ahpAPt0p7NE4DZxm1nJQY9gmF4PBf+4pAYa+D/rLIGmrn1ZMvg==
 
 "@tailwindcss/forms@0.5.3":
   version "0.5.3"
@@ -610,7 +586,16 @@ postcss-value-parser@^4.0.0, postcss-value-parser@^4.2.0:
   resolved "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@8.4.19, postcss@^8.4.18:
+postcss@8.4.21:
+  version "8.4.21"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.21.tgz#c639b719a57efc3187b13a1d765675485f4134f4"
+  integrity sha512-tP7u/Sn/dVxK2NnruI4H9BG+x+Wxz6oeZ1cJ8P6G/PZY0IKk4k/63TDsQf2kQq3+qoJeLm2kIBUNlZe3zgb4Zg==
+  dependencies:
+    nanoid "^3.3.4"
+    picocolors "^1.0.0"
+    source-map-js "^1.0.2"
+
+postcss@^8.4.18:
   version "8.4.19"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.19.tgz"
   integrity sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA==
@@ -679,25 +664,10 @@ spark-md5@^3.0.1:
   resolved "https://registry.npmjs.org/spark-md5/-/spark-md5-3.0.2.tgz"
   integrity sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==
 
-stimulus-scroll-to@^4.1.0:
+stimulus-scroll-to@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/stimulus-scroll-to/-/stimulus-scroll-to-4.1.0.tgz#22b24d768d673f029ab0f68100556e113075fa95"
   integrity sha512-bKltfECyU8y/ck8yXy77hlK/vv85igW7LPtZpgkUBFuAGz+Ou7EnMPpKrSJiYoK+TXS2COFilb/PGND/xISxJA==
-
-stimulus-toggle-util@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.npmjs.org/stimulus-toggle-util/-/stimulus-toggle-util-0.4.1.tgz"
-  integrity sha512-XG4Hk94vFl+TFYtjqKFQ3ifGCJ33sVuGw+xYYNBNakX27+YgQO8Gx74nW91lp0ygZ9HyLfJMnflsoihzQmTQQA==
-  dependencies:
-    stimulus "^1.1.1"
-
-stimulus@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/stimulus/-/stimulus-1.1.1.tgz"
-  integrity sha512-R0mBqKp48YnRDZOxZ8hiOH4Ilph3Yj78CIFTBkCwyHs4iGCpe7xlEdQ7cjIxb+7qVCSxFKgxO+mAQbsNgt/5XQ==
-  dependencies:
-    "@stimulus/core" "^1.1.1"
-    "@stimulus/webpack-helpers" "^1.1.1"
 
 "stimulus@https://github.com/stimulusreflex/stimulus/raw/master/stimulus-v3.0.0.tgz":
   version "3.0.0"
@@ -720,15 +690,15 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-tailwind-capitalize-first-letter@^1.0.4:
+tailwind-capitalize-first-letter@1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/tailwind-capitalize-first-letter/-/tailwind-capitalize-first-letter-1.0.4.tgz#d7a07c1dda4a7555f2240d57154df394b0ee8db6"
   integrity sha512-ZB8hBi68JI4aQ1cDUxuFWfMYTxgBvlzIdPPHSkFkMUlo7p2QlbMy0hVv/vAREAFmkUh9QfjuKQnOSbe4Gnqljg==
 
-tailwindcss@3.2.3:
-  version "3.2.3"
-  resolved "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.2.3.tgz"
-  integrity sha512-Xt9D4PK4zuuQCEB8bwK9JUCKmTgUwyac/6b0/42Vqhgl6YJkep+Wf5wq+5uXYfmrupdAD0YY2NY1hyZp1HjRrg==
+tailwindcss@3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.4.tgz#afe3477e7a19f3ceafb48e4b083e292ce0dc0250"
+  integrity sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==
   dependencies:
     arg "^5.0.2"
     chokidar "^3.5.3"
@@ -763,7 +733,7 @@ to-regex-range@^5.0.1:
 
 trix@1.3.1:
   version "1.3.1"
-  resolved "https://registry.npmjs.org/trix/-/trix-1.3.1.tgz"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-1.3.1.tgz#ccce8d9e72bf0fe70c8c019ff558c70266f8d857"
   integrity sha512-BbH6mb6gk+AV4f2as38mP6Ucc1LE3OD6XxkZnAgPIduWXYtvg2mI3cZhIZSLqmMh9OITEpOBCCk88IVmyjU7bA==
 
 update-browserslist-db@^1.0.9:
