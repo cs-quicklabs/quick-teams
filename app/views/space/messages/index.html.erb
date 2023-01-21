@@ -55,8 +55,9 @@
           <p class="font-normal text-sm line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
         </div>
         <div class="flex justify-center py-4">
-          <div class="flex   ">
+       
             <% users = @space.users.decorate %>
+               <div class="flex   ">
             <% users.limit(10).each_with_index do |user, index| %>
               <div>
                 <span role="img" class="inline-flex h-8 w-8 relative cursor-pointer "  title="<%= user.display_name %>" >
@@ -65,9 +66,9 @@
                   </div>
                 <% end %>
                 <% if users.size > 10 %>
-                  <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold"  > + <%= users.size - 10 %>  </span>
+                  <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold items-center"  > + <%= users.size - 10 %>  </span>
                 <% elsif users.size == 0 %>
-                  <span class="inline-flex h-6 w-6 whitespace-nowrap z-0 text-sm text-gray-400">No person added  </span>
+                  <span class="inline-flex whitespace-nowrap z-0 text-sm text-gray-400 items-center">No person added  </span>
                 <% end %>
               </div>
               <div class="">
