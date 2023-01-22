@@ -138,7 +138,7 @@ GEM
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
     crass (1.0.6)
-    cssbundling-rails (1.1.1)
+    cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -173,7 +173,7 @@ GEM
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jmespath (1.6.1)
-    jsbundling-rails (1.0.3)
+    jsbundling-rails (1.1.1)
       railties (>= 6.0.0)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -223,7 +223,7 @@ GEM
       activerecord (>= 5.2)
       activesupport (>= 5.2)
     public_suffix (5.0.0)
-    puma (6.0.0)
+    puma (6.0.2)
       nio4r (~> 2.0)
     pwned (2.0.2)
     raabro (1.4.0)
@@ -312,7 +312,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stimulus-rails (1.1.1)
+    stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     stimulus_reflex (3.5.0.pre8)
       cable_ready (= 5.0.0.pre8)
@@ -372,7 +372,7 @@ DEPENDENCIES
   bootsnap (= 1.13.0)
   byebug
   capybara (>= 3.38)
-  cssbundling-rails (= 1.1.1)
+  cssbundling-rails (= 1.1.2)
   devise!
   devise-pwned_password
   devise_invitable (~> 2.0.0)
@@ -380,7 +380,7 @@ DEPENDENCIES
   hiredis
   htmlbeautifier
   image_processing (~> 1.12)
-  jsbundling-rails (= 1.0.3)
+  jsbundling-rails (= 1.1.1)
   launchy
   letter_opener
   letter_opener_web
@@ -392,7 +392,7 @@ DEPENDENCIES
   pay (= 6.1.0)
   pg (= 1.2.3)
   pg_search
-  puma (= 6.0.0)
+  puma (= 6.0.2)
   rack-mini-profiler (~> 2.0)
   rails (= 7.0.4.1)
   rails-patterns
@@ -405,7 +405,7 @@ DEPENDENCIES
   sinatra (>= 1.3.0)
   spring
   sprockets-rails (= 3.4.2)
-  stimulus-rails (= 1.1.1)
+  stimulus-rails (= 1.2.1)
   stimulus_reflex (= 3.5.0.pre8)
   stripe (~> 8.0)
   turbo-rails (= 1.3.2)

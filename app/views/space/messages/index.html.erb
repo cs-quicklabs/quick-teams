@@ -55,9 +55,8 @@
           <p class="font-normal text-sm line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
         </div>
         <div class="flex justify-center py-4">
-       
-            <% users = @space.users.decorate %>
-               <div class="flex   ">
+          <div class="flex   ">
+            <% users = @space.users.load.decorate %>
             <% users.limit(10).each_with_index do |user, index| %>
               <div>
                 <span role="img" class="inline-flex h-8 w-8 relative cursor-pointer "  title="<%= user.display_name %>" >
