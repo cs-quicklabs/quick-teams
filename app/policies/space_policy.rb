@@ -12,7 +12,7 @@ class SpacePolicy < ApplicationPolicy
   end
 
   def destroy?
-    index?
+    edit?
   end
 
   def archive?

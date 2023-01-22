@@ -65,9 +65,9 @@
                   </div>
                 <% end %>
                 <% if users.size > 10 %>
-                  <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold"  > + <%= users.size - 10 %>  </span>
+                  <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold items-center"  > + <%= users.size - 10 %>  </span>
                 <% elsif users.size == 0 %>
-                  <span class="inline-flex h-6 w-6 whitespace-nowrap z-0 text-sm text-gray-400">No person added  </span>
+                  <span class="inline-flex whitespace-nowrap z-0 text-sm text-gray-400 items-center">No person added  </span>
                 <% end %>
               </div>
               <div class="">
