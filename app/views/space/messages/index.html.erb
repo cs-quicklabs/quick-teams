@@ -56,7 +56,7 @@
         </div>
         <div class="flex justify-center py-4">
           <div class="flex   ">
-            <% users = @space.users.decorate %>
+            <% users = @space.users.load.decorate %>
             <% users.limit(10).each_with_index do |user, index| %>
               <div>
                 <span role="img" class="inline-flex h-8 w-8 relative cursor-pointer "  title="<%= user.display_name %>" >

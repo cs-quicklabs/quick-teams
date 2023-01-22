@@ -24,7 +24,7 @@ class Space::MessagesController < Space::BaseController
       if @message.persisted?
         format.html { redirect_to space_messages_path(@space), notice: "Thread was created successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Message.new, partial: "space/messages/form", locals: { space_message: @message, title: "Add New Thread", subtitle: "Threads are messages which can be added inside a space", space: @space, url: space_messages_path, method: "post" }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Message.new, partial: "space/messages/form", locals: { space_message: @message, title: "Add New Thread", subtitle: "Threads are messages or discussion which can be added inside a space", space: @space, url: space_messages_path, method: "post" }) }
       end
     end
   end
