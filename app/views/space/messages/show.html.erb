@@ -42,11 +42,11 @@
       </div>
       <div data-controller="toggle" class="px-6" id="comment-form">
         <% if policy([@space, @message]).comment? %>
-          <div class="flex space-x-3 " data-action= "click->toggle#toggle" data-toggle-target="comment_form">
+          <div class="flex space-x-3  " data-action= "click->toggle#toggle" data-toggle-target="comment_form">
             <div class="flex-shrink-0 mt-4">
               <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full cursor-pointer", title: current_user.decorate.display_name %>
             </div>
-            <button class="inline-edit text-gray-500 mt-4 " id="show-comment-form"  >
+            <button class="btn-inline-edit text-gray-500  " href="#" id="show-comment-form"  >
               Add a comment
             </button>
           </div>
@@ -58,17 +58,17 @@
     </div>
   </section>
 </main>
-<div class="fixed bottom-0 left-0 w-full text-center px-6 py-4 ">
-  <div class="flex  justify-end">
-    <div class="flex flex-col space-y-2 justify-end">
-      <a  class=" items-center inset-0 bottom-2 cursor-pointer right-2 z-50 flex items-center justify-center w-8 h-8 text-white bg-gray-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+<div class=" fixed bottom-0 left-0 w-full text-center px-6 pb-20 ">
+  <div class="flex justify-end " >
+    <div class="flex flex-col space-y-2 justify-end absolute">
+      <a  class="  items-center bottom-2 cursor-pointer right-2 z-50 flex items-center justify-center w-8 h-8 text-white bg-gray-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
  data-controller="scroll-to"
   data-scroll-to-target="#message-header" data-action ="click->scroll-to#scroll" id="scroll-top" >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
           <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" clip-rule="evenodd" />
         </svg>
       </a>
-      <a  class=" items-center pl-1 z-50 flex cursor-pointer w-8 h-8 text-white bg-gray-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      <a  class=" items-center pl-1 z-50 flex cursor-pointer w-8 h-8 text-white bg-gray-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
   data-controller="scroll-to"
   data-scroll-to-target="#comment-form" data-action ="click->scroll-to#scroll" id="scroll-bottom">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">

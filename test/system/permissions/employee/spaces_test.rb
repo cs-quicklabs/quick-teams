@@ -33,21 +33,28 @@ class SpacesTest < ApplicationSystemTestCase
     end
   end
 
-  test "admin can only view spaces that belong to him and  comment on spaces shared with him" do
+  test "admin can only view spaces that belong to him and  comment on spaces shared with him if not archived"
     @space = @user.spaces.where(archive: false).first
+    @thread = @space.messages.where(published: true).first
+
     visit space_page_url
-    assert_no_text "Add New Thread"
-    within "#threads" do
-      assert_no_text "Draft"
-      @thread = @space.messages.where(published: true).first
-      assert_no_selector "a[href='#{edit_space_path(@space)}']"
-      assert_no_selector "a[data-method='delete'][href='#{space_path(@space)}']"
-      click_on @thread.title
-      assert_text @thread.title
-      assert_no_selector "a[href='#{edit_space_message_path(@space, @thread)}']"
-      assert_no_selector "a[data-method='delete'][href='#{space_message_path(@space, @thread)}']"
+    assert_no_text "Draft"
+    within "div#space-header" do
+      find("button", id: "space-menu").click
+      take_screenshot
+      assert_no_text "Edit"
+      assert_no_text "Delete"
+      assert_no_text "Archive"
+      assert_text "Pin" || "Unpin"
     end
     click_on @thread.title
+    assert_text @thread.title
+    within "div#message-header" do
+      find("button", id: "message-menu").click
+      take_screenshot
+      assert_text "Edit"
+      assert_text "Delete"
+    end
     within "ul#comments" do
       @comment = @thread.comments.where(user_id: users(:lead).id).first
       within "#comment_#{@comment.id}" do
@@ -62,7 +69,7 @@ class SpacesTest < ApplicationSystemTestCase
     end
   end
 
-  test "lead can only comment on shared spaces and cannot view draft threads" do
+  test "lead can only comment on shared spaces and cannot view draft threads" do  
     sign_out @user
     @user = users(:lead)
     sign_in @user

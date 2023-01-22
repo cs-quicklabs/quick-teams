@@ -36,8 +36,8 @@ six:
   account: crownstack
 
 seven:
-  title: This is a archived space
-  description: This is archived
+  title: This is a some space
+  description: This is space
   user: lead
   archive: false
   account: crownstack 

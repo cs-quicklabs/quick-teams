@@ -211,9 +211,7 @@ GEM
       net-protocol
     newrelic_rpm (8.12.0)
     nio4r (2.5.8)
-    nokogiri (1.13.10-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-linux)
+    nokogiri (1.14.0-x86_64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (5.10.1)
@@ -334,8 +332,6 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    tzinfo-data (1.2022.7)
-      tzinfo (>= 1.0.0)
     valid_url (0.0.4)
       addressable
       rails
@@ -391,6 +387,7 @@ DEPENDENCIES
   listen (~> 3.3)
   mimemagic!
   newrelic_rpm
+  nokogiri (~> 1.14)
   pagy
   pay (= 6.1.0)
   pg (= 1.2.3)
@@ -423,4 +420,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.4.3
+   2.3.24

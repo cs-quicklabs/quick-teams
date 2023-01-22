@@ -55,6 +55,7 @@ gem "wkhtmltopdf-binary"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "pg_search"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+gem 'nokogiri', '~> 1.14'
 
 # devise gems
 gem "devise", github: "heartcombo/devise", branch: "main"
