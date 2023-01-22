@@ -6,3 +6,4 @@ import '@rails/activestorage'
 import '@tailwindcss/line-clamp'
 import '@tailwindcss/forms'
 import "@hotwired/turbo-rails"
+
