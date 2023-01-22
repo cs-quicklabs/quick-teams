@@ -6,7 +6,7 @@
         <div class="pb-4 ml-4">
           <%= render "shared/form_header", title: "Archived Projects", subtitle: @projects.load.size > 0 ? "Following projects have been archived." : "No record found." %>
         </div>
-        <%if @projects.load.size>0%>
+        <% if @projects.load.size > 0 %>
           <div class=" flex space-x-4 ml-4">
             <div class="flex-1 min-w-0 "  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/archived" >
               <label for="search" class="sr-only">Search</label>

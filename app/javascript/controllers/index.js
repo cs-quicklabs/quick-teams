@@ -21,6 +21,21 @@ application.register("nav-search", NavSearchController)
 import ConfirmationController from "./confirmation_controller"
 application.register("confirmation", ConfirmationController)
 
+import StimulusSlimSelect from "./slim_select_controller"
+application.register('slimselect', StimulusSlimSelect)
+
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)
+
+import CommentsController from "./comments_controller"
+application.register("comments", CommentsController)
+
+import ScrollToController from "./scroll_to_controller"
+application.register("scroll-to", ScrollToController)
+
+import SwapController from "./swap_controller"
+application.register("swap", SwapController)
+
 import StimulusReflex from 'stimulus_reflex'
 import consumer from '../channels/consumer'
 import controller from '../controllers/application_controller'

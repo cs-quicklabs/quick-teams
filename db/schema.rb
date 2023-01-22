@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_14_042646) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_104231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -154,6 +154,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_042646) do
     t.bigint "account_id", null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "title"
+    t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "space_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "published", default: false
+    t.index ["account_id"], name: "index_messages_on_account_id"
+    t.index ["space_id"], name: "index_messages_on_space_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.text "body"
     t.string "notable_type"
@@ -289,6 +302,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_042646) do
     t.bigint "people_tag_id", null: false
   end
 
+  create_table "pinned_spaces", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "space_id", null: false
+    t.index ["space_id"], name: "index_pinned_spaces_on_space_id"
+    t.index ["user_id"], name: "index_pinned_spaces_on_user_id"
+  end
+
   create_table "preferences", force: :cascade do |t|
     t.string "key"
     t.string "value"
@@ -389,6 +409,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_042646) do
   create_table "skills_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
+  end
+
+  create_table "spaces", force: :cascade do |t|
+    t.string "title"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "description"
+    t.boolean "archive", default: false
+    t.datetime "archive_at"
+    t.index ["account_id"], name: "index_spaces_on_account_id"
+    t.index ["user_id"], name: "index_spaces_on_user_id"
+  end
+
+  create_table "spaces_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "space_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "survey_answers", force: :cascade do |t|
@@ -622,6 +662,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_042646) do
   add_foreign_key "kbs", "disciplines", name: "kbs_discipline_id_fkey"
   add_foreign_key "kbs", "jobs", name: "kbs_job_id_fkey"
   add_foreign_key "kbs", "users", name: "kbs_user_id_fkey"
+  add_foreign_key "messages", "accounts"
+  add_foreign_key "messages", "spaces"
+  add_foreign_key "messages", "users"
   add_foreign_key "notes", "users", name: "notes_user_id_fkey"
   add_foreign_key "notes", "users", name: "notes_user_id_fkey1"
   add_foreign_key "nuggets", "accounts", name: "nuggets_account_id_fkey"
@@ -635,6 +678,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_042646) do
   add_foreign_key "people_statuses", "accounts", name: "people_statuses_account_id_fkey1"
   add_foreign_key "people_tags", "accounts", name: "people_tags_account_id_fkey"
   add_foreign_key "people_tags", "accounts", name: "people_tags_account_id_fkey1"
+  add_foreign_key "pinned_spaces", "spaces"
+  add_foreign_key "pinned_spaces", "users"
   add_foreign_key "preferences", "accounts", name: "preferences_account_id_fkey"
   add_foreign_key "project_statuses", "accounts", name: "project_statuses_account_id_fkey"
   add_foreign_key "project_statuses", "accounts", name: "project_statuses_account_id_fkey1"
@@ -656,6 +701,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_14_042646) do
   add_foreign_key "schedules", "users", name: "schedules_user_id_fkey1"
   add_foreign_key "skills", "accounts", name: "skills_account_id_fkey"
   add_foreign_key "skills", "accounts", name: "skills_account_id_fkey1"
+  add_foreign_key "spaces", "accounts"
+  add_foreign_key "spaces", "users"
   add_foreign_key "survey_attempts", "users", column: "actor_id", name: "survey_attempts_actor_id_fkey"
   add_foreign_key "survey_question_categories", "accounts", name: "survey_question_categories_account_id_fkey"
   add_foreign_key "survey_surveys", "users", column: "actor_id", name: "survey_surveys_actor_id_fkey"

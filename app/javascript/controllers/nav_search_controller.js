@@ -68,8 +68,8 @@ export default class extends Controller {
 
     select(target) {
         for (const el of this.resultsTarget.querySelectorAll(
-                '[aria-selected="true"]'
-            )) {
+            '[aria-selected="true"]'
+        )) {
             el.removeAttribute('aria-selected')
             el.classList.remove('bg-gray-100')
         }
@@ -196,8 +196,8 @@ export default class extends Controller {
     identifyOptions() {
         let id = 0
         for (const el of this.resultsTarget.querySelectorAll(
-                '[role="option"]:not([id])'
-            )) {
+            '[role="option"]:not([id])'
+        )) {
             el.id = `${this.resultsTarget.id}-option-${id++}`
         }
     }
@@ -268,6 +268,6 @@ export default class extends Controller {
 
     extractTextValue = el =>
         el.hasAttribute('data-autocomplete-label') ?
-        el.getAttribute('data-autocomplete-label') :
-        el.textContent.trim()
+            el.getAttribute('data-autocomplete-label') :
+            el.textContent.trim()
 }
