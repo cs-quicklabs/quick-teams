@@ -197,6 +197,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.1)
     minitest (5.17.0)
     msgpack (1.6.0)
     mustermann (3.0.0)
@@ -211,16 +212,15 @@ GEM
       net-protocol
     newrelic_rpm (8.12.0)
     nio4r (2.5.8)
-    nokogiri (1.13.10-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-linux)
+    nokogiri (1.13.10)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (5.10.1)
       activesupport
     pay (6.1.0)
       rails (>= 6.0.0)
-    pg (1.2.3)
+    pg (1.4.5)
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
@@ -391,7 +391,7 @@ DEPENDENCIES
   newrelic_rpm
   pagy
   pay (= 6.1.0)
-  pg (= 1.2.3)
+  pg (= 1.4.5)
   pg_search
   puma (= 6.0.2)
   rack-mini-profiler (~> 2.0)
@@ -418,7 +418,7 @@ DEPENDENCIES
   wkhtmltopdf-binary
 
 RUBY VERSION
-   ruby 3.1.2p20
+   ruby 3.2.0p0
 
 BUNDLED WITH
    2.4.3
