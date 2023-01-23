@@ -32,7 +32,15 @@ class Space::MessagePolicy < ApplicationPolicy
   end
 
   def publish?
-    record.first.users.include?(user) && !record.first.archive
+    record.first.users.include?(user) && !record.first.archive && !record.last.published?
+  end
+
+  def delete_draft?
+    record.last.user == user && !record.last.published?
+  end
+
+  def draft?
+    record.first.users.include?(user) && !record.last.published?
   end
 
   def edit_comment?

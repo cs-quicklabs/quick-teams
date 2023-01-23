@@ -1,6 +1,6 @@
 </div>
 <!-- This example requires Tailwind CSS v2.0+ -->
-<main class="max-w-4xl px-4 pt-10 pb-12 mx-auto  lg:pb-16" >
+<main class="max-w-4xl px-4 pt-10 pb-20 mx-auto  lg:pb-20" >
   <div class="px-4 py-4  sm:px-6 lg:px-8" id="message-header" data-scroll-to-target="message-header">
     <%= render partial: "shared/messages/title", locals: { message: @message } %>
   </div>
@@ -13,7 +13,7 @@
   <section aria-labelledby="notes-title">
     <div class="bg-white sm:rounded-lg   ">
       <div class="relative h-max " >
-        <% comments = @message.comments.includes(:user).order(created_at: :asc) %>
+        <% comments = @message.message_comments.includes(:user).order(created_at: :asc) %>
         <% if comments.size < 10 %>
           <div >
             <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
@@ -40,18 +40,10 @@
           </ul>
         <% end %>
       </div>
-      <div data-controller="toggle" class="px-6" id="comment-form">
+      <div  class="px-6" id="comment-form">
         <% if policy([@space, @message]).comment? %>
-          <div class="flex space-x-3  " data-action= "click->toggle#toggle" data-toggle-target="comment_form">
-            <div class="flex-shrink-0 mt-4">
-              <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full cursor-pointer", title: current_user.decorate.display_name %>
-            </div>
-            <button class="btn-inline-edit text-gray-500  " href="#" id="show-comment-form"  >
-              Add a comment
-            </button>
-          </div>
-          <div class="hidden " data-toggle-name="comment_form">
-            <%= render partial: "message_comments/new", locals: { space_message: @message, comment: @comment, url: message_comments_path, method: "post" } %>
+          <div >
+            <%= render "message_comments/new" %>
           </div>
         <% end %>
       </div>
