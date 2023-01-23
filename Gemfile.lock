@@ -120,8 +120,13 @@ GEM
       msgpack (~> 1.2)
     builder (3.2.4)
     byebug (11.1.3)
-    cable_ready (5.0.0.pre8)
-      rails (>= 5.2)
+    cable_ready (5.0.0.pre9)
+      actioncable (>= 5.2)
+      actionpack (>= 5.2)
+      actionview (>= 5.2)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
+      railties (>= 5.2)
       thread-local (>= 1.1.0)
     capybara (3.38.0)
       addressable
@@ -321,11 +326,15 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    stimulus_reflex (3.5.0.pre8)
-      cable_ready (= 5.0.0.pre8)
+    stimulus_reflex (3.5.0.pre9)
+      actioncable (>= 5.2)
+      actionpack (>= 5.2)
+      actionview (>= 5.2)
+      activesupport (>= 5.2)
+      cable_ready (>= 5.0.0.pre9)
       nokogiri
       rack
-      rails (>= 5.2)
+      railties (>= 5.2)
       redis
     stripe (8.1.0)
     thor (1.2.1)
@@ -413,7 +422,7 @@ DEPENDENCIES
   spring
   sprockets-rails (= 3.4.2)
   stimulus-rails (= 1.2.1)
-  stimulus_reflex (= 3.5.0.pre8)
+  stimulus_reflex (= 3.5.0.pre9)
   stripe (~> 8.0)
   turbo-rails (= 1.3.2)
   tzinfo-data
