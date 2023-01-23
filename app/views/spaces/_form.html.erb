@@ -12,10 +12,10 @@
       <select name="space[users][]" class="form-text-field mt-1 capitalize" data-controller="slimselect" multiple>
         <% if users.size > 0 %>
           <% users.each do |user| %>
-            <% if user==current_user %>
+            <% if user == current_user %>
               <option  value="<%= user.id %>" selected disabled><%= user.decorate.display_name %></option>
             <% elsif !space_users.nil? %>
-              <% if  space_users.include?(user.id) %>
+              <% if space_users.include?(user.id) %>
                 <option  value="<%= user.id %>" selected><%= user.decorate.display_name %></option>
               <% else %>
                 <option  value="<%= user.id %>"><%= user.decorate.display_name %></option>
