@@ -4,7 +4,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # ruby version app is using, [https://www.ruby-lang.org/en/downloads/]
-ruby "3.1.2"
+ruby "3.2.0"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
 gem "rails", "7.0.4.1"
@@ -12,8 +12,8 @@ gem "rails", "7.0.4.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", "3.4.2"
 
-# Use postgresql as the database for Active Record
-gem "pg", "1.2.3"
+# Use postgresql as the database for Active Record [https://github.com/ged/ruby-pg]
+gem "pg", "1.4.5"
 
 # Use Puma as the app server [https://github.com/puma/puma]
 gem "puma", "6.0.2"
@@ -83,7 +83,7 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem "listen", "~> 3.3"
-  gem "rack-mini-profiler", "~> 2.0"
+  gem "rack-mini-profiler", "~> 3.0"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "rufo"
