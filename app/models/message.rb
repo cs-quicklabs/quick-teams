@@ -4,5 +4,7 @@ class Message < ActiveRecord::Base
   belongs_to :user
   has_rich_text :body
   validates_presence_of :body, :title
-  has_many :comments, as: :commentable, dependent: :delete_all
+  has_many :message_comments, dependent: :destroy
+  scope :published, -> { where(published: true) }
+  scope :draft, -> { where(published: false) }
 end

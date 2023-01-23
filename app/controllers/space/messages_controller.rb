@@ -32,11 +32,12 @@ class Space::MessagesController < Space::BaseController
 
   def edit
     authorize [@space, @message]
+    @space_message = @message
   end
 
   def show
     authorize [@space, @message]
-    @comment = Comment.new
+    @comment = MessageComment.new
   end
 
   def update

@@ -27,6 +27,7 @@ class UpdateSpace < Patterns::Service
     space_users.destroy user
     if !@users.nil?
       space_users << @users - space_users
+      space_users << actor
     end
   end
 
