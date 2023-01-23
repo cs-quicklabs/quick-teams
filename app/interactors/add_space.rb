@@ -9,6 +9,7 @@ class AddSpace < Patterns::Service
     begin
       create_space
       space_users
+      send_email
     rescue
       space
     end
@@ -22,6 +23,20 @@ class AddSpace < Patterns::Service
   def space_users
     space.users << User.where("id IN (?)", users)
     space.users << actor
+  end
+
+  def send_email
+    if users.size > 0
+      users.each do |user|
+        if deliver_email?(user)
+          SpacesMailer.with(actor: actor, employee: user, space: space).space_email.deliver_later
+        end
+      end
+    end
+  end
+
+  def deliver_email?(employee)
+    (actor != employee) and employee.email_enabled and employee.account.email_enabled
   end
 
   attr_reader :space, :actor, :users

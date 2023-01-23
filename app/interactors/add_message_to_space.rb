@@ -28,9 +28,9 @@ class AddMessageToSpace < Patterns::Service
 
   def email
     return unless !send_email.nil?
-    space.users.each do |user|
+    (space.users - actor).each do |user|
       if deliver_email?(user)
-        MessagesMailer.with(actor: actor, employee: user, space: space).message_email.deliver_later
+        MessagesMailer.with(actor: actor, employee: user, message: message).message_email.deliver_later
       end
     end
   end
