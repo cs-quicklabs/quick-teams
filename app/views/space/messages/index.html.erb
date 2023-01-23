@@ -39,7 +39,7 @@
                     <% end %>
                     <% if policy(@space).archive? %>
                       <%= confirm_button(space_archive_path(@space), "Archive", "Are you sure you want to archive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
-                    <% else %>
+                    <% elsif policy(@space).unarchive? %>
                       <%= confirm_button(space_unarchive_path(@space), "Unarchive", "Are you sure you want to unarchive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
                     <% end %>
                   </div>
