@@ -63,7 +63,7 @@ gem "devise_invitable", "~> 2.0.0"
 gem "devise-pwned_password"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
-gem "sidekiq", "6.5.8"
+gem "sidekiq", "7.0.3"
 gem "sidekiq-scheduler", "4.0.2"
 gem "sinatra", ">= 1.3.0", require: nil
 
