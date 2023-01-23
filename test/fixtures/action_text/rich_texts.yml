@@ -2,3 +2,13 @@
    record: one(Template)
    name: body
    body: <div>This is some report</div>
+
+ two:
+   record: four(Message)
+   name: body
+   body: <div>This is some Space</div>
+
+ three:
+   record: three(Message)
+   name: body
+   body: <div>This is some Space</div>   

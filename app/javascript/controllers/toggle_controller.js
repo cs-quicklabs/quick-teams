@@ -1,6 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
+
     toggle(event) {
 
         const TARGETS = event.currentTarget.dataset.toggleTarget.split(",");

@@ -37,16 +37,13 @@
       <span class="inline-flex items-center rounded bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800">Archived</span>
     <% end %>
   </div>
-  <div class="flex space-x-3 flex-row  justify-center">
+  <div class="flex space-x-2 flex-row  justify-center">
     <div class="flex-shrink-0">
       <%= image_tag "male-placeholder-image.png", class: "w-7 h-7 rounded-full flex-auto" %>
     </div>
-    <div class="text-sm mt-1">
-      <a href="<%= employee_path(message.user) %>" class=" flex-none font-medium text-gray-900 hover:underline"><%= message.user.decorate.display_name %></a>
-    </div>
-    <div class=" text-sm mt-1 text-gray-500">
-      —— on <%= display_created_at(message) %> </span>
-  </div>
+        <div class="flex justify-center mt-1">
+          <p class="font-normal text-sm line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
+        </div>
 </div>
 </div>
 </div>
