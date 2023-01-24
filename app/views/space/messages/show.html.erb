@@ -43,7 +43,7 @@
       <div  class="px-6" id="comment-form">
         <% if policy([@space, @message]).comment? %>
           <div >
-            <%= render "message_comments/new" %>
+            <%= render partial: "message_comments/new", locals: { space_message: @message , comment: @comment } %>
           </div>
         <% end %>
       </div>

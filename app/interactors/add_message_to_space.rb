@@ -8,9 +8,9 @@ class AddMessageToSpace < Patterns::Service
   end
 
   def call
+    add_message
+    email
     begin
-      add_message
-      email
     rescue
       message
     end
@@ -27,10 +27,10 @@ class AddMessageToSpace < Patterns::Service
   end
 
   def email
-    return unless !send_email.nil?
-    (space.users - actor).each do |user|
+    return unless !send_email.nil? && draft.nil?
+    (space.users - [actor]).each do |user|
       if deliver_email?(user)
-        MessagesMailer.with(actor: actor, employee: user, message: message).message_email.deliver_later
+        MessagesMailer.with(actor: actor, employee: user, message: message, space: space).message_email.deliver_later
       end
     end
   end

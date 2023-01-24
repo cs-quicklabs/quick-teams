@@ -6,4 +6,5 @@ class Space < ActiveRecord::Base
   validates_presence_of :title, :description
   validates :title, length: { maximum: 255 }
   has_many :pinned_spaces, dependent: :destroy
+  scope :active, -> { where(archive: false) }
 end
