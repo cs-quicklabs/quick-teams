@@ -8,9 +8,9 @@ class AddMessageToSpace < Patterns::Service
   end
 
   def call
-    add_message
-    email
     begin
+      add_message
+      email
     rescue
       message
     end

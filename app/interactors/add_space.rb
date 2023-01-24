@@ -6,10 +6,10 @@ class AddSpace < Patterns::Service
   end
 
   def call
-    create_space
-    space_users
-    send_email
     begin
+      create_space
+      space_users
+      send_email
     rescue
       space
     end

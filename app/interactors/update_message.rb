@@ -9,9 +9,9 @@ class UpdateMessage < Patterns::Service
   end
 
   def call
+    update_message
+    email
     begin
-      update_message
-      email
     rescue
       message
     end
@@ -26,10 +26,10 @@ class UpdateMessage < Patterns::Service
   end
 
   def email
-    return unless !send_email.nil?
-    (space.users - actor).each do |user|
+    return unless !send_email.nil? && draft.nil?
+    (space.users - [actor]).each do |user|
       if deliver_email?(user)
-        MessagesMailer.with(actor: actor, employee: user, message: message).update_message_email.deliver_later
+        MessagesMailer.with(actor: actor, employee: user, message: message, space: space).update_message_email.deliver_later
       end
     end
   end

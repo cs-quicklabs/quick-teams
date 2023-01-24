@@ -6,9 +6,9 @@ class AddCommentOnMessage < Patterns::Service
   end
 
   def call
-    add_comment
-    send_email
     begin
+      add_comment
+      send_email
     rescue
       comment
     end
