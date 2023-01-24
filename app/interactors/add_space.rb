@@ -27,7 +27,8 @@ class AddSpace < Patterns::Service
 
   def send_email
     if users.size > 0
-      users.each do |user|
+      @space_users = User.where("id IN (?)", users)
+      @space_users.each do |user|
         if deliver_email?(user)
           SpacesMailer.with(actor: actor, employee: user, space: space).space_email.deliver_later
         end

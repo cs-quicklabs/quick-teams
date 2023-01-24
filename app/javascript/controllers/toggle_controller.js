@@ -6,11 +6,12 @@ export default class extends Controller {
 
         const TARGETS = event.currentTarget.dataset.toggleTarget.split(",");
         const HIDDEN_CLASS = "hidden";
-
         TARGETS.forEach((target) =>
+
             document
                 .querySelectorAll(`[data-toggle-name="${target}"]`)
-                .forEach((target) => target.classList.toggle(HIDDEN_CLASS))
+                .forEach((target) => target.classList.remove(HIDDEN_CLASS))
+
         );
         event.currentTarget.classList.toggle("hidden");
     }

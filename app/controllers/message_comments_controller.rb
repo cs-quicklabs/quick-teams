@@ -9,7 +9,7 @@ class MessageCommentsController < BaseController
     respond_to do |format|
       if @comment.persisted?
         format.turbo_stream {
-          render turbo_stream: turbo_stream.replace("add", partial: "message_comments/new", locals: { space_message: @message, comment: Comment.new, url: message_comments_path, method: "post" }) +
+          render turbo_stream: turbo_stream.update("add", partial: "message_comments/new", locals: { space_message: @message, comment: MessageComment.new, url: message_comments_path, method: "post" }) +
                                turbo_stream.append(:comments, partial: "message_comments/message_comment", locals: { comment: @comment })
         }
       else

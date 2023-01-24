@@ -7,7 +7,7 @@ class SpacesController < BaseController
     @all_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
     @pinned_spaces = current_user.pinned.order(created_at: :desc)
     @my_spaces = @all_spaces.where(user: current_user, archive: false)
-    @shared_spaces = @all_spaces.where.not(user: current_user)
+    @shared_spaces = @all_spaces.active.where.not(user: current_user)
     @archived_spaces = @all_spaces.where(archive: true)
     render_partial("spaces/space", collection: @all_spaces, cached: true) if stale?(@all_spaces)
   end
