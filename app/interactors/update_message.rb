@@ -9,9 +9,9 @@ class UpdateMessage < Patterns::Service
   end
 
   def call
-    update_message
-    email
     begin
+      update_message
+      email
     rescue
       message
     end
