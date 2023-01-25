@@ -3,8 +3,8 @@
   <tr id="<%= dom_id(assignee) %>">
     <td class="table-cell whitespace-nowrap ">
       <div class="flex items-center">
-        <div class="flex-shrink-0 w-10 h-10">
-          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full" %>
+        <div class="flex-shrink-0">
+          <%= display_medium_avatar(assignee) %>
         </div>
         <div class="ml-4">
           <a href="<%= employee_kpis_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">

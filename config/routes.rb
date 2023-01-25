@@ -137,6 +137,8 @@ Rails.application.routes.draw do
     get "/password", to: "user#password", as: "setting_password"
     patch "/password", to: "user#update_password", as: "edit_password"
     get "/preferences", to: "user#preferences", as: "user_preferences"
+    patch "/avatar", to: "user#update_avatar", as: "avatar"
+    delete "/avatar", to: "user#destroy_avatar", as: "destroy_avatar"
   end
   scope "/spaces" do
     get ":id/pin", to: "spaces#pin", as: "space_pin"

@@ -64,9 +64,8 @@ class UserDecorator < Draper::Decorator
     return total_subordinates <= 5 ? "" : "+#{total_subordinates - 5}"
   end
 
-  def display_team_members_count
-    total_subordinates = subordinates.size
-    [total_subordinates, 5].min
+  def display_team_members
+    total_subordinates = subordinates
   end
 
   def display_deactivated_on

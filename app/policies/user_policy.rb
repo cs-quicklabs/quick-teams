@@ -33,4 +33,12 @@ class UserPolicy < ApplicationPolicy
   def update_password?
     true
   end
+
+  def update_avatar?
+    true
+  end
+
+  def destroy_avatar?
+    true
+  end
 end

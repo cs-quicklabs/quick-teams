@@ -1,4 +1,5 @@
 class UserController < BaseController
+  include ActiveStorage::SetCurrent
   before_action :set_user
   before_action :build_form, only: [:update_password, :password]
 
@@ -25,6 +26,28 @@ class UserController < BaseController
     end
   end
 
+  def update_avatar
+    authorize @user
+    respond_to do |format|
+      if @user.avatar.attach(params[:user][:avatar])
+        format.html { redirect_to profile_path, notice: "Avatar was updated successfully" }
+      else
+        format.html { redirect_to profile_path, alert: "Invalid file added" }
+      end
+    end
+  end
+
+  def destroy_avatar
+    authorize @user
+    respond_to do |format|
+      if @user.avatar.purge
+        format.html { redirect_to profile_path, notice: "Avatar was deleted successfully" }
+      else
+        format.html { redirect_to profile_path, alert: "Avatar was not deleted" }
+      end
+    end
+  end
+
   def preferences
     authorize @user
   end
@@ -44,7 +67,7 @@ class UserController < BaseController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :manager_id, :job_id, :discipline_id)
+    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :manager_id, :job_id, :discipline_id, :avatar)
   end
 
   def change_password_params
