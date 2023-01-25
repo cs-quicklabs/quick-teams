@@ -39,7 +39,7 @@
   </div>
   <div class="flex space-x-2 flex-row  justify-center">
     <div class="flex-shrink-0">
-      <%= image_tag "male-placeholder-image.png", class: "w-7 h-7 rounded-full flex-auto" %>
+       <%=display_small_avatar(@space.user) %>
     </div>
         <div class="flex justify-center mt-1">
           <p class="font-normal text-sm line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>

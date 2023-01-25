@@ -59,11 +59,9 @@
         <div class="flex justify-center py-4">
           <div class="flex   ">
             <% users = @space.users.load.decorate %>
-            <% users.limit(10).each_with_index do |user, index| %>
+            <% users.limit(10).each do |user| %>
               <div>
-                <span role="img" class="inline-flex h-8 w-8 relative cursor-pointer "  title="<%= user.display_name %>" >
-                  <%= image_tag "male-placeholder-image.png", class: "w-8 h-8 rounded-full ring-2 ring-white relative  inline-block" %>
-                  <span>
+               <%=display_small_avatar(user) %>
                   </div>
                 <% end %>
                 <% if users.size > 10 %>
