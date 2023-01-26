@@ -1,7 +1,7 @@
 <div data-controller="toggle">
   <div class="flex space-x-3  " data-action= "click->toggle#toggle" data-toggle-target="comment_form">
     <div class="flex-shrink-0 mt-4">
-      <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full cursor-pointer", title: current_user.decorate.display_name %>
+     <%= display_medium_avatar(current_user) %>
     </div>
     <button class="btn-inline-edit text-gray-500  " href="#" id="show-comment-form"  >
       Add a comment
@@ -11,7 +11,7 @@
     <div id="add" >
       <div class="flex space-x-3">
         <div class="flex-shrink-0 mt-4">
-          <%= image_tag "male-placeholder-image.png", class: "w-10 h-10 rounded-full cursor-pointer", title: current_user.decorate.display_name %>
+          <%= display_medium_avatar(current_user) %>
         </div>
         <div class="flex-1 min-w-0">
           <%= form_with(model: comment, id: dom_id(comment), url: message_comments_path, method: :post) do |form| %>
