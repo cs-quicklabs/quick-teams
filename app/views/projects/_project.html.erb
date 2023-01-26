@@ -32,7 +32,7 @@
     <div class="flex items-center space-x-2">
       <div class="flex flex-shrink-0 -space-x-1">
         <% project.display_participants.each do |participant| %>
-          <%= display_xsmall_avatar(participant, true) %>
+          <%= display_xsmall_avatar(participant) %>
         <% end %>
       </div>
       <span class="flex-shrink-0 text-xs font-medium leading-5"><%= project.display_additional_participants %></span>
