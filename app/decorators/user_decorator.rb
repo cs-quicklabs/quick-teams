@@ -66,6 +66,7 @@ class UserDecorator < Draper::Decorator
 
   def display_team_members
     total_subordinates = subordinates
+    total_subordinates.first(5)
   end
 
   def display_deactivated_on

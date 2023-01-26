@@ -3,7 +3,7 @@
   <div class="flex items-center px-2 py-2 sm:px-6">
     <div class="flex items-center flex-1 min-w-0">
       <div class="flex-shrink-0">
-       <%=display_medium_avatar(employee) %>
+        <%=display_medium_avatar(employee) %>
       </div>
       <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4">
         <% if current_user.member? %>
@@ -26,7 +26,7 @@
         <div class="flex items-center space-x-2">
           <div class="flex flex-shrink-0 -space-x-1">
             <% employee.display_team_members.each do |employee| %>
-                 <%=<%=display_xsmall_avatar(event.user) %>(employee) %>
+              <%= display_xsmall_avatar(employee) %>
             <% end %>
           </div>
           <span class="flex-shrink-0 text-xs font-medium leading-5"><%= employee.display_additional_team_members %></span>

@@ -8,14 +8,14 @@
       <div class="flex  overflow-hidden  px-6 pb-6">
         <% users = space.users.decorate %>
         <% users.limit(5).each do |user| %>
-          <%=display_xsmall_avatar(user) %>
-            <% end %>
-            <% if users.size > 5 %>
-              <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold"  > + <%= users.size - 5 %>  </span>
-            <% elsif users.size == 0 %>
-              <span class="inline-flex h-6 w-6 whitespace-nowrap z-0 text-sm text-gray-400">No person added  </span>
-            <% end %>
-          </div>
-        </a>
-      </li>
-    <% end %>
+          <%=display_xsmall_avatar(user, true) %>
+        <% end %>
+        <% if users.size > 5 %>
+          <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold"  > + <%= users.size - 5 %>  </span>
+        <% elsif users.size == 0 %>
+          <span class="inline-flex h-6 w-6 whitespace-nowrap z-0 text-sm text-gray-400">No person added  </span>
+        <% end %>
+      </div>
+    </a>
+  </li>
+<% end %>

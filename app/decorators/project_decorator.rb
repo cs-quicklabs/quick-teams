@@ -27,6 +27,6 @@ class ProjectDecorator < Draper::Decorator
   end
 
   def display_participants
-    total_participants = project.participants
+    total_participants = project.participants.first(5)
   end
 end
