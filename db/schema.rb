@@ -486,10 +486,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_115323) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "description"
-<<<<<<< HEAD
-=======
-    t.boolean "pin", default: false
->>>>>>> 72ecd6068ece84408d30c7694c270621cf8b93c3
     t.boolean "archive", default: false
     t.datetime "archive_at"
     t.index ["account_id"], name: "index_spaces_on_account_id"
