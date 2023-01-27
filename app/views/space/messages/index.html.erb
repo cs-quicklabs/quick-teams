@@ -58,7 +58,7 @@
         </div>
         <div class="flex justify-center py-4">
           <div class="flex   ">
-            <% users = @space.users %>
+            <% users = @space.users.includes(avatar_attachment: :blob) %>
             <% users.first(10).each do |user| %>
               <div>
                 <%= display_small_avatar(user) %>
