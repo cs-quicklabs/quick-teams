@@ -59,45 +59,45 @@
         <div class="flex justify-center py-4">
           <div class="flex   ">
             <% users = @space.users.load.decorate %>
-            <% users.limit(10).each do |user| %>
+            <% users.first(10).each do |user| %>
               <div>
-               <%=display_small_avatar(user) %>
-                  </div>
-                <% end %>
-                <% if users.size > 10 %>
-                  <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold items-center"  > + <%= users.size - 10 %>  </span>
-                <% elsif users.size == 0 %>
-                  <span class="inline-flex whitespace-nowrap z-0 text-sm text-gray-400 items-center">No person added  </span>
-                <% end %>
+                <%=display_small_avatar(user) %>
               </div>
-              <div class="">
-                <% if @messages.size > 0 %>
-                  <select class="form-text-field w-56 inline-flex ml-4" name="direction" id="sort" onchange="window.location.href = '<%= space_messages_path(@space) %>?direction=' + this.value;">
-                    <%= options_for_select([["Sort Threads By Newest", "DESC"], ["Sort Threads By Oldest", "ASC"]], prompt: "DESC", :selected => (params["direction"] if !params["direction"].blank?)) %>
-                  </select>
-                <% end %>
-                <% if policy([@space, Message]).new? %>
-                  <%= link_to "Add New Thread", new_space_message_path(@space.id), class: "btn-blue inline-flex " %>
-                <% end %>
-              </div>
-            </div>
+            <% end %>
+            <% if users.size > 10 %>
+              <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold items-center"  > + <%= users.size - 10 %>  </span>
+            <% elsif users.size == 0 %>
+              <span class="inline-flex whitespace-nowrap z-0 text-sm text-gray-400 items-center">No person added  </span>
+            <% end %>
+          </div>
+          <div class="">
+            <% if @messages.size > 0 %>
+              <select class="form-text-field w-56 inline-flex ml-4" name="direction" id="sort" onchange="window.location.href = '<%= space_messages_path(@space) %>?direction=' + this.value;">
+                <%= options_for_select([["Sort Threads By Newest", "DESC"], ["Sort Threads By Oldest", "ASC"]], prompt: "DESC", :selected => (params["direction"] if !params["direction"].blank?)) %>
+              </select>
+            <% end %>
+            <% if policy([@space, Message]).new? %>
+              <%= link_to "Add New Thread", new_space_message_path(@space.id), class: "btn-blue inline-flex " %>
+            <% end %>
           </div>
         </div>
-        <div class="relative " id="threads">
-          <% if @messages.size > 0 %>
-            <ul role="list" class="">
-              <%= render partial: "message", collection: @messages, as: :message, cached: false %>
-            </ul>
-          <% else %>
-            <div class="flex justify-center items-center h-28">
-              <div class="text-center">
-                <h1 class="text-sm text-gray-400">No Threads Added Yet</h1>
-                <% if !@space.archive? %>
-                  <p class="text-gray-400 text-sm">Add a new thread to get started</p>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        </div>
       </div>
-    </main>
+    </div>
+    <div class="relative " id="threads">
+      <% if @messages.size > 0 %>
+        <ul role="list" class="">
+          <%= render partial: "message", collection: @messages, as: :message, cached: false %>
+        </ul>
+      <% else %>
+        <div class="flex justify-center items-center h-28">
+          <div class="text-center">
+            <h1 class="text-sm text-gray-400">No Threads Added Yet</h1>
+            <% if !@space.archive? %>
+              <p class="text-gray-400 text-sm">Add a new thread to get started</p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>

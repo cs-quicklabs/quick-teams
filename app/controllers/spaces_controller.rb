@@ -4,11 +4,12 @@ class SpacesController < BaseController
 
   def index
     authorize :spaces
-    @all_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
-    @pinned_spaces = current_user.pinned.order(created_at: :desc)
-    @my_spaces = @all_spaces.where(user: current_user, archive: false)
-    @shared_spaces = @all_spaces.active.where.not(user: current_user)
-    @archived_spaces = @all_spaces.where(archive: true)
+    @all_spaces = current_user.spaces.includes(users: :avatar, users: { avatar_attachment: :blob }).order(created_at: :desc)
+    @pinned_spaces = current_user.pinned.includes(users: { avatar_attachment: :blob }).order(created_at: :desc)
+    @my_spaces = @all_spaces.select { |space| space.user_id == current_user.id && space.archive == false }
+    @archived_spaces = @all_spaces.select { |space| space.archive == true }
+    @shared_spaces = @all_spaces - @my_spaces - @archived_spaces
+
     render_partial("spaces/space", collection: @all_spaces, cached: true) if stale?(@all_spaces)
   end
 
