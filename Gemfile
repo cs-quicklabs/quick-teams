@@ -41,6 +41,11 @@ gem "valid_url"
 # Use Active Storage variant
 gem "image_processing", "~> 1.12"
 
+# sidekiq gems, sinatra is used to build UI for /sidekiq
+gem "sidekiq", "7.0.3"
+gem "sidekiq-scheduler", "5.0.0"
+gem "sinatra", "3.0.5", require: nil
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"
 gem "aws-sdk-s3", "~> 1.87"
@@ -61,11 +66,6 @@ gem "nokogiri", "~> 1.14"
 gem "devise", github: "heartcombo/devise", branch: "main"
 gem "devise_invitable", "~> 2.0.0"
 gem "devise-pwned_password"
-
-# sidekiq gems, sinatra is used to build UI for /sidekiq
-gem "sidekiq", "7.0.3"
-gem "sidekiq-scheduler", "5.0.0"
-gem "sinatra", "3.0.5", require: nil
 
 # Payments
 gem "pay", "6.3.1"
