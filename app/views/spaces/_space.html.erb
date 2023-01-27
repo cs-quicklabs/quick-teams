@@ -6,7 +6,7 @@
         <p class="font-normal text-sm text-gray-500 line-clamp-2 mt-2"> <%= highlight_hashtag(space.description.upcase_first) %></p>
       </div>
       <div class="flex  overflow-hidden  px-6 pb-6">
-        <% users = space.users.decorate %>
+        <% users = space.users %>
         <% users.first(5).each do |user| %>
           <%= display_xsmall_avatar(user) %>
         <% end %>
