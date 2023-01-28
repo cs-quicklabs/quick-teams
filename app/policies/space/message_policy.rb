@@ -12,7 +12,8 @@ class Space::MessagePolicy < ApplicationPolicy
   end
 
   def show?
-    (record.last.published? && record.first.users.include?(user)) || record.last.user == user
+    true
+    #(record.last.published? && record.first.users.include?(user)) || record.last.user == user
   end
 
   def comment?

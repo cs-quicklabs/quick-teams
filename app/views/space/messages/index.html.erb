@@ -59,7 +59,7 @@
         <div class="flex justify-center py-4">
           <div class="flex   ">
             <% users = @space.users.includes(avatar_attachment: :blob) %>
-            <% users.first(10).each do |user| %>
+            <% users.load.first(10).each do |user| %>
               <div>
                 <%= display_small_avatar(user) %>
               </div>
@@ -71,7 +71,7 @@
             <% end %>
           </div>
           <div class="">
-            <% if @messages.size > 0 %>
+            <% if @messages.load.size > 0 %>
               <select class="form-text-field w-56 inline-flex ml-4" name="direction" id="sort" onchange="window.location.href = '<%= space_messages_path(@space) %>?direction=' + this.value;">
                 <%= options_for_select([["Sort Threads By Newest", "DESC"], ["Sort Threads By Oldest", "ASC"]], prompt: "DESC", :selected => (params["direction"] if !params["direction"].blank?)) %>
               </select>

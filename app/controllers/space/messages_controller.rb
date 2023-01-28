@@ -6,10 +6,12 @@ class Space::MessagesController < Space::BaseController
   def index
     authorize [@space, :message]
     if params[:direction].present?
-      @messages = @space.messages.order("created_at #{params[:direction]}")
+      @messages = @space.messages.includes(:user).order("created_at #{params[:direction]}")
     else
-      @messages = @space.messages.order("created_at desc")
+      @messages = @space.messages.includes(:user).order("created_at desc")
     end
+
+    fresh_when @messages + [@space]
   end
 
   def new
