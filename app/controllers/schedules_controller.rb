@@ -30,7 +30,7 @@ class SchedulesController < BaseController
   end
 
   def employees_for_schedule
-    employees = User.for_current_account.active.includes({ schedules: :project }, :role, :discipline, :job, :status).order(:first_name)
+    employees = User.for_current_account.active.with_attached_avatar.includes({ schedules: :project }, :role, :discipline, :job, :status).order(:first_name)
     if params[:job]
       employees = employees.where(job: params[:job])
     elsif params[:role]
