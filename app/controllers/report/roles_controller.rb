@@ -1,7 +1,7 @@
 class Report::RolesController < Report::BaseController
   def index
     authorize :report
-    entries = User.for_current_account.active.includes(:status).query(employee_filter_params)
+    entries = User.for_current_account.active.with_attached_avatar.includes(:status).query(employee_filter_params)
     @stats = EmployeesStats.new(entries)
 
     @pagy, @employees = pagy_nil_safe(params, entries, items: LIMIT)
