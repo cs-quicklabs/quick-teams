@@ -161,10 +161,10 @@
   resolved "https://registry.npmjs.org/@rails/actioncable/-/actioncable-7.0.4.tgz"
   integrity sha512-tz4oM+Zn9CYsvtyicsa/AwzKZKL+ITHWkhiu7x+xF77clh2b4Rm+s6xnOgY/sGDWoFWZmtKsE95hxBPkgQQNnQ==
 
-"@rails/actiontext@7.0.4-1":
-  version "7.0.4-1"
-  resolved "https://registry.yarnpkg.com/@rails/actiontext/-/actiontext-7.0.4-1.tgz#f753c4fbcc92359537fc00e8ab70907464b6bb01"
-  integrity sha512-MoHoMX7m+aYB/1q0386a6OF/ErIiIbzK1LTaJ8ki5yxF46nDPFhjmqCjSnkVl5HYLjYHUDd1yWHwPSiMMxKUjQ==
+"@rails/actiontext@7.0.4-2":
+  version "7.0.4-2"
+  resolved "https://registry.yarnpkg.com/@rails/actiontext/-/actiontext-7.0.4-2.tgz#53047a5734eb6e13f0c101b632954c4413858e5d"
+  integrity sha512-+6KD8cbbgNukWoalPgM7sfEX2eQ4XM6EAS532nc0pgGbbHnyjNeMV/rLSpVGkZSOB0OoYhi2yNZon7zGlJ05DA==
   dependencies:
     "@rails/activestorage" ">= 7.0.0-alpha1"
 
