@@ -1,0 +1,45 @@
+<%= turbo_frame_tag dom_id(comment) do %>
+  <li class="py-4 list-none border-b border-gray-200 px-6">
+    <div class=" w-full  flex justify-between">
+      <div class="flex space-x-3 ">
+        <div class="flex-shrink-0">
+          <%= display_medium_avatar(comment.user) %>
+        </div>
+        <div class="w-full text-sm flex-wrap ">
+          <div class="flex space-x-3">
+            <p class="font-medium text-gray-900"><%= comment.user.decorate.display_name %> </p>
+            <div class="space-x-2 flex whitespace-nowrap ">
+              <span class="text-sm text-gray-500"><%= display_created_at(comment) %></span>
+            </div>
+          </div>
+          <div class="text-sm text-gray-700 ">
+            <p class="whitespace-pre-wrap"><%= comment.body %></p>
+          </div>
+        </div>
+      </div>
+      <div  x-on:click.outside="open = false" class=" relative" x-data="{ open: false }">
+        <div class=" ">
+          <% if (policy(comment).edit? && policy([comment.message.space, comment.message]).edit_comment?) || policy(comment).destroy? %>
+            <button @click="open = !open" id="comment-menu" class="flex-auto mt-1 ml-4 z-20  text-sm rounded-full hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="user-menu" aria-haspopup="true">
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z" />
+              </svg>
+            </button>
+          </div>
+          <div x-show="open"    x-transition.opacity class="h-8 absolute right-0 w-48  origin-top-right rounded-md shadow-lg">
+            <div class="absolute  -mt-5 right-0 z-10  w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+              <div class="" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                <% if policy(comment).edit? && policy([comment.message.space, comment.message]).edit_comment? %>
+                  <a href=<%= edit_message_comment_path(comment) %> class="  block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"  role= "menuitem" tabindex="-1">Edit</a>
+                <% end %>
+                <% if policy(comment).destroy? %>
+                  <%= styled_delete_button(message_comment_path(comment), "  block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </li>
+<% end %>

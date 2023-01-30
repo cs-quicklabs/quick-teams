@@ -1,0 +1,23 @@
+one:
+  title: This is a seven space
+  user: regular
+  commentable: six
+  commentable_type: Message
+
+two:
+  title: This is a seven space
+  user: lead
+  commentable: six
+  commentable_type: Message  
+
+three:
+  title: This is a seven space
+  user: regular
+  commentable: four
+  commentable_type: Message
+
+four:
+  title: This is a seven space
+  user: lead
+  commentable: four
+  commentable_type: Message    

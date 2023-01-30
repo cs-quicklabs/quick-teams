@@ -42,7 +42,13 @@ trix-editor ul { list-style-type: disc !important; margin-left: 1rem !important;
 trix-editor ol { list-style-type: decimal !important; margin-left: 1rem !important; }
 trix-editor a { text-decoration: underline !important; color: blue }
 trix-toolbar .trix-button--icon { width: 2.2em !important;}
+trix-editor {
+  min-height: 10rem;
+  height: auto;
+}
 
 .trix-content ul { list-style-type: disc !important; margin-left: 1rem !important; }
 .trix-content ol { list-style-type: decimal !important; margin-left: 1rem !important; }
 .trix-content a { text-decoration: underline !important; color: blue }
+
+.trix-content div:first-letter { text-transform: capitalize; }

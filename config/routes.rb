@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     resources :ticket_statuses, except: [:new, :show]
     resources :ticket_labels, except: [:new, :show]
   end
+  resources :spaces do
+    resources :messages, module: "space"
+  end
+  resources :message_comments, only: [:create, :update, :destroy, :edit, :update]
 
   resources :projects do
     resources :schedules, module: "project"
@@ -135,6 +139,12 @@ Rails.application.routes.draw do
     get "/preferences", to: "user#preferences", as: "user_preferences"
     patch "/avatar", to: "user#update_avatar", as: "avatar"
     delete "/avatar", to: "user#destroy_avatar", as: "destroy_avatar"
+  end
+  scope "/spaces" do
+    get ":id/pin", to: "spaces#pin", as: "space_pin"
+    get ":id/unpin", to: "spaces#unpin", as: "space_unpin"
+    get ":id/archive", to: "spaces#archive", as: "space_archive"
+    get ":id/unarchive", to: "spaces#unarchive", as: "space_unarchive"
   end
 
   # if you change something in reports path please check stats path are not broken in project/employee timsheets, as they are hardcoded.

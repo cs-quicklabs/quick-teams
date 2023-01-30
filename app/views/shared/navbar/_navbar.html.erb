@@ -20,7 +20,7 @@
           <div @click.away="open = false" class="relative z-10 ml-3" x-data="{ open: false }">
             <div>
               <button @click="open = !open" class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
-             <%= display_small_avatar(current_user) %>
+                <%= display_small_avatar(current_user) %>
               </button>
             </div>
             <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-48 mt-2 origin-top-right rounded-md shadow-lg">

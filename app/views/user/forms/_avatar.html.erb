@@ -1,45 +1,37 @@
-     <div class="mt-6 flex-grow lg:mt-0 lg:ml-6 lg:flex-shrink-0 lg:flex-grow-0" id="<%= dom_id(user) %>">
-          <%=form_with(model: @user, id: "avatar_upload", url: avatar_path,  remote: true, method: :patch, html: { multipart: true }, local: true) do |f| %>
-           <%= render "shared/form_messages", resource: @form, message: local_assigns[:message] %>
-                  <p class="text-lg leading-6 font-medium text-gray-900 flex pb-6 justify-center " aria-hidden="true"></p>
-                  <div class="mt-1 lg:hidden">
-                    <div class="flex items-center">
-                      <div class="inline-block h-40 w-40 flex-shrink-0 overflow-hidden rounded-full" aria-hidden="true">
-             <%=display_large_avatar(user) %> 
-                               
-                        </div>
-                  
-                      <div class="ml-5 rounded-md shadow-sm">
-                        <div class="group relative flex items-center justify-center rounded-md border border-gray-300 py-2 px-3 focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 hover:bg-gray-50">
-                         
-                          <label for="mobile-user-photo" class="pointer-events-none relative text-sm font-medium leading-4 text-gray-700">
-                            <span>Change</span>
-                            <span class="sr-only"> user photo</span>
-                          </label>
-  
-                        </div>
-                      </div>
-                     
-                    </div>
-                  </div>
-
-                  <div class="relative hidden overflow-hidden rounded-full lg:block">
-                <%=display_large_avatar(user) %> 
-  
-                    <label for="desktop-user-photo" class="absolute inset-0 flex h-full w-full items-center justify-center bg-black bg-opacity-75 text-sm font-medium text-white opacity-0 focus-within:opacity-100 hover:opacity-100">
-                      <span>Change</span>
-                      <span class="sr-only"> user photo</span>
-                      
-                      <input type="file" id="desktop-user-photo" name="user[avatar]" class="absolute inset-0 h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0" onchange = "document.getElementById('avatar_upload').submit();">
-                    </label>
-                  </div>
-                   <% end %>
-                   <div class="mt-6 flex justify-center">
-                   <%=link_to "Remove Photo", destroy_avatar_path, class: "btn-inline-delete text-red-600", data: {
-                                    controller: "confirmation",
-                                    "turbo-method": :delete,
-                                    "confirmation-message-value": "Are you sure you want to delete your profile pic?",
-                                    action: "confirmation#confirm",
-                                  }%>
-                                  </div>
-                </div>
+<div class="mt-6 flex-grow lg:mt-0 lg:ml-6 lg:flex-shrink-0 lg:flex-grow-0" id="<%= dom_id(user) %>">
+  <%= form_with(model: @user, id: "avatar_upload", url: avatar_path, remote: true, method: :patch, html: { multipart: true }, local: true) do |f| %>
+    <%= render "shared/form_messages", resource: @form, message: local_assigns[:message] %>
+    <p class="text-lg leading-6 font-medium text-gray-900 flex pb-6 justify-center " aria-hidden="true"></p>
+    <div class="mt-1 lg:hidden">
+      <div class="flex items-center">
+        <div class="inline-block h-40 w-40 flex-shrink-0 overflow-hidden rounded-full" aria-hidden="true">
+          <%= display_large_avatar(user) %>
+        </div>
+        <div class="ml-5 rounded-md shadow-sm">
+          <div class="group relative flex items-center justify-center rounded-md border border-gray-300 py-2 px-3 focus-within:ring-2 focus-within:ring-sky-500 focus-within:ring-offset-2 hover:bg-gray-50">
+            <label for="mobile-user-photo" class="pointer-events-none relative text-sm font-medium leading-4 text-gray-700">
+              <span>Change</span>
+              <span class="sr-only"> user photo</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="relative hidden overflow-hidden rounded-full lg:block">
+      <%= display_large_avatar(user) %>
+      <label for="desktop-user-photo" class="absolute inset-0 flex h-full w-full items-center justify-center bg-black bg-opacity-75 text-sm font-medium text-white opacity-0 focus-within:opacity-100 hover:opacity-100">
+        <span>Change</span>
+        <span class="sr-only"> user photo</span>
+        <input type="file" id="desktop-user-photo" name="user[avatar]" class="absolute inset-0 h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0" onchange = "document.getElementById('avatar_upload').submit();">
+      </label>
+    </div>
+  <% end %>
+  <div class="mt-6 flex justify-center">
+    <%= link_to "Remove Photo", destroy_avatar_path, class: "btn-inline-delete text-red-600", data: {
+                                                       controller: "confirmation",
+                                                       "turbo-method": :delete,
+                                                       "confirmation-message-value": "Are you sure you want to delete your profile pic?",
+                                                       action: "confirmation#confirm",
+                                                     } %>
+  </div>
+</div>

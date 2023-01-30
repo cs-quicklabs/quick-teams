@@ -1,0 +1,12 @@
+one:
+  space: pinned
+  user: lead
+
+two:
+  space: seven
+  user: regular
+
+three:
+  space: eight
+  user: lead  
+

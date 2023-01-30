@@ -1,0 +1,69 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+pinned:
+  title: This is a pinned space
+  description: This is pinned
+  user: regular
+  account: crownstack
+
+eight:
+  title: This is a eight space
+  description: This is eight
+  user: regular
+  account: crownstack  
+
+nine:
+  title: This is a nine space
+  description: This is nine
+  user: lead  
+  archive: false
+  account: crownstack   
+
+archived:
+  title: This is a archived space
+  description: This is nine
+  user: regular
+  archive: true
+  archive_at: 2021-03-31
+  account: crownstack  
+
+six:
+  title: This is a archived space
+  description: This is archived
+  user: lead
+  archive: true
+  archive_at: 2021-03-31
+  account: crownstack
+
+seven:
+  title: This is a some space
+  description: This is space
+  user: lead
+  archive: false
+  account: crownstack 
+
+two:
+  title: This is a space two
+  description: This is space two
+  user: lead
+  account: crownstack
+
+three:
+  title: This is a archived space
+  description: This is archived
+  user: lead
+  archive: true
+  archive_at: 2021-03-31
+  account: crownstack
+
+four:
+  title: This is a title four
+  description: This is four
+  user: lead
+  account: crownstack
+
+five:
+  title: This is a pinned space
+  description: This is pinned
+  user: lead
+  account: crownstack

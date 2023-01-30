@@ -3,9 +3,7 @@
     <div class="px-4 py-6 bg-gray-50 sm:px-6">
       <div class="flex space-x-3">
         <div class="flex-shrink-0">
-            <%=display_medium_avatar(@comment.user) %>
-          
-
+          <%= display_medium_avatar(@comment.user) %>
         </div>
         <div class="flex-1 min-w-0">
           <%= form_with model: @comment, url: comment_path(@comment), method: :patch do |form| %>
