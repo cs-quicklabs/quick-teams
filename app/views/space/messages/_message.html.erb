@@ -1,7 +1,7 @@
 <% if policy([message.space, message]).show? %>
   <%= turbo_frame_tag dom_id(message) do %>
     <li class=" py-4 border-b border-gray-200 ">
-      <% if  message.published? %>
+      <% if message.published? %>
         <a href="<%= space_message_path(message.space, message) %>" class=" focus:outline-none">
            <div class="flex flex-col ">
         <% else %>
