@@ -1,0 +1,4 @@
+<p>Dear <%= @manager.decorate.display_name %>!</p>
+<p> You have been relieved from management of  <%= @employee.decorate.display_name %>. Please click link below to see more details:</p>
+<p><%= link_to "Show Schedule", employee_schedules_url(@employee, script_name: "/#{@employee.account.id}") %></p>
+<p> Please ignore if you think this has been a mistake.</p>
