@@ -1,10 +1,9 @@
 class Space::MessagesController < Space::BaseController
   helper TrixAttachmentsHelper
   before_action :set_message, only: %i[ show edit update destroy ]
-  before_action :set_space
 
   def index
-    authorize [@space, :message]
+    authorize [@space, Message]
     if params[:direction].present?
       @messages = @space.messages.includes(:user).order("created_at #{params[:direction]}")
     else
@@ -15,12 +14,12 @@ class Space::MessagesController < Space::BaseController
   end
 
   def new
-    authorize [@space, :message]
+    authorize [@space, Message]
     @space_message = Message.new
   end
 
   def create
-    authorize [@space, :message]
+    authorize [@space, Message]
     @message = AddMessageToSpace.call(@space, Message.new(message_params), current_user, params[:draft], params[:send_email]).result
 
     respond_to do |format|
