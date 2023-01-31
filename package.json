@@ -11,7 +11,7 @@
     "autoprefixer": "10.4.13",
     "esbuild": "0.17.5",
     "postcss": "8.4.21",
-    "slim-select": "2.3.3",
+    "slim-select": "2.4.2",
     "stimulus": "https://github.com/stimulusreflex/stimulus/raw/master/stimulus-v3.0.0.tgz",
     "stimulus-scroll-to": "4.1.0",
     "stimulus_reflex": "3.5.0-pre8",
