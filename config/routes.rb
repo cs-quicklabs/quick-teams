@@ -146,7 +146,11 @@ Rails.application.routes.draw do
     get ":id/archive", to: "spaces#archive", as: "space_archive"
     get ":id/unarchive", to: "spaces#unarchive", as: "space_unarchive"
   end
+<<<<<<< Updated upstream
   get "*pdf", to: "pdf#generate"
+=======
+  get "*csv", to: "report/csv#generate", as: "csv", constraints: { format: "csv" }
+>>>>>>> Stashed changes
   # if you change something in reports path please check stats path are not broken in project/employee timsheets, as they are hardcoded.
   scope "report" do
     get "/timesheets", to: "report/timesheets#index", as: "timesheets_reports"
