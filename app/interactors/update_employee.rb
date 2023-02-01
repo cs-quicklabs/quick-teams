@@ -7,8 +7,8 @@ class UpdateEmployee < Patterns::Service
 
   def call
     begin
-      send_email
       update_employee
+      send_email
     rescue
       employee
     end
@@ -22,11 +22,11 @@ class UpdateEmployee < Patterns::Service
   end
 
   def send_email
-    if employee.manager_id != params[:manager_id]
-      @manager = User.find(params[:manager_id])
-      ManagerMailer.with(employee: employee, manager: employee.manager).relieved_email.deliver_later if deliver_email?
-      ManagerMailer.with(employee: employee, manager: @manager).updated_email.deliver_later if deliver_email?
-      ManagerMailer.with(employee: employee, manager: @manager).manager_email.deliver_later if deliver_email?
+    if employee.saved_change_to_attribute?(:manager_id)
+      @manager = User.find(employee.manager_id_before_last_save)
+      ManagerMailer.with(employee: employee, manager: @manager).relieved_email.deliver_later if deliver_email?
+      ManagerMailer.with(employee: employee, manager: employee.manager).updated_email.deliver_later if deliver_email?
+      ManagerMailer.with(employee: employee, manager: employee.manager).manager_email.deliver_later if deliver_email?
     end
   end
 
