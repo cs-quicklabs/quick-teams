@@ -124,6 +124,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def render_pdf(partial, collection:, cached: true)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        # here you call prawn pdf class (see below)
+        pdf =
+          send_data pdf.render, filename: "family.pdf",
+                                type: "application/pdf",
+                                disposition: "inline"
+      end
+    end
+  end
+
   def render_timeline(partial, collection:, cached: true)
     respond_to do |format|
       format.html
