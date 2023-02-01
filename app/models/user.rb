@@ -52,7 +52,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :skills, dependent: :destroy
   has_and_belongs_to_many :nuggets
   has_and_belongs_to_many :spaces
-
+  default_scope { includes({ avatar_attachment: :blob }) }
   validates :email, uniqueness: true
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
   has_one_attached :avatar

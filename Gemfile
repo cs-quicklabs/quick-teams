@@ -7,7 +7,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.0"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
-gem "rails", "7.0.4.1"
+gem "rails", "7.0.4.2"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", "3.4.2"
@@ -31,7 +31,7 @@ gem "turbo-rails", "1.3.2"
 gem "stimulus-rails", "1.2.1"
 
 # Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
-gem "stimulus_reflex", "3.5.0.pre9"
+gem "stimulus_reflex", "3.5.0.pre8"
 
 # Use Redis adapter to run Action Cable in production
 gem "hiredis"
@@ -48,8 +48,8 @@ gem "sinatra", "3.0.5", require: nil
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"
-gem "aws-sdk-s3", "~> 1.87"
-gem "bootsnap", "1.15.0", require: false
+gem "aws-sdk-s3", "~> 1.119"
+gem "bootsnap", "1.16.0", require: false
 gem "draper"
 gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
 gem "newrelic_rpm"

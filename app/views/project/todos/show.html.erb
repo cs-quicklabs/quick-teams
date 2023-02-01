@@ -2,8 +2,8 @@
 <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="todo-detail">
     <div class="flex-1 min-w-0">
-      <h3 class="text-2xl font-bold leading-tight text-gray-900">
-        <%= @todo.display_title %>
+      <h3 class="text-2xl font-bold leading-tight text-gray-900 break-words">
+        <%= highlight_hashtag(@todo.display_title) %>
       </h3>
       <div class="flex mt-4 space-x-3">
         <div class="flex-shrink-0">
@@ -29,7 +29,9 @@
   </div>
   <% cache @todo do %>
     <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
-      <p class="whitespace-pre-wrap"><%= @todo.body %></p>
+      <p class="whitespace-pre-wrap break-words">
+        <%= auto_link_urls_in_text(@todo.body.upcase_first) %>
+      </p>
     </div>
   <% end %>
   <% if @todo.completed? %>

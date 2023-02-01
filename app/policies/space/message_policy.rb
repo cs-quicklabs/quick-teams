@@ -1,6 +1,7 @@
 class Space::MessagePolicy < ApplicationPolicy
   def index?
-    (record.first.users.include?(user) || record.first.user == user)
+    #(record.first.users.include?(user) || record.first.user == user)
+    true
   end
 
   def new?
