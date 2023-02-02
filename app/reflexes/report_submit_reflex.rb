@@ -7,4 +7,9 @@ class ReportSubmitReflex < ApplicationReflex
     reportable.events.create(user: actor, action: "report", action_for_context: "added new report", trackable: report)
     report.save!
   end
+
+  def download
+    html = render(partial: "shared/export")
+    morph "#modal", "#{html}"
+  end
 end
