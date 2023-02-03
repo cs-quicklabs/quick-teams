@@ -12,4 +12,11 @@ class TodosMailer < ApplicationMailer
     @todo = params[:todo]
     mail(to: @actor.email, subject: "TODO Completed", template_path: "mailers/todos_mailer")
   end
+
+  def opened_email
+    @employee = params[:employee]
+    @actor = params[:actor]
+    @todo = params[:todo]
+    mail(to: @actor.email, subject: "TODO Re-Opened", template_path: "mailers/todos_mailer")
+  end
 end
