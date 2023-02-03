@@ -24,9 +24,9 @@ class EmployeesController < BaseController
 
   def update
     authorize :team
-
+    @employee = UpdateEmployee.call(@employee, employee_params, current_user).result
     respond_to do |format|
-      if @employee.update(employee_params)
+      if @employee.errors.empty?
         format.html { redirect_to employee_team_path(@employee), notice: "User was successfully updated." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@employee, partial: "employees/forms/form", locals: { employee: @employee }) }
