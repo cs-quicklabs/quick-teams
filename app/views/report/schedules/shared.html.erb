@@ -9,7 +9,7 @@
     </div>
        <%= form_tag generate_reports_path(format: :csv), method: :post do %>
   <%= hidden_field_tag :data, @employees.to_json %>
-    <%= hidden_field_tag :header, ["Name", "Projects", "Occupancy", "Status"]  %>
+    <%= hidden_field_tag :header, ["Name", "Projects", "Occupancy", "Status"] %>
   <%= submit_tag "Download CSV", class: "btn-blue" %>
 <% end %>
   </div>
