@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  rescue_from Pundit::NotDefinedError, with: :record_not_found
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  rescue_from ActiveRecord::InvalidForeignKey, with: :show_referenced_alert
-  rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_token
-  rescue_from ActsAsTenant::Errors::NoTenantSet, with: :user_not_authorized
+  #rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  #rescue_from Pundit::NotDefinedError, with: :record_not_found
+  #rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  #rescue_from ActiveRecord::InvalidForeignKey, with: :show_referenced_alert
+  #rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_token
+  #rescue_from ActsAsTenant::Errors::NoTenantSet, with: :user_not_authorized
 
   before_action :set_redirect_path, unless: :user_signed_in?
 
@@ -121,6 +121,19 @@ class ApplicationController < ActionController::Base
         render json: { entries: render_to_string(partial: partial, formats: [:html], collection: collection, as: as, cached: cached),
                        pagination: render_to_string(partial: "shared/paginator", formats: [:html], locals: { pagy: @pagy }) }
       }
+    end
+  end
+
+  def render_pdf(partial, collection:, cached: true)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        # here you call prawn pdf class (see below)
+        pdf =
+          send_data pdf.render, filename: "family.pdf",
+                                type: "application/pdf",
+                                disposition: "inline"
+      end
     end
   end
 

@@ -139,6 +139,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
+    csv (3.2.6)
     date (3.3.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -380,6 +381,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.38)
   cssbundling-rails (= 1.1.2)
+  csv
   devise!
   devise-pwned_password
   devise_invitable (~> 2.0.0)
