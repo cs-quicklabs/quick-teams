@@ -303,7 +303,7 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.11.0)
-    sidekiq-scheduler (5.0.0)
+    sidekiq-scheduler (5.0.1)
       rufus-scheduler (~> 3.2)
       sidekiq (>= 4, < 8)
       tilt (>= 1.4.0)
@@ -410,7 +410,7 @@ DEPENDENCIES
   rufo
   selenium-webdriver
   sidekiq (= 7.0.3)
-  sidekiq-scheduler (= 5.0.0)
+  sidekiq-scheduler (= 5.0.1)
   sinatra (= 3.0.5)
   spring
   sprockets-rails (= 3.4.2)
