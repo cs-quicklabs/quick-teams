@@ -328,7 +328,7 @@ GEM
       rack
       rails (>= 5.2)
       redis
-    stripe (8.1.0)
+    stripe (8.2.0)
     thor (1.2.1)
     thread-local (1.1.0)
     thread_safe (0.3.6)
@@ -416,7 +416,7 @@ DEPENDENCIES
   sprockets-rails (= 3.4.2)
   stimulus-rails (= 1.2.1)
   stimulus_reflex (= 3.5.0.pre8)
-  stripe (~> 8.0)
+  stripe (~> 8.2)
   turbo-rails (= 1.3.2)
   tzinfo-data
   valid_url
