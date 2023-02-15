@@ -34,9 +34,9 @@
     <% end %>
   </td>
   <td class="table-cell">
-    <% if current_user.admin? %>
+    <% if current_user.admin? and !attempt.participant.archived? %>
       <%= delete_button(survey_attempt_path(attempt.survey, attempt)) %>
-    <% elsif attempt.submitted? == false and current_user == attempt.actor %>
+    <% elsif attempt.submitted? == false and current_user == attempt.actor and !attempt.participant.archived? %>
       <%= delete_button(survey_attempt_path(attempt.survey, attempt)) %>
     <% end %>
   </td>

@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  ACTIONS = ["activated", "freed", "archived", "goal", "milestone", "todo", "plan", "created", "deactivated", "event", "feedback", "noted", "reviewed", "scheduled", "unarchived", "project_created", "document", "risk", "report"].freeze
+  ACTIONS = ["activated", "freed", "archived", "goal", "milestone", "todo", "plan", "created", "deactivated", "event", "feedback", "noted", "reviewed", "scheduled", "unarchived", "project_created", "document", "risk", "report", "attempt"].freeze
 
   acts_as_tenant :account
 
