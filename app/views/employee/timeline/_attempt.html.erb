@@ -11,12 +11,12 @@
         <div>
           <p class="text-sm text-gray-500">
             <a href="<%= employee_surveys_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
-           attempted a survey
+           submitted a survey
             <% if event.trackable.nil? %>
               which does not exists anymore 
             <% else %>
               titled
-              <a href="<%=survey_report_preview_path(event.trackable.survey, event.trackable)%> " class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.survey.name.upcase_first) %></a>
+              <a href="<%= survey_report_preview_path(event.trackable.survey, event.trackable) %> " class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.survey.name.upcase_first) %></a>
             <% end %>
           </p>
         </div>
