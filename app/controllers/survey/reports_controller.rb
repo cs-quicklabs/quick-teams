@@ -22,6 +22,7 @@ class Survey::ReportsController < Survey::BaseController
   def submit
     authorize [:survey, :report]
     @attempt.update("comment": params[:survey_attempt][:comment], "submitted": true, score: @attempt.calculate_score)
+    @attempt.participant.events.create(user: current_user, action: "attempt", action_for_context: "attempted survey", trackable: @attempt)
     redirect_to resolve_redirect_path(@attempt)
   end
 
