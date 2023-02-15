@@ -1,0 +1,29 @@
+<li>
+  <div class="relative pb-6">
+    <span class="absolute top-4 left-3 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+    <div class="relative flex space-x-3">
+      <div>
+        <span class="flex items-center justify-center w-7 h-7 bg-gray-200 rounded-full ring-2 ring-white">
+          <%= display_xsmall_avatar(event.user) %>
+        </span>
+      </div>
+      <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+        <div>
+          <p class="text-sm text-gray-500">
+            <a href="<%= employee_surveys_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
+           attempted a survey
+            <% if event.trackable.nil? %>
+              which does not exists anymore 
+            <% else %>
+              titled
+              <a href="<%=survey_report_preview_path(event.trackable.survey, event.trackable)%> " class="font-medium text-gray-900 hover:underline"><%= highlight_hashtag(event.trackable.survey.name.upcase_first) %></a>
+            <% end %>
+          </p>
+        </div>
+        <div class="text-sm text-right text-gray-500 whitespace-nowrap">
+          <%= display_created_at(event) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

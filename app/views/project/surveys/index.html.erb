@@ -33,7 +33,7 @@
                     </tr>
                   </thead>
                   <tbody class="table-body" id="filled_surveys" data-infinite-scroll-target="entries">
-                    <%= render partial: "filled_survey", collection: @filled_surveys, as: :attempt, cached: true %>
+                    <%= render partial: "filled_survey", collection: @filled_surveys, as: :attempt, cached: false %>
                   </tbody>
                 </table>
                 <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">

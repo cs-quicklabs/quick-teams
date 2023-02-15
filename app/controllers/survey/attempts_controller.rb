@@ -89,7 +89,6 @@ class Survey::AttemptsController < Survey::BaseController
     attempt.survey_id = @survey.id
     attempt.actor_id = current_user.id
     attempt.save
-
     attempt
   end
 
