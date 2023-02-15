@@ -12,6 +12,7 @@ class Project::ReportPolicy < Project::BaseProjectPolicy
   end
 
   def destroy?
-    edit? and is_admin?
+    return false if !is_active?
+    edit? or is_admin?
   end
 end
