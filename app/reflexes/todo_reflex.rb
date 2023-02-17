@@ -1,4 +1,6 @@
 class TodoReflex < ApplicationReflex
+  delegate :current_user, to: :connection
+
   def toggle_project_todo
     todo = Todo.find(element.dataset[:id])
     todo.update(completed: !todo.completed)
@@ -32,6 +34,6 @@ class TodoReflex < ApplicationReflex
   end
 
   def deliver_email?(todo)
-    todo.user.email_enabled and todo.user.account.email_enabled and todo.user.sign_in_count > 0
+    current_user != todo.owner and todo.user.email_enabled and todo.user.account.email_enabled and todo.user.sign_in_count > 0
   end
 end
