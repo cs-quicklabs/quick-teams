@@ -5,7 +5,7 @@ class Project::SchedulesController < Project::BaseController
     authorize [@project, Schedule]
 
     @schedule = Schedule.new
-    @schedules = Schedule.where(project: @project).includes({ user: [:role, :job] }).order(created_at: :desc)
+    @schedules = Schedule.where(project: @project).includes(user: { avatar_attachment: :blob }).includes({ user: [:role, :job] }).order(created_at: :desc)
 
     fresh_when @schedules + [@project]
   end

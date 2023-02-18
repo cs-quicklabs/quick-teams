@@ -12,6 +12,6 @@ class HomeController < BaseController
   def events
     authorize :home, :index?
 
-    @events = Event.includes(:user, :eventable, :trackable).order(created_at: :desc).limit(50).decorate
+    @events = Event.includes(:eventable, :trackable, :user => { avatar_attachment: :blob }).order(created_at: :desc).limit(50).decorate
   end
 end
