@@ -146,7 +146,6 @@ Rails.application.routes.draw do
     get ":id/archive", to: "spaces#archive", as: "space_archive"
     get ":id/unarchive", to: "spaces#unarchive", as: "space_unarchive"
   end
-  get "report.csv" => "report/csv#generate", via: :get, defaults: { format: :csv }
   # if you change something in reports path please check stats path are not broken in project/employee timsheets, as they are hardcoded.
   scope "report" do
     post "csv", to: "report/csv#generate", as: "generate_reports"
