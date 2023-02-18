@@ -72,6 +72,7 @@ class SpacesController < BaseController
 
   def archive
     authorize @space
+    current_user.pinned.destroy @space
     @space.update(archive: true, archive_at: Time.now)
     redirect_to space_messages_path(@space), notice: "Space was archived successfully."
   end
