@@ -1,7 +1,8 @@
 class Space::MessagePolicy < Space::BaseSpacePolicy
   def index?
-    space = record.first
-    space.users.include?(user)
+    true
+    # space = record.first
+    # space.users.include?(user)
   end
 
   # def new?

@@ -86,7 +86,7 @@ class SpacesController < BaseController
   private
 
   def set_space
-    @space = Space.includes(:users).find(params[:id])
+    @space ||= Space.includes(:users).find(params[:id])
   end
 
   def space_params
