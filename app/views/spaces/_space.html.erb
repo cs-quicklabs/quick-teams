@@ -1,3 +1,5 @@
+<% users = space.users %>
+<% presetable_users = users.first(5) %>
 <%= turbo_frame_tag dom_id(space) do %>
   <li class="col-span-1 rounded-lg bg-white shadow-sm hover:shadow-lg border-gray-100 group">
     <a href="<%= space_messages_path(space) %>">
@@ -5,9 +7,8 @@
         <h1 id="message-heading" class="font-medium text-gray-900 line-clamp-2 group-hover:underline"><%= highlight_hashtag(space.title.upcase_first) %></h1>
         <p class="font-normal text-sm text-gray-500 line-clamp-2 mt-2"> <%= highlight_hashtag(space.description.upcase_first) %></p>
       </div>
-      <div class="flex  overflow-hidden  px-6 pb-6">
-        <% users = space.users %>
-        <% users.first(5).each do |user| %>
+      <div class="flex  overflow-hidden  px-6 pb-6" title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ")}.join(', ')%>">
+        <% presetable_users.each do |user| %>
           <%= display_xsmall_avatar(user) %>
         <% end %>
         <% if users.size > 5 %>
