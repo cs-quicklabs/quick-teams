@@ -8,7 +8,7 @@ class Report::SchedulesController < Report::BaseController
     @employees = @employees.select { |e| e.overall_occupancy < 100 }
 
     respond_to do |format|
-      format.html { fresh_when @employees }
+      format.html
       format.csv { send_data to_csv(@employees), filename: "available_resources_#{Date.today}.csv" }
     end
   end
@@ -20,7 +20,7 @@ class Report::SchedulesController < Report::BaseController
     @employees = @employees.select { |e| e.overall_occupancy == 0 }
 
     respond_to do |format|
-      format.html { fresh_when @employees }
+      format.html
       format.csv { send_data to_csv(@employees), filename: "no_schedule_#{Date.today}.csv" }
     end
   end
@@ -31,7 +31,7 @@ class Report::SchedulesController < Report::BaseController
     @employees = @employees.select { |e| e.overall_occupancy > 100 }
 
     respond_to do |format|
-      format.html { fresh_when @employees }
+      format.html
       format.csv { send_data to_csv(@employees), filename: "overburdened_resources_#{Date.today}.csv" }
     end
   end
@@ -42,7 +42,7 @@ class Report::SchedulesController < Report::BaseController
     @employees = @employees.select { |e| e.schedules.size > 1 }
 
     respond_to do |format|
-      format.html { fresh_when @employees }
+      format.html
       format.csv { send_data to_csv(@employees), filename: "shared_resources_#{Date.today}.csv" }
     end
   end
@@ -56,7 +56,7 @@ class Report::SchedulesController < Report::BaseController
     @pagy, @employees = pagy_nil_safe(params, @employees, items: LIMIT)
 
     respond_to do |format|
-      format.html { fresh_when @employees }
+      format.html
       format.csv { send_data to_csv_short(@employees), filename: "no_projects_#{Date.today}.csv" }
     end
   end
