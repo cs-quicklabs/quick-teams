@@ -14,7 +14,7 @@ class Report::CsvController < Report::BaseController
 
     respond_to do |format|
       format.html
-      format.csv { send_data report, type: "text/csv", filename: params[:title], disposition: "attachment" }
+      format.csv { send_data report, type: "text/csv", filename: params[:title] + ".csv", disposition: "attachment" }
     end
   end
 end
