@@ -126,10 +126,4 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
-  config.active_storage.service_configurations = {
-    local: {
-      host: "http://localhost:3000",
-      expires_in: 1.hour,
-    },
-  }
 end
