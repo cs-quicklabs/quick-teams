@@ -6,7 +6,7 @@
       <h1 id="message-heading" class="font-medium text-gray-900 line-clamp-2 group-hover:underline"><%= highlight_hashtag(space.title.upcase_first) %></h1>
       <p class="font-normal text-sm text-gray-500 line-clamp-2 mt-2"> <%= highlight_hashtag(space.description.upcase_first) %></p>
     </div>
-    <div class="flex  overflow-hidden  px-6 pb-6" title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ")}.join(', ')%>">
+    <div class="flex  overflow-hidden  px-6 pb-6" title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>">
       <% presetable_users.each do |user| %>
         <%= display_xsmall_avatar(user) %>
       <% end %>

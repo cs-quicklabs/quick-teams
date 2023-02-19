@@ -57,7 +57,7 @@
           <p class="font-normal text-xs line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
         </div>
         <% users = @space.users.includes(avatar_attachment: :blob) %>
-        <div class="flex justify-center py-4" title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ")}.join(', ')%>">
+        <div class="flex justify-center py-4" title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>">
           <div class="flex   ">
             <% users.load.first(10).each do |user| %>
               <div>
