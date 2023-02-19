@@ -26,7 +26,7 @@ class TodoReflex < ApplicationReflex
 
   def send_email(user, todo)
     if current_user.admin? || current_user.manager?
-      if todo.user == todo.owner and deliver_email?(todo.user)
+      if todo.user == todo.owner and deliver_email?(todo.user, current_user)
         TodosMailer.with(actor: current_user, employee: todo.user, todo: todo).completed_email.deliver_later if todo.completed
         TodosMailer.with(actor: current_user, employee: todo.user, todo: todo).opened_email.deliver_later if !todo.completed
       elsif todo.user != todo.owner and todo.completed
