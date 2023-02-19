@@ -62,7 +62,7 @@ class Space::MessagesController < Space::BaseController
   end
 
   def set_message
-    @message = Message.find(params[:id])
+    @message ||= Message.find(params[:id])
   end
 
   def message_params

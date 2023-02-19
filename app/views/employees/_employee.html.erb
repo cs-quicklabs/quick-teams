@@ -28,7 +28,7 @@
   </td>
   <td class="table-cell">
     <div class="flex items-center space-x-2">
-      <div class="flex flex-shrink-0 -space-x-1">
+      <div class="flex flex-shrink-0 -space-x-1" title="<%= employee.subordinates.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>">
         <% employee.display_team_members.each do |team_member| %>
           <%= display_xsmall_avatar(team_member) %>
         <% end %>

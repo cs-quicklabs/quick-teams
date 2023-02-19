@@ -52,7 +52,6 @@ class User < ApplicationRecord
   has_and_belongs_to_many :skills, dependent: :destroy
   has_and_belongs_to_many :nuggets
   has_and_belongs_to_many :spaces
-  default_scope { includes({ avatar_attachment: :blob }) }
   validates :email, uniqueness: true
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
   has_one_attached :avatar
@@ -92,13 +91,13 @@ class User < ApplicationRecord
     return true if all_subordinates_ids.include?(employee.id)
 
     # level 2 subordinates
-    all_subordinates_ids << User.where("manager_id in (?)", all_subordinates_ids).ids
+    all_subordinates_ids << User.with_attached_avatar.where("manager_id in (?)", all_subordinates_ids).ids
     all_subordinates_ids = all_subordinates_ids.flatten.uniq
     # early return on level two
     return true if all_subordinates_ids.include?(employee.id)
 
     # level 3 subordinates
-    all_subordinates_ids << User.where("manager_id in (?)", all_subordinates_ids).ids
+    all_subordinates_ids << User.with_attached_avatar.where("manager_id in (?)", all_subordinates_ids).ids
     all_subordinates_ids = all_subordinates_ids.flatten.uniq
     all_subordinates_ids.include?(employee.id)
   end

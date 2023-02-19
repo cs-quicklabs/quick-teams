@@ -1,20 +1,20 @@
-class Space::MessagePolicy < ApplicationPolicy
+class Space::MessagePolicy < Space::BaseSpacePolicy
   def index?
-    #(record.first.users.include?(user) || record.first.user == user)
-    true
+    space = record.first
+    space.users.include?(user)
   end
 
   def new?
-    record.first.users.include?(user) && !record.first.archive
+    space = record.first
+    !space.archive and space.users.include?(user)
   end
 
   def create?
-    record.first.users.include?(user) && !record.first.archive
+    new?
   end
 
   def show?
-    true
-    #(record.last.published? && record.first.users.include?(user)) || record.last.user == user
+    (record.last.published? && record.first.users.include?(user)) || record.last.user == user
   end
 
   def comment?

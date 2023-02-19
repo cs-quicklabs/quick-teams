@@ -4,8 +4,8 @@ class SpacesController < BaseController
 
   def index
     authorize :spaces
-    @all_spaces = current_user.spaces.includes(:users).order(created_at: :desc)
-    @pinned_spaces = current_user.pinned.includes(:users).order(created_at: :desc)
+    @all_spaces = current_user.spaces.includes(users: { avatar_attachment: :blob }).order(created_at: :desc)
+    @pinned_spaces = current_user.pinned.includes(users: { avatar_attachment: :blob }).order(created_at: :desc)
     @my_spaces = @all_spaces.select { |space| space.user_id == current_user.id && space.archive == false }
     @archived_spaces = @all_spaces.select { |space| space.archive == true }
     @shared_spaces = @all_spaces - @my_spaces - @archived_spaces
@@ -72,6 +72,7 @@ class SpacesController < BaseController
 
   def archive
     authorize @space
+    current_user.pinned.destroy @space
     @space.update(archive: true, archive_at: Time.now)
     redirect_to space_messages_path(@space), notice: "Space was archived successfully."
   end
@@ -85,7 +86,7 @@ class SpacesController < BaseController
   private
 
   def set_space
-    @space = Space.includes(:users).find(params[:id])
+    @space ||= Space.includes(:users).find(params[:id])
   end
 
   def space_params

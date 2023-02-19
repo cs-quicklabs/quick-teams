@@ -16,7 +16,7 @@ class TemplatesController < BaseController
 
   def show
     authorize @template
-    @template_assignees = @template.templates_assignees
+    @template_assignees = @template.templates_assignees.order(created_at: :desc)
     @template_assignee = TemplatesAssignee.new
     @template_assignee.template_id = @template.id
   end

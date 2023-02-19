@@ -17,7 +17,7 @@
           <div class="flex justify-end">
             <div  x-on:click.outside="open = false" class="relative  " x-data="{ open: false }">
               <div>
-                <% if policy(@space).edit? || policy(@space).unpin? || policy(@space).pin? %>
+                <% if policy(@space).edit? || policy(@space).unpin? || policy(@space).pin? || policy(@space).destroy? %>
                   <button @click="open = !open" id="space-menu" class=" flex-end mt-1 ml-4 border border-gray-600 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-500 focus:ring-white" id="user-menu" aria-haspopup="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
                       <path fill-rule="evenodd" d="M4.5 12a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
@@ -36,13 +36,13 @@
                     <% if policy(@space).edit? %>
                       <a href=<%= edit_space_path(@space) %> class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"  role= "menuitem">Edit</a>
                     <% end %>
-                    <% if policy(@space).destroy? %>
-                      <%= styled_delete_button(space_path(@space), "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
-                    <% end %>
                     <% if policy(@space).archive? %>
                       <%= confirm_button(space_archive_path(@space), "Archive", "Are you sure you want to archive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
                     <% elsif policy(@space).unarchive? %>
                       <%= confirm_button(space_unarchive_path(@space), "Unarchive", "Are you sure you want to unarchive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
+                    <% end %>
+                    <% if policy(@space).destroy? %>
+                      <%= styled_delete_button(space_path(@space), "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
                     <% end %>
                   </div>
                 </div>
@@ -54,11 +54,11 @@
           <p class="font-normal text-sm line-clamp-2 text-gray-500"> <%= highlight_hashtag(@space.description.upcase_first) %></p>
         </div>
         <div class="flex justify-center mt-2">
-          <p class="font-normal text-sm line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
+          <p class="font-normal text-xs line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
         </div>
-        <div class="flex justify-center py-4">
+        <% users = @space.users.includes(avatar_attachment: :blob) %>
+        <div class="flex justify-center py-4" title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>">
           <div class="flex   ">
-            <% users = @space.users.includes(avatar_attachment: :blob) %>
             <% users.load.first(10).each do |user| %>
               <div>
                 <%= display_small_avatar(user) %>

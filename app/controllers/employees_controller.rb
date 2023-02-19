@@ -7,7 +7,7 @@ class EmployeesController < BaseController
   def index
     authorize :team
 
-    @pagy, @employees = pagy(User.for_current_account.active.includes(:role, :discipline, :job, :manager, :subordinates, :status).order(:first_name), items: 10)
+    @pagy, @employees = pagy(User.with_attached_avatar.for_current_account.active.includes(:role, :discipline, :job, :manager, :subordinates, :status).order(:first_name), items: 10)
 
     fresh_when @employees
   end
