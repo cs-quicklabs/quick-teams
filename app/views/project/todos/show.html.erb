@@ -30,7 +30,11 @@
   <% cache @todo do %>
     <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
       <p class="whitespace-pre-wrap break-words">
-        <%= auto_link_urls_in_text(@todo.body.upcase_first) %>
+        <% if @todo.body.present? %>
+          <%= auto_link_urls_in_text(@todo.body.upcase_first) %>
+        <% else %>
+          <span class="text-gray-400">No description provided</span>
+        <% end %>
       </p>
     </div>
   <% end %>
