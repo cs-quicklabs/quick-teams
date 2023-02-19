@@ -34,8 +34,8 @@ gem "stimulus-rails", "1.2.1"
 gem "stimulus_reflex", "3.5.0.pre8"
 
 # Use Redis adapter to run Action Cable in production
-gem "hiredis"
 gem "redis", "5.0.6"
+gem "hiredis"
 gem "valid_url"
 
 # Use Active Storage variant
@@ -64,8 +64,8 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "nokogiri", "~> 1.14"
 
 # devise gems
-gem "devise", github: "heartcombo/devise", branch: "main"
-gem "devise_invitable", "~> 2.0.0"
+gem "devise", "4.9.0"
+gem "devise_invitable", "2.0.7"
 gem "devise-pwned_password"
 
 # Payments

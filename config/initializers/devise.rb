@@ -1,17 +1,3 @@
-class TurboFailureApp < Devise::FailureApp
-  def respond
-    if request_format == :turbo_stream
-      redirect
-    else
-      super
-    end
-  end
-
-  def skip_format?
-    %w(html turbo_stream */*).include? request_format.to_s
-  end
-end
-
 # frozen_string_literal: true
 
 # Assuming you have not yet modified this file, each configuration option below
@@ -32,7 +18,7 @@ Devise.setup do |config|
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
-  config.parent_controller = "TurboController"
+  #config.parent_controller = "TurboController"
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -340,11 +326,10 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  config.warden do |manager|
-    manager.failure_app = TurboFailureApp
-    #   manager.intercept_401 = false
-    #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  end
+  # config.warden do |manager|
+  #      manager.intercept_401 = false
+  #      manager.default_strategies(scope: :user).unshift :some_external_strategy
+  # end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
@@ -372,4 +357,6 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  config.responder.error_status = :unprocessable_entity
+  config.responder.redirect_status = :see_other
 end
