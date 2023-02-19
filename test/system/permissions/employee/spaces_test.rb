@@ -101,6 +101,8 @@ class SpacesTest < ApplicationSystemTestCase
   test "only comment creator can edit and delete a comment" do
   end
 
+  test "space creater can only delete any of comments on a thread" do
+  end
   test "can only view spaces that belong to the employee" do
     visit page_url
     created_spaces = Space.where(archive: false, user_id: @user.id)
