@@ -26,7 +26,7 @@ class TodosMailerTest < ActionMailer::TestCase
       email.deliver_later
     end
 
-    assert_equal email.to, [@actor.email]
+    assert_equal email.to, [@employee.email]
     assert_equal email.from, ["admin@skia.me"]
     assert_equal email.subject, "TODO Completed"
     assert_match "Show TODO", email.body.encoded
