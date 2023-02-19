@@ -1,4 +1,4 @@
-<div class="flex   flex-col space-y-1">
+<div class="flex flex-col">
   <div class="flex justify-between " >
     <div>
       <%= link_to "Back", "javascript:history.back()", class: "btn-normal flex-none" %>
@@ -38,11 +38,23 @@
     <% end %>
   </div>
   <div class="flex space-x-2 flex-row  justify-center">
-    <div class="flex-shrink-0">
-      <%= display_small_avatar(@space.user) %>
+    <div class="flex justify-center">
+      <p class="font-normal text-xs line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
     </div>
-    <div class="flex justify-center mt-1">
-      <p class="font-normal text-sm line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
+  </div>
+  <% users = @space.users.includes(avatar_attachment: :blob) %>
+  <div class="flex justify-center py-4" title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ")}.join(', ')%>">
+    <div class="flex   ">
+      <% users.load.first(20).each do |user| %>
+        <div>
+          <%= display_small_avatar(user) %>
+        </div>
+      <% end %>
+      <% if users.size > 20 %>
+        <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold items-center"  > + <%= users.size - 20 %>  </span>
+      <% elsif users.size == 0 %>
+        <span class="inline-flex whitespace-nowrap z-0 text-sm text-gray-400 items-center">No person added  </span>
+      <% end %>
     </div>
   </div>
 </div>

@@ -5,11 +5,12 @@ class Space::MessagePolicy < Space::BaseSpacePolicy
   end
 
   def new?
-    record.first.users.include?(user) && !record.first.archive
+    space = record.first
+    !space.archive and space.users.include?(user)
   end
 
   def create?
-    record.first.users.include?(user) && !record.first.archive
+    new?
   end
 
   def show?
