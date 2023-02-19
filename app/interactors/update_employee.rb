@@ -22,11 +22,16 @@ class UpdateEmployee < Patterns::Service
   end
 
   def send_email
+    return unless deliver_email?
     if employee.saved_change_to_attribute?(:manager_id)
       @manager = User.find(employee.manager_id_before_last_save)
-      ManagerMailer.with(employee: employee, manager: @manager).relieved_email.deliver_later if deliver_email?
-      ManagerMailer.with(employee: employee, manager: employee.manager).updated_email.deliver_later if deliver_email?
-      ManagerMailer.with(employee: employee, manager: employee.manager).manager_email.deliver_later if deliver_email?
+      EmployeeMailer.with(employee: employee, manager: @manager).relieved_email.deliver_later
+      EmployeeMailer.with(employee: employee, manager: employee.manager).updated_manager_email.deliver_later
+      EmployeeMailer.with(employee: employee, manager: employee.manager).manager_email.deliver_later
+    end
+    if employee.saved_change_to_attribute?(:role_id)
+      @role = employee.role.name
+      EmployeeMailer.with(employee: employee, role: @role).role_changed_email.deliver_later
     end
   end
 
