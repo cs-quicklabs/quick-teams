@@ -17,6 +17,90 @@ class SpacesTest < ApplicationSystemTestCase
     space_messages_url(script_name: "/#{@account.id}", space_id: @space.id)
   end
 
+  test "admin can see spaces which he is part of" do
+  end
+
+  test "admin can not see spaces which he is not part of" do
+  end
+
+  test "lead can see spaces which he is part of" do
+  end
+
+  test "lead can not see spaces which he is not part of" do
+  end
+
+  test "member can see spaces which he is part of" do
+  end
+
+  test "member can not see spaces which he is not part of" do
+  end
+
+  test "admin can add new space" do
+  end
+
+  test "lead can add new space" do
+  end
+
+  test "member can add new space" do
+  end
+
+  test "space participant can pin a space" do
+  end
+
+  test "space creator can edit the space" do
+  end
+
+  test "space creator can delete the space" do
+  end
+
+  test "space creator can archive the space" do
+  end
+
+  test "space participant can not edit the space" do
+  end
+
+  test "space participant can not delete the space" do
+  end
+
+  test "space participant can not archive the space" do
+  end
+
+  test "space participant can see threads lists" do
+  end
+
+  test "user which is not space participant can see thread list" do
+  end
+
+  test "space participant can see threds details" do
+  end
+
+  test "user which is not space participant can see thread detail" do
+  end
+
+  test "space participant can add a new thread" do
+  end
+
+  test "thread draft can be edited by thread creator" do
+  end
+
+  test "thread draft can not be edited by other than thread creator" do
+  end
+
+  test "space participant can edit a thread" do
+  end
+
+  test "space participant can not delete a thread" do
+  end
+
+  test "thread creator can edit delete a thread" do
+  end
+
+  test "space participant can add a new comment" do
+  end
+
+  test "only comment creator can edit and delete a comment" do
+  end
+
   test "can only view spaces that belong to the employee" do
     visit page_url
     created_spaces = Space.where(archive: false, user_id: @user.id)
