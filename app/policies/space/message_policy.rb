@@ -48,4 +48,8 @@ class Space::MessagePolicy < Space::BaseSpacePolicy
   def edit_comment?
     !record.first.archive?
   end
+
+  def destroy_comment?
+    !record.first.archive? and record.first.user == user
+  end
 end

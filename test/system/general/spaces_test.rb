@@ -5,7 +5,7 @@ class SpacesTest < ApplicationSystemTestCase
     @user = users(:regular)
     @account = @user.account
     ActsAsTenant.current_tenant = @account
-    @space = spaces(:eight)
+    @space = @user.spaces.where(archive: false, user_id: @user.id).first
     sign_in @user
   end
 
@@ -32,7 +32,7 @@ class SpacesTest < ApplicationSystemTestCase
 
   test "can show space detail page" do
     visit page_url
-    find(id: dom_id(@space)).click
+    find("li", id: dom_id(@space)).click
     within "#space-header" do
       assert_text @space.title
       assert_text @space.description
