@@ -1,5 +1,5 @@
 <% if policy([message.space, message]).show? %>
-  <li class=" py-4 border-b border-gray-200 ">
+  <li class=" py-4 border-b border-gray-200 " id="<%= dom_id(message) %>">
     <% if message.published? %>
       <a href="<%= space_message_path(message.space, message) %>" class=" focus:outline-none">
         <div class="flex flex-col ">

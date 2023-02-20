@@ -10,3 +10,17 @@ three:
   space: eight
   user: lead  
 
+four:
+  space: eight
+  user: regular
+
+five:
+  space: pinned
+  user: regular 
+
+six:
+  space: ten
+  user: member
+
+
+

@@ -1,6 +1,6 @@
 <% users = space.users %>
 <% presetable_users = users.first(5) %>
-<li class="col-span-1 rounded-lg bg-white shadow-sm hover:shadow-lg border-gray-100 group">
+<li class="col-span-1 rounded-lg bg-white shadow-sm hover:shadow-lg border-gray-100 group" id="<%= dom_id(space) %>">
   <a href="<%= space_messages_path(space) %>">
     <div class="flex-wrap py-6 px-6 text-gray-900 h-32">
       <h1 id="message-heading" class="font-medium text-gray-900 line-clamp-2 group-hover:underline"><%= highlight_hashtag(space.title.upcase_first) %></h1>

@@ -5,7 +5,7 @@ class ThreadsTest < ApplicationSystemTestCase
     @user = users(:regular)
     @account = @user.account
     ActsAsTenant.current_tenant = @account
-    @space = spaces(:eight)
+    @space = @user.spaces.where(archive: false, user_id: @user.id).first
     @message = @space.messages.where(published: "true").first
     sign_in @user
   end
@@ -32,7 +32,7 @@ class ThreadsTest < ApplicationSystemTestCase
 
   test "can show message detail page" do
     visit page_url
-    find(id: dom_id(@message)).click
+    find("li", id: dom_id(@message)).click_on(@message.title)
     within "#message-header" do
       assert_selector "h3", text: @message.title
       assert_selector "div", text: @message.body
@@ -75,7 +75,7 @@ class ThreadsTest < ApplicationSystemTestCase
     fill_in "message_title", with: "Thread"
     fill_in_rich_text_area dom_id(@message), with: "This is some message"
     page.accept_confirm do
-      click_on "Publish"
+      click_on "Update"
     end
     assert_selector "p.notice", text: "Thread was updated successfully."
   end
@@ -89,7 +89,7 @@ class ThreadsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Edit Thread"
     fill_in "message_title", with: ""
     page.accept_confirm do
-      click_on "Publish"
+      click_on "Update"
     end
     take_screenshot
   end
@@ -109,7 +109,7 @@ class ThreadsTest < ApplicationSystemTestCase
   test "can comment on a message" do
     visit messages_page_url
     click_on "Add a comment"
-    fill_in_rich_text_area "comment_body", with: "This is a comments"
+    fill_in_rich_text_area "message_comment_body", with: "This is a comments"
     click_on "Comment"
     assert_text "This is a comment"
   end
@@ -118,21 +118,22 @@ class ThreadsTest < ApplicationSystemTestCase
     visit messages_page_url
     click_on "Add a comment"
     click_on "Comment"
-    assert_selector "div#error_explanation", text: "Comment can't be blank"
+    assert_selector "div#error_explanation", text: "Body can't be blank"
   end
 
   test "can edit comment on message" do
     visit messages_page_url
     take_screenshot
     assert_selector "h3", text: @message.title
+    scroll_to(page.find("div", id: "comment-form"))
     click_on "Add a comment"
-    fill_in_rich_text_area "comment_body", with: "This is a comment"
+    fill_in_rich_text_area "message_comment_body", with: "This is a comment"
     click_on "Comment"
     assert_text "This is a comment"
     within "#comments" do
       find("button", id: "comment-menu").click
       click_on "Edit"
-      fill_in_rich_text_area "comment_body", with: "This is an edited comment"
+      fill_in_rich_text_area "message_comment_body", with: "This is an edited comment"
       click_on "Comment"
     end
     assert_text "This is an edited comment"
@@ -142,16 +143,17 @@ class ThreadsTest < ApplicationSystemTestCase
     visit messages_page_url
     take_screenshot
     assert_selector "h3", text: @message.title
+    scroll_to(page.find("div", id: "comment-form"))
     click_on "Add a comment"
-    fill_in_rich_text_area "comment_body", with: "This is a comment"
+    fill_in_rich_text_area "message_comment_body", with: "This is a comment"
     click_on "Comment"
     assert_text "This is a comment"
     within "#comments" do
       find("button", id: "comment-menu").click
       click_on "Edit"
-      fill_in_rich_text_area "comment_body", with: ""
+      fill_in_rich_text_area "message_comment_body", with: ""
       click_on "Comment"
     end
-    assert_selector "div#error_explanation", text: "Comment can't be blank"
+    assert_selector "div#error_explanation", text: "Body can't be blank"
   end
 end
