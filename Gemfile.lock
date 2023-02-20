@@ -290,7 +290,7 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    rufo (0.14.0)
+    rufo (0.15.1)
     rufus-scheduler (3.8.2)
       fugit (~> 1.1, >= 1.1.6)
     selenium-webdriver (4.8.1)
