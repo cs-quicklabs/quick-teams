@@ -70,7 +70,7 @@ gem "devise-pwned_password"
 
 # Payments
 gem "pay", "6.3.1"
-gem "stripe", "~> 8.2"
+gem "stripe", "~> 8.3"
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
