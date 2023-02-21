@@ -29,11 +29,11 @@
         <% if policy([@space, @space_message]).draft? %>
           <%= form.submit "Save as draft", class: "btn-normal mr-2", name: "draft" %>
         <% else %>
-          <%= form.submit "Update", class: "btn-blue " , data: {
-                                       controller: "confirmation",
-                                       "confirmation-message-value": "Are you sure you want to update this thread?",
-                                       action: "confirmation#confirm",
-          } %>
+          <%= form.submit "Update", class: "btn-blue ", data: {
+                                      controller: "confirmation",
+                                      "confirmation-message-value": "Are you sure you want to update this thread?",
+                                      action: "confirmation#confirm",
+                                    } %>
         <% end %>
         <% if policy([@space, @space_message]).publish? %>
           <%= form.submit "Publish", class: "btn-blue", data: {

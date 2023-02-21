@@ -30,7 +30,7 @@
   <% cache @todo do %>
     <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
       <p class="whitespace-pre-wrap break-words">
-      <%if !@todo.body.nil? %>
+      <% if !@todo.body.nil? %>
               <%= auto_link_urls_in_text(@todo.body.upcase_first) %>
               <% end %>
       </p>
