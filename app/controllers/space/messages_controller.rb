@@ -38,7 +38,11 @@ class Space::MessagesController < Space::BaseController
 
   def show
     authorize [@space, @message]
+
+    @comments = @message.message_comments.includes(:user).order(created_at: :asc)
     @comment = MessageComment.new
+
+    fresh_when [@message] + @comments + [@space]
   end
 
   def update

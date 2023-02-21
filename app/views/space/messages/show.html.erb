@@ -13,15 +13,14 @@
   <section aria-labelledby="notes-title">
     <div class="bg-white sm:rounded-lg   ">
       <div class="relative h-max " >
-        <% comments = @message.message_comments.includes(:user).order(created_at: :asc) %>
-        <% if comments.size < 10 %>
+        <% if @comments.load.size < 10 %>
           <div >
             <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
-              <%= render partial: "message_comments/message_comment", collection: comments, as: :comment, cached: false %>
+              <%= render partial: "message_comments/message_comment", collection: @comments, as: :comment, cached: false %>
             </ul>
           </div>
         <% else %>
-          <% display_comments = comments.last(10) %>
+          <% display_comments = @comments.last(10) %>
           <div  data-controller="comments" >
             <div class="relative py-6" id="load-comments">
               <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -32,7 +31,7 @@
               </div>
             </div>
             <ul role="list" >
-              <%= render partial: "message_comments/hidden_comment", collection: comments - display_comments, as: :comment, cached: false %>
+              <%= render partial: "message_comments/hidden_comment", collection: @comments - display_comments, as: :comment, cached: false %>
             </ul>
           </div>
           <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
