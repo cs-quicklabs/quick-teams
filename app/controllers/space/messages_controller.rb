@@ -52,7 +52,7 @@ class Space::MessagesController < Space::BaseController
       if @message.errors.empty?
         format.html { redirect_to space_messages_path(@space), notice: "Thread was updated successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@message, partial: "space/messages/form", locals: { space_message: @message, title: "Edit Thread", subtitle: "Please update thread into existing space#{@message.space.title}", space: @space, url: space_message_path(@space, @message), method: "patch" }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@message, partial: "space/messages/form", locals: { space_message: @message, title: "Edit Thread", subtitle: "Please update thread into existing space #{@message.space.title}", space: @space, url: space_message_path(@space, @message), method: "patch" }) }
       end
     end
   end
