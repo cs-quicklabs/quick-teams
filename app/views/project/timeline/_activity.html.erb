@@ -1,5 +1,5 @@
 <% if lookup_context.template_exists?(event.action, "project/timeline", true) %>
-  <% cache event do %>
+  <% cache [event, event.user] do %>
     <%= render partial: event.action, locals: { event: event } %>
   <% end %>
 <% end %>
