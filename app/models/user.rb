@@ -47,6 +47,7 @@ class User < ApplicationRecord
   has_many :comments, class_name: "Comment", foreign_key: "user_id", dependent: :destroy
   has_many :pinned_spaces, dependent: :destroy
   has_many :pinned, through: :pinned_spaces, source: :space
+  has_many :observe_projects, class_name: "ProjectObserver", foreign_key: "user_id", dependent: :destroy
 
   has_and_belongs_to_many :people_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy
@@ -114,6 +115,10 @@ class User < ApplicationRecord
         level_three_manager = level_two_manager.manager
         managers << level_three_manager unless level_three_manager.nil?
       end
+    end
+
+    def project_observer?(employee)
+      user.observe_projects.size > 0
     end
 
     if managers.include?(self)

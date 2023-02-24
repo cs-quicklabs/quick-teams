@@ -2,29 +2,44 @@
   <%= render "project/title", project: @project %>
   <div class="px-4 sm:px-6">
     <!-- Main 2 column grid -->
-    <div class="grid items-start grid-cols-1 lg:grid-cols-3">
+    <div class="grid items-start grid-cols-1 lg:grid-cols-3 lg:gap-8">
       <!-- Left column -->
-      <div class="grid grid-cols-1 col-span-2 gap-2">
+      <div class="grid grid-cols-1 col-span-2 gap-4 ">
         <div class="ml-4">
           <dl class="divide-y divide-gray-200">
-            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
-              <dt class="text-sm font-medium text-gray-500">About</dt>
-              <div class="col-span-2">
-                <%= turbo_frame_tag dom_id(@project) do %>
-                  <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <span class="flex-grow whitespace-pre-wrap text-justify"><%= @project.about.to_s.upcase_first %></span>
-                    <span class="ml-4 flex-shrink-0">
+            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-2 sm:gap-4">
+             <div class="col-span-2">
+              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2 justify-between">
+              <span>About </span>
+                <span class="ml-4 flex-shrink-0 justify-end flex">
                       <% if policy([@project, :about]).edit? %>
                         <%= edit_button(project_edit_path(@project)) %>
                       <% end %>
                     </span>
-                  </dd>
+              </dd>
+</div>
+                <%= turbo_frame_tag dom_id(@project) do %>
+                  <dt class="mt-1  text-sm text-gray-900 sm:mt-0 sm:col-span-1">
+                    <span class="flex-grow whitespace-pre-wrap text-justify"><%= @project.about.to_s.upcase_first %></span>
+                  
+                  </dt>
                 <% end %>
-              </div>
             </div>
           </dl>
         </div>
-      </div>
-    </div>
-  </div>
+                   </div>
+           <!-- Right column -->
+
+        <div class="grid grid-cols-1 col-span-1 gap-2 border-l border-gray-200">
+       <div class="ml-4 p-4">
+       <ul class="divide-y divide-gray-200">
+       <%= render partial: "project/about/observer", collection: @observers, as: :employee , cached: true %>
+       </ul>  
+</div>
+</div>
+   
+   
+       
+</div>
+</div>
 </main>
