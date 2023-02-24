@@ -59,8 +59,8 @@ class User < ApplicationRecord
   validate :avatar_size
 
   def avatar_size
-    if avatar.attached? && avatar.blob.byte_size > 5.megabytes
-      errors.add(:avatar, "size should not be more than 5MB")
+    if avatar.attached? && avatar.blob.byte_size > 1.megabytes
+      errors.add(:avatar, "size should not be more than 1MB")
     end
   end
 
