@@ -150,6 +150,10 @@ class User < ApplicationRecord
     project.manager == self
   end
 
+  def is_observer?(project)
+    project.observers.include?(self)
+  end
+
   def added_nuggets
     Nugget.where(user: self).includes(:user)
   end

@@ -1,6 +1,6 @@
 class Project::AboutPolicy < Project::BaseProjectPolicy
   def index?
-    is_admin? or is_project_manager?
+    is_admin? or is_project_manager? or is_project_observer?
   end
 
   def edit?
