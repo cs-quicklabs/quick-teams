@@ -10,4 +10,8 @@ class Project::AboutPolicy < Project::BaseProjectPolicy
   def update?
     edit?
   end
+
+  def destroy_observer?
+    edit?
+  end
 end

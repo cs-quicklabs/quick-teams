@@ -49,7 +49,7 @@ Rails.application.routes.draw do
       get "stats", to: "kpis#stats", as: "stats"
     end
     resources :clients, module: "project"
-
+    delete "/observers/:observer_id", to: "project/about#destroy_observer", as: "destroy_observer"
     get "/timeline", to: "project/timeline#index", as: "timeline"
     resources :about, module: "project", only: [:index]
     get "about/edit", to: "project/about#edit", as: "edit"

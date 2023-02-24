@@ -18,7 +18,7 @@
       <label for="manager" class="block mt-4 text-sm font-medium text-gray-700">
         Select Observers
       </label>
-      <%= form.collection_select(:observers, User.all_users.decorate, :id, :display_name, { :prompt => "Select Observers" }, :selected => project.observers.pluck(:id), :class => "form-text-field mt-1", :multiple => true, :data => { :controller => "slimselect" }) %>
+      <%= form.collection_select(:observers, User.all_users.decorate, :id, :display_name, {  }, :selected => project.observers.pluck(:id), :class => "form-text-field mt-1", :multiple => true, :data => { :controller => "slimselect" }) %>
     </div>
     <div class="flex items-center justify-between">
       <div class="flex items-center">

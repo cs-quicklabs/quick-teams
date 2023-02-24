@@ -19,4 +19,16 @@ class Project::AboutController < Project::BaseController
       end
     end
   end
+
+  def destroy_observer
+    authorize [@project, :about]
+    @observer = User.find(params[:observer_id])
+    respond_to do |format|
+      if @project.observers.delete(@observer)
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@observer) }
+      else
+        format.html(redirect_to project_about_index_path, notice: "Observer could not be removed")
+      end
+    end
+  end
 end

@@ -1,29 +1,35 @@
+<%= turbo_frame_tag dom_id(employee) do %>
 <% employee = employee.decorate %>
 <li>
-  <div class="flex items-center px-2 py-2 sm:px-6 w-max">
+  <div class="flex items-center  py-2  ">
     <div class="flex items-center flex-1 min-w-0">
       <div class="flex-shrink-0">
         <%= display_medium_avatar(employee) %>
       </div>
-      <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4">
+      <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4 ">
         <% if current_user.member? %>
-          <div>
-            <p class="text-sm font-medium text-gray-900 whitespace-nowrap truncate"><%= employee.display_name %></p>
+          <div class="">
+            <p class="text-sm font-medium text-gray-900 whitespace-nowrap "><%= employee.display_name %></p>
             <p class="flex items-center mt-1 text-sm text-gray-500">
-              <span class="truncate"><%= employee.display_position %></span>
+              <span class=""><%= employee.display_position %></span>
             </p>
           </div>
         <% else %>
           <a href="<%= employee_team_path(employee) %>" class="block hover:underline" target="_top">
-            <div>
-              <p class="text-sm font-medium text-gray-900  whitespace-nowrap  truncate"><%= employee.display_name %></p>
-              <p class="flex items-center mt-1 text-sm text-gray-500">
-                <span class="truncate"><%= employee.display_position %></span>
+            <div class="">
+              <p class="text-sm font-medium text-gray-900  whitespace-nowrap  "><%= employee.display_name %></p>
+              <p class="flex items-center mt-1 text-sm text-gray-500 whitespace-nowrap">
+                <span class=""><%= employee.display_position %></span>
               </p>
             </div>
           </a>
         <% end %>
+       
       </div>
+       <div class="flex justify-end mb-6">
+        <%=delete_button(project_destroy_observer_path(@project, employee))%>
+        </div>
     </div>
   </div>
 </li>
+<% end %>

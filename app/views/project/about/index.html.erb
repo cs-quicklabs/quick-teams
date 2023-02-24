@@ -31,15 +31,30 @@
            <!-- Right column -->
 
         <div class="grid grid-cols-1 col-span-1 gap-2 border-l border-gray-200">
-       <div class="ml-4 p-4">
+<section aria-labelledby="add-participant-section">
+              <div class="overflow-hidden bg-white">
+                <div class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-8 z-10">
+                <div class="max-w-lg px-4 pt-2 pb-12 mx-auto space-y-6 lg:pb-16">
+  <h1 class="text-lg leading-6 font-medium text-gray-900">
+    Porject Observers
+  </h1>
+  <p class="mt-1 text-sm text-gray-500">
+    Observers are people who can view the project but cannot edit it.
+  </p>
+
+
        <ul class="divide-y divide-gray-200">
        <%= render partial: "project/about/observer", collection: @observers, as: :employee , cached: true %>
        </ul>  
+       </div>
+       
 </div>
 </div>
+</section>
+        </div>
+      </div>
    
    
        
-</div>
 </div>
 </main>

@@ -6,10 +6,10 @@ class CreateProject < Patterns::Service
   end
 
   def call
-    create_project
-    add_observers
-    add_event
     begin
+      create_project
+      add_observers
+      add_event
     rescue
       project
     end
