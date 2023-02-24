@@ -46,4 +46,12 @@ class ProjectAboutTest < ApplicationSystemTestCase
     take_screenshot
     assert_no_text "Edit"
   end
+  test "project observer can see and edit about the project" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_text "Edit"
+  end
 end

@@ -1,15 +1,24 @@
 <%= turbo_frame_tag dom_id(@project) do %>
+
   <%= form_with(model: @project, id: dom_id(@project), url: project_update_path(@project)) do |form| %>
-    <li class="flex">
+    <main class=" px-4 pb-12  py-6 lg:pb-16 space-y-6">
+      <div class="px-4">
       <div class="w-full">
-        <%= form.text_area :about, class: "form-text-field h-48" %>
+    <h1 class="text-lg leading-6 font-medium text-gray-900">
+    Edit About for <%= @project.decorate.display_name %>
+    </h1>
+        <%= form.text_area :about, class: "form-text-field h-48 mt-2" %>
       </div>
+      <div class="flex justify-end mt-4">
       <div class="ml-1">
         <%= form.submit "Save", class: "btn-blue justify-end" %>
       </div>
       <div class="ml-1">
         <%= link_to "Cancel", project_about_index_path, class: "btn-normal" %>
       </div>
-    </li>
+      </div>
+      </div>
+  </main>
   <% end %>
+
 <% end %>

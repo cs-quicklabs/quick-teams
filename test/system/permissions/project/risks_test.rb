@@ -66,4 +66,28 @@ class ProjectRisksTest < ApplicationSystemTestCase
     assert_no_selector "div#project-tabs", text: "Risks"
     assert_no_selector "form#new_risk"
   end
+
+  test "observer can see project risk with edit buttons" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Risks"
+    assert_selector "form#new_risk"
+    risk = @project.risks.first
+    assert_selector "tr##{dom_id(risk)}", text: "Mitigate"
+    assert_selector "tr##{dom_id(risk)}", text: "Delete"
+    take_screenshot
+  end
+
+  test "observer can not see risks other than his project risks" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    @project = projects(:managed)
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Risks"
+    assert_no_selector "form#new_risk"
+  end
 end

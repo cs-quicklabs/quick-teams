@@ -68,4 +68,28 @@ class ProjectSchedulesTest < ApplicationSystemTestCase
     assert_no_selector "div#project-tabs", text: "Schedules"
     assert_no_selector "form#new_schedule"
   end
+  test "observer can see project schedule without edit buttons" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Schedules"
+    schedule = @project.schedules.first
+    assert_no_selector "turbo-frame##{dom_id(schedule)}", text: "Edit"
+    assert_no_selector "turbo-frame##{dom_id(schedule)}", text: "Delete"
+    assert_no_selector "div#billable-schedule"
+    assert_no_selector "form#new_schedule"
+    take_screenshot
+  end
+
+  test "observer can not see project schedule other than his project" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    @project = projects(:managed)
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Schedules"
+    assert_no_selector "form#new_schedule"
+  end
 end

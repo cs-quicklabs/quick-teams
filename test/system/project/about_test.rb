@@ -21,7 +21,7 @@ class ProjectAboutTest < ApplicationSystemTestCase
 
   test "can edit the Project About" do
     visit page_url
-    find("turbo-frame").click_link("Edit")
+    find("turbo-frame##{dom_id(@project)}").click_on "Edit"
     fill_in "project_about", with: "This is test description about project"
     click_on "Save"
     sleep(0.5)
@@ -34,5 +34,16 @@ class ProjectAboutTest < ApplicationSystemTestCase
 
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
+  end
+  test "can delete project observer" do
+    visit page_url
+    @observer = @project.project_observers.first
+    within "#project-observers" do
+      page.accept_confirm do
+        click_on "Delete"
+      end
+      assert_no_text @observer.user.name
+    end
+    take_screenshot
   end
 end
