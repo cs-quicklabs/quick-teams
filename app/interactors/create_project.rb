@@ -2,14 +2,14 @@ class CreateProject < Patterns::Service
   def initialize(params, actor, observers)
     @project = Project.new(params)
     @actor = actor
-    @observers = observers
+    @observers = observers.reject(&:blank?)
   end
 
   def call
+    create_project
+    add_observers
+    add_event
     begin
-      create_project
-      add_observers
-      add_event
     rescue
       project
     end
@@ -24,7 +24,7 @@ class CreateProject < Patterns::Service
   end
 
   def add_observers
-    project.observers << User.where("id in (?)", observers)
+    project.observers << User.where("id IN (?)", observers)
   end
 
   def add_event
