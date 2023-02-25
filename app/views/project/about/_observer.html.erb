@@ -21,7 +21,7 @@
     <%observers.each do |employee| %>
       <%= turbo_frame_tag dom_id(employee) do %>
         <% employee = employee.decorate %>
-        <li>
+        <li class="border-b border-gray-200 py-2">
           <div class="flex items-center  py-2  ">
             <div class="flex items-center flex-1 min-w-0">
               <div class="flex-shrink-0">

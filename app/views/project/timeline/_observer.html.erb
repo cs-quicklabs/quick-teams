@@ -12,7 +12,7 @@
           <p class="text-sm text-gray-500">
             <a href="<%= employee_timeline_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
             added
-            <a href="<%= employee_schedules_path(event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.decorate.display_name %>
+            <a href="<%= employee_team_path(event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.decorate.display_name %>
             </a>
             <%= event.action_for_context %>
           </p>
