@@ -23,11 +23,10 @@ class Project::AboutController < Project::BaseController
   def destroy_observer
     authorize [@project, :about]
     @observer = User.find(params[:observer_id])
+    @project = RemoveObserver.call(@project, @observer, current_user).result
     respond_to do |format|
-      if @project.observers.delete(@observer)
+      if @project.errors.empty?
         format.turbo_stream { render turbo_stream: turbo_stream.update("add-observers", partial: "project/about/observer", locals: { observers: @project.observers, project: @project, message: "Observer removed successfully" }) }
-      else
-        format.html(redirect_to project_about_index_path, notice: "Observer could not be removed")
       end
     end
   end
