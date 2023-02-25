@@ -40,9 +40,21 @@ class ProjectAboutTest < ApplicationSystemTestCase
     @observer = @project.project_observers.first
     within "#project-observers" do
       page.accept_confirm do
-        click_on "Delete"
+        click_on "Remove"
       end
       assert_no_text @observer.user.name
+    end
+    take_screenshot
+  end
+
+  test "can add project observer" do
+    visit page_url
+    within "#add-observers" do
+      fill_in "search", with: "a"
+      first("#project-observer").click
+      within "#project-observers" do
+        assert_selector "li", count: 2
+      end
     end
     take_screenshot
   end

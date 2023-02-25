@@ -6,62 +6,38 @@
       <!-- Left column -->
       <div class="grid grid-cols-1 col-span-2 gap-4 ">
         <div class="ml-4">
-         <%= turbo_frame_tag dom_id(@project) do %>
-          <dl class="divide-y divide-gray-200">
-                    
-            <div class="py-4 sm:grid sm:py-5 sm:grid-cols-2 sm:gap-4">
-
-             <div class="col-span-2">
-              <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2 justify-between">
-              <span>About </span>
-
-              
-              </dd>
-</div>
-    
-                  <dt class="mt-1  text-sm text-gray-900 sm:mt-0 sm:col-span-1">
-                    <span class="flex-grow whitespace-pre-wrap text-justify"><%= @project.about.to_s.upcase_first %></span>
-                  
-                  </dt>
-              
-                 <span class="ml-4 flex-shrink-0 justify-end flex">
-                      <% if policy([@project, :about]).edit? %>
-                        <%= edit_button(project_edit_path(@project)) %>
-                      <% end %>
-                    </span>
-            </div>
-        
-          </dl>
-             <% end %> 
-        </div>
-                   </div>
-           <!-- Right column -->
-
-        <div class="grid grid-cols-1 col-span-1 gap-2 border-l border-gray-200">
-<section aria-labelledby="add-participant-section">
-              <div class="overflow-hidden bg-white">
-                <div class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-8 z-10">
-                <div class="max-w-lg px-4 pt-2 pb-12 mx-auto space-y-6 lg:pb-16">
-  <h1 class="text-lg leading-6 font-medium text-gray-900">
-    Porject Observers
-  </h1>
-  <p class="mt-1 text-sm text-gray-500">
-    Observers are people who can view the project but cannot edit it.
-  </p>
-
-
-       <ul class="divide-y divide-gray-200" id="project-observers">
-       <%= render partial: "project/about/observer", collection: @observers, as: :employee , cached: true %>
-       </ul>  
-       </div>
-       
-</div>
-</div>
-</section>
+          <%= turbo_frame_tag dom_id(@project) do %>
+            <dl class="divide-y divide-gray-200">
+              <div class="py-4 sm:grid sm:py-5 sm:grid-cols-2 sm:gap-4">
+                <div class="col-span-2">
+                  <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2 justify-between">
+                    <span>About </span>
+                  </dd>
+                </div>
+                <dt class="mt-1  text-sm text-gray-900 sm:mt-0 sm:col-span-1">
+                  <span class="flex-grow whitespace-pre-wrap text-justify"><%= @project.about.to_s.upcase_first %></span>
+                </dt>
+                <span class="ml-4 flex-shrink-0 justify-end flex">
+                  <% if policy([@project, :about]).edit? %>
+                    <%= edit_button(project_edit_path(@project)) %>
+                  <% end %>
+                </span>
+              </div>
+            </dl>
+          <% end %>
         </div>
       </div>
-   
-   
-       
+      <!-- Right column -->
+      <div class="grid grid-cols-1 col-span-1 gap-2 border-l border-gray-200">
+        <section aria-labelledby="add-participant-section" >
+          <div class="overflow-hidden bg-white" id="add-observers">
+            <%= render partial: "project/about/observer",  locals: { project: @project , observers: @project.observers, message: ""} %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
 </div>
 </main>

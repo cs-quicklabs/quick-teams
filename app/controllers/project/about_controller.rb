@@ -25,7 +25,7 @@ class Project::AboutController < Project::BaseController
     @observer = User.find(params[:observer_id])
     respond_to do |format|
       if @project.observers.delete(@observer)
-        format.turbo_stream { render turbo_stream: turbo_stream.remove(@observer) }
+        format.turbo_stream { render turbo_stream: turbo_stream.update("add-observers", partial: "project/about/observer", locals: { observers: @project.observers, project: @project, message: "Observer removed successfully" }) }
       else
         format.html(redirect_to project_about_index_path, notice: "Observer could not be removed")
       end

@@ -128,6 +128,7 @@ Rails.application.routes.draw do
   get "/search/project/skills", to: "search#project_skills"
   get "/search/documents", to: "search#documents"
   get "/search/surveys", to: "search#surveys"
+  get "search/users", to: "search#users"
 
   get :goals, controller: :home
   get :events, controller: :home

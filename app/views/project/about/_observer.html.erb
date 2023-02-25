@@ -1,35 +1,63 @@
-<%= turbo_frame_tag dom_id(employee) do %>
-<% employee = employee.decorate %>
-<li>
-  <div class="flex items-center  py-2  ">
-    <div class="flex items-center flex-1 min-w-0">
-      <div class="flex-shrink-0">
-        <%= display_medium_avatar(employee) %>
-      </div>
-      <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4 ">
-        <% if current_user.member? %>
-          <div class="">
-            <p class="text-sm font-medium text-gray-900 whitespace-nowrap "><%= employee.display_name %></p>
-            <p class="flex items-center mt-1 text-sm text-gray-500">
-              <span class=""><%= employee.display_position %></span>
-            </p>
-          </div>
-        <% else %>
-          <a href="<%= employee_team_path(employee) %>" class="block hover:underline" target="_top">
-            <div class="">
-              <p class="text-sm font-medium text-gray-900  whitespace-nowrap  "><%= employee.display_name %></p>
-              <p class="flex items-center mt-1 text-sm text-gray-500 whitespace-nowrap">
-                <span class=""><%= employee.display_position %></span>
-              </p>
-            </div>
-          </a>
-        <% end %>
-       
-      </div>
-       <div class="flex justify-end mb-6">
-        <%=delete_button(project_destroy_observer_path(@project, employee))%>
+  <main class="max-w-lg px-8 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
+  <%=render "devise/shared/success_message", message: message %>
+  <%= render "shared/form_header", title: "Porject Observers", subtitle: " Observers are people who can view the project but cannot edit it." %>
+  <div class="flex justify-center w-full max-w-sm lg:justify-end"   data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/users?project_id=<%=project.id%>">
+    <div class="w-full max-w-sm lg:max-w-sm">
+      <div>
+        <label for="skill" class="block text-sm font-medium text-gray-700">Search to add new observer</label>
+        <div class="mt-1">
+          <input type="search" name="search" id="search-observers" class="form-text-field" data-nav-search-target="input">
         </div>
+      </div>
+      <div class="relative">
+        <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+          <ul data-nav-search-target="results">
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-</li>
-<% end %>
+  <ul class="divide-y divide-gray-200 py-4" id="project-observers">
+    <%observers.each do |employee| %>
+      <%= turbo_frame_tag dom_id(employee) do %>
+        <% employee = employee.decorate %>
+        <li>
+          <div class="flex items-center  py-2  ">
+            <div class="flex items-center flex-1 min-w-0">
+              <div class="flex-shrink-0">
+                <%= display_medium_avatar(employee) %>
+              </div>
+              <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4 ">
+                <% if current_user.member? %>
+                  <div class="">
+                    <p class="text-sm font-medium text-gray-900 whitespace-nowrap "><%= employee.display_name %></p>
+                    <p class="flex items-center mt-1 text-sm text-gray-500">
+                      <span class=""><%= employee.display_position %></span>
+                    </p>
+                  </div>
+                <% else %>
+                  <a href="<%= employee_team_path(employee) %>" class="block hover:underline" target="_top">
+                    <div class="">
+                      <p class="text-sm font-medium text-gray-900  whitespace-nowrap  "><%= employee.display_name %></p>
+                      <p class="flex items-center mt-1 text-sm text-gray-500 whitespace-nowrap">
+                        <span class=""><%= employee.display_position %></span>
+                      </p>
+                    </div>
+                  </a>
+                <% end %>
+              </div>
+              <div class="flex justify-end mb-6">
+                <%=link_to "Remove", "/#{project.account_id}/projects/#{project.id}/observers/#{employee.id}", class: "btn-inline-delete", data: {
+                                    controller: "confirmation",
+                                    "turbo-method": :delete,
+                                    "confirmation-message-value": "Are you sure you want to delete this?",
+                                    action: "confirmation#confirm", target: "_top"
+                                  } %>
+              </div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</main>
