@@ -10,7 +10,7 @@
       <%project.observers.each_with_index do |observer, index| %>
         <%= observer.decorate.display_name %>
         <% if project.observers["#{index + 1}".to_i] %>
-          , &ensp;
+          ,&ensp;
         <% end %>
       <% end %>
     </a>

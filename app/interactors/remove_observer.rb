@@ -23,7 +23,7 @@ class RemoveObserver < Patterns::Service
   end
 
   def add_event
-    observer.events.create(user: actor, action: "observer_removed", action_for_context: "as observer", trackable: project)
+    observer.events.create(user: actor, action: "observer_removed", action_for_context: "as project observer", trackable: project)
   end
 
   def send_email
