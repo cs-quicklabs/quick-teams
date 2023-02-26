@@ -33,7 +33,7 @@ class SpacesController < BaseController
       if @space.persisted?
         format.html { redirect_to space_messages_path(@space), notice: "Space was created successfully." }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(Space.new, partial: "spaces/form", locals: { space: @space, users: User.for_current_account.active, title: "Add New Space", subtitle: "Please fill in the details of your new space.", url: spaces_path, method: "post", space_users: params[:space][:users] }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(Space.new, partial: "spaces/form", locals: { space: @space, users: User.for_current_account.active, title: "Add New Space", subtitle: "Please fill in the details of your new space. A space is a groupd of similar threads.", url: spaces_path, method: "post", space_users: params[:space][:users] }) }
       end
     end
   end
