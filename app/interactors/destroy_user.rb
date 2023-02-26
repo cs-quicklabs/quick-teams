@@ -19,6 +19,7 @@ class DestroyUser < Patterns::Service
       transfer_comments
       transfer_spaces
       transfer_space_messages
+      transfer_ticket_labels
       delete_message_comments
       delete_events
       user.destroy
@@ -81,6 +82,10 @@ class DestroyUser < Patterns::Service
     user_spaces.each do |space|
       space.users << transferred_to
     end
+  end
+
+  def transfer_ticket_labels
+    user.ticket_labels.update_all(user_id: transferred_to.id)
   end
 
   def transfer_space_messages
