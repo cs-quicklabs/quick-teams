@@ -4,7 +4,7 @@
     <!-- Main 2 column grid -->
     <div class="grid items-start grid-cols-1 lg:grid-cols-3 lg:gap-8">
       <!-- Left column -->
-      <div class="grid grid-cols-1 col-span-2 gap-4 ">
+      <div class="grid grid-cols-1 col-span-2 gap-2 border-r border-gray-200 pr-12 h-full">
         <div class="ml-4">
           <%= turbo_frame_tag dom_id(@project) do %>
             <dl class="divide-y divide-gray-200">
@@ -28,9 +28,9 @@
         </div>
       </div>
       <!-- Right column -->
-      <div class="grid grid-cols-1 col-span-1 gap-2 border-l border-gray-200">
+      <div class="grid grid-cols-1 col-span-1 gap-2">
         <section aria-labelledby="add-participant-section" >
-          <div class="overflow-hidden bg-white" id="add-observers">
+          <div class="overflow-hidden bg-white " id="add-observers">
             <%= render partial: "project/about/observer",  locals: { project: @project , observers: @project.observers, message: ""} %>
           </div>
         </div>

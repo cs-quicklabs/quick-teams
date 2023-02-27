@@ -1,8 +1,11 @@
-  <main class="max-w-lg px-8 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
-  <%=render "devise/shared/success_message", message: message %>
-  <%= render "shared/form_header", title: "Porject Observers", subtitle: " Observers are people who can view the project but cannot edit it." %>
-  <div class="flex justify-center w-full max-w-sm lg:justify-end"   data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/users?project_id=<%=project.id%>">
-    <div class="w-full max-w-sm lg:max-w-sm">
+  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
+
+
+  <%= render "shared/form_header", title: "Project Observers", subtitle: " Observers are people who can view the project but cannot edit it." %>
+    <%if policy([project, :about]).add_observer?%>
+   <%=render "devise/shared/success_message", message: message %>
+  <div class="flex justify-center w-full lg:justify-end"   data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/users?project_id=<%=project.id%>">
+    <div class="w-full ">
       <div>
         <label for="skill" class="block text-sm font-medium text-gray-700">Search to add new observer</label>
         <div class="mt-1">
@@ -17,7 +20,8 @@
       </div>
     </div>
   </div>
-  <ul class="divide-y divide-gray-200 py-4" id="project-observers">
+  <% end %>
+  <ul class="divide-y divide-gray-200 " id="project-observers">
     <%observers.each do |employee| %>
       <%= turbo_frame_tag dom_id(employee) do %>
         <% employee = employee.decorate %>
@@ -46,6 +50,7 @@
                   </a>
                 <% end %>
               </div>
+              <%if policy([project, :about]).destroy_observer? %>
               <div class="flex justify-end mb-6">
                 <%=link_to "Remove", "/#{project.account_id}/projects/#{project.id}/observers/#{employee.id}", class: "btn-inline-delete", data: {
                                     controller: "confirmation",
@@ -54,6 +59,7 @@
                                     action: "confirmation#confirm", target: "_top"
                                   } %>
               </div>
+              <% end %>
             </div>
           </div>
         </li>

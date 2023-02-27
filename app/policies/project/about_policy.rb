@@ -12,6 +12,10 @@ class Project::AboutPolicy < Project::BaseProjectPolicy
   end
 
   def destroy_observer?
-    edit?
+    is_admin?
+  end
+
+  def add_observer?
+    is_admin?
   end
 end
