@@ -7,9 +7,9 @@ class UpdateSpace < Patterns::Service
   end
 
   def call
-    update_space
-    update_space_users
     begin
+      update_space
+      update_space_users
     rescue
       space
     end
