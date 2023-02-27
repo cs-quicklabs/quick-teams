@@ -125,7 +125,7 @@ GEM
       xpath (~> 3.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    concurrent-ruby (1.2.0)
+    concurrent-ruby (1.2.2)
     connection_pool (2.3.0)
     crass (1.0.6)
     cssbundling-rails (1.1.2)
@@ -275,7 +275,7 @@ GEM
       ffi (~> 1.0)
     redis (5.0.6)
       redis-client (>= 0.9.0)
-    redis-client (0.12.1)
+    redis-client (0.12.2)
       connection_pool
     regexp_parser (2.6.2)
     request_store (1.5.1)
@@ -300,9 +300,9 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.11.0)
-    sidekiq-scheduler (5.0.1)
+    sidekiq-scheduler (5.0.2)
       rufus-scheduler (~> 3.2)
-      sidekiq (>= 4, < 8)
+      sidekiq (>= 6, < 8)
       tilt (>= 1.4.0)
     sinatra (3.0.5)
       mustermann (~> 3.0)
@@ -333,7 +333,7 @@ GEM
     thor (1.2.1)
     thread-local (1.1.0)
     thread_safe (0.3.6)
-    tilt (2.0.11)
+    tilt (2.1.0)
     timeout (0.3.1)
     turbo-rails (1.3.3)
       actionpack (>= 6.0.0)
@@ -411,7 +411,7 @@ DEPENDENCIES
   rufo
   selenium-webdriver
   sidekiq (= 7.0.5)
-  sidekiq-scheduler (= 5.0.1)
+  sidekiq-scheduler (= 5.0.2)
   sinatra (= 3.0.5)
   spring
   sprockets-rails (= 3.4.2)
