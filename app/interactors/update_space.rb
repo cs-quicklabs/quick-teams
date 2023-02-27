@@ -21,19 +21,9 @@ class UpdateSpace < Patterns::Service
   end
 
   def update_space_users
-    space_users = space.users
-    new_space_users = users - space_users.pluck(:id)
-    user = space_users.pluck(:id) - users
-    if !new_space_users.empty?
-      space_users << User.where("id IN (?)", new_space_users)
-    end
-    if !space_users.include?(actor)
-      space_users << actor
-    end
-
-    if !user.empty?
-      space_users.delete(User.where("id IN (?)", user))
-    end
+    space.users.clear
+    space.users << User.where("id IN (?)", users)
+    space.users << actor unless space.users.include?(actor)
   end
 
   attr_reader :space, :actor, :users, :params
