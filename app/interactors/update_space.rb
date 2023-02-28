@@ -23,7 +23,7 @@ class UpdateSpace < Patterns::Service
   def update_space_users
     space.users.clear
     space.users << User.where("id IN (?)", users)
-    space.users << actor unless space.users.include?(actor)
+    space.users << space.user unless space.users.include?(space.user)
   end
 
   attr_reader :space, :actor, :users, :params
