@@ -32,7 +32,9 @@ class SpacesTest < ApplicationSystemTestCase
 
   test "can show space detail page" do
     visit page_url
-    find("li", id: dom_id(@space)).click
+    within "div#created-spaces" do
+      find("li", id: dom_id(@space)).click
+    end
     within "#space-header" do
       assert_text @space.title
       assert_text @space.description
@@ -98,6 +100,7 @@ class SpacesTest < ApplicationSystemTestCase
   end
 
   test "can pin a space" do
+    @space = spaces(:eight)
     visit space_page_url
     within "#space-header" do
       find("button", id: "space-menu").click
@@ -115,6 +118,7 @@ class SpacesTest < ApplicationSystemTestCase
         click_on "Archive"
       end
     end
+    assert_selector "p.notice", text: "Space was archived successfully."
   end
 
   test "can unarchive a space" do
@@ -126,6 +130,7 @@ class SpacesTest < ApplicationSystemTestCase
         click_on "Unarchive"
       end
     end
+    assert_selector "p.notice", text: "Space was unarchived successfully."
   end
 
   test "can unpin a space" do
