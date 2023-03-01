@@ -6,7 +6,8 @@ class Space::MessagePolicy < Space::BaseSpacePolicy
 
   def new?
     space = record.first
-    !space.archive and space.users.include?(user)
+    return false if space.archive
+    space.users.include?(user)
   end
 
   def create?
@@ -14,7 +15,9 @@ class Space::MessagePolicy < Space::BaseSpacePolicy
   end
 
   def show?
-    (record.last.published? && (record.first.users.include?(user))) || !record.last.published? && record.last.user == user
+    space = record.first
+    message = record.last
+    message.published? ? space.users.include?(user) : message.user == user
   end
 
   def comment?
@@ -22,7 +25,8 @@ class Space::MessagePolicy < Space::BaseSpacePolicy
   end
 
   def edit?
-    record.first.users.include?(user) && !record.first.archive
+    space = record.first
+    space.users.include?(user) && !space.archive
   end
 
   def update?
@@ -34,15 +38,20 @@ class Space::MessagePolicy < Space::BaseSpacePolicy
   end
 
   def publish?
-    record.first.users.include?(user) && !record.first.archive && !record.last.published?
+    space = record.first
+    message = record.last
+    space.users.include?(user) && !space.archive && !message.published?
   end
 
   def delete_draft?
-    record.last.user == user && !record.last.published?
+    message = record.last
+    message.user == user && !message.published?
   end
 
   def draft?
-    record.first.users.include?(user) && !record.last.published?
+    space = record.first
+    message = record.last
+    space.users.include?(user) && !message.published?
   end
 
   def edit_comment?
