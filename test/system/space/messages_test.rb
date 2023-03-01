@@ -32,8 +32,10 @@ class ThreadsTest < ApplicationSystemTestCase
 
   test "can show message detail page" do
     visit page_url
-    find("li", id: dom_id(@message)).click_on(@message.title)
-    within "#message-header" do
+    within "div#threads" do
+      find("li", id: dom_id(@message)).click_link
+    end
+    within "div#message-header" do
       assert_selector "h3", text: @message.title
       assert_selector "div", text: @message.body
     end
@@ -108,6 +110,7 @@ class ThreadsTest < ApplicationSystemTestCase
 
   test "can comment on a message" do
     visit messages_page_url
+    scroll_to(page.find("div", id: "comment-form"))
     click_on "Add a comment"
     fill_in_rich_text_area "message_comment_body", with: "This is a comments"
     click_on "Comment"
@@ -123,32 +126,23 @@ class ThreadsTest < ApplicationSystemTestCase
 
   test "can edit comment on message" do
     visit messages_page_url
-    take_screenshot
-    assert_selector "h3", text: @message.title
-    scroll_to(page.find("div", id: "comment-form"))
-    click_on "Add a comment"
-    fill_in_rich_text_area "message_comment_body", with: "This is a comment"
-    click_on "Comment"
-    assert_text "This is a comment"
-    within "#comments" do
+    @comment = @message.message_comments.where(user_id: @user.id).first
+    within "turbo-frame##{dom_id(@comment)}" do
       find("button", id: "comment-menu").click
+      take_screenshot
       click_on "Edit"
+      sleep 1
       fill_in_rich_text_area "message_comment_body", with: "This is an edited comment"
       click_on "Comment"
     end
     assert_text "This is an edited comment"
+    take_screenshot
   end
 
   test "can not edit comment on message with empty body" do
     visit messages_page_url
-    take_screenshot
-    assert_selector "h3", text: @message.title
-    scroll_to(page.find("div", id: "comment-form"))
-    click_on "Add a comment"
-    fill_in_rich_text_area "message_comment_body", with: "This is a comment"
-    click_on "Comment"
-    assert_text "This is a comment"
-    within "#comments" do
+    @comment = @message.message_comments.where(user_id: @user.id).first
+    within "turbo-frame##{dom_id(@comment)}" do
       find("button", id: "comment-menu").click
       click_on "Edit"
       fill_in_rich_text_area "message_comment_body", with: ""

@@ -22,5 +22,9 @@ six:
   space: ten
   user: member
 
+seven:
+  space: archived
+  user: regular  
+
 
 

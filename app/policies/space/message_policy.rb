@@ -14,15 +14,15 @@ class Space::MessagePolicy < Space::BaseSpacePolicy
   end
 
   def show?
-    (record.last.published? && record.first.users.include?(user)) || record.last.user == user
+    (record.last.published? && (record.first.users.include?(user))) || !record.last.published? && record.last.user == user
   end
 
   def comment?
-    (record.first.users.include?(user)) && !record.first.archive && record.last.published?
+    show? && !record.first.archive
   end
 
   def edit?
-    record.first.users.include?(user)
+    record.first.users.include?(user) && !record.first.archive
   end
 
   def update?
