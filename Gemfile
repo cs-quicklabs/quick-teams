@@ -13,7 +13,7 @@ gem "rails", "7.0.4.2"
 gem "sprockets-rails", "3.4.2"
 
 # Use postgresql as the database for Active Record [https://github.com/ged/ruby-pg]
-gem "pg", "1.4.5"
+gem "pg", "1.4.6"
 
 # Use Puma as the app server [https://github.com/puma/puma]
 gem "puma", "6.1.0"
@@ -42,8 +42,8 @@ gem "valid_url"
 gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
-gem "sidekiq", "7.0.5"
-gem "sidekiq-scheduler", "5.0.1"
+gem "sidekiq", "7.0.6"
+gem "sidekiq-scheduler", "5.0.2"
 gem "sinatra", "3.0.5", require: nil
 
 # Reduces boot times through caching; required in config/boot.rb

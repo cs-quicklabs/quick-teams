@@ -22,7 +22,7 @@ class AddSpace < Patterns::Service
 
   def space_users
     space.users << User.where("id IN (?)", users)
-    space.users << actor
+    space.users << actor unless space.users.include?(actor)
   end
 
   def send_email

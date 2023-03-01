@@ -155,7 +155,7 @@ class SpacesTest < ApplicationSystemTestCase
     take_screenshot
   end
 
-  test "space participant can see threds details" do
+  test "space participant can see threads details" do
     @space = @all_spaces.select { |space| space.user_id != @user.id && space.archive == false }.first
     visit space_page_url
     @thread = @space.messages.where(published: "true").first

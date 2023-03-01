@@ -12,6 +12,7 @@ class MessageCommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.message.space.archive == false and (record.message.space.user == user || record.user == user)
+    space = record.message.space
+    space.archive == false and (space.user == user || record.user == user)
   end
 end

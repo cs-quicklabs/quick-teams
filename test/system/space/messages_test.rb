@@ -131,7 +131,6 @@ class ThreadsTest < ApplicationSystemTestCase
       find("button", id: "comment-menu").click
       take_screenshot
       click_on "Edit"
-      sleep 1
       fill_in_rich_text_area "message_comment_body", with: "This is an edited comment"
       click_on "Comment"
     end
