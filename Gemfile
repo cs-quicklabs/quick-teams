@@ -43,7 +43,7 @@ gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
 gem "sidekiq", "7.0.5"
-gem "sidekiq-scheduler", "5.0.1"
+gem "sidekiq-scheduler", "5.0.2"
 gem "sinatra", "3.0.5", require: nil
 
 # Reduces boot times through caching; required in config/boot.rb
