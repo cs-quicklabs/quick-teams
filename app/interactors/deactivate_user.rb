@@ -13,6 +13,7 @@ class DeactivateUser < Patterns::Service
       discard_goals
       clear_todos
       submit_pending_reports
+      destroy_observers
       deactivate
       add_event
     rescue
@@ -68,6 +69,10 @@ class DeactivateUser < Patterns::Service
 
   def add_event
     user.events.create(user: actor, action: "deactivated", action_for_context: "deactivated", trackable: user)
+  end
+
+  def destroy_observers
+    user.observe_projects.destroy_all
   end
 
   attr_reader :user, :actor

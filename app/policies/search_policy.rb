@@ -26,4 +26,8 @@ class SearchPolicy < Struct.new(:user, :search)
   def archived?
     user.admin?
   end
+
+  def users?
+    true
+  end
 end

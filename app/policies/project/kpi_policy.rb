@@ -6,6 +6,6 @@ class Project::KpiPolicy < Project::BaseProjectPolicy
   def record?
     project = record.first
     return false if project.kpi.nil?
-    (is_admin? or is_project_manager?) and is_active?
+    (is_admin? or is_project_manager? or is_project_observer?) and is_active?
   end
 end

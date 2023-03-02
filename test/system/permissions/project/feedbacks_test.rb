@@ -90,7 +90,7 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     end
   end
 
-  test "manage can see project feedback detail page" do
+  test "manager can see project feedback detail page" do
     sign_out @employee
     @employee = users(:manager)
     sign_in @employee
@@ -111,6 +111,53 @@ class ProjectFeedbacksTest < ApplicationSystemTestCase
     sign_out @employee
     @employee = users(:manager)
     @project = projects(:one)
+    @feedback = @project.feedbacks.first
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#feedback-detail"
+  end
+
+  test "observer can see project feedbacks without edit buttons" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Feedbacks"
+    assert_selector "form#new_feedback"
+    feedbacks = @project.feedbacks
+
+    feedbacks.each do |feedback|
+      if feedback.user_id == @employee.id
+        assert_selector "tr##{dom_id(feedback)}", text: "Delete" #can delete feedback added by him
+      else
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Delete"
+      end
+    end
+  end
+
+  test "observer can see project feedback detail page" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_detail_url
+    assert_selector "div#feedback-detail"
+  end
+
+  test "observer can not see feedback from other projects" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:managed)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Feedbacks"
+  end
+
+  test "observer can not see feedback details of other project feedbacks" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:managed)
     @feedback = @project.feedbacks.first
     sign_in @employee
     visit page_url

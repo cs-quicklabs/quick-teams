@@ -68,4 +68,15 @@ class SearchController < BaseController
     @projects = Project.archived.where("name iLIKE ANY ( array[?] )", like_keyword).limit(4).order(:name)
     render layout: false
   end
+
+  def users
+    authorize :search
+    like_keyword = "%#{params[:q]}%".split(/\s+/)
+    @project = Project.find(params[:project_id])
+    @employees = User.for_current_account.active.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
+      .or(User.for_current_account.active.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
+      .limit(4).order(:first_name) - @project.observers
+
+    render layout: false
+  end
 end

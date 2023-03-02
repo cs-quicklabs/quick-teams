@@ -51,10 +51,11 @@ class ProjectNotesTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "div#project-tabs", text: "Notes"
     assert_selector "form#new_note"
+
     note = @project.notes.first
     assert_no_selector "turbo-frame##{dom_id(note)}", text: "Edit"
     assert_no_selector "turbo-frame##{dom_id(note)}", text: "Delete"
-    note = @project.notes.last
+    note = @project.notes.where(user_id: @employee.id).first
     assert_selector "turbo-frame##{dom_id(note)}", text: "Edit"
     assert_selector "turbo-frame##{dom_id(note)}", text: "Delete"
   end
@@ -64,6 +65,32 @@ class ProjectNotesTest < ApplicationSystemTestCase
     @employee = users(:manager)
     sign_in @employee
     @project = projects(:one)
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Notes"
+    assert_no_selector "form#new_note"
+  end
+
+  test "observer can see project note without edit buttons" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Notes"
+    assert_selector "form#new_note"
+    note = @project.notes.first
+    assert_no_selector "turbo-frame##{dom_id(note)}", text: "Edit"
+    assert_no_selector "turbo-frame##{dom_id(note)}", text: "Delete"
+    note = @project.notes.where(user_id: @employee.id).first
+    assert_selector "turbo-frame##{dom_id(note)}", text: "Edit"
+    assert_selector "turbo-frame##{dom_id(note)}", text: "Delete"
+  end
+
+  test "observer can not see notes other than his project notes" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    @project = projects(:managed)
     visit page_url
     assert_no_selector "div#project-tabs", text: "Notes"
     assert_no_selector "form#new_note"
