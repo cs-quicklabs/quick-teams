@@ -72,15 +72,16 @@ class SpacesController < BaseController
 
   def archive
     authorize @space
-    current_user.pinned.destroy @space
-    @space.update(archive: true, archive_at: Time.now)
-    redirect_to space_messages_path(@space), notice: "Space was archived successfully."
+    if ArchiveSpace.call(@space, current_user).result
+      redirect_to space_messages_path(@space), notice: "Space was archived successfully."
+    end
   end
 
   def unarchive
     authorize @space
-    @space.update(archive: false)
-    redirect_to space_messages_path(@space), notice: "Space was unarchived successfully."
+    if UnarchiveSpace.call(@space, current_user).result
+      redirect_to space_messages_path(@space), notice: "Space was unarchived successfully."
+    end
   end
 
   private
