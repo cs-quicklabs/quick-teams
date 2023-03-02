@@ -4,12 +4,12 @@ class AttemptReflex < ApplicationReflex
   def answer
     attempt, question, option = records
     answer = Survey::Answer.find_by(attempt: attempt, question: question)
+
     if answer
       answer.update(option_id: element.dataset[:option_id], correct: option.correct)
     else
       Survey::Answer.create(attempt: attempt, question: question, option: option, correct: option.correct)
     end
-
     morph "#{dom_id(question)}", render(partial: "survey/attempts/checklist_question", locals: { attempt: attempt, question: question, option: option })
   end
 
