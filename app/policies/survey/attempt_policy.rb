@@ -38,7 +38,7 @@ class Survey::AttemptPolicy < Survey::BaseSurveyPolicy
   def show_project_survey_attempt?
     attempt = record.first
     project = attempt.participant
-    user.admin? or user.is_manager?(project)
+    user.admin? or user.is_manager?(project) or user.is_observer?(project)
   end
 
   def show_employee_survey_attempt?

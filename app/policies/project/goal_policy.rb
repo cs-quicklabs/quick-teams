@@ -9,6 +9,6 @@ class Project::GoalPolicy < Project::BaseProjectPolicy
     return false if project.archived?
     return true if user.admin?
 
-    user.is_manager?(project) and milestone.user_id == user.id
+    (user.is_observer?(project) or user.is_manager?(project)) and milestone.user_id == user.id
   end
 end
