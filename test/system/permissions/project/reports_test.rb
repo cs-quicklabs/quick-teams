@@ -143,7 +143,7 @@ class ProjectReportsTest < ApplicationSystemTestCase
   test "observer can not see project report details of different project" do
     sign_out @employee
     @employee = users(:abram)
-    @project = projects(:one)
+    @project = projects(:managed)
     @report = @project.reports.first
     sign_in @employee
     visit page_url

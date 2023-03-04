@@ -91,3 +91,10 @@ kpi:
   comment: "Test Comment"
   score: 60
   participant_type: User
+
+therteen:
+  participant: one
+  actor: regular
+  survey: project
+  participant_type: Project
+
