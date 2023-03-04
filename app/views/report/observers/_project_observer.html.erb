@@ -7,12 +7,7 @@
   </td>
   <td class="w-full table-cell">
     <span class="inline-flex flex-wrap">
-      <% project.observers.each_with_index do |observer, index| %>
-        <%= observer.decorate.display_name %>
-        <% if project.observers["#{index + 1}".to_i] %>
-          ,&ensp;
-        <% end %>
-      <% end %>
+      <%= project.observers.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ")%>
     </a>
   </span>
 </td>
