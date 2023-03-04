@@ -10,7 +10,6 @@ class RemoveObserver < Patterns::Service
       remove_observer
       send_email
       add_event
-  
     rescue
       project
     end

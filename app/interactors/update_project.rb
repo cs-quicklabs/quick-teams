@@ -21,7 +21,7 @@ class UpdateProject < Patterns::Service
 
   def add_observers
     project.observers.clear
-    project.observers << User.where("id IN (?)", observers)    
+    project.observers << User.where("id IN (?)", observers)
   end
 
   attr_reader :project, :observers, :params
