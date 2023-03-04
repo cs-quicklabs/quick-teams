@@ -2,9 +2,9 @@
 
 
   <%= render "shared/form_header", title: "Project Observers", subtitle: " Observers are people who can view the project but cannot edit it." %>
-    <%if policy([project, :about]).add_observer?%>
-   <%=render "devise/shared/success_message", message: message %>
-  <div class="flex justify-center w-full lg:justify-end"   data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/users?project_id=<%=project.id%>">
+    <% if policy([project, :about]).add_observer? %>
+   <%= render "devise/shared/success_message", message: message %>
+  <div class="flex justify-center w-full lg:justify-end"   data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/users?project_id=<%= project.id %>">
     <div class="w-full ">
       <div>
         <label for="skill" class="block text-sm font-medium text-gray-700">Search to add new observer</label>
@@ -22,7 +22,7 @@
   </div>
   <% end %>
   <ul class="divide-y divide-gray-200 " id="project-observers">
-    <%observers.each do |employee| %>
+    <% observers.each do |employee| %>
       <%= turbo_frame_tag dom_id(employee) do %>
         <% employee = employee.decorate %>
         <li class="border-b border-gray-200 py-2">
@@ -50,14 +50,14 @@
                   </a>
                 <% end %>
               </div>
-              <%if policy([project, :about]).destroy_observer? %>
+              <% if policy([project, :about]).destroy_observer? %>
               <div class="flex justify-end mb-6">
-                <%=link_to "Remove", "/#{project.account_id}/projects/#{project.id}/observers/#{employee.id}", class: "btn-inline-delete", data: {
-                                    controller: "confirmation",
-                                    "turbo-method": :delete,
-                                    "confirmation-message-value": "Are you sure you want to delete this?",
-                                    action: "confirmation#confirm", target: "_top"
-                                  } %>
+                <%= link_to "Remove", "/#{project.account_id}/projects/#{project.id}/observers/#{employee.id}", class: "btn-inline-delete", data: {
+                                                                                                                  controller: "confirmation",
+                                                                                                                  "turbo-method": :delete,
+                                                                                                                  "confirmation-message-value": "Are you sure you want to delete this?",
+                                                                                                                  action: "confirmation#confirm", target: "_top",
+                                                                                                                } %>
               </div>
               <% end %>
             </div>

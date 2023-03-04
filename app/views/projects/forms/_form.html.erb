@@ -19,7 +19,7 @@
         Select Observers
       </label>
       <select name="project[observers][]" id="project_observers" multiple="multiple" data-controller="slimselect" class="form-text-field mt-1">
-     <%=options_for_select(User.all_users.decorate.map{|u| [u.display_name, u.id]}, project.observers.pluck(:id))%>
+     <%= options_for_select(User.all_users.decorate.map { |u| [u.display_name, u.id] }, project.observers.pluck(:id)) %>
       </select>
     </div>
     <div class="flex items-center justify-between">

@@ -1,13 +1,13 @@
 <tr id="<%= dom_id project %>">
-  <%project=project.decorate %>
+  <% project = project.decorate %>
   <td class="table-cell  whitespace-nowrap items-center">
     <a href="<%= project_about_index_path(project) %>" class="block hover:underline">
-      <%=project.display_name%>
+      <%= project.display_name %>
     </a>
   </td>
   <td class="w-full table-cell">
     <span class="inline-flex flex-wrap">
-      <%project.observers.each_with_index do |observer, index| %>
+      <% project.observers.each_with_index do |observer, index| %>
         <%= observer.decorate.display_name %>
         <% if project.observers["#{index + 1}".to_i] %>
           ,&ensp;
