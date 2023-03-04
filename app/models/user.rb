@@ -117,8 +117,8 @@ class User < ApplicationRecord
       end
     end
 
-    def project_observer?(employee)
-      employee.observing_projects.size > 0
+    def project_observer?
+      @project_observer ||= self.observing_projects.count > 0
     end
 
     if managers.include?(self)
