@@ -72,7 +72,7 @@ class DeactivateUser < Patterns::Service
   end
 
   def destroy_observers
-    user.observe_projects.destroy_all
+    user.observing_projects.destroy_all
   end
 
   attr_reader :user, :actor
