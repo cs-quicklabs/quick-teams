@@ -30,10 +30,9 @@ class UserController < BaseController
     authorize @user
     respond_to do |format|
       if @user.avatar.attach(params[:user][:avatar])
-        @user.touch
         format.html { redirect_to profile_path, notice: "Avatar was updated successfully" }
       else
-        format.html { redirect_to profile_path, alert: "Invalid file added" }
+        format.html { redirect_to profile_path, alert: @user.errors.full_messages.join(" and ") }
       end
     end
   end
@@ -42,7 +41,6 @@ class UserController < BaseController
     authorize @user
     respond_to do |format|
       if @user.avatar.destroy
-        @user.touch
         format.html { redirect_to profile_path, notice: "Avatar was deleted successfully" }
       else
         format.html { redirect_to profile_path, alert: "Avatar was not deleted" }

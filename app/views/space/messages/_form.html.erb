@@ -25,10 +25,10 @@
       <div class="flex  inline-flex">
         <%= form.submit "Save as draft", class: "btn-normal mr-2", name: "draft" %>
         <%= form.submit "Publish", class: "btn-blue", data: {
-                                       controller: "confirmation",
-                                       "confirmation-message-value": "Are you sure you want to submit it? After this members added to this space will be able to see this thread.",
-                                       action: "confirmation#confirm",
-                                     } %>
+                                     controller: "confirmation",
+                                     "confirmation-message-value": "Are you sure you want to submit it? After this members added to this space will be able to see this thread.",
+                                     action: "confirmation#confirm",
+                                   } %>
       </div>
     </div>
   </main>

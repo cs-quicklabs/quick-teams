@@ -47,7 +47,8 @@ class User < ApplicationRecord
   has_many :comments, class_name: "Comment", foreign_key: "user_id", dependent: :destroy
   has_many :pinned_spaces, dependent: :destroy
   has_many :pinned, through: :pinned_spaces, source: :space
-  has_many :observe_projects, class_name: "ProjectObserver", foreign_key: "user_id", dependent: :destroy
+  has_many :observing_projects, class_name: "ProjectObserver", foreign_key: "user_id", dependent: :destroy
+  has_many :observed_projects, through: :observing_projects, source: :project
 
   has_and_belongs_to_many :people_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy
@@ -60,8 +61,8 @@ class User < ApplicationRecord
   validate :avatar_size
 
   def avatar_size
-    if avatar.attached? && avatar.blob.byte_size > 5.megabytes
-      errors.add(:avatar, "size should not be more than 5MB")
+    if avatar.attached? && avatar.blob.byte_size > 1.megabytes
+      errors.add(:avatar, "size should not be more than 1MB")
     end
   end
 
@@ -117,8 +118,8 @@ class User < ApplicationRecord
       end
     end
 
-    def project_observer?(employee)
-      user.observe_projects.size > 0
+    def project_observer?
+      @project_observer ||= self.observing_projects.count > 0
     end
 
     if managers.include?(self)

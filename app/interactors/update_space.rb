@@ -2,7 +2,7 @@ class UpdateSpace < Patterns::Service
   def initialize(space, actor, users, params)
     @space = space
     @actor = actor
-    @users = users
+    @users = users.reject(&:blank?).map(&:to_i)
     @params = params
   end
 
@@ -21,14 +21,9 @@ class UpdateSpace < Patterns::Service
   end
 
   def update_space_users
-    space_users = space.users
-    @users = User.where("id IN (?)", users)
-    user = space_users - @users
-    space_users.destroy user
-    if !@users.nil?
-      space_users << @users - space_users
-      space_users << actor
-    end
+    space.users.clear
+    space.users << User.where("id IN (?)", users)
+    space.users << space.user unless space.users.include?(space.user)
   end
 
   attr_reader :space, :actor, :users, :params

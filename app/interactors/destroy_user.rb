@@ -17,6 +17,10 @@ class DestroyUser < Patterns::Service
       transfer_todos
       transfer_surveys
       transfer_comments
+      transfer_spaces
+      transfer_space_messages
+      transfer_ticket_labels
+      delete_message_comments
       delete_events
       user.destroy
     rescue Exception => e
@@ -70,6 +74,26 @@ class DestroyUser < Patterns::Service
 
   def transfer_comments
     Comment.where(user_id: user.id).update_all(user_id: transferred_to.id)
+  end
+
+  def transfer_spaces
+    user_spaces = Space.where(user: user)
+    user_spaces.update_all(user_id: transferred_to.id)
+    user_spaces.each do |space|
+      space.users << transferred_to
+    end
+  end
+
+  def transfer_ticket_labels
+    user.ticket_labels.update_all(user_id: transferred_to.id)
+  end
+
+  def transfer_space_messages
+    Message.where(user: user).update_all(user_id: transferred_to.id)
+  end
+
+  def delete_message_comments
+    MessageComment.where(user: user).delete_all
   end
 
   def delete_events

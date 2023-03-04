@@ -2,7 +2,7 @@ class Project::AboutController < Project::BaseController
   def index
     authorize [@project, :about]
     @observers = @project.observers
-    fresh_when [@project]
+    fresh_when [@project] + @observers
   end
 
   def edit

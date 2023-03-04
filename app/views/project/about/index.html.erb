@@ -10,18 +10,20 @@
             <dl class="divide-y divide-gray-200">
               <div class="py-4 sm:grid sm:py-5 sm:grid-cols-2 sm:gap-4">
                 <div class="col-span-2">
-                  <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2 justify-between">
+                  <dt class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2 justify-between">
                     <span>About </span>
+                    <span class="ml-4 flex-shrink-0 justify-end flex">
+                      <% if policy([@project, :about]).edit? %>
+                        <%= edit_button(project_edit_path(@project)) %>
+                      <% end %>
+                    </span>
+                  </dt>
+                </div>
+                <div class="col-span-2">
+                  <dd class="mt-1  text-sm text-gray-900 sm:mt-0 sm:col-span-1">
+                    <span class="flex-grow whitespace-pre-wrap text-justify"><%= @project.about.to_s.upcase_first %></span>
                   </dd>
                 </div>
-                <dt class="mt-1  text-sm text-gray-900 sm:mt-0 sm:col-span-1">
-                  <span class="flex-grow whitespace-pre-wrap text-justify"><%= @project.about.to_s.upcase_first %></span>
-                </dt>
-                <span class="ml-4 flex-shrink-0 justify-end flex">
-                  <% if policy([@project, :about]).edit? %>
-                    <%= edit_button(project_edit_path(@project)) %>
-                  <% end %>
-                </span>
               </div>
             </dl>
           <% end %>
@@ -31,13 +33,10 @@
       <div class="grid grid-cols-1 col-span-1 gap-2">
         <section aria-labelledby="add-participant-section" >
           <div class="overflow-hidden bg-white " id="add-observers">
-            <%= render partial: "project/about/observer",  locals: { project: @project , observers: @project.observers, message: ""} %>
+            <%= render partial: "project/about/observer", locals: { project: @project, observers: @project.observers, message: "" } %>
           </div>
-        </div>
+        </section>
       </div>
     </div>
-  </section>
-</div>
-</div>
-</div>
+  </div>
 </main>

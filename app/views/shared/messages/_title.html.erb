@@ -34,12 +34,13 @@
   </div>
   <div class="flex justify-center">
     <% if @space.archive? %>
-      <span class="inline-flex items-center rounded bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800">Archived</span>
+      <span class="inline-flex items-center rounded bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800 mb-2">Parent space archived on <%= display_date(@space.archive_at) %></span>
     <% end %>
   </div>
   <div class="flex space-x-2 flex-row  justify-center">
     <div class="flex justify-center">
-      <p class="font-normal text-xs line-clamp-2 text-gray-500"> Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
+      <p class="font-normal text-xs line-clamp-2 text-gray-500 pr-1"> Thread created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %> in </p>
+      <%= link_to @space.title, space_messages_path(@space), class: "font-bold text-xs line-clamp-2 text-gray-500 hover:underline hover:text-indigo-500 cursor-pointer" %>
     </div>
   </div>
   <% users = @space.users.includes(avatar_attachment: :blob) %>

@@ -6,10 +6,10 @@ class RemoveObserver < Patterns::Service
   end
 
   def call
-    remove_observer
-    send_email
-    add_event
     begin
+      remove_observer
+      send_email
+      add_event
     rescue
       project
     end
@@ -23,7 +23,7 @@ class RemoveObserver < Patterns::Service
   end
 
   def add_event
-    observer.events.create(user: actor, action: "observer_removed", action_for_context: "as project observer", trackable: project)
+    @project.events.create(user: actor, action: "observer_removed", action_for_context: "as project observer", trackable: observer)
   end
 
   def send_email
