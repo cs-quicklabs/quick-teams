@@ -49,7 +49,7 @@ class ProjectsController < BaseController
     authorize :projects
     @project = UpdateProject.call(@project, project_params, params[:project][:observers]).result
     respond_to do |format|
-      if @project
+      if @project.errors.empty?
         format.html { redirect_to @project, notice: "Project was successfully updated." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@project, partial: "projects/forms/form", locals: { project: @project, title: "Edit Project", subtitle: "Please update details of existing project" }) }

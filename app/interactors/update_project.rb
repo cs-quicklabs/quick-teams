@@ -20,9 +20,8 @@ class UpdateProject < Patterns::Service
   end
 
   def add_observers
-    new_observers = observers - project.observers.pluck(:id)
-    project.observers << User.where("id IN (?)", new_observers)
-    project.observers.destroy(project.observers.pluck(:id).uniq - observers)
+    project.observers.clear
+    project.observers << User.where("id IN (?)", observers)    
   end
 
   attr_reader :project, :observers, :params
