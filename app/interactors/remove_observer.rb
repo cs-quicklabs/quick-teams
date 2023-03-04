@@ -6,10 +6,11 @@ class RemoveObserver < Patterns::Service
   end
 
   def call
-    remove_observer
-    send_email
-    add_event
     begin
+      remove_observer
+      send_email
+      add_event
+  
     rescue
       project
     end
