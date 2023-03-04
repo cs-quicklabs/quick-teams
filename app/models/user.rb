@@ -48,6 +48,7 @@ class User < ApplicationRecord
   has_many :pinned_spaces, dependent: :destroy
   has_many :pinned, through: :pinned_spaces, source: :space
   has_many :observing_projects, class_name: "ProjectObserver", foreign_key: "user_id", dependent: :destroy
+  has_many :observed_projects, through: :observing_projects, source: :project
 
   has_and_belongs_to_many :people_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy

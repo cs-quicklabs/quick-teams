@@ -10,8 +10,8 @@ class ProjectPolicy < ApplicationPolicy
         scope.active.includes(:discipline, :participants, :manager, :status, :project_tags)
       elsif user.project_manager? || user.project_observer?
         managed = user.managed_projects.active.includes(:discipline, :participants, :manager, :status, :project_tags)
-        observer = Project.active.includes(:discipline, :participants, :manager, :status, :project_tags).where(id: user.observing_projects.pluck(:project_id))
-        managed.or(observer)
+        observer = user.observed_projects.active.includes(:discipline, :participants, :manager, :status, :project_tags)
+        managed.or(observer).distinct
       end
     end
 
