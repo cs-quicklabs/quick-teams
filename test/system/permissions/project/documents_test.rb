@@ -93,6 +93,7 @@ class ProjectDocumentssTest < ApplicationSystemTestCase
       end
     end
   end
+  
   test "observer can not see documents from other projects" do
     sign_out @employee
     @employee = users(:abram)
