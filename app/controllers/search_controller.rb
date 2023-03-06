@@ -34,11 +34,10 @@ class SearchController < BaseController
   def documents
     authorize :search
 
-    # like_keyword = "%#{params[:q]}%"
-    # @kbs = Kb.where("document ILIKE ?", like_keyword)
-    #   .limit(5).order(:document)
+    like_keyword = "%#{params[:q]}%"
+    @kbs = Kb.where("document ILIKE ?", like_keyword)
+      .limit(5).order(:document)
 
-    @kbs = Kb.search_title(params[:q])
     render layout: false
   end
 
@@ -69,8 +68,17 @@ class SearchController < BaseController
     authorize :search
     like_keyword = "%#{params[:q]}%".split(/\s+/)
     @project = Project.find(params[:project_id])
-    @employees = users_matching_name(like_keyword) - @project.observers
+    @employees = users_matching_name(like_keyword)
 
+    if @project.manager.present?
+      @employees = @employees - [@project.manager]
+    end
+
+    if @project.participants.present?
+      @employees = @employees - @project.participants
+    end
+
+    
     render layout: false
   end
 
