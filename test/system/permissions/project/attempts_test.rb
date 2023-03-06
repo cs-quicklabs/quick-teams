@@ -155,4 +155,44 @@ class ProjectSurveyAttemptsTest < ApplicationSystemTestCase
     visit attempt_preview_url
     assert_selector "h1", text: leadmanager.decorate.display_name
   end
+
+  test "project observer can see all survey attempts for his assigned project" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @project = projects(:one)
+    visit attempts_url
+    assert_selector "h1", text: @project.name
+    assert_selector "div#project-tabs", text: "Surveys"
+    assert_text "Take a Survey"
+  end
+
+  test "project observer can not see all survey attempts for other projects" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @project = projects(:managed)
+    visit attempts_url
+    assert_selector "h1", text: observer.decorate.display_name
+  end
+
+  test "project observer can see survey attempts preview of his project" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @project = projects(:one)
+    @attempt = survey_attempts(:therteen)
+    visit attempt_preview_url
+    assert_selector "h3", text: @attempt.survey.name
+  end
+
+  test "project observer can not see survey attempt preview of other projects" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @project = projects(:managed)
+    @attempt = survey_attempts(:one)
+    visit attempt_preview_url
+    assert_selector "h1", text: observer.decorate.display_name
+  end
 end

@@ -8,7 +8,7 @@ class Project::ReportPolicy < Project::BaseProjectPolicy
   def comment?
     return false if !is_active?
     report = record.last
-    is_admin? or is_project_manager?
+    is_admin? or is_project_manager? or is_project_observer?
   end
 
   def destroy?

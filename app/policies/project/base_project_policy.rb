@@ -1,6 +1,6 @@
 class Project::BaseProjectPolicy < ApplicationPolicy
   def index?
-    is_admin? or is_project_manager?
+    is_admin? or is_project_manager? or is_project_observer?
   end
 
   def create?
@@ -35,5 +35,9 @@ class Project::BaseProjectPolicy < ApplicationPolicy
 
   def is_project_manager?
     user.is_manager?(record.first)
+  end
+
+  def is_project_observer?
+    user.is_observer?(record.first)
   end
 end

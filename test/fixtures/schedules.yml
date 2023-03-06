@@ -60,3 +60,10 @@ nine:
   starts_at: 2021-02-01
   ends_at: 2021-03-31
   occupancy: 90
+
+ten:
+  user: member
+  project: one
+  starts_at: 2021-02-01
+  ends_at: 2021-03-31
+  occupancy: 90  

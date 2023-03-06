@@ -11,6 +11,7 @@ class ArchiveProject < Patterns::Service
       discard_milestones
       archive
       submit_pending_reports
+      destroy_observers
       add_event
     rescue
       project
@@ -51,6 +52,10 @@ class ArchiveProject < Patterns::Service
 
   def add_event
     project.events.create(user: actor, action: "archived", action_for_context: "archived", trackable: project)
+  end
+
+  def destroy_observers
+    project.observers.destroy_all
   end
 
   attr_reader :project, :actor

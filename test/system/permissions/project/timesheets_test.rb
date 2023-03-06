@@ -60,4 +60,27 @@ class ProjectTimesheetsTest < ApplicationSystemTestCase
     sign_in @employee
     assert_no_selector "div#project-tabs", text: "Timesheets"
   end
+
+  test "observer can see project timesheets" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Timesheets"
+    assert_selector "div#timesheet-stats"
+    assert_selector "div#timesheet-list"
+    @employee.timesheets.each do |timesheet|
+      assert_selector "div##{dom_id(timesheet)}", text: "Edit"
+      assert_no_selector "div##{dom_id(timesheet)}", text: "Delete"
+    end
+  end
+
+  test "observer can not see project timesheets of other projects" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:managed)
+    sign_in @employee
+    assert_no_selector "div#project-tabs", text: "Timesheets"
+  end
 end

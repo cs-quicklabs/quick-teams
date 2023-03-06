@@ -3,9 +3,7 @@ class SearchController < BaseController
     authorize :search
 
     like_keyword = "%#{params[:q]}%".split(/\s+/)
-    @employees = User.for_current_account.active.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
-      .or(User.for_current_account.active.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
-      .limit(4).order(:first_name)
+    @employees = users_matching_name(like_keyword)
     @projects = Project.active.where("name iLIKE ANY ( array[?] )", like_keyword).limit(4).order(:name)
 
     render layout: false
@@ -36,11 +34,10 @@ class SearchController < BaseController
   def documents
     authorize :search
 
-    # like_keyword = "%#{params[:q]}%"
-    # @kbs = Kb.where("document ILIKE ?", like_keyword)
-    #   .limit(5).order(:document)
+    like_keyword = "%#{params[:q]}%"
+    @kbs = Kb.where("document ILIKE ?", like_keyword)
+      .limit(5).order(:document)
 
-    @kbs = Kb.search_title(params[:q])
     render layout: false
   end
 
@@ -56,9 +53,7 @@ class SearchController < BaseController
     authorize :search
 
     like_keyword = "%#{params[:q]}%".split(/\s+/)
-    @employees = User.for_current_account.inactive.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
-      .or(User.for_current_account.inactive.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
-      .limit(4).order(:first_name)
+    @employees = users_matching_name(like_keyword)
     render layout: false
   end
 
@@ -67,5 +62,29 @@ class SearchController < BaseController
     like_keyword = "%#{params[:q]}%".split(/\s+/)
     @projects = Project.archived.where("name iLIKE ANY ( array[?] )", like_keyword).limit(4).order(:name)
     render layout: false
+  end
+
+  def users
+    authorize :search
+    like_keyword = "%#{params[:q]}%".split(/\s+/)
+    @project = Project.find(params[:project_id])
+    @employees = users_matching_name(like_keyword)
+
+    if @project.manager.present?
+      @employees = @employees - [@project.manager]
+    end
+
+    if @project.participants.present?
+      @employees = @employees - @project.participants
+    end
+
+    
+    render layout: false
+  end
+
+  def users_matching_name(like_keyword)
+    User.for_current_account.active.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
+      .or(User.for_current_account.active.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
+      .limit(4).order(:first_name)
   end
 end

@@ -47,6 +47,8 @@ class User < ApplicationRecord
   has_many :comments, class_name: "Comment", foreign_key: "user_id", dependent: :destroy
   has_many :pinned_spaces, dependent: :destroy
   has_many :pinned, through: :pinned_spaces, source: :space
+  has_many :observing_projects, class_name: "ProjectObserver", foreign_key: "user_id", dependent: :destroy
+  has_many :observed_projects, through: :observing_projects, source: :project
 
   has_and_belongs_to_many :people_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy
@@ -116,6 +118,10 @@ class User < ApplicationRecord
       end
     end
 
+    def project_observer?
+      @project_observer ||= self.observing_projects.count > 0
+    end
+
     if managers.include?(self)
       managers = managers - [self]
     end
@@ -143,6 +149,10 @@ class User < ApplicationRecord
 
   def is_manager?(project)
     project.manager == self
+  end
+
+  def is_observer?(project)
+    project.observers.include?(self)
   end
 
   def added_nuggets

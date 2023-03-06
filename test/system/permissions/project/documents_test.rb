@@ -72,4 +72,34 @@ class ProjectDocumentssTest < ApplicationSystemTestCase
     visit page_url
     assert_no_selector "div#project-tabs", text: "Documents"
   end
+
+  test "observer can see project documents without edit buttons" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Documents"
+    assert_selector "form#new_document"
+    documents = @project.documents
+
+    documents.each do |document|
+      if document.user_id == @employee.id
+        assert_selector "tr##{dom_id(document)}", text: "Edit"
+        assert_selector "tr##{dom_id(document)}", text: "Delete"
+      else
+        assert_no_selector "tr##{dom_id(document)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(document)}", text: "Delete"
+      end
+    end
+  end
+  
+  test "observer can not see documents from other projects" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:managed)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Documents"
+  end
 end

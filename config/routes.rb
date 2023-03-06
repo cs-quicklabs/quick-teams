@@ -49,7 +49,7 @@ Rails.application.routes.draw do
       get "stats", to: "kpis#stats", as: "stats"
     end
     resources :clients, module: "project"
-
+    delete "/observers/:observer_id", to: "project/about#destroy_observer", as: "destroy_observer"
     get "/timeline", to: "project/timeline#index", as: "timeline"
     resources :about, module: "project", only: [:index]
     get "about/edit", to: "project/about#edit", as: "edit"
@@ -128,6 +128,7 @@ Rails.application.routes.draw do
   get "/search/project/skills", to: "search#project_skills"
   get "/search/documents", to: "search#documents"
   get "/search/surveys", to: "search#surveys"
+  get "search/users", to: "search#users"
 
   get :goals, controller: :home
   get :events, controller: :home
@@ -152,7 +153,7 @@ Rails.application.routes.draw do
     get "/employees", to: "report/employees#index", as: "employees_reports"
     get "/projects", to: "report/projects#index", as: "projects_reports"
     get "/risks", to: "report/risks#index", as: "projects_risks_reports"
-
+    get "/observers", to: "report/observers#index", as: "projects_observers_reports"
     get "/goals", to: "report/goals#index", as: "goals_reports"
     get "/goals/open", to: "report/goals#open", as: "open_goals_reports"
     get "/schedules/available", to: "report/schedules#available", as: "available_schedules_reports"
