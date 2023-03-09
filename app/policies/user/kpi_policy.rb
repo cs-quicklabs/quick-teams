@@ -12,6 +12,6 @@ class User::KpiPolicy < User::BaseUserPolicy
   def record?
     employee = record.first
     return false if employee.kpi.nil?
-    is_active? and (is_admin? or is_project_manager? or is_team_lead?) and (user.id != employee.id)
+    is_active? and (is_admin? or is_project_manager? or is_team_lead? or is_project_observer?) and (user.id != employee.id)
   end
 end

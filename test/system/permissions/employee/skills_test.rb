@@ -93,4 +93,32 @@ class EmployeeSkillsTest < ApplicationSystemTestCase
     assert_selector "h1", text: @manager.decorate.display_name
     assert_selector "div#employee-tabs", text: "Skills"
   end
+
+  test "project observer can see his skills" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Skills"
+  end
+
+  test "project observer can see his project participants skills" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:actor)
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Skills"
+  end
+
+  test "project observer can not see skills of other employee" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @observer.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Skills"
+  end
 end

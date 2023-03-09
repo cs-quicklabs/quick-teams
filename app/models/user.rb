@@ -134,6 +134,13 @@ class User < ApplicationRecord
     @project_participant ||= @employees.include?(employee.id)
   end
 
+  def observed_project_participant?(employee)
+    projects= self.observed_projects.map(&:id)
+    @employees = Schedule.where("project_id IN (?)", projects).pluck(:user_id)
+    @observed_project_participant ||= @employees.include?(employee.id)
+  end
+
+
   def self.query(params, includes = nil)
     return [] if params.empty?
     EmployeeQuery.new(self.includes(:job, :role, :manager, :discipline), params).filter

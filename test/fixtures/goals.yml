@@ -107,8 +107,8 @@ twelve:
   status: progress
   permission: true
 
-thirteen:
-  title: Some Random Goal twelve
+therteen:
+  title: Some Random Goal therteen
   user: admin
   goalable_type: User
   goalable: manager
@@ -116,3 +116,23 @@ thirteen:
   account: crownstack
   status: progress
   permission: false
+
+fourteen:
+  title: Some Random Goal fourteen
+  user: admin
+  goalable_type: User
+  goalable: actor
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+  permission: false  
+
+fifteen:
+  title: Some Random Goal fifteen
+  user: admin
+  goalable_type: User
+  goalable: abram
+  deadline: 2021-06-30
+  account: crownstack
+  status: progress
+  permission: false  

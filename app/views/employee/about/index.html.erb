@@ -4,7 +4,7 @@
     <!-- Main 2 column grid -->
     <div class="grid items-start grid-cols-1 lg:grid-cols-3">
       <!-- Left column -->
-      <div class="grid grid-cols-1 col-span-2 gap-2">
+      <div class="grid grid-cols-1 col-span-2 gap-2 border-r border-gray-200 pr-10">
         <div class="ml-4">
           <dl class="divide-y divide-gray-200">
             <div class="py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4">
@@ -21,6 +21,13 @@
             </div>
           </dl>
         </div>
+      </div>
+      <div class="grid grid-cols-1 col-span-1 gap-2">
+        <section aria-labelledby="add-participant-section" >
+          <div class="overflow-hidden bg-white " id="add-observed-projects">
+            <%= render partial: "employee/about/observed_projects", locals: { employee: @employee, observed_projects: @observed_projects, message: "" } %>
+          </div>
+        </section>
       </div>
     </div>
   </div>

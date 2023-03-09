@@ -2,7 +2,7 @@ class CreateProject < Patterns::Service
   def initialize(params, actor, observers)
     @project = Project.new(params)
     @actor = actor
-    @observers = observers.reject(&:blank?)
+    @observers = observers.reject(&:blank?) if observers
   end
 
   def call

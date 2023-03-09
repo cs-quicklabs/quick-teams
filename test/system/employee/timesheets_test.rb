@@ -33,10 +33,10 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     travel_to "2021-04-05".to_date do
       visit subordinate_page_url
       click_on "Last Week"
-      assert_selector "p", text: "Last Week's Performance"
+      assert_selector "a", text: "Last Week's Performance"
       take_screenshot
       click_on "Last Month"
-      assert_selector "p", text: "Last Month's Performance"
+      assert_selector "a", text: "Last Month's Performance"
       take_screenshot
     end
   end

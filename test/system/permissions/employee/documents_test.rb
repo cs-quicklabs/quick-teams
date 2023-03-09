@@ -171,4 +171,54 @@ class EmployeeDocumentsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: @manager.decorate.display_name
   end
+
+  test "project observer can see and add his own documents" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Documents"
+    assert_selector "form#new_document"
+    @employee.documents.each do |document|
+      if document.user == @employee
+        assert_selector "tr##{dom_id(document)}", text: "Edit"
+        assert_selector "tr##{dom_id(document)}", text: "Delete"
+      else
+        assert_no_selector "tr##{dom_id(document)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(document)}", text: "Delete"
+      end
+    end
+  end
+
+  test "project observer can see and add project participant documents" do
+    sign_out @employee
+    @manager = users(:abram)
+    sign_in @manager
+    @employee = users(:actor)
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Documents"
+    # can create a document for subordinate
+    assert_selector "form#new_document"
+    # can edit, delete documents create by him
+    @employee.documents.each do |document|
+      if document.user == @lead
+        assert_selector "tr##{dom_id(document)}", text: "Edit"
+        assert_selector "tr##{dom_id(document)}", text: "Delete"
+      else
+        assert_no_selector "tr##{dom_id(document)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(document)}", text: "Delete"
+      end
+    end
+  end
+
+  test "project observer can not see someone elses documents" do
+    sign_out @employee
+    @manager = users(:abram)
+    sign_in @manager
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @manager.decorate.display_name
+  end
 end

@@ -35,16 +35,16 @@ class ProjectAboutTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: "Sign in to your account"
   end
-  
+
   test "can delete project observer" do
     visit page_url
     @observer = @project.project_observers.first
     within "#project-observers" do
       page.accept_confirm do
-        click_on "Remove"
+        find("turbo-frame#user_#{@observer.user_id}").click_on "Remove"
       end
-      assert_no_text @observer.user.name
     end
+    assert_text "Observer removed successfully"
     take_screenshot
   end
 

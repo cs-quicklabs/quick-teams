@@ -70,15 +70,15 @@ class SearchController < BaseController
     @project = Project.find(params[:project_id])
     @employees = users_matching_name(like_keyword)
 
-    if @project.manager.present?
-      @employees = @employees - [@project.manager]
-    end
-
-    if @project.participants.present?
-      @employees = @employees - @project.participants
-    end
-
     
+    render layout: false
+  end
+
+  def projects
+    authorize :search
+    like_keyword = "%#{params[:q]}%".split(/\s+/)
+    @employee = User.find(params[:user_id])
+    @projects = projects_matching_name(like_keyword)- @employee.observed_projects
     render layout: false
   end
 
@@ -86,5 +86,9 @@ class SearchController < BaseController
     User.for_current_account.active.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
       .or(User.for_current_account.active.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
       .limit(4).order(:first_name)
+  end
+
+  def projects_matching_name(like_keyword)
+    Project.active.where("name iLIKE ANY ( array[?] )", like_keyword).limit(4).order(:name)
   end
 end

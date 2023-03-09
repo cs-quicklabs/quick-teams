@@ -8,6 +8,6 @@ class User::TodoPolicy < User::BaseUserPolicy
   end
 
   def show?
-    is_admin? or is_project_manager? or is_team_lead? or self?
+    is_admin? or is_project_manager? or is_team_lead? or self? or is_project_observer?
   end
 end
