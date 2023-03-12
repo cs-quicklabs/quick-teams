@@ -12,7 +12,7 @@ class User::AboutPolicy < User::BaseUserPolicy
   end
 
   def add_observing_project?
-    is_admin? 
+    is_admin?
   end
 
   def destroy_observed_project?

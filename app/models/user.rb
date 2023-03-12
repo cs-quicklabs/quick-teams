@@ -118,14 +118,14 @@ class User < ApplicationRecord
       end
     end
 
-    def project_observer?
-      @project_observer ||= self.observing_projects.count > 0
-    end
-
     if managers.include?(self)
       managers = managers - [self]
     end
     managers.uniq
+  end
+
+  def project_observer?
+    @project_observer ||= self.observing_projects.count > 0
   end
 
   def project_participant?(employee)
@@ -135,11 +135,10 @@ class User < ApplicationRecord
   end
 
   def observed_project_participant?(employee)
-    projects= self.observed_projects.map(&:id)
+    projects = self.observed_projects.map(&:id)
     @employees = Schedule.where("project_id IN (?)", projects).pluck(:user_id)
     @observed_project_participant ||= @employees.include?(employee.id)
   end
-
 
   def self.query(params, includes = nil)
     return [] if params.empty?

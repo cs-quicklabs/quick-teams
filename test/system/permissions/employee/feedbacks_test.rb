@@ -342,5 +342,4 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     visit page_detail_url
     assert_selector "h1", text: @observer.decorate.display_name
   end
-  
 end

@@ -51,6 +51,6 @@ class User::BaseUserPolicy < ApplicationPolicy
   end
 
   def is_project_observer?
-    user.observed_project_participant?(record.first)
+    user.project_observer? and user.observed_project_participant?(record.first)
   end
 end

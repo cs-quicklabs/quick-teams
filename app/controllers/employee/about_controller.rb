@@ -21,12 +21,13 @@ class Employee::AboutController < Employee::BaseController
       end
     end
   end
+
   def destroy_observed_project
     authorize [@employee, :about]
     respond_to do |format|
-    if @employee.observed_projects.delete(Project.find(params[:observed_project_id]))
-      format.turbo_stream { render turbo_stream: turbo_stream.update("add-observed-projects", partial: "employee/about/observed_projects", locals: { observed_projects: @employee.observed_projects, employee: @employee, message: "Observed project removed successfully" }) }
+      if @employee.observed_projects.delete(Project.find(params[:observed_project_id]))
+        format.turbo_stream { render turbo_stream: turbo_stream.update("add-observed-projects", partial: "employee/about/observed_projects", locals: { observed_projects: @employee.observed_projects, employee: @employee, message: "Observed project removed successfully" }) }
+      end
     end
-  end
   end
 end

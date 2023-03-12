@@ -70,7 +70,6 @@ class SearchController < BaseController
     @project = Project.find(params[:project_id])
     @employees = users_matching_name(like_keyword)
 
-    
     render layout: false
   end
 
@@ -78,7 +77,7 @@ class SearchController < BaseController
     authorize :search
     like_keyword = "%#{params[:q]}%".split(/\s+/)
     @employee = User.find(params[:user_id])
-    @projects = projects_matching_name(like_keyword)- @employee.observed_projects
+    @projects = projects_matching_name(like_keyword) - @employee.observed_projects
     render layout: false
   end
 
