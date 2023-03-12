@@ -7,5 +7,8 @@
   "[erb]": {
     "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
   },
-  "vscode-erb-beautify.executePath": "/Users/adityatrehan/.rvm/gems/ruby-3.1.2/wrappers/htmlbeautifier"
+  "vscode-erb-beautify.executePath": "/Users/adityatrehan/.rvm/gems/ruby-3.1.2/wrappers/htmlbeautifier",
+  "[gemfile]": {
+    "editor.defaultFormatter": "jnbt.vscode-rufo"
+  }
 }

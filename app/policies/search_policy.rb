@@ -30,4 +30,8 @@ class SearchPolicy < Struct.new(:user, :search)
   def users?
     true
   end
+
+  def projects?
+    true
+  end
 end

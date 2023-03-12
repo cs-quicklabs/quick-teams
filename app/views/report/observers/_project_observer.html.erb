@@ -7,7 +7,7 @@
   </td>
   <td class="w-full table-cell">
     <span class="inline-flex flex-wrap">
-      <%= project.observers.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ")%>
+      <%= project.observers.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>
     </a>
   </span>
 </td>

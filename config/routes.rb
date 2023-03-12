@@ -70,6 +70,7 @@ Rails.application.routes.draw do
     resources :kpis, module: "employee", only: [:index, :show, :destroy] do
       get "stats", to: "kpis#stats", as: "stats"
     end
+    delete "/observers/:observed_project_id", to: "employee/about#destroy_observed_project", as: "destroy_observed_project"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
     get "/show_skills", to: "employee/skills#show_skills", as: "show_skills"
@@ -129,7 +130,7 @@ Rails.application.routes.draw do
   get "/search/documents", to: "search#documents"
   get "/search/surveys", to: "search#surveys"
   get "search/users", to: "search#users"
-
+  get "search/projects", to: "search#projects"
   get :goals, controller: :home
   get :events, controller: :home
 

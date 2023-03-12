@@ -26,7 +26,7 @@ class Project::AboutController < Project::BaseController
     @project = RemoveObserver.call(@project, @observer, current_user).result
     respond_to do |format|
       if @project.errors.empty?
-        format.turbo_stream { render turbo_stream: turbo_stream.update("add-observers", partial: "project/about/observer", locals: { observers: @project.observers, project: @project, message: "Observer removed successfully" }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.update("add-observers", partial: "project/about/observers", locals: { observers: @project.observers, project: @project, message: "Observer removed successfully" }) }
       end
     end
   end

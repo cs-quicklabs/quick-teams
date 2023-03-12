@@ -18,6 +18,7 @@ class Survey::AttemptPolicy < Survey::BaseSurveyPolicy
 
   def show?
     attempt = record.first
+
     attempt.participant_type == "Project" ? show_project_survey_attempt? : show_employee_survey_attempt?
   end
 
@@ -44,6 +45,6 @@ class Survey::AttemptPolicy < Survey::BaseSurveyPolicy
   def show_employee_survey_attempt?
     attempt = record.first
     employee = attempt.participant
-    user.admin? or user.subordinate?(employee) or user.project_participant?(employee) or attempt.actor == user
+    user.admin? or user.subordinate?(employee) or user.project_participant?(employee) or user.observed_project_participant?(employee) or attempt.actor == user
   end
 end

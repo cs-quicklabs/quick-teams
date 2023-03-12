@@ -2,7 +2,7 @@ class CreateProject < Patterns::Service
   def initialize(params, actor, observers)
     @project = Project.new(params)
     @actor = actor
-    @observers = observers.reject(&:blank?)
+    @observers = observers.reject(&:blank?) if observers
   end
 
   def call
@@ -24,7 +24,7 @@ class CreateProject < Patterns::Service
   end
 
   def add_observers
-    project.observers << User.where("id IN (?)", observers)
+    project.observers << User.where("id IN (?)", observers) unless observers.blank?
   end
 
   def add_event

@@ -1,19 +1,19 @@
 class User::GoalPolicy < User::BaseUserPolicy
   def create?
-    is_active? and (is_admin? or is_project_manager? or is_team_lead?)
+    is_active? and (is_admin? or is_project_manager? or is_team_lead? or is_project_observer?)
   end
 
   def show?
-    is_admin? or _is_project_manager? or _is_team_lead? or self?
+    is_admin? or _is_project_manager? or _is_team_lead? or self? or is_project_observer?
   end
 
   def edit?
-    (is_admin? or _is_project_manager? or _is_team_lead?) and record.last.progress?
+    (is_admin? or _is_project_manager? or _is_team_lead? or is_project_observer?) and record.last.progress?
   end
 
   def comment?
     return false unless is_active? and record.last.progress?
-    is_admin? or _is_project_manager? or _is_team_lead? or (self? and record.last.permission?)
+    is_admin? or _is_project_manager? or _is_team_lead? or is_project_observer? or (self? and record.last.permission?)
   end
 
   private

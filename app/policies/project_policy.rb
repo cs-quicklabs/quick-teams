@@ -9,7 +9,7 @@ class ProjectPolicy < ApplicationPolicy
       if user.admin?
         scope.active.includes(:discipline, :participants, :manager, :status, :project_tags)
       elsif user.project_manager? || user.project_observer?
-        observed_project_ids = Project.active.joins(:project_observers).where('project_observers.user_id = ?', user).pluck(:id)
+        observed_project_ids = Project.active.joins(:project_observers).where("project_observers.user_id = ?", user).pluck(:id)
         managed_projects_ids = user.managed_projects.active.pluck(:id)
         projects = Project.active.where(id: observed_project_ids + managed_projects_ids).includes(:discipline, :participants, :manager, :status, :project_tags)
       end

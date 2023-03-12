@@ -43,4 +43,11 @@ class EmployeeTimelineTest < ApplicationSystemTestCase
     visit page_url
     assert_no_selector "div#employee-tabs", text: "Timeline"
   end
+  test "project observer can not see timeline" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#employee-tabs", text: "Timeline"
+  end
 end
