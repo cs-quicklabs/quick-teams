@@ -24,7 +24,7 @@ class CreateProject < Patterns::Service
   end
 
   def add_observers
-    project.observers << User.where("id IN (?)", observers)
+    project.observers << User.where("id IN (?)", observers) unless observers.blank?
   end
 
   def add_event

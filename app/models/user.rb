@@ -125,19 +125,19 @@ class User < ApplicationRecord
   end
 
   def project_observer?
-    @project_observer ||= self.observing_projects.count > 0
+    self.observing_projects.count > 0
   end
 
   def project_participant?(employee)
     projects = self.managed_projects.map(&:id)
-    @employees ||= Schedule.where("project_id IN (?)", projects).pluck(:user_id)
-    @project_participant ||= @employees.include?(employee.id)
+    employees = Schedule.where("project_id IN (?)", projects).pluck(:user_id)
+    employees.include?(employee.id)
   end
 
   def observed_project_participant?(employee)
     projects = self.observed_projects.map(&:id)
-    @employees = Schedule.where("project_id IN (?)", projects).pluck(:user_id)
-    @observed_project_participant ||= @employees.include?(employee.id)
+    employees = Schedule.where("project_id IN (?)", projects).pluck(:user_id)
+    employees.include?(employee.id)
   end
 
   def self.query(params, includes = nil)
@@ -150,7 +150,7 @@ class User < ApplicationRecord
   end
 
   def project_manager?
-    @project_manager ||= self.managed_projects.count > 0
+    self.managed_projects.count > 0
   end
 
   def is_manager?(project)
