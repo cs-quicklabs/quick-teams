@@ -58,4 +58,23 @@ class ProjectSkillsTest < ApplicationSystemTestCase
     assert_no_selector "div#project-tabs", text: "TechStack"
     assert_no_selector "input#search-skills"
   end
+  test "observer can see project skills" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "TechStack"
+    assert_selector "input#search-skills"
+  end
+
+  test "observer can not see skills of other projects" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    @project = projects(:managed)
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "TechStack"
+    assert_no_selector "input#search-skills"
+  end
 end

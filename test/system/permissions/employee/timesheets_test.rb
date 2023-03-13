@@ -134,4 +134,39 @@ class EmployeeTimesheetsTest < ApplicationSystemTestCase
     assert_selector "h1", text: @manager.decorate.display_name
     assert_selector "div#employee-tabs", text: "Timesheets"
   end
+
+  test "project observer can see his timesheets" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Timesheets"
+    @employee.timesheets.last_30_days.each do |timesheet|
+      assert_selector "tr##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "tr##{dom_id(timesheet)}", text: "Delete"
+    end
+  end
+
+  test "project observer can see his project particiapants timesheet" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:actor)
+    visit employee_timesheets_url(script_name: "/#{@account.id}", employee_id: @employee.id)
+    assert_selector "div#employee-tabs", text: "Timesheets"
+    @employee.timesheets.last_30_days.each do |timesheet|
+      assert_selector "tr##{dom_id(timesheet)}", text: "Edit"
+      assert_selector "tr##{dom_id(timesheet)}", text: "Delete"
+    end
+  end
+
+  test "project observer can not see someone elseses timesheet" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @observer.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Timesheets"
+  end
 end

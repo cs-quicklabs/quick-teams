@@ -72,8 +72,8 @@ tweleve:
   critiquable_type: User
   critiquable: manager
 
-thirteen:
-  title: Some Random Feedback Thirteen
+therteen:
+  title: Some Random Feedback Therteen
   user: admin
   critiquable_type: User
   critiquable: regular
@@ -83,3 +83,17 @@ fourteen:
   user: admin
   critiquable_type: User
   critiquable: manager
+
+
+fifteen:
+  title: Some Random Feedback fifteen
+  user: admin
+  critiquable_type: User
+  critiquable: abram
+
+sixteen:
+  title: Some Random Feedback sixteen
+  user: actor
+  critiquable_type: User
+  critiquable: actor  
+

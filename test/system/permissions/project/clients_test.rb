@@ -29,6 +29,15 @@ class ProjectClientsTest < ApplicationSystemTestCase
     assert_text "Add New Client"
   end
 
+  test "project observer can see and add clients" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    @project = projects(:one)
+    visit page_url
+    assert_text "Add New Client"
+  end
+
   test "team lead can not see and add clients" do
     sign_out @employee
     @employee = users(:lead)

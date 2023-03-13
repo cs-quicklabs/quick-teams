@@ -125,7 +125,6 @@ class OnboardingTest < ApplicationSystemTestCase
     user = User.where(account: admin.account).active.order(:first_name).first
     assert_emails 1 do
       find("tr", id: dom_id(user)).find("a", text: "Invite").click
-      sleep(0.5)
     end
     sign_out admin
     doc = Nokogiri::HTML::Document.parse(ActionMailer::Base.deliveries.last.to_s)

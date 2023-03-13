@@ -19,7 +19,7 @@
       </div>
       <div  x-on:click.outside="open = false" class=" relative" x-data="{ open: false }">
         <div class=" ">
-          <% if policy(comment).edit?  || policy(comment).destroy? %>
+          <% if policy(comment).edit? || policy(comment).destroy? %>
             <button @click="open = !open" id="comment-menu" class="flex-auto mt-1 ml-4 z-20  text-sm rounded-full hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="user-menu" aria-haspopup="true">
               <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z" />
@@ -32,7 +32,7 @@
                 <% if policy(comment).edit? %>
                   <a href=<%= edit_message_comment_path(comment) %> class="  block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"  role= "menuitem" tabindex="-1">Edit</a>
                 <% end %>
-                <% if policy(comment).destroy?  %>
+                <% if policy(comment).destroy? %>
                   <%= styled_delete_button(message_comment_path(comment), "  block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
                 <% end %>
               </div>

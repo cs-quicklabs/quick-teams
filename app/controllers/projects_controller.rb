@@ -34,7 +34,7 @@ class ProjectsController < BaseController
   def create
     authorize :projects
 
-    @project = CreateProject.call(project_params, current_user).result
+    @project = CreateProject.call(project_params, current_user, params[:project][:observers]).result
 
     respond_to do |format|
       if @project.errors.empty?
@@ -47,9 +47,9 @@ class ProjectsController < BaseController
 
   def update
     authorize :projects
-
+    @project = UpdateProject.call(@project, project_params, params[:project][:observers]).result
     respond_to do |format|
-      if @project.update(project_params)
+      if @project.errors.empty?
         format.html { redirect_to @project, notice: "Project was successfully updated." }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@project, partial: "projects/forms/form", locals: { project: @project, title: "Edit Project", subtitle: "Please update details of existing project" }) }

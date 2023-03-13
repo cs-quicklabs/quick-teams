@@ -16,7 +16,7 @@
   </td>
   <td class="w-full table-cell">
     <a href="<%= project_todo_path(project, todo, script_name: "/#{owner.account.id}") %>" class="block hover:underline" target="_top">
-      <p class="break-all"> <%= highlight_hashtag(auto_link_urls_in_text(todo.title.upcase_first)) %></p>
+      <p class="break-words"> <%= highlight_hashtag(auto_link_urls_in_text(todo.title.upcase_first)) %></p>
     </a>
   </td>
   <td class="table-cell whitespace-nowrap">

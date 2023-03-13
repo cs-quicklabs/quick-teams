@@ -23,6 +23,8 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :project_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy
   has_and_belongs_to_many :clients, dependent: :destroy
+  has_many :project_observers, dependent: :destroy
+  has_many :observers, through: :project_observers, source: :user
 
   validates_presence_of :name
 

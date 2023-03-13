@@ -10,4 +10,12 @@ class User::AboutPolicy < User::BaseUserPolicy
   def update?
     edit?
   end
+
+  def add_observing_project?
+    is_admin?
+  end
+
+  def destroy_observed_project?
+    add_observing_project?
+  end
 end

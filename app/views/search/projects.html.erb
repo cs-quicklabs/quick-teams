@@ -1,0 +1,5 @@
+<% @projects.each do |project| %>
+  <li role="option" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" data-reflex="click->ProjectObservers#add_project" data-employee-id=<%= @employee.id %>  data-project-id=<%= project.id %> id="observing-project">
+    <%= project.decorate.display_name %>
+  </li>
+<% end %>

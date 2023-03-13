@@ -47,6 +47,8 @@ class User < ApplicationRecord
   has_many :comments, class_name: "Comment", foreign_key: "user_id", dependent: :destroy
   has_many :pinned_spaces, dependent: :destroy
   has_many :pinned, through: :pinned_spaces, source: :space
+  has_many :observing_projects, class_name: "ProjectObserver", foreign_key: "user_id", dependent: :destroy
+  has_many :observed_projects, through: :observing_projects, source: :project
 
   has_and_belongs_to_many :people_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy
@@ -122,10 +124,20 @@ class User < ApplicationRecord
     managers.uniq
   end
 
+  def project_observer?
+    self.observing_projects.count > 0
+  end
+
   def project_participant?(employee)
     projects = self.managed_projects.map(&:id)
-    @employees ||= Schedule.where("project_id IN (?)", projects).pluck(:user_id)
-    @project_participant ||= @employees.include?(employee.id)
+    employees = Schedule.where("project_id IN (?)", projects).pluck(:user_id)
+    employees.include?(employee.id)
+  end
+
+  def observed_project_participant?(employee)
+    projects = self.observed_projects.map(&:id)
+    employees = Schedule.where("project_id IN (?)", projects).pluck(:user_id)
+    employees.include?(employee.id)
   end
 
   def self.query(params, includes = nil)
@@ -138,11 +150,15 @@ class User < ApplicationRecord
   end
 
   def project_manager?
-    @project_manager ||= self.managed_projects.count > 0
+    self.managed_projects.count > 0
   end
 
   def is_manager?(project)
     project.manager == self
+  end
+
+  def is_observer?(project)
+    project.observers.include?(self)
   end
 
   def added_nuggets

@@ -83,4 +83,32 @@ class EmployeeTeamTest < ApplicationSystemTestCase
     # manager is redirected to his own profile
     assert_selector "h1", text: @manager.decorate.display_name
   end
+
+  test "project observer can see his team if he is not lead" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#employee-tabs", text: "Team"
+  end
+
+  test "project observer can see his project participant team" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:actor)
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Team"
+  end
+
+  test "project observer can not see team of other employee" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @manager
+    @employee = users(:admin)
+    visit page_url
+    # manager is redirected to his own profile
+    assert_selector "h1", text: @observer.decorate.display_name
+  end
 end

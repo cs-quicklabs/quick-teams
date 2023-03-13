@@ -16,7 +16,7 @@ gem "sprockets-rails", "3.4.2"
 gem "pg", "1.4.6"
 
 # Use Puma as the app server [https://github.com/puma/puma]
-gem "puma", "6.1.0"
+gem "puma", "6.1.1"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", "1.1.1"
@@ -25,7 +25,7 @@ gem "jsbundling-rails", "1.1.1"
 gem "cssbundling-rails", "1.1.2"
 
 # Hotwire's SPA-like page accelerator [https://github.com/hotwired/turbo-rails]
-gem "turbo-rails", "1.3.3"
+gem "turbo-rails", "1.4.0"
 
 # Hotwire's modest JavaScript framework [https://github.com/hotwired/stimulus-rails]
 gem "stimulus-rails", "1.2.1"
@@ -85,6 +85,10 @@ group :development do
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem "listen", "~> 3.3"
   gem "rack-mini-profiler", "~> 3.0"
+  # For memory profiling
+  gem "memory_profiler"
+  # For call-stack profiling flamegraphs
+  gem "stackprof"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "rufo"

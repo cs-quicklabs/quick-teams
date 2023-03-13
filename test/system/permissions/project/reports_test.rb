@@ -108,4 +108,45 @@ class ProjectReportsTest < ApplicationSystemTestCase
     visit page_url
     assert_no_selector "div#report-detail"
   end
+
+  test "observer can see project reports" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Reports"
+    assert_selector "div#report-list"
+    assert_selector "div#new_report"
+  end
+
+  test "observer can see project report details" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_detail_url
+    assert_selector "div#report-detail"
+    # can comment on report
+    assert_selector "textarea#comment"
+  end
+
+  test "observer can not see project reports of other projects" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:managed)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Reports"
+  end
+
+  test "observer can not see project report details of different project" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:managed)
+    @report = @project.reports.first
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#report-detail"
+  end
 end

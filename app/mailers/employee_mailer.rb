@@ -22,4 +22,16 @@ class EmployeeMailer < ApplicationMailer
     @role = params[:role]
     mail(to: @employee.email, subject: "Role Changed", template_path: "mailers/employee_mailer")
   end
+
+  def observer_email
+    @employee = params[:employee]
+    @project = params[:project]
+    mail(to: @employee.email, subject: "You have been added as a project observer", template_path: "mailers/employee_mailer")
+  end
+
+  def observer_removed_email
+    @employee = params[:employee]
+    @project = params[:project]
+    mail(to: @employee.email, subject: "You have been removed as a project observer", template_path: "mailers/employee_mailer")
+  end
 end

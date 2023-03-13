@@ -100,4 +100,36 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     assert_selector "h1", text: @manager.decorate.display_name
     assert_selector "div#employee-tabs", text: "KPIs"
   end
+
+  test "project observer can see his KPIs" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    visit page_url
+    take_screenshot
+    assert_equal @survey.account.name, "Crownstack technologies"
+    assert_selector "div#employee-tabs", text: "KPIs"
+  end
+
+  test "project observer can see his project participants KPIs" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:actor)
+    visit subordinate_page_url
+    take_screenshot
+    assert_equal @survey.account.name, "Crownstack technologies"
+    assert_selector "div#employee-tabs", text: "KPIs"
+  end
+
+  test "project observer can not see someone elseses KPIs" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:admin)
+    visit page_url
+    take_screenshot
+    assert_selector "h1", text: @observer.decorate.display_name
+    assert_selector "div#employee-tabs", text: "KPIs"
+  end
 end

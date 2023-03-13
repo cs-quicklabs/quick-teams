@@ -205,4 +205,60 @@ class EmployeeSurveyAttemptsTest < ApplicationSystemTestCase
     visit attempt_preview_url
     assert_selector "h1", text: manager.decorate.display_name
   end
+
+  test "project observer can see his own attempts" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @employee = observer
+    visit attempts_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Surveys"
+    assert_text "Take a Survey"
+  end
+
+  test "project observer can see his attempt previews" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @attempt = survey_attempts(:fourteen)
+    visit attempt_preview_url
+    assert_selector "h3", text: @attempt.survey.name
+  end
+
+  test "project observer can not see other's attempts" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @employee = users(:admin)
+    visit attempts_url
+    assert_selector "h1", text: observer.decorate.display_name
+  end
+
+  test "project observer can not see other's attempts previews" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @attempt = survey_attempts(:eleven)
+    visit attempt_preview_url
+    assert_selector "h1", text: observer.decorate.display_name
+  end
+
+  test "project observer can see attempt previews of his project participants" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @attempt = survey_attempts(:fifteen)
+    visit attempt_preview_url
+    assert_selector "h3", text: @attempt.survey.name
+  end
+
+  test "project observer can not see attempt previews of other project participant" do
+    sign_out @employee
+    observer = users(:abram)
+    sign_in observer
+    @attempt = survey_attempts(:eleven)
+    visit attempt_preview_url
+    assert_selector "h1", text: observer.decorate.display_name
+  end
 end
