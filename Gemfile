@@ -51,7 +51,7 @@ gem "acts_as_tenant"
 gem "aws-sdk-s3", "~> 1.119"
 gem "bootsnap", "1.16.0", require: false
 gem "draper"
-gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
+gem "mimemagic", "0.4.3"
 gem "newrelic_rpm"
 gem "pagy"
 gem "rails-patterns"
