@@ -4,8 +4,8 @@ class SearchController < BaseController
 
     like_keyword = "%#{params[:q]}%".split(/\s+/)
     @employees = users_matching_name(like_keyword)
-    @projects = Project.active.where("name iLIKE ANY ( array[?] )", like_keyword).limit(4).order(:name)
-
+    @projects = projects_matching_name(like_keyword)
+    @jobs = Job.where("name iLIKE ANY ( array[?] )", like_keyword).limit(3).order(:name)
     render layout: false
   end
 
@@ -84,10 +84,10 @@ class SearchController < BaseController
   def users_matching_name(like_keyword)
     User.for_current_account.active.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
       .or(User.for_current_account.active.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
-      .limit(4).order(:first_name)
+      .limit(3).order(:first_name)
   end
 
   def projects_matching_name(like_keyword)
-    Project.active.where("name iLIKE ANY ( array[?] )", like_keyword).limit(4).order(:name)
+    Project.active.where("name iLIKE ANY ( array[?] )", like_keyword).limit(3).order(:name)
   end
 end

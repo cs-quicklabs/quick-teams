@@ -89,6 +89,10 @@
           <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
         </div>
       </div>
+    <% else %>
+      <div class="flex  items-center justify-center w-full h-1/4">
+        <p class="mt-2 max-w-4xl text-sm text-gray-500 ">No Schedules Found</p>
+      </div>
     <% end %>
   </div>
 </div>
