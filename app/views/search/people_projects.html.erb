@@ -25,7 +25,7 @@
     </li>
   </a>
 <% end %>
-<% if @projects.size > 0 && @employees.size > 0  && @jobs.size > 0 %>
+<% if (@projects.size > 0 or @employees.size > 0) and @jobs.size > 0 %>
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="relative">
     <div class="absolute inset-0 flex items-center" aria-hidden="true">
