@@ -42,7 +42,7 @@ gem "valid_url"
 gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
-gem "sidekiq", "7.0.6"
+gem "sidekiq", "7.0.7"
 gem "sidekiq-scheduler", "5.0.2"
 gem "sinatra", "3.0.5", require: nil
 
@@ -90,7 +90,7 @@ group :development do
   # For call-stack profiling flamegraphs
   gem "stackprof"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "spring"
+#   gem "spring"
   gem "rufo"
   gem "htmlbeautifier"
 end
@@ -102,3 +102,5 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
 end
+
+gem "action-cable-redis-backport", "~> 1"

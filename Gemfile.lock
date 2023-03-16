@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    action-cable-redis-backport (1.0.0)
+      actioncable (>= 5.0, < 7.1)
     actioncable (7.0.4.3)
       actionpack (= 7.0.4.3)
       activesupport (= 7.0.4.3)
@@ -292,7 +294,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sidekiq (7.0.6)
+    sidekiq (7.0.7)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -306,7 +308,6 @@ GEM
       rack (~> 2.2, >= 2.2.4)
       rack-protection (= 3.0.5)
       tilt (~> 2.0)
-    spring (4.1.1)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -374,6 +375,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  action-cable-redis-backport (~> 1)
   acts_as_tenant
   aws-sdk-s3 (~> 1.119)
   bootsnap (= 1.16.0)
@@ -409,10 +411,9 @@ DEPENDENCIES
   rexml
   rufo
   selenium-webdriver
-  sidekiq (= 7.0.6)
+  sidekiq (= 7.0.7)
   sidekiq-scheduler (= 5.0.2)
   sinatra (= 3.0.5)
-  spring
   sprockets-rails (= 3.4.2)
   stackprof
   stimulus-rails (= 1.2.1)

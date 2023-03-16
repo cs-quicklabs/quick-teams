@@ -49,6 +49,7 @@ class ProjectTodosTest < ApplicationSystemTestCase
     visit page_url
     todo = @project.todos.first
 
+    binding.irb
     find("tr", id: dom_id(todo)).check "completed"
     take_screenshot
   end
