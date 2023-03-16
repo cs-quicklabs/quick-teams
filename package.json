@@ -16,11 +16,14 @@
     "stimulus_reflex": "3.5.0-pre10",
     "tailwind-capitalize-first-letter": "1.0.4",
     "tailwindcss": "3.2.7",
-    "trix": "2.0.4"
+    "trix": "2.0.4",
+    "cable_ready": "5.0.0-pre10",
+    "esbuild-rails": "^1.0.3"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
-    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css"
+    "build": "node esbuild.config.mjs",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css",
+    "build:default": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds"
   },
   "engines": {
     "node": "19.0.1",

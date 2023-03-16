@@ -7,4 +7,6 @@ import '@tailwindcss/line-clamp'
 import '@tailwindcss/forms'
 import "@hotwired/turbo-rails"
 import "./trix-editor-overrides"
+import "./config"
+import "./channels"
 
