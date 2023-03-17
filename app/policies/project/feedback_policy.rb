@@ -6,7 +6,7 @@ class Project::FeedbackPolicy < Project::BaseProjectPolicy
 
   def show?
     project = record.first
-    user.admin? or user.is_manager?(project)
+    user.admin? or user.is_manager?(project) or user.is_observer?(project)
   end
 
   def edit?
@@ -15,7 +15,7 @@ class Project::FeedbackPolicy < Project::BaseProjectPolicy
     return false if project.archived?
     return true if user.admin?
 
-    user.is_manager?(project) and feedback.user == user
+    (user.is_observer?(project) or user.is_manager?(project)) and feedback.user == user
   end
 
   def show_add_feedback_form?

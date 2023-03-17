@@ -3,11 +3,9 @@ class SearchController < BaseController
     authorize :search
 
     like_keyword = "%#{params[:q]}%".split(/\s+/)
-    @employees = User.for_current_account.active.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
-      .or(User.for_current_account.active.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
-      .limit(4).order(:first_name)
-    @projects = Project.active.where("name iLIKE ANY ( array[?] )", like_keyword).limit(4).order(:name)
-
+    @employees = users_matching_name(like_keyword)
+    @projects = projects_matching_name(like_keyword)
+    @jobs = Job.where("name iLIKE ANY ( array[?] )", like_keyword).limit(3).order(:name)
     render layout: false
   end
 
@@ -36,11 +34,10 @@ class SearchController < BaseController
   def documents
     authorize :search
 
-    # like_keyword = "%#{params[:q]}%"
-    # @kbs = Kb.where("document ILIKE ?", like_keyword)
-    #   .limit(5).order(:document)
+    like_keyword = "%#{params[:q]}%"
+    @kbs = Kb.where("document ILIKE ?", like_keyword)
+      .limit(5).order(:document)
 
-    @kbs = Kb.search_title(params[:q])
     render layout: false
   end
 
@@ -56,9 +53,7 @@ class SearchController < BaseController
     authorize :search
 
     like_keyword = "%#{params[:q]}%".split(/\s+/)
-    @employees = User.for_current_account.inactive.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
-      .or(User.for_current_account.inactive.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
-      .limit(4).order(:first_name)
+    @employees = users_matching_name(like_keyword)
     render layout: false
   end
 
@@ -67,5 +62,32 @@ class SearchController < BaseController
     like_keyword = "%#{params[:q]}%".split(/\s+/)
     @projects = Project.archived.where("name iLIKE ANY ( array[?] )", like_keyword).limit(4).order(:name)
     render layout: false
+  end
+
+  def users
+    authorize :search
+    like_keyword = "%#{params[:q]}%".split(/\s+/)
+    @project = Project.find(params[:project_id])
+    @employees = users_matching_name(like_keyword)
+
+    render layout: false
+  end
+
+  def projects
+    authorize :search
+    like_keyword = "%#{params[:q]}%".split(/\s+/)
+    @employee = User.find(params[:user_id])
+    @projects = projects_matching_name(like_keyword) - @employee.observed_projects
+    render layout: false
+  end
+
+  def users_matching_name(like_keyword)
+    User.for_current_account.active.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
+      .or(User.for_current_account.active.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
+      .limit(3).order(:first_name)
+  end
+
+  def projects_matching_name(like_keyword)
+    Project.active.where("name iLIKE ANY ( array[?] )", like_keyword).limit(3).order(:name)
   end
 end

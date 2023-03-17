@@ -132,4 +132,44 @@ class EmployeeScheduleTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Schedules"
     assert_no_selector "form#new_schedule"
   end
+
+  test "project observer can see his schedule" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Schedules"
+    assert_no_selector "form#new_schedule"
+    @employee.schedules.each do |schedule|
+      assert_no_selector "turbo-frame##{dom_id(schedule)}", text: "Edit"
+      assert_no_selector "turbo-frame##{dom_id(schedule)}", text: "Delete"
+    end
+  end
+
+  test "project observer see schedule of his project participants" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:actor)
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Schedules"
+    assert_no_selector "form#new_schedule"
+    @employee.schedules.each do |schedule|
+      assert_no_selector "turbo-frame##{dom_id(schedule)}", text: "Edit"
+      assert_no_selector "turbo-frame##{dom_id(schedule)}", text: "Delete"
+    end
+  end
+
+  test "project observer can not see schedule of other employees" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @observer.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Schedules"
+    assert_no_selector "form#new_schedule"
+  end
 end

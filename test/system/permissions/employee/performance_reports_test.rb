@@ -42,4 +42,11 @@ class EmployeesPerformanceReporstTest < ApplicationSystemTestCase
     sign_in @user
     assert_no_text "Reports"
   end
+
+  test "Project observer can not see Reports Download PDF" do
+    sign_out @employee
+    @user = users(:abram)
+    sign_in @user
+    assert_no_text "Reports"
+  end
 end

@@ -30,6 +30,7 @@ actor:
   permission: admin
   sign_in_count: 1
   email_enabled: true
+  skills: ruby, python
 
 abram:
   first_name: Abram
@@ -44,6 +45,7 @@ abram:
   confirmed_at: 2021-03-18
   email_enabled: true
   sign_in_count: 1
+  skills: ruby, python
 
 inactive:
   first_name: Inactive

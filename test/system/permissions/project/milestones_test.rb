@@ -125,4 +125,55 @@ class ProjectMilestonesTest < ApplicationSystemTestCase
     visit page_url
     assert_no_selector "div#milestone-detail"
   end
+
+  test "observer can see project milestones" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_url
+    assert_selector "div#project-tabs", text: "Milestones"
+    assert_selector "form#new_goal"
+    milestones = @project.milestones
+    milestones.each do |milestone|
+      if milestone.user_id == @employee.id
+        assert_selector "tr##{dom_id(milestone)}", text: "Edit"
+        assert_selector "tr##{dom_id(milestone)}", text: "Delete"
+      else
+        assert_no_selector "tr##{dom_id(milestone)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(milestone)}", text: "Delete"
+      end
+    end
+  end
+
+  test "observer can see project milestone details" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:one)
+    sign_in @employee
+    visit page_detail_url
+    assert_selector "div#milestone-detail"
+
+    # can comment on milestone
+    assert_selector "div#add"
+  end
+
+  test "observer can not see project milestones for different project" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:managed)
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#project-tabs", text: "Milestones"
+  end
+
+  test "observer can not see project milestone details of different project" do
+    sign_out @employee
+    @employee = users(:abram)
+    @project = projects(:managed)
+    @milestone = @project.milestones.first
+    sign_in @employee
+    visit page_url
+    assert_no_selector "div#milestone-detail"
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_23_115323) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_24_052624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -326,6 +326,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_115323) do
     t.bigint "account_id", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "project_observers", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_observers_on_project_id"
+    t.index ["user_id"], name: "index_project_observers_on_user_id"
   end
 
   create_table "project_statuses", force: :cascade do |t|
@@ -692,6 +701,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_115323) do
   add_foreign_key "pinned_spaces", "spaces"
   add_foreign_key "pinned_spaces", "users"
   add_foreign_key "preferences", "accounts", name: "preferences_account_id_fkey"
+  add_foreign_key "project_observers", "projects"
+  add_foreign_key "project_observers", "users"
   add_foreign_key "project_statuses", "accounts", name: "project_statuses_account_id_fkey"
   add_foreign_key "project_statuses", "accounts", name: "project_statuses_account_id_fkey1"
   add_foreign_key "project_tags", "accounts", name: "project_tags_account_id_fkey"

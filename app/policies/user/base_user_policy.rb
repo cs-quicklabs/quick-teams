@@ -1,11 +1,11 @@
 class User::BaseUserPolicy < ApplicationPolicy
   def index?
-    is_admin? or is_project_manager? or is_team_lead? or self?
+    is_admin? or is_project_manager? or is_team_lead? or self? or is_project_observer?
   end
 
   def create?
     return false unless is_active?
-    is_admin? or is_project_manager? or is_team_lead? or self?
+    is_admin? or is_project_manager? or is_team_lead? or self? or is_project_observer?
   end
 
   def edit?
@@ -48,5 +48,9 @@ class User::BaseUserPolicy < ApplicationPolicy
 
   def subordinate?
     user.subordinate?(record.first)
+  end
+
+  def is_project_observer?
+    user.project_observer? and user.observed_project_participant?(record.first)
   end
 end

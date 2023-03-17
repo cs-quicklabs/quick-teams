@@ -265,4 +265,81 @@ class EmployeeFeedbacksTest < ApplicationSystemTestCase
     visit page_detail_url
     assert_selector "h1", text: @manager.decorate.display_name
   end
+
+  test "project observer can see his feedbacks" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Feedbacks"
+    # can not create a feedback for himself
+    assert_no_selector "form#new_feedback"
+    # can not edit, delete feedback for himself
+    @employee.feedbacks.each do |feedback|
+      if feedback.published?
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Edit"
+        assert_no_selector "tr##{dom_id(feedback)}", text: "Delete"
+      else
+        assert_no_selector "tr##{dom_id(feedback)}"
+      end
+    end
+  end
+
+  test "project observer can see his project participants feedback" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:actor)
+    visit page_url
+    assert_selector "h1", text: @employee.decorate.display_name
+    assert_selector "div#employee-tabs", text: "Feedbacks"
+    # can create a feedback for subordinate
+    assert_selector "form#new_feedback"
+    # can edit feedbck for subordinates
+    # can delete feedback create by him
+    @employee.feedbacks.each do |feedback|
+      assert_selector "tr##{dom_id(feedback)}", text: "Edit"
+      if feedback.user == @manager
+        assert_selector "tr##{dom_id(feedback)}", text: "Delete"
+      end
+    end
+  end
+
+  test "project observer can not see someone elsese feedback" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:admin)
+    visit page_url
+    assert_selector "h1", text: @observer.decorate.display_name
+  end
+
+  test "project observer can see his feedback details" do
+    sign_out @employee
+    @employee = users(:abram)
+    sign_in @employee
+    visit page_detail_url
+    assert_selector "h3", text: @employee.feedbacks.first.title
+    assert_no_selector "button", text: "Publish"
+  end
+
+  test "project observer can see his project participants feedback details" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:actor)
+    visit page_detail_url
+    assert_selector "h3", text: @employee.feedbacks.first.title
+    assert_no_selector "button", text: "Publish"
+  end
+
+  test "project observer can not see someone elses feedback details" do
+    sign_out @employee
+    @observer = users(:abram)
+    sign_in @observer
+    @employee = users(:admin)
+    visit page_detail_url
+    assert_selector "h1", text: @observer.decorate.display_name
+  end
 end

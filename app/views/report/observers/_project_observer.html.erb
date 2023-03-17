@@ -1,0 +1,14 @@
+<tr id="<%= dom_id project %>">
+  <% project = project.decorate %>
+  <td class="table-cell  whitespace-nowrap items-center">
+    <a href="<%= project_about_index_path(project) %>" class="block hover:underline">
+      <%= project.display_name %>
+    </a>
+  </td>
+  <td class="w-full table-cell">
+    <span class="inline-flex flex-wrap">
+      <%= project.observers.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>
+    </a>
+  </span>
+</td>
+</tr>

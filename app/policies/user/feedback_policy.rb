@@ -3,14 +3,14 @@ class User::FeedbackPolicy < User::BaseUserPolicy
     feedback = record.last
     return false unless is_active? and not feedback.published?
     return true if is_admin?
-    return feedback.user == user if _is_team_lead? or _is_project_manager?
+    return feedback.user == user if _is_team_lead? or _is_project_manager? or is_project_observer?
     false
   end
 
   def edit?
     feedback = record.last
     return false unless is_active? and not feedback.published?
-    is_admin? or _is_team_lead? or _is_project_manager?
+    is_admin? or _is_team_lead? or _is_project_manager? or is_project_observer?
   end
 
   def comment?
@@ -21,12 +21,12 @@ class User::FeedbackPolicy < User::BaseUserPolicy
   end
 
   def create?
-    is_active? and (is_admin? or is_project_manager? or is_team_lead?)
+    is_active? and (is_admin? or is_project_manager? or is_team_lead? or is_project_observer?)
   end
 
   def show?
     employee = record.first
-    is_admin? or _is_team_lead? or _is_project_manager? or self?
+    is_admin? or _is_team_lead? or _is_project_manager? or self? or is_project_observer?
   end
 
   private

@@ -1,0 +1,48 @@
+  <main class="max-w-lg px-8 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
+  <%= render "shared/form_header", title: "Observed Projects", subtitle: "You can observe projects to get updates on their progress." %>
+  <% if policy([employee, :about]).add_observing_project? %>
+    <%= render "devise/shared/success_message", message: message %>
+    <div class="flex justify-center w-full lg:justify-end"   data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/projects?user_id=<%= employee.id %>" >
+      <div class="w-full ">
+        <div>
+          <label for="skill" class="block text-sm font-medium text-gray-700">Search to add project </label>
+          <div class="mt-1">
+            <input type="search" name="search" id="search-observers" class="form-text-field" data-nav-search-target="input">
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <ul data-nav-search-target="results">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <ul class="divide-y divide-gray-200 py-2 " id="observed-projects">
+    <% observed_projects.each do |project| %>
+      <%= turbo_frame_tag dom_id(project) do %>
+        <% project = project.decorate %>
+        <li class="border-b border-gray-200 py-4">
+          <div class="flex items-center  ">
+            <div class="flex items-center flex-1 min-w-0">
+              <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4 ">
+                <p class="text-sm font-medium text-gray-900 whitespace-nowrap ">  <%= project.display_name %></p>
+              </div>
+              <% if policy([project, :about]).destroy_observer? %>
+                <div class="flex justify-end mb-2">
+                  <%= link_to "Remove", "/#{employee.account_id}/employees/#{employee.id}/observers/#{project.id}", class: "btn-inline-delete", data: {
+                                                                                                                      controller: "confirmation",
+                                                                                                                      "turbo-method": :delete,
+                                                                                                                      "confirmation-message-value": "Are you sure you want to remove this observer?",
+                                                                                                                      action: "confirmation#confirm", target: "_top",
+                                                                                                                    } %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</main>

@@ -1,0 +1,7 @@
+<% @employees.each do |employee| %>
+  <a href="<%= employee_team_path(employee) %>">
+    <li role="option"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" data-reflex="click->ProjectObservers#add" data-employee-id=<%= employee.id %>  data-project-id=<%= @project.id %> id="project-observer">
+      <%= employee.decorate.display_name %> (<%= employee.job.name if !employee.job.blank? %>)
+    </li>
+  </a>
+<% end %>

@@ -14,6 +14,14 @@
       </label>
       <%= form.collection_select(:manager_id, User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Manager" }, :selected => project.manager_id, :class => "form-text-field mt-1") %>
     </div>
+    <div>
+      <label for="manager" class="block mt-4 text-sm font-medium text-gray-700">
+        Select Observers
+      </label>
+      <select name="project[observers][]" id="project_observers" multiple="multiple" data-controller="slimselect" class="form-text-field mt-1">
+        <%= options_for_select(User.all_users.decorate.map { |u| [u.display_name, u.id] }, project.observers.pluck(:id)) %>
+      </select>
+    </div>
     <div class="flex items-center justify-between">
       <div class="flex items-center">
         <%= form.check_box :billable, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
