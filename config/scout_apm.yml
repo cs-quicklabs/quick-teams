@@ -22,7 +22,7 @@ common: &defaults
   #              for more information.
   # - Default: false
   # - Valid Options: true, false
-  # use_prepend: true
+   use_prepend: true
 
   # name: Application name in APM Web UI
   # - Default: the application names comes from the Rails or Sinatra class name
