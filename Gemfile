@@ -42,7 +42,7 @@ gem "valid_url"
 gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
-gem "sidekiq", "7.0.6"
+gem "sidekiq", "7.0.7"
 gem "sidekiq-scheduler", "5.0.2"
 gem "sinatra", "3.0.5", require: nil
 
