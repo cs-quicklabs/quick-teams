@@ -46,6 +46,8 @@ gem "sidekiq", "7.0.6"
 gem "sidekiq-scheduler", "5.0.2"
 gem "sinatra", "3.0.5", require: nil
 
+gem 'scout_apm'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"
 gem "aws-sdk-s3", "~> 1.119"
@@ -72,7 +74,6 @@ gem "devise-pwned_password"
 gem "pay", "6.3.1"
 gem "stripe", "~> 8.3"
 
-gem 'scout_apm'
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
