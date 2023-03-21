@@ -9,7 +9,7 @@
     "@tailwindcss/forms": "0.5.3",
     "@tailwindcss/line-clamp": "0.4.2",
     "autoprefixer": "10.4.13",
-    "esbuild": "0.17.11",
+    "esbuild": "0.17.12",
     "postcss": "8.4.21",
     "slim-select": "2.3.3",
     "stimulus-scroll-to": "4.1.0",
