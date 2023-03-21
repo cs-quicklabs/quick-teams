@@ -326,16 +326,16 @@ GEM
     stackprof (0.2.23)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    stimulus_reflex (3.5.0.pre9)
-      actioncable (>= 5.2)
-      actionpack (>= 5.2)
-      actionview (>= 5.2)
-      activesupport (>= 5.2)
-      cable_ready (>= 5.0.0.pre9)
-      nokogiri
-      rack
-      railties (>= 5.2)
-      redis
+    stimulus_reflex (3.5.0.pre10)
+      actioncable (>= 5.2, < 8)
+      actionpack (>= 5.2, < 8)
+      actionview (>= 5.2, < 8)
+      activesupport (>= 5.2, < 8)
+      cable_ready (>= 5.0.0.pre10)
+      nokogiri (~> 1.0)
+      rack (~> 2.0)
+      railties (>= 5.2, < 8)
+      redis (>= 4.0, < 6.0)
     stripe (8.3.0)
     thor (1.2.1)
     thread-local (1.1.0)
@@ -426,7 +426,7 @@ DEPENDENCIES
   sprockets-rails (= 3.4.2)
   stackprof
   stimulus-rails (= 1.2.1)
-  stimulus_reflex (= 3.5.0.pre9)
+  stimulus_reflex (= 3.5.0.pre10)
   stripe (~> 8.3)
   turbo-rails (= 1.4.0)
   tzinfo-data
