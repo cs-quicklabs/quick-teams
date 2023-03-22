@@ -31,7 +31,7 @@ gem "turbo-rails", "1.4.0"
 gem "stimulus-rails", "1.2.1"
 
 # Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
-gem "stimulus_reflex", "3.5.0.pre10"
+gem "stimulus_reflex", "3.5.0.pre8"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", "5.0.6"
@@ -71,6 +71,9 @@ gem "devise-pwned_password"
 # Payments
 gem "pay", "6.3.1"
 gem "stripe", "~> 8.3"
+
+gem 'scout_apm'
+
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -82,6 +82,7 @@ GEM
       request_store (>= 1.0.5)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.716.0)
     aws-sdk-core (3.170.0)
@@ -108,11 +109,8 @@ GEM
       msgpack (~> 1.2)
     builder (3.2.4)
     byebug (11.1.3)
-    cable_ready (5.0.0.pre10)
-      actionpack (>= 5.2)
-      actionview (>= 5.2)
-      activesupport (>= 5.2)
-      railties (>= 5.2)
+    cable_ready (5.0.0.pre8)
+      rails (>= 5.2)
       thread-local (>= 1.1.0)
     capybara (3.38.0)
       addressable
@@ -220,6 +218,8 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (6.0.2)
+    parser (3.2.1.1)
+      ast (~> 2.4.1)
     pay (6.3.1)
       rails (>= 6.0.0)
     pg (1.4.6)
@@ -292,6 +292,8 @@ GEM
     rufo (0.15.1)
     rufus-scheduler (3.8.2)
       fugit (~> 1.1, >= 1.1.6)
+    scout_apm (5.3.3)
+      parser
     selenium-webdriver (4.8.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -321,16 +323,12 @@ GEM
     stackprof (0.2.23)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    stimulus_reflex (3.5.0.pre10)
-      actioncable (>= 5.2, < 8)
-      actionpack (>= 5.2, < 8)
-      actionview (>= 5.2, < 8)
-      activesupport (>= 5.2, < 8)
-      cable_ready (>= 5.0.0.pre10)
-      nokogiri (~> 1.0)
-      rack (~> 2.0)
-      railties (>= 5.2, < 8)
-      redis (>= 4.0, < 6.0)
+    stimulus_reflex (3.5.0.pre8)
+      cable_ready (= 5.0.0.pre8)
+      nokogiri
+      rack
+      rails (>= 5.2)
+      redis
     stripe (8.3.0)
     thor (1.2.1)
     thread-local (1.1.0)
@@ -412,6 +410,7 @@ DEPENDENCIES
   redis (= 5.0.6)
   rexml
   rufo
+  scout_apm
   selenium-webdriver
   sidekiq (= 7.0.6)
   sidekiq-scheduler (= 5.0.2)
@@ -420,7 +419,7 @@ DEPENDENCIES
   sprockets-rails (= 3.4.2)
   stackprof
   stimulus-rails (= 1.2.1)
-  stimulus_reflex (= 3.5.0.pre10)
+  stimulus_reflex (= 3.5.0.pre8)
   stripe (~> 8.3)
   turbo-rails (= 1.4.0)
   tzinfo-data
