@@ -46,8 +46,6 @@ gem "sidekiq", "7.0.7"
 gem "sidekiq-scheduler", "5.0.2"
 gem "sinatra", "3.0.5", require: nil
 
-gem 'scout_apm'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"
 gem "aws-sdk-s3", "~> 1.119"
