@@ -82,7 +82,6 @@ GEM
       request_store (>= 1.0.5)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.716.0)
     aws-sdk-core (3.170.0)
@@ -221,8 +220,6 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (6.0.2)
-    parser (3.2.1.1)
-      ast (~> 2.4.1)
     pay (6.3.1)
       rails (>= 6.0.0)
     pg (1.4.6)
@@ -295,8 +292,6 @@ GEM
     rufo (0.15.1)
     rufus-scheduler (3.8.2)
       fugit (~> 1.1, >= 1.1.6)
-    scout_apm (5.3.3)
-      parser
     selenium-webdriver (4.8.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -417,7 +412,6 @@ DEPENDENCIES
   redis (= 5.0.6)
   rexml
   rufo
-  scout_apm
   selenium-webdriver
   sidekiq (= 7.0.7)
   sidekiq-scheduler (= 5.0.2)
