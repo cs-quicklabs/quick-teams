@@ -31,7 +31,7 @@ gem "turbo-rails", "1.4.0"
 gem "stimulus-rails", "1.2.1"
 
 # Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
-gem "stimulus_reflex", "3.5.0.pre8"
+gem "stimulus_reflex", "3.5.0.pre10"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", "5.0.6"
