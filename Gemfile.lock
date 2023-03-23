@@ -82,6 +82,8 @@ GEM
       request_store (>= 1.0.5)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    appsignal (3.3.7)
+      rack
     aws-eventstream (1.2.0)
     aws-partitions (1.716.0)
     aws-sdk-core (3.170.0)
@@ -212,7 +214,6 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    newrelic_rpm (9.0.0)
     nio4r (2.5.8)
     nokogiri (1.14.2-x86_64-darwin)
       racc (~> 1.4)
@@ -379,6 +380,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_tenant
+  appsignal
   aws-sdk-s3 (~> 1.119)
   bootsnap (= 1.16.0)
   byebug
@@ -399,7 +401,6 @@ DEPENDENCIES
   listen (~> 3.3)
   memory_profiler
   mimemagic!
-  newrelic_rpm
   nokogiri (~> 1.14)
   pagy
   pay (= 6.3.1)
