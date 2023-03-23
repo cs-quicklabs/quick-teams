@@ -54,7 +54,7 @@ class SearchController < BaseController
 
     like_keyword = "%#{params[:q]}%".split(/\s+/)
     @employees = User.for_current_account.inactive.where("first_name iLIKE ANY ( array[?] )", like_keyword).includes(:job)
-      .or(User.for_current_account.active.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
+      .or(User.for_current_account.inactive.where("last_name iLIKE ANY ( array[?] )", like_keyword).includes(:job))
       .order(:first_name).limit(4)
     render layout: false
   end
