@@ -35,13 +35,3 @@ application.register("scroll-to", ScrollToController)
 
 import SwapController from "./swap_controller"
 application.register("swap", SwapController)
-
-import StimulusReflex from 'stimulus_reflex'
-import consumer from '../channels/consumer'
-import controller from '../controllers/application_controller'
-import CableReady from 'cable_ready'
-
-StimulusReflex.initialize(application, { controller, isolate: true })
-CableReady.initialize({ consumer })
-application.consumer = consumer
-application.consumer = consumer

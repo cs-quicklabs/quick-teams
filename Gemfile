@@ -7,7 +7,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.0"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
-gem "rails", "7.0.4.2"
+gem "rails", "7.0.4.3"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", "3.4.2"
@@ -42,7 +42,7 @@ gem "valid_url"
 gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
-gem "sidekiq", "7.0.6"
+gem "sidekiq", "7.0.7"
 gem "sidekiq-scheduler", "5.0.2"
 gem "sinatra", "3.0.5", require: nil
 
@@ -73,7 +73,6 @@ gem "devise-pwned_password"
 # Payments
 gem "pay", "6.3.1"
 gem "stripe", "~> 8.3"
-
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
