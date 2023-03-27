@@ -69,7 +69,7 @@ gem "devise-pwned_password"
 
 # Payments
 gem "pay", "6.3.1"
-gem "stripe", "~> 8.3"
+gem "stripe", "~> 8.4"
 
 gem 'appsignal'
 
