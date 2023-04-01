@@ -2,7 +2,7 @@ class UpdateProject < Patterns::Service
   def initialize(project, params, observers)
     @project = project
     @params = params
-    @observers = observers.reject(&:blank?).map(&:to_i)
+    @observers = observers.reject(&:blank?) if observers
   end
 
   def call
@@ -21,7 +21,7 @@ class UpdateProject < Patterns::Service
 
   def add_observers
     project.observers.clear
-    project.observers << User.where("id IN (?)", observers)
+    project.observers << User.where("id IN (?)", observers) unless observers.blank?
   end
 
   attr_reader :project, :observers, :params
