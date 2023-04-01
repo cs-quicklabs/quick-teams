@@ -26,11 +26,11 @@ class RemoveSchedule < Patterns::Service
   end
 
   def add_event
-    employee.events.create(user: actor, action: "freed", action_for_context: "freed", trackable: schedule.project)
+    employee.events.create(user: actor, action: "freed", action_for_context: "freed", trackable: project)
   end
 
   def send_email
-    SchedulesMailer.with(employee: employee, project: schedule.project).relieved_email.deliver_later if deliver_email?
+    SchedulesMailer.with(employee: employee, project: project).relieved_email.deliver_later if deliver_email?
   end
 
   def deliver_email?
