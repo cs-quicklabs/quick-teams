@@ -71,7 +71,7 @@ gem "devise-pwned_password"
 gem "pay", "6.3.1"
 gem "stripe", "~> 8.3"
 
-gem 'appsignal'
+gem 'newrelic_rpm', "8.16.0"
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
