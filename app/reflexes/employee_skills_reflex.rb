@@ -23,6 +23,6 @@ class EmployeeSkillsReflex < ApplicationReflex
       employee.skills << skill
     end
     skills = Skill.order("lower(name) asc")
-    morph "#{dom_id(skill)}", render(partial: "employee/skills/skill", locals: { employee: employee, skill: skill, selected: employee.skills.include?(skill) })
+    morph "#skills", render(partial: "employee/skills/skill", locals: { employee: employee, skills: Skill.all, employee_skills: employee.skills, user: current_user })
   end
 end
