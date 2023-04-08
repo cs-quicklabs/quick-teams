@@ -35,3 +35,6 @@ application.register("scroll-to", ScrollToController)
 
 import SwapController from "./swap_controller"
 application.register("swap", SwapController)
+
+import SelectSkillController from "./select_skill_controller"
+application.register("select-skill", SelectSkillController)

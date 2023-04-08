@@ -17,7 +17,12 @@
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
     <div class="py-10 px-6 " id="show-skills">
-      <%= render partial: "skill", locals: { employee: @employee, skills: @skills, employee_skills: @employee_skills } %>
+      <ul role="list" id="skills" class="grid grid-cols-2 gap-x-6 gap-y-4 lg:grid-cols-5 xl:gap-x-6" data-controller="select-skill">
+        <% @employee_skills.load %>
+        <% @skills.each do |skill| %>
+          <%= render partial: "skill", locals: { employee: @employee, skill: skill, selected: @employee_skills.include?(skill) } %>
+        <% end %>
+      </ul>
     </div>
   </main>
 </div>

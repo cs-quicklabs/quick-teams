@@ -70,6 +70,7 @@ Rails.application.routes.draw do
     resources :kpis, module: "employee", only: [:index, :show, :destroy] do
       get "stats", to: "kpis#stats", as: "stats"
     end
+    get "/skills/:id/add", to: "employee/skills#add_skill", as: "add_skill"
     delete "/observers/:observed_project_id", to: "employee/about#destroy_observed_project", as: "destroy_observed_project"
     get "/team", to: "employee/team#index"
     get "/timeline", to: "employee/timeline#index", as: "timeline"
