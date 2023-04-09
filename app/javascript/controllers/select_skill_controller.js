@@ -10,7 +10,7 @@ export default class extends Controller {
  toggleSelected(event) {
   event.preventDefault();
   const url = event.target.closest('a').href;
-  target=event.target.closest('li')
+  const target=event.target.closest('li')
   fetch(url, { headers: { "Accept": "text/vnd.turbo-stream.html" } })
   .then(response => response.text())
   .then(html => {
