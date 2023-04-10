@@ -63,7 +63,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "nokogiri", "~> 1.14"
 
 # devise gems
-gem "devise", "4.9.0"
+gem "devise", "4.9.2"
 gem "devise_invitable", "2.0.7"
 gem "devise-pwned_password"
 
