@@ -219,7 +219,7 @@ GEM
     nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (6.0.2)
+    pagy (6.0.3)
     pay (6.3.1)
       rails (>= 6.0.0)
     pg (1.4.6)
