@@ -5,6 +5,24 @@ export default class extends Controller {
     static targets = ["comment"]
 
     counter = 0;
+    connect() {
+        const url=window.location.href;
+        if (url.includes("#")) {
+            const target = this.element.querySelector(url.substring(url.indexOf("#")))
+            const comment=url.substring(url.lastIndexOf("_")+1)
+            const item=this.commentTargets.find((item) => item.dataset.commentId == comment)
+            if (item.classList.contains("hidden")) {
+                item.classList.remove("hidden")
+                item.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+             } else {
+                item.scrollIntoView({behavior: "smooth", block: "center", inline: "center"})
+                }
+        }
+        const hiddenComments = this.commentTargets.filter((comment) => comment.classList.contains("hidden"))
+         if (!hiddenComments.length > 0) {
+             document.getElementById("load-comments").style.display = "none"
+         }
+    }
     toggleComments(event) {
         event.preventDefault()
 
