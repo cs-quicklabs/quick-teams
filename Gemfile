@@ -42,7 +42,7 @@ gem "valid_url"
 gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
-gem "sidekiq", "7.0.7"
+gem "sidekiq", "7.0.8"
 gem "sidekiq-scheduler", "5.0.2"
 gem "sinatra", "3.0.5", require: nil
 
@@ -63,7 +63,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "nokogiri", "~> 1.14"
 
 # devise gems
-gem "devise", "4.9.0"
+gem "devise", "4.9.2"
 gem "devise_invitable", "2.0.7"
 gem "devise-pwned_password"
 
