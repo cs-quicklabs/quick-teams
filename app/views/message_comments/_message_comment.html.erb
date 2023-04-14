@@ -11,7 +11,7 @@
             <div class="space-x-2 flex whitespace-nowrap ">
               <span class="text-sm text-gray-500"><%= display_created_at(comment) %></span>
             </div>
-            <a href="<%=space_message_url(@space, @message)+ "##{dom_id(comment)}" %>" data-controller="copy-url" data-action="click->copy-url#copyUrl"
+            <a href="<%=space_message_path(comment.message.space, comment.message)+ "##{dom_id(comment)}" %>" data-controller="copy-url" data-action="click->copy-url#copyUrl"
               class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 text-xs font-medium text-gray-800 hover:underline">
               Copy Comment URL</a>
           </div>
