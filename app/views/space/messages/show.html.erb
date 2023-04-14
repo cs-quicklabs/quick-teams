@@ -13,7 +13,7 @@
   <section aria-labelledby="notes-title">
     <div class="bg-white sm:rounded-lg   ">
       <div class="relative h-max " >
-        <% if @comments.load.size < 10 %>
+        <% if @comments.load.size <= 10 %>
           <div >
             <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
               <%= render partial: "message_comments/message_comment", collection: @comments, as: :comment, cached: false %>

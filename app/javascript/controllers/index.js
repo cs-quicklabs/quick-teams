@@ -35,3 +35,6 @@ application.register("scroll-to", ScrollToController)
 
 import SwapController from "./swap_controller"
 application.register("swap", SwapController)
+
+import CopyUrlController from "./copy_url_controller"
+application.register("copy-url", CopyUrlController)
