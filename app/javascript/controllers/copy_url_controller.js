@@ -5,6 +5,6 @@ export default class extends Controller {
     event.preventDefault();
     const url = event.target.href;
     navigator.clipboard.writeText(url);
-    event.target.innerHTML = 'Copied!';
+    event.target.innerHTML = 'Copied to Clipboard!';
   }
 }

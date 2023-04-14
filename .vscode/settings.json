@@ -10,5 +10,8 @@
   "vscode-erb-beautify.executePath": "/Users/adityatrehan/.rvm/gems/ruby-3.1.2/wrappers/htmlbeautifier",
   "[gemfile]": {
     "editor.defaultFormatter": "jnbt.vscode-rufo"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   }
 }
