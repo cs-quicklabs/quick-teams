@@ -5,12 +5,14 @@ export default class extends Controller {
         const url = window.location.href;
         if (url.includes("#")) {
             const target = document.querySelector(url.substring(url.indexOf("#")));
-            const elementPosition = target.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({
-                top: elementPosition,
-                left: 0,
-                behavior: "smooth",
-            });
+            if (target) {
+                const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({
+                    top: elementPosition,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            }
         }
     }
 

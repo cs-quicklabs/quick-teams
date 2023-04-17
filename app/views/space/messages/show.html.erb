@@ -12,7 +12,7 @@
   <!-- Comments-->
   <section aria-labelledby="notes-title">
     <div class="bg-white sm:rounded-lg   ">
-      <div class="relative h-max " >
+      <div class="relative h-max " data-controller="comments">
         <% if @comments.load.size <= 10 %>
           <div >
             <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
@@ -21,7 +21,7 @@
           </div>
         <% else %>
           <% display_comments = @comments.last(10) %>
-          <div  data-controller="comments" >
+          <div   >
             <div class="relative py-6" id="load-comments">
               <div class="absolute inset-0 flex items-center" aria-hidden="true">
                 <div class="w-full border-t border-gray-300"></div>
