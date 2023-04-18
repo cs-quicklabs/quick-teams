@@ -112,16 +112,20 @@ class ThreadsTest < ApplicationSystemTestCase
     visit messages_page_url
     scroll_to(page.find("div", id: "comment-form"))
     click_on "Add a comment"
-    fill_in_rich_text_area "message_comment_body", with: "This is a comments"
-    click_on "Comment"
+    within "#add" do
+      fill_in_rich_text_area "message_comment_body", with: "This is a comments"
+      click_on "Comment"
+    end
     assert_text "This is a comment"
   end
 
   test "can not comment on a message with empty body" do
     visit messages_page_url
     click_on "Add a comment"
-    click_on "Comment"
-    assert_selector "div#error_explanation", text: "Body can't be blank"
+    within "#add" do
+      click_on "Comment"
+      assert_selector "div#error_explanation", text: "Body can't be blank"
+    end
   end
 
   test "can edit comment on message" do

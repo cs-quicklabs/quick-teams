@@ -1,5 +1,5 @@
-<%= turbo_frame_tag dom_id(comment) do %>
-  <li class="py-4 list-none border-b border-gray-200 px-6 hidden"  data-comments-target="comment" data-comment-id="<%= comment.id %>">
+<%= turbo_frame_tag dom_id(comment), data: { scroll_to_target: "comment", comment_id: comment.id } do %>
+  <li class="py-4 list-none border-b border-gray-200 px-6 hidden" >
     <div class=" w-full  flex justify-between">
       <div class="flex space-x-3 ">
         <div class="flex-shrink-0">
@@ -11,9 +11,9 @@
             <div class="space-x-2 flex whitespace-nowrap ">
               <span class="text-sm text-gray-500"><%= display_created_at(comment) %></span>
             </div>
-            <a href="<%=space_message_url(@space, @message)+ "##{dom_id(comment)}" %>" data-controller="copy-url" data-action="click->copy-url#copyUrl"
-              class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-xs font-medium text-indigo-800">
-              Copy Url</a>
+            <a href="<%= space_message_path(comment.message.space, comment.message) + "##{dom_id(comment)}" %>" data-controller="copy-url" data-action="click->copy-url#copyUrl"
+              class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 text-xs font-medium text-gray-800 hover:underline">
+              Copy Comment URL</a>
           </div>
           <div class="text-sm text-gray-700 ">
             <p class="whitespace-pre-wrap"><%= comment.body %></p>
