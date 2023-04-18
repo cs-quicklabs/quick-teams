@@ -35,3 +35,6 @@ application.register("swap", SwapController)
 
 import CopyUrlController from "./copy_url_controller"
 application.register("copy-url", CopyUrlController)
+
+import CommentsController from "./comments_controller"
+application.register("comments", CommentsController)

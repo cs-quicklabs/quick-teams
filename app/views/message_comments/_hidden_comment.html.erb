@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(comment), data: { scroll_to_target: "comment", comment_id: comment.id } do %>
+<%= turbo_frame_tag dom_id(comment), data: { comments_target: "comment", comment_id: comment.id } do %>
   <li class="py-4 list-none border-b border-gray-200 px-6 hidden" >
     <div class=" w-full  flex justify-between">
       <div class="flex space-x-3 ">
