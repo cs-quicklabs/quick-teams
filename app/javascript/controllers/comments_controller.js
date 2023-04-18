@@ -22,13 +22,12 @@ export default class extends Controller {
                 left: 0,
                 behavior: "smooth",
             });
-            const hiddenComments = this.commentTargets.filter((comment) => comment.querySelector("li").classList.contains("hidden"))
-            if (hiddenComments.length > 1) {
-                document.getElementById("load-comments").style.display = "block"
-            } else {
-                document.getElementById("load-comments").style.display = "none"
-            }
-
+        }
+        const hiddenComments = this.commentTargets.filter((comment) => comment.querySelector("li").classList.contains("hidden"))
+        if (hiddenComments.length > 1) {
+            document.getElementById("load-comments").style.display = "block"
+        } else {
+            document.getElementById("load-comments").style.display = "none"
         }
 
     }
