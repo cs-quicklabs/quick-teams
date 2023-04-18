@@ -40,19 +40,17 @@ export default class extends Controller {
             behavior: "smooth",
         });
     }
+
     toggleComments(event) {
         event.preventDefault()
         const hiddenComments = this.commentTargets.filter((comment) => comment.querySelector("li").classList.contains("hidden"))
         this.counter = 0
         hiddenComments.forEach((comments, index) => {
             if (index < this.counter + 10) {
-
                 comments.querySelector("li").classList.remove("hidden")
-
             } else {
                 comments.querySelector("li").classList.add("hidden")
             }
-
         });
         if (this.commentTargets.filter((comment) => comment.querySelector("li").classList.contains("hidden")).length < 1) {
             document.getElementById("load-comments").style.display = "none"
