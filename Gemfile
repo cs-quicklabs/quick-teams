@@ -31,7 +31,7 @@ gem "turbo-rails", "1.4.0"
 gem "stimulus-rails", "1.2.1"
 
 # Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
-gem "stimulus_reflex", "3.5.0.pre10"
+gem "stimulus_reflex", "3.5.0.rc2"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", "5.0.6"
@@ -44,7 +44,7 @@ gem "image_processing", "~> 1.12"
 # sidekiq gems, sinatra is used to build UI for /sidekiq
 gem "sidekiq", "7.0.8"
 gem "sidekiq-scheduler", "5.0.2"
-gem "sinatra", "3.0.5", require: nil
+gem "sinatra", "3.0.6", require: nil
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"
@@ -71,7 +71,7 @@ gem "devise-pwned_password"
 gem "pay", "6.3.1"
 gem "stripe", "~> 8.5"
 
-gem 'newrelic_rpm', "8.16.0"
+gem "newrelic_rpm", "8.16.0"
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -85,7 +85,7 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem "listen", "~> 3.3"
-  gem "rack-mini-profiler", "~> 3.0"
+  gem "rack-mini-profiler", "~> 3.1"
   # For memory profiling
   gem "memory_profiler"
   # For call-stack profiling flamegraphs

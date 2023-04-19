@@ -27,11 +27,14 @@ application.register('slimselect', StimulusSlimSelect)
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
-import CommentsController from "./comments_controller"
-application.register("comments", CommentsController)
-
 import ScrollToController from "./scroll_to_controller"
 application.register("scroll-to", ScrollToController)
 
 import SwapController from "./swap_controller"
 application.register("swap", SwapController)
+
+import CopyUrlController from "./copy_url_controller"
+application.register("copy-url", CopyUrlController)
+
+import CommentsController from "./comments_controller"
+application.register("comments", CommentsController)

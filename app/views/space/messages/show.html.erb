@@ -1,7 +1,6 @@
-</div>
 <!-- This example requires Tailwind CSS v2.0+ -->
 <main class="max-w-4xl px-4 pt-10 pb-20 mx-auto  lg:pb-20" >
-  <div class="px-4 py-4  sm:px-6 lg:px-8" id="message-header" data-scroll-to-target="message-header">
+  <div class="px-4 py-4  sm:px-6 lg:px-8" id="message-header" >
     <%= render partial: "shared/messages/title", locals: { message: @message } %>
   </div>
   <% cache @message do %>
@@ -12,32 +11,25 @@
   <!-- Comments-->
   <section aria-labelledby="notes-title">
     <div class="bg-white sm:rounded-lg   ">
-      <div class="relative h-max " >
-        <% if @comments.load.size < 10 %>
-          <div >
-            <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
-              <%= render partial: "message_comments/message_comment", collection: @comments, as: :comment, cached: false %>
-            </ul>
-          </div>
-        <% else %>
-          <% display_comments = @comments.last(10) %>
-          <div  data-controller="comments" >
-            <div class="relative py-6" id="load-comments">
-              <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                <div class="w-full border-t border-gray-300"></div>
-              </div>
-              <div class="relative flex justify-center">
-                <%= link_to "Show older Comments", "#", data: { action: "click->comments#toggleComments" }, class: "inline-flex items-center rounded-full border border-gray-300 bg-white px-4 py-1.5 text-sm font-medium leading-5 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
-              </div>
+      <div class="relative h-max " data-controller="comments">
+        <% display_comments = @comments.last(10) %>
+        <% hidden_comments = @comments - display_comments %>
+        <div   >
+          <div class="relative py-6" id="load-comments">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+              <div class="w-full border-t border-gray-300"></div>
             </div>
-            <ul role="list" >
-              <%= render partial: "message_comments/hidden_comment", collection: @comments - display_comments, as: :comment, cached: false %>
-            </ul>
+            <div class="relative flex justify-center">
+              <%= link_to "Show older Comments", "#", data: { action: "click->comments#toggleComments" }, class: "inline-flex items-center rounded-full border border-gray-300 bg-white px-4 py-1.5 text-sm font-medium leading-5 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+            </div>
           </div>
-          <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
-            <%= render partial: "message_comments/message_comment", collection: display_comments, as: :comment, cached: false %>
+          <ul role="list" >
+            <%= render partial: "message_comments/hidden_comment", collection: hidden_comments, as: :comment, cached: false %>
           </ul>
-        <% end %>
+        </div>
+        <ul role="list" class="relative z-0 divide-y divide-gray-200 " id="comments" >
+          <%= render partial: "message_comments/message_comment", collection: display_comments, as: :comment, cached: false %>
+        </ul>
       </div>
       <div  class="px-6" id="comment-form">
         <% if policy([@space, @message]).comment? %>
