@@ -213,14 +213,14 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     newrelic_rpm (8.16.0)
-    nio4r (2.5.8)
+    nio4r (2.5.9)
     nokogiri (1.14.3-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (6.0.3)
-    pay (6.3.1)
+    pay (6.3.3)
       rails (>= 6.0.0)
     pg (1.4.6)
     pg_search (2.3.6)
@@ -402,7 +402,7 @@ DEPENDENCIES
   newrelic_rpm (= 8.16.0)
   nokogiri (~> 1.14)
   pagy
-  pay (= 6.3.1)
+  pay (= 6.3.3)
   pg (= 1.4.6)
   pg_search
   puma (= 6.1.1)
