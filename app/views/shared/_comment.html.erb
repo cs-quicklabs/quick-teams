@@ -1,0 +1,23 @@
+<div id="modal">
+  <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"  data-controller="modal" data-action="keyup@document->modal#escClose">
+    <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" aria-hidden="true"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div class="inline-block px-4 pb-4 overflow-hidden text-left align-top transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="modal-header flex flex-shrink-0 items-center justify-between py-4 border-b border-gray-200 rounded-t-md">
+          <h5 class="text-xl font-medium  text-gray-800" id="exampleModalLongLabel">
+            Comment:
+          </h5>
+        </div>
+        <div class="mt-2 flex">
+          <span class="text-sm text-gray-500 py-4 text-left">
+            <%= attempt.decorate.comment %>
+          </span>
+        </div>
+        <button type="button" class="inline-flex justify-right w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm" data-action="modal#close">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
