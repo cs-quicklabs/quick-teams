@@ -19,6 +19,10 @@ class UserDecorator < Draper::Decorator
     display_name
   end
 
+  def display_name_job_title
+    "#{first_name} #{last_name}".titleize + " (" + display_job_title + ")".titleize
+  end
+
   def display_job_title
     job.nil? ? "" : "#{job.name}"
   end
