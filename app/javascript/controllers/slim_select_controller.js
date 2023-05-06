@@ -11,6 +11,8 @@ export default class extends Controller {
       select: this.element,
       settings: {
         placeholderText: 'Select People',
+        maxValuesShown: 20, // Default 20
+        maxValuesMessage: '{number} people selected', // Default '{number} selected'
       },
       ...this.optionsValue
     });
