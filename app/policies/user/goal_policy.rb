@@ -1,6 +1,6 @@
 class User::GoalPolicy < User::BaseUserPolicy
   def create?
-    is_active? and (is_admin? or is_project_manager? or is_team_lead? or is_project_observer?)
+    is_active? or is_admin? or is_project_manager? or is_team_lead? or is_project_observer?
   end
 
   def show?

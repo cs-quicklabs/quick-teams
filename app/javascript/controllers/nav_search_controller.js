@@ -9,6 +9,7 @@ export default class extends Controller {
     }
 
     connect() {
+        console.log("NavSearchController connected")
         this.resultsTarget.hidden = true
 
         this.inputTarget.setAttribute('autocomplete', 'off')
