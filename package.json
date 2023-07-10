@@ -10,7 +10,7 @@
     "@tailwindcss/line-clamp": "0.4.4",
     "autoprefixer": "10.4.13",
     "esbuild": "0.17.16",
-    "postcss": "8.4.21",
+    "postcss": "8.4.25",
     "slim-select": "2.3.3",
     "stimulus-scroll-to": "4.1.0",
     "stimulus_reflex": "3.5.0-pre10",
