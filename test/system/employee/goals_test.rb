@@ -8,7 +8,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     @actor = users(:actor)
     @account = @actor.account
     ActsAsTenant.current_tenant = @account
-    @employee = users(:regular)
+    @employee = users(:member)
     sign_in @actor
   end
 
@@ -77,6 +77,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
   test "can not show add goal when employee is inactive" do
     inactive_employee = users(:inactive)
     visit employee_goals_url(script_name: "/#{@account.id}", employee_id: inactive_employee.id)
+
     assert_no_text "Add New Goal"
     take_screenshot
   end

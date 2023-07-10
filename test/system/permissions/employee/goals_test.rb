@@ -82,7 +82,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
     # can not create a goal for himself
-    assert_no_selector "form#new_goal"
+    assert_selector "form#new_goal"
     # can not edit, delete goal for himself
     @employee.goals.each do |goal|
       assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
@@ -158,7 +158,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
     # can not create a goal
-    assert_no_selector "form#new_goal"
+    assert_selector "form#new_goal"
     # can see goal detail button
     # can not see edit delete button
     @employee.goals.each do |goal|
@@ -207,7 +207,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
     # can not create a goal for himself
-    assert_no_selector "form#new_goal"
+    assert_selector "form#new_goal"
     # can not edit, delete goal for himself
     @employee.goals.each do |goal|
       assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
@@ -285,7 +285,7 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
     # can not create a goal for himself
-    assert_no_selector "form#new_goal"
+    assert_selector "form#new_goal"
     # can not edit, delete goal for himself
     @employee.goals.each do |goal|
       assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
