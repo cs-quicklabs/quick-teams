@@ -16,7 +16,7 @@ gem "sprockets-rails", "3.4.2"
 gem "pg", "1.5.3"
 
 # Use Puma as the app server [https://github.com/puma/puma]
-gem "puma", "6.1.1"
+gem "puma", "6.3.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", "1.1.1"
@@ -43,8 +43,8 @@ gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
 gem "sidekiq", "7.0.8"
-gem "sidekiq-scheduler", "5.0.2"
-gem "sinatra", "3.0.5", require: nil
+gem "sidekiq-scheduler", "5.0.3"
+gem "sinatra", "3.0.6", require: nil
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"
@@ -68,7 +68,7 @@ gem "devise_invitable", "2.0.7"
 gem "devise-pwned_password"
 
 # Payments
-gem "pay", "6.3.1"
+gem "pay", "6.6.1"
 gem "stripe", "~> 8.5"
 
 gem "newrelic_rpm", "8.16.0"
