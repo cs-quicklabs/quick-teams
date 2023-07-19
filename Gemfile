@@ -7,16 +7,16 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.0"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
-gem "rails", "7.0.4.3"
+gem "rails", "7.0.6"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", "3.4.2"
 
 # Use postgresql as the database for Active Record [https://github.com/ged/ruby-pg]
-gem "pg", "1.4.6"
+gem "pg", "1.5.3"
 
 # Use Puma as the app server [https://github.com/puma/puma]
-gem "puma", "6.1.1"
+gem "puma", "6.3.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", "1.1.1"
@@ -43,7 +43,7 @@ gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
 gem "sidekiq", "7.0.8"
-gem "sidekiq-scheduler", "5.0.2"
+gem "sidekiq-scheduler", "5.0.3"
 gem "sinatra", "3.0.6", require: nil
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -85,7 +85,7 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem "listen", "~> 3.3"
-  gem "rack-mini-profiler", "~> 3.0"
+  gem "rack-mini-profiler", "~> 3.1"
   # For memory profiling
   gem "memory_profiler"
   # For call-stack profiling flamegraphs
