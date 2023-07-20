@@ -7,16 +7,20 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.0"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
-gem "rails", "7.0.4.3"
+gem "rails", "7.0.6"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails", "3.4.2"
 
 # Use postgresql as the database for Active Record [https://github.com/ged/ruby-pg]
-gem "pg", "1.4.6"
+gem "pg", "1.5.3"
 
 # Use Puma as the app server [https://github.com/puma/puma]
+<<<<<<< HEAD
 gem "puma", "6.2.1"
+=======
+gem "puma", "6.3.0"
+>>>>>>> 8557b4a2e44906a0e3bad602da45291956824d0e
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", "1.1.1"
@@ -31,7 +35,7 @@ gem "turbo-rails", "1.4.0"
 gem "stimulus-rails", "1.2.1"
 
 # Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
-gem "stimulus_reflex", "3.5.0.rc2"
+gem "stimulus_reflex", "3.5.0.rc3"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", "5.0.6"
@@ -43,7 +47,7 @@ gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
 gem "sidekiq", "7.0.8"
-gem "sidekiq-scheduler", "5.0.2"
+gem "sidekiq-scheduler", "5.0.3"
 gem "sinatra", "3.0.6", require: nil
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -68,7 +72,7 @@ gem "devise_invitable", "2.0.7"
 gem "devise-pwned_password"
 
 # Payments
-gem "pay", "6.3.1"
+gem "pay", "6.6.1"
 gem "stripe", "~> 8.5"
 
 gem "newrelic_rpm", "9.2.0"
