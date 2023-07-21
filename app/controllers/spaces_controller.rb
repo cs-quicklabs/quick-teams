@@ -16,7 +16,7 @@ class SpacesController < BaseController
   def new
     authorize :spaces
     @space = Space.new(user_id: current_user.id)
-    @users = User.for_current_account.active
+    @users = User.for_current_account.active.includes(:role, :job).order(:first_name)
   end
 
   def edit
