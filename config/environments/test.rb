@@ -4,7 +4,7 @@ require "active_support/core_ext/integer/time"
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
-
+Rails.application.config.action_cable.allowed_request_origins = "*"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -21,20 +21,11 @@ Rails.application.configure do
   config.public_file_server.headers = {
     "Cache-Control" => "public, max-age=#{1.hour.to_i}",
   }
-
+  config.hosts.clear
   # Show full error reports and disable caching.
   config.consider_all_requests_local = true
   config.action_controller.perform_caching = true
   config.cache_store = :redis_cache_store, { url: ENV["REDIS_URL"] }
-  config.session_store :redis_session_store,
-  serializer: :json,
-  on_redis_down: ->(*a) { Rails.logger.error("Redis down! #{a.inspect}") },
-  redis: {
-    expire_after: 120.minutes,
-    key_prefix: "session:",
-    url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" }
-}
-
 
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
@@ -67,6 +58,12 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+  config.assets.debug = false
   config.assets.compile = true
+  # Generate digests for assets URLs
+  config.assets.digest = false
+  # Suppress logger output for asset requests.
+  config.assets.quiet = true
   config.action_mailer.default_url_options = { host: "127.0.0.1" }
+  config.assets.css_compressor = nil
 end
