@@ -91,7 +91,7 @@ group :development do
   # For call-stack profiling flamegraphs
   gem "stackprof"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "spring"
+#   gem "spring"
   gem "rufo"
   gem "htmlbeautifier"
 end
@@ -101,3 +101,8 @@ group :test do
   gem "capybara", ">= 3.38"
   gem "selenium-webdriver"
 end
+
+# StimulusReflex recommends using Redis for session storage
+gem "redis-session-store", "0.11.5"
+
+gem "action-cable-redis-backport", "~> 1"

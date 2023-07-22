@@ -8,6 +8,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    action-cable-redis-backport (1.0.2)
+      actioncable (>= 5.0, < 7.1)
     actioncable (7.0.6)
       actionpack (= 7.0.6)
       activesupport (= 7.0.6)
@@ -280,6 +282,9 @@ GEM
       redis-client (>= 0.9.0)
     redis-client (0.14.1)
       connection_pool
+    redis-session-store (0.11.5)
+      actionpack (>= 6, < 8)
+      redis (>= 3, < 6)
     regexp_parser (2.8.1)
     request_store (1.5.1)
       rack (>= 1.4)
@@ -312,7 +317,6 @@ GEM
       rack (~> 2.2, >= 2.2.4)
       rack-protection (= 3.0.6)
       tilt (~> 2.0)
-    spring (4.1.1)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -376,6 +380,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  action-cable-redis-backport (~> 1)
   acts_as_tenant
   aws-sdk-s3 (~> 1.120)
   bootsnap (= 1.16.0)
@@ -408,13 +413,13 @@ DEPENDENCIES
   rails (= 7.0.6)
   rails-patterns
   redis (= 5.0.6)
+  redis-session-store (= 0.11.5)
   rexml
   rufo
   selenium-webdriver
   sidekiq (= 7.0.8)
   sidekiq-scheduler (= 5.0.3)
   sinatra (= 3.0.6)
-  spring
   sprockets-rails (= 3.4.2)
   stackprof
   stimulus-rails (= 1.2.1)

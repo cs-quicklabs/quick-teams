@@ -10,4 +10,3 @@ application.consumer = consumer
 window.Stimulus      = application
 
 export { application }
-
