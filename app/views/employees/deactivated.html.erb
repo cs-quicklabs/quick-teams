@@ -4,9 +4,9 @@
     <main class="max-w-xl px-4 pb-12 lg:col-span-8">
       <div class="overflow-hidden bg-white">
         <div class="pb-4 ml-4">
-          <%= render "shared/form_header", title: "Deactivated Users", subtitle: @employees.load.size > 0 ? "Following users have been deactivated." : "No record found." %>
+          <%= render "shared/form_header", title: "Deactivated Users", subtitle: @employees.nil? ? "Following users have been deactivated." : "No record found." %>
         </div>
-        <% if @employees.load.size > 0 %>
+        <% if !@employees.nil? %>
           <div class=" flex space-x-4 ml-4">
             <div class="flex-1 min-w-0 "  data-behavior="autocomplete" data-controller="nav-search" data-nav-search-url-value="/search/deactivated" >
               <label for="search" class="sr-only">Search</label>
@@ -27,21 +27,21 @@
               </div>
             </div>
           </div>
-        <% end %>
-        <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
-          <div>
-            <table class="table border-separate mt-4">
-              <thead class="bg-gray-50">
-              </thead>
-              <tbody class="table-body " id="employees" data-infinite-scroll-target="entries">
-                <%= render partial: "employees/deactivated_user", collection: @employees, as: :deactivated_user, cached: true %>
-              </tbody>
-            </table>
-            <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-              <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+          <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
+            <div>
+              <table class="table border-separate mt-4">
+                <thead class="bg-gray-50">
+                </thead>
+                <tbody class="table-body " id="employees" data-infinite-scroll-target="entries">
+                  <%= render partial: "employees/deactivated_user", collection: @employees, as: :deactivated_user, cached: true %>
+                </tbody>
+              </table>
+              <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     </main>
   </div>
