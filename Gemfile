@@ -68,7 +68,7 @@ gem "devise_invitable", "2.0.7"
 gem "devise-pwned_password"
 
 # Payments
-gem "pay", "6.6.1"
+gem "pay", "6.7.0"
 gem "stripe", "~> 8.5"
 
 gem "newrelic_rpm", "8.16.0"
