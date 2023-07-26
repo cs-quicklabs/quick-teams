@@ -39,7 +39,7 @@ class User::BaseUserPolicy < ApplicationPolicy
   end
 
   def self_or_subordinate?
-    self? or subordinate? or is_project_observer?
+    self? or subordinate?
   end
 
   def self?
