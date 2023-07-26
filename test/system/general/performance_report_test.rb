@@ -15,7 +15,7 @@ class EmployeesPerformanceReportTest < ApplicationSystemTestCase
   end
 
   def reports_page_url
-    kpis_reports_url(script_name: "/#{@account.id}", survey_type: @survey.id, participant_id: @kpis.participant.id, from_date: "2022-01-01", to_date: "2022-12-31")
+    kpis_reports_url(script_name: "/#{@account.id}", survey_type: @survey.id, participant_id: @kpis.participant.id, from_date: Date.today - 1.day, to_date: Date.today + 1.day)
   end
 
   test "can visit the employee kpi's reports page and download pdf" do
@@ -34,6 +34,7 @@ class EmployeesPerformanceReportTest < ApplicationSystemTestCase
     assert_text "Comment:"
     click_on "Close"
     assert_text "Employee KPIs Report"
+    take_screenshot
   end
 
   test "can not see Download PDF button if the employee is not selected" do
