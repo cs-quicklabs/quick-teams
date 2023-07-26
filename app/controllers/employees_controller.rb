@@ -56,7 +56,6 @@ class EmployeesController < BaseController
 
   def deactivate_user
     authorize @employee, :update?
-
     DeactivateUser.call(@employee, current_user)
     redirect_to deactivated_users_path, notice: "User has been deactivated."
   end

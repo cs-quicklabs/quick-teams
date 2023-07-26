@@ -7,7 +7,8 @@ require "active_support/core_ext/integer/time"
 Rails.application.config.action_cable.allowed_request_origins = "*"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.log_level = :debug # Set the log level to :debug or :info for more detailed logs
+  config.logger = ActiveSupport::Logger.new(STDOUT)
   config.cache_classes = false
   config.action_view.cache_template_loading = true
 
