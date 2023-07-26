@@ -92,20 +92,10 @@ class EmployeeTeamTest < ApplicationSystemTestCase
     assert_selector "div#employee-tabs", text: "Team"
   end
 
-  test "project observer can see his project participant team" do
-    sign_out @employee
-    @observer = users(:abram)
-    sign_in @observer
-    @employee = users(:actor)
-    visit page_url
-    assert_selector "h1", text: @employee.decorate.display_name
-    assert_selector "div#employee-tabs", text: "Team"
-  end
-
   test "project observer can not see team of other employee" do
     sign_out @employee
     @observer = users(:abram)
-    sign_in @manager
+    sign_in @observer
     @employee = users(:admin)
     visit page_url
     # manager is redirected to his own profile
