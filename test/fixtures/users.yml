@@ -41,7 +41,7 @@ abram:
   job: ios
   role: senior
   discipline: engineering
-  manager: actor
+  manager: regular
   confirmed_at: 2021-03-18
   email_enabled: true
   sign_in_count: 1

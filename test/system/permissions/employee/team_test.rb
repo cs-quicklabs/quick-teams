@@ -96,7 +96,7 @@ class EmployeeTeamTest < ApplicationSystemTestCase
     sign_out @employee
     @observer = users(:abram)
     sign_in @observer
-    @employee = users(:actor)
+    @employee = users(:member)
     visit page_url
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Team"

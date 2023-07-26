@@ -23,7 +23,7 @@
                 </p>
               </div>
             </a>
-          <% elsif current_user.is_manager?(@project) %>
+          <% elsif current_user.is_manager?(@project) or current_user.is_observer?(@project) %>
             <a href="<%= employee_schedules_path(schedule.user) %>" class="block hover:underline col-span-3" target="_top">
               <div class="col-span-3">
                 <p class="text-sm font-medium text-gray-900 col-span-3 whitespace-nowrap w-full">

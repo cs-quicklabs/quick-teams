@@ -5,7 +5,7 @@
   <div class="hidden sm:block sm:ml-6">
     <div class="flex space-x-4">
       <a href=<%= employee_schedules_path(current_user) %> class= "<%= current_page?(employee_schedules_path(current_user)) ? "nav-selected" : "nav-unselected" %>"><%= current_user.first_name %></a>
-      <% if current_user.project_manager? %>
+      <% if current_user.project_manager? or current_user.project_observer? %>
         <a href=<%= projects_path %> class= "<%= current_page?(projects_path) ? "nav-selected" : "nav-unselected" %>">Projects</a>
       <% end %>
       <% if policy(:nugget).index? %>

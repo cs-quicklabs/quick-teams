@@ -4,6 +4,7 @@ class User::TeamPolicy < User::BaseUserPolicy
     return true if user.admin?
     return self_or_subordinate? if user.lead?
     return true if employee == user
+    return true if is_project_observer?
     false
   end
 end
