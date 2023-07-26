@@ -35,11 +35,16 @@ class ProjectsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Projects"
     assert_text "New Project"
     assert_text "Project"
-    click_link("Project")
+
+    within(:xpath, "/html/body/main/main/div[2]/div/table") do
+      click_on "Project"
+    end
     within(:xpath, "/html/body/main/main/div[2]/div/table/tbody/tr[1]/td[1]/div/a/span") do
       assert_text "Aws in Engineering"
     end
-    click_link("Project")
+    within(:xpath, "/html/body/main/main/div[2]/div/table") do
+      click_on "Project"
+    end
     within(:xpath, "/html/body/main/main/div[2]/div/table/tbody/tr[1]/td[1]/div/a/span") do
       assert_text "Zoom in Engineering"
     end
