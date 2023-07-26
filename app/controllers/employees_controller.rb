@@ -54,6 +54,27 @@ class EmployeesController < BaseController
     redirect_to employee_team_path(@employee)
   end
 
+  def deactivate_user
+    authorize @employee, :update?
+    DeactivateUser.call(@employee, current_user)
+    redirect_to deactivated_users_path, notice: "User has been deactivated."
+  end
+
+  def activate_user
+    authorize @employee, :update?
+
+    ActivateUser.call(@employee, current_user)
+    redirect_to employee_team_path(@employee), notice: "User has been activated."
+  end
+
+  def deactivated
+    authorize :team, :index?
+
+    employees = User.for_current_account.inactive.includes(:role, :discipline, :job).order(deactivated_on: :desc)
+    @pagy, @employees = pagy_nil_safe(params, employees, items: LIMIT)
+    render_partial("employees/deactivated_user", collection: @employees, cached: true) if stale?(@employees)
+  end
+
   def destroy
     authorize :team
 
