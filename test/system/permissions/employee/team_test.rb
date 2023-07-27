@@ -105,7 +105,7 @@ class EmployeeTeamTest < ApplicationSystemTestCase
   test "project observer can not see team of other employee" do
     sign_out @employee
     @observer = users(:abram)
-    sign_in @manager
+    sign_in @observer
     @employee = users(:admin)
     visit page_url
     # manager is redirected to his own profile
