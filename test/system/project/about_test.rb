@@ -54,7 +54,7 @@ class ProjectAboutTest < ApplicationSystemTestCase
       fill_in "search", with: "a"
       first("#project-observer").click
       within "#project-observers" do
-        assert_selector "li", count: 2
+        assert_selector "li", count: @project.project_observers.count + 1
       end
     end
     take_screenshot
