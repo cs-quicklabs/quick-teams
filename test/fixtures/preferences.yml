@@ -12,7 +12,7 @@ two:
 
 three:
   key: transfer_data_to_admin
-  value: <%= User.find_by(email: 'aashishdhawan@crownstack.com').id %>
+  value: 365
   account: crownstack
   
 four:
