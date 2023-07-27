@@ -6,7 +6,7 @@ class FeedbacksMailerTest < ActionMailer::TestCase
     employee = feedback.critiquable
     email = FeedbacksMailer.with(feedback: feedback).publish_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [employee.email]

@@ -10,7 +10,7 @@ class GoalsMailerTest < ActionMailer::TestCase
   test "created" do
     email = GoalsMailer.with(actor: @actor, employee: @employee, goal: @goal).created_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [@employee.email]
@@ -22,7 +22,7 @@ class GoalsMailerTest < ActionMailer::TestCase
   test "commented" do
     email = GoalsMailer.with(actor: @actor, employee: @employee, goal: @goal).commented_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [@employee.email]
@@ -34,7 +34,7 @@ class GoalsMailerTest < ActionMailer::TestCase
   test "missed" do
     email = GoalsMailer.with(actor: @actor, employee: @employee, goal: @goal).missed_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [@employee.email]
@@ -46,7 +46,7 @@ class GoalsMailerTest < ActionMailer::TestCase
   test "completed" do
     email = GoalsMailer.with(actor: @actor, employee: @employee, goal: @goal).completed_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [@employee.email]
@@ -58,7 +58,7 @@ class GoalsMailerTest < ActionMailer::TestCase
   test "discarded" do
     email = GoalsMailer.with(actor: @actor, employee: @employee, goal: @goal).discarded_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [@employee.email]
