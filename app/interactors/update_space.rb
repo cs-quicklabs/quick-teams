@@ -10,6 +10,7 @@ class UpdateSpace < Patterns::Service
     begin
       update_space
       update_space_users
+      @space.touch
     rescue
       space
     end

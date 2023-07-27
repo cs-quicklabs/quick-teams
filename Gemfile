@@ -19,10 +19,10 @@ gem "pg", "1.5.3"
 gem "puma", "6.3.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", "1.1.2"
+gem "jsbundling-rails", "1.1.1"
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
-gem "cssbundling-rails", "1.2.0"
+gem "cssbundling-rails", "1.1.2"
 
 # Hotwire's SPA-like page accelerator [https://github.com/hotwired/turbo-rails]
 gem "turbo-rails", "1.4.0"
@@ -64,11 +64,11 @@ gem "nokogiri", "~> 1.14"
 
 # devise gems
 gem "devise", "4.9.2"
-gem "devise_invitable", "2.0.8"
+gem "devise_invitable", "2.0.7"
 gem "devise-pwned_password"
 
 # Payments
-gem "pay", "6.7.0"
+gem "pay", "6.6.1"
 gem "stripe", "~> 8.5"
 
 gem "newrelic_rpm", "8.16.0"
@@ -91,7 +91,7 @@ group :development do
   # For call-stack profiling flamegraphs
   gem "stackprof"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-#   gem "spring"
+  #   gem "spring"
   gem "rufo"
   gem "htmlbeautifier"
 end
