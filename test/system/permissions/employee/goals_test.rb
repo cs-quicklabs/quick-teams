@@ -81,12 +81,12 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
-    # can not create a goal for himself
-    assert_no_selector "form#new_goal"
-    # can not edit, delete goal for himself
+    # can create a goal for himself
+    assert_selector "form#new_goal"
+    # can  edit, delete goal for himself
     @employee.goals.each do |goal|
-      assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
-      assert_no_selector "tr##{dom_id(goal)}", text: "Delete"
+      assert_selector "tr##{dom_id(goal)}", text: "Edit"
+      assert_selector "tr##{dom_id(goal)}", text: "Delete"
     end
   end
 
@@ -125,8 +125,8 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_detail_url
     assert_selector "h3", text: @goal.title
-    #can not comment on goal
-    assert_no_selector "textarea#comment"
+    #can comment on goal
+    assert_selector "textarea#comment"
   end
 
   test "lead can see subordinate goal details" do
@@ -157,13 +157,13 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
-    # can not create a goal
-    assert_no_selector "form#new_goal"
+    # can create a goal
+    assert_selector "form#new_goal"
     # can see goal detail button
-    # can not see edit delete button
+    # can  see edit delete button
     @employee.goals.each do |goal|
-      assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
-      assert_no_selector "tr##{dom_id(goal)}", text: "Delete"
+      assert_selector "tr##{dom_id(goal)}", text: "Edit"
+      assert_selector "tr##{dom_id(goal)}", text: "Delete"
     end
   end
 
@@ -173,11 +173,11 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     sign_in @employee
     visit page_detail_url
     assert_selector "h3", text: @goal.title
-    #can not comment on goal
-    assert_no_selector "textarea#comment"
+    #can comment on goal
+    assert_selector "textarea#comment"
     visit second_page_detail_url
     assert_selector "h3", text: @second.title
-    #can not comment on goal
+    #can comment on goal
     assert_selector "textarea#comment"
   end
 
@@ -206,12 +206,12 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
-    # can not create a goal for himself
-    assert_no_selector "form#new_goal"
-    # can not edit, delete goal for himself
+    # can create a goal for himself
+    assert_selector "form#new_goal"
+    # can  edit, delete goal for himself
     @employee.goals.each do |goal|
-      assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
-      assert_no_selector "tr##{dom_id(goal)}", text: "Delete"
+      assert_selector "tr##{dom_id(goal)}", text: "Edit"
+      assert_selector "tr##{dom_id(goal)}", text: "Delete"
     end
   end
 
@@ -251,8 +251,8 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     @goal = @employee.goals.where(permission: false).first
     visit page_detail_url
     assert_selector "h3", text: @goal.title
-    #can not comment on goal
-    assert_no_selector "textarea#comment"
+    #can comment on goal
+    assert_selector "textarea#comment"
   end
 
   test "project manager can see project participant goal details" do
@@ -284,12 +284,12 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     visit page_url
     assert_selector "h1", text: @employee.decorate.display_name
     assert_selector "div#employee-tabs", text: "Goals"
-    # can not create a goal for himself
-    assert_no_selector "form#new_goal"
-    # can not edit, delete goal for himself
+    # can create a goal for himself
+    assert_selector "form#new_goal"
+    # can  edit, delete goal for himself
     @employee.goals.each do |goal|
-      assert_no_selector "tr##{dom_id(goal)}", text: "Edit"
-      assert_no_selector "tr##{dom_id(goal)}", text: "Delete"
+      assert_selector "tr##{dom_id(goal)}", text: "Edit"
+      assert_selector "tr##{dom_id(goal)}", text: "Delete"
     end
   end
 
@@ -329,8 +329,8 @@ class EmployeeGoalsTest < ApplicationSystemTestCase
     @goal = @employee.goals.where(permission: false).first
     visit page_detail_url
     assert_selector "h3", text: @goal.title
-    #can not comment on goal
-    assert_no_selector "textarea#comment"
+    #can comment on goal
+    assert_selector "textarea#comment"
   end
 
   test "project observer can see project participant goal details" do
