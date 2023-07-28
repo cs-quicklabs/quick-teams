@@ -145,7 +145,7 @@ GEM
     devise-pwned_password (0.1.10)
       devise (~> 4)
       pwned (~> 2.0.0)
-    devise_invitable (2.0.7)
+    devise_invitable (2.0.8)
       actionmailer (>= 5.0)
       devise (>= 4.6)
     draper (4.0.2)
@@ -390,7 +390,7 @@ DEPENDENCIES
   csv
   devise (= 4.9.2)
   devise-pwned_password
-  devise_invitable (= 2.0.7)
+  devise_invitable (= 2.0.8)
   draper
   hiredis
   htmlbeautifier

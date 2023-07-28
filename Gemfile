@@ -64,7 +64,7 @@ gem "nokogiri", "~> 1.14"
 
 # devise gems
 gem "devise", "4.9.2"
-gem "devise_invitable", "2.0.7"
+gem "devise_invitable", "2.0.8"
 gem "devise-pwned_password"
 
 # Payments
