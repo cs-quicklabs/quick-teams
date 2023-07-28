@@ -11,7 +11,7 @@ class TodosMailerTest < ActionMailer::TestCase
   test "added" do
     email = TodosMailer.with(employee: @employee, actor: @actor, todo: @todo).added_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [@employee.email]
@@ -23,7 +23,7 @@ class TodosMailerTest < ActionMailer::TestCase
   test "completed" do
     email = TodosMailer.with(employee: @employee, actor: @actor, todo: @todo).completed_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [@employee.email]

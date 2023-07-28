@@ -130,7 +130,7 @@ GEM
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
-    cssbundling-rails (1.2.0)
+    cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     csv (3.2.7)
     date (3.3.3)
@@ -145,7 +145,7 @@ GEM
     devise-pwned_password (0.1.10)
       devise (~> 4)
       pwned (~> 2.0.0)
-    devise_invitable (2.0.8)
+    devise_invitable (2.0.7)
       actionmailer (>= 5.0)
       devise (>= 4.6)
     draper (4.0.2)
@@ -173,7 +173,7 @@ GEM
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jmespath (1.6.2)
-    jsbundling-rails (1.1.2)
+    jsbundling-rails (1.1.1)
       railties (>= 6.0.0)
     launchy (2.5.2)
       addressable (~> 2.8)
@@ -214,7 +214,7 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
-    newrelic_rpm (8.16.0)
+    newrelic_rpm (9.3.1)
     nio4r (2.5.9)
     nokogiri (1.15.3-x86_64-darwin)
       racc (~> 1.4)
@@ -222,7 +222,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pagy (6.0.4)
-    pay (6.7.0)
+    pay (6.6.1)
       rails (>= 6.0.0)
     pg (1.5.3)
     pg_search (2.3.6)
@@ -386,26 +386,26 @@ DEPENDENCIES
   bootsnap (= 1.16.0)
   byebug
   capybara (>= 3.38)
-  cssbundling-rails (= 1.2.0)
+  cssbundling-rails (= 1.1.2)
   csv
   devise (= 4.9.2)
   devise-pwned_password
-  devise_invitable (= 2.0.8)
+  devise_invitable (= 2.0.7)
   draper
   hiredis
   htmlbeautifier
   image_processing (~> 1.12)
-  jsbundling-rails (= 1.1.2)
+  jsbundling-rails (= 1.1.1)
   launchy
   letter_opener
   letter_opener_web
   listen (~> 3.3)
   memory_profiler
   mimemagic!
-  newrelic_rpm (= 8.16.0)
+  newrelic_rpm (= 9.3.1)
   nokogiri (~> 1.14)
   pagy
-  pay (= 6.7.0)
+  pay (= 6.6.1)
   pg (= 1.5.3)
   pg_search
   puma (= 6.3.0)

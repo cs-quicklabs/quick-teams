@@ -25,6 +25,7 @@ class UpdateEmployee < Patterns::Service
     return unless deliver_email?
     if employee.saved_change_to_attribute?(:manager_id)
       @manager = User.find(employee.manager_id_before_last_save)
+      @manager.touch
       EmployeeMailer.with(employee: employee, manager: @manager).relieved_email.deliver_later
       EmployeeMailer.with(employee: employee, manager: employee.manager).updated_manager_email.deliver_later
       EmployeeMailer.with(employee: employee, manager: employee.manager).manager_email.deliver_later

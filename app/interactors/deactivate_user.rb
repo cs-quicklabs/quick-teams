@@ -9,6 +9,7 @@ class DeactivateUser < Patterns::Service
       remove_as_people_manager
       remove_as_project_manager
       remove_reporting_manager
+      remove_report_templates
       clear_schedules
       discard_goals
       clear_todos
@@ -35,6 +36,10 @@ class DeactivateUser < Patterns::Service
 
   def remove_reporting_manager
     user.update(manager_id: nil)
+  end
+
+  def remove_report_templates
+    user.templates_assignees.delete_all
   end
 
   def clear_schedules

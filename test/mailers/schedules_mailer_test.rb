@@ -8,7 +8,7 @@ class SchedulesMailerTest < ActionMailer::TestCase
   test "updated" do
     email = SchedulesMailer.with(employee: @employee, message: "with 100% occupancy in project Gotasker").updated_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [@employee.email]
@@ -20,7 +20,7 @@ class SchedulesMailerTest < ActionMailer::TestCase
   test "relieved" do
     email = SchedulesMailer.with(employee: @employee, project: projects(:one)).relieved_email
     assert_emails 1 do
-      email.deliver_later
+      email.deliver_now
     end
 
     assert_equal email.to, [@employee.email]
