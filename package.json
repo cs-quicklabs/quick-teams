@@ -20,7 +20,7 @@
   },
   "resolutions": {
     "@hotwired/stimulus": "3.2.1",
-    "@rails/actioncable": "7.0.4"
+    "@rails/actioncable": "7.0.6"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
