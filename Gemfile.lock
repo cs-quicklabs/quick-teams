@@ -173,7 +173,7 @@ GEM
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jmespath (1.6.2)
-    jsbundling-rails (1.1.1)
+    jsbundling-rails (1.1.2)
       railties (>= 6.0.0)
     launchy (2.5.2)
       addressable (~> 2.8)
@@ -395,7 +395,7 @@ DEPENDENCIES
   hiredis
   htmlbeautifier
   image_processing (~> 1.12)
-  jsbundling-rails (= 1.1.1)
+  jsbundling-rails (= 1.1.2)
   launchy
   letter_opener
   letter_opener_web
