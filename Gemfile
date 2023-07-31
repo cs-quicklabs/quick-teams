@@ -4,7 +4,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # ruby version app is using, [https://www.ruby-lang.org/en/downloads/]
-ruby "3.2.0"
+ruby "3.2.2"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
 gem "rails", "7.0.6"
@@ -71,7 +71,7 @@ gem "devise-pwned_password"
 gem "pay", "6.6.1"
 gem "stripe", "~> 8.5"
 
-gem "newrelic_rpm", "9.3.1"
+gem "newrelic_rpm", "8.16.0"
 
 group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
