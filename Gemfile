@@ -19,10 +19,10 @@ gem "pg", "1.5.3"
 gem "puma", "6.3.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", "1.1.1"
+gem "jsbundling-rails", "1.1.2"
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
-gem "cssbundling-rails", "1.1.2"
+gem "cssbundling-rails", "1.2.0"
 
 # Hotwire's SPA-like page accelerator [https://github.com/hotwired/turbo-rails]
 gem "turbo-rails", "1.4.0"
@@ -42,7 +42,7 @@ gem "valid_url"
 gem "image_processing", "~> 1.12"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
-gem "sidekiq", "7.0.8"
+gem "sidekiq", "7.1.2"
 gem "sidekiq-scheduler", "5.0.3"
 gem "sinatra", "3.0.6", require: nil
 
@@ -64,11 +64,11 @@ gem "nokogiri", "~> 1.14"
 
 # devise gems
 gem "devise", "4.9.2"
-gem "devise_invitable", "2.0.7"
+gem "devise_invitable", "2.0.8"
 gem "devise-pwned_password"
 
 # Payments
-gem "pay", "6.6.1"
+gem "pay", "6.7.1"
 gem "stripe", "~> 8.5"
 
 gem "newrelic_rpm", "8.16.0"
