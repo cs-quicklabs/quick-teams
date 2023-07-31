@@ -27,7 +27,7 @@
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css"
   },
   "engines": {
-    "node": "20.4.0",
+    "node": "20.5.0",
     "npm": "9.8.1",
     "yarn": "1.22.19"
   },
