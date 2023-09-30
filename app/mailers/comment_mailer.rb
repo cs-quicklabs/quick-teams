@@ -5,6 +5,6 @@ class CommentMailer < ApplicationMailer
     @comment = params[:comment]
     @message = params[:message]
     @space = params[:space]
-    mail(to: @employee.email, subject: "New Comment Added", template_path: "mailers/comment_mailer")
+    mail(to: @employee.email, subject: "Quick Teams: New Comment Added", template_path: "mailers/comment_mailer")
   end
 end
