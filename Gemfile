@@ -60,7 +60,7 @@ gem "csv"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "pg_search"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
-gem "nokogiri", "~> 1.14"
+gem "nokogiri", "~> 1.15"
 
 # devise gems
 gem "devise", "4.9.2"
