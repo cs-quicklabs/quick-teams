@@ -8,7 +8,7 @@ Rails.application.config.action_cable.allowed_request_origins = "*"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.cache_classes = false
+  config.enable_reloading = false
   config.action_view.cache_template_loading = true
 
   # Do not eager load code on boot. This avoids loading your whole application
@@ -28,7 +28,7 @@ Rails.application.configure do
   config.cache_store = :redis_cache_store, { url: ENV["REDIS_URL"] }
 
   # Raise exceptions instead of rendering exception templates.
-  config.action_dispatch.show_exceptions = false
+  config.action_dispatch.show_exceptions = :rescuable
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
@@ -66,4 +66,7 @@ Rails.application.configure do
   config.assets.quiet = true
   config.action_mailer.default_url_options = { host: "127.0.0.1" }
   config.assets.css_compressor = nil
+
+  # Raise error when a before_action's only/except options reference missing actions
+ config.action_controller.raise_on_missing_callback_actions = true
 end

@@ -167,6 +167,7 @@ GEM
       ruby2_keywords
     drb (2.1.1)
       ruby2_keywords
+    error_highlight (0.5.1)
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
@@ -421,6 +422,7 @@ DEPENDENCIES
   devise-pwned_password
   devise_invitable (= 2.0.8)
   draper
+  error_highlight (>= 0.4.0)
   hiredis
   htmlbeautifier
   image_processing (~> 1.12)
