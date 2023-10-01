@@ -16,7 +16,7 @@
     "stimulus_reflex": "3.5.0-rc3",
     "tailwind-capitalize-first-letter": "1.0.4",
     "tailwindcss": "3.3.3",
-    "trix": "2.0.5"
+    "trix": "2.0.6"
   },
   "resolutions": {
     "@hotwired/stimulus": "3.2.2",
