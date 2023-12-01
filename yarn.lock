@@ -198,17 +198,17 @@
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.0.8.tgz#f44e7517f2d1570f1eabeea457dbeb17ed3a2d12"
   integrity sha512-GjYQv89ZOOfbFw8VMNUOG33GXzyAA/TCVoD+742Ob4svm1XXUkd+w+ewqUXd+7VHQtV35y1/O78AGIPeJDTy/g==
 
-"@rails/actiontext@7.0.8":
-  version "7.0.8"
-  resolved "https://registry.yarnpkg.com/@rails/actiontext/-/actiontext-7.0.8.tgz#aa9f84f1726cce07ff24af9df376995354755a4c"
-  integrity sha512-AsG3QRX7K04c3mlkGBvTf1QRSxOMf7RXv9ve2jlA5C2AsBNHCOeVMmurTLRIC5Q8Mvd4WCUgC+TaNO+BN59WLw==
+"@rails/actiontext@7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@rails/actiontext/-/actiontext-7.1.2.tgz#2f7772b33951f76a07e9ff83d54519c362d99fd5"
+  integrity sha512-qiSUtop7rIb9BlwvgU98u+y8erlWhOiV0AveoHQ4EzN11VAWj3Euao9O+Q1iEJfIPcgXRvnsVLIJPrz3ldizFg==
   dependencies:
-    "@rails/activestorage" ">= 7.0.0-alpha1"
+    "@rails/activestorage" ">= 7.1.0-alpha"
 
-"@rails/activestorage@>= 7.0.0-alpha1":
-  version "7.0.4"
-  resolved "https://registry.npmjs.org/@rails/activestorage/-/activestorage-7.0.4.tgz"
-  integrity sha512-K2fV9C0z88fapu58nt9uHzMylsmJWUFuaIFvuZQEf1WTiPMsgTsj1bf8+cD81zXfTXYMZDQNRq4164JmuBKD3A==
+"@rails/activestorage@>= 7.1.0-alpha":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-7.1.2.tgz#088dce680fa1e0a4f8e0c5ac91073f729204ed06"
+  integrity sha512-evC/xGlpq5XGpcNJina3oNVVB8pUp1GpnN3a84SVA+UNuB6O91OdNRl9BGHNAOo6/jxmFtLb73PIjWqQyVE14w==
   dependencies:
     spark-md5 "^3.0.1"
 
