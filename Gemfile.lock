@@ -232,7 +232,7 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     newrelic_rpm (8.16.0)
-    nio4r (2.5.9)
+    nio4r (2.7.0)
     nokogiri (1.15.3-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.3-x86_64-linux)
@@ -248,7 +248,7 @@ GEM
     psych (5.1.0)
       stringio
     public_suffix (5.0.3)
-    puma (6.3.1)
+    puma (6.4.2)
       nio4r (~> 2.0)
     pwned (2.0.2)
     raabro (1.4.0)
@@ -439,7 +439,7 @@ DEPENDENCIES
   pay (= 6.7.1)
   pg (= 1.5.3)
   pg_search
-  puma (= 6.3.1)
+  puma (= 6.4.2)
   rack-mini-profiler (~> 3.1)
   rails (= 7.1.0.rc1)
   rails-patterns
