@@ -16,7 +16,7 @@ gem "sprockets-rails", "3.4.2"
 gem "pg", "1.5.3"
 
 # Use Puma as the app server [https://github.com/puma/puma]
-gem "puma", "6.3.1"
+gem "puma", "6.4.2"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", "1.1.2"
@@ -60,7 +60,7 @@ gem "csv"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "pg_search"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
-gem "nokogiri", "~> 1.14"
+gem "nokogiri", "~> 1.16"
 
 # devise gems
 gem "devise", "4.9.2"
