@@ -294,10 +294,10 @@ browserslist@^4.21.10:
     node-releases "^2.0.13"
     update-browserslist-db "^1.0.13"
 
-cable_ready@^5.0.0:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-5.0.1.tgz#1cef5991cf7a064d09971ed7d87c614dec2ee1e1"
-  integrity sha512-+t9rKTgYwW5XBx113y97qC8MNEtBZZL84Isdec23HWvjMx0icOQsMzHJE75ycjevgjACTeWZqjRcCdtCHxgZ9g==
+cable_ready@^5.0.5:
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-5.0.5.tgz#45dd12ae5b3c5c53a1b42c10785e79ff87a5be22"
+  integrity sha512-qPC6zaI8h59BzMH3MxtpuMC+H33VJTA2eVddL6fZSWz01jJ2Y3okld01oYWQoKwE2yle/tvHbyuhoKxD4mhEuw==
   dependencies:
     morphdom "2.6.1"
 
@@ -745,14 +745,14 @@ stimulus-scroll-to@4.1.0:
   resolved "https://registry.yarnpkg.com/stimulus-scroll-to/-/stimulus-scroll-to-4.1.0.tgz#22b24d768d673f029ab0f68100556e113075fa95"
   integrity sha512-bKltfECyU8y/ck8yXy77hlK/vv85igW7LPtZpgkUBFuAGz+Ou7EnMPpKrSJiYoK+TXS2COFilb/PGND/xISxJA==
 
-stimulus_reflex@3.5.0-rc3:
-  version "3.5.0-rc3"
-  resolved "https://registry.yarnpkg.com/stimulus_reflex/-/stimulus_reflex-3.5.0-rc3.tgz#21196b2a42f48ea7f1fad54f8443d09a95c320a5"
-  integrity sha512-KSRDgGkU4aA77yw1b0W0oP7Ag+SB6Aa36BdcBJTpacU2W0bm9Fz1a0o9ynD+YAWK6AUyJ0gR20wXLvBvBGpnpg==
+stimulus_reflex@3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/stimulus_reflex/-/stimulus_reflex-3.5.1.tgz#fb9c548667e01b8dc7141187c73abfe1aa25472a"
+  integrity sha512-Bwsuerfh8ca6kp7MKlUgzYAmeflqoBzSpb25M4i+h3FsmAfPl4rUNN6T8v1d6JPqAPAVQRUL/wtDHumLtpETFw==
   dependencies:
     "@hotwired/stimulus" "^3"
     "@rails/actioncable" "^6 || ^7"
-    cable_ready "^5.0.0"
+    cable_ready "^5.0.5"
 
 sucrase@^3.32.0:
   version "3.33.0"
@@ -826,10 +826,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-trix@2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-2.0.5.tgz#f54880ab38e24d47829a04e04afaf03a8607f772"
-  integrity sha512-OiCbDf17F7JahEwhyL1MvK9DxAAT1vkaW5sn+zpwfemZAcc4RfQB4ku18/1mKP58LRwBhjcy+6TBho7ciXz52Q==
+trix@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.1.tgz#688f1213601316cf8b92c5e625d2f562c118c780"
+  integrity sha512-IljOMGOlRUPg1i5Pk/+x/Ia65ZY7Gw5JxxKCh/4caxG5ZaKuFJCKdn1+TF0efUYfdg+bqWenB/mAYCHjZu0zpQ==
 
 ts-interface-checker@^0.1.9:
   version "0.1.13"
