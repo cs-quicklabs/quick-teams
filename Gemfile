@@ -34,7 +34,7 @@ gem "stimulus-rails", "1.2.2"
 gem "stimulus_reflex", "3.5.0.rc3"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "5.0.6"
+gem "redis", "5.2.0"
 gem "hiredis"
 gem "valid_url"
 
