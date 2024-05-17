@@ -16,7 +16,7 @@ gem "sprockets-rails", "3.4.2"
 gem "pg", "1.5.3"
 
 # Use Puma as the app server [https://github.com/puma/puma]
-gem "puma", "6.3.1"
+gem "puma", "6.4.2"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails", "1.1.2"
@@ -31,7 +31,7 @@ gem "turbo-rails", "1.4.0"
 gem "stimulus-rails", "1.2.2"
 
 # Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
-gem "stimulus_reflex", "3.5.0.rc3"
+gem "stimulus_reflex", "3.5.0.rc4"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", "5.2.0"
@@ -64,7 +64,7 @@ gem "nokogiri", "~> 1.14"
 
 # devise gems
 gem "devise", "4.9.2"
-gem "devise_invitable", "2.0.8"
+gem "devise_invitable", "2.0.9"
 gem "devise-pwned_password"
 
 # Payments
