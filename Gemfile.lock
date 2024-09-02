@@ -291,7 +291,8 @@ GEM
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.2.6)
+    rexml (3.3.6)
+      strscan
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
@@ -338,6 +339,7 @@ GEM
       railties (>= 5.2, < 8)
       redis (>= 4.0, < 6.0)
     stripe (8.6.0)
+    strscan (3.1.0)
     thor (1.2.2)
     thread-local (1.1.0)
     thread_safe (0.3.6)
