@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/mileszs/wicked_pdf.git
+  revision: 2bf120d0c7fd56dcffc5fa3bc430692e30d00474
+  branch: master
+  specs:
+    wicked_pdf (2.8.1)
+      activesupport
+      ostruct
+
+GIT
   remote: https://github.com/mimemagicrb/mimemagic.git
   revision: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
   ref: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
@@ -221,6 +230,7 @@ GEM
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    ostruct (0.6.1)
     pagy (6.0.4)
     pay (6.7.1)
       rails (>= 6.0.0)
@@ -367,8 +377,6 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked_pdf (2.6.3)
-      activesupport
     wkhtmltopdf-binary (0.12.6.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
@@ -429,7 +437,7 @@ DEPENDENCIES
   tzinfo-data
   valid_url
   web-console (>= 4.1.0)
-  wicked_pdf
+  wicked_pdf!
   wkhtmltopdf-binary
 
 RUBY VERSION
