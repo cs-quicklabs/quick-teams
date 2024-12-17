@@ -55,7 +55,7 @@ gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dab
 gem "pagy"
 gem "rails-patterns"
 gem "wicked_pdf", github: "mileszs/wicked_pdf", branch: "master"
-gem "wkhtmltopdf-binary"
+gem "wkhtmltopdf-binary", "0.12.6.7"
 gem "csv"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "pg_search"
