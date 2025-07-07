@@ -25,6 +25,15 @@ class SpacesController < BaseController
     @space_users = @space.users.pluck(:user_id)
   end
 
+  def archived
+    authorize :spaces, :index?
+
+    @archived_spaces = current_user.spaces.where(archive: true).order(created_at: :desc)
+    @pagy, @spaces = pagy_nil_safe(params, @archived_spaces, items: LIMIT)
+
+    render_partial_as("spaces/archived_spaces", collection: @spaces, as: :space, cached: true) if stale?(@spaces)
+  end
+
   def create
     authorize :spaces
 

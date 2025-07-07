@@ -7,4 +7,8 @@ class Space < ActiveRecord::Base
   validates :title, length: { maximum: 255 }
   has_many :pinned_spaces, dependent: :destroy
   scope :active, -> { where(archive: false) }
+
+  def display_archived_on
+    ""
+  end
 end

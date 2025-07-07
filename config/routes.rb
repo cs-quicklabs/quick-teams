@@ -188,6 +188,7 @@ Rails.application.routes.draw do
     get "/employees", to: "employees#deactivated", as: "deactivated_users"
     get "/employees/:id", to: "employees#deactivate_user", as: "deactivate_user"
     get "/employees/:id/restore", to: "employees#activate_user", as: "activate_user"
+    get "/spaces", to: "spaces#archived", as: "archived_spaces"
   end
 
   get "account/details", to: "account/account#index", as: "detail"
