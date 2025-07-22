@@ -13,9 +13,12 @@
             <a href="<%= employee_timeline_path(event.user) %>" class="font-medium text-gray-900 hover:underline"><%= event.user.decorate.display_name %></a>
             freed  employee
             <a href="<%= employee_schedules_path(event.eventable) %>" class="font-medium text-gray-900 hover:underline"><%= event.eventable.decorate.display_name %></a>
-            <% if event.trackable.present? %>
             from project
+                        <% if event.trackable.present? %>
+
             <a href="<%= project_schedules_path(event.trackable) %>" class="font-medium text-gray-900 hover:underline"><%= event.trackable.name.titleize %></a>
+            <% else %>
+            which does not exist anymore
             <% end %>
           </p>
         </div>
