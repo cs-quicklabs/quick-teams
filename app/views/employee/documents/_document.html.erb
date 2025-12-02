@@ -1,24 +1,38 @@
 <tr id="<%= dom_id document %>">
   <% document = document.decorate %>
-  <td class="table-cell ">
+
+  <td class="table-cell">
     <div class="text-sm">
-      <a href="<%= ensure_protocol(document.link) %>" target="_blank"  class="line-clamp-2 font-medium text-gray-900 block hover:underline" target="_top">
+      <a
+        href="<%= ensure_protocol(document.link) %>"
+        target="_blank"
+        class="line-clamp-2 font-medium text-gray-900 block hover:underline"
+        target="_top"
+      >
         <%= document.display_filename %>
       </a>
     </div>
+
     <div class="mt-1 text-sm text-gray-700">
       <p class="line-clamp-3"><%= document.comments %></p>
     </div>
   </td>
+
   <td class="table-cell whitespace-nowrap">
-    <a href="<%= employee_documents_path(document.user) %>" class="block hover:underline" target="_top">
+    <a
+      href="<%= employee_documents_path(document.user) %>"
+      class="block hover:underline"
+      target="_top"
+    >
       <%= document.user.display_name %>
     </a>
   </td>
+
   <td class="table-cell whitespace-nowrap">
     <%= display_created_at(document) %>
   </td>
-  <td class="table-cell ">
+
+  <td class="table-cell">
     <% if policy([@employee, document]).edit? %>
       <div class="flex justify-end space-x-2">
         <%= edit_button(edit_employee_document_path(@employee, document)) %>
