@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  enum status: [:regress, :stale, :progress]
+  enum :status, { regress: 0, stale: 1, progress: 2 }
 
   belongs_to :user
   belongs_to :commentable, polymorphic: true

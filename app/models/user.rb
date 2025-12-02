@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :trackable, :timeoutable, timeout_in: 5.days, invite_for: 2.weeks
 
-  enum permission: [:member, :lead, :admin]
+  enum :permission, { member: 0, lead: 1, admin: 2 }
 
   scope :for_current_account, -> { where(account: Current.account) }
   scope :inactive, -> { where(active: false) }

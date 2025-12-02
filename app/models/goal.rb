@@ -1,6 +1,6 @@
 class Goal < ApplicationRecord
   include Extractor::HashTag
-  enum status: [:progress, :completed, :missed, :discarded]
+  enum :status, { progress: 0, completed: 1, missed: 2, discarded: 3 }
   acts_as_tenant :account
 
   belongs_to :user
