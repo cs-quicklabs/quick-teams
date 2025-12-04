@@ -33,15 +33,14 @@ gem "stimulus-rails", "~> 1.3"
 # Build reactive applications [https://github.com/stimulusreflex/stimulus_reflex]
 gem "stimulus_reflex", "~> 3.5"
 
-# Use Redis adapter to run Action Cable in production
-gem "redis", "~> 5.3"
-gem "hiredis-client"
-
 # Use Active Storage variant
 gem "image_processing", "~> 1.13"
 
 # Solid Queue for background jobs
 gem "solid_queue", "~> 1.2"
+
+# Solid Cable for Action Cable
+gem "solid_cable", "~> 3.0"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"
@@ -91,6 +90,3 @@ group :test do
   gem "vcr"
   gem "mocha"
 end
-
-# StimulusReflex recommends using Redis for session storage
-gem "redis-session-store", "~> 0.11"

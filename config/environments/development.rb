@@ -3,18 +3,6 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   config.action_controller.default_url_options = { host: "localhost", port: 3000 }
 
-  #StimulusReflex does not support :cookie_store, and we recommend switching to Redis.
-  #To use `redis-session-store`, make sure to add it to your Gemfile and run `bundle install`.
-
-  config.session_store :redis_session_store,
-                       serializer: :json,
-                       on_redis_down: ->(*a) { Rails.logger.error("Redis down! #{a.inspect}") },
-                       redis: {
-                         expire_after: 120.minutes,
-                         key_prefix: "session:",
-                         url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" },
-                       }
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -34,7 +22,7 @@ Rails.application.configure do
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
-    config.cache_store = :redis_cache_store, { url: ENV["REDIS_URL"] }
+    config.cache_store = :memory_store
     config.public_file_server.headers = {
       "Cache-Control" => "public, max-age=#{2.days.to_i}",
     }
