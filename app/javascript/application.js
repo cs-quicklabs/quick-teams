@@ -1,14 +1,12 @@
-// Entry point for the build script in your package.json
-import "./controllers"
-import "./channels"
-import "./config"
-import 'trix'
-import '@rails/actiontext'
-import '@rails/activestorage'
-import '@tailwindcss/forms'
+// Configure your import map in config/importmap.rb
+import "controllers"
+import "channels"
+import "config"
+import "trix"
+import "@rails/actiontext"
+import "@rails/activestorage"
 import "@hotwired/turbo-rails"
 import "./trix-editor-overrides"
-
 
 import Trix from "trix"
 

@@ -18,8 +18,8 @@ gem "pg", "~> 1.5"
 # Use Puma as the app server [https://github.com/puma/puma]
 gem "puma", "~> 6.5"
 
-# Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem "jsbundling-rails", "~> 1.3"
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails", "~> 1.4"
@@ -40,6 +40,11 @@ gem "valid_url"
 
 # Use Active Storage variant
 gem "image_processing", "~> 1.13"
+
+# solid trifecta gems
+gem "solid_cable", ">= 3.0"
+gem "solid_cache", "~> 1.0"
+gem "solid_queue", "~> 1.2"
 
 # sidekiq gems, sinatra is used to build UI for /sidekiq
 gem "sidekiq", "~> 7.3"
@@ -73,33 +78,27 @@ gem "stripe", "~> 18.0"
 
 gem "newrelic_rpm", "~> 9.16"
 
-group :development do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platforms: %i[mri mingw x64_mingw]
-  gem "launchy"
+group :development, :test do
+  gem "brakeman", require: false
+  gem "bundler-audit", require: false
+  gem "debug"
+  gem "faker"
   gem "letter_opener"
-  gem "letter_opener_web"
-  gem "rexml"
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem "web-console", ">= 4.1.0"
-  # Display performance information such as SQL time and flame graphs for each request in your browser.
-  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem "listen", "~> 3.3"
-  gem "rack-mini-profiler", "~> 3.1"
-  # For memory profiling
-  gem "memory_profiler"
-  # For call-stack profiling flamegraphs
-  gem "stackprof"
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  #   gem "spring"
-  gem "rufo"
-  gem "htmlbeautifier"
+  gem "rack-mini-profiler"
+  gem "rubocop-rails-omakase", require: false
+end
+
+group :development do
+  gem "web-console"
+  gem "listen"
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem "capybara", ">= 3.38"
+  gem "capybara"
   gem "selenium-webdriver"
+  gem "webmock"
+  gem "vcr"
+  gem "mocha"
 end
 
 # StimulusReflex recommends using Redis for session storage
