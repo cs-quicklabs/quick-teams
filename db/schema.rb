@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2023_02_24_052624) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_04_145029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -208,28 +208,6 @@ ActiveRecord::Schema[8.1].define(version: 2023_02_24_052624) do
     t.bigint "user_id", null: false
     t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
     t.index ["user_id"], name: "index_notes_on_user_id"
-  end
-
-  create_table "nuggets", force: :cascade do |t|
-    t.bigint "account_id", null: false
-    t.datetime "created_at", null: false
-    t.boolean "published", default: false
-    t.datetime "published_on", precision: nil
-    t.bigint "skill_id", null: false
-    t.string "title"
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["account_id"], name: "index_nuggets_on_account_id"
-    t.index ["skill_id"], name: "index_nuggets_on_skill_id"
-    t.index ["user_id"], name: "index_nuggets_on_user_id"
-  end
-
-  create_table "nuggets_users", force: :cascade do |t|
-    t.datetime "created_at", precision: nil, default: "2025-10-23 15:16:28", null: false
-    t.bigint "nugget_id", null: false
-    t.boolean "read", default: false
-    t.datetime "updated_at", precision: nil, default: "2025-10-23 15:16:28", null: false
-    t.bigint "user_id", null: false
   end
 
   create_table "pay_charges", force: :cascade do |t|
@@ -755,9 +733,6 @@ ActiveRecord::Schema[8.1].define(version: 2023_02_24_052624) do
   add_foreign_key "messages", "spaces"
   add_foreign_key "messages", "users"
   add_foreign_key "notes", "users"
-  add_foreign_key "nuggets", "accounts"
-  add_foreign_key "nuggets", "skills"
-  add_foreign_key "nuggets", "users"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"

@@ -10,7 +10,6 @@ class Account < ApplicationRecord
   has_many :project_statuses, dependent: :destroy
   has_many :people_tags, dependent: :destroy
   has_many :people_statuses, dependent: :destroy
-  has_many :nuggets, dependent: :destroy
   has_many :jobs, dependent: :destroy
   has_many :kbs, dependent: :destroy
   has_many :goals, dependent: :destroy

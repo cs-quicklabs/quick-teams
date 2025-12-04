@@ -8,7 +8,6 @@ class DestroyUser < Patterns::Service
     begin
       transfer_kbs
       transfer_surveys
-      transfer_nuggets
       transfer_templates
       transfer_documents
       transfer_feedbacks
@@ -33,11 +32,6 @@ class DestroyUser < Patterns::Service
 
   def transfer_kbs
     Kb.where(user: user).update_all(user_id: transferred_to.id)
-  end
-
-  def transfer_nuggets
-    Nugget.where(user: user).update_all(user_id: transferred_to.id)
-    NuggetsUser.where(user_id: user.id).destroy_all
   end
 
   def transfer_surveys
