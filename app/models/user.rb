@@ -38,7 +38,6 @@ class User < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :templates
   has_many :timesheets, dependent: :delete_all
-  has_many :kbs
   has_many :tickets, dependent: :destroy
   has_many :ticket_labels, dependent: :destroy
   has_many :managed_projects, class_name: "Project", foreign_key: "manager_id"

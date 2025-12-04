@@ -80,7 +80,6 @@ Rails.application.routes.draw do
   resources :comments, only: [:edit, :destroy, :update]
   resources :report_comments, only: [:create, :update]
   resources :goal_comments, only: [:create, :update]
-  resources :kbs
   resources :kpis
   resources :templates do
     resources :assignees
@@ -118,7 +117,6 @@ Rails.application.routes.draw do
   get "search/archived", to: "search#archived"
   get "/search/employee/skills", to: "search#employee_skills"
   get "/search/project/skills", to: "search#project_skills"
-  get "/search/documents", to: "search#documents"
   get "/search/surveys", to: "search#surveys"
   get "search/users", to: "search#users"
   get "search/projects", to: "search#projects"
@@ -162,7 +160,6 @@ Rails.application.routes.draw do
     get "/skills", to: "report/skills#index", as: "skills_reports"
     get "/activities", to: "report/activities#index", as: "activities_reports"
     get "/roles", to: "report/roles#index", as: "employee_roles_reports"
-    get "/kbs", to: "report/kbs#index", as: "kbs_reports"
     get "/kpis", to: "report/kpis#index", as: "kpis_reports"
     get "/reports", to: "report/reports#index", as: "report_reports"
     get "/kpis/performance_report", to: "report/kpis#performance_report", as: "performance_report"

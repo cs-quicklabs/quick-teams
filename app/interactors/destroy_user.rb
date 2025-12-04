@@ -6,7 +6,6 @@ class DestroyUser < Patterns::Service
 
   def call
     begin
-      transfer_kbs
       transfer_surveys
       transfer_templates
       transfer_documents
@@ -29,10 +28,6 @@ class DestroyUser < Patterns::Service
   end
 
   private
-
-  def transfer_kbs
-    Kb.where(user: user).update_all(user_id: transferred_to.id)
-  end
 
   def transfer_surveys
     Survey::Survey.where(actor: user).update_all(actor_id: transferred_to.id)

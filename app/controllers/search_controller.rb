@@ -31,16 +31,6 @@ class SearchController < BaseController
     render layout: false
   end
 
-  def documents
-    authorize :search
-
-    like_keyword = "%#{params[:q]}%"
-    @kbs = Kb.where("document ILIKE ?", like_keyword)
-      .limit(5).order(:document)
-
-    render layout: false
-  end
-
   def surveys
     authorize :search
     like_keyword = "%#{params[:q]}%"

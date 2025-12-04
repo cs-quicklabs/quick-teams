@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_04_145029) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_04_151100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -158,23 +158,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_04_145029) do
     t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_jobs_on_account_id"
-  end
-
-  create_table "kbs", force: :cascade do |t|
-    t.bigint "account_id", null: false
-    t.string "comments"
-    t.datetime "created_at", null: false
-    t.bigint "discipline_id"
-    t.string "document"
-    t.bigint "job_id"
-    t.string "link"
-    t.string "tag"
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["account_id"], name: "index_kbs_on_account_id"
-    t.index ["discipline_id"], name: "index_kbs_on_discipline_id"
-    t.index ["job_id"], name: "index_kbs_on_job_id"
-    t.index ["user_id"], name: "index_kbs_on_user_id"
   end
 
   create_table "message_comments", force: :cascade do |t|
@@ -723,10 +706,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_04_145029) do
   add_foreign_key "goals", "accounts"
   add_foreign_key "goals", "users"
   add_foreign_key "jobs", "accounts"
-  add_foreign_key "kbs", "accounts"
-  add_foreign_key "kbs", "disciplines"
-  add_foreign_key "kbs", "jobs"
-  add_foreign_key "kbs", "users"
   add_foreign_key "message_comments", "messages"
   add_foreign_key "message_comments", "users"
   add_foreign_key "messages", "accounts"

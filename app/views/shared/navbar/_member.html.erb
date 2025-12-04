@@ -8,9 +8,6 @@
       <% if policy(:projects).index? %>
         <a href=<%= projects_path %> class= "<%= current_page?(projects_path) ? "nav-selected" : "nav-unselected" %>">Projects</a>
       <% end %>
-      <% if policy(:kb).index? %>
-        <a href="<%= kbs_path %>" class="<%= current_page?(kbs_path) ? "nav-selected" : "nav-unselected" %>">Knowledge Base</a>
-      <% end %>
       <% if policy(:ticket).index? %>
         <a href=<%= tickets_path %> class= "<%= current_page?(tickets_path) ? "nav-selected" : "nav-unselected" %>"> Tickets </a>
       <% end %>

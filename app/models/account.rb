@@ -11,7 +11,6 @@ class Account < ApplicationRecord
   has_many :people_tags, dependent: :destroy
   has_many :people_statuses, dependent: :destroy
   has_many :jobs, dependent: :destroy
-  has_many :kbs, dependent: :destroy
   has_many :goals, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :disciplines, dependent: :destroy
