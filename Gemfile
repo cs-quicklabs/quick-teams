@@ -36,14 +36,11 @@ gem "stimulus_reflex", "~> 3.5"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 5.3"
 gem "hiredis-client"
-gem "valid_url"
 
 # Use Active Storage variant
 gem "image_processing", "~> 1.13"
 
-# solid trifecta gems
-gem "solid_cable", ">= 3.0"
-gem "solid_cache", "~> 1.0"
+# Solid Queue for background jobs
 gem "solid_queue", "~> 1.2"
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -51,7 +48,6 @@ gem "acts_as_tenant"
 gem "aws-sdk-s3", "~> 1.170"
 gem "bootsnap", "~> 1.18", require: false
 gem "draper"
-gem "mimemagic", github: "mimemagicrb/mimemagic", ref: "01f92d86d15d85cfd0f20dabd025dcbd36a8a60f"
 gem "pagy", "~> 9.3"
 gem "rails-patterns"
 gem "wicked_pdf", github: "mileszs/wicked_pdf", branch: "master"
