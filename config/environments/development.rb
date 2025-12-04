@@ -7,13 +7,13 @@ Rails.application.configure do
   #To use `redis-session-store`, make sure to add it to your Gemfile and run `bundle install`.
 
   config.session_store :redis_session_store,
-    serializer: :json,
-    on_redis_down: ->(*a) { Rails.logger.error("Redis down! #{a.inspect}") },
-    redis: {
-      expire_after: 120.minutes,
-      key_prefix: "session:",
-      url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" }
-  }
+                       serializer: :json,
+                       on_redis_down: ->(*a) { Rails.logger.error("Redis down! #{a.inspect}") },
+                       redis: {
+                         expire_after: 120.minutes,
+                         key_prefix: "session:",
+                         url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" },
+                       }
 
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -69,14 +69,6 @@ Rails.application.configure do
 
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
-
-  # Debug mode disables concatenation and preprocessing of assets.
-  # This option may cause significant delays in view rendering with a large
-  # number of complex assets.
-  config.assets.debug = true
-
-  # Suppress logger output for asset requests.
-  config.assets.quiet = true
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

@@ -58,12 +58,5 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
-  config.assets.debug = false
-  config.assets.compile = true
-  # Generate digests for assets URLs
-  config.assets.digest = false
-  # Suppress logger output for asset requests.
-  config.assets.quiet = true
   config.action_mailer.default_url_options = { host: "127.0.0.1" }
-  config.assets.css_compressor = nil
 end

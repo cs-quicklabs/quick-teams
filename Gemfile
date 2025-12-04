@@ -4,13 +4,13 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # ruby version app is using, [https://www.ruby-lang.org/en/downloads/]
-ruby "3.3.0"
+ruby "3.4.7"
 
 # Bundle edge Rails instead: gem 'rails', [https://github.com/rails/rails]
-gem "rails", "~> 8.0.1"
+gem "rails", "~> 8.1.1"
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails", "~> 3.5"
+# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
+gem "propshaft"
 
 # Use postgresql as the database for Active Record [https://github.com/ged/ruby-pg]
 gem "pg", "~> 1.5"
