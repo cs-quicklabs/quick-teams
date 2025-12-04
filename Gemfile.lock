@@ -249,11 +249,19 @@ GEM
       logger
     mini_mime (1.1.5)
     minitest (5.26.2)
+    mission_control-jobs (1.1.0)
+      actioncable (>= 7.1)
+      actionpack (>= 7.1)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      importmap-rails (>= 1.2.1)
+      irb (~> 1.13)
+      railties (>= 7.1)
+      stimulus-rails
+      turbo-rails
     mocha (2.8.2)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.8.0)
-    mustermann (3.0.4)
-      ruby2_keywords (~> 0.0.1)
     net-imap (0.5.12)
       date
       net-protocol
@@ -309,10 +317,6 @@ GEM
     rack (3.2.4)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
-    rack-protection (4.2.1)
-      base64 (>= 0.1.0)
-      logger (>= 1.6.0)
-      rack (>= 3.0.0, < 4)
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -414,8 +418,6 @@ GEM
       logger
     ruby2_keywords (0.0.5)
     rubyzip (3.2.2)
-    rufus-scheduler (3.9.2)
-      fugit (~> 1.1, >= 1.11.1)
     securerandom (0.4.1)
     selenium-webdriver (4.38.0)
       base64 (~> 0.2)
@@ -423,23 +425,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    sidekiq (7.3.9)
-      base64
-      connection_pool (>= 2.3.0)
-      logger
-      rack (>= 2.2.4)
-      redis-client (>= 0.22.2)
-    sidekiq-scheduler (5.0.6)
-      rufus-scheduler (~> 3.2)
-      sidekiq (>= 6, < 8)
-      tilt (>= 1.4.0, < 3)
-    sinatra (4.2.1)
-      logger (>= 1.6.0)
-      mustermann (~> 3.0)
-      rack (>= 3.0.0, < 4)
-      rack-protection (= 4.2.1)
-      rack-session (>= 2.0.0, < 3)
-      tilt (~> 2.0)
     solid_cable (3.0.12)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -481,7 +466,6 @@ GEM
     thor (1.4.0)
     thread-local (1.1.0)
     thread_safe (0.3.6)
-    tilt (2.6.1)
     timeout (0.4.4)
     tsort (0.2.0)
     turbo-rails (2.0.20)
@@ -550,6 +534,7 @@ DEPENDENCIES
   letter_opener
   listen
   mimemagic!
+  mission_control-jobs
   mocha
   newrelic_rpm (~> 9.16)
   nokogiri (~> 1.16)
@@ -566,9 +551,6 @@ DEPENDENCIES
   redis-session-store (~> 0.11)
   rubocop-rails-omakase
   selenium-webdriver
-  sidekiq (~> 7.3)
-  sidekiq-scheduler (~> 5.0)
-  sinatra (~> 4.1)
   solid_cable (>= 3.0)
   solid_cache (~> 1.0)
   solid_queue (~> 1.2)

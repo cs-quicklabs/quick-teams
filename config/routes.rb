@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-  require "sidekiq/web"
-  require "sidekiq-scheduler/web"
-
   authenticate :user, lambda { |u| u.admin? } do
-    mount Sidekiq::Web => "/sidekiq"
+    mount MissionControl::Jobs::Engine, at: "/jobs"
   end
 
   mount ActionCable.server => "/cable"

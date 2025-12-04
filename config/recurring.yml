@@ -1,0 +1,38 @@
+# Recurring jobs configuration for Solid Queue
+# These replace the sidekiq-scheduler jobs
+
+# Weekly activity report - every Monday at 10:00 AM
+send_weekly_activity_report:
+  class: WeeklyActivityMailerJob
+  queue: default
+  schedule: every Monday at 10:00am
+
+# Daily tech nugget - Monday to Friday at 10:00 AM
+send_daily_tech_nugget:
+  class: DailyTechNuggetMailerJob
+  queue: default
+  schedule: every weekday at 10:00am
+
+# Reset unread tech nuggets - every Monday at 10:00 AM
+reset_unread_tech_nugget:
+  class: WeeklyNuggetResetMailerJob
+  queue: default
+  schedule: every Monday at 10:00am
+
+# Delete old timesheets - daily at midnight
+delete_timesheets_after_x_days:
+  class: DeleteTimesheetsJob
+  queue: default
+  schedule: every day at midnight
+
+# Delete deactivated users - daily at midnight
+delete_deactivated_users_after_x_days:
+  class: DeleteDeactivatedUsersJob
+  queue: default
+  schedule: every day at midnight
+
+# Delete cancelled subscriptions - daily at midnight
+delete_cancelled_subscriptions:
+  class: DeleteAccountsJob
+  queue: default
+  schedule: every day at midnight

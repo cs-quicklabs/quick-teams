@@ -10,49 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2023_02_24_052624) do
+ActiveRecord::Schema[8.1].define(version: 2023_02_24_052624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "email_enabled", default: true
-    t.bigint "owner_id"
     t.boolean "expired", default: false, null: false
+    t.string "name"
+    t.bigint "owner_id"
+    t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
   end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
-    t.string "name", null: false
     t.text "body"
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", precision: nil, null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
+    t.string "content_type"
     t.datetime "created_at", precision: nil, null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -63,114 +63,114 @@ ActiveRecord::Schema[8.0].define(version: 2023_02_24_052624) do
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_clients_on_account_id"
     t.index ["email"], name: "index_clients_on_email"
   end
 
   create_table "clients_projects", id: false, force: :cascade do |t|
-    t.bigint "project_id", null: false
     t.bigint "client_id", null: false
+    t.bigint "project_id", null: false
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
     t.bigint "commentable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
     t.string "commentable_type"
+    t.datetime "created_at", null: false
+    t.integer "status", default: 0, null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["commentable_id"], name: "index_comments_on_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "disciplines", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_disciplines_on_account_id"
   end
 
   create_table "documents", force: :cascade do |t|
+    t.string "comments"
+    t.datetime "created_at", null: false
+    t.bigint "documenter_id", null: false
+    t.string "documenter_type", null: false
     t.string "filename"
     t.string "link"
-    t.bigint "user_id", null: false
-    t.string "comments"
-    t.string "documenter_type", null: false
-    t.bigint "documenter_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["documenter_type", "documenter_id"], name: "index_documents_on_documenter"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "account_id", null: false
     t.string "action"
+    t.string "action_for_context"
+    t.datetime "created_at", null: false
     t.integer "eventable_id"
     t.string "eventable_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "action_for_context"
     t.integer "trackable_id"
     t.string "trackable_type"
-    t.bigint "account_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["account_id"], name: "index_events_on_account_id"
   end
 
   create_table "feedbacks", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "critiquable_type", null: false
     t.bigint "critiquable_id", null: false
+    t.string "critiquable_type", null: false
     t.boolean "published", default: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["critiquable_type", "critiquable_id"], name: "index_feedbacks_on_critiquable"
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
 
   create_table "goals", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
-    t.string "goalable_type", null: false
-    t.bigint "goalable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date "deadline"
-    t.integer "status", default: 0, null: false
     t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.date "deadline"
+    t.bigint "goalable_id", null: false
+    t.string "goalable_type", null: false
     t.boolean "permission", default: false, null: false
+    t.integer "status", default: 0, null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_goals_on_account_id"
     t.index ["goalable_type", "goalable_id"], name: "index_goals_on_goalable"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "jobs", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_jobs_on_account_id"
   end
 
   create_table "kbs", force: :cascade do |t|
-    t.string "document"
-    t.string "link"
-    t.bigint "user_id", null: false
-    t.bigint "discipline_id"
-    t.bigint "job_id"
-    t.string "tag"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "comments"
     t.bigint "account_id", null: false
+    t.string "comments"
+    t.datetime "created_at", null: false
+    t.bigint "discipline_id"
+    t.string "document"
+    t.bigint "job_id"
+    t.string "link"
+    t.string "tag"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_kbs_on_account_id"
     t.index ["discipline_id"], name: "index_kbs_on_discipline_id"
     t.index ["job_id"], name: "index_kbs_on_job_id"
@@ -178,22 +178,22 @@ ActiveRecord::Schema[8.0].define(version: 2023_02_24_052624) do
   end
 
   create_table "message_comments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "message_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "message_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["message_id"], name: "index_message_comments_on_message_id"
     t.index ["user_id"], name: "index_message_comments_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
-    t.string "title"
     t.bigint "account_id", null: false
-    t.bigint "user_id", null: false
-    t.bigint "space_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "published", default: false
+    t.bigint "space_id", null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_messages_on_account_id"
     t.index ["space_id"], name: "index_messages_on_space_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
@@ -201,9 +201,9 @@ ActiveRecord::Schema[8.0].define(version: 2023_02_24_052624) do
 
   create_table "notes", force: :cascade do |t|
     t.text "body"
-    t.string "notable_type"
-    t.bigint "notable_id"
     t.datetime "created_at", null: false
+    t.bigint "notable_id"
+    t.string "notable_type"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
@@ -211,178 +211,178 @@ ActiveRecord::Schema[8.0].define(version: 2023_02_24_052624) do
   end
 
   create_table "nuggets", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
-    t.bigint "skill_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
     t.boolean "published", default: false
     t.datetime "published_on", precision: nil
-    t.datetime "created_at", null: false
+    t.bigint "skill_id", null: false
+    t.string "title"
     t.datetime "updated_at", null: false
-    t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_nuggets_on_account_id"
     t.index ["skill_id"], name: "index_nuggets_on_skill_id"
     t.index ["user_id"], name: "index_nuggets_on_user_id"
   end
 
   create_table "nuggets_users", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: nil, default: "2025-10-23 15:16:28", null: false
     t.bigint "nugget_id", null: false
     t.boolean "read", default: false
-    t.datetime "created_at", precision: nil, default: "2025-10-23 15:16:28", null: false
     t.datetime "updated_at", precision: nil, default: "2025-10-23 15:16:28", null: false
+    t.bigint "user_id", null: false
   end
 
   create_table "pay_charges", force: :cascade do |t|
-    t.bigint "customer_id", null: false
-    t.bigint "subscription_id"
-    t.string "processor_id", null: false
     t.integer "amount", null: false
-    t.string "currency"
-    t.integer "application_fee_amount"
     t.integer "amount_refunded"
-    t.jsonb "metadata"
-    t.jsonb "data"
+    t.integer "application_fee_amount"
     t.datetime "created_at", null: false
+    t.string "currency"
+    t.bigint "customer_id", null: false
+    t.jsonb "data"
+    t.jsonb "metadata"
+    t.string "processor_id", null: false
+    t.bigint "subscription_id"
     t.datetime "updated_at", null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_charges_on_customer_id_and_processor_id", unique: true
     t.index ["subscription_id"], name: "index_pay_charges_on_subscription_id"
   end
 
   create_table "pay_customers", force: :cascade do |t|
-    t.string "owner_type"
+    t.datetime "created_at", null: false
+    t.jsonb "data"
+    t.boolean "default"
+    t.datetime "deleted_at", precision: nil
     t.bigint "owner_id"
+    t.string "owner_type"
     t.string "processor", null: false
     t.string "processor_id"
-    t.boolean "default"
-    t.jsonb "data"
-    t.datetime "deleted_at", precision: nil
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_type", "owner_id", "deleted_at", "default"], name: "pay_customer_owner_index"
     t.index ["processor", "processor_id"], name: "index_pay_customers_on_processor_and_processor_id", unique: true
   end
 
   create_table "pay_merchants", force: :cascade do |t|
-    t.string "owner_type"
+    t.datetime "created_at", null: false
+    t.jsonb "data"
+    t.boolean "default"
     t.bigint "owner_id"
+    t.string "owner_type"
     t.string "processor", null: false
     t.string "processor_id"
-    t.boolean "default"
-    t.jsonb "data"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_type", "owner_id", "processor"], name: "index_pay_merchants_on_owner_type_and_owner_id_and_processor"
   end
 
   create_table "pay_payment_methods", force: :cascade do |t|
-    t.bigint "customer_id", null: false
-    t.string "processor_id", null: false
-    t.boolean "default"
-    t.string "type"
-    t.jsonb "data"
     t.datetime "created_at", null: false
+    t.bigint "customer_id", null: false
+    t.jsonb "data"
+    t.boolean "default"
+    t.string "processor_id", null: false
+    t.string "type"
     t.datetime "updated_at", null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_payment_methods_on_customer_id_and_processor_id", unique: true
   end
 
   create_table "pay_subscriptions", force: :cascade do |t|
+    t.decimal "application_fee_percent", precision: 8, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "current_period_end"
+    t.datetime "current_period_start"
     t.bigint "customer_id", null: false
+    t.jsonb "data"
+    t.datetime "ends_at", precision: nil
+    t.jsonb "metadata"
+    t.boolean "metered"
     t.string "name", null: false
+    t.string "pause_behavior"
+    t.datetime "pause_resumes_at"
+    t.datetime "pause_starts_at"
     t.string "processor_id", null: false
     t.string "processor_plan", null: false
     t.integer "quantity", default: 1, null: false
     t.string "status", null: false
     t.datetime "trial_ends_at", precision: nil
-    t.datetime "ends_at", precision: nil
-    t.decimal "application_fee_percent", precision: 8, scale: 2
-    t.jsonb "metadata"
-    t.jsonb "data"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "current_period_start"
-    t.datetime "current_period_end"
-    t.boolean "metered"
-    t.string "pause_behavior"
-    t.datetime "pause_starts_at"
-    t.datetime "pause_resumes_at"
     t.index ["customer_id", "processor_id"], name: "index_pay_subscriptions_on_customer_id_and_processor_id", unique: true
     t.index ["metered"], name: "index_pay_subscriptions_on_metered"
     t.index ["pause_starts_at"], name: "index_pay_subscriptions_on_pause_starts_at"
   end
 
   create_table "pay_webhooks", force: :cascade do |t|
-    t.string "processor"
-    t.string "event_type"
-    t.jsonb "event"
     t.datetime "created_at", null: false
+    t.jsonb "event"
+    t.string "event_type"
+    t.string "processor"
     t.datetime "updated_at", null: false
   end
 
   create_table "people_statuses", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_people_statuses_on_account_id"
   end
 
   create_table "people_tags", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_people_tags_on_account_id"
   end
 
   create_table "people_tags_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "people_tag_id", null: false
+    t.bigint "user_id", null: false
   end
 
   create_table "pinned_spaces", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "space_id", null: false
+    t.bigint "user_id", null: false
     t.index ["space_id"], name: "index_pinned_spaces_on_space_id"
     t.index ["user_id"], name: "index_pinned_spaces_on_user_id"
   end
 
   create_table "preferences", force: :cascade do |t|
-    t.string "key"
-    t.string "value"
-    t.string "title"
-    t.string "message"
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
+    t.string "key"
+    t.string "message"
+    t.string "title"
     t.datetime "updated_at", null: false
+    t.string "value"
     t.index ["account_id"], name: "index_preferences_on_account_id"
   end
 
   create_table "project_observers", force: :cascade do |t|
-    t.bigint "project_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "project_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["project_id"], name: "index_project_observers_on_project_id"
     t.index ["user_id"], name: "index_project_observers_on_user_id"
   end
 
   create_table "project_statuses", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_project_statuses_on_account_id"
   end
 
   create_table "project_tags", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_project_tags_on_account_id"
   end
 
@@ -392,20 +392,20 @@ ActiveRecord::Schema[8.0].define(version: 2023_02_24_052624) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text "about"
     t.integer "account_id"
-    t.bigint "manager_id"
-    t.bigint "discipline_id"
-    t.string "description"
     t.boolean "archived", default: false
     t.datetime "archived_on", precision: nil
-    t.bigint "status_id"
     t.boolean "billable", default: true
     t.decimal "billable_resources", precision: 4, scale: 2
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.bigint "discipline_id"
     t.integer "kpi_id"
-    t.text "about"
+    t.bigint "manager_id"
+    t.string "name"
+    t.bigint "status_id"
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["discipline_id"], name: "index_projects_on_discipline_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id"
@@ -418,227 +418,227 @@ ActiveRecord::Schema[8.0].define(version: 2023_02_24_052624) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.string "title"
-    t.string "reportable_type", null: false
-    t.bigint "reportable_id", null: false
-    t.bigint "user_id", null: false
-    t.boolean "submitted", default: false
     t.datetime "created_at", null: false
+    t.bigint "reportable_id", null: false
+    t.string "reportable_type", null: false
+    t.boolean "submitted", default: false
+    t.string "title"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "risks", force: :cascade do |t|
     t.text "body"
-    t.boolean "status", default: true, null: false
-    t.bigint "user_id", null: false
-    t.bigint "project_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "project_id", null: false
+    t.boolean "status", default: true, null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["project_id"], name: "index_risks_on_project_id"
     t.index ["user_id"], name: "index_risks_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "name"
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
+    t.string "name"
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_roles_on_account_id"
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "project_id", null: false
+    t.boolean "billable", default: true
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.date "starts_at"
     t.date "ends_at"
     t.integer "occupancy"
-    t.boolean "billable", default: true
+    t.bigint "project_id", null: false
+    t.date "starts_at"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["project_id"], name: "index_schedules_on_project_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "skills", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_skills_on_account_id"
   end
 
   create_table "skills_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "skill_id", null: false
+    t.bigint "user_id", null: false
   end
 
   create_table "spaces", force: :cascade do |t|
-    t.string "title"
     t.bigint "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.string "description"
     t.boolean "archive", default: false
     t.datetime "archive_at"
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["account_id"], name: "index_spaces_on_account_id"
     t.index ["user_id"], name: "index_spaces_on_user_id"
   end
 
   create_table "spaces_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "space_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "space_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
   end
 
   create_table "survey_answers", force: :cascade do |t|
     t.integer "attempt_id"
-    t.integer "question_id"
-    t.integer "option_id"
-    t.integer "score", default: 0
     t.boolean "correct"
     t.datetime "created_at", null: false
+    t.integer "option_id"
+    t.integer "question_id"
+    t.integer "score", default: 0
     t.datetime "updated_at", null: false
   end
 
   create_table "survey_attempts", force: :cascade do |t|
-    t.bigint "participant_id", null: false
     t.bigint "actor_id", null: false
-    t.integer "survey_id"
-    t.boolean "submitted", default: false
-    t.boolean "winner"
     t.string "comment"
-    t.integer "score"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "participant_id", null: false
     t.string "participant_type", null: false
+    t.integer "score"
+    t.boolean "submitted", default: false
+    t.integer "survey_id"
+    t.datetime "updated_at", null: false
+    t.boolean "winner"
     t.index ["actor_id"], name: "index_survey_attempts_on_actor_id"
     t.index ["participant_id"], name: "index_survey_attempts_on_participant_id"
   end
 
   create_table "survey_options", force: :cascade do |t|
-    t.integer "question_id"
-    t.integer "weight", default: 0
-    t.string "text"
     t.boolean "correct"
     t.datetime "created_at", null: false
+    t.integer "question_id"
+    t.string "text"
     t.datetime "updated_at", null: false
+    t.integer "weight", default: 0
   end
 
   create_table "survey_participant", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
     t.datetime "created_at", null: false
+    t.string "email"
+    t.string "name"
     t.datetime "updated_at", null: false
   end
 
   create_table "survey_question_categories", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_survey_question_categories_on_account_id"
   end
 
   create_table "survey_questions", force: :cascade do |t|
-    t.integer "survey_id"
-    t.string "text"
+    t.datetime "created_at", null: false
     t.string "description"
     t.string "explanation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "question_category_id"
+    t.integer "survey_id"
+    t.string "text"
+    t.datetime "updated_at", null: false
   end
 
   create_table "survey_surveys", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
     t.bigint "account_id", null: false
-    t.integer "survey_for", default: 0
-    t.integer "attempts_number", default: 0
-    t.boolean "finished", default: false
     t.boolean "active", default: false
-    t.integer "winning_score", default: 0
     t.bigint "actor_id", null: false
-    t.integer "survey_type", default: 0
+    t.integer "attempts_number", default: 0
     t.datetime "created_at", null: false
+    t.text "description"
+    t.boolean "finished", default: false
+    t.string "name"
+    t.integer "survey_for", default: 0
+    t.integer "survey_type", default: 0
     t.datetime "updated_at", null: false
+    t.integer "winning_score", default: 0
     t.index ["account_id"], name: "index_survey_surveys_on_account_id"
     t.index ["actor_id"], name: "index_survey_surveys_on_actor_id"
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.bigint "tag_id", null: false
-    t.string "taggable_type", null: false
-    t.bigint "taggable_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "tag_id", null: false
+    t.bigint "taggable_id", null: false
+    t.string "taggable_type", null: false
     t.datetime "updated_at", null: false
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
     t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable"
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name"
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
+    t.string "name"
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_tags_on_account_id"
   end
 
   create_table "templates", force: :cascade do |t|
-    t.text "title"
-    t.bigint "user_id", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
+    t.text "title"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_templates_on_account_id"
     t.index ["user_id"], name: "index_templates_on_user_id"
   end
 
   create_table "templates_assignees", force: :cascade do |t|
-    t.bigint "template_id", null: false
-    t.string "assignable_type", null: false
     t.bigint "assignable_id", null: false
+    t.string "assignable_type", null: false
     t.datetime "created_at", null: false
+    t.bigint "template_id", null: false
     t.datetime "updated_at", null: false
     t.index ["assignable_type", "assignable_id"], name: "index_templates_assignees_on_assignable"
     t.index ["template_id"], name: "index_templates_assignees_on_template_id"
   end
 
   create_table "ticket_labels", force: :cascade do |t|
-    t.string "name"
-    t.bigint "discipline_id", null: false
     t.bigint "account_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "discipline_id", null: false
+    t.string "name"
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_ticket_labels_on_account_id"
     t.index ["discipline_id"], name: "index_ticket_labels_on_discipline_id"
     t.index ["user_id"], name: "index_ticket_labels_on_user_id"
   end
 
   create_table "ticket_statuses", force: :cascade do |t|
-    t.string "name"
     t.bigint "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "color", default: "gray", null: false
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_ticket_statuses_on_account_id"
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.bigint "ticket_label_id"
-    t.bigint "user_id", null: false
-    t.integer "ticket_status_id"
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "description"
+    t.bigint "ticket_label_id"
+    t.integer "ticket_status_id"
     t.boolean "ticketstatus", default: false, null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_tickets_on_account_id"
     t.index ["ticket_label_id"], name: "index_tickets_on_ticket_label_id"
     t.index ["ticket_status_id"], name: "index_tickets_on_ticket_status_id"
@@ -647,31 +647,31 @@ ActiveRecord::Schema[8.0].define(version: 2023_02_24_052624) do
 
   create_table "timesheets", force: :cascade do |t|
     t.bigint "account_id", null: false
-    t.bigint "project_id", null: false
-    t.bigint "user_id", null: false
-    t.decimal "hours", precision: 4, scale: 2, default: "0.0", null: false
+    t.boolean "billable", default: true, null: false
+    t.boolean "billed", default: false, null: false
+    t.datetime "created_at", null: false
     t.date "date", null: false
     t.string "description", null: false
-    t.boolean "billed", default: false, null: false
-    t.boolean "billable", default: true, null: false
-    t.datetime "created_at", null: false
+    t.decimal "hours", precision: 4, scale: 2, default: "0.0", null: false
+    t.bigint "project_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_timesheets_on_account_id"
     t.index ["project_id"], name: "index_timesheets_on_project_id"
     t.index ["user_id"], name: "index_timesheets_on_user_id"
   end
 
   create_table "todos", force: :cascade do |t|
-    t.string "title"
-    t.date "deadline"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "completed", default: false
-    t.bigint "project_id"
-    t.bigint "owner_id", null: false
     t.bigint "account_id", null: false
     t.text "body"
+    t.boolean "completed", default: false
+    t.datetime "created_at", null: false
+    t.date "deadline"
+    t.bigint "owner_id", null: false
+    t.bigint "project_id"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["account_id"], name: "index_todos_on_account_id"
     t.index ["owner_id"], name: "index_todos_on_owner_id"
     t.index ["project_id"], name: "index_todos_on_project_id"
@@ -679,47 +679,47 @@ ActiveRecord::Schema[8.0].define(version: 2023_02_24_052624) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: nil
-    t.datetime "remember_created_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text "about"
     t.integer "account_id", null: false
-    t.string "first_name", default: "", null: false
-    t.string "last_name", default: "", null: false
-    t.integer "role_id", null: false
-    t.integer "discipline_id", null: false
-    t.integer "job_id", null: false
-    t.bigint "manager_id"
     t.boolean "active", default: true, null: false
-    t.datetime "deactivated_on", precision: nil
-    t.bigint "status_id"
-    t.integer "permission", default: 0, null: false
-    t.string "invitation_token"
-    t.datetime "invitation_created_at", precision: nil
-    t.datetime "invitation_sent_at", precision: nil
-    t.datetime "invitation_accepted_at", precision: nil
-    t.integer "invitation_limit"
-    t.string "invited_by_type"
-    t.bigint "invited_by_id"
-    t.integer "invitations_count", default: 0
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: nil
-    t.datetime "last_sign_in_at", precision: nil
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
     t.boolean "billable", default: true, null: false
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "confirmation_token"
     t.datetime "confirmed_at", precision: nil
-    t.datetime "confirmation_sent_at", precision: nil
-    t.string "unconfirmed_email"
-    t.boolean "email_enabled", default: true
-    t.integer "kpi_id"
-    t.text "about"
-    t.string "experience"
+    t.datetime "created_at", null: false
+    t.datetime "current_sign_in_at", precision: nil
+    t.string "current_sign_in_ip"
     t.string "cv"
+    t.datetime "deactivated_on", precision: nil
+    t.integer "discipline_id", null: false
+    t.string "email", default: "", null: false
+    t.boolean "email_enabled", default: true
+    t.string "encrypted_password", default: "", null: false
+    t.string "experience"
+    t.string "first_name", default: "", null: false
+    t.datetime "invitation_accepted_at", precision: nil
+    t.datetime "invitation_created_at", precision: nil
+    t.integer "invitation_limit"
+    t.datetime "invitation_sent_at", precision: nil
+    t.string "invitation_token"
+    t.integer "invitations_count", default: 0
+    t.bigint "invited_by_id"
+    t.string "invited_by_type"
+    t.integer "job_id", null: false
+    t.integer "kpi_id"
+    t.string "last_name", default: "", null: false
+    t.datetime "last_sign_in_at", precision: nil
+    t.string "last_sign_in_ip"
+    t.bigint "manager_id"
+    t.integer "permission", default: 0, null: false
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "reset_password_sent_at", precision: nil
+    t.string "reset_password_token"
+    t.integer "role_id", null: false
+    t.integer "sign_in_count", default: 0, null: false
+    t.bigint "status_id"
+    t.string "unconfirmed_email"
+    t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["discipline_id"], name: "index_users_on_discipline_id"
     t.index ["email"], name: "index_users_on_email", unique: true
