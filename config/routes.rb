@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  authenticate :user, lambda { |u| u.admin? } do
-    mount MissionControl::Jobs::Engine, at: "/jobs"
-  end
-
   mount ActionCable.server => "/cable"
 
   if %w(development).include?(Rails.env) && defined?(LetterOpenerWeb)

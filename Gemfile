@@ -45,7 +45,6 @@ gem "image_processing", "~> 1.13"
 gem "solid_cable", ">= 3.0"
 gem "solid_cache", "~> 1.0"
 gem "solid_queue", "~> 1.2"
-gem "mission_control-jobs"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "acts_as_tenant"

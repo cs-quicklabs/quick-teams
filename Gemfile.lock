@@ -249,16 +249,6 @@ GEM
       logger
     mini_mime (1.1.5)
     minitest (5.26.2)
-    mission_control-jobs (1.1.0)
-      actioncable (>= 7.1)
-      actionpack (>= 7.1)
-      activejob (>= 7.1)
-      activerecord (>= 7.1)
-      importmap-rails (>= 1.2.1)
-      irb (~> 1.13)
-      railties (>= 7.1)
-      stimulus-rails
-      turbo-rails
     mocha (2.8.2)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.8.0)
@@ -534,7 +524,6 @@ DEPENDENCIES
   letter_opener
   listen
   mimemagic!
-  mission_control-jobs
   mocha
   newrelic_rpm (~> 9.16)
   nokogiri (~> 1.16)
