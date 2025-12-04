@@ -7,18 +7,6 @@ send_weekly_activity_report:
   queue: default
   schedule: every Monday at 10:00am
 
-# Daily tech nugget - Monday to Friday at 10:00 AM
-send_daily_tech_nugget:
-  class: DailyTechNuggetMailerJob
-  queue: default
-  schedule: every weekday at 10:00am
-
-# Reset unread tech nuggets - every Monday at 10:00 AM
-reset_unread_tech_nugget:
-  class: WeeklyNuggetResetMailerJob
-  queue: default
-  schedule: every Monday at 10:00am
-
 # Delete old timesheets - daily at midnight
 delete_timesheets_after_x_days:
   class: DeleteTimesheetsJob

@@ -52,7 +52,6 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :people_tags, dependent: :destroy
   has_and_belongs_to_many :skills, dependent: :destroy
-  has_and_belongs_to_many :nuggets
   has_and_belongs_to_many :spaces
   validates :email, uniqueness: true
   validates_presence_of :first_name, :last_name, :email, :role, :job, :discipline, :account
@@ -159,18 +158,6 @@ class User < ApplicationRecord
 
   def is_observer?(project)
     project.observers.include?(self)
-  end
-
-  def added_nuggets
-    Nugget.where(user: self).includes(:user)
-  end
-
-  def published_nuggets
-    nuggets.where(published: true).select("nuggets_users.read as read", "nuggets.*").includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
-  end
-
-  def published_nuggets_for_skill(id)
-    nuggets.where(published: true).select("nuggets_users.read as read", "nuggets.*").where(skill_id: id).includes(:skill).order(read: :ASC).order(created_at: :desc).uniq
   end
 
   def surveys

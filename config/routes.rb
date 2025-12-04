@@ -56,7 +56,6 @@ Rails.application.routes.draw do
     resources :goals, module: "employee"
     resources :todos, module: "employee"
     resources :skills, module: "employee"
-    resources :nuggets, module: "employee"
     resources :documents, module: "employee"
     resources :reports, module: "employee"
     resources :surveys, module: "employee", only: [:index, :show, :destroy]
@@ -81,7 +80,6 @@ Rails.application.routes.draw do
   resources :comments, only: [:edit, :destroy, :update]
   resources :report_comments, only: [:create, :update]
   resources :goal_comments, only: [:create, :update]
-  resources :nuggets
   resources :kbs
   resources :kpis
   resources :templates do
@@ -162,7 +160,6 @@ Rails.application.routes.draw do
     get "/todos/recently-added", to: "report/todos#recently_added_todos", as: "recently_added_todos"
     get "/todos/recently-finished", to: "report/todos#recently_finished_todos", as: "recently_finished_todos"
     get "/skills", to: "report/skills#index", as: "skills_reports"
-    get "/nuggets", to: "report/nuggets#index", as: "nuggets_reports"
     get "/activities", to: "report/activities#index", as: "activities_reports"
     get "/roles", to: "report/roles#index", as: "employee_roles_reports"
     get "/kbs", to: "report/kbs#index", as: "kbs_reports"
