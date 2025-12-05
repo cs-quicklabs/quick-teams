@@ -6,39 +6,54 @@ class UpdateEmployee < Patterns::Service
   end
 
   def call
-    begin
-      update_employee
-      send_email
-    rescue
-      employee
-    end
+    update_employee
+    send_emails
+    employee
+  rescue StandardError
     employee
   end
 
   private
 
+  attr_reader :employee, :params, :actor
+
   def update_employee
-    employee.update(params)
+    employee.update!(params)
   end
 
-  def send_email
+  def send_emails
     return unless deliver_email?
-    if employee.saved_change_to_attribute?(:manager_id)
-      @manager = User.find(employee.manager_id_before_last_save)
-      @manager.touch
-      EmployeeMailer.with(employee: employee, manager: @manager).relieved_email.deliver_later
-      EmployeeMailer.with(employee: employee, manager: employee.manager).updated_manager_email.deliver_later
-      EmployeeMailer.with(employee: employee, manager: employee.manager).manager_email.deliver_later
-    end
-    if employee.saved_change_to_attribute?(:role_id)
-      @role = employee.role.name
-      EmployeeMailer.with(employee: employee, role: @role).role_changed_email.deliver_later
-    end
+
+    send_manager_change_emails if employee.saved_change_to_attribute?(:manager_id)
+    send_role_change_email if employee.saved_change_to_attribute?(:role_id)
+  end
+
+  def send_manager_change_emails
+    previous_manager = User.find(employee.manager_id_before_last_save)
+    previous_manager.touch
+
+    EmployeeMailer.with(employee: employee, manager: previous_manager)
+                  .relieved_email
+                  .deliver_later
+
+    EmployeeMailer.with(employee: employee, manager: employee.manager)
+                  .updated_manager_email
+                  .deliver_later
+
+    EmployeeMailer.with(employee: employee, manager: employee.manager)
+                  .manager_email
+                  .deliver_later
+  end
+
+  def send_role_change_email
+    EmployeeMailer.with(employee: employee, role: employee.role.name)
+                  .role_changed_email
+                  .deliver_later
   end
 
   def deliver_email?
-    employee.email_enabled and employee.account.email_enabled and employee.sign_in_count > 0
+    employee.email_enabled &&
+      employee.account.email_enabled &&
+      employee.sign_in_count.positive?
   end
-
-  attr_reader :employee, :params, :actor
 end

@@ -5,36 +5,42 @@ class ArchiveSpace < Patterns::Service
   end
 
   def call
-    begin
-      delete_drafts
-      archive_space
-      send_email
-    rescue
-      space
-    end
+    delete_drafts
+    archive_space
+    send_emails
+    space
+  rescue StandardError
     space
   end
 
   private
+
+  attr_reader :space, :actor
 
   def delete_drafts
     space.messages.draft.destroy_all
   end
 
   def archive_space
-    actor.pinned.destroy @space
-    @space.update(archive: true, archive_at: Time.now)
+    actor.pinned.destroy(space)
+    space.update!(archive: true, archive_at: Time.current)
   end
 
-  def send_email
-    (space.users - [actor]).each do |user|
-      SpacesMailer.with(space: space, employee: user, actor: actor).archived_email.deliver_later if deliver_email?(user)
+  def send_emails
+    recipients.each do |user|
+      SpacesMailer.with(space: space, employee: user, actor: actor)
+                  .archived_email
+                  .deliver_later
     end
   end
 
-  def deliver_email?(employee)
-    employee.email_enabled and employee.account.email_enabled and employee.sign_in_count > 0
+  def recipients
+    (space.users - [actor]).select { |user| deliver_email?(user) }
   end
 
-  attr_reader :space, :actor
+  def deliver_email?(employee)
+    employee.email_enabled &&
+      employee.account.email_enabled &&
+      employee.sign_in_count.positive?
+  end
 end

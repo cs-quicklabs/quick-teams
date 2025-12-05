@@ -9,34 +9,37 @@ class UpdateMessage < Patterns::Service
   end
 
   def call
-    begin
-      update_message
-      email
-    rescue
-      message
-    end
+    update_message
+    send_emails
+    message
+  rescue StandardError
     message
   end
 
+  private
+
+  attr_reader :space, :message, :actor, :draft, :send_email, :params
+
   def update_message
-    if draft.nil?
-      message.published = true
-    end
-    message.update(params)
+    message.published = true if draft.nil?
+    message.update!(params)
   end
 
-  def email
-    return unless !send_email.nil? && draft.nil?
-    (space.users - [actor]).each do |user|
-      if deliver_email?(user)
-        MessagesMailer.with(actor: actor, employee: user, message: message, space: space).update_message_email.deliver_later
-      end
+  def send_emails
+    return unless send_email.present? && draft.nil?
+
+    recipients.each do |user|
+      MessagesMailer.with(actor: actor, employee: user, message: message, space: space)
+                    .update_message_email
+                    .deliver_later
     end
+  end
+
+  def recipients
+    (space.users - [actor]).select { |user| deliver_email?(user) }
   end
 
   def deliver_email?(employee)
-    (actor != employee) and employee.email_enabled and employee.account.email_enabled
+    actor != employee && employee.email_enabled && employee.account.email_enabled
   end
-
-  attr_reader :space, :message, :actor, :draft, :send_email, :params
 end

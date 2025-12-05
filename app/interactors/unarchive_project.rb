@@ -5,26 +5,27 @@ class UnarchiveProject < Patterns::Service
   end
 
   def call
-    begin
-      unarchive
-      add_event
-    rescue
-      project
-    end
+    unarchive
+    add_event
+    project
+  rescue StandardError
     project
   end
 
   private
 
+  attr_reader :project, :actor
+
   def unarchive
-    project.archived = false
-    project.archived_on = nil
-    project.save!
+    project.update!(archived: false, archived_on: nil)
   end
 
   def add_event
-    project.events.create(user: actor, action: "unarchived", action_for_context: "unarchived project", trackable: project)
+    project.events.create!(
+      user: actor,
+      action: "unarchived",
+      action_for_context: "unarchived project",
+      trackable: project,
+    )
   end
-
-  attr_reader :project, :actor
 end

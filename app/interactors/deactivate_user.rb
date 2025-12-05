@@ -5,37 +5,36 @@ class DeactivateUser < Patterns::Service
   end
 
   def call
-    begin
-      remove_as_people_manager
-      remove_as_project_manager
-      remove_reporting_manager
-      remove_report_templates
-      clear_schedules
-      discard_goals
-      clear_todos
-      submit_pending_reports
-      destroy_observers
-      deactivate
-      add_event
-    rescue
-      user
-    end
-
+    remove_as_people_manager
+    remove_as_project_manager
+    remove_reporting_manager
+    remove_report_templates
+    clear_schedules
+    discard_goals
+    clear_todos
+    submit_pending_reports
+    destroy_observers
+    deactivate
+    add_event
+    user
+  rescue StandardError
     user
   end
 
   private
 
+  attr_reader :user, :actor
+
   def remove_as_people_manager
-    user.subordinates.update_all(manager_id: nil, updated_at: DateTime.now.utc)
+    user.subordinates.update_all(manager_id: nil, updated_at: Time.current)
   end
 
   def remove_as_project_manager
-    Project.where(manager_id: user.id).update_all(manager_id: nil, updated_at: DateTime.now.utc)
+    Project.where(manager_id: user.id).update_all(manager_id: nil, updated_at: Time.current)
   end
 
   def remove_reporting_manager
-    user.update(manager_id: nil)
+    user.update!(manager_id: nil)
   end
 
   def remove_report_templates
@@ -43,24 +42,25 @@ class DeactivateUser < Patterns::Service
   end
 
   def clear_schedules
-    schedules = Schedule.where(user: user)
-    schedules.each do |schedule|
-      schedule.destroy
+    Schedule.where(user: user).find_each do |schedule|
+      schedule.destroy!
       schedule.project.reset_billable_resources
     end
   end
 
   def deactivate
-    user.active = false
-    user.deactivated_on = DateTime.now.utc
-    user.save!
+    user.update!(active: false, deactivated_on: Time.current)
   end
 
   def discard_goals
-    user.goals.pending.each do |goal|
-      params = { user_id: actor.id, commentable_id: goal.id, title: "Discarding as employee has been deactivated.", status: "stale" }
-      goal.comments << Comment.new(params)
-      goal.update_attribute("status", "discarded")
+    user.goals.pending.find_each do |goal|
+      goal.comments.create!(
+        user_id: actor.id,
+        commentable_id: goal.id,
+        title: "Discarding as employee has been deactivated.",
+        status: "stale",
+      )
+      goal.update!(status: "discarded")
     end
   end
 
@@ -73,12 +73,15 @@ class DeactivateUser < Patterns::Service
   end
 
   def add_event
-    user.events.create(user: actor, action: "deactivated", action_for_context: "deactivated", trackable: user)
+    user.events.create!(
+      user: actor,
+      action: "deactivated",
+      action_for_context: "deactivated",
+      trackable: user,
+    )
   end
 
   def destroy_observers
     user.observing_projects.destroy_all
   end
-
-  attr_reader :user, :actor
 end

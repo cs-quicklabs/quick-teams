@@ -6,39 +6,42 @@ class AddSpace < Patterns::Service
   end
 
   def call
-    begin
-      create_space
-      space_users
-      send_email
-    rescue
-      space
-    end
+    create_space
+    add_space_users
+    send_emails
+    space
+  rescue StandardError
     space
   end
+
+  private
+
+  attr_reader :space, :actor, :users
 
   def create_space
     space.save!
   end
 
-  def space_users
-    space.users << User.where("id IN (?)", users)
+  def add_space_users
+    space.users << User.where(id: users)
     space.users << actor unless space.users.include?(actor)
   end
 
-  def send_email
-    if users.size > 0
-      @space_users = User.where("id IN (?)", users)
-      @space_users.each do |user|
-        if deliver_email?(user)
-          SpacesMailer.with(actor: actor, employee: user, space: space).space_email.deliver_later
-        end
-      end
+  def send_emails
+    return if users.empty?
+
+    recipients.each do |user|
+      SpacesMailer.with(actor: actor, employee: user, space: space)
+                  .space_email
+                  .deliver_later
     end
   end
 
-  def deliver_email?(employee)
-    (actor != employee) and employee.email_enabled and employee.account.email_enabled
+  def recipients
+    User.where(id: users).select { |user| deliver_email?(user) }
   end
 
-  attr_reader :space, :actor, :users
+  def deliver_email?(employee)
+    actor != employee && employee.email_enabled && employee.account.email_enabled
+  end
 end

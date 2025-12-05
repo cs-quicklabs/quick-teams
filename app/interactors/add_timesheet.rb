@@ -6,22 +6,19 @@ class AddTimesheet < Patterns::Service
   end
 
   def call
-    begin
-      create_timesheet
-    rescue
-      timesheet
-    end
-
+    create_timesheet
+    timesheet
+  rescue StandardError
     timesheet
   end
 
   private
+
+  attr_reader :project, :actor, :timesheet
 
   def create_timesheet
     timesheet.billable = project.billable && actor.billable
     timesheet.user = actor
     timesheet.save!
   end
-
-  attr_reader :project, :actor, :timesheet
 end

@@ -6,33 +6,42 @@ class RemoveObserver < Patterns::Service
   end
 
   def call
-    begin
-      remove_observer
-      send_email
-      add_event
-    rescue
-      project
-    end
+    remove_observer
+    send_email
+    add_event
+    project
+  rescue StandardError
     project
   end
 
   private
 
+  attr_reader :actor, :observer, :project
+
   def remove_observer
-    project.observers.delete(@observer)
+    project.observers.delete(observer)
   end
 
   def add_event
-    @project.events.create(user: actor, action: "observer_removed", action_for_context: "as project observer", trackable: observer)
+    project.events.create!(
+      user: actor,
+      action: "observer_removed",
+      action_for_context: "as project observer",
+      trackable: observer,
+    )
   end
 
   def send_email
-    EmployeeMailer.with(employee: observer, project: project).observer_removed_email.deliver_later if deliver_email?(observer)
+    return unless deliver_email?
+
+    EmployeeMailer.with(employee: observer, project: project)
+                  .observer_removed_email
+                  .deliver_later
   end
 
-  def deliver_email?(employee)
-    employee.email_enabled and employee.account.email_enabled and employee.sign_in_count > 0
+  def deliver_email?
+    observer.email_enabled &&
+      observer.account.email_enabled &&
+      observer.sign_in_count.positive?
   end
-
-  attr_reader :actor, :observer, :project
 end

@@ -5,30 +5,36 @@ class UnarchiveSpace < Patterns::Service
   end
 
   def call
-    begin
-      unarchive_space
-      send_email
-    rescue
-      space
-    end
+    unarchive_space
+    send_emails
+    space
+  rescue StandardError
     space
   end
 
   private
 
+  attr_reader :space, :actor
+
   def unarchive_space
-    @space.update(archive: false, archive_at: nil)
+    space.update!(archive: false, archive_at: nil)
   end
 
-  def send_email
-    (space.users - [actor]).each do |user|
-      SpacesMailer.with(space: space, employee: user, actor: actor).unarchived_email.deliver_later if deliver_email?(user)
+  def send_emails
+    recipients.each do |user|
+      SpacesMailer.with(space: space, employee: user, actor: actor)
+                  .unarchived_email
+                  .deliver_later
     end
   end
 
-  def deliver_email?(employee)
-    employee.email_enabled and employee.account.email_enabled and employee.sign_in_count > 0
+  def recipients
+    (space.users - [actor]).select { |user| deliver_email?(user) }
   end
 
-  attr_reader :space, :actor
+  def deliver_email?(employee)
+    employee.email_enabled &&
+      employee.account.email_enabled &&
+      employee.sign_in_count.positive?
+  end
 end

@@ -1,22 +1,21 @@
 class AddEmployeeTodo < Patterns::Service
   def initialize(employee, params, actor)
     @employee = employee
-    @todo = @employee.todos.new params
+    @todo = employee.todos.new(params)
     @actor = actor
   end
 
   def call
-    begin
-      add_todo
-      send_email
-    rescue
-      todo
-    end
-
+    add_todo
+    send_email
+    todo
+  rescue StandardError
     todo
   end
 
   private
+
+  attr_reader :employee, :todo, :actor
 
   def add_todo
     todo.user_id = actor.id
@@ -25,12 +24,17 @@ class AddEmployeeTodo < Patterns::Service
   end
 
   def send_email
-    TodosMailer.with(actor: actor, employee: employee, todo: todo).added_email.deliver_later if deliver_email?
+    return unless deliver_email?
+
+    TodosMailer.with(actor: actor, employee: employee, todo: todo)
+               .added_email
+               .deliver_later
   end
 
   def deliver_email?
-    actor != employee and employee.email_enabled and employee.account.email_enabled and employee.sign_in_count > 0
+    actor != employee &&
+      employee.email_enabled &&
+      employee.account.email_enabled &&
+      employee.sign_in_count.positive?
   end
-
-  attr_reader :employee, :todo, :actor
 end

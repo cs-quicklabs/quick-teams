@@ -5,22 +5,21 @@ class ArchiveProject < Patterns::Service
   end
 
   def call
-    begin
-      clear_schedule
-      clear_todos
-      discard_milestones
-      archive
-      submit_pending_reports
-      destroy_observers
-      add_event
-    rescue
-      project
-    end
-
+    clear_schedule
+    clear_todos
+    discard_milestones
+    archive
+    submit_pending_reports
+    destroy_observers
+    add_event
+    project
+  rescue StandardError
     project
   end
 
   private
+
+  attr_reader :project, :actor
 
   def clear_schedule
     project.schedules.destroy_all
@@ -28,10 +27,11 @@ class ArchiveProject < Patterns::Service
   end
 
   def archive
-    project.archived = true
-    project.archived_on = DateTime.now.utc
-    project.manager = nil
-    project.save!
+    project.update!(
+      archived: true,
+      archived_on: Time.current,
+      manager: nil,
+    )
   end
 
   def clear_todos
@@ -39,10 +39,14 @@ class ArchiveProject < Patterns::Service
   end
 
   def discard_milestones
-    project.milestones.where(status: :progress).each do |goal|
-      params = { user_id: actor.id, commentable_id: goal.id, title: "Discarding as project has been archived.", status: "stale" }
-      goal.comments << Comment.new(params)
-      goal.update_attribute("status", "discarded")
+    project.milestones.where(status: :progress).find_each do |milestone|
+      milestone.comments.create!(
+        user_id: actor.id,
+        commentable_id: milestone.id,
+        title: "Discarding as project has been archived.",
+        status: "stale",
+      )
+      milestone.update!(status: "discarded")
     end
   end
 
@@ -51,12 +55,15 @@ class ArchiveProject < Patterns::Service
   end
 
   def add_event
-    project.events.create(user: actor, action: "archived", action_for_context: "archived", trackable: project)
+    project.events.create!(
+      user: actor,
+      action: "archived",
+      action_for_context: "archived",
+      trackable: project,
+    )
   end
 
   def destroy_observers
     project.observers.destroy_all
   end
-
-  attr_reader :project, :actor
 end

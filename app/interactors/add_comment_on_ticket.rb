@@ -2,28 +2,31 @@ class AddCommentOnTicket < Patterns::Service
   def initialize(params, ticket, method, actor)
     @comment = Comment.new(params)
     @ticket = ticket
-
     @method = method
     @actor = actor
-    if (actor == ticket.user or actor.admin?)
-      @employee = ticket.ticket_label.user
-    else
-      @employee = ticket.user
-    end
+    @employee = determine_employee
   end
 
   def call
-    begin
-      add_comment
-      update_ticket
-      send_email
-    rescue
-      comment
-    end
+    add_comment
+    update_ticket
+    send_email
+    comment
+  rescue StandardError
     comment
   end
 
   private
+
+  attr_reader :ticket, :comment, :method, :actor, :employee
+
+  def determine_employee
+    if actor == ticket.user || actor.admin?
+      ticket.ticket_label.user
+    else
+      ticket.user
+    end
+  end
 
   def add_comment
     comment.commentable = ticket
@@ -31,18 +34,20 @@ class AddCommentOnTicket < Patterns::Service
   end
 
   def update_ticket
-    if method == "and mark closed"
-      ticket.update_attribute("ticketstatus", true)
-    end
+    return unless method == "and mark closed"
+
+    ticket.update!(ticketstatus: true)
   end
 
   def send_email
-    CommentsMailer.with(actor: actor, employee: employee, ticket: ticket).commented_ticket.deliver_later if deliver_email?
+    return unless deliver_email?
+
+    CommentsMailer.with(actor: actor, employee: employee, ticket: ticket)
+                  .commented_ticket
+                  .deliver_later
   end
 
   def deliver_email?
-    (actor != employee) and employee.email_enabled and employee.account.email_enabled
+    actor != employee && employee.email_enabled && employee.account.email_enabled
   end
-
-  attr_reader :ticket, :comment, :method, :actor, :employee
 end

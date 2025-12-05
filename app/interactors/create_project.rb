@@ -2,34 +2,38 @@ class CreateProject < Patterns::Service
   def initialize(params, actor, observers)
     @project = Project.new(params)
     @actor = actor
-    @observers = observers.reject(&:blank?) if observers
+    @observers = observers&.reject(&:blank?)
   end
 
   def call
-    begin
-      create_project
-      add_observers
-      add_event
-    rescue
-      project
-    end
-
+    create_project
+    add_observers
+    add_event
+    project
+  rescue StandardError
     project
   end
 
   private
+
+  attr_reader :project, :actor, :observers
 
   def create_project
     project.save!
   end
 
   def add_observers
-    project.observers << User.where("id IN (?)", observers) unless observers.blank?
+    return if observers.blank?
+
+    project.observers << User.where(id: observers)
   end
 
   def add_event
-    project.events.create(user: actor, action: "project_created", action_for_context: "added new project", trackable: project)
+    project.events.create!(
+      user: actor,
+      action: "project_created",
+      action_for_context: "added new project",
+      trackable: project,
+    )
   end
-
-  attr_reader :project, :actor, :observers
 end

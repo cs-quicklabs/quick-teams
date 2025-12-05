@@ -2,27 +2,27 @@ class UpdateProject < Patterns::Service
   def initialize(project, params, observers)
     @project = project
     @params = params
-    @observers = observers.reject(&:blank?) if observers
+    @observers = observers&.reject(&:blank?)
   end
 
   def call
-    begin
-      update_project
-      add_observers
-    rescue
-      project
-    end
+    update_project
+    update_observers
+    project
+  rescue StandardError
     project
   end
 
-  def update_project
-    @project.update(@params)
-  end
-
-  def add_observers
-    project.observers.clear
-    project.observers << User.where("id IN (?)", observers) unless observers.blank?
-  end
+  private
 
   attr_reader :project, :observers, :params
+
+  def update_project
+    project.update!(params)
+  end
+
+  def update_observers
+    project.observers.clear
+    project.observers << User.where(id: observers) if observers.present?
+  end
 end

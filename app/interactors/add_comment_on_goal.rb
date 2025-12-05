@@ -1,4 +1,17 @@
 class AddCommentOnGoal < Patterns::Service
+  STATUS_MAP = {
+    "and mark Missed" => "missed",
+    "and mark Completed" => "completed",
+    "and mark Discarded" => "discarded",
+  }.freeze
+
+  EMAIL_METHOD_MAP = {
+    "Comment" => :commented_email,
+    "and mark Missed" => :missed_email,
+    "and mark Completed" => :completed_email,
+    "and mark Discarded" => :discarded_email,
+  }.freeze
+
   def initialize(params, goal, method, actor)
     @comment = Comment.new(params)
     @goal = goal
@@ -8,51 +21,41 @@ class AddCommentOnGoal < Patterns::Service
   end
 
   def call
-    begin
-      add_comment
-      update_goal
-      send_email
-    rescue
-      comment
-    end
+    add_comment
+    update_goal_status
+    send_email
+    comment
+  rescue StandardError
     comment
   end
 
   private
+
+  attr_reader :goal, :comment, :method, :actor, :employee
 
   def add_comment
     comment.commentable = goal
     comment.save!
   end
 
-  def update_goal
-    if method == "Comment"
-    elsif method == "and mark Missed"
-      goal.update_attribute("status", "missed")
-    elsif method == "and mark Completed"
-      goal.update_attribute("status", "completed")
-    elsif method == "and mark Discarded"
-      goal.update_attribute("status", "discarded")
-    end
+  def update_goal_status
+    return unless STATUS_MAP.key?(method)
+
+    goal.update!(status: STATUS_MAP[method])
   end
 
   def send_email
-    return unless goal.goalable_type == "User" and deliver_email?
+    return unless goal.goalable_type == "User" && deliver_email?
 
-    if method == "Comment"
-      GoalsMailer.with(actor: actor, employee: employee, goal: goal).commented_email.deliver_later
-    elsif method == "and mark Missed"
-      GoalsMailer.with(actor: actor, employee: employee, goal: goal).missed_email.deliver_later
-    elsif method == "and mark Completed"
-      GoalsMailer.with(actor: actor, employee: employee, goal: goal).completed_email.deliver_later
-    elsif method == "and mark Discarded"
-      GoalsMailer.with(actor: actor, employee: employee, goal: goal).discarded_email.deliver_later
-    end
+    email_method = EMAIL_METHOD_MAP[method]
+    return unless email_method
+
+    GoalsMailer.with(actor: actor, employee: employee, goal: goal)
+               .public_send(email_method)
+               .deliver_later
   end
 
   def deliver_email?
-    (actor != employee) and employee.email_enabled and employee.account.email_enabled
+    actor != employee && employee.email_enabled && employee.account.email_enabled
   end
-
-  attr_reader :goal, :comment, :method, :actor, :employee
 end

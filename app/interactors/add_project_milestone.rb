@@ -1,22 +1,21 @@
 class AddProjectMilestone < Patterns::Service
   def initialize(project, params, actor)
     @project = project
-    @milestone = @project.milestones.new params
+    @milestone = project.milestones.new(params)
     @actor = actor
   end
 
   def call
-    begin
-      add_milestone
-      add_event
-    rescue
-      milestone
-    end
-
+    add_milestone
+    add_event
+    milestone
+  rescue StandardError
     milestone
   end
 
   private
+
+  attr_reader :project, :milestone, :actor
 
   def add_milestone
     milestone.user_id = actor.id
@@ -24,8 +23,11 @@ class AddProjectMilestone < Patterns::Service
   end
 
   def add_event
-    project.events.create(user: actor, action: "milestone", action_for_context: "added milestone for", trackable: milestone)
+    project.events.create!(
+      user: actor,
+      action: "milestone",
+      action_for_context: "added milestone for",
+      trackable: milestone,
+    )
   end
-
-  attr_reader :project, :milestone, :actor
 end

@@ -1,23 +1,22 @@
 class AddEmployeeReport < Patterns::Service
   def initialize(employee, params, submitted, actor)
     @employee = employee
-    @report = @employee.reports.new params
+    @report = employee.reports.new(params)
     @submitted = submitted
     @actor = actor
   end
 
   def call
-    begin
-      add_report
-      add_event
-    rescue
-      report
-    end
-
+    add_report
+    add_event
+    report
+  rescue StandardError
     report
   end
 
   private
+
+  attr_reader :employee, :report, :submitted, :actor
 
   def add_report
     report.submitted = submitted
@@ -26,8 +25,13 @@ class AddEmployeeReport < Patterns::Service
   end
 
   def add_event
-    employee.events.create(user: actor, action: "report", action_for_context: "added new report in employee", trackable: report) if submitted
-  end
+    return unless submitted
 
-  attr_reader :employee, :report, :submitted, :actor
+    employee.events.create!(
+      user: actor,
+      action: "report",
+      action_for_context: "added new report in employee",
+      trackable: report,
+    )
+  end
 end

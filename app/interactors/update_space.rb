@@ -7,25 +7,25 @@ class UpdateSpace < Patterns::Service
   end
 
   def call
-    begin
-      update_space
-      update_space_users
-      @space.touch
-    rescue
-      space
-    end
+    update_space
+    update_space_users
+    space.touch
+    space
+  rescue StandardError
     space
   end
 
+  private
+
+  attr_reader :space, :actor, :users, :params
+
   def update_space
-    @space.update(params)
+    space.update!(params)
   end
 
   def update_space_users
     space.users.clear
-    space.users << User.where("id IN (?)", users)
+    space.users << User.where(id: users)
     space.users << space.user unless space.users.include?(space.user)
   end
-
-  attr_reader :space, :actor, :users, :params
 end

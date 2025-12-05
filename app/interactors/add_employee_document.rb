@@ -1,30 +1,23 @@
 class AddEmployeeDocument < Patterns::Service
   def initialize(employee, params, actor)
     @employee = employee
-    @document = @employee.documents.new params
+    @document = employee.documents.new(params)
     @actor = actor
   end
 
   def call
-    begin
-      add_document
-    rescue
-      document
-    end
-
+    add_document
+    document
+  rescue StandardError
     document
   end
 
   private
 
+  attr_reader :employee, :document, :actor
+
   def add_document
     document.user_id = actor.id
     document.save!
   end
-
-  def add_event
-    employee.events.create(user: actor, action: "document", action_for_context: "added new document", trackable: document)
-  end
-
-  attr_reader :employee, :document, :actor
 end

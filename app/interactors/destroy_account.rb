@@ -4,30 +4,23 @@ class DestroyAccount < Patterns::Service
   end
 
   def call
-    begin
-      accounts.each do |account|
-        ActsAsTenant.current_tenant = account
-        account.owner = nil
-        account.save!
-        delete_projects(account)
-        delete_users(account)
-        account.destroy
-      end
-    rescue Exception => e
-      return e
+    accounts.each do |account|
+      destroy_account(account)
     end
     true
+  rescue StandardError => e
+    e
   end
 
   private
 
-  def delete_projects(account)
-    account.projects.destroy_all
-  end
-
-  def delete_users(account)
-    User.where(account_id: account.id).destroy_all
-  end
-
   attr_reader :accounts
+
+  def destroy_account(account)
+    ActsAsTenant.current_tenant = account
+    account.update!(owner: nil)
+    account.projects.destroy_all
+    account.users.destroy_all
+    account.destroy!
+  end
 end
