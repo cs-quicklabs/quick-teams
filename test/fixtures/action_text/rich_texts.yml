@@ -13,7 +13,77 @@
    name: body
    body: <div>This is some Space</div>   
 
+ goal_one:
+   record: one(Goal)
+   name: body
+   body: <div>This is goal one body</div>
+
+ goal_two:
+   record: two(Goal)
+   name: body
+   body: <div>This is goal two body</div>
+
+ goal_three:
+   record: three(Goal)
+   name: body
+   body: <div>This is goal three body</div>
+
  goal_four:
    record: four(Goal)
    name: body
-   body: <div>This is some goal body</div>
+   body: <div>This is goal four body</div>
+
+ goal_five:
+   record: five(Goal)
+   name: body
+   body: <div>This is goal five body</div>
+
+ goal_six:
+   record: six(Goal)
+   name: body
+   body: <div>This is goal six body</div>
+
+ goal_seven:
+   record: seven(Goal)
+   name: body
+   body: <div>This is goal seven body</div>
+
+ goal_eight:
+   record: eight(Goal)
+   name: body
+   body: <div>This is goal eight body</div>
+
+ goal_nine:
+   record: nine(Goal)
+   name: body
+   body: <div>This is goal nine body</div>
+
+ goal_ten:
+   record: ten(Goal)
+   name: body
+   body: <div>This is goal ten body</div>
+
+ goal_eleven:
+   record: eleven(Goal)
+   name: body
+   body: <div>This is goal eleven body</div>
+
+ goal_twelve:
+   record: twelve(Goal)
+   name: body
+   body: <div>This is goal twelve body</div>
+
+ goal_therteen:
+   record: therteen(Goal)
+   name: body
+   body: <div>This is goal therteen body</div>
+
+ goal_fourteen:
+   record: fourteen(Goal)
+   name: body
+   body: <div>This is goal fourteen body</div>
+
+ goal_fifteen:
+   record: fifteen(Goal)
+   name: body
+   body: <div>This is goal fifteen body</div>
