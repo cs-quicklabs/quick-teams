@@ -18,7 +18,7 @@
           </button>
         </div>
         <div data-dropdown-target="menu" class="hidden absolute right-0 w-48 mt-2 origin-top-right rounded-md shadow-lg">
-          <div class="absolute right-0 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg w-60 ring-1 ring-black ring-opacity-5 z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+          <div class="absolute right-0 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg w-60 border border-gray-200 z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
             <div>
               <% if policy([@space, @message]).edit? %>
                 <a href=<%= edit_space_message_path(@space, @message) %> class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"  role= "menuitem">Edit</a>
@@ -45,7 +45,7 @@
   </div>
   <% users = @space.users.includes(avatar_attachment: :blob) %>
   <div class="flex justify-center py-4" title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>">
-    <div class="flex   ">
+    <div class="flex">
       <% users.load.first(20).each do |user| %>
         <div>
           <%= display_small_avatar(user) %>

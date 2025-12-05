@@ -26,7 +26,7 @@
                 <% end %>
               </div>
               <div data-dropdown-target="menu" class="hidden absolute right-0 w-48 mt-2 origin-top-right rounded-md shadow-lg">
-                <div class="absolute right-0 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg w-60 ring-1 ring-black ring-opacity-5 z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                <div class="absolute right-0 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg w-60 border border-gray-200 z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                   <div>
                     <% if policy(@space).unpin? %>
                       <a><%= link_to "Unpin", space_unpin_path(@space), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
@@ -70,7 +70,7 @@
               <span class="inline-flex whitespace-nowrap z-0 text-sm text-gray-400 items-center">No person added  </span>
             <% end %>
           </div>
-          <div class="">
+          <div class="flex">
             <% if @messages.load.size > 0 %>
               <select class="form-text-field w-56 inline-flex ml-4" name="direction" id="sort" onchange="window.location.href = '<%= space_messages_path(@space) %>?direction=' + this.value;">
                 <%= options_for_select([["Sort Threads By Newest", "DESC"], ["Sort Threads By Oldest", "ASC"]], prompt: "DESC", :selected => (params["direction"] if !params["direction"].blank?)) %>

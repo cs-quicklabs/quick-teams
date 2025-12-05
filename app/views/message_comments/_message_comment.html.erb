@@ -30,7 +30,7 @@
             </button>
           </div>
           <div data-dropdown-target="menu" class="hidden h-8 absolute right-0 w-48  origin-top-right rounded-md ">
-            <div class="absolute  -mt-5 right-0 z-10  w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+            <div class="absolute  -mt-5 right-0 z-10  w-56 origin-top-right rounded-md bg-white shadow-lg border border-gray-200 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
               <div class="" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                 <% if policy(comment).edit? %>
                   <a href=<%= edit_message_comment_path(comment) %> class="  block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"  role= "menuitem" tabindex="-1">Edit</a>

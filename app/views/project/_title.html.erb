@@ -17,7 +17,7 @@
               <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
           </button>
-          <div data-dropdown-target="menu" class="hidden absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+          <div data-dropdown-target="menu" class="hidden absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg border border-gray-200 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             <% if @tags.empty? %>
               <div class="py-1" role="none">
                 <p role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 " > No project tag added yet</p>
@@ -51,7 +51,7 @@
               </svg>
             </button>
           </div>
-          <div data-dropdown-target="menu" class="hidden absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+          <div data-dropdown-target="menu" class="hidden absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg border border-gray-200 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
             <% if @statuses.empty? %>
               <div class="py-1" role="none">
                 <p role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 " > No project status added yet</p>
