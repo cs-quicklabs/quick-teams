@@ -1,5 +1,5 @@
   <%= tailwind_form_with(model: ticket_status, id: dom_id(ticket_status), url: account_ticket_statuses_path) do |form| %>
-  <div class="space-y-6">
+  <div class="space-y-4">
     <%= render "shared/form_messages", resource: ticket_status, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Ticket Statuses", subtitle: "Ticket status is something this denotes status of a ticket. Open, Closed are defined already. You can add another statuses like In Progress, Action Required" %>
     <%= form.text_field :name, "Add New Status", autocomplete: "off" %>

@@ -1,5 +1,5 @@
   <%= tailwind_form_with(model: ticket_label, id: dom_id(ticket_label), url: account_ticket_labels_path) do |form| %>
-  <div class="space-y-6">
+  <div class="space-y-4">
     <%= render "shared/form_messages", resource: ticket_label, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Ticket Labels", subtitle: "You can define custom label which can be applied a ticket. A label can belong to a department and a person can be assigned who handles all those tickets marked with selected label." %>
     <%= form.text_field :name, "Add New label", autocomplete: "off" %>

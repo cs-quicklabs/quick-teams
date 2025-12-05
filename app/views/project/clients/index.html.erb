@@ -12,7 +12,7 @@
                 <div class="flex flex-wrap">
                   <p class="mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Clients (" + @clients.load.size.to_s + ")" %></p>
                 </div>
-                <ul class="space-y-6" id="clients" data-infinite-scroll-target="entries">
+                <ul class="space-y-4" id="clients" data-infinite-scroll-target="entries">
                   <%= render partial: "client", collection: @clients, as: :client, cached: true %>
                 </ul>
               </div>
@@ -25,7 +25,7 @@
             <section aria-labelledby="add-client-section">
               <div class="bg-white">
                 <div class="px-4">
-                  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-6 lg:pb-8 z-10">
+                  <main class="max-w-lg px-4 pt-6 pb-12 mx-auto space-y-4 lg:pb-8 z-10">
                     <%= render partial: "form", locals: { client: @client }, cached: false %>
                   </main>
                 </div>

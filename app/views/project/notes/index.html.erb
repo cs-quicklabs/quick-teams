@@ -13,7 +13,7 @@
                 <div class="flex flex-wrap">
                   <p class="mt-1 text-sm font-medium text-gray-900 truncate"><%= "Project Notes" %></p>
                 </div>
-                <ul class="space-y-6" id="notes" data-infinite-scroll-target="entries">
+                <ul class="space-y-4" id="notes" data-infinite-scroll-target="entries">
                   <%= render partial: "note", collection: @notes, as: :note, cached: true %>
                 </ul>
               </div>

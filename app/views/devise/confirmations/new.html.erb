@@ -10,7 +10,7 @@
   <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="px-4 py-8 mt-4 space-y-6 bg-white shadow sm:rounded-lg sm:px-10">
+      <div class="px-4 py-8 mt-4 space-y-4 bg-white shadow sm:rounded-lg sm:px-10">
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">
             Email

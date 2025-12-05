@@ -1,5 +1,5 @@
 <%= tailwind_form_with(model: @space, id: dom_id(@space), url: url, method: method) do |form| %>
-  <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-6 lg:pb-16">
+  <main class="max-w-lg px-4 pt-10 pb-12 mx-auto space-y-4 lg:pb-16">
     <%= render "shared/form_messages", resource: @space, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: local_assigns[:title], subtitle: local_assigns[:subtitle] %>
     <%= form.text_field :title, "Title", autocomplete: "off" %>

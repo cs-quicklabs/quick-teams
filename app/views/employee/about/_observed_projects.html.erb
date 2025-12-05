@@ -1,4 +1,4 @@
-  <main class="max-w-lg px-8 pt-6 pb-12 mx-auto space-y-6 lg:pb-16 z-10">
+  <main class="max-w-lg px-8 pt-6 pb-12 mx-auto space-y-4 lg:pb-16 z-10">
   <%= render "shared/form_header", title: "Observed Projects", subtitle: "You can observe projects to get updates on their progress." %>
   <% if policy([employee, :about]).add_observing_project? %>
     <%= render "devise/shared/success_message", message: message %>

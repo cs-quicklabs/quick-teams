@@ -1,5 +1,5 @@
   <%= form_with(model: client, id: dom_id(client), url: account_clients_path) do |form| %>
-  <div class="space-y-6">
+  <div class="space-y-4">
     <%= render "shared/form_messages", resource: client, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Client", subtitle: "You can add your clients here. These clients can be assigned to projects." %>
     <div>
