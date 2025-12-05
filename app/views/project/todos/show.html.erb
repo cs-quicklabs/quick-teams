@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+      <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
     </div>
     <% if policy([@todo.project, @todo]).edit? %>
       <%= link_to "Edit", edit_project_todo_path(@todo.project, @todo), class: "btn-primary ml-3" %>

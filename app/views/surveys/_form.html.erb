@@ -21,7 +21,7 @@
         <%= form.select(:survey_for, [["All Projects", "project"], ["All Employees", "user"], ["Client", "client"], ["Adhoc Employee", "adhoc"]], { :prompt => "Select Survey For", :selected => (params["survey_for"] if !params["survey_for"].blank?) }, :class => "form-text-field mt-1", :required => true) %>
       </div>
       <div class="flex justify-end pt-5">
-        <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+        <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
         <%= form.submit " Add Survey", class: "btn-primary" %>
       </div>
     </div>

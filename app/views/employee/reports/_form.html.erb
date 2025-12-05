@@ -8,10 +8,10 @@
         <%= form.rich_text_area :body, "Description" %>
         <div class="flex justify-between">
           <div class="">
-            <%= link_to "Cancel", employee_reports_path(@employee), class: "btn-normal" %>
+            <%= link_to "Cancel", employee_reports_path(@employee), class: "btn-secondary" %>
           </div>
           <div class="">
-            <%= form.submit "Save As Draft", :name => "draft", class: "btn-normal" %>
+            <%= form.submit "Save As Draft", :name => "draft", class: "btn-secondary" %>
             <%= form.submit "Submit Report", class: "btn-primary", data: {
                                                controller: "confirmation",
                                                "confirmation-message-value": "Are you sure you want to submit it? You won't be able to edit it after this.",

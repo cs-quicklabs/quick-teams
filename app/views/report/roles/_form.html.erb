@@ -34,7 +34,7 @@
                   <%= form.select(:billable, [["Billable or not", ""], ["Show Only Billable", 1], ["Show Only Unbillable", 0]], { selected: params["billable"] }, :class => "form-text-field mt-1") %>
                 </div>
                 <div class="flex justify-end mt-6">
-                  <%= link_to "Reset", employee_roles_reports_path, class: "btn-normal" %>
+                  <%= link_to "Reset", employee_roles_reports_path, class: "btn-secondary" %>
                   <%= form.submit "Search", class: "btn-primary" %>
                 </div>
               </main>

@@ -3,7 +3,7 @@
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="milestone-detail">
     <%= render partial: "shared/goals/title", locals: { goal: @milestone } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+      <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
       <% if policy([@project, @milestone]).edit? %>
         <%= link_to "Edit", edit_project_milestone_path(@milestone.goalable, @milestone), class: "btn-primary ml-3" %>
       <% end %>

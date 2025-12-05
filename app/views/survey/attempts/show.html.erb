@@ -26,7 +26,7 @@
           <%= link_to "See Report", survey_report_preview_path, class: "btn-primary" %>
         <% else %>
           <% unless survey.kpi? %>
-            <%= link_to "Finish it Later", "javascript:history.back()", class: "btn-normal" %>
+            <%= link_to "Finish it Later", "javascript:history.back()", class: "btn-secondary" %>
           <% end %>
           <%= link_to "Preview and Submit", survey_report_preview_path, class: "btn-primary" %>
         <% end %>

@@ -18,7 +18,7 @@
     </div>
     <div class="flex justify-between">
       <div class="flex justify-start inline-flex">
-        <%= link_to "Cancel", space_messages_path(@space), class: "btn-normal mr-2" %>
+        <%= link_to "Cancel", space_messages_path(@space), class: "btn-secondary mr-2" %>
         <% if policy([@space, @space_message]).delete_draft? %>
           <%= link_to "Delete Draft", space_message_path(@space, @space_message), method: :delete, data: { confirm: "Are you sure?" }, class: "btn-red ml-2" %>
         <% end %>
@@ -27,7 +27,7 @@
       </div>
       <div class="flex  inline-flex">
         <% if policy([@space, @space_message]).draft? %>
-          <%= form.submit "Save as draft", class: "btn-normal mr-2", name: "draft" %>
+          <%= form.submit "Save as draft", class: "btn-secondary mr-2", name: "draft" %>
         <% else %>
           <%= form.submit "Update", class: "btn-primary ", data: {
                                       controller: "confirmation",

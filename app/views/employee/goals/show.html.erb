@@ -3,7 +3,7 @@
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
     <%= render partial: "shared/goals/title", locals: { goal: @goal } %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+      <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
       <% if policy([@employee, @goal]).edit? %>
         <%= link_to "Edit", edit_employee_goal_path(@goal.goalable, @goal), class: "btn-primary ml-3" %>
       <% end %>

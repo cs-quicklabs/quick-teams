@@ -28,7 +28,7 @@
                 <%= form.date_field :to_date, class: "form-text-field mt-1", value: params["to_date"].blank? ? Date.today.to_formatted_s(:db) : params["to_date"] %>
               </div>
               <div class="flex justify-end mt-6">
-                <%= link_to "Reset", kpis_reports_path, class: "btn-normal" %>
+                <%= link_to "Reset", kpis_reports_path, class: "btn-secondary" %>
                 <%= form.submit "Search", class: "btn-primary" %>
               </div>
             </main>

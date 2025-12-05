@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/forms";
 
 @source "../../../app/views/**/*.html.erb";
 @source "../../../app/helpers/**/*.rb";
@@ -12,10 +11,10 @@
   --color-primary-200: oklch(0.87 0.059 254.1);
   --color-primary-300: oklch(0.76 0.105 252.7);
   --color-primary-400: oklch(0.63 0.158 253.4);
-  --color-primary-500: oklch(0.55 0.180 256.0);
+  --color-primary-500: oklch(0.55 0.18 256);
   --color-primary-600: oklch(0.49 0.185 259.8);
   --color-primary-700: oklch(0.45 0.162 261.3);
-  --color-primary-800: oklch(0.39 0.130 261.1);
+  --color-primary-800: oklch(0.39 0.13 261.1);
   --color-primary-900: oklch(0.35 0.101 261.2);
   --color-primary-950: oklch(0.26 0.071 260.8);
 }
@@ -33,10 +32,6 @@
   @apply border-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-sm text-white bg-red-600 hover:bg-red-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:order-1 sm:ml-3 cursor-pointer;
 }
 
-.btn-normal {
-  @apply bg-white py-2 px-4 inline-flex border border-gray-300 rounded-sm shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer;
-}
-
 .btn-inline-edit {
   @apply text-sm text-gray-400 hover:text-blue-600 cursor-pointer;
 }
@@ -46,12 +41,9 @@
 }
 
 /* Form components */
-.form-text-input {
-  @apply appearance-none block w-full px-2 py-2 border border-gray-300 text-gray-900 bg-gray-50 rounded-sm shadow-sm placeholder-gray-400 focus:outline-hidden focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm;
-}
 
 .form-text-field {
-  @apply appearance-none block bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-sm focus:ring-primary-600 focus:border-primary-600 w-full p-1.5;
+  @apply appearance-none block bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
 }
 
 /* Navigation components */

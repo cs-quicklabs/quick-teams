@@ -57,7 +57,7 @@
             <%= form.text_area :comment, rows: "4", autocomplete: "off", class: "w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" %>
           </div>
           <div class=" sm:col-span-4 px-6 flex justify-end overflow-y-auto py-6">
-            <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+            <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
             <%= form.submit "Submit", class: "btn-primary ml-2" %>
           </div>
         <% end %>
@@ -71,7 +71,7 @@
           </span>
         </div>
         <div class=" sm:col-span-4 px-6 flex justify-end  overflow-y-auto py-6">
-          <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
+          <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
           <% if policy([:survey, :report]).download? %>
             <%= link_to "Download PDF", survey_report_pdf_path(@survey, @attempt, format: :pdf), target: "_blank", class: "btn-primary" %>
           <% end %>

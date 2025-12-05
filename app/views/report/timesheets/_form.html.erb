@@ -51,7 +51,7 @@
                 <%= form.select(:billed, [["Billed or not", ""], ["Show Only Billed", 1], ["Show Only Unbilled", 0]], { selected: params["billed"] }, :class => "form-text-field mt-1") %>
               </div>
               <div class="flex justify-end mt-6">
-                <%= link_to "Reset", timesheets_reports_path, class: "btn-normal" %>
+                <%= link_to "Reset", timesheets_reports_path, class: "btn-secondary" %>
                 <%= form.submit "Search", class: "btn-primary" %>
               </div>
             </main>
