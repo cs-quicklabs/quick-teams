@@ -43,9 +43,9 @@
           <%= render partial: "employee/status", locals: { employee: employee } %>
         </div>
         <!-- This example requires Tailwind CSS v2.0+ -->
-        <div class="relative inline-block mr-4  text-left" data-controller="dropdown" data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide">
+        <div class="relative inline-block mr-2  text-left" data-controller="dropdown" data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide">
           <div>
-            <button data-action="click->dropdown#toggle" data-dropdown-target="button" type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
+            <button data-action="click->dropdown#toggle" data-dropdown-target="button" type="button" class="btn-secondary" id="menu-button" aria-expanded="true" aria-haspopup="true">
               Status
               <!-- Heroicon name: solid/chevron-down -->
               <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

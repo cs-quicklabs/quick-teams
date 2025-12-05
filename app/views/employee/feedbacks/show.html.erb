@@ -23,7 +23,7 @@
       <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
     </div>
     <% if policy([@employee, @feedback]).edit? %>
-      <%= link_to "Edit", edit_employee_feedback_path(@feedback.critiquable, @feedback), class: "btn-primary ml-3" %>
+      <%= link_to "Edit", edit_employee_feedback_path(@feedback.critiquable, @feedback), class: "btn-primary ml-2" %>
     <% end %>
   </div>
   <% cache @feedback do %>
