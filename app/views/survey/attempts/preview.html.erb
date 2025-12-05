@@ -73,7 +73,7 @@
         <div class=" sm:col-span-4 px-6 flex justify-end  overflow-y-auto py-6">
           <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
           <% if policy([:survey, :report]).download? %>
-            <%= link_to "Download PDF", survey_report_pdf_path(@survey, @attempt, format: :pdf), target: "_blank", class: "btn-primary" %>
+            <%= link_to "Download PDF", survey_report_pdf_path(@survey, @attempt, format: :pdf), target: "_blank", class: "btn-primary ml-2" %>
           <% end %>
         </div>
       <% end %>

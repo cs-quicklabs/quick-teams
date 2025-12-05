@@ -11,7 +11,7 @@
           </div>
           <div class="">
             <%= form.submit "Update Draft", :name => "draft", class: "btn-secondary" %>
-            <%= form.submit "Submit Report", class: "btn-primary", data: {
+            <%= form.submit "Submit Report", class: "btn-primary ml-2", data: {
                                                controller: "confirmation",
                                                "confirmation-message-value": "Are you sure you want to submit it? You won't be able to edit it after this.",
                                                action: "confirmation#confirm",
