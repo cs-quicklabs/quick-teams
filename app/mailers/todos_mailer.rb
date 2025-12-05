@@ -1,22 +1,34 @@
 class TodosMailer < ApplicationMailer
+  TEMPLATE_PATH = "mailers/todos_mailer"
+
   def added_email
-    @employee = params[:employee]
-    @actor = params[:actor]
-    @todo = params[:todo]
-    mail(to: @employee.email, subject: "Quick Teams: New TODO Assigned", template_path: "mailers/todos_mailer")
+    set_common_params
+    mail_to_employee("Quick Teams: New Todo Assigned")
   end
 
   def completed_email
-    @employee = params[:employee]
-    @actor = params[:actor]
-    @todo = params[:todo]
-    mail(to: @employee.email, subject: "Quick Teams: TODO Completed", template_path: "mailers/todos_mailer")
+    set_common_params
+    mail_to_employee("Quick Teams: Todo Completed")
   end
 
   def opened_email
+    set_common_params
+    mail_to_employee("Quick Teams: Todo Re-Opened")
+  end
+
+  private
+
+  def set_common_params
     @employee = params[:employee]
     @actor = params[:actor]
     @todo = params[:todo]
-    mail(to: @employee.email, subject: "Quick Teams: TODO Re-Opened", template_path: "mailers/todos_mailer")
+  end
+
+  def mail_to_employee(subject)
+    mail(
+      to: @employee.email,
+      subject: subject,
+      template_path: TEMPLATE_PATH,
+    )
   end
 end
