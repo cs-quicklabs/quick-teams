@@ -12,7 +12,7 @@ class WeeklyActivityMailerJob < ApplicationJob
   def send_weekly_summaries(account)
     User.active.where(email_enabled: true, account: account).find_each do |user|
       stats = Reports::EmployeeWeeklyStats.new(user)
-      WeeklyActivityMailer.with(employee: user, stats: stats).weekly_summary_email.deliver_later
+      WeeklyActivityMailer.with(employee: user, stats: stats).weekly_summary_email.deliver_now
     end
   end
 end

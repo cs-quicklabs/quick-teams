@@ -12,3 +12,8 @@
    record: three(Message)
    name: body
    body: <div>This is some Space</div>   
+
+ goal_four:
+   record: four(Goal)
+   name: body
+   body: <div>This is some goal body</div>

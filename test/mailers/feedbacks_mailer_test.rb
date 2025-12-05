@@ -11,7 +11,7 @@ class FeedbacksMailerTest < ActionMailer::TestCase
 
     assert_equal email.to, [employee.email]
     assert_equal email.from, ["admin@quicklabs.in"]
-    assert_equal email.subject, "New Feedback Published"
+    assert_equal email.subject, "Quick Teams: New Feedback Published"
     assert_match "Show Feedback", email.body.encoded
   end
 end

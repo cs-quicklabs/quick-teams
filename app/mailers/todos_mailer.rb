@@ -3,17 +3,17 @@ class TodosMailer < ApplicationMailer
 
   def added_email
     set_common_params
-    mail_to_employee("Quick Teams: New Todo Assigned")
+    mail_to_employee("Quick Teams: New TODO Assigned")
   end
 
   def completed_email
     set_common_params
-    mail_to_employee("Quick Teams: Todo Completed")
+    mail_to_employee("Quick Teams: TODO Completed")
   end
 
   def opened_email
     set_common_params
-    mail_to_employee("Quick Teams: Todo Re-Opened")
+    mail_to_employee("Quick Teams: TODO Re-Opened")
   end
 
   private

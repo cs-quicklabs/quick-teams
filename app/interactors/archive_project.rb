@@ -13,7 +13,9 @@ class ArchiveProject < Patterns::Service
     destroy_observers
     add_event
     project
-  rescue StandardError
+  rescue StandardError => e
+    Rails.logger.error "ArchiveProject failed: #{e.class} - #{e.message}"
+    Rails.logger.error e.backtrace.first(10).join("\n")
     project
   end
 

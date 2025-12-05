@@ -1,7 +1,7 @@
 class WeeklyActivityMailer < ApplicationMailer
   def weekly_summary_email
     @employee = params[:employee]
-    @stats = params[:stats]
+    @stats = Reports::EmployeeWeeklyStats.new(@employee)
 
     mail(
       to: @employee.email,

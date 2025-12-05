@@ -15,7 +15,7 @@ class GoalsMailerTest < ActionMailer::TestCase
 
     assert_equal email.to, [@employee.email]
     assert_equal email.from, ["admin@quicklabs.in"]
-    assert_equal email.subject, "New Goal Created"
+    assert_equal email.subject, "Quick Teams: New Goal Created"
     assert_match "Show Goal", email.body.encoded
   end
 
@@ -27,7 +27,7 @@ class GoalsMailerTest < ActionMailer::TestCase
 
     assert_equal email.to, [@employee.email]
     assert_equal email.from, ["admin@quicklabs.in"]
-    assert_equal email.subject, "New Comment on Goal"
+    assert_equal email.subject, "Quick Teams: New Comment on Goal"
     assert_match "Show Goal", email.body.encoded
   end
 
@@ -39,7 +39,7 @@ class GoalsMailerTest < ActionMailer::TestCase
 
     assert_equal email.to, [@employee.email]
     assert_equal email.from, ["admin@quicklabs.in"]
-    assert_equal email.subject, "Goal Missed"
+    assert_equal email.subject, "Quick Teams: Goal Missed"
     assert_match "Show Goal", email.body.encoded
   end
 
@@ -51,7 +51,7 @@ class GoalsMailerTest < ActionMailer::TestCase
 
     assert_equal email.to, [@employee.email]
     assert_equal email.from, ["admin@quicklabs.in"]
-    assert_equal email.subject, "Goal Completed"
+    assert_equal email.subject, "Quick Teams: Goal Completed"
     assert_match "Show Goal", email.body.encoded
   end
 
@@ -63,7 +63,7 @@ class GoalsMailerTest < ActionMailer::TestCase
 
     assert_equal email.to, [@employee.email]
     assert_equal email.from, ["admin@quicklabs.in"]
-    assert_equal email.subject, "Goal Discarded"
+    assert_equal email.subject, "Quick Teams: Goal Discarded"
     assert_match "Show Goal", email.body.encoded
   end
 end

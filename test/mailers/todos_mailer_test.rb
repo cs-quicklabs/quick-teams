@@ -16,7 +16,7 @@ class TodosMailerTest < ActionMailer::TestCase
 
     assert_equal email.to, [@employee.email]
     assert_equal email.from, ["admin@quicklabs.in"]
-    assert_equal email.subject, "New TODO Assigned"
+    assert_equal email.subject, "Quick Teams: New TODO Assigned"
     assert_match "Show TODO", email.body.encoded
   end
 
@@ -28,7 +28,7 @@ class TodosMailerTest < ActionMailer::TestCase
 
     assert_equal email.to, [@employee.email]
     assert_equal email.from, ["admin@quicklabs.in"]
-    assert_equal email.subject, "TODO Completed"
+    assert_equal email.subject, "Quick Teams: TODO Completed"
     assert_match "Show TODO", email.body.encoded
   end
 end

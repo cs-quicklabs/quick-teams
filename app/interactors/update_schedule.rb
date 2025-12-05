@@ -22,8 +22,10 @@ class UpdateSchedule < Patterns::Service
   attr_reader :project, :actor, :schedule, :employee, :params
 
   def update_schedule
-    schedule.update!(params)
-    schedule.update!(project: project, user: employee)
+    schedule.update(params)
+    schedule.project = project
+    schedule.user = employee
+    schedule.save!
   end
 
   def update_billable_resources
