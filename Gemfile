@@ -22,7 +22,7 @@ gem "puma", "~> 6.5"
 gem "importmap-rails"
 
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
-gem "tailwindcss-rails", "~> 3.3"
+gem "tailwindcss-rails", "~> 4.4"
 
 # Hotwire's SPA-like page accelerator [https://github.com/hotwired/turbo-rails]
 gem "turbo-rails", "~> 2.0"

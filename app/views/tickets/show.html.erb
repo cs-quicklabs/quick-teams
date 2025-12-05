@@ -9,7 +9,7 @@
         <%= render partial: "tickets/show_buttons/user", locals: { ticket: @ticket } %>
       <% end %>
       <% if policy([@ticket]).edit? %>
-        <%= styled_edit_button(edit_ticket_path(@ticket), "btn-blue") %>
+        <%= styled_edit_button(edit_ticket_path(@ticket), "btn-primary") %>
         <%= styled_delete_button(ticket_path(@ticket), "btn-red") %>
       <% end %>
     </div>

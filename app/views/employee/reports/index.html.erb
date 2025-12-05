@@ -67,7 +67,7 @@
               </p>
             <% end %>
             <div class="justify-center flex ">
-              <%= link_to "Submit New Report", new_employee_report_path(@employee), class: "btn-blue items-center " %>
+              <%= link_to "Submit New Report", new_employee_report_path(@employee), class: "btn-primary items-center " %>
             </div>
           <% end %>
           <% if policy([@employee, Report]).create? and (current_user != @employee) %>

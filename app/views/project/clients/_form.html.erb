@@ -3,7 +3,7 @@
     <%= render "shared/form_header", title: "Add New Client", subtitle: "A full list of clients can be found under Account settings" %>
     <%= form.collection_select(:client_id, Client.where.not(id: @project.clients).order(name: :asc), :id, :display_client_name, { :prompt => "Select Client" }, :class => "form-text-field mt-4") %>
     <div class="flex justify-end mt-6">
-      <%= form.submit "Add Client", class: "btn-blue" %>
+      <%= form.submit "Add Client", class: "btn-primary" %>
     </div>
   </main>
 <% end %>

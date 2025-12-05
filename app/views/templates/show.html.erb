@@ -5,7 +5,7 @@
       <% if policy([@template]).edit? %>
         <div class="flex justify-end items-center space-x-2">
           <%= link_to "Back", templates_path, class: "btn-normal" %>
-          <%= styled_edit_button(edit_template_path(@template), "btn-blue") %>
+          <%= styled_edit_button(edit_template_path(@template), "btn-primary") %>
           <%= styled_delete_button(template_path(@template), "btn-red") %>
         </div>
       <% end %>

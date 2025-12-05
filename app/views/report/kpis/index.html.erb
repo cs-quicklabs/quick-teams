@@ -8,7 +8,7 @@
     </div>
     <% if @kpis.size > 0 and params[:participant_id].present? %>
       <div>
-        <%= link_to "Download PDF", performance_report_path(survey_type: params[:survey_type], participant_id: params[:participant_id], from_date: params[:from_date], to_date: params[:to_date], format: :pdf), target: "_blank", class: "btn-blue" %>
+        <%= link_to "Download PDF", performance_report_path(survey_type: params[:survey_type], participant_id: params[:participant_id], from_date: params[:from_date], to_date: params[:to_date], format: :pdf), target: "_blank", class: "btn-primary" %>
       </div>
     <% end %>
   </div>

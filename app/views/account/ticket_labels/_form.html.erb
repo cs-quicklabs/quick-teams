@@ -16,7 +16,7 @@
       <%= form.collection_select("user_id", User.all_users.decorate, :id, :display_name_position, { :prompt => "Select Assignee" }, :class => "form-text-field mt-1") %>
     </div>
     <div class="flex justify-end">
-      <%= form.submit "Save", class: "btn-blue" %>
+      <%= form.submit "Save", class: "btn-primary" %>
     </div>
   </div>
 <% end %>

@@ -4,6 +4,6 @@
   </p>
   <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
     <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly) %>" />
-    <input type="submit" value="Subscribe for $49/month" class="btn-blue mt-2 ml-0" />
+    <input type="submit" value="Subscribe for $49/month" class="btn-primary mt-2 ml-0" />
   <% end %>
 </div>

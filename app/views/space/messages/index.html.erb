@@ -77,7 +77,7 @@
               </select>
             <% end %>
             <% if policy([@space, Message]).new? %>
-              <%= link_to "Add New Thread", new_space_message_path(@space.id), class: "btn-blue inline-flex " %>
+              <%= link_to "Add New Thread", new_space_message_path(@space.id), class: "btn-primary inline-flex " %>
             <% end %>
           </div>
         </div>

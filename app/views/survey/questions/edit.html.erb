@@ -31,7 +31,7 @@
             <%= form.collection_select(:question_category_id, @question_categories, :id, :name, { :prompt => "Select Category", :selected => @question.question_category_id }, :class => "form-text-field mt-1", :required => true) %>
           </div>
           <div class="content-end">
-            <%= form.submit "Save", class: "btn-blue ml-3 mt-2" %>
+            <%= form.submit "Save", class: "btn-primary ml-3 mt-2" %>
           </div>
         </div>
       </div>

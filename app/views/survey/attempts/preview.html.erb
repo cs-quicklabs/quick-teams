@@ -58,7 +58,7 @@
           </div>
           <div class=" sm:col-span-4 px-6 flex justify-end overflow-y-auto py-6">
             <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
-            <%= form.submit "Submit", class: "btn-blue ml-2" %>
+            <%= form.submit "Submit", class: "btn-primary ml-2" %>
           </div>
         <% end %>
       <% else %>
@@ -73,7 +73,7 @@
         <div class=" sm:col-span-4 px-6 flex justify-end  overflow-y-auto py-6">
           <%= link_to "Back", "javascript:history.back()", class: "btn-normal" %>
           <% if policy([:survey, :report]).download? %>
-            <%= link_to "Download PDF", survey_report_pdf_path(@survey, @attempt, format: :pdf), target: "_blank", class: "btn-blue" %>
+            <%= link_to "Download PDF", survey_report_pdf_path(@survey, @attempt, format: :pdf), target: "_blank", class: "btn-primary" %>
           <% end %>
         </div>
       <% end %>

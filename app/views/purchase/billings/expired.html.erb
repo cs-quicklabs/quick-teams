@@ -20,7 +20,7 @@
         <div class="mt-4 flex justify-center">
           <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
             <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly) %>" />
-            <input type="submit" value="Subscribe for $49/month" class="btn-blue" />
+            <input type="submit" value="Subscribe for $49/month" class="btn-primary" />
           <% end %>
         </div>
       <% else %>
