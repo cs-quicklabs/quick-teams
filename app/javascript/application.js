@@ -6,7 +6,7 @@ import "trix"
 import "@rails/actiontext"
 import "@rails/activestorage"
 import "@hotwired/turbo-rails"
-import "./trix-editor-overrides"
+import "trix-editor-overrides"
 
 import Trix from "trix"
 

@@ -2,8 +2,8 @@
 
 pin "application", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers", preload: true
-pin_all_from "app/javascript/channels", under: "channels"
-pin_all_from "app/javascript/config", under: "config"
+pin_all_from "app/javascript/channels", under: "channels", preload: true
+pin_all_from "app/javascript/config", under: "config", preload: true
 
 # Hotwire
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
@@ -18,6 +18,7 @@ pin "@rails/request.js", to: "https://ga.jspm.io/npm:@rails/request.js@0.0.11/sr
 
 # Trix editor
 pin "trix", to: "https://ga.jspm.io/npm:trix@2.1.8/dist/trix.esm.min.js"
+pin "trix-editor-overrides", to: "trix-editor-overrides.js"
 
 # StimulusReflex and CableReady
 pin "stimulus_reflex", to: "https://ga.jspm.io/npm:stimulus_reflex@3.5.2/dist/stimulus_reflex.js"
