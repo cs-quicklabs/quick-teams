@@ -1,11 +1,22 @@
 // Configure your import map in config/importmap.rb
+// Turbo must be imported first as other modules depend on it
+import "@hotwired/turbo-rails"
+
+// Then load controllers which set up Stimulus
 import "controllers"
+
+// Load channels for ActionCable
 import "channels"
+
+// Load config (StimulusReflex, CableReady) after Turbo and controllers
 import "config"
-import "trix"
+
+// Rails libraries
 import "@rails/actiontext"
 import "@rails/activestorage"
-import "@hotwired/turbo-rails"
+
+// Trix editor
+import "trix"
 import "trix-editor-overrides"
 
 import Trix from "trix"
