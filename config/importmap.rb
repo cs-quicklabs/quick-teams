@@ -21,12 +21,12 @@ pin "trix", to: "https://ga.jspm.io/npm:trix@2.1.8/dist/trix.esm.min.js"
 pin "trix-editor-overrides", to: "trix-editor-overrides.js"
 
 # StimulusReflex and CableReady
-pin "stimulus_reflex", to: "https://ga.jspm.io/npm:stimulus_reflex@3.5.2/dist/stimulus_reflex.js"
-pin "cable_ready", to: "https://ga.jspm.io/npm:cable_ready@5.0.6/dist/cable_ready.js"
-pin "morphdom", to: "https://ga.jspm.io/npm:morphdom@2.7.4/dist/morphdom-esm.js"
+pin "stimulus_reflex", to: "stimulus_reflex.js"
+pin "cable_ready", to: "cable_ready.js"
+pin "morphdom", to: "morphdom.js"
 
 # Slim Select
-pin "slim-select", to: "https://ga.jspm.io/npm:slim-select@2.9.2/dist/slimselect.es.js"
+pin "slim-select", to: "slim-select.js"
 
 # Stimulus plugins
-pin "stimulus-scroll-to", to: "https://ga.jspm.io/npm:stimulus-scroll-to@4.1.0/dist/stimulus-scroll-to.mjs"
+pin "stimulus-scroll-to", to: "stimulus-scroll-to.js"

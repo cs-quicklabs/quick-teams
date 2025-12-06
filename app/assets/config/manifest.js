@@ -1,4 +1,11 @@
 //= link_tree ../images
 //= link_tree ../builds
-//= link_tree ../stylesheets
 //= link_tree ../../javascript .js
+//= link turbo.min.js
+//= link stimulus.min.js
+//= link stimulus-loading.js
+//= link actioncable.esm.js
+//= link activestorage.esm.js
+//= link actiontext.esm.js
+//= link actiontext.css
+//= link slim.css

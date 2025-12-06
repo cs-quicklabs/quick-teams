@@ -14,7 +14,10 @@ import StimulusReflex from 'stimulus_reflex'
  */
 export default class extends Controller {
   connect() {
-    StimulusReflex.register(this)
+    // Only register if StimulusReflex has been initialized
+    if (StimulusReflex.app) {
+      StimulusReflex.register(this)
+    }
   }
 
   /* Application-wide lifecycle methods

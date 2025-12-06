@@ -1,19 +1,27 @@
 // Configure your import map in config/importmap.rb
+console.log("Application.js starting...");
+
 // Turbo must be imported first as other modules depend on it
 import "@hotwired/turbo-rails"
-
-// Then load controllers which set up Stimulus
-import "controllers"
+console.log("Turbo imported");
 
 // Load channels for ActionCable
 import "channels"
+console.log("Channels imported");
 
-// Load config (StimulusReflex, CableReady) after Turbo and controllers
+// Load config (StimulusReflex, CableReady) BEFORE controllers
+// so StimulusReflex is initialized before controllers try to register
 import "config"
+console.log("Config imported");
+
+// Then load controllers which set up Stimulus
+import "controllers"
+console.log("Controllers imported");
 
 // Rails libraries
 import "@rails/actiontext"
 import "@rails/activestorage"
+console.log("Rails libraries imported");
 
 // Trix editor
 import "trix"
