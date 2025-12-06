@@ -25,7 +25,7 @@ pin "cable_ready", to: "https://ga.jspm.io/npm:cable_ready@5.0.6/dist/cable_read
 pin "morphdom", to: "https://ga.jspm.io/npm:morphdom@2.7.4/dist/morphdom-esm.js"
 
 # Slim Select
-pin "slim-select", to: "https://ga.jspm.io/npm:slim-select@2.9.2/dist/slimselect.es.js"
+pin "slim-select", to: "https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.9.2/slimselect.es.js"
 
 # Stimulus plugins
 pin "stimulus-scroll-to", to: "https://ga.jspm.io/npm:stimulus-scroll-to@4.1.0/dist/stimulus-scroll-to.mjs"
