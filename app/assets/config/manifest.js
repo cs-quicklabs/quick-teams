@@ -1,4 +1,6 @@
 //= link_tree ../images
 //= link_tree ../builds
 //= link slim.css
-//= require activestorage
+//= link activestorage.esm.js
+//= link actiontext.esm.js
+//= link actioncable.esm.js
