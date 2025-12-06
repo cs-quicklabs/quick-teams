@@ -48,7 +48,9 @@ class QuestionsTest < ApplicationSystemTestCase
     visit page_url
     @question = @survey.questions.first
     find("li", id: "#{@question.id}").click_link("Edit")
-    fill_in "survey_question_text", with: "question 1"
+    within("turbo-frame#survey_question_#{@question.id}") do
+      fill_in "survey_question_text", with: "question 1"
+    end
     click_on "Save"
     assert_text "Question 1"
     assert_no_text "Save"
@@ -59,7 +61,9 @@ class QuestionsTest < ApplicationSystemTestCase
     visit page_url
     @question = @survey.questions.first
     find("li", id: "#{@question.id}").click_link("Edit")
-    fill_in "survey_question_text", with: ""
+    within("turbo-frame#survey_question_#{@question.id}") do
+      fill_in "survey_question_text", with: ""
+    end
     click_on "Save"
     take_screenshot
   end
