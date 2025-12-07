@@ -1,32 +1,49 @@
 <% @todo = @todo.decorate %>
+
 <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-4 lg:pb-16">
-  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="todo-detail">
+  <div
+    class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
+    id="todo-detail"
+  >
     <div class="flex-1 min-w-0">
       <h3 class="text-2xl font-bold leading-tight text-gray-900 break-words">
         <%= highlight_hashtag(@todo.display_title) %>
       </h3>
+
       <div class="flex mt-4 space-x-3">
         <div class="flex-shrink-0">
           <%= display_medium_avatar(@todo.user) %>
         </div>
+
         <div>
           <div class="text-sm">
-            <a href="<%= project_todos_path(@todo.project) %>" class="font-medium text-gray-900 hover:underline"><%= @todo.project.decorate.display_name %></a>
+            <a
+              href="<%= project_todos_path(@todo.project) %>"
+              class="font-medium text-gray-900 hover:underline"
+            >
+              <%= @todo.project.decorate.display_name %>
+            </a>
           </div>
+
           <div class="mt-1 space-x-2 text-sm">
-            <span class="font-medium text-gray-500"> Created by <%= @todo.user.decorate.display_name %>
-              to be completed by  <%= display_date(@todo.deadline) %></span>
+            <span class="font-medium text-gray-500">
+              Created by <%= @todo.user.decorate.display_name %> to be
+              completed by <%= display_date(@todo.deadline) %>
+            </span>
           </div>
         </div>
       </div>
     </div>
+
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
     </div>
+
     <% if policy([@todo.project, @todo]).edit? %>
       <%= link_to "Edit", edit_project_todo_path(@todo.project, @todo), class: "btn-primary ml-2" %>
     <% end %>
   </div>
+
   <% cache @todo do %>
     <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
       <p class="whitespace-pre-wrap break-words">
@@ -38,6 +55,7 @@
       </p>
     </div>
   <% end %>
+
   <div id="todo-status-<%= @todo.id %>">
     <%= render partial: "shared/todos/status", locals: { todo: @todo } %>
   </div>

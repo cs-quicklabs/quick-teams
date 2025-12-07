@@ -1,8 +1,13 @@
 <div class="max-w-4xl px-4 pt-10 pb-12 mx-auto lg:pb-16 bg-white" id="ticket">
-  <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="ticket-header">
+  <div
+    class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
+    id="ticket-header"
+  >
     <%= render partial: "title", locals: { ticket: @ticket } %>
+
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to "Back", "javascript:history.back()", class: "btn-secondary mr-2" %>
+
       <% if policy([@ticket]).change_status? %>
         <div id="ticket-status-<%= @ticket.id %>">
           <%= render partial: "tickets/show_buttons/assignee", locals: { ticket: @ticket, status_count: @status_count, statuses: @statuses } %>
@@ -10,47 +15,76 @@
       <% else %>
         <%= render partial: "tickets/show_buttons/user", locals: { ticket: @ticket } %>
       <% end %>
+
       <% if policy([@ticket]).edit? %>
         <%= styled_edit_button(edit_ticket_path(@ticket), "btn-primary") %>
         <%= styled_delete_button(ticket_path(@ticket), "btn-red") %>
       <% end %>
     </div>
   </div>
+
   <div class="mt-4 text-sm text-gray-900 sm:px-6 lg:px-8">
     <p><%= @ticket.decorate.display_body %></p>
   </div>
+
   <% if @ticket.in_progress? && @ticket.ticket_label.user != current_user %>
-    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-2 overflow-hidden mt-4 ml-8">
+    <div
+      class="
+        bg-yellow-50 border-l-4 border-yellow-400 p-2 overflow-hidden mt-4
+        ml-8
+      "
+    >
       <% if @ticket.ticket_label.present? %>
         <div class="text-sm">
-          <p class="text-sm">This ticket has been assigned to <b><%= @ticket.ticket_label.user.decorate.display_name_position %>.</b> Please follow up for progress update.</p>
+          <p class="text-sm">
+            This ticket has been assigned to
+            <b><%= @ticket.ticket_label.user.decorate.display_name_position %>.</b>
+            Please follow up for progress update.
+          </p>
         </div>
       <% end %>
     </div>
   <% end %>
+
   <section aria-labelledby="notes-title">
     <div class="pb-24 bg-white sm:rounded-lg overflow">
       <div class="divide-y divide-gray-200">
         <div class="px-4 py-5 sm:px-6">
-          <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments</h2>
+          <h2 id="notes-title" class="text-lg font-medium text-gray-900">
+            Comments
+          </h2>
         </div>
+
         <div class="px-4 py-6 sm:px-6">
           <ul class="space-y-4" id="comments">
             <%= render partial: "shared/comments/comment", collection: @ticket.comments.includes(:user).order(created_at: :asc), as: :comment, cached: true %>
           </ul>
         </div>
       </div>
+
       <% if policy([@ticket]).comment? %>
         <%= render partial: "shared/comments/ticket", locals: { ticket: @ticket, comment: @comment } %>
       <% end %>
+
       <% if @ticket.completed? %>
         <div class="p-4 rounded-md bg-green-50">
           <div class="flex">
             <div class="flex-shrink-0">
-              <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              <svg
+                class="w-5 h-5 text-green-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
               </svg>
             </div>
+
             <div class="ml-3">
               <p class="text-sm font-medium text-green-800">
                 This ticket was marked as closed.

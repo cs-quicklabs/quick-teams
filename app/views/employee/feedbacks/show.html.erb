@@ -5,32 +5,46 @@
       <h3 class="text-2xl font-bold leading-tight text-gray-900">
         <%= highlight_hashtag(@feedback.title.upcase_first) %>
       </h3>
+
       <div class="flex mt-4 space-x-3">
         <div class="flex-shrink-0">
           <%= display_medium_avatar(@feedback.critiquable) %>
         </div>
+
         <div>
           <div class="text-sm">
-            <a href="<%= employee_feedbacks_path(@feedback.critiquable) %>" class="font-medium text-gray-900 hover:underline"><%= @feedback.critiquable.decorate.display_name %></a>
+            <a
+              href="<%= employee_feedbacks_path(@feedback.critiquable) %>"
+              class="font-medium text-gray-900 hover:underline"
+            >
+              <%= @feedback.critiquable.decorate.display_name %>
+            </a>
           </div>
+
           <div class="mt-1 space-x-2 text-sm">
-            <span class="font-medium text-gray-500"><%= @feedback.user.decorate.display_name + " added on " + display_created_at(@feedback) %></span>
+            <span class="font-medium text-gray-500">
+              <%= @feedback.user.decorate.display_name + " added on " + display_created_at(@feedback) %>
+            </span>
           </div>
         </div>
       </div>
     </div>
+
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
     </div>
+
     <% if policy([@employee, @feedback]).edit? %>
       <%= link_to "Edit", edit_employee_feedback_path(@feedback.critiquable, @feedback), class: "btn-primary ml-2" %>
     <% end %>
   </div>
+
   <% cache @feedback do %>
     <div class="mt-1 text-sm text-gray-700 sm:px-6 lg:px-8">
       <p><%= @feedback.body %></p>
     </div>
   <% end %>
+
   <% if current_user.admin? %>
     <div id="feedback-status-<%= @feedback.id %>">
       <%= render partial: "employee/feedbacks/status", locals: { feedback: @feedback } %>
