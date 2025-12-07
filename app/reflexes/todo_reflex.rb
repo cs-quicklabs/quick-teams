@@ -1,28 +1,12 @@
 class TodoReflex < ApplicationReflex
   delegate :current_user, to: :connection
 
-  def toggle_project_todo
-    todo = Todo.find(element.dataset[:id])
-    todo.update(completed: !todo.completed)
-    send_email(current_user, todo)
-    todo.save!
-    morph "#{dom_id(todo)}", render(partial: "project/todos/todo", locals: { todo: todo })
-  end
-
   def toggle_todo
     todo = Todo.find(element.dataset[:id])
     todo.update(completed: !todo.completed)
     send_email(current_user, todo)
     todo.save!
     morph "#todo-status-#{todo.id}", render(partial: "shared/todos/status", locals: { todo: todo })
-  end
-
-  def toggle_employee_todo
-    todo = Todo.find(element.dataset[:id])
-    todo.update(completed: !todo.completed)
-    send_email(current_user, todo)
-    todo.save!
-    morph "#{dom_id(todo)}", render(partial: "employee/todos/todo", locals: { todo: todo })
   end
 
   def send_email(actor, todo)
