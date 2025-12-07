@@ -2,44 +2,37 @@ class TodoReflex < ApplicationReflex
   delegate :current_user, to: :connection
 
   def toggle_todo
-    todo = Todo.find(element.dataset[:id])
-    todo.update(completed: !todo.completed)
-    send_email(current_user, todo)
-    todo.save!
+    todo.toggle!(:completed)
+    notify_relevant_users
     morph "#todo-status-#{todo.id}", render(partial: "shared/todos/status", locals: { todo: todo })
   end
 
-  def send_email(actor, todo)
-    todo.completed ? send_completed_email(actor, todo) : send_opened_email(actor, todo)
+  private
+
+  def todo
+    @todo ||= Todo.find(element.dataset[:id])
   end
 
-  def send_completed_email(actor, todo)
-    if actor == todo.owner
-      TodosMailer.with(actor: actor, employee: todo.user, todo: todo).completed_email.deliver_later if deliver_email?(todo.user, actor)
-    elsif actor == todo.user
-      TodosMailer.with(actor: actor, employee: todo.owner, todo: todo).completed_email.deliver_later if deliver_email?(todo.owner, actor)
-    elsif actor != todo.owner and actor != todo.user and todo.user != todo.owner
-      TodosMailer.with(actor: actor, employee: todo.user, todo: todo).completed_email.deliver_later if deliver_email?(todo.user, actor)
-      TodosMailer.with(actor: actor, employee: todo.owner, todo: todo).completed_email.deliver_later if deliver_email?(todo.owner, actor)
-    elsif actor != todo.owner and actor != todo.user and todo.user == todo.owner
-      TodosMailer.with(actor: actor, employee: todo.user, todo: todo).completed_email.deliver_later if deliver_email?(todo.user, actor)
+  def notify_relevant_users
+    email_type = todo.completed ? :completed_email : :opened_email
+    recipients_for_notification.each do |recipient|
+      deliver_notification(recipient, email_type)
     end
   end
 
-  def send_opened_email(actor, todo)
-    if actor == todo.owner
-      TodosMailer.with(actor: actor, employee: todo.user, todo: todo).opened_email.deliver_later if deliver_email?(todo.user, actor)
-    elsif actor == todo.user
-      TodosMailer.with(actor: actor, employee: todo.owner, todo: todo).opened_email.deliver_later if deliver_email?(todo.owner, actor)
-    elsif actor != todo.owner and actor != todo.user and todo.user != todo.owner
-      TodosMailer.with(actor: actor, employee: todo.user, todo: todo).opened_email.deliver_later if deliver_email?(todo.user, actor)
-      TodosMailer.with(actor: actor, employee: todo.owner, todo: todo).opened_email.deliver_later if deliver_email?(todo.owner, actor)
-    elsif actor != todo.owner and actor != todo.user and todo.user == todo.owner
-      TodosMailer.with(actor: actor, employee: todo.user, todo: todo).opened_email.deliver_later if deliver_email?(todo.user, actor)
-    end
+  def recipients_for_notification
+    [todo.owner, todo.user].uniq.reject { |user| user == current_user }
   end
 
-  def deliver_email?(user, actor)
-    actor != user and user.email_enabled and user.account.email_enabled and user.sign_in_count > 0
+  def deliver_notification(recipient, email_type)
+    return unless deliverable?(recipient)
+
+    TodosMailer.with(actor: current_user, employee: recipient, todo: todo)
+               .public_send(email_type)
+               .deliver_later
+  end
+
+  def deliverable?(user)
+    user.email_enabled && user.account.email_enabled && user.sign_in_count.positive?
   end
 end

@@ -1,22 +1,24 @@
 class EmployeeTimesheetsStatsReflex < ApplicationReflex
   def last_week
-    employee = User.find(element.dataset["employee-id"])
-
-    stats = EmployeeTimesheetsStats.new(employee, "week")
-    morph "#stats", render(partial: "employee/timesheets/stats", locals: { employee_stats: stats })
+    render_stats("week")
   end
 
   def last_month
-    employee = User.find(element.dataset["employee-id"])
-
-    stats = EmployeeTimesheetsStats.new(employee, "month")
-    morph "#stats", render(partial: "employee/timesheets/stats", locals: { employee_stats: stats })
+    render_stats("month")
   end
 
   def since_beginning
-    employee = User.find(element.dataset["employee-id"])
+    render_stats("beginning")
+  end
 
-    stats = EmployeeTimesheetsStats.new(employee, "beginning")
+  private
+
+  def employee
+    @employee ||= User.find(element.dataset["employee-id"])
+  end
+
+  def render_stats(period)
+    stats = EmployeeTimesheetsStats.new(employee, period)
     morph "#stats", render(partial: "employee/timesheets/stats", locals: { employee_stats: stats })
   end
 end

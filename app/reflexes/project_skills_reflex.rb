@@ -2,15 +2,31 @@ class ProjectSkillsReflex < ApplicationReflex
   delegate :current_user, to: :connection
 
   def add
-    project = Project.find(element.dataset["project-id"])
-    project.skills << Skill.find(element.dataset["skill-id"])
-    morph "#skills", render(partial: "project/skills/form", locals: { project: project, skills: project.skills, skill: Skill.new, user: current_user })
+    project.skills << skill
+    morph "#skills", render(partial: "project/skills/form", locals: {
+                        project: project,
+                        skills: project.skills,
+                        skill: Skill.new,
+                        user: current_user,
+                      })
   end
 
   def remove
-    project = Project.find(element.dataset["project-id"])
-    project.skills.destroy Skill.find(element.dataset["skill-id"])
+    project.skills.destroy(skill)
+    morph "#project-skills", render(partial: "project/skills/skills", locals: {
+                                project: project,
+                                skills: project.skills,
+                                user: current_user,
+                              })
+  end
 
-    morph "#project-skills", render(partial: "project/skills/skills", locals: { project: project, skills: project.skills, user: current_user })
+  private
+
+  def project
+    @project ||= Project.find(element.dataset["project-id"])
+  end
+
+  def skill
+    @skill ||= Skill.find(element.dataset["skill-id"])
   end
 end

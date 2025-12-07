@@ -1,25 +1,37 @@
 class SurveyStatsReflex < ApplicationReflex
   def summary
-    question = Survey::Question.find(element.dataset["question-id"])
-    total_responses, average_score = Survey::Stats::SurveyStats.new(question.survey).stats_for(question)
+    total_responses, average_score = fetch_stats
     color, message = color_message_for(total_responses, average_score)
     morph "#summary_#{question.id}", render(partial: "shared/surveys/summary", locals: { message: message, color: color })
   end
 
-  def color_message_for(total_responses, average_score)
-    color = "bg-gray-100"
-    message = "No answer to this question yet."
-    if total_responses > 0
-      message = "Average score is #{average_score.round(1)} in #{total_responses} responses."
-    end
+  private
 
-    if average_score >= 8
-      color = "bg-green-100"
-    elsif average_score >= 4
-      color = "bg-yellow-100"
+  def question
+    @question ||= Survey::Question.find(element.dataset["question-id"])
+  end
+
+  def fetch_stats
+    Survey::Stats::SurveyStats.new(question.survey).stats_for(question)
+  end
+
+  def color_message_for(total_responses, average_score)
+    [score_color(average_score), build_message(total_responses, average_score)]
+  end
+
+  def build_message(total_responses, average_score)
+    if total_responses.positive?
+      "Average score is #{average_score.round(1)} in #{total_responses} responses."
     else
-      color = "bg-red-100"
+      "No answer to this question yet."
     end
-    return color, message
+  end
+
+  def score_color(score)
+    case score
+    when 8.. then "bg-green-100"
+    when 4...8 then "bg-yellow-100"
+    else "bg-red-100"
+    end
   end
 end

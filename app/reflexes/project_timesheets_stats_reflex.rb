@@ -1,25 +1,33 @@
 class ProjectTimesheetsStatsReflex < ApplicationReflex
-  def last_week
-    project = Project.find(element.dataset["project-id"])
+  PERIOD_TITLES = {
+    "week" => "Last Week's Performance",
+    "month" => "Last Month's Performance",
+    "beginning" => "Performance since start",
+  }.freeze
 
-    title = "Last Week's Performance"
-    stats = ProjectTimesheetsStats.new(project, "week")
-    morph "#stats", render(partial: "project/timesheets/stats", locals: { project_stats: stats, title: title })
+  def last_week
+    render_stats("week")
   end
 
   def last_month
-    project = Project.find(element.dataset["project-id"])
-
-    title = "Last Month's Performance"
-    stats = ProjectTimesheetsStats.new(project, "month")
-    morph "#stats", render(partial: "project/timesheets/stats", locals: { project_stats: stats, title: title })
+    render_stats("month")
   end
 
   def since_beginning
-    project = Project.find(element.dataset["project-id"])
+    render_stats("beginning")
+  end
 
-    title = "Performance since start"
-    stats = ProjectTimesheetsStats.new(project, "beginning")
-    morph "#stats", render(partial: "project/timesheets/stats", locals: { project_stats: stats, title: title })
+  private
+
+  def project
+    @project ||= Project.find(element.dataset["project-id"])
+  end
+
+  def render_stats(period)
+    stats = ProjectTimesheetsStats.new(project, period)
+    morph "#stats", render(partial: "project/timesheets/stats", locals: {
+                       project_stats: stats,
+                       title: PERIOD_TITLES[period],
+                     })
   end
 end
