@@ -4,12 +4,14 @@ class EmployeeFeedbackReflex < ApplicationReflex
     feedback.update(published: true)
     feedback.save!
     FeedbacksMailer.with(feedback: feedback).publish_email.deliver_later if deliver_email?(feedback.critiquable)
+    morph "#feedback-status-#{feedback.id}", render(partial: "employee/feedbacks/status", locals: { feedback: feedback })
   end
 
   def unpublish
     feedback = Feedback.find(element.dataset["feedback-id"])
     feedback.update(published: false)
     feedback.save!
+    morph "#feedback-status-#{feedback.id}", render(partial: "employee/feedbacks/status", locals: { feedback: feedback })
   end
 
   def deliver_email?(employee)

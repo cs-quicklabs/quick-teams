@@ -14,6 +14,7 @@ class TodoReflex < ApplicationReflex
     todo.update(completed: !todo.completed)
     send_email(current_user, todo)
     todo.save!
+    morph "#todo-status-#{todo.id}", render(partial: "shared/todos/status", locals: { todo: todo })
   end
 
   def toggle_employee_todo

@@ -4,7 +4,9 @@
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to "Back", "javascript:history.back()", class: "btn-secondary mr-2" %>
       <% if policy([@ticket]).change_status? %>
-        <%= render partial: "tickets/show_buttons/assignee", locals: { ticket: @ticket, status_count: @status_count } %>
+        <div id="ticket-status-<%= @ticket.id %>">
+          <%= render partial: "tickets/show_buttons/assignee", locals: { ticket: @ticket, status_count: @status_count, statuses: @statuses } %>
+        </div>
       <% else %>
         <%= render partial: "tickets/show_buttons/user", locals: { ticket: @ticket } %>
       <% end %>
