@@ -28,7 +28,7 @@
                 <div class="py-1" role="none">
                   <% @tags.each do |tag| %>
                     <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-reflex="click->EmployeeTags#change" data-employee-id=<%= employee.id %> data-tag-id=<%= tag.id %> ><%= tag.name %></a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-action="click->dropdown#close" data-reflex="click->EmployeeTags#change" data-employee-id=<%= employee.id %> data-tag-id=<%= tag.id %> ><%= tag.name %></a>
                   <% end %>
                 <% end %>
               </div>
@@ -62,7 +62,7 @@
                 <div class="py-1" role="none">
                   <% @statuses.each do |status| %>
                     <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-reflex="click->EmployeeStatus#change" data-employee-id=<%= employee.id %> data-status-id=<%= status.id %> ><%= status.name %></a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" data-action="click->dropdown#close" data-reflex="click->EmployeeStatus#change" data-employee-id=<%= employee.id %> data-status-id=<%= status.id %> ><%= status.name %></a>
                   <% end %>
                 <% end %>
               </div>

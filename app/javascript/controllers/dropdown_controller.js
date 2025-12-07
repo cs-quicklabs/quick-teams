@@ -118,6 +118,10 @@ export default class extends Controller {
         this.openValue = true;
     }
 
+    close() {
+        this.openValue = false;
+    }
+
     hide(event) {
         if (this.element.contains(event.target) === false && this.openValue) {
             this.openValue = false;
