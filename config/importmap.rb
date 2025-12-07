@@ -11,7 +11,7 @@ pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 
 # Rails
-pin "@rails/actioncable", to: "actioncable.esm.js"
+pin "@rails/actioncable", to: "actioncable.esm.js", preload: true
 pin "@rails/activestorage", to: "activestorage.esm.js"
 pin "@rails/actiontext", to: "actiontext.esm.js"
 pin "@rails/request.js", to: "https://ga.jspm.io/npm:@rails/request.js@0.0.11/src/index.js"
@@ -20,10 +20,10 @@ pin "@rails/request.js", to: "https://ga.jspm.io/npm:@rails/request.js@0.0.11/sr
 pin "trix", to: "https://ga.jspm.io/npm:trix@2.1.8/dist/trix.esm.min.js"
 pin "trix-editor-overrides", to: "trix-editor-overrides.js"
 
-# StimulusReflex and CableReady
-pin "stimulus_reflex", to: "stimulus_reflex.js"
-pin "cable_ready", to: "cable_ready.js"
-pin "morphdom", to: "morphdom.js"
+# StimulusReflex and CableReady - preload for proper initialization order
+pin "stimulus_reflex", to: "stimulus_reflex.js", preload: true
+pin "cable_ready", to: "cable_ready.js", preload: true
+pin "morphdom", to: "morphdom.js", preload: true
 
 # Slim Select
 pin "slim-select", to: "slim-select.js"
