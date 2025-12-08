@@ -76,7 +76,7 @@ function T(p, e) {
 }
 function O(p, e = 50, t = !1) {
   let s;
-  return function(...i) {
+  return function (...i) {
     const l = self, a = () => {
       s = null, t || p.apply(l, i);
     }, n = t && !s;
@@ -1073,7 +1073,7 @@ class M {
     const e = [], t = this.select.id;
     t && document.querySelectorAll(`label[for="${t}"]`).forEach((a) => e.push(a));
     let s = this.select.parentElement;
-    for (; s && s !== document.body; ) {
+    for (; s && s !== document.body;) {
       if (s.tagName === "LABEL") {
         e.push(s);
         break;
@@ -1095,7 +1095,7 @@ class M {
     const e = [], t = this.select.id;
     t && document.querySelectorAll(`label[for="${t}"]`).forEach((a) => e.push(a));
     let s = this.select.parentElement;
-    for (; s && s !== document.body; ) {
+    for (; s && s !== document.body;) {
       if (s.tagName === "LABEL") {
         e.push(s);
         break;
