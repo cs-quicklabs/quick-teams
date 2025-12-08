@@ -33,8 +33,8 @@
         name="project[observers][]"
         id="project_observers"
         multiple
-        class="slimselect mt-1 w-full"
-        data-controller="slim-select"
+        class="slimselect mt-1 w-full form-text-field"
+        data-controller="slimselect"
       >
         <%= options_for_select(User.all_users.decorate.map { |u| [u.display_name, u.id] }, project.observers.pluck(:id)) %>
       </select>
