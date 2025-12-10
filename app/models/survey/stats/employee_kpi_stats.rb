@@ -10,7 +10,7 @@ class Survey::Stats::EmployeeKpiStats < Survey::Stats::SurveyStats
   end
 
   def survey_ids
-    Survey::Survey.where(survey_for: :user, survey_type: :kpi)
+    Survey::Survey.where(survey_for: :user, survey_type: @survey.survey_type)
   end
 
   def attempts_by_self

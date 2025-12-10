@@ -57,6 +57,11 @@
             KPIs
           </a>
         <% end %>
+        <% if policy([employee, :culture]).index? %>
+          <a href="<%= employee_culture_index_path %>" class="<%= current_page?(employee_culture_index_path) ? "selected-tab" : "unselected-tab" %>">
+            Culture
+          </a>
+        <% end %>
         <% if policy([employee, :report]).index? %>
           <a href="<%= employee_reports_path %>" class="<%= current_page?(employee_reports_path) ? "selected-tab" : "unselected-tab" %>">
             Reports

@@ -23,7 +23,8 @@ class Employee::SurveysController < Employee::BaseController
     answer = Survey::Answer.create(attempt: attempt, question: question, score: score, option: question.options.first)
     attempt.update(submitted: true, score: attempt.calculate_score)
 
-    redirect_to employee_kpis_path(@employee), notice: "Assessment successfully submitted"
+    redirect_path = survey.culture? ? employee_culture_index_path(@employee) : employee_kpis_path(@employee)
+    redirect_to redirect_path, notice: "Assessment successfully submitted"
   end
 
   private

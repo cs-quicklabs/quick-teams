@@ -20,6 +20,7 @@ class EmployeeKpiReflex < ApplicationReflex
   def view_comment
     attempt = Survey::Attempt.find(element.dataset[:comment])
     morph "#modal", render(partial: "shared/comment", locals: { attempt: attempt, main_button_visible: true })
+    # Do not morph or replace any other container
   end
 
   private

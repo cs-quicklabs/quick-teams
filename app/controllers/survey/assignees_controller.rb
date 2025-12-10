@@ -6,17 +6,19 @@ class Survey::AssigneesController < Survey::BaseController
     authorize [:survey, :assignee]
 
     klass = @survey.survey_for.resolve_class
-    @pagy, @assignees = pagy_nil_safe(params, klass.available.where(kpi_id: @survey), items: LIMIT)
-    @assigns = klass.available.where(kpi_id: nil)
+    search = @survey.survey_type == "culture" ? klass.available.where(culture_kpi_id: @survey) : klass.available.where(kpi_id: @survey)
+    @pagy, @assignees = pagy_nil_safe(params, search, items: LIMIT)
+    @assigns = @survey.survey_type == "culture" ? klass.available.where(culture_kpi_id: nil) : klass.available.where(kpi_id: nil)
     render_partial("survey/assignees/assignee", collection: @assignees, cached: true) if stale?(@assignees + @assigns + [@survey])
   end
 
   def create
     authorize [:survey, :assignee]
 
-    @assigns = @klass.available.where(kpi_id: nil)
+    @assigns = @survey.survey_type == "culture" ? @klass.available.where(culture_kpi_id: nil) : @klass.available.where(kpi_id: nil)
+    update_result = @survey.survey_type == "culture" ? @assignee.update(culture_kpi_id: @survey.id) : @assignee.update(kpi_id: @survey.id)
     respond_to do |format|
-      if @assignee.update(kpi_id: @survey.id)
+      if update_result
         format.turbo_stream {
           render turbo_stream: turbo_stream.prepend(:assignees, partial: "survey/assignees/assignee", locals: { assignee: @assignee }) +
                                turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey, message: "Assignee was added successfully." })
@@ -32,8 +34,8 @@ class Survey::AssigneesController < Survey::BaseController
 
     klass = @survey.survey_for.resolve_class
     @assignee = klass.find(params[:id])
-    @assignee.update(kpi_id: nil)
-    @assigns = klass.available.where(kpi_id: nil)
+    @survey.survey_type == "culture" ? @assignee.update(culture_kpi_id: nil) : @assignee.update(kpi_id: nil)
+    @assigns = @survey.survey_type == "culture" ? klass.available.where(culture_kpi_id: nil) : klass.available.where(kpi_id: nil)
     respond_to do |format|
       format.turbo_stream {
         render turbo_stream: turbo_stream.replace("add-assignee", partial: "survey/assignees/form", locals: { assigns: @assigns, survey: @survey }) +

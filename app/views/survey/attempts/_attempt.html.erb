@@ -3,7 +3,7 @@
 <% participant = attempt.participant.decorate %>
 <tr class="bg-white " id="<%= dom_id(attempt) %>">
   <td class=" whitespace-nowrap  table-cell">
-    <a class= "hover:underline" href="<%= resolve_redirect_path(attempt) %>">
+    <a class="hover:underline" href="<%= resolve_redirect_path(attempt) %>">
       <p> <%= participant.display_name %></p>
     </a>
   </td>
@@ -16,7 +16,8 @@
   <td class=" whitespace-nowrap  table-cell">
     <p> <%= attempt.decorate.display_score %></p>
   </td>
-  <td class="whitespace-nowrap text-sm font-xs mt-4 text-gray-500 max-w-full flex">
+  <td class="whitespace-nowrap table-cell">
+    <div class="flex items-center">
     <% if attempt.submitted? %>
       <!-- Heroicon name: solid/check-circle -->
       <svg class="ml-1 flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -29,14 +30,16 @@
       </svg>
       In Progress
     <% end %>
+    </div>
   </td>
+  
   <td class="table-cell whitespace-nowrap">
     <% if current_user.admin? %>
       <%= delete_button(survey_attempt_path(attempt.survey, attempt)) %>
     <% elsif attempt.submitted? == false and current_user == attempt.actor %>
       <%= delete_button(survey_attempt_path(attempt.survey, attempt)) %>
     <% end %>
-    <a class="ml-4 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
+    <a class="ml-4 btn-secondary" href="<%= survey_report_preview_path(attempt.survey, attempt) %>">
       View
     </a>
   </td>

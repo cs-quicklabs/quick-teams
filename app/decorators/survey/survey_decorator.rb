@@ -8,6 +8,8 @@ class Survey::SurveyDecorator < Draper::Decorator
       "green"
     elsif self.score?
       "gray"
+    elsif self.culture?
+      "blue"
     end
   end
 

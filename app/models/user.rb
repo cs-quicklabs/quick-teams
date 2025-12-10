@@ -21,6 +21,7 @@ class User < ApplicationRecord
   belongs_to :role
   belongs_to :job
   belongs_to :kpi, class_name: "Survey::Survey", optional: true
+  belongs_to :culture_kpi, class_name: "Survey::Survey", optional: true
   belongs_to :status, class_name: "PeopleStatus", optional: true
 
   has_many :schedules, dependent: :destroy

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_06_114129) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_10_095741) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -779,6 +779,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_06_114129) do
     t.string "confirmation_token"
     t.datetime "confirmed_at", precision: nil
     t.datetime "created_at", null: false
+    t.integer "culture_kpi_id"
     t.datetime "current_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "cv"
@@ -902,5 +903,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_06_114129) do
   add_foreign_key "users", "jobs"
   add_foreign_key "users", "people_statuses", column: "status_id"
   add_foreign_key "users", "roles"
+  add_foreign_key "users", "survey_surveys", column: "culture_kpi_id"
   add_foreign_key "users", "users", column: "manager_id"
 end

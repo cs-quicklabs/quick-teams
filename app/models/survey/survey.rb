@@ -3,7 +3,7 @@ class Survey::Survey < ActiveRecord::Base
 
   self.table_name = "survey_surveys"
 
-  enum :survey_type, { checklist: 0, score: 1, kpi: 2 }
+  enum :survey_type, { checklist: 0, score: 1, kpi: 2, culture: 3 }
   enum :survey_for, { project: 0, user: 1, client: 2, adhoc: 3 }
   belongs_to :actor, class_name: "User", foreign_key: "actor_id"
 

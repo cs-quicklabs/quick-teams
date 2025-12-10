@@ -7,7 +7,7 @@
           <%= display_medium_avatar(assignee) %>
         </div>
         <div class="ml-4">
-          <a href="<%= employee_kpis_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">
+          <a href="<%= @survey.survey_type == "culture" ? employee_culture_index_path(assignee) : employee_kpis_path(assignee) %>" class="truncate hover:text-gray-600 hover:underline">
             <div class="text-sm font-medium text-gray-900">
               <%= assignee_decorated.display_name %>
               <div id="employee-tags" class="inline-flex">

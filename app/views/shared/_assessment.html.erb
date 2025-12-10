@@ -1,62 +1,72 @@
 <div id="modal">
-  <!-- This example requires Tailwind CSS v2.0+ -->
-  <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"  data-controller="modal" data-action="keyup@document->modal#escClose">
-    <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-      <!--
-      Background overlay, show/hide based on modal state.
+  <div>
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <div
+      class="fixed inset-0 z-10 overflow-y-auto"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+      data-controller="modal"
+      data-action="keyup@document->modal#escClose"
+    >
+      <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <!--
+  Background overlay, show/hide based on modal state.
 
-      Entering: "ease-out duration-300"
-        From: "opacity-0"
-        To: "opacity-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100"
-        To: "opacity-0"
+  Entering: "ease-out duration-300"
+    From: "opacity-0"
+    To: "opacity-100"
+  Leaving: "ease-in duration-200"
+    From: "opacity-100"
+    To: "opacity-0"
     -->
-      <div class="fixed inset-0 transition-opacity bg-gray-500/75" aria-hidden="true"></div>
-      <!-- This element is to trick the browser into centering the modal contents. -->
-      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-      <!--
-      Modal panel, show/hide based on modal state.
+        <div class="fixed inset-0 transition-opacity bg-gray-500/75" aria-hidden="true"></div>
 
-      Entering: "ease-out duration-300"
-        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        To: "opacity-100 translate-y-0 sm:scale-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100 translate-y-0 sm:scale-100"
-        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+        <!--
+  Modal panel, show/hide based on modal state.
+
+  Entering: "ease-out duration-300"
+    From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+    To: "opacity-100 translate-y-0 sm:scale-100"
+  Leaving: "ease-in duration-200"
+    From: "opacity-100 translate-y-0 sm:scale-100"
+    To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     -->
-      <div class="relative z-10 inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-        <div class="sm:flex sm:items-start">
-          <% question = question.decorate %>
-          <div class=" flex items-start w-full pt-2" id="<%= dom_id(question) %>">
-            <div class="ml-3 text-sm w-full py-4">
-              <p class="text-xs font-medium text-gray-500 uppercase"><%= question.display_category %></p>
-              <p class="text-sm font-semibold text-gray-900 mt-1"><%= question.display_text %></p>
-              <p class="text-sm  text-gray-500 mt-1"><%= question.display_description %></p>
-              <%= tailwind_form_with(model: attempt, id: dom_id(attempt), url: "surveys/#{question.survey.id}/assessment") do |form| %>
-                <%= form.hidden_field :actor_id, value: actor.id %>
-                <%= form.hidden_field :participant_id, value: participant.id %>
-                <%= form.hidden_field :question_id, value: question.id %>
-                <div>
-                  <label for="rating" class="block mt-4 text-sm font-medium text-gray-700">
-                    Select Score (between 1 to 10)
-                  </label>
-                  <%= form.number_field :rating, in: 1..10, step: 1, class: "form-text-field", required: true %>
-                </div>
-                <main class="max-w-lg mx-auto space-y-4 mt-4">
-                  <%= form.text_area :comment, "Comment (required)", required: true %>
-                </main>
-                <div class="sm:mt-4 sm:flex sm:flex-row-reverse">
-                  <% if main_button_visible %>
-                    <button type="submit" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
-                      Save
+        <div class="relative z-10 inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+          <div class="sm:flex sm:items-start">
+            <% question = question.decorate %>
+
+            <div class="flex items-start w-full pt-2" id="<%= dom_id(question) %>">
+              <div class="ml-3 text-sm w-full py-4">
+                <p class="text-xs font-medium text-gray-500 uppercase"><%= question.display_category %></p>
+                <p class="text-sm font-semibold text-gray-900 mt-1"><%= question.display_text %></p>
+                <p class="text-sm text-gray-500 mt-1"><%= question.display_description %></p>
+
+                <%= tailwind_form_with(model: attempt, id: dom_id(attempt), url: "surveys/#{question.survey.id}/assessment") do |form| %>
+                  <%= form.hidden_field :actor_id, value: actor.id %>
+                  <%= form.hidden_field :participant_id, value: participant.id %>
+                  <%= form.hidden_field :question_id, value: question.id %>
+
+                  <div><label for="rating" class="block mt-4 text-sm font-medium text-gray-700"> Select Score (between 1 to 10) </label><%= form.number_field :rating, in: 1..10, step: 1, class: "form-text-field", required: true %></div>
+
+                  <main class="max-w-lg mx-auto space-y-4 mt-4"><%= form.text_area :comment, "Comment (required)", required: true %></main>
+
+                  <div class="sm:mt-4 sm:flex sm:flex-row-reverse">
+                    <% if main_button_visible %>
+                      <button type="submit" class="btn-primary ml-2">
+                        Save
+                      </button>
+                    <% end %>
+
+                    <button type="button" class="btn-secondary" data-action="modal#close">
+                      Cancel
                     </button>
-                  <% end %>
-                  <button type="button" class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm" data-action="modal#close">
-                    Cancel
-                  </button>
-                </div>
-              <% end %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>

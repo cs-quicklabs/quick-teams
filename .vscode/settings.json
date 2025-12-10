@@ -5,7 +5,7 @@
     "editor.defaultFormatter": "jnbt.vscode-rufo"
   },
   "[erb]": {
-    "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+    "editor.defaultFormatter": "marcoroth.herb-lsp"
   },
   "vscode-erb-beautify.executePath": "/Users/adityatrehan/.rvm/gems/ruby-3.1.2/wrappers/htmlbeautifier",
   "[gemfile]": {

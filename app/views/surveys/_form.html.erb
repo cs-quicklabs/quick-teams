@@ -12,7 +12,7 @@
         <label for="email" class="block text-sm font-medium text-gray-700">
           Select Survey Type
         </label>
-        <%= form.select(:survey_type, [["Checklist", "checklist"], ["Score", "score"], ["KPIs", "kpi"]], { :prompt => "Select Survey Type", :selected => (params["survey_type"] if !params["survey_type"].blank?) }, :class => "form-text-field mt-1", :required => true) %>
+        <%= form.select(:survey_type, [["Checklist", "checklist"], ["Score", "score"], ["KRAs", "kpi"], ["Culture KPIs", "culture"]], { :prompt => "Select Survey Type", :selected => (params["survey_type"] if !params["survey_type"].blank?) }, :class => "form-text-field mt-1", :required => true) %>
       </div>
       <div class="sm:col-span-4 pt-6">
         <label for="email" class="block text-sm font-medium text-gray-700">
