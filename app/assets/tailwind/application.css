@@ -34,11 +34,11 @@
 }
 
 .btn-inline-edit {
-  @apply text-sm text-gray-400 hover:text-blue-600 cursor-pointer;
+  @apply text-xs text-gray-400 hover:text-blue-600 cursor-pointer;
 }
 
 .btn-inline-delete {
-  @apply text-sm text-gray-400 hover:text-red-600 cursor-pointer;
+  @apply text-xs text-gray-400 hover:text-red-600 cursor-pointer;
 }
 
 /* Form components */
