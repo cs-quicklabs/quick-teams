@@ -1,21 +1,26 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <title>Quick Teams</title>
+
     <meta name="turbo-prefetch" content="false">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= action_cable_meta_tag %>
+
     <% if user_signed_in? %>
-      <meta name="current-account", content="<%= Current.account.id %>">
+      <meta name="current-account" content="<%= Current.account.id %>">
     <% end %>
+
     <meta name="turbo-cache-control" content="no-cache">
+
     <% if content_for?(:head) %>
-      <main>
-        <%= yield(:head) %>
-      </main>
+      <main><%= yield(:head) %></main>
     <% end %>
+
     <%= javascript_importmap_tags %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://ga.jspm.io/npm:trix@2.1.8/dist/trix.css", "data-turbo-track": "reload" %>
@@ -23,15 +28,15 @@
     <%= stylesheet_link_tag "slim", "data-turbo-track": "reload" %>
     <%= favicon_link_tag "favicon.png" %>
   </head>
+
   <body>
     <% if user_signed_in? %>
       <%= render "shared/navbar/navbar" %>
       <div id="modal"></div>
     <% end %>
+
     <p class="text-sm font-medium text-center notice bg-green-50"><%= notice %></p>
     <p class="text-sm font-medium text-center alert bg-red-50"><%= alert %></p>
-    <main>
-      <%= yield %>
-    </main>
+    <main><%= yield %></main>
   </body>
 </html>

@@ -1,7 +1,6 @@
 <turbo-frame id="stats">
   <section aria-labelledby="add-participant-section">
     <div class="overflow-hidden bg-white">
-    
       <div class="px-4 justify-between flex">
         <div class="p-5">
           <% if current_user.admin? %>
@@ -20,15 +19,16 @@
             <p class="mt-2 max-w-4xl text-sm text-gray-500"><%= kpi.name %></p>
           <% end %>
         </div>
+
         <div class="px-4 p-4 bg-white overflow-hidden">
-          <dd class="text-3xl font-semibold text-gray-900 text-right">
-            <%= stats.average_score.to_s %>
-          </dd>
+          <dd class="text-3xl font-semibold text-gray-900 text-right"><%= stats.average_score.to_s %></dd>
+
           <dt class="text-sm font-medium text-gray-500 truncate">
             Score (out of 10)
           </dt>
         </div>
       </div>
+
       <ul>
         <% stats.contributions.each do |contribution| %>
           <%= render partial: "shared/surveys/progress_bar", locals: { title: contribution.category, score: contribution.score, scale: 10 } %>
