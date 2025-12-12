@@ -1,24 +1,23 @@
 <tr id="<%= dom_id timesheet %>">
+  <td class="table-cell whitespace-nowrap"><a href="<%= employee_timesheets_path(timesheet.user) %>" class="block hover:underline"><%= timesheet.user.decorate.display_name %></a></td>
+
+  <td class="table-cell w-full">
+    <div class="flex-col flex">
+      <p><%= timesheet.description.upcase_first %></p>
+      <p class="text-xs text-gray-400"><%= timesheet.output.upcase_first if timesheet.output.present? %></p>
+    </div>
+  </td>
+
   <td class="table-cell whitespace-nowrap">
-    <a href="<%= employee_timesheets_path(timesheet.user) %>" class="block hover:underline">
-      <%= timesheet.user.decorate.display_name %>
-    </a>
+    <div class="flex-col flex">
+      <p><%= timesheet.hours %></p>
+      <p class="text-xs text-gray-400"><%= display_date(timesheet.date) %></p>
+    </div>
   </td>
-  <td class="w-full table-cell">
-    <%= timesheet.description.upcase_first %>
-  </td>
-  <td class="table-cell whitespace-nowrap">
-    <%= display_date(timesheet.date) %>
-  </td>
-  <td class="table-cell whitespace-nowrap">
-    <%= timesheet.hours %>
-  </td>
+
   <td class="table-cell">
     <% if policy([@project, timesheet]).edit? %>
-      <div class="flex justify-end space-x-2">
-        <%= edit_button(edit_project_timesheet_path(@project, timesheet)) %>
-        <%= delete_button(project_timesheet_path(@project, timesheet)) %>
-      </div>
+      <div class="flex justify-end space-x-2"><%= edit_button(edit_project_timesheet_path(@project, timesheet)) %><%= delete_button(project_timesheet_path(@project, timesheet)) %></div>
     <% end %>
   </td>
 </tr>

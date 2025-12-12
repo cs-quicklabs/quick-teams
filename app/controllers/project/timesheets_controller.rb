@@ -48,6 +48,6 @@ class Project::TimesheetsController < Project::BaseController
   end
 
   def timesheet_params
-    params.require(:timesheet).permit(:project_id, :description, :hours, :date, :project_id)
+    params.require(:timesheet).permit(:project_id, :description, :hours, :date, :project_id, :output)
   end
 end
