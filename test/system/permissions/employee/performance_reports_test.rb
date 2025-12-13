@@ -18,7 +18,7 @@ class EmployeesPerformanceReporstTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h3", text: "EMPLOYEES"
-    assert_text "Employees KPIs Report"
+    assert_text "Employees KRAs Report"
     take_screenshot
   end
 

@@ -11,7 +11,7 @@ class Preference < ApplicationRecord
     elsif key == "delete_archived_projects_after_x_days"
       [["1 year", "365"], ["2 years", "730"], ["3 years", "1095"], ["Never", "-1"]]
     elsif key == "consider_overall_kpi_score"
-      [["Consider previous KPIs score", "true"], ["Consider only current KPIs Score", "false"]]
+      [["Consider previous KRAs score", "true"], ["Consider only current KRAs Score", "false"]]
     elsif key == "transfer_data_to_admin"
       User.where(account: account, permission: :admin).map { |u| [u.decorate.display_name, u.id] }
     end

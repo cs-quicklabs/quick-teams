@@ -1,21 +1,22 @@
-<div class="relative z-0  flex-1 overflow-y-auto focus:outline-none">
+<div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <!-- Page title & actions -->
   <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
     <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
-        Employee KPIs Report
+        Employee KRAs Report
       </h1>
     </div>
+
     <% if @kpis.size > 0 and params[:participant_id].present? %>
-      <div>
-        <%= link_to "Download PDF", performance_report_path(survey_type: params[:survey_type], participant_id: params[:participant_id], from_date: params[:from_date], to_date: params[:to_date], format: :pdf), target: "_blank", class: "btn-primary" %>
-      </div>
+      <div><%= link_to "Download PDF", performance_report_path(survey_type: params[:survey_type], participant_id: params[:participant_id], from_date: params[:from_date], to_date: params[:to_date], format: :pdf), target: "_blank", class: "btn-primary" %></div>
     <% end %>
   </div>
 </div>
+
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
     <%= render partial: "form" %>
+
     <!-- This example requires Tailwind CSS v2.0+ -->
     <% if @kpis.size > 0 %>
       <div class="w-full overflow-auto" data-controller="infinite-scroll">
@@ -23,35 +24,39 @@
           <thead class="bg-gray-50">
             <tr>
               <th scope="col" class="w-6/12 table-head">
-                KPI
+                KRA
               </th>
-              <th scope="col" class=" table-head">
+
+              <th scope="col" class="table-head">
                 Participant
               </th>
-              <th scope="col" class="  table-head">
+
+              <th scope="col" class="table-head">
                 score
               </th>
-              <th scope="col" class=" table-head">
+
+              <th scope="col" class="table-head">
                 Taken by
               </th>
-              <th scope="col" class=" table-head px-10">
+
+              <th scope="col" class="table-head px-10">
                 Status
               </th>
-              <th scope="col" class=" table-head">
+
+              <th scope="col" class="table-head">
                 created at
               </th>
-              <th scope="col" class=" table-head">
+
+              <th scope="col" class="table-head">
                 Comment
               </th>
             </tr>
           </thead>
-          <tbody class="table-body" data-infinite-scroll-target="entries">
-            <%= render partial: "kpi", collection: @kpis, as: :kpi %>
-          </tbody>
+
+          <tbody class="table-body" data-infinite-scroll-target="entries"><%= render partial: "kpi", collection: @kpis, as: :kpi %></tbody>
         </table>
-        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
-          <%= render partial: "shared/paginator", locals: { pagy: @pagy } %>
-        </div>
+
+        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination"><%= render partial: "shared/paginator", locals: { pagy: @pagy } %></div>
       </div>
     <% else %>
       <%== render partial: "shared/no_result_found", cached: true %>

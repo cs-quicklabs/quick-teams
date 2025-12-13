@@ -45,7 +45,7 @@ class SurveysTest < ApplicationSystemTestCase
     click_on "New Survey"
     fill_in "Name", with: "Survey Campaign"
     fill_in "Description", with: "This is a sample Survey Description"
-    select "KPIs", from: "survey_survey_survey_type"
+    select "KRAs", from: "survey_survey_survey_type"
     select "All Employees", from: "survey_survey_survey_for"
     click_on "Add Survey"
     take_screenshot

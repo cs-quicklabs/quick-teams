@@ -17,7 +17,7 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: "#{@employee.first_name} #{@employee.last_name}"
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
   test "can not show index if not logged in" do

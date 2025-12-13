@@ -79,8 +79,8 @@ class SignUp < Patterns::Service
       create_preference(
         key: "consider_overall_kpi_score",
         value: "true",
-        title: "Consider overall KPI score when KPIs are changed",
-        message: "When KPIs are changed for an employee, do you wish to consider previous KPIs in overall score or just the new KPIs score should be considered while calculating final score",
+        title: "Consider overall KRA score when KRAs are changed",
+        message: "When KRAs are changed for an employee, do you wish to consider previous KRAs in overall score or just the new KRAs score should be considered while calculating final score",
       )
       create_preference(
         key: "transfer_data_to_admin",

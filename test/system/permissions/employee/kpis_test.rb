@@ -24,20 +24,20 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "lead can see his subordiates KPIs" do
+  test "lead can see his subordiates KRAs" do
     sign_out @employee
     @employee = users(:lead)
     sign_in @employee
     visit subordinate_page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "lead can not see someone elseses KPIs" do
+  test "lead can not see someone elseses KRAs" do
     sign_out @employee
     @lead = users(:lead)
     sign_in @lead
@@ -45,20 +45,20 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: @lead.decorate.display_name
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "member can see his KPIs" do
+  test "member can see his KRAs" do
     sign_out @employee
     @employee = users(:member)
     sign_in @employee
     visit page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "member can not see someone elses KPIs" do
+  test "member can not see someone elses KRAs" do
     sign_out @employee
     @member = users(:member)
     sign_in @member
@@ -66,20 +66,20 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: @member.decorate.display_name
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "project manager can see his KPIs" do
+  test "project manager can see his KRAs" do
     sign_out @employee
     @manager = users(:manager)
     sign_in @manager
     visit page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "project manager can see his project participants KPIs" do
+  test "project manager can see his project participants KRAs" do
     sign_out @employee
     @manager = users(:manager)
     sign_in @manager
@@ -87,10 +87,10 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     visit subordinate_page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "project manager can not see someone elseses KPIs" do
+  test "project manager can not see someone elseses KRAs" do
     sign_out @employee
     @manager = users(:manager)
     sign_in @manager
@@ -98,20 +98,20 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: @manager.decorate.display_name
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "project observer can see his KPIs" do
+  test "project observer can see his KRAs" do
     sign_out @employee
     @observer = users(:abram)
     sign_in @observer
     visit page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "project observer can see his project participants KPIs" do
+  test "project observer can see his project participants KRAs" do
     sign_out @employee
     @observer = users(:abram)
     sign_in @observer
@@ -119,10 +119,10 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     visit subordinate_page_url
     take_screenshot
     assert_equal @survey.account.name, "Crownstack technologies"
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 
-  test "project observer can not see someone elseses KPIs" do
+  test "project observer can not see someone elseses KRAs" do
     sign_out @employee
     @observer = users(:abram)
     sign_in @observer
@@ -130,6 +130,6 @@ class EmployeeKpisTest < ApplicationSystemTestCase
     visit page_url
     take_screenshot
     assert_selector "h1", text: @observer.decorate.display_name
-    assert_selector "div#employee-tabs", text: "KPIs"
+    assert_selector "div#employee-tabs", text: "KRAs"
   end
 end

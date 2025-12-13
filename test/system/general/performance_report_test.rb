@@ -33,15 +33,15 @@ class EmployeesPerformanceReportTest < ApplicationSystemTestCase
     click_on "View"
     assert_text "Comment:"
     click_on "Close"
-    assert_text "Employee KPIs Report"
+    assert_text "Employee KRAs Report"
     take_screenshot
   end
 
   test "can not see Download PDF button if the employee is not selected" do
     visit page_url
     assert_selector "h3", text: "EMPLOYEES"
-    click_on "Employees KPIs Report"
-    assert_text "Employee KPIs Report"
+    click_on "Employees KRAs Report"
+    assert_text "Employee KRAs Report"
     click_on "Search"
     assert_no_text "Download PDF"
   end

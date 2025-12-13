@@ -7,7 +7,7 @@ user:
   survey_type: checklist
 
 userkpi: 
-  name: KPI Initiation Project
+  name: KRA Initiation Project
   description: Survey Description
   actor: regular
   account: crownstack
