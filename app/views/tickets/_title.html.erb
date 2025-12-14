@@ -1,23 +1,19 @@
-<% ticket = ticket.decorate %>
+<% decorated_ticket = ticket.decorate %>
+
 <div class="flex-1 min-w-0" id="title">
   <div class="flex mt-4 space-x-2">
-    <div class="flex-shrink-0">
-      <%= display_medium_avatar(ticket.user) %>
-    </div>
+    <div class="flex-shrink-0"><%= display_medium_avatar(decorated_ticket.user) %></div>
+
     <div>
       <div class="text-sm">
-        <span class="font-medium text-gray-500">  <%= ticket.user.decorate.display_name %></span>
+        <span class="font-medium text-gray-500"><%= decorated_ticket.user.decorate.display_name %></span>
+
         <% if policy([ticket]).show? %>
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= ticket.display_status_color %>-100 text-<%= ticket.display_status_color %>-800">
-            <%= ticket.display_status %>
-          </span>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ml-2 bg-<%= decorated_ticket.display_status_color %>-100 text-<%= decorated_ticket.display_status_color %>-800"><%= decorated_ticket.display_status %></span>
         <% end %>
       </div>
-      <div class="mt-1 space-x-2 text-sm">
-        <span class="font-medium text-gray-500">Created By <%= ticket.user.decorate.display_name %>
-          in the <%= ticket.ticket_label.name %> ticket label</span>
-        on <%= display_created_at(ticket) %> </span>
+
+      <div class="mt-1 text-sm"><span class="text-gray-500">Created by <%= decorated_ticket.user.decorate.display_name %> in the <%= decorated_ticket.ticket_label.name %> ticket label on <%= display_created_at(decorated_ticket) %></span></div>
     </div>
   </div>
-</div>
 </div>

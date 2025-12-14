@@ -18,18 +18,20 @@
 
 <% next_disabled_classes = "#{base_page} cursor-not-allowed page next disabled hover:bg-gray-100" %>
 
-<nav
-  aria-label="Pagination"
-  class="
-    inline-flex border border-gray-200 rounded-sm shadow-md pagy_nav
-    pagination
-  "
-  role="navigation"
->
+<nav aria-label="Pagination" class="inline-flex border border-gray-200 rounded-sm shadow-md pagy_nav pagination" role="navigation">
   <% if pagy.prev %>
     <span class="<%= prev_classes %>"><%== link.(pagy.prev, "&lt;", aria_label: "Previous") %></span>
   <% else %>
-    <span class="<%= prev_disabled_classes %>"><a role="link" aria-disabled="true" aria-label="Previous">&lt;</a></span>
+    <span class="<%= prev_disabled_classes %>">
+      <a
+        href="#"
+        role="link"
+        aria-disabled="true"
+        aria-label="Previous"
+      >
+        &lt;
+      </a>
+    </span>
   <% end %>
 
   <% pagy.series.each do |item| %>
@@ -43,10 +45,17 @@
   <% end %>
 
   <% if pagy.next %>
-    <span class="<%= next_classes %>">
-      <%= link_to raw("&gt;"), pagy_url_for(pagy, pagy.next), rel: "next", aria: { label: "Next" } %>
-    </span>
+    <span class="<%= next_classes %>"><%= link_to raw("&gt;"), pagy_url_for(pagy, pagy.next), rel: "next", aria: { label: "Next" } %></span>
   <% else %>
-    <span class="<%= next_disabled_classes %>"><a role="link" aria-disabled="true" aria-label="Next">&gt;</a></span>
+    <span class="<%= next_disabled_classes %>">
+      <a
+        href="#"
+        role="link"
+        aria-disabled="true"
+        aria-label="Next"
+      >
+        &gt;
+      </a>
+    </span>
   <% end %>
 </nav>
