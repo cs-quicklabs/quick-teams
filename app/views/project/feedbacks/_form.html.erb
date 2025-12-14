@@ -4,8 +4,7 @@
     <%= render "shared/form_header", title: "Add New Feedback", subtitle: "Feedback can be added in this project which can be about performace or participants or feedbacks given by client." %>
     <%= form.text_field :title, "Title" %>
     <%= form.rich_text_area :body, "Feedback" %>
-    <div class="flex justify-end">
-      <%= form.submit "Add Feedback", class: "btn-primary" %>
-    </div>
+
+    <div class="flex justify-end"><%= form.submit "Add Feedback", class: "btn-primary" %></div>
   </main>
 <% end %>

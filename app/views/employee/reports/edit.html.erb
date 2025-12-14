@@ -6,18 +6,14 @@
         <%= render "shared/form_header", title: "Edit Report", subtitle: "A report can be general update about goals, progress or anything you want to share with your team." %>
         <%= form.text_field :title, "Title", autocomplete: "off" %>
         <%= form.rich_text_area :body, "Description" %>
+
         <div class="flex justify-between">
-          <div class="">
-            <%= link_to "Cancel", employee_reports_path(@employee), class: "btn-secondary" %>
-          </div>
-          <div class="">
-            <%= form.submit "Update Draft", :name => "draft", class: "btn-secondary" %>
-            <%= form.submit "Submit Report", class: "btn-primary ml-2", data: {
+          <div><%= link_to "Cancel", employee_reports_path(@employee), class: "btn-secondary" %></div>
+          <div><%= form.submit "Update Draft", :name => "draft", class: "btn-secondary" %><%= form.submit "Submit Report", class: "btn-primary ml-2", data: {
                                                controller: "confirmation",
                                                "confirmation-message-value": "Are you sure you want to submit it? You won't be able to edit it after this.",
                                                action: "confirmation#confirm",
-                                             } %>
-          </div>
+                                             } %></div>
         </div>
       </main>
     <% end %>

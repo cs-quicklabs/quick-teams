@@ -3,14 +3,11 @@
     <%= render "shared/form_messages", resource: milestone, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "Add New Milestone", subtitle: "Add details of milestone for project" %>
     <%= form.text_field :title, "Title", autocomplete: "off" %>
-    <div>
-      <label for="date" class="block text-sm font-medium text-gray-700">Deadline</label>
-      <%= form.date_field :deadline, class: "form-text-field mt-1" %>
-    </div>
+
+    <div><label for="date" class="block text-sm font-medium text-gray-700">Deadline</label><%= form.date_field :deadline, class: "form-text-field mt-1" %></div>
 
     <%= form.rich_text_area :body, "Description" %>
-    <div class="flex justify-end">
-      <%= form.submit "Add Milestone", class: "btn-primary" %>
-    </div>
+
+    <div class="flex justify-end"><%= form.submit "Add Milestone", class: "btn-primary" %></div>
   </main>
 <% end %>

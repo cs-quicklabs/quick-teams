@@ -8,9 +8,7 @@
     <div class="-space-y-px">
       <%= form.text_field :name, "Name", required: true, autocomplete: "off" %>
 
-      <div class="sm:col-span-2 pt-6">
-        <%= form.text_area :description, "Survey Description", required: true, class: "form-text-field h-24" %>
-      </div>
+      <div class="sm:col-span-2 pt-6"><%= form.text_area :description, "Survey Description", required: true, class: "form-text-field h-24" %></div>
 
       <div class="sm:col-span-2 pt-6">
         <label for="email" class="block text-sm font-medium text-gray-700">Select Survey Type</label>
@@ -18,16 +16,11 @@
       </div>
 
       <div class="sm:col-span-4 pt-6">
-        <label for="email" class="block text-sm font-medium text-gray-700">
-          Select for whom this survey is intended
-        </label>
+        <label for="email" class="block text-sm font-medium text-gray-700"> Select for whom this survey is intended </label>
         <%= form.select(:survey_for, [["All Projects", "project"], ["All Employees", "user"], ["Client", "client"], ["Adhoc Employee", "adhoc"]], { :prompt => "Select Survey For", :selected => (params["survey_for"] if !params["survey_for"].blank?) }, :class => "form-text-field mt-1", :required => true) %>
       </div>
 
-      <div class="flex justify-end pt-5">
-        <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
-        <%= form.submit " Add Survey", class: "btn-primary ml-2" %>
-      </div>
+      <div class="flex justify-end pt-5"><%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %><%= form.submit " Add Survey", class: "btn-primary ml-2" %></div>
     </div>
   </main>
 <% end %>

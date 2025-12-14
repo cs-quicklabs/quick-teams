@@ -7,7 +7,7 @@
       <%= render "shared/form_messages", resource: ticket, message: local_assigns[:message] %>
       <%= form.hidden_field :user_id, value: current_user.id %>
       <%= form.hidden_field :account_id, value: current_user.account.id %>
-      <div><%= form.label :description, "Description", class: "block text-sm font-medium text-gray-700" %><%= form.text_area :description, class: "form-text-field h-24", placeholder: "Describe the issue..." %></div>
+      <div><%= form.text_area :description, title: "Description something", placeholder: "Describe the issue..." %></div>
       <div data-controller="select" data-select-param-value="discipline_id" data-select-url-value="tickets/labels">
         <div><%= form.label :ticket_label_id, "Select Label", class: "block mt-4 text-sm font-medium text-gray-700" %><%= form.collection_select :ticket_label_id, labels, :id, :name, { prompt: "Select Label" }, { class: "form-text-field mt-1", data: { select_target: "select" } } %></div>
       </div>

@@ -6,18 +6,14 @@
         <%= render "shared/form_header", title: "Add New Report for #{@project.decorate.display_name}", subtitle: "A report can be anything about the project, for example, milestones updates or anything you want to share with your team." %>
         <%= form.text_field :title, "Title", autocomplete: "off" %>
         <%= form.rich_text_area :body, "Description" %>
+
         <div class="flex justify-between">
-          <div class="">
-            <%= link_to "Cancel", project_reports_path(@project), class: "btn-secondary" %>
-          </div>
-          <div class="">
-            <%= form.submit "Save As Draft", :name => "draft", class: "btn-secondary" %>
-            <%= form.submit "Submit Report", class: "btn-primary ml-2", data: {
+          <div><%= link_to "Cancel", project_reports_path(@project), class: "btn-secondary" %></div>
+          <div><%= form.submit "Save As Draft", :name => "draft", class: "btn-secondary" %><%= form.submit "Submit Report", class: "btn-primary ml-2", data: {
                                                controller: "confirmation",
                                                "confirmation-message-value": "Are you sure you want to submit it? You won't be able to edit it after this.",
                                                action: "confirmation#confirm",
-                                             } %>
-          </div>
+                                             } %></div>
         </div>
       </main>
     <% end %>

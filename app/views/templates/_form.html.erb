@@ -8,10 +8,7 @@
         <%= form.hidden_field :user_id, value: current_user.id %>
         <%= form.rich_text_area :body, "Contents of Report", class: "form-text-field" %>
 
-        <div class="flex justify-end">
-          <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
-          <%= form.submit "Save Template", class: "btn-primary ml-2" %>
-        </div>
+        <div class="flex justify-end"><%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %><%= form.submit "Save Template", class: "btn-primary ml-2" %></div>
       </main>
     <% end %>
   </div>

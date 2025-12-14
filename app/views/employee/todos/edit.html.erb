@@ -4,14 +4,9 @@
     <%= render "shared/form_header", title: "Edit Todo for #{@employee.decorate.display_name}", subtitle: "Todo are short term goals" %>
     <%= form.text_field :title, "Title", autocomplete: "off" %>
     <%= form.text_area :body, "Description(optional)", class: "form-text-field h-24" %>
-    <div>
-      <label for="date" class="block text-sm font-medium text-gray-700">Due Date</label>
-      <%= form.date_field :deadline, class: "form-text-field mt-1" %>
-    </div>
 
-    <div class="flex justify-end">
-      <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
-      <%= form.submit "Edit Todo", class: "btn-primary ml-2" %>
-    </div>
+    <div><label for="date" class="block text-sm font-medium text-gray-700">Due Date</label><%= form.date_field :deadline, class: "form-text-field mt-1" %></div>
+
+    <div class="flex justify-end"><%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %><%= form.submit "Edit Todo", class: "btn-primary ml-2" %></div>
   </main>
 <% end %>
