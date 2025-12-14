@@ -6,15 +6,17 @@
       <% end %>
     </div>
 
-    <div id="space-header" class="">
+    <div id="space-header">
       <div class="flex flex-col">
         <div class="flex">
           <div class="w-16"></div>
 
           <div class="flex flex-1 justify-center">
-            <a href="<%= spaces_path %>">
-              <h1 id="message-heading" class="font-bold line-clamp-1 text-2xl leading-tight text-align-center"><%= highlight_hashtag(@space.title.upcase_first) %></h1>
-            </a>
+            <% title_html = highlight_hashtag(@space.title.upcase_first) %>
+
+            <%= link_to spaces_path do %>
+              <h1 id="message-heading" class="font-bold line-clamp-1 text-2xl leading-tight text-align-center"><%= title_html %></h1>
+            <% end %>
           </div>
 
           <div class="flex justify-end">
@@ -25,8 +27,10 @@
                     data-action="click->dropdown#toggle"
                     data-dropdown-target="button"
                     id="space-menu"
-                    class="flex-end mt-1 ml-4 border border-gray-600 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-500 focus:ring-white"
                     aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="space-menu-dropdown"
+                    class="flex-end mt-1 ml-4 border border-gray-600 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-500 focus:ring-white"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -40,34 +44,34 @@
                 <% end %>
               </div>
 
-              <div data-dropdown-target="menu" class="hidden absolute right-0 w-48 mt-2 origin-top-right rounded-md shadow-lg">
-                <div
-                  class="absolute right-0 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg w-60 border border-gray-200 z-10"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="user-menu"
-                >
-                  <div>
-                    <% if policy(@space).unpin? %>
-                      <a><%= link_to "Unpin", space_unpin_path(@space), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
-                    <% elsif policy(@space).pin? %>
-                      <a><%= link_to "Pin", space_pin_path(@space), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %></a>
-                    <% end %>
+              <div
+                id="space-menu-dropdown"
+                data-dropdown-target="menu"
+                class="hidden absolute right-0 mt-2 w-60 origin-top-right rounded-md shadow-lg z-10"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="space-menu"
+              >
+                <div class="py-1 bg-white rounded-md border border-gray-200">
+                  <% if policy(@space).unpin? %>
+                    <%= link_to "Unpin", space_unpin_path(@space), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
+                  <% elsif policy(@space).pin? %>
+                    <%= link_to "Pin", space_pin_path(@space), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
+                  <% end %>
 
-                    <% if policy(@space).edit? %>
-                      <a href="<%= edit_space_path(@space) %>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Edit</a>
-                    <% end %>
+                  <% if policy(@space).edit? %>
+                    <%= link_to "Edit", edit_space_path(@space), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
+                  <% end %>
 
-                    <% if policy(@space).archive? %>
-                      <%= confirm_button(space_archive_path(@space), "Archive", "Are you sure you want to archive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
-                    <% elsif policy(@space).unarchive? %>
-                      <%= confirm_button(space_unarchive_path(@space), "Unarchive", "Are you sure you want to unarchive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
-                    <% end %>
+                  <% if policy(@space).archive? %>
+                    <%= confirm_button(space_archive_path(@space), "Archive", "Are you sure you want to archive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
+                  <% elsif policy(@space).unarchive? %>
+                    <%= confirm_button(space_unarchive_path(@space), "Unarchive", "Are you sure you want to unarchive this space?", "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
+                  <% end %>
 
-                    <% if policy(@space).destroy? %>
-                      <%= styled_delete_button(space_path(@space), "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
-                    <% end %>
-                  </div>
+                  <% if policy(@space).destroy? %>
+                    <%= styled_delete_button(space_path(@space), "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100") %>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -119,7 +123,7 @@
 
     <div class="relative" id="threads">
       <% if @messages.size > 0 %>
-        <ul role="list" class=""><%= render partial: "message", collection: @messages, as: :message, cached: false %></ul>
+        <ul role="list"><%= render partial: "message", collection: @messages, as: :message, cached: false %></ul>
       <% else %>
         <div class="flex justify-center items-center h-28">
           <div class="text-center">
