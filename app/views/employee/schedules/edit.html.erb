@@ -8,41 +8,50 @@
       <div class="flex pt-2 pb-4 border-b border-gray-200">
         <div class="flex w-full ml-3">
           <div class="w-full">
-            <label for="starts" class="block text-sm font-medium text-gray-700">
-              Starts At
-            </label>
+            <label for="starts" class="block text-sm font-medium text-gray-700">Starts At</label>
+
             <%= form.hidden_field :project_id, value: @schedule.project_id %>
             <%= form.date_field :starts_at, class: "form-text-field mt-1" %>
           </div>
+
           <div class="w-full ml-4">
-            <label for="ends" class="block text-sm font-medium text-gray-700">
-              Ends At
-            </label>
+            <label for="ends" class="block text-sm font-medium text-gray-700">Ends At</label>
             <%= form.date_field :ends_at, class: "form-text-field mt-1" %>
           </div>
+
           <div class="w-full ml-4">
-            <label for="ends" class="block text-sm font-medium text-gray-700">
-              Occupancy(%)
-            </label>
+            <label for="ends" class="block text-sm font-medium text-gray-700">Occupancy(%)</label>
             <%= form.text_field :occupancy, class: "form-text-field mt-1", autocomplete: "off" %>
           </div>
+
           <% if @schedule.project.billable %>
             <div class="w-full ml-4">
-              <label for="billable" class="block text-sm font-medium text-gray-700">
+              <label
+                for="billable"
+                class="block text-sm font-medium text-gray-700"
+              >
                 Billable
               </label>
               <%= form.select :billable, Schedule::SCHEDULE_OPTIONS, {}, class: "form-text-field mt-1" %>
             </div>
           <% else %>
             <div class="w-full ml-4">
-              <label for="billable" class="block text-sm font-medium text-gray-700">
+              <label
+                for="billable"
+                class="block text-sm font-medium text-gray-700"
+              >
                 Billable
               </label>
-              <label for="billable" class="block text-xs font-medium text-gray-500">
-                Project is non billable hence this schedule is non-billable as well.
+              <label
+                for="billable"
+                class="block text-xs font-medium text-gray-500"
+              >
+                Project is non billable hence this schedule is non-billable as
+                well.
               </label>
             </div>
           <% end %>
+
           <div class="content-end">
             <%= form.submit "Save", class: "btn-primary ml-2 mt-6" %>
           </div>

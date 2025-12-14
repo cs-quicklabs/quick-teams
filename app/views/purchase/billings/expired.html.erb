@@ -1,33 +1,91 @@
-<div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    <div class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
-    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="relative inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+<div
+  class="fixed z-10 inset-0 overflow-y-auto"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    class="
+      flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center
+      sm:block sm:p-0
+    "
+  >
+    <div
+      class="fixed inset-0 bg-gray-500/75 transition-opacity"
+      aria-hidden="true"
+    ></div>
+    <span
+      class="hidden sm:inline-block sm:align-middle sm:h-screen"
+      aria-hidden="true"
+    >
+      &#8203;
+    </span>
+
+    <div
+      class="
+        relative inline-block align-bottom bg-white rounded-lg px-4 pt-5
+        pb-4 text-left overflow-hidden shadow-xl transform transition-all
+        sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6
+      "
+    >
       <div>
         <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full">
-          <svg class="ml-2 h-12 w-12 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+          <svg
+            class="ml-2 h-12 w-12 text-red-600"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+              clip-rule="evenodd"
+            />
           </svg>
         </div>
         <div class="text-center">
-          <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">No Active Subscription</h3>
+          <h3
+            class="text-lg leading-6 font-medium text-gray-900"
+            id="modal-title"
+          >
+            No Active Subscription
+          </h3>
           <div class="mt-2">
-            <p class="text-sm text-gray-500">This account has been suspended as there is no active subscription present. </p>
+            <p class="text-sm text-gray-500">
+              This account has been suspended as there is no active subscription
+              present.
+            </p>
           </div>
         </div>
       </div>
+
       <% if current_user.account.owner == current_user %>
         <div class="mt-4 flex justify-center">
           <%= form_tag purchase_checkouts_path, method: :post, data: { turbo: false } do %>
-            <input type="hidden" name="price_id" value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly) %>" />
-            <input type="submit" value="Subscribe for $49/month" class="btn-primary" />
+            <input
+              type="hidden"
+              name="price_id"
+              value="<%= Rails.application.credentials.dig(:stripe, :pricing, :monthly) %>"
+            />
+            <input
+              type="submit"
+              value="Subscribe for $49/month"
+              class="btn-primary"
+            />
           <% end %>
         </div>
       <% else %>
-        <p class="text-sm text-gray-500 mt-4 text-center">Please contact your account owner to resolve this issue. </p>
+        <p class="text-sm text-gray-500 mt-4 text-center">
+          Please contact your account owner to resolve this issue.
+        </p>
       <% end %>
+
       <div class="mt-2">
-        <a><%= link_to "Sign Out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "block px-4 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-500 hover:underline text-center", role: "menuitem" %></a>
+        <a>
+          <%= link_to "Sign Out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "block px-4 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-500 hover:underline text-center", role: "menuitem" %>
+        </a>
       </div>
     </div>
   </div>

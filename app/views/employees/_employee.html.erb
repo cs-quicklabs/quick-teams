@@ -1,34 +1,44 @@
 <% employee = employee.decorate %>
-<tr id ="<%= dom_id(employee) %>">
+
+<tr id="<%= dom_id(employee) %>">
   <td class="table-cell whitespace-nowrap">
     <div class="flex items-center">
       <div class="flex-shrink-0 w-10 h-10">
         <%= display_medium_avatar(employee) %>
       </div>
-      <a href="<%= employee_team_path(employee) %>" class="truncate hover:text-gray-600 hover:underline">
+      <a
+        href="<%= employee_team_path(employee) %>"
+        class="truncate hover:text-gray-600 hover:underline"
+      >
         <div class="ml-4">
           <div class="text-sm font-medium text-gray-900">
             <%= employee.display_name %>
           </div>
-          <div class="text-sm text-gray-500">
-            <%= employee.email %>
-          </div>
+          <div class="text-sm text-gray-500"><%= employee.email %></div>
         </div>
       </a>
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
     <div class="text-sm text-gray-900"><%= employee.display_position %></div>
-    <div class="text-sm text-gray-500"><%= employee.display_discipline_title %></div>
+    <div class="text-sm text-gray-500">
+      <%= employee.display_discipline_title %>
+    </div>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <a href="<%= employee_team_path(employee.manager) if !employee.manager.nil? %>" class="truncate hover:text-gray-600 hover:underline">
+    <a
+      href="<%= employee_team_path(employee.manager) if !employee.manager.nil? %>"
+      class="truncate hover:text-gray-600 hover:underline"
+    >
       <%= employee.display_manager_name %>
     </a>
   </td>
   <td class="table-cell">
     <div class="flex items-center space-x-2">
-      <div class="flex flex-shrink-0 -space-x-1" title="<%= employee.subordinates.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>">
+      <div
+        class="flex flex-shrink-0 -space-x-1"
+        title="<%= employee.subordinates.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>"
+      >
         <% employee.display_team_members.each do |team_member| %>
           <%= display_xsmall_avatar(team_member) %>
         <% end %>
@@ -38,7 +48,10 @@
   </td>
   <td class="table-cell whitespace-nowrap">
     <% unless employee.status.nil? %>
-      <a href="<%= employees_reports_path(status: employee.status.id) %>" class="hover:underline">
+      <a
+        href="<%= employees_reports_path(status: employee.status.id) %>"
+        class="hover:underline"
+      >
         <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= employee.status.color %>-800 bg-<%= employee.status.color %>-100 rounded-full">
           <%= employee.status.name.titleize %>
         </span>
@@ -49,21 +62,48 @@
     <div class="text-sm text-gray-500"><%= employee.permission.titleize %></div>
     <% if employee.sign_in_count > 0 %>
       <p class="flex items-center text-sm text-gray-500">
-        Joined      
+        Joined
         <!-- Heroicon name: solid/check-circle -->
-        <svg class="flex-shrink-0 mr-1.5 h-4 w-4 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        <svg
+          class="flex-shrink-0 mr-1.5 h-4 w-4 text-green-400"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"
+          />
         </svg>
       </p>
     <% elsif employee.invitation_created_at.nil? %>
-      <a data-reflex="click->InviteEmployee#invite" data-employee-id=<%= employee.id %> class="text-blue-600 cursor-pointer hover:underline btn-inline-edit">Invite</a>
+      <a
+        data-reflex="click->InviteEmployee#invite"
+        data-employee-id="<%= employee.id %>"
+        class="text-blue-600 cursor-pointer hover:underline btn-inline-edit"
+      >
+        Invite
+      </a>
     <% else %>
-      <p class="flex items-center text-sm text-gray-500 ">
+      <p class="flex items-center text-sm text-gray-500">
         Invited
         <!-- Heroicon name: solid/check-circle -->
-        <svg class="flex-shrink-0 mr-1.5 h-4 w-4 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-        </svg>      </p>
+        <svg
+          class="flex-shrink-0 mr-1.5 h-4 w-4 text-yellow-400"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </p>
     <% end %>
   </td>
 </tr>

@@ -1,17 +1,35 @@
 <% employee = employee.decorate %>
+
 <tr id="<%= dom_id(employee) %>">
   <td class="table-cell whitespace-nowrap">
     <div class="flex items-center">
-      <span role="img" class="relative inline-block" title="<%= employee.billable? ? "Billable" : "Non Billable" %>">
+      <span
+        role="img"
+        class="relative inline-block"
+        title="<%= employee.billable? ? "Billable" : "Non Billable" %>"
+      >
         <%= display_medium_avatar(employee) %>
         <% if employee.billable? %>
-          <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
+          <span
+            class="
+              absolute bottom-0 right-0 block h-2 w-2 rounded-full
+              bg-green-400 ring-2 ring-white
+            "
+          ></span>
         <% else %>
-          <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+          <span
+            class="
+              absolute bottom-0 right-0 block h-2 w-2 rounded-full
+              bg-red-400 ring-2 ring-white
+            "
+          ></span>
         <% end %>
       </span>
       <div class="ml-4">
-        <a href="<%= employee_schedules_path(employee) %>" class="truncate hover:text-gray-600 hover:underline">
+        <a
+          href="<%= employee_schedules_path(employee) %>"
+          class="truncate hover:text-gray-600 hover:underline"
+        >
           <div class="text-sm font-medium text-gray-900">
             <%= employee.display_name %>
             <% unless employee.status.nil? %>

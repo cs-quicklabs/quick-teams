@@ -5,9 +5,18 @@
       <div class="relative flex items-center justify-between h-12">
         <%= render "shared/navbar/default" %>
 
-        <div class="absolute inset-y-0 right-0 items-center flex-shrink-0 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div
+          class="
+            absolute inset-y-0 right-0 items-center flex-shrink-0 pr-2
+            sm:static sm:inset-auto sm:ml-6 sm:pr-0
+          "
+        >
           <!-- Profile dropdown -->
-          <div class="relative z-10 ml-3" data-controller="dropdown" data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide">
+          <div
+            class="relative z-10 ml-3"
+            data-controller="dropdown"
+            data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide"
+          >
             <div>
               <button
                 data-action="click->dropdown#toggle"
@@ -16,7 +25,11 @@
                 aria-haspopup="true"
                 aria-expanded="false"
                 aria-controls="user-menu-dropdown"
-                class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                class="
+                  flex text-sm bg-gray-800 rounded-full focus:outline-none
+                  focus:ring-2 focus:ring-offset-2
+                  focus:ring-offset-gray-800 focus:ring-white
+                "
               >
                 <%= display_small_avatar(current_user) %>
               </button>
@@ -25,7 +38,10 @@
             <div
               id="user-menu-dropdown"
               data-dropdown-target="menu"
-              class="hidden absolute right-0 mt-2 w-60 origin-top-right rounded-md shadow-lg transition ease-out duration-100"
+              class="
+                hidden absolute right-0 mt-2 w-60 origin-top-right
+                rounded-md shadow-lg transition ease-out duration-100
+              "
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="user-menu"
@@ -33,7 +49,9 @@
               <div class="py-1 bg-white rounded-md border border-gray-200">
                 <div class="px-4 py-3">
                   <p class="text-sm">Signed in as</p>
-                  <p class="text-xs text-gray-400 truncate font-small max-w-auto"><%= current_user.email %></p>
+                  <p class="text-xs text-gray-400 truncate font-small max-w-auto">
+                    <%= current_user.email %>
+                  </p>
                 </div>
 
                 <div class="border-t border-gray-100">

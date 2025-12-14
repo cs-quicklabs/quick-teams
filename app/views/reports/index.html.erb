@@ -1,220 +1,403 @@
-  <main class="pb-8">
+<main class="pb-8">
   <div class="px-4 sm:px-6">
     <!-- Main 2 column grid -->
     <div class="grid items-start grid-cols-1 gap-2 pl-40 pr-40 lg:grid-cols-2 lg:gap-2">
       <!-- Left column -->
       <div class="grid grid-cols-1 gap-4 lg:col-span-1">
         <div class="max-w-2xl mx-auto mt-8 mb-8">
-          <h3 class="px-3 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
+          <h3
+            class="px-3 text-xs font-bold tracking-wider text-gray-800 uppercase"
+            id="projects-headline"
+          >
             Timesheets
           </h3>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= timesheets_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Timesheets Report
-              </span>
+            <a
+              href="<%= timesheets_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Timesheets Report</span>
             </a>
-            <a href="<%= timesheets_reports_path(from_date: Date.yesterday, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                What happened yesterday?
-              </span>
+            <a
+              href="<%= timesheets_reports_path(from_date: Date.yesterday, to_date: Date.today) %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">What happened yesterday?</span>
             </a>
           </div>
-          <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
+
+          <h3
+            class="
+              px-3 mt-8 text-xs font-bold tracking-wider text-gray-800
+              uppercase
+            "
+            id="projects-headline"
+          >
             Goals
           </h3>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= goals_reports_path(from_date: Date.today - 7.days, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Last Week's Goals Status Report
-              </span>
+            <a
+              href="<%= goals_reports_path(from_date: Date.today - 7.days, to_date: Date.today) %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Last Week's Goals Status Report</span>
             </a>
-            <a href="<%= goals_reports_path(from_date: Date.today - 30.days, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Last Month's Goals Status Report
-              </span>
+            <a
+              href="<%= goals_reports_path(from_date: Date.today - 30.days, to_date: Date.today) %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Last Month's Goals Status Report</span>
             </a>
-            <a href="<%= goals_reports_path(from_date: Date.today - 90.days, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Last Quarter's Goals Status Report
-              </span>
+            <a
+              href="<%= goals_reports_path(from_date: Date.today - 90.days, to_date: Date.today) %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Last Quarter's Goals Status Report</span>
             </a>
-            <a href="<%= goals_reports_path(status: 0, to_date: Date.today, created_by: current_user.id) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Pending goals created by me
-              </span>
+            <a
+              href="<%= goals_reports_path(status: 0, to_date: Date.today, created_by: current_user.id) %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Pending goals created by me</span>
             </a>
-            <a href="<%= goals_reports_path(status: 1, from_date: Date.today - 30.days, to_date: Date.today, order_by: "updated_at", order: "desc") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Recently completed goals
-              </span>
+            <a
+              href="<%= goals_reports_path(status: 1, from_date: Date.today - 30.days, to_date: Date.today, order_by: "updated_at", order: "desc") %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Recently completed goals</span>
             </a>
-            <a href="<%= goals_reports_path(status: 0, order: "desc", order_by: "created_at") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Recently Added pending goals
-              </span>
+            <a
+              href="<%= goals_reports_path(status: 0, order: "desc", order_by: "created_at") %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Recently Added pending goals</span>
             </a>
-            <a href="<%= goals_reports_path(status: 0, order: "desc", order_by: "updated_at") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Recently Updated pending goals
-              </span>
+            <a
+              href="<%= goals_reports_path(status: 0, order: "desc", order_by: "updated_at") %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Recently Updated pending goals</span>
             </a>
-            <a href="<%= goals_reports_path(status: 0, to_date: Date.today, type: "User") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Pending employee goals which should have been completed by now
-              </span>
+            <a
+              href="<%= goals_reports_path(status: 0, to_date: Date.today, type: "User") %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Pending employee goals which should have been completed by now</span>
             </a>
-            <a href="<%= goals_reports_path(status: 0, to_date: Date.today, type: "Project") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Pending project milestones which should have been completed by now
-              </span>
+            <a
+              href="<%= goals_reports_path(status: 0, to_date: Date.today, type: "Project") %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Pending project milestones which should have been completed by now</span>
             </a>
-            <a href="<%= goals_reports_path(status: 0) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                All Pending goals
-              </span>
+            <a
+              href="<%= goals_reports_path(status: 0) %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">All Pending goals</span>
             </a>
           </div>
-          <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
+
+          <h3
+            class="
+              px-3 mt-8 text-xs font-bold tracking-wider text-gray-800
+              uppercase
+            "
+            id="projects-headline"
+          >
             Schedules
           </h3>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= available_schedules_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Available Resources
-              </span>
+            <a
+              href="<%= available_schedules_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Available Resources</span>
             </a>
-            <a href="<%= no_schedule_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Employees with no schedule
-              </span>
+            <a
+              href="<%= no_schedule_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Employees with no schedule</span>
             </a>
-            <a href="<%= no_projects_schedules_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Employees with no project
-              </span>
+            <a
+              href="<%= no_projects_schedules_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Employees with no project</span>
             </a>
-            <a href="<%= overburdened_schedules_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Overburdened Resources 
-              </span>
+            <a
+              href="<%= overburdened_schedules_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Overburdened Resources</span>
             </a>
-            <a href="<%= shared_schedules_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Resources shared in multiple projects
-              </span>
+            <a
+              href="<%= shared_schedules_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Resources shared in multiple projects</span>
             </a>
+
             <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-              <a href="<%= roles_schedule_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-                <span class="truncate">
-                  Schedules by Jobs, Roles and Discipline
-                </span>
+              <a
+                href="<%= roles_schedule_reports_path %>"
+                class="
+                  flex items-center px-3 py-1 text-sm text-gray-600
+                  rounded-md group hover:text-gray-900 hover:bg-gray-50
+                "
+              >
+                <span class="truncate">Schedules by Jobs, Roles and Discipline</span>
               </a>
             </div>
           </div>
         </div>
       </div>
+
       <!-- Left column -->
       <div class="grid grid-cols-1 gap-4 lg:col-span-1">
         <div class="max-w-2xl mx-auto mt-8 mb-8">
-          <h3 class="px-3 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
+          <h3
+            class="px-3 text-xs font-bold tracking-wider text-gray-800 uppercase"
+            id="projects-headline"
+          >
             Todos
           </h3>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= my_pending_todos_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Pending Todos created by me
-              </span>
+            <a
+              href="<%= my_pending_todos_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Pending Todos created by me</span>
             </a>
-            <a href="<%= pending_todos_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Pending Todos which should have been completed by now
-              </span>
+            <a
+              href="<%= pending_todos_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Pending Todos which should have been completed by now</span>
             </a>
-            <a href="<%= all_pending_todos_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                All Pending Todos
-              </span>
+            <a
+              href="<%= all_pending_todos_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">All Pending Todos</span>
             </a>
-            <a href="<%= recently_added_todos_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Recently Added Pending Todos
-              </span>
+            <a
+              href="<%= recently_added_todos_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Recently Added Pending Todos</span>
             </a>
-            <a href="<%= recently_finished_todos_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Recetly Finished Todos
-              </span>
+            <a
+              href="<%= recently_finished_todos_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Recetly Finished Todos</span>
             </a>
           </div>
-          <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
+
+          <h3
+            class="
+              px-3 mt-8 text-xs font-bold tracking-wider text-gray-800
+              uppercase
+            "
+            id="projects-headline"
+          >
             Projects
           </h3>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= projects_risks_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Projects Risks Report
-              </span>
+            <a
+              href="<%= projects_risks_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Projects Risks Report</span>
             </a>
-            <a href="<%= projects_observers_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Projects Observers Report
-              </span>
+            <a
+              href="<%= projects_observers_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Projects Observers Report</span>
             </a>
           </div>
-          <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
+
+          <h3
+            class="
+              px-3 mt-8 text-xs font-bold tracking-wider text-gray-800
+              uppercase
+            "
+            id="projects-headline"
+          >
             Employees
           </h3>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= employees_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Employees Report
-              </span>
+            <a
+              href="<%= employees_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Employees Report</span>
             </a>
           </div>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= skills_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Employees Skills Report
-              </span>
+            <a
+              href="<%= skills_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Employees Skills Report</span>
             </a>
           </div>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= kpis_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Employees KRAs Report
-              </span>
+            <a
+              href="<%= kpis_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Employees KRAs Report</span>
             </a>
           </div>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= open_goals_reports_path(from_date: Date.today, to_date: Date.today + 90.days, type: "User") %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Employees with no open goals
-              </span>
+            <a
+              href="<%= open_goals_reports_path(from_date: Date.today, to_date: Date.today + 90.days, type: "User") %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Employees with no open goals</span>
             </a>
           </div>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= report_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Employee Submitted Reports
-              </span>
+            <a
+              href="<%= report_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Employee Submitted Reports</span>
             </a>
           </div>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= employee_roles_reports_path %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Employees by Jobs, Roles and Discipline
-              </span>
+            <a
+              href="<%= employee_roles_reports_path %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Employees by Jobs, Roles and Discipline</span>
             </a>
           </div>
-          <h3 class="px-3 mt-8 text-xs font-bold tracking-wider text-gray-800 uppercase" id="projects-headline">
+
+          <h3
+            class="
+              px-3 mt-8 text-xs font-bold tracking-wider text-gray-800
+              uppercase
+            "
+            id="projects-headline"
+          >
             Miscellaneous
           </h3>
+
           <div class="mt-1 space-y-1" aria-labelledby="projects-headline">
-            <a href="<%= activities_reports_path(from_date: Date.today - 7.days, to_date: Date.today) %>" class="flex items-center px-3 py-1 text-sm text-gray-600 rounded-md group hover:text-gray-900 hover:bg-gray-50">
-              <span class="truncate">
-                Activities Report
-              </span>
+            <a
+              href="<%= activities_reports_path(from_date: Date.today - 7.days, to_date: Date.today) %>"
+              class="
+                flex items-center px-3 py-1 text-sm text-gray-600 rounded-md
+                group hover:text-gray-900 hover:bg-gray-50
+              "
+            >
+              <span class="truncate">Activities Report</span>
             </a>
           </div>
         </div>

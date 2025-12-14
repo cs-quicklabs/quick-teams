@@ -2,16 +2,20 @@
   <%= render "survey/title", survey: @survey %>
   <main class="pb-8">
     <div class="">
-      <div class="grid items-start grid-cols-1 lg:grid-cols-3 ">
+      <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <!-- Left column -->
-        <div class="grid grid-cols-1 lg:col-span-2" >
+        <div class="grid grid-cols-1 lg:col-span-2">
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
-              <div id="employee-assignees" class="flex  flex-wrap " data-controller="infinite-scroll">
+              <div
+                id="employee-assignees"
+                class="flex flex-wrap"
+                data-controller="infinite-scroll"
+              >
                 <table class="table">
                   <thead class="bg-gray-50">
                     <tr>
-                      <th scope="col" class=" w-full table-head">
+                      <th scope="col" class="w-full table-head">
                         assignee
                       </th>
                       <th scope="col" class="table-head">
@@ -19,19 +23,27 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="table-body" id="assignees" data-infinite-scroll-target="entries">
+                  <tbody
+                    class="table-body"
+                    id="assignees"
+                    data-infinite-scroll-target="entries"
+                  >
                     <%= render partial: "assignee", collection: @assignees, as: :assignee, cached: false %>
                   </tbody>
                 </table>
-                <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                <div
+                  class="flex justify-end invisible mt-2 mb-6 mr-2"
+                  data-infinite-scroll-target="pagination"
+                >
                   <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
                 </div>
               </div>
             </div>
           </section>
         </div>
+
         <!-- Right column -->
-        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200" >
+        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
           <%= render partial: "form", locals: { assigns: @assigns, survey: @survey } %>
         </div>
       </div>

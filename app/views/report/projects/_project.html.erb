@@ -1,20 +1,23 @@
 <% project = project.decorate %>
+
 <tr>
   <td class="w-full table-cell whitespace-nowrap">
     <div class="flex items-center font-medium">
-      <span class="mr-2 w-2.5 h-2.5  font-semibold leading-5 bg-<%= project.status.nil? ? "white" : project.status.color %>-400 rounded-full">
-      </span>
-      <a href="<%= project_schedules_path(project) %>" class="truncate hover:text-gray-600 hover:underline">
-        <span>
-          <%= project.name %>
-          <span class="font-normal text-gray-500"><%= project.display_discipline %></span>
-        </span>
+      <span class="mr-2 w-2.5 h-2.5 font-semibold leading-5 bg-<%= project.status.nil? ? "white" : project.status.color %>-400 rounded-full"></span>
+      <a
+        href="<%= project_schedules_path(project) %>"
+        class="truncate hover:text-gray-600 hover:underline"
+      >
+        <span><%= project.name %><span class="font-normal text-gray-500"><%= project.display_discipline %></span></span>
       </a>
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
     <% project.project_tags.uniq.each do |tag| %>
-      <a href="<%= projects_reports_path(tag: tag.id) %>" class="hover:underline">
+      <a
+        href="<%= projects_reports_path(tag: tag.id) %>"
+        class="hover:underline"
+      >
         <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= tag.color %>-800 bg-<%= tag.color %>-100 rounded-full">
           <%= tag.name.upcase_first %>
         </span>
@@ -27,7 +30,10 @@
     <% end %>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <a href="<%= employee_team_path(project.manager) if !project.manager.nil? %>" class="truncate hover:text-gray-600 hover:underline">
+    <a
+      href="<%= employee_team_path(project.manager) if !project.manager.nil? %>"
+      class="truncate hover:text-gray-600 hover:underline"
+    >
       <%= project.display_manager_name %>
     </a>
   </td>
@@ -36,7 +42,10 @@
   </td>
   <td class="table-cell whitespace-nowrap">
     <% unless project.status.nil? %>
-      <a href="<%= projects_reports_path(status: project.status.id) %>" class="hover:underline">
+      <a
+        href="<%= projects_reports_path(status: project.status.id) %>"
+        class="hover:underline"
+      >
         <span class="inline-flex px-2 text-xs font-semibold leading-5 text-<%= project.status.color %>-800 bg-<%= project.status.color %>-100 rounded-full">
           <%= project.status.name.titleize %>
         </span>

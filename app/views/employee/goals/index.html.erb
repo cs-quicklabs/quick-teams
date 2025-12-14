@@ -3,9 +3,12 @@
   <main class="pb-8">
     <div>
       <!-- Main 3 column grid -->
-      <div class="grid items-start grid-cols-1  lg:grid-cols-3">
+      <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <!-- Left column -->
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2" data-controller="infinite-scroll">
+        <div
+          class="grid grid-cols-1 gap-4 lg:col-span-2"
+          data-controller="infinite-scroll"
+        >
           <section aria-labelledby="participants_section">
             <div class="w-full overflow-hidden">
               <table class="table">
@@ -28,16 +31,24 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody class="table-body" id="goals" data-infinite-scroll-target="entries">
+                <tbody
+                  class="table-body"
+                  id="goals"
+                  data-infinite-scroll-target="entries"
+                >
                   <%= render partial: "goal", collection: @goals, cached: false %>
                 </tbody>
               </table>
-              <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+              <div
+                class="flex justify-end invisible mt-2 mb-6 mr-2"
+                data-infinite-scroll-target="pagination"
+              >
                 <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
               </div>
             </div>
           </section>
         </div>
+
         <% if policy([@employee, Goal]).create? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
@@ -53,6 +64,6 @@
       </div>
     </div>
   </main>
-  <div class="pt-4 pl-16 pr-16">
-  </div>
+
+  <div class="pt-4 pl-16 pr-16"></div>
 </main>

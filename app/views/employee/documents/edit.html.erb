@@ -5,9 +5,8 @@
         <%= render "shared/form_messages", resource: @document, message: local_assigns[:message] %>
         <%= render "shared/form_header", title: "Edit document for #{current_user.decorate.display_name}", subtitle: "A document can be resume, Learning material, blogs or anything work related." %>
         <%= form.text_field :filename, "Filename", autocomplete: "off" %>
-        <div>
-          <%= form.text_field :link, "Link", autocomplete: "off" %>
-        </div>
+        <div><%= form.text_field :link, "Link", autocomplete: "off" %></div>
+
         <%= form.text_area :comments, "Comments (optional)", class: "h-32 form-text-field", autocomplete: "off" %>
         <div class="flex justify-end">
           <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>

@@ -9,8 +9,13 @@
     data-question-id="<%= question.id %>"
   >
     <div class="ml-3 w-full">
-      <p class="text-xs font-medium text-gray-500 uppercase"><%= question.display_category %></p>
-      <p class="text-sm font-semibold text-gray-900"><%= question.display_text %></p>
+      <p class="text-xs font-medium text-gray-500 uppercase">
+        <%= question.display_category %>
+      </p>
+
+      <p class="text-sm font-semibold text-gray-900">
+        <%= question.display_text %>
+      </p>
 
       <% if current_user == participant %>
         <p class="text-sm text-gray-500"><%= question.display_explanation %></p>
@@ -19,10 +24,22 @@
       <% end %>
 
       <div class="inline-flex">
-        <button data-reflex="click->SurveyParticipantStats#summary" data-reflex-dataset="combined" class="btn-inline-edit underline mt-2 text-xs">View summary</button>
+        <button
+          data-reflex="click->SurveyParticipantStats#summary"
+          data-reflex-dataset="combined"
+          class="btn-inline-edit underline mt-2 text-xs"
+        >
+          View summary
+        </button>
 
         <% if policy([participant, :kpi]).record? %>
-          <p data-reflex="click->EmployeeKpi#assessment" data-reflex-dataset="combined" class="btn-inline-edit underline mt-2 text-xs px-4">Quick Assessment</p>
+          <p
+            data-reflex="click->EmployeeKpi#assessment"
+            data-reflex-dataset="combined"
+            class="btn-inline-edit underline mt-2 text-xs px-4"
+          >
+            Quick Assessment
+          </p>
         <% end %>
       </div>
 

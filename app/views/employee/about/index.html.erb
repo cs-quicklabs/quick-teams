@@ -22,9 +22,10 @@
           </dl>
         </div>
       </div>
+
       <div class="grid grid-cols-1 col-span-1 gap-2">
-        <section aria-labelledby="add-participant-section" >
-          <div class="overflow-hidden bg-white " id="add-observed-projects">
+        <section aria-labelledby="add-participant-section">
+          <div class="overflow-hidden bg-white" id="add-observed-projects">
             <%= render partial: "employee/about/observed_projects", locals: { employee: @employee, observed_projects: @observed_projects, message: "" } %>
           </div>
         </section>

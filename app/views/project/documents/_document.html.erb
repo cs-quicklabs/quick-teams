@@ -4,19 +4,23 @@
     <div class="text-sm">
       <%= link_to document.display_filename, ensure_protocol(document.link), target: "_blank", class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
-    <div class="mt-1 text-sm text-gray-700 ">
+    <div class="mt-1 text-sm text-gray-700">
       <p class="line-clamp-3"><%= highlight_hashtag(document.comments) %></p>
     </div>
   </td>
   <td class="table-cell align-top whitespace-nowrap">
-    <a href="<%= employee_documents_path(document.user) %>" class="block hover:underline" target="_top">
+    <a
+      href="<%= employee_documents_path(document.user) %>"
+      class="block hover:underline"
+      target="_top"
+    >
       <%= document.user.display_name %>
     </a>
   </td>
   <td class="table-cell whitespace-nowrap align-top">
     <%= display_created_at(document) %>
   </td>
-  <td class="table-cell  align-top">
+  <td class="table-cell align-top">
     <% if policy([@project, document]).edit? %>
       <div class="flex justify-end items-center space-x-2">
         <%= edit_button(edit_project_document_path(@project, document)) %>

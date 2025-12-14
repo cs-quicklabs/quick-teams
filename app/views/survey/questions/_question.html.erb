@@ -1,21 +1,40 @@
 <% question = question.decorate %>
+
 <%= turbo_frame_tag dom_id(question) do %>
-  <li class="py-3 flex border-b border-gray-200"  id=<%= question.id %>>
+  <li class="py-3 flex border-b border-gray-200" id="<%= question.id %>">
     <div class="ml-3 w-full">
-      <p class="text-xs text-gray-500 uppercase"><%= question.display_category %></p>
-      <p class="text-sm font-medium text-gray-900"><%= question.text.upcase_first %></p>
+      <p class="text-xs text-gray-500 uppercase">
+        <%= question.display_category %>
+      </p>
+
+      <p class="text-sm font-medium text-gray-900">
+        <%= question.text.upcase_first %>
+      </p>
+
       <p class="text-sm text-gray-500"><%= question.display_description %></p>
+
       <% unless question.explanation.nil? %>
-        <p class="text-xs text-gray-500 mt-2"><span class="font-semibold text-gray-900">Explanation: </span><%= question.display_explanation %></p>
+        <p class="text-xs text-gray-500 mt-2">
+          <span class="font-semibold text-gray-900">Explanation:</span>
+          <%= question.display_explanation %>
+        </p>
       <% end %>
+
       <div class="inline-flex">
-        <p  data-reflex="click->SurveyStats#summary" data-reflex-dataset="combined" class="btn-inline-edit underline mt-2 text-xs" >View summary</p>
+        <p
+          data-reflex="click->SurveyStats#summary"
+          data-reflex-dataset="combined"
+          class="btn-inline-edit underline mt-2 text-xs"
+        >
+          View summary
+        </p>
       </div>
-      <div id=<%= "summary_" + question.id.to_s %>   >
-      </div>
+
+      <div id="<%= "summary_" + question.id.to_s %>"></div>
     </div>
+
     <div class="flex align-right">
-      <div class="px-6 py-3 whitespace-nowrap  text-sm font-medium">
+      <div class="px-6 py-3 whitespace-nowrap text-sm font-medium">
         <%= edit_button(edit_survey_question_path(question.survey, question)) %>
         <%= delete_button(survey_question_path(question.survey, question)) %>
       </div>

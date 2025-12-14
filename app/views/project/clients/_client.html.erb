@@ -5,10 +5,16 @@
         <div class="flex-shrink-0">
           <%= image_tag "male-placeholder-image.png", class: "w-12 h-12 rounded-full" %>
         </div>
+
         <div class="flex-1 md:grid md:grid-cols-8 md:gap-4">
-          <span class="inline-flex rounded items-center py-0.5 pl-2.5 pr-1 text-sm font-medium text-gray-700">
+          <span
+            class="
+              inline-flex rounded items-center py-0.5 pl-2.5 pr-1 text-sm
+              font-medium text-gray-700
+            "
+          >
             <div>
-              <p class="text-sm font-medium text-gray-900 ">
+              <p class="text-sm font-medium text-gray-900">
                 <span class="truncate"><%= client.display_client_name %></span>
               </p>
               <p class="flex items-center mt-1 text-sm text-gray-500">
@@ -17,10 +23,13 @@
             </div>
           </span>
         </div>
+
         <div class="flex col-span-1">
           <div class="whitespace-nowrap">
             <% if policy([@project, :client]).delete? %>
-              <div class="text-sm text-gray-900"><%= delete_button([@project, client]) %></div>
+              <div class="text-sm text-gray-900">
+                <%= delete_button([@project, client]) %>
+              </div>
             <% end %>
           </div>
         </div>

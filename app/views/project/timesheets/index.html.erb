@@ -8,8 +8,11 @@
         <div class="grid grid-cols-1 gap-4 lg:col-span-2" id="timesheet-list">
           <% if @timesheets.size > 0 %>
             <section aria-labelledby="participants_section">
-              <div class="overflow-hidden bg-white" >
-                <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+              <div class="overflow-hidden bg-white">
+                <div
+                  class="w-full overflow-hidden"
+                  data-controller="infinite-scroll"
+                >
                   <table class="table">
                     <thead class="bg-gray-50">
                       <tr>
@@ -27,30 +30,69 @@
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="table-body" data-infinite-scroll-target="entries">
+                    <tbody
+                      class="table-body"
+                      data-infinite-scroll-target="entries"
+                    >
                       <%= render partial: "project/timesheets/timesheet", collection: @timesheets, cached: false %>
                     </tbody>
                   </table>
-                  <p class="pr-4 mt-2 text-sm text-right text-gray-500">Showing last 30 days' timesheets only.</p>
-                  <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+
+                  <p class="pr-4 mt-2 text-sm text-right text-gray-500">
+                    Showing last 30 days' timesheets only.
+                  </p>
+
+                  <div
+                    class="flex justify-end mt-2 mb-6 mr-2 invisible"
+                    data-infinite-scroll-target="pagination"
+                  >
                     <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
                   </div>
                 </div>
               </div>
-            <% end %>
-          </section>
+              <% end %>
+            </section>
         </div>
+
         <!-- Right column -->
-        <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200" id="timesheet-stats">
+        <div
+          class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200"
+          id="timesheet-stats"
+        >
           <section aria-labelledby="add-participant-section">
             <div class="overflow-hidden bg-white">
               <div class="px-4">
-                <div class="flex justify-center mt-4" data-project-id="<%= @project.id %>">
+                <div
+                  class="flex justify-center mt-4"
+                  data-project-id="<%= @project.id %>"
+                >
                   <span class="relative inline-flex rounded-md shadow-sm">
-                    <button type="button" data-reflex="click->ProjectTimesheetsStats#last_week" data-reflex-dataset="combined" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                    <button
+                      type="button"
+                      data-reflex="click->ProjectTimesheetsStats#last_week"
+                      data-reflex-dataset="combined"
+                      class="
+                        relative inline-flex items-center px-4 py-2 text-sm
+                        font-medium text-gray-700 bg-white border
+                        border-gray-300 rounded-l-md hover:bg-gray-50
+                        focus:z-10 focus:outline-none focus:ring-1
+                        focus:ring-indigo-500 focus:border-indigo-500
+                      "
+                    >
                       Last Week
                     </button>
-                    <button type="button" data-reflex="click->ProjectTimesheetsStats#last_month" data-reflex-dataset="combined" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                    <button
+                      type="button"
+                      data-reflex="click->ProjectTimesheetsStats#last_month"
+                      data-reflex-dataset="combined"
+                      class="
+                        relative inline-flex items-center px-4 py-2 -ml-px
+                        text-sm font-medium text-gray-700 bg-white border
+                        border-gray-300 rounded-r-md hover:bg-gray-50
+                        focus:z-10 focus:outline-none focus:ring-1
+                        focus:ring-indigo-500 focus:border-indigo-500
+                      "
+                    >
                       Last Month
                     </button>
                   </span>
@@ -65,6 +107,6 @@
       </div>
     </div>
   </main>
-  <div class="pt-4 pl-16 pr-16">
-  </div>
+
+  <div class="pt-4 pl-16 pr-16"></div>
 </main>

@@ -6,11 +6,10 @@
     <%= form.text_field :title, "Todo", autocomplete: "off" %>
     <%= form.text_area :body, "Description(optional)", class: "form-text-field h-24" %>
     <div>
-      <label for="date" class="block text-sm font-medium text-gray-700">
-        Due Date
-      </label>
+      <label for="date" class="block text-sm font-medium text-gray-700">Due Date</label>
       <%= form.date_field :deadline, class: "form-text-field mt-1", value: Date.today.to_formatted_s(:db) %>
     </div>
+
     <div class="flex justify-end">
       <%= form.submit "Add Todo", class: "btn-primary" %>
     </div>

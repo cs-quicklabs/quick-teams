@@ -1,27 +1,29 @@
 <tr>
-  <td class="table-cell  whitespace-nowrap">
-    <a href="<%= project_timesheets_path(timesheet.project) %>" class="block hover:underline">
+  <td class="table-cell whitespace-nowrap">
+    <a
+      href="<%= project_timesheets_path(timesheet.project) %>"
+      class="block hover:underline"
+    >
       <%= timesheet.project.name %>
     </a>
   </td>
-  <td class="table-cell  whitespace-nowrap">
-    <a href="<%= employee_timesheets_path(timesheet.user) %>" class="block hover:underline">
+  <td class="table-cell whitespace-nowrap">
+    <a
+      href="<%= employee_timesheets_path(timesheet.user) %>"
+      class="block hover:underline"
+    >
       <%= timesheet.user.decorate.display_name %>
     </a>
   </td>
-  <td class="w-full table-cell ">
-    <%= timesheet.description.upcase_first %>
-  </td>
-  <td class="table-cell  whitespace-nowrap">
+  <td class="w-full table-cell"><%= timesheet.description.upcase_first %></td>
+  <td class="table-cell whitespace-nowrap">
     <%= display_date(timesheet.date) %>
   </td>
-  <td class="table-cell  whitespace-nowrap">
-    <%= timesheet.hours %>
-  </td>
+  <td class="table-cell whitespace-nowrap"><%= timesheet.hours %></td>
   <td class="table-cell whitespace-nowrap">
     <%= timesheet.billable ? "Billable" : "Non-Billable" %>
   </td>
-  <td class="table-cell  whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <%= timesheet.billed ? "Billable" : "Not-Billed" %>
   </td>
 </tr>

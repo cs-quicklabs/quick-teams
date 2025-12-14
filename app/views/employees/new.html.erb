@@ -13,18 +13,22 @@
       <div class="flex items-center">
         <%= form.check_box :billable, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
         <label for="remember_me" class="block ml-2 text-sm text-gray-900">
-          This resource can be put on client work and can generate direct revenue. Leave unchecked if resource is not directly billable.
+          This resource can be put on client work and can generate direct
+          revenue. Leave unchecked if resource is not directly billable.
         </label>
       </div>
     </div>
+
     <div class="flex items-center justify-between">
       <div class="flex items-center">
         <%= form.check_box :invite, name: "invite", class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
         <label for="remember_me" class="block ml-2 text-sm text-gray-900">
-          Invite this user to join Quick Teams. User will be sent an invitation email to confirm.
+          Invite this user to join Quick Teams. User will be sent an invitation
+          email to confirm.
         </label>
       </div>
     </div>
+
     <div class="flex justify-end">
       <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
       <%= form.submit "Save", class: "btn-primary ml-2" %>

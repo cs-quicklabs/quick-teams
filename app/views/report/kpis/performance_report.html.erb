@@ -1,8 +1,16 @@
 <div class="d-inline-block">
-  <h2 class="mt-1 w-full font-semibold"><%= @kpis.last.participant.decorate.display_name %></h2>
+  <h2 class="mt-1 w-full font-semibold">
+    <%= @kpis.last.participant.decorate.display_name %>
+  </h2>
 </div>
 
-<p class="mt-1 w-full text-sm text-gray-500">This KRA report is from <%= params[:from_date].to_s %> to <%= params[:to_date].to_s %>. Names of the reviewers are hidden for anonymity.</p>
+<p class="mt-1 w-full text-sm text-gray-500">
+  This KRA report is from
+  <%= params[:from_date].to_s %>
+  to
+  <%= params[:to_date].to_s %>
+  . Names of the reviewers are hidden for anonymity.
+</p>
 
 <div class="pb-12 d-flex justify-content-start">
   <div>

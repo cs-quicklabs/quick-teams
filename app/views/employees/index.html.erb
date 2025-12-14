@@ -1,38 +1,55 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <!-- Page title & actions -->
-  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+  <div
+    class="
+      px-4 py-4 border-b border-gray-200 sm:flex sm:items-center
+      sm:justify-between sm:px-6 lg:px-8
+    "
+  >
     <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         People
       </h1>
-      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @pagy.count.to_s + " employees)" %></p>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate">
+        <%= "(" + @pagy.count.to_s + " employees)" %>
+      </p>
     </div>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
       <%= link_to "Add Member", new_employee_path, class: "btn-primary" %>
     </div>
   </div>
+
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div>
     <div class="flex flex-col">
       <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-          <div class="overflow-hidden border-b border-gray-200 sm:rounded-lg" >
+          <div class="overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table class="table">
               <thead class="bg-gray-50">
                 <tr>
-                  <th scope="col" class="table-head bg-gray-50 border-b border-gray-200">
+                  <th
+                    scope="col"
+                    class="table-head bg-gray-50 border-b border-gray-200"
+                  >
                     Name
                   </th>
-                  <th scope="col" class="table-head bg-gray-50 border-b border-gray-200">
+                  <th
+                    scope="col"
+                    class="table-head bg-gray-50 border-b border-gray-200"
+                  >
                     Title
                   </th>
-                  <th scope="col" class="table-head bg-gray-50 border-b border-gray-200">
+                  <th
+                    scope="col"
+                    class="table-head bg-gray-50 border-b border-gray-200"
+                  >
                     Manager
                   </th>
-                  <th class="table-head bg-gray-50 border-b border-gray-200 ">
+                  <th class="table-head bg-gray-50 border-b border-gray-200">
                     Team
                   </th>
-                  <th class="table-head  bg-gray-50 border-b border-gray-200 ">
+                  <th class="table-head bg-gray-50 border-b border-gray-200">
                     Status
                   </th>
                   <th class="table-head bg-gray-50 border-b border-gray-200">

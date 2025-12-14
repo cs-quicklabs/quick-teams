@@ -1,12 +1,19 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <!-- Page title & actions -->
-  <div class="px-4 py-4 border-b border-gray-200 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
+  <div
+    class="
+      px-4 py-4 border-b border-gray-200 sm:flex sm:items-center
+      sm:justify-between sm:px-6 lg:px-8
+    "
+  >
     <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         Select Survey
       </h1>
 
-      <p class="mt-1 ml-1 text-sm text-gray-500 truncate"><%= "(" + @surveys.load.size.to_s + " Surveys)" %></p>
+      <p class="mt-1 ml-1 text-sm text-gray-500 truncate">
+        <%= "(" + @surveys.load.size.to_s + " Surveys)" %>
+      </p>
     </div>
 
     <div
@@ -30,7 +37,10 @@
 
         <div class="relative">
           <div
-            class="absolute left-0 z-10 block w-full mt-2 origin-top-right bg-white rounded-md shadow-lg focus:outline-none"
+            class="
+              absolute left-0 z-10 block w-full mt-2 origin-top-right
+              bg-white rounded-md shadow-lg focus:outline-none
+            "
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
@@ -41,7 +51,9 @@
       </div>
     </div>
 
-    <div class="flex mt-4 sm:mt-0 sm:ml-4"><%= link_to "New Survey", new_survey_path, class: "btn-primary" %></div>
+    <div class="flex mt-4 sm:mt-0 sm:ml-4">
+      <%= link_to "New Survey", new_survey_path, class: "btn-primary" %>
+    </div>
   </div>
 
   <% if @surveys.size > 0 %>
@@ -72,10 +84,21 @@
             </tr>
           </thead>
 
-          <tbody class="table-body" id="surveys" data-infinite-scroll-target="entries"><%= render partial: "survey", collection: @surveys, as: :survey, cached: true %></tbody>
+          <tbody
+            class="table-body"
+            id="surveys"
+            data-infinite-scroll-target="entries"
+          >
+            <%= render partial: "survey", collection: @surveys, as: :survey, cached: true %>
+          </tbody>
         </table>
 
-        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination"><%= render partial: "shared/paginator", locals: { pagy: @pagy } %></div>
+        <div
+          class="flex justify-end invisible mt-2 mb-6 mr-2"
+          data-infinite-scroll-target="pagination"
+        >
+          <%= render partial: "shared/paginator", locals: { pagy: @pagy } %>
+        </div>
       </div>
     </div>
   <% else %>

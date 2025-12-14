@@ -3,29 +3,44 @@
     <div class="relative inline-block px-3 text-left">
       <nav class="px-3">
         <div>
-          <h3 class="text-xs font-semibold tracking-wider text-gray-500 uppercase" id="teams-headline">
+          <h3
+            class="text-xs font-semibold tracking-wider text-gray-500 uppercase"
+            id="teams-headline"
+          >
             Filter Projects
           </h3>
           <%= form_with url: projects_reports_path, method: :get do |form| %>
             <main class="max-w-lg pt-4 pb-8 mx-auto space-y-4 lg:pb-16">
               <div>
-                <label for="date" class="block text-sm font-medium text-gray-700">
+                <label
+                  for="date"
+                  class="block text-sm font-medium text-gray-700"
+                >
                   Manager
                 </label>
                 <%= form.collection_select(:manager_id, User.all_users.decorate, :id, :display_name, { :prompt => "Select Employee", :selected => (params["manager_id"] if !params["manager_id"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
+
               <div>
-                <label for="billed" class="block text-sm font-medium text-gray-700">
+                <label
+                  for="billed"
+                  class="block text-sm font-medium text-gray-700"
+                >
                   Status
                 </label>
                 <%= form.collection_select(:status, ProjectStatus.all.order(:name), :id, :name, { :prompt => "Select Status", :selected => (params["status"] if !params["status"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
+
               <div>
-                <label for="billed" class="block text-sm font-medium text-gray-700">
+                <label
+                  for="billed"
+                  class="block text-sm font-medium text-gray-700"
+                >
                   Tag
                 </label>
                 <%= form.collection_select(:tag, ProjectTag.all.order(:name), :id, :name, { :prompt => "Select Tag", :selected => (params["tag"] if !params["tag"].blank?) }, :class => "form-text-field mt-1") %>
               </div>
+
               <div class="flex justify-end mt-6">
                 <%= link_to "Reset", projects_reports_path, class: "btn-secondary" %>
                 <%= form.submit "Search", class: "btn-primary ml-2" %>

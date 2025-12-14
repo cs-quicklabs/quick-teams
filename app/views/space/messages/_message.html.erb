@@ -7,25 +7,44 @@
         <div class="flex flex-col">
           <div class="flex justify-between">
             <div class="hover:underline inline-flex space-x-2">
-              <h3 class="text-base font-medium line-clamp-1 flex-auto"><%= title_html %></h3>
+              <h3 class="text-base font-medium line-clamp-1 flex-auto">
+                <%= title_html %>
+              </h3>
             </div>
           </div>
         </div>
       <% end %>
     <% else %>
       <%= link_to edit_space_message_path(message.space, message), class: "focus:outline-none", aria: { label: "#{message.title} (draft)" } do %>
-        <div class="flex flex-col" data-controller="swap" data-action="mouseenter->swap#mouseenter mouseleave->swap#mouseleave">
+        <div
+          class="flex flex-col"
+          data-controller="swap"
+          data-action="mouseenter->swap#mouseenter mouseleave->swap#mouseleave"
+        >
           <div class="flex justify-between">
             <div class="hover:underline inline-flex space-x-2">
-              <h3 class="text-base font-medium line-clamp-1 flex-auto"><%= title_html %></h3>
+              <h3 class="text-base font-medium line-clamp-1 flex-auto">
+                <%= title_html %>
+              </h3>
             </div>
 
-            <div data-swap-target="text"><span class="inline-flex items-center ml-2 px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">Draft</span></div>
+            <div data-swap-target="text">
+              <span
+                class="
+                  inline-flex items-center ml-2 px-2 py-0.5 rounded text-xs
+                  font-medium bg-red-100 text-red-800
+                "
+              >
+                Draft
+              </span>
+            </div>
           </div>
         </div>
       <% end %>
     <% end %>
 
-    <span class="whitespace-nowrap text-gray-500 text-sm font-normal flex-none"><%= message.user.decorate.display_name %> on <%= display_date(message.created_at) %></span>
+    <span class="whitespace-nowrap text-gray-500 text-sm font-normal flex-none">
+      <%= message.user.decorate.display_name %> on <%= display_date(message.created_at) %>
+    </span>
   </li>
 <% end %>

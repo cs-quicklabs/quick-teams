@@ -8,10 +8,12 @@
     <% else %>
       <span class="attachment__name"><%= blob.filename %></span>
       <span class="attachment__size"><%= number_to_human_size blob.byte_size %></span>
-      <span class="attachment__size"> · </span>
+      <span class="attachment__size">·</span>
       <span class="attachment__attribute"><a href="<%= rails_blob_path(blob) %>">View Full Size</a></span>
-      <span class="attachment__size"> · </span>
-      <span class="attachment__attribute"><%= link_to "Download", rails_blob_path(blob, disposition: "attachment") %></span>
+      <span class="attachment__size">·</span>
+      <span class="attachment__attribute">
+        <%= link_to "Download", rails_blob_path(blob, disposition: "attachment") %>
+      </span>
     <% end %>
   </figcaption>
 </figure>

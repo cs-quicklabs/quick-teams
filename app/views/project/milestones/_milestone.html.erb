@@ -1,5 +1,5 @@
-<tr id=<%= dom_id(milestone) %>>
-  <td class="table-cell ">
+<tr id="<%= dom_id(milestone) %>">
+  <td class="table-cell">
     <div class="text-sm">
       <%= link_to highlight_hashtag(milestone.title.upcase_first), project_milestone_path(@project, milestone), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
@@ -12,7 +12,11 @@
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <a href="<%= employee_team_path(milestone.user) %>" class="block hover:underline" target="_top">
+    <a
+      href="<%= employee_team_path(milestone.user) %>"
+      class="block hover:underline"
+      target="_top"
+    >
       <%= milestone.user.decorate.display_name %>
     </a>
   </td>
@@ -20,7 +24,10 @@
     <%= display_created_at(milestone) %>
   </td>
   <td class="table-cell">
-    <div class="flex justify-end space-x-2" id=<%= "buttons_" + dom_id(milestone) %>>
+    <div
+      class="flex justify-end space-x-2"
+      id="<%= "buttons_" + dom_id(milestone) %>"
+    >
       <% if policy([@project, milestone]).edit? %>
         <%= edit_button(edit_project_milestone_path(@project, milestone)) %>
       <% end %>

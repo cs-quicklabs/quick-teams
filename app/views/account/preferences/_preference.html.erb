@@ -1,4 +1,4 @@
-<div  id=<%= dom_id preference %>>
+<div id="<%= dom_id preference %>">
   <div class="flex flex-col mt-6">
     <p class="text-sm font-medium text-gray-900" id="privacy-option-1-label">
       <%= preference.title %>
@@ -7,6 +7,7 @@
       <%= preference.message %>
     </p>
   </div>
+
   <%= tailwind_form_with model: preference, url: account_preference_path(preference), format: :turbo_stream, method: :put do |form| %>
     <%= form.hidden_field :key, value: preference.key %>
     <%= form.select :value, preference.options_for(preference.key), {}, onchange: "this.form.requestSubmit()", :class => "form-text-field mt-1" %>

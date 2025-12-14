@@ -2,7 +2,11 @@
 
 <tr id="<%= dom_id survey %>">
   <td class="table-cell">
-    <a href="<%= survey_questions_path(survey) %>" target="_top" class="block hover:underline">
+    <a
+      href="<%= survey_questions_path(survey) %>"
+      target="_top"
+      class="block hover:underline"
+    >
       <div class="text-sm font-medium text-gray-900">
         <p class="line-clamp-2"><%= survey.name.upcase_first %></p>
       </div>
@@ -15,14 +19,25 @@
 
   <td class="table-cell whitespace-nowrap">
     <div class="mt-1 text-sm text-gray-700">
-      <a href="<%= employee_team_path(survey.actor_id) %>" class="truncate hover:text-gray-600 hover:underline">
+      <a
+        href="<%= employee_team_path(survey.actor_id) %>"
+        class="truncate hover:text-gray-600 hover:underline"
+      >
         <p><%= survey.actor.decorate.display_name %></p>
       </a>
     </div>
   </td>
 
-  <td class="table-cell"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_type_color %>-100 text-<%= survey.survey_type_color %>-800"><%= survey.decorate.display_survey_type %></span></td>
-  <td class="table-cell"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_for_color %>-100 text-<%= survey.survey_for_color %>-800"><%= survey.decorate.display_survey_for %></span></td>
+  <td class="table-cell">
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_type_color %>-100 text-<%= survey.survey_type_color %>-800">
+      <%= survey.decorate.display_survey_type %>
+    </span>
+  </td>
+  <td class="table-cell">
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-<%= survey.survey_for_color %>-100 text-<%= survey.survey_for_color %>-800">
+      <%= survey.decorate.display_survey_for %>
+    </span>
+  </td>
 
   <td class="table-cell whitespace-nowrap">
     <div class="mt-1 text-sm text-gray-700">

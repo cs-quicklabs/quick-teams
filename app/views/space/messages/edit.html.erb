@@ -6,6 +6,7 @@
     <%= form.rich_text_area :body, "Description" %>
 
     <input type="hidden" name="message[user_id]" value="<%= current_user.id %>">
+
     <input type="hidden" name="message[space_id]" value="<%= @space.id %>">
 
     <div class="relative flex items-start">
@@ -15,13 +16,19 @@
           aria-describedby="comments-description"
           name="send_email"
           type="checkbox"
-          class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+          class="
+            h-4 w-4 rounded border-gray-300 text-indigo-600
+            focus:ring-indigo-500
+          "
           checked
         >
       </div>
 
       <div class="ml-4 text-sm flex">
-        <p class="block text-sm font-medium text-gray-700" id="privacy-option-1-label">
+        <p
+          class="block text-sm font-medium text-gray-700"
+          id="privacy-option-1-label"
+        >
           Send email notification to all members
         </p>
       </div>

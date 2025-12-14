@@ -1,5 +1,9 @@
 <% frame_id = dom_id(model, "#{attribute}") %>
-<dt class="text-sm font-medium text-gray-500"><%= "#{attribute}".titlecase %></dt>
+
+<dt class="text-sm font-medium text-gray-500">
+  <%= "#{attribute}".titlecase %>
+</dt>
+
 <div class="col-span-2">
   <%= turbo_frame_tag frame_id do %>
     <dd class="mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -10,5 +14,6 @@
         </span>
       <% end %>
     </dd>
-  </div>
+</div>
+
 <% end %>

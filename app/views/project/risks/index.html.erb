@@ -8,7 +8,10 @@
         <div class="grid grid-cols-1 gap-4 lg:col-span-2" id="todo-list">
           <section aria-labelledby="participants_section">
             <div class="overflow-hidden bg-white">
-              <div class="w-full overflow-hidden" data-controller="infinite-scroll">
+              <div
+                class="w-full overflow-hidden"
+                data-controller="infinite-scroll"
+              >
                 <table class="table">
                   <thead class="bg-gray-50">
                     <tr>
@@ -26,17 +29,25 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="table-body" id="risks" data-infinite-scroll-target="entries">
+                  <tbody
+                    class="table-body"
+                    id="risks"
+                    data-infinite-scroll-target="entries"
+                  >
                     <%= render partial: "risk", collection: @risks, as: :risk, cached: true %>
                   </tbody>
                 </table>
-                <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+                <div
+                  class="flex justify-end invisible mt-2 mb-6 mr-2"
+                  data-infinite-scroll-target="pagination"
+                >
                   <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
                 </div>
               </div>
             </div>
           </section>
         </div>
+
         <!-- Right column -->
         <% if policy([@project, Risk]).create? %>
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
@@ -53,6 +64,6 @@
       </div>
     </div>
   </main>
-  <div class="pt-4 pl-16 pr-16">
-  </div>
+
+  <div class="pt-4 pl-16 pr-16"></div>
 </main>

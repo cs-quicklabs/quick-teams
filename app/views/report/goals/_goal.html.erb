@@ -1,42 +1,55 @@
 <tr>
   <% if goal.goalable_type == "User" %>
-    <td class="w-full table-cell ">
-      <a href="<%= employee_goal_path(goal.goalable, goal) %>" class="block hover:text-gray-900 hover:underline">
+    <td class="w-full table-cell">
+      <a
+        href="<%= employee_goal_path(goal.goalable, goal) %>"
+        class="block hover:text-gray-900 hover:underline"
+      >
         <%= highlight_hashtag(goal.title.upcase_first) %>
       </a>
     </td>
   <% else %>
-    <td class="w-full table-cell ">
-      <a href="<%= project_milestone_path(goal.goalable, goal) %>" class="block hover:text-gray-900 hover:underline">
+    <td class="w-full table-cell">
+      <a
+        href="<%= project_milestone_path(goal.goalable, goal) %>"
+        class="block hover:text-gray-900 hover:underline"
+      >
         <%= highlight_hashtag(goal.title) %>
       </a>
     </td>
   <% end %>
-  <td class="table-cell  whitespace-nowrap">
-    <a href="<%= employee_goals_path(goal.user) %>" class="block hover:text-gray-900 hover:underline">
+  <td class="table-cell whitespace-nowrap">
+    <a
+      href="<%= employee_goals_path(goal.user) %>"
+      class="block hover:text-gray-900 hover:underline"
+    >
       <%= goal.user.decorate.display_name %>
     </a>
   </td>
   <% if goal.goalable_type == "User" %>
-    <td class="table-cell  whitespace-nowrap">
-      <a href="<%= employee_goals_path(goal.goalable) %>" class="block hover:text-gray-900 hover:underline">
+    <td class="table-cell whitespace-nowrap">
+      <a
+        href="<%= employee_goals_path(goal.goalable) %>"
+        class="block hover:text-gray-900 hover:underline"
+      >
         <%= goal.goalable.decorate.display_name %>
       </a>
     </td>
   <% else %>
     <td class="table-cell whitespace-nowrap">
-      <a href="<%= project_milestones_path(goal.goalable) %>" class="block hover:text-gray-900 hover:underline">
+      <a
+        href="<%= project_milestones_path(goal.goalable) %>"
+        class="block hover:text-gray-900 hover:underline"
+      >
         <%= goal.goalable.name %>
       </a>
     </td>
   <% end %>
-  <td class="table-cell  whitespace-nowrap">
-    <%= display_created_at(goal) %>
-  </td>
-  <td class="table-cell  whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap"><%= display_created_at(goal) %></td>
+  <td class="table-cell whitespace-nowrap">
     <%= display_date(goal.deadline) %>
   </td>
-  <td class="table-cell  whitespace-nowrap">
+  <td class="table-cell whitespace-nowrap">
     <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-<%= goal.decorate.color %>-100 text-<%= goal.decorate.color %>-800">
       <%= goal.status.titleize %>
     </span>

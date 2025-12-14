@@ -1,28 +1,53 @@
 <% employees_count = @employees.load.size %>
+
 <div class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <!-- Page title & actions -->
-  <div class="px-4 py-4 border-b border-gray-200 sm:items-center sm:justify-between sm:px-6 lg:px-8">
+  <div
+    class="
+      px-4 py-4 border-b border-gray-200 sm:items-center sm:justify-between
+      sm:px-6 lg:px-8
+    "
+  >
     <div class="flex w-full items-baseline -mt-2 -ml-2">
       <h1 class="text-3xl font-bold leading-tight text-gray-900">
         Schedule
       </h1>
-      <p class="mt-1 ml-2 text-sm text-gray-500 w-full"> (Total: <%= @total_resources %>,  Billable: <%= @billable %>,  Billed: <%= @billed %>, Free: <%= [@free_resources, 0].max.round(2) %>)</p>
+
+      <p class="mt-1 ml-2 text-sm text-gray-500 w-full">
+        (Total:
+        <%= @total_resources %>
+        , Billable:
+        <%= @billable %>
+        , Billed:
+        <%= @billed %>
+        , Free:
+        <%= [@free_resources, 0].max.round(2) %>
+        )
+      </p>
+
       <% if params[:job] %>
         <%= turbo_frame_tag "occupancy", class: "w-full", src: "/#{current_user.account.id}/occupancy/jobs/#{params[:job]}", target: "_top", loading: :lazy do %>
-          <p class="text-right w-full pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Calculating Occupancy...</p>
+          <p class="text-right w-full pb-2 px-8 mt-1 text-sm text-gray-500 truncate">
+            Calculating Occupancy...
+          </p>
         <% end %>
       <% elsif params[:role] %>
         <%= turbo_frame_tag "occupancy", class: "w-full", src: "/#{current_user.account.id}/occupancy/roles/#{params[:role]}", target: "_top", loading: :lazy do %>
-          <p class="text-right w-full pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Calculating Occupancy...</p>
+          <p class="text-right w-full pb-2 px-8 mt-1 text-sm text-gray-500 truncate">
+            Calculating Occupancy...
+          </p>
         <% end %>
       <% else %>
         <%= turbo_frame_tag "occupancy", class: "w-full", src: "/#{current_user.account.id}/occupancy", target: "_top", loading: :lazy do %>
-          <p class="text-right w-full pb-2 px-8 mt-1 text-sm text-gray-500 truncate">Calculating Occupancy...</p>
+          <p class="text-right w-full pb-2 px-8 mt-1 text-sm text-gray-500 truncate">
+            Calculating Occupancy...
+          </p>
         <% end %>
       <% end %>
     </div>
   </div>
 </div>
+
 <div class="flex w-full overflow-hidden bg-white">
   <div class="flex w-full">
     <div class="flex flex-col pt-5 pb-4 border-r border-gray-200">
@@ -30,33 +55,62 @@
         <div class="relative inline-block px-3 text-left">
           <nav id="menu" class="px-3">
             <div>
-              <h3 class="px-3 text-xs font-semibold tracking-wider text-gray-500 uppercase" id="teams-headline">
+              <h3
+                class="
+                  px-3 text-xs font-semibold tracking-wider text-gray-500
+                  uppercase
+                "
+                id="teams-headline"
+              >
                 Teams
               </h3>
-              <div class="mt-1 space-y-1" role="group" aria-labelledby="teams-headline">
-                <a href="<%= schedules_path %>" class="<%= (request.params[:job].nil? and request.params[:role].nil?) ? "selected" : "unselected" %>">
-                  <span class="ml-2 truncate">
-                    All
-                  </span>
+              <div
+                class="mt-1 space-y-1"
+                role="group"
+                aria-labelledby="teams-headline"
+              >
+                <a
+                  href="<%= schedules_path %>"
+                  class="<%= (request.params[:job].nil? and request.params[:role].nil?) ? "selected" : "unselected" %>"
+                >
+                  <span class="ml-2 truncate">All</span>
                 </a>
-                <div class="sticky top-0 z-10 border-t border-b border-gray-200 bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500">
+
+                <div
+                  class="
+                    sticky top-0 z-10 border-t border-b border-gray-200
+                    bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500
+                  "
+                >
                   <h3>JOBS</h3>
                 </div>
+
                 <% @jobs.each do |job| %>
-                  <a id="<%= dom_id(job) %>" href="<%= schedules_path(:job => job.id) %>" class="<%= request.params[:job].to_i == job.id ? "selected" : "unselected" %>">
-                    <span class="ml-2 truncate">
-                      <%= job.name %>
-                    </span>
+                  <a
+                    id="<%= dom_id(job) %>"
+                    href="<%= schedules_path(:job => job.id) %>"
+                    class="<%= request.params[:job].to_i == job.id ? "selected" : "unselected" %>"
+                  >
+                    <span class="ml-2 truncate"><%= job.name %></span>
                   </a>
                 <% end %>
-                <div class="sticky top-0 z-10 border-t border-b border-gray-200 bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500">
+
+                <div
+                  class="
+                    sticky top-0 z-10 border-t border-b border-gray-200
+                    bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500
+                  "
+                >
                   <h3>ROLES</h3>
                 </div>
+
                 <% @roles.each do |role| %>
-                  <a id="<%= dom_id(role) %>" href="<%= schedules_path(:role => role.id) %>" class="<%= request.params[:role].to_i == role.id ? "selected" : "unselected" %>">
-                    <span class="ml-2 truncate">
-                      <%= role.name %>
-                    </span>
+                  <a
+                    id="<%= dom_id(role) %>"
+                    href="<%= schedules_path(:role => role.id) %>"
+                    class="<%= request.params[:role].to_i == role.id ? "selected" : "unselected" %>"
+                  >
+                    <span class="ml-2 truncate"><%= role.name %></span>
                   </a>
                 <% end %>
               </div>
@@ -85,13 +139,16 @@
             <%= render partial: "schedules/schedule", collection: @employees, as: :employee, cached: false %>
           </tbody>
         </table>
-        <div class="flex justify-end invisible mt-2 mb-6 mr-2" data-infinite-scroll-target="pagination">
+        <div
+          class="flex justify-end invisible mt-2 mb-6 mr-2"
+          data-infinite-scroll-target="pagination"
+        >
           <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
         </div>
       </div>
     <% else %>
-      <div class="flex  items-center justify-center w-full h-1/4">
-        <p class="mt-2 max-w-4xl text-sm text-gray-500 ">No Schedules Found</p>
+      <div class="flex items-center justify-center w-full h-1/4">
+        <p class="mt-2 max-w-4xl text-sm text-gray-500">No Schedules Found</p>
       </div>
     <% end %>
   </div>

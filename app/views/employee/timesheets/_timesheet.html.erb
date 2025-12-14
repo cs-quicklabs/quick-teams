@@ -1,7 +1,12 @@
 <tr id="<%= dom_id timesheet %>">
   <td class="table-cell whitespace-nowrap">
     <% if current_user.admin? %>
-      <a href="<%= project_timesheets_path(timesheet.project) %>" class="block hover:underline"><%= timesheet.project.name.titleize %></a>
+      <a
+        href="<%= project_timesheets_path(timesheet.project) %>"
+        class="block hover:underline"
+      >
+        <%= timesheet.project.name.titleize %>
+      </a>
     <% else %>
       <%= timesheet.project.name.titleize %>
     <% end %>
@@ -10,7 +15,9 @@
   <td class="table-cell w-full">
     <div class="flex-col flex">
       <p><%= timesheet.description.upcase_first %></p>
-      <p class="text-xs text-gray-400"><%= timesheet.output.upcase_first if timesheet.output.present? %></p>
+      <p class="text-xs text-gray-400">
+        <%= timesheet.output.upcase_first if timesheet.output.present? %>
+      </p>
     </div>
   </td>
 
@@ -23,7 +30,10 @@
 
   <td class="table-cell">
     <% if policy([@employee, timesheet]).edit? %>
-      <div class="flex justify-end space-x-2"><%= edit_button(edit_employee_timesheet_path(@employee, timesheet)) %><%= delete_button(employee_timesheet_path(@employee, timesheet)) %></div>
+      <div class="flex justify-end space-x-2">
+        <%= edit_button(edit_employee_timesheet_path(@employee, timesheet)) %>
+        <%= delete_button(employee_timesheet_path(@employee, timesheet)) %>
+      </div>
     <% end %>
   </td>
 </tr>

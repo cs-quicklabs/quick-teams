@@ -7,7 +7,10 @@
         <!-- Left column -->
         <div class="grid grid-cols-1 gap-4 lg:col-span-2">
           <section aria-labelledby="participants_section">
-            <div class="overflow-hidden bg-white" data-controller="infinite-scroll">
+            <div
+              class="overflow-hidden bg-white"
+              data-controller="infinite-scroll"
+            >
               <div>
                 <table class="table">
                   <thead class="bg-gray-50">
@@ -29,17 +32,25 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="table-body" id="todos" data-infinite-scroll-target="entries">
+                  <tbody
+                    class="table-body"
+                    id="todos"
+                    data-infinite-scroll-target="entries"
+                  >
                     <%= render partial: "employee/todos/todo", collection: @todos, cached: false %>
                   </tbody>
                 </table>
-                <div class="flex justify-end mt-2 mb-6 mr-2 invisible" data-infinite-scroll-target="pagination">
+                <div
+                  class="flex justify-end mt-2 mb-6 mr-2 invisible"
+                  data-infinite-scroll-target="pagination"
+                >
                   <%== render partial: "shared/paginator", locals: { pagy: @pagy } %>
                 </div>
               </div>
             </div>
           </section>
         </div>
+
         <% if policy([@employee, Todo]).create? %>
           <!-- Right column -->
           <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
@@ -55,6 +66,6 @@
       </div>
     </div>
   </main>
-  <div class="pt-4 pl-16 pr-16">
-  </div>
+
+  <div class="pt-4 pl-16 pr-16"></div>
 </main>

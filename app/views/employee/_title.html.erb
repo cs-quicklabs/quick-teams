@@ -1,24 +1,42 @@
 <% employee = employee.decorate %>
 
-<div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="employee-header">
+<div
+  class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
+  id="employee-header"
+>
   <div class="flex flex-wrap items-baseline -mt-2 -ml-2">
-    <h1 class="text-3xl font-bold leading-tight text-gray-900"><%= employee.display_name %></h1>
+    <h1 class="text-3xl font-bold leading-tight text-gray-900">
+      <%= employee.display_name %>
+    </h1>
 
     <% if current_user.admin? or current_user.lead? %>
-      <p class="mt-1 ml-2 text-sm text-gray-500 truncate"><%= employee.display_position %></p>
+      <p class="mt-1 ml-2 text-sm text-gray-500 truncate">
+        <%= employee.display_position %>
+      </p>
     <% end %>
 
     <% if current_user.admin? %>
       <div class="flex">
-        <div id="employee-tags" class="flex ml-4"><%= render partial: "employee/tags", locals: { employee: employee, tags: employee.people_tags } %></div>
+        <div id="employee-tags" class="flex ml-4">
+          <%= render partial: "employee/tags", locals: { employee: employee, tags: employee.people_tags } %>
+        </div>
 
-        <div class="relative inline-block mr-4 text-left" data-controller="dropdown" data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide">
+        <div
+          class="relative inline-block mr-4 text-left"
+          data-controller="dropdown"
+          data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide"
+        >
           <button
             id="add"
             data-action="click->dropdown#toggle"
             data-dropdown-target="button"
             type="button"
-            class="inline-flex items-center p-1 ml-2 text-white bg-indigo-600 border border-transparent rounded-full shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="
+              inline-flex items-center p-1 ml-2 text-white bg-indigo-600
+              border border-transparent rounded-full shadow-sm
+              hover:bg-indigo-700 focus:outline-none focus:ring-2
+              focus:ring-offset-2 focus:ring-indigo-500
+            "
           >
             <!-- Heroicon name: solid/plus -->
             <svg
@@ -28,13 +46,21 @@
               fill="currentColor"
               aria-hidden="true"
             >
-              <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+              <path
+                fill-rule="evenodd"
+                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                clip-rule="evenodd"
+              />
             </svg>
           </button>
 
           <div
             data-dropdown-target="menu"
-            class="hidden absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg border border-gray-200 focus:outline-none"
+            class="
+              hidden absolute right-0 z-10 w-56 mt-2 origin-top-right
+              bg-white rounded-md shadow-lg border border-gray-200
+              focus:outline-none
+            "
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
@@ -42,8 +68,21 @@
           >
             <% if @tags.empty? %>
               <div class="py-1" role="none">
-                <p role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">No people tag added yet</p>
-                <a href="<%= account_people_tags_path %>" class="block px-4 py-2 text-sm text-indigo-700 hover:bg-gray-50 hover:underline"> Add People Tags</a>
+                <p
+                  role="menuitem"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                >
+                  No people tag added yet
+                </p>
+                <a
+                  href="<%= account_people_tags_path %>"
+                  class="
+                    block px-4 py-2 text-sm text-indigo-700 hover:bg-gray-50
+                    hover:underline
+                  "
+                >
+                  Add People Tags
+                </a>
               </div>
             <% else %>
               <div class="py-1" role="none">
@@ -71,10 +110,16 @@
 
   <% if current_user.admin? %>
     <div class="flex mt-4 sm:mt-0 sm:ml-4">
-      <div id="employee-status" class="flex"><%= render partial: "employee/status", locals: { employee: employee } %></div>
+      <div id="employee-status" class="flex">
+        <%= render partial: "employee/status", locals: { employee: employee } %>
+      </div>
 
       <!-- This example requires Tailwind CSS v2.0+ -->
-      <div class="relative inline-block mr-2 text-left" data-controller="dropdown" data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide">
+      <div
+        class="relative inline-block mr-2 text-left"
+        data-controller="dropdown"
+        data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide"
+      >
         <div>
           <button
             data-action="click->dropdown#toggle"
@@ -94,14 +139,21 @@
               fill="currentColor"
               aria-hidden="true"
             >
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              <path
+                fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
             </svg>
           </button>
         </div>
 
         <div
           data-dropdown-target="menu"
-          class="hidden absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg border border-gray-200 focus:outline-none"
+          class="
+            hidden absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white
+            rounded-md shadow-lg border border-gray-200 focus:outline-none
+          "
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
@@ -109,8 +161,21 @@
         >
           <div class="py-1" role="none">
             <% if @statuses.empty? %>
-              <p role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">No people status added yet</p>
-              <a href="<%= account_people_statuses_path %>" class="block px-4 py-2 text-sm text-indigo-700 hover:bg-gray-50 hover:underline"> Add People Status</a>
+              <p
+                role="menuitem"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+              >
+                No people status added yet
+              </p>
+              <a
+                href="<%= account_people_statuses_path %>"
+                class="
+                  block px-4 py-2 text-sm text-indigo-700 hover:bg-gray-50
+                  hover:underline
+                "
+              >
+                Add People Status
+              </a>
             <% else %>
               <% @statuses.each do |status| %>
                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
@@ -131,12 +196,18 @@
         </div>
       </div>
 
-      <div><%= link_to "Edit", edit_employee_path(employee), class: " btn-secondary" %></div>
+      <div>
+        <%= link_to "Edit", edit_employee_path(employee), class: " btn-secondary" %>
+      </div>
 
       <% if employee.active %>
-        <div><%= confirm_button(deactivate_user_path(employee), "Deactivate", "Are you sure?", "ml-4 btn-secondary") %></div>
+        <div>
+          <%= confirm_button(deactivate_user_path(employee), "Deactivate", "Are you sure?", "ml-4 btn-secondary") %>
+        </div>
       <% else %>
-        <div><%= confirm_button(activate_user_path(employee), "Activate", "Are you sure?", "ml-4  btn-secondary") %></div>
+        <div>
+          <%= confirm_button(activate_user_path(employee), "Activate", "Are you sure?", "ml-4  btn-secondary") %>
+        </div>
       <% end %>
     </div>
   <% end %>

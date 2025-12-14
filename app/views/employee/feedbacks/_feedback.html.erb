@@ -1,25 +1,34 @@
 <tr id="<%= dom_id feedback %>">
-  <td class="table-cell ">
+  <td class="table-cell">
     <div class="text-sm">
       <%= link_to highlight_hashtag(feedback.title.upcase_first), employee_feedback_path(@employee, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
     <% if feedback.published %>
-      <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-green-100 text-green-800">
+      <span
+        class="
+          inline-flex items-center px-2.5 py-0.5 rounded-md text-xs
+          font-medium bg-green-100 text-green-800
+        "
+      >
         Published
       </span>
     <% end %>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <a href="<%= employee_team_path(feedback.user) %>" class="block hover:underline" target="_top">
+    <a
+      href="<%= employee_team_path(feedback.user) %>"
+      class="block hover:underline"
+      target="_top"
+    >
       <%= feedback.user.decorate.display_name %>
     </a>
   </td>
   <td class="table-cell whitespace-nowrap">
     <%= display_created_at(feedback) %>
   </td>
-  <td class="table-cell ">
+  <td class="table-cell">
     <div class="flex justify-end space-x-2">
       <% if policy([@employee, feedback]).edit? %>
         <%= edit_button(edit_employee_feedback_path(@employee, feedback)) %>

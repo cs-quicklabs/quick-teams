@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(@comment) do %>
-  <div id="add" >
-    <div class="flex space-x-3 " >
+  <div id="add">
+    <div class="flex space-x-3">
       <div class="flex-shrink-0 mt-4">
         <%= display_medium_avatar(current_user) %>
       </div>
@@ -9,17 +9,22 @@
           <div class="mt-4">
             <%= render "shared/form_messages", resource: @comment, message: local_assigns[:message] %>
           </div>
+
           <%= form.hidden_field :message_id, :value => @comment.message.id %>
           <%= form.hidden_field :user_id, :value => current_user.id %>
           <div class="py-2">
             <%= form.rich_text_area :body, class: "form-text-field" %>
           </div>
-          <div  class="flex items-center justify-between mt-3">
-            <div class="flex">
-            </div>
+
+          <div class="flex items-center justify-between mt-3">
+            <div class="flex"></div>
+
             <!-- This example requires Tailwind CSS v2.0+ -->
-            <span class="relative z-0 inline-flex ">
-              <a class="btn-secondary"  href="<%= space_message_path(@comment.message.space, @comment.message) %>" >
+            <span class="relative z-0 inline-flex">
+              <a
+                class="btn-secondary"
+                href="<%= space_message_path(@comment.message.space, @comment.message) %>"
+              >
                 Cancel
               </a>
               <%= form.submit "Comment", class: "btn-primary ml-2" %>

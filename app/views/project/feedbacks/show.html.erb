@@ -1,7 +1,10 @@
 <% cache @feedback do %>
   <!-- This example requires Tailwind CSS v2.0+ -->
   <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-4 lg:pb-16">
-    <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8" id="feedback-detail">
+    <div
+      class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
+      id="feedback-detail"
+    >
       <div class="flex-1 min-w-0">
         <h3 class="text-2xl font-bold leading-tight text-gray-900">
           <%= @feedback.title %>
@@ -12,10 +15,17 @@
           </div>
           <div>
             <div class="text-sm">
-              <a href="<%= project_feedbacks_path(@project) %>" class="font-medium text-gray-900 hover:underline"><%= @feedback.critiquable.name %></a>
+              <a
+                href="<%= project_feedbacks_path(@project) %>"
+                class="font-medium text-gray-900 hover:underline"
+              >
+                <%= @feedback.critiquable.name %>
+              </a>
             </div>
             <div class="mt-1 space-x-2 text-sm">
-              <span class="font-medium text-gray-500">Created By <%= @feedback.user.decorate.display_name %> on <%= display_created_at(@feedback) %></span>
+              <span class="font-medium text-gray-500">
+                Created By <%= @feedback.user.decorate.display_name %> on <%= display_created_at(@feedback) %>
+              </span>
             </div>
           </div>
         </div>

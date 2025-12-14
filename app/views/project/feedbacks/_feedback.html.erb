@@ -1,22 +1,28 @@
-<tr id=<%= dom_id(feedback) %>>
-  <td class="table-cell ">
+<tr id="<%= dom_id(feedback) %>">
+  <td class="table-cell">
     <div class="text-sm">
       <% if policy([@project, feedback]).show? %>
         <%= link_to highlight_hashtag(feedback.title.upcase_first), project_feedback_path(@project, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
       <% else %>
-        <p class="line-clamp-2 font-medium text-gray-900 block "><%= highlight_hashtag(feedback.title.upcase_first) %></p>
+        <p class="line-clamp-2 font-medium text-gray-900 block">
+          <%= highlight_hashtag(feedback.title.upcase_first) %>
+        </p>
       <% end %>
     </div>
   </td>
   <td class="table-cell whitespace-nowrap">
-    <a href="<%= employee_team_path(feedback.user) %>" class="block hover:underline" target="_top">
+    <a
+      href="<%= employee_team_path(feedback.user) %>"
+      class="block hover:underline"
+      target="_top"
+    >
       <%= feedback.user.decorate.display_name %>
     </a>
   </td>
   <td class="table-cell whitespace-nowrap">
     <%= display_created_at(feedback) %>
   </td>
-  <td class="table-cell ">
+  <td class="table-cell">
     <div class="flex justify-end space-x-2">
       <% if policy([@project, feedback]).destroy? %>
         <%= delete_button(project_feedback_path(@project, feedback)) %>

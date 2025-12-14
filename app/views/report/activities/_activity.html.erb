@@ -1,4 +1,4 @@
- <% @events.each do |event| %>
+<% @events.each do |event| %>
   <% if lookup_context.template_exists?(event.action, "home", true) %>
     <% cache event do %>
       <%= render partial: "home/" + event.action, locals: { event: event } %>

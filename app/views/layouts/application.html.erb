@@ -5,6 +5,7 @@
     <title>Quick Teams</title>
 
     <meta name="turbo-prefetch" content="false">
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <%= csrf_meta_tags %>
@@ -35,7 +36,9 @@
       <div id="modal"></div>
     <% end %>
 
-    <p class="text-sm font-medium text-center notice bg-green-50"><%= notice %></p>
+    <p class="text-sm font-medium text-center notice bg-green-50">
+      <%= notice %>
+    </p>
     <p class="text-sm font-medium text-center alert bg-red-50"><%= alert %></p>
     <main><%= yield %></main>
   </body>

@@ -2,7 +2,14 @@
   <div class="h-full">
     <div class="flex justify-center">
       <% if @space.archive? %>
-        <span class="inline-flex items-center rounded bg-red-100 px-2 py-0.5 text-sm font-medium text-red-800">Archived on <%= display_date(@space.archive_at) %></span>
+        <span
+          class="
+            inline-flex items-center rounded bg-red-100 px-2 py-0.5 text-sm
+            font-medium text-red-800
+          "
+        >
+          Archived on <%= display_date(@space.archive_at) %>
+        </span>
       <% end %>
     </div>
 
@@ -15,12 +22,24 @@
             <% title_html = highlight_hashtag(@space.title.upcase_first) %>
 
             <%= link_to spaces_path do %>
-              <h1 id="message-heading" class="font-bold line-clamp-1 text-2xl leading-tight text-align-center"><%= title_html %></h1>
+              <h1
+                id="message-heading"
+                class="
+                  font-bold line-clamp-1 text-2xl leading-tight
+                  text-align-center
+                "
+              >
+                <%= title_html %>
+              </h1>
             <% end %>
           </div>
 
           <div class="flex justify-end">
-            <div class="relative" data-controller="dropdown" data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide">
+            <div
+              class="relative"
+              data-controller="dropdown"
+              data-action="click@window->dropdown#hide keydown.escape@window->dropdown#hide"
+            >
               <div>
                 <% if policy(@space).edit? || policy(@space).unpin? || policy(@space).pin? || policy(@space).destroy? %>
                   <button
@@ -30,7 +49,12 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="space-menu-dropdown"
-                    class="flex-end mt-1 ml-4 border border-gray-600 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-500 focus:ring-white"
+                    class="
+                      flex-end mt-1 ml-4 border border-gray-600 text-sm
+                      rounded-full focus:outline-none focus:ring-2
+                      focus:ring-offset-2 focus:ring-offset-indigo-500
+                      focus:ring-white
+                    "
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +62,11 @@
                       fill="currentColor"
                       class="w-7 h-7"
                     >
-                      <path fill-rule="evenodd" d="M4.5 12a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clip-rule="evenodd" />
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.5 12a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zm6 0a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z"
+                        clip-rule="evenodd"
+                      />
                     </svg>
                   </button>
                 <% end %>
@@ -47,7 +75,10 @@
               <div
                 id="space-menu-dropdown"
                 data-dropdown-target="menu"
-                class="hidden absolute right-0 mt-2 w-60 origin-top-right rounded-md shadow-lg z-10"
+                class="
+                  hidden absolute right-0 mt-2 w-60 origin-top-right
+                  rounded-md shadow-lg z-10
+                "
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="space-menu"
@@ -79,25 +110,46 @@
         </div>
 
         <div class="flex justify-center">
-          <p class="font-normal text-sm line-clamp-2 text-gray-500"><%= highlight_hashtag(@space.description.upcase_first) %></p>
+          <p class="font-normal text-sm line-clamp-2 text-gray-500">
+            <%= highlight_hashtag(@space.description.upcase_first) %>
+          </p>
         </div>
 
         <div class="flex justify-center mt-2">
-          <p class="font-normal text-xs line-clamp-2 text-gray-500">Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %></p>
+          <p class="font-normal text-xs line-clamp-2 text-gray-500">
+            Created by <%= @space.user.decorate.name %> on <%= display_date(@space.created_at) %>
+          </p>
         </div>
 
         <% users = @space.users.includes(avatar_attachment: :blob) %>
 
-        <div class="flex justify-center py-4" title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>">
+        <div
+          class="flex justify-center py-4"
+          title="<%= users.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>"
+        >
           <div class="flex">
             <% users.load.first(10).each do |user| %>
               <div><%= display_small_avatar(user) %></div>
             <% end %>
 
             <% if users.size > 10 %>
-              <span class="inline-flex h-7 w-7 relative z-0 text-sm ml-1 text-gray-400 font-semibold items-center">+ <%= users.size - 10 %></span>
+              <span
+                class="
+                  inline-flex h-7 w-7 relative z-0 text-sm ml-1
+                  text-gray-400 font-semibold items-center
+                "
+              >
+                + <%= users.size - 10 %>
+              </span>
             <% elsif users.size == 0 %>
-              <span class="inline-flex whitespace-nowrap z-0 text-sm text-gray-400 items-center">No person added </span>
+              <span
+                class="
+                  inline-flex whitespace-nowrap z-0 text-sm text-gray-400
+                  items-center
+                "
+              >
+                No person added
+              </span>
             <% end %>
           </div>
 
@@ -123,14 +175,18 @@
 
     <div class="relative" id="threads">
       <% if @messages.size > 0 %>
-        <ul role="list"><%= render partial: "message", collection: @messages, as: :message, cached: false %></ul>
+        <ul role="list">
+          <%= render partial: "message", collection: @messages, as: :message, cached: false %>
+        </ul>
       <% else %>
         <div class="flex justify-center items-center h-28">
           <div class="text-center">
             <h1 class="text-sm text-gray-400">No Threads Added Yet</h1>
 
             <% if !@space.archive? %>
-              <p class="text-gray-400 text-sm">Add a new thread to get started</p>
+              <p class="text-gray-400 text-sm">
+                Add a new thread to get started
+              </p>
             <% end %>
           </div>
         </div>

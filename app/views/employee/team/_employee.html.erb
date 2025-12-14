@@ -1,22 +1,29 @@
 <% employee = employee.decorate %>
+
 <li>
   <div class="flex items-center px-2 py-2 sm:px-6">
     <div class="flex items-center flex-1 min-w-0">
-      <div class="flex-shrink-0">
-        <%= display_medium_avatar(employee) %>
-      </div>
+      <div class="flex-shrink-0"><%= display_medium_avatar(employee) %></div>
       <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-3 md:gap-4">
         <% if current_user.member? %>
           <div>
-            <p class="text-sm font-medium text-gray-900 truncate"><%= employee.display_name %></p>
+            <p class="text-sm font-medium text-gray-900 truncate">
+              <%= employee.display_name %>
+            </p>
             <p class="flex items-center mt-1 text-sm text-gray-500">
               <span class="truncate"><%= employee.display_position %></span>
             </p>
           </div>
         <% else %>
-          <a href="<%= employee_team_path(employee) %>" class="block hover:underline" target="_top">
+          <a
+            href="<%= employee_team_path(employee) %>"
+            class="block hover:underline"
+            target="_top"
+          >
             <div>
-              <p class="text-sm font-medium text-gray-900 truncate"><%= employee.display_name %></p>
+              <p class="text-sm font-medium text-gray-900 truncate">
+                <%= employee.display_name %>
+              </p>
               <p class="flex items-center mt-1 text-sm text-gray-500">
                 <span class="truncate"><%= employee.display_position %></span>
               </p>
@@ -24,12 +31,17 @@
           </a>
         <% end %>
         <div class="flex items-center space-x-2">
-          <div class="flex flex-shrink-0 -space-x-1" title="<%= employee.subordinates.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>">
+          <div
+            class="flex flex-shrink-0 -space-x-1"
+            title="<%= employee.subordinates.pluck(:first_name, :last_name).map { |names| names.join(" ") }.join(", ") %>"
+          >
             <% employee.display_team_members.each do |employee| %>
               <%= display_xsmall_avatar(employee) %>
             <% end %>
           </div>
-          <span class="flex-shrink-0 text-xs font-medium leading-5"><%= employee.display_additional_team_members %></span>
+          <span class="flex-shrink-0 text-xs font-medium leading-5">
+            <%= employee.display_additional_team_members %>
+          </span>
         </div>
       </div>
     </div>

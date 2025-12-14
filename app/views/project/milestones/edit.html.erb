@@ -6,11 +6,10 @@
         <%= render "shared/form_header", title: "Edit Milestone for #{@project.name}", subtitle: "Edit details of Milestone" %>
         <%= form.text_field :title, "Title", autocomplete: "off" %>
         <div>
-          <label for="date" class="block text-sm font-medium text-gray-700">
-            Deadline
-          </label>
+          <label for="date" class="block text-sm font-medium text-gray-700">Deadline</label>
           <%= form.date_field :deadline, class: "form-text-field mt-1" %>
         </div>
+
         <%= form.rich_text_area :body, "Description" %>
         <div class="flex justify-end">
           <%= link_to "Back", "javascript:history.back()", class: "btn-secondary" %>
