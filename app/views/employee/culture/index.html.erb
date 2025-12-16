@@ -1,7 +1,8 @@
 <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none">
   <%= render "employee/title", employee: @employee %>
+
   <main class="pb-8">
-    <div class="">
+    <div>
       <!-- Main 3 column grid -->
       <div class="grid items-start grid-cols-1 lg:grid-cols-3">
         <!-- Left column -->
@@ -15,6 +16,7 @@
                       <%= "KRAs Questions set (" + @kpi.questions.load.size.to_s + ")" %>
                     </p>
                   </div>
+
                   <ul class="divide-y divide-gray-200" id="questions">
                     <%= render partial: "shared/surveys/question", collection: @kpi.questions.order(:question_category_id), locals: { as: :question, participant: @employee }, cached: false %>
                   </ul>
@@ -28,8 +30,8 @@
         <div class="grid grid-cols-1 gap-4 xl:border-l xl:border-gray-200">
           <% if @kpi.nil? %>
             <p class="mt-2 p-4 max-w-4xl text-sm text-gray-500">
-              No KRAs have been assinged yet. If you are an admin, you can set
-              KRAs from surveys page. If not, please connect with the admin.
+              No KRAs have been assinged yet. If you are an admin, you can set KRAs from surveys page. If not, please
+              connect with the admin.
             </p>
           <% else %>
             <%= turbo_frame_tag "stats", src: "/#{@employee.account.id}/employees/#{@employee.id}/culture/#{@kpi.id}/stats", target: "_top", loading: :lazy do %>
@@ -44,10 +46,8 @@
                 </h3>
 
                 <p class="mt-1 text-sm text-gray-500 px-8">
-                  <%= @employee.decorate.display_name %>
-                  has been assigned
-                  <%= @kpi.name.upcase_first %>
-                  . Please click on button below to record a new assessment.
+                  <%= @employee.decorate.display_name %> has been assigned <%= @kpi.name.upcase_first %>. Please click
+                  on button below to record a new assessment.
                 </p>
 
                 <div class="mt-2">
