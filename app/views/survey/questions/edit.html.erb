@@ -6,50 +6,34 @@
       <div class="flex pt-2 pb-4 border-b border-gray-200">
         <div class="w-full ml-3">
           <div class="w-full px-4 py-2">
-            <label
-              for="filename"
-              class="block text-sm font-medium text-gray-700"
-            >
-              Question
-            </label>
+            <label for="filename" class="block text-sm font-medium text-gray-700"> Question </label>
             <%= form.text_field :text, required: true, class: "form-text-field mt-1" %>
           </div>
 
           <div class="w-full px-4 py-2">
-            <label
-              for="comments"
-              class="block text-sm font-medium text-gray-700"
-            >
+            <label for="comments" class="block text-sm font-medium text-gray-700">
               Question Description (optional)
             </label>
+
             <%= form.text_area :description, class: "form-text-field mt-1", autocomplete: "off" %>
           </div>
 
-          <% if @survey.kpi? %>
+          <% if @survey.kpi? || @survey.culture? %>
             <div class="w-full px-4 py-2">
-              <label
-                for="comments"
-                class="block text-sm font-medium text-gray-700"
-              >
+              <label for="comments" class="block text-sm font-medium text-gray-700">
                 Question Explanation (optional)
               </label>
+
               <%= form.text_area :explanation, class: "form-text-field mt-1", autocomplete: "off" %>
             </div>
           <% end %>
 
           <div class="w-full px-4 py-2">
-            <label
-              for="comments"
-              class="block text-sm font-medium text-gray-700"
-            >
-              Category (optional)
-            </label>
+            <label for="comments" class="block text-sm font-medium text-gray-700"> Category (optional) </label>
             <%= form.collection_select(:question_category_id, @question_categories, :id, :name, { :prompt => "Select Category", :selected => @question.question_category_id }, :class => "form-text-field mt-1", :required => true) %>
           </div>
 
-          <div class="content-end">
-            <%= form.submit "Save", class: "btn-primary ml-2 mt-2" %>
-          </div>
+          <div class="content-end"><%= form.submit "Save", class: "btn-primary ml-2 mt-2" %></div>
         </div>
       </div>
     </li>
