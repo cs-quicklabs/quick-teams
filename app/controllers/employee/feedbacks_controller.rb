@@ -65,7 +65,7 @@ class Employee::FeedbacksController < Employee::BaseController
   end
 
   def feedback_params
-    params.require(:feedback).permit(:title, :body)
+    params.require(:feedback).permit(:title, :body, :feedback_type, :is_kpi)
   end
 
   def employee_feedbacks

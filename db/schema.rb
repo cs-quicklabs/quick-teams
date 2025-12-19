@@ -128,6 +128,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_12_120000) do
     t.datetime "created_at", null: false
     t.bigint "critiquable_id", null: false
     t.string "critiquable_type", null: false
+    t.integer "feedback_type", default: 0, null: false
+    t.boolean "is_kpi", default: false, null: false
     t.boolean "published", default: false
     t.string "title"
     t.datetime "updated_at", null: false

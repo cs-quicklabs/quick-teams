@@ -3,14 +3,29 @@
 <main class="max-w-4xl px-4 pt-10 pb-12 mx-auto space-y-4 lg:pb-16">
   <div class="px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8">
     <div class="flex-1 min-w-0">
-      <h3 class="text-2xl font-bold leading-tight text-gray-900">
+      <h3 class="text-2xl font-bold leading-tight text-gray-900 items-center space-x-3 flex">
+        <%# Feedback type indicator %>
+        <% color_class =
+        case @feedback.feedback_type
+        when "positive" then "bg-green-600"
+        when "negative" then "bg-red-600"
+        when "neutral"  then "bg-gray-600"
+        else "bg-gray-200"
+        end %>
+
+        <span class="inline-block w-4 h-4 rounded-full align-middle mr-2 <%= color_class %>"></span>
+
         <%= highlight_hashtag(@feedback.title.upcase_first) %>
+
+        <% if @feedback.is_kpi? %>
+          <span class="inline-flex items-center ml-2 px-2.5 py-0.5 rounded-sm text-xs font-medium bg-blue-100 text-blue-800">
+            KPI
+          </span>
+        <% end %>
       </h3>
 
       <div class="flex mt-4 space-x-3">
-        <div class="flex-shrink-0">
-          <%= display_medium_avatar(@feedback.critiquable) %>
-        </div>
+        <div class="flex-shrink-0"><%= display_medium_avatar(@feedback.critiquable) %></div>
 
         <div>
           <div class="text-sm">

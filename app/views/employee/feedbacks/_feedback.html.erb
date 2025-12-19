@@ -1,9 +1,27 @@
 <tr id="<%= dom_id feedback %>">
   <td class="table-cell">
-    <div class="text-sm">
+    <div class="text-sm flex items-center space-x-2">
+      <%# Feedback type indicator %>
+      <% color_class =
+        case feedback.feedback_type
+        when "positive" then "bg-green-600"
+        when "negative" then "bg-red-600"
+        when "neutral"  then "bg-gray-600"
+        else "bg-gray-200"
+        end %>
+
+      <span class="inline-block w-2.5 h-2.5 rounded-full align-middle <%= color_class %>"></span>
+
       <%= link_to highlight_hashtag(feedback.title.upcase_first), employee_feedback_path(@employee, feedback), class: "line-clamp-2 font-medium text-gray-900 block hover:underline" %>
+
+      <% if feedback.is_kpi? %>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-blue-100 text-blue-800">
+          KPI
+        </span>
+      <% end %>
     </div>
   </td>
+
   <td class="table-cell whitespace-nowrap">
     <% if feedback.published %>
       <span
@@ -16,23 +34,21 @@
       </span>
     <% end %>
   </td>
+
   <td class="table-cell whitespace-nowrap">
-    <a
-      href="<%= employee_team_path(feedback.user) %>"
-      class="block hover:underline"
-      target="_top"
-    >
+    <a href="<%= employee_team_path(feedback.user) %>" class="block hover:underline" target="_top">
       <%= feedback.user.decorate.display_name %>
     </a>
   </td>
-  <td class="table-cell whitespace-nowrap">
-    <%= display_created_at(feedback) %>
-  </td>
+
+  <td class="table-cell whitespace-nowrap"><%= display_created_at(feedback) %></td>
+
   <td class="table-cell">
     <div class="flex justify-end space-x-2">
       <% if policy([@employee, feedback]).edit? %>
         <%= edit_button(edit_employee_feedback_path(@employee, feedback)) %>
       <% end %>
+
       <% if policy([@employee, feedback]).destroy? %>
         <%= delete_button(employee_feedback_path(@employee, feedback)) %>
       <% end %>

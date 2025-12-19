@@ -5,6 +5,27 @@
     <%= form.text_field :title, "Title", autocomplete: "off" %>
     <%= form.rich_text_area :body, "Feedback" %>
 
+    <!-- Feedback Type dropdown -->
+    <div class="mt-4">
+      <%= form.label :feedback_type, "Feedback Type", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.select :feedback_type, Feedback.feedback_types.keys.map { |k| [k.titleize, k] }, {}, class: "form-text-field mt-1" %>
+    </div>
+
+    <!-- Is KPI checkbox -->
+    <div class="flex">
+      <div class="flex items-center h-5">
+        <%= form.check_box :is_kpi, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
+      </div>
+
+      <div class="ms-2 text-sm select-none">
+        <label for="helper-checkbox" class="font-medium text-heading">Mark as KPI</label>
+
+        <p id="helper-checkbox-text" class="text-xs font-normal text-body">
+          Mark this feedback as a Key Performance Indicator (KPI) for the employee.
+        </p>
+      </div>
+    </div>
+
     <div class="flex justify-end"><%= form.submit "Add Feedback", class: "btn-primary" %></div>
   </main>
 <% end %>
