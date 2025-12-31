@@ -9,6 +9,6 @@ class Space < ActiveRecord::Base
   scope :active, -> { where(archive: false) }
 
   def display_archived_on
-    "#{archive_at.to_formatted_s(:long)}"
+   "#{archive_at.to_formatted_s(:long)}"
   end
 end

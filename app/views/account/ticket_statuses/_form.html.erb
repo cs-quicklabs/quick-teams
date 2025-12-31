@@ -4,8 +4,7 @@
     <%= render "shared/form_header", title: "Ticket Statuses", subtitle: "Ticket status is something this denotes status of a ticket. Open, Closed are defined already. You can add another statuses like In Progress, Action Required" %>
 
     <%# name field: use placeholder properly %>
-    <%= form.label :name, "Add New Status", class: "sr-only" %>
-    <%= form.text_field :name, placeholder: "Add New Status", autocomplete: "off", class: "form-text-field" %>
+    <%= form.text_field :name, placeholder: "Add New Status", autocomplete: "off" %>
 
     <div class="flex items-start">
       <%= form.label :color, "Appearance", class: "text-sm" %>
@@ -30,8 +29,6 @@
       </div>
     </div>
 
-    <div class="flex justify-end">
-      <%= form.submit "Save", class: "btn-primary" %>
-    </div>
+    <div class="flex justify-end"><%= form.submit "Save", class: "btn-primary" %></div>
   </div>
 <% end %>

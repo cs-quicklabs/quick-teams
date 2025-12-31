@@ -3,8 +3,7 @@
     <%= render "shared/form_messages", resource: people_tag, message: local_assigns[:message] %>
     <%= render "shared/form_header", title: "People Tags", subtitle: "You can define custom tags which can be applied to your team members. Examples include star performer, pending performance review." %>
 
-    <%= form.label :name, "Add New Tag", class: "sr-only" %>
-    <%= form.text_field :name, placeholder: "Add New Tag", autocomplete: "off", class: "form-text-field" %>
+    <%= form.text_field :name, placeholder: "Add New Tag", autocomplete: "off" %>
 
     <div class="flex items-start">
       <%= form.label :color, "Appearance", class: "text-sm" %>
@@ -17,7 +16,12 @@
           <div class="flex items-center ml-4 text-sm">
             <%= form.radio_button :color, color, id: "people_tag_color_#{color}", checked: (selected_color == color), class: "w-4 h-4 text-#{color}-600 border-#{color}-400 cursor-pointer focus:ring-#{color}-500" %>
 
-            <label for="people_tag_color_<%= color %>" class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-<%= color %>-100 text-<%= color %>-800"><%= color.capitalize %></label>
+            <label
+              for="people_tag_color_<%= color %>"
+              class="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-<%= color %>-100 text-<%= color %>-800"
+            >
+              <%= color.capitalize %>
+            </label>
           </div>
         <% end %>
       </div>
