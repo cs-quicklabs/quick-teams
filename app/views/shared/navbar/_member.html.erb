@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+<div class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start w-full">
   <div class="flex items-center flex-shrink-0">
     <h1 class="text-white font-extrabold font-mono">Quick Teams</h1>
   </div>
@@ -21,6 +21,9 @@
       <% if policy(:spaces).index? %>
         <%= link_to "Spaces", spaces_path, class: nav_class.call(spaces_path) %>
       <% end %>
+
+      <%= link_to "Job Card", employee_planner_daily_path(current_user), class: nav_class.call(employee_planner_daily_path(current_user)) %>
+
     </div>
   </div>
 </div>

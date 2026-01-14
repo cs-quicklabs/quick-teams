@@ -16,6 +16,13 @@ import SlimSelectController from "controllers/slim_select_controller"
 import SwapController from "controllers/swap_controller"
 import ToggleController from "controllers/toggle_controller"
 
+import WeeklyPlannerController from "controllers/weekly_planner_controller"
+application.register("weekly-planner", WeeklyPlannerController)
+
+import DailyPlannerController from "controllers/daily_planner_controller"
+application.register("daily-planner", DailyPlannerController)
+
+// Register other controllers
 application.register("application", ApplicationController)
 application.register("auto-dismiss", AutoDismissController)
 application.register("comments", CommentsController)

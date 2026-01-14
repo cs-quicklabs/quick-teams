@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_12_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_15_121620) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -152,6 +152,20 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_12_120000) do
     t.index ["account_id"], name: "index_goals_on_account_id"
     t.index ["goalable_type", "goalable_id"], name: "index_goals_on_goalable"
     t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "job_cards", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.date "date", null: false
+    t.text "description"
+    t.integer "session", null: false
+    t.integer "slot_length", null: false
+    t.integer "slot_start", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["date", "session"], name: "index_job_cards_on_date_and_session"
+    t.index ["user_id"], name: "index_job_cards_on_user_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -840,6 +854,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_12_120000) do
   add_foreign_key "feedbacks", "users"
   add_foreign_key "goals", "accounts"
   add_foreign_key "goals", "users"
+  add_foreign_key "job_cards", "users"
   add_foreign_key "jobs", "accounts"
   add_foreign_key "message_comments", "messages"
   add_foreign_key "message_comments", "users"

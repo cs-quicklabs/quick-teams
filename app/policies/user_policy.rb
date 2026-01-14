@@ -14,6 +14,10 @@ class UserPolicy < ApplicationPolicy
     user.id == record.id
   end
 
+  def view_planner?
+    index?
+  end
+
   def show?
     index?
   end
