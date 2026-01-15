@@ -15,10 +15,10 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-3 gap-6">
+  <div class="grid grid-cols-3 gap-6 px-4">
     <% %w[morning afternoon evening].each_with_index do |session, session_index| %>
       <div class="bg-white rounded-lg shadow-md p-4">
-        <h3 class="text-lg font-semibold mb-4 text-center capitalize bg-gray-100 py-2 rounded">
+        <h3 class="font-semibold mb-4 text-center capitalize bg-gray-200 py-1 rounded">
           <%= session %> (3 hours)
         </h3>
         
@@ -38,7 +38,7 @@
               </div>
               
               <% if existing_card %>
-              <div class="job-card absolute inset-0 bg-blue-400 text-white rounded p-1 cursor-pointer overflow-hidden"
+              <div class="job-card absolute inset-0 bg-primary-400 text-white rounded p-1 cursor-pointer overflow-hidden"
                      style="height: <%= (existing_card.slot_length * 2.5) + ((existing_card.slot_length - 1) * 0.25) %>rem; z-index: 10;"
                      data-card-id="<%= existing_card.id %>"
 >
