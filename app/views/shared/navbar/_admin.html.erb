@@ -28,7 +28,7 @@
       <% end %>
 
       
-      <%= link_to "Job Card", employee_planner_daily_path(current_user), class: nav_class.call(employee_planner_daily_path(current_user)) %>
+      <%= link_to "JobCards", employee_planner_daily_path(current_user), class: nav_class.call(employee_planner_daily_path(current_user)) %>
 
       <% if policy(:reports).index? %>
         <%= link_to "Reports", reports_path, class: nav_class.call(reports_path) %>
