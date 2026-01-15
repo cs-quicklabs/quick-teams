@@ -39,7 +39,7 @@
               
               <% if existing_card %>
               <div class="job-card absolute inset-0 bg-primary-400 text-white rounded p-1 cursor-pointer overflow-hidden"
-                     style="height: <%= (existing_card.slot_length * 2.5) + ((existing_card.slot_length - 1) * 0.25) %>rem; z-index: 10;"
+                     style="height: <%= (existing_card.slot_length * 2.5) + ((existing_card.slot_length - 1) * 0.25) %>rem; z-index: 1;"
                      data-card-id="<%= existing_card.id %>"
 >
                   <div class="text-xs font-medium truncate"><%= existing_card.title %></div>
