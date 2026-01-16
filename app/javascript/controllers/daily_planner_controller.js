@@ -4,7 +4,7 @@ export default class extends Controller {
     static values = { date: String }
     static targets = [
         "modalSession", "modalSlot", "modalTitle", "deleteButton",
-        "titleInput", "descriptionInput", "slotLengthInput", "cardId", "saveButton"
+        "titleInput", "descriptionInput", "slotLengthInput", "cardId", "saveButton", "colorInput"
     ]
 
     connect() {
@@ -73,6 +73,13 @@ export default class extends Controller {
         this.modalSessionTarget.value = cardData.session
         this.modalSlotTarget.value = cardData.slot_start
         this.cardIdTarget.value = cardData.id
+        
+        // Set color radio button
+        const color = cardData.color || 'gray'
+        const colorRadio = this.colorInputTargets.find(input => input.value === color)
+        if (colorRadio) {
+            colorRadio.checked = true
+        }
     }
 
     resetModalForNew() {
@@ -85,6 +92,12 @@ export default class extends Controller {
         this.descriptionInputTarget.value = ''
         this.slotLengthInputTarget.value = '1'
         this.cardIdTarget.value = ''
+        
+        // Reset color to gray (default)
+        const grayRadio = this.colorInputTargets.find(input => input.value === 'gray')
+        if (grayRadio) {
+            grayRadio.checked = true
+        }
     }
 
     closeModal() {

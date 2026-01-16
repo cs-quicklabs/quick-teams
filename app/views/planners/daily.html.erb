@@ -38,7 +38,7 @@
               </div>
               
               <% if existing_card %>
-              <div class="job-card absolute inset-0 bg-primary-400 text-white rounded p-1 cursor-pointer overflow-hidden"
+              <div class="job-card absolute inset-0 <%= existing_card.color_class %> text-white rounded p-1 cursor-pointer overflow-hidden"
                      style="height: <%= (existing_card.slot_length * 2.5) + ((existing_card.slot_length - 1) * 0.25) %>rem; z-index: 1;"
                      data-card-id="<%= existing_card.id %>"
 >
@@ -109,6 +109,49 @@
               <option value="<%= slots %>"><%= slots %> slot<%= 's' if slots > 1 %> (<%= time_display %>)</option>
                        <% end %>
           </select>
+        </div>
+        
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Color (Optional)</label>
+          <div class="flex flex-col space-x-2">
+
+            <div class="flex items-center">
+              <input type="radio" id="color_green" name="color" value="green" class="mr-1" data-daily-planner-target="colorInput">
+              <label for="color_green" class="text-sm flex items-center">
+                <span class="w-4 h-4 bg-green-500 rounded mr-1"></span>
+                Green - Deep Work, Important or priority tasks
+              </label>
+            </div>
+            <div class="flex items-center">
+              <input type="radio" id="color_yellow" name="color" value="yellow" class="mr-1" data-daily-planner-target="colorInput">
+              <label for="color_yellow" class="text-sm flex items-center">
+                <span class="w-4 h-4 bg-yellow-500 rounded mr-1"></span>
+                Yellow - Maintenance, routine, or admin tasks
+              </label>
+            </div>
+            <div class="flex items-center">
+              <input type="radio" id="color_blue" name="color" value="blue" class="mr-1" data-daily-planner-target="colorInput">
+              <label for="color_blue" class="text-sm flex items-center">
+                <span class="w-4 h-4 bg-blue-500 rounded mr-1"></span>
+                Blue - Meetings, Discussions or Team management
+              </label>
+            </div>
+                        <div class="flex items-center">
+              <input type="radio" id="color_gray" name="color" value="gray" class="mr-1" checked data-daily-planner-target="colorInput">
+              <label for="color_gray" class="text-sm flex items-center">
+                <span class="w-4 h-4 bg-gray-500 rounded mr-1"></span>
+                Gray - Breaks, Learning or fun activities
+              </label>
+            </div>
+
+            <div class="flex items-center">
+              <input type="radio" id="color_red" name="color" value="red" class="mr-1" data-daily-planner-target="colorInput">
+              <label for="color_red" class="text-sm flex items-center">
+                <span class="w-4 h-4 bg-red-500 rounded mr-1"></span>
+                Red - Time Wasters, Distractions or unproductive tasks
+              </label>
+          </div>
+          </div>
         </div>
         
         <input type="hidden" name="date" value="<%= @date.iso8601 %>">

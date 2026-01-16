@@ -34,7 +34,7 @@
               <% cards = @grouped_cards[[date, session]] %>
               <% if cards && cards.any? %>
                 <% cards.each_with_index do |card, index| %>
-                  <div class="job-card inset-x-2 bg-green-400 text-white rounded p-1 overflow-hidden cursor-pointer"
+                  <div class="job-card inset-x-2 <%= card.weekly_color_class %> text-white rounded p-1 overflow-hidden cursor-pointer"
                        style="top: <%= 1 + (index) %>rem; z-index: 1; height: <%= (card.slot_length * 1.5) + ((card.slot_length - 1) * 0.25) %>rem;"
                        data-card-id="<%= card.id %>"
                        data-action="click->weekly-planner#showCardDetails">

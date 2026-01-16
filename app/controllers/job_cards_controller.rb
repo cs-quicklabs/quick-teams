@@ -47,7 +47,7 @@ class JobCardsController < ApplicationController
   end
 
   def job_card_params
-    params.require(:job_card).permit(:title, :description, :date, :session, :slot_start, :slot_length, :user_id)
+    params.require(:job_card).permit(:title, :description, :date, :session, :slot_start, :slot_length, :user_id, :color)
   end
 
   def set_user 
