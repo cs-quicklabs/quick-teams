@@ -35,7 +35,16 @@
               <% cards = @grouped_cards[[date, session]] %>
 
               <% if cards && cards.any? %>
-                <% cards_by_color = cards.group_by(&:weekly_color_class).values.flatten %>
+                <% color_priority = {
+                    'bg-green-400' => 1,
+                    'bg-yellow-400' => 2, 
+                    'bg-blue-400' => 3,
+                    'bg-gray-400' => 4,
+                    'bg-red-400' => 5
+                  }
+                  grouped_by_color = cards.group_by(&:weekly_color_class)
+                  sorted_groups = grouped_by_color.sort_by { |color, _| color_priority[color] || 6 }
+                  cards_by_color = sorted_groups.map { |_, group| group }.flatten %>
                 <% cards_by_color.each_with_index do |card, index| %>
                   <div
                     class="job-card inset-x-2 <%= card.weekly_color_class %> text-white rounded p-1 overflow-hidden cursor-pointer"
