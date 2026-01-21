@@ -39,7 +39,7 @@
                 <% cards_by_color.each_with_index do |card, index| %>
                   <div
                     class="job-card inset-x-2 <%= card.weekly_color_class %> text-white rounded p-1 overflow-hidden cursor-pointer"
-                    style="top: <%= 1 + (index) %>rem; z-index: 1; height: <%= (card.slot_length * 1.5) + ((card.slot_length - 1) * 0.25) %>rem;"
+                    style="top: <%= (index * 11.11) %>%; z-index: 1; height: calc(<%= (card.slot_length.to_f / 9 * 100).round(2) %>% - 0.25rem);"
                     data-card-id="<%= card.id %>"
                     data-action="click->weekly-planner#showCardDetails"
                   >
